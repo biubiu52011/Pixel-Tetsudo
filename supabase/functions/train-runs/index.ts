@@ -110,6 +110,31 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   if (!templates.length) return json({ ok: true, complete: false, cache: "MISS",
     source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
 
+
+  // Canonical train schedule is the sole identity authority; original source
+  // templates remain evidence, never a second source of truth for vehicle type.
+  const sourceResolution = new Map<number, any>();
+  for (let i = 0; i < templates.length; i += 100) {
+    const ids = templates.slice(i, i + 100).map((t: any) => t.id);
+    const { data, error } = await db.from("train_timetable_source_resolution")
+      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date")
+      .in("source_template_id", ids);
+    if (error) throw error;
+    for (const row of data || []) sourceResolution.set(row.source_template_id, row);
+  }
+  // Reject a partial mapping instead of silently serving the old line-based
+  // identity. The importer keeps this projection synchronized atomically.
+  if (templates.some((t: any) => !sourceResolution.has(t.id))) {
+    throw new Error("UNMAPPED_CANONICAL_TIMETABLE_SOURCE");
+  }
+  const seenCanonical = new Set<number>();
+  templates = templates.filter((t: any) => {
+    const key = Number(sourceResolution.get(t.id).timetable_id);
+    if (seenCanonical.has(key)) return false;
+    seenCanonical.add(key);
+    return true;
+  });
+
   const byTemplate = new Map<number, any[]>();
   // Keep URL/IN-list bounded; individual batches still page if stops exceed 700.
   for (let pos = 0; pos < templates.length; pos += 100) {
@@ -123,6 +148,30 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       byTemplate.set(stop.template_id, list);
     }
   }
+
+  // Only preverified continuation chains receive a merged end-to-end station
+  // sequence. Never join trains here by time, number, or neighboring station.
+  const canonicalStopsById = new Map<number, any[]>();
+  const connectedIds = [...new Set(templates
+    .map((t: any) => sourceResolution.get(t.id))
+    .filter((m: any) => m?.group_evidence === "verified_continuation")
+    .map((m: any) => Number(m.timetable_id)))];
+  for (let i = 0; i < connectedIds.length; i += 30) {
+    const ids = connectedIds.slice(i, i + 30);
+    const rows = await pages((first, last) => db.from("train_timetable_stops")
+      .select("timetable_id,stop_sequence,station_urn,arrival_clock,departure_clock")
+      .in("timetable_id", ids)
+      .order("timetable_id").order("stop_sequence").range(first, last));
+    for (const row of rows) {
+      const stops = canonicalStopsById.get(row.timetable_id) || [];
+      stops.push(row);
+      canonicalStopsById.set(row.timetable_id, stops);
+    }
+  }
+  if (connectedIds.some(id => !(canonicalStopsById.get(id) || []).length)) {
+    throw new Error("CANONICAL_CONTINUATION_STOPS_UNAVAILABLE");
+  }
+
   // Vehicle type may be verified by a *different* timetable segment of
   // the very same through train. At the canonical Osaki boundary, accept a
   // single exact Rinkai model only when BOTH schedules agree on operating
@@ -189,10 +238,22 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
 
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
+    const mapped = sourceResolution.get(t.id);
+    const ruleType = mapped.mapping_level === "dated_schedule_rule" ? String(mapped.vehicle_type || "") : "";
+    const verifiedBoundaryType = String(boundaryVehicle.get(t.id) || "");
+    const conflict = !!(ruleType && verifiedBoundaryType && ruleType !== verifiedBoundaryType);
+    const exactScheduleType = conflict ? "" : (ruleType || verifiedBoundaryType);
+    const scheduleLevel = conflict ? "conflicting_scheduled_evidence"
+      : ruleType ? "dated_schedule_rule"
+      : verifiedBoundaryType ? "verified_scheduled_boundary"
+      : mapped.mapping_level || "unresolved";
+    const completeStops = mapped.group_evidence === "verified_continuation"
+      ? canonicalStopsById.get(mapped.timetable_id) : null;
     return {
       // Only SQL-certified identical itineraries share identity across line sources.
       // Keep separate line records/stops; never dedupe by departure time alone.
-      id: t.physical_service_key || ("manual-template:" + t.id),
+      id: "canonical-train-timetable:" + mapped.timetable_id,
+      canonical_timetable_id: mapped.timetable_id,
       line_id: lineId,
       service_date: serviceDate,
       calendar_type: calendarType(t.calendar_urn),
@@ -202,15 +263,22 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       rail_direction: t.direction_urn,
       train_type: t.train_type_urn,
       destination_station: t.destination_urns?.[0] || null,
-      vehicle_type_label: boundaryVehicle.get(t.id) || t.vehicle_type_label || null,
-      vehicle_evidence_source: boundaryVehicle.has(t.id) ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
+      // A single source label is a candidate, not observed rolling stock.
+      // Only decisive, source-dated timetable rules may identify a planned type.
+      vehicle_type_label: exactScheduleType || null,
+      vehicle_type_candidates: t.vehicle_type_label || null,
+      vehicle_mapping_level: scheduleLevel,
+      vehicle_evidence_source: ruleType && !conflict ? "database-dated-schedule-rule"
+        : verifiedBoundaryType && !conflict ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
+      vehicle_evidence_source_id: ruleType && !conflict ? mapped.vehicle_source_id : null,
+      vehicle_evidence_url: ruleType && !conflict ? mapped.vehicle_source_url : null,
       source_trip_id: t.source_trip_id || null,
       previous_timetable_ids: t.previous_timetable_ids || [],
       next_timetable_ids: t.next_timetable_ids || [],
       timetable_provenance: t.source_path || null,
       source_revision_date: t.source_revision_date || null,
-      stops: (byTemplate.get(t.id) || []).map((s: any) => {
-        const urn = s.arrival_station_urn || s.departure_station_urn || "";
+      stops: (completeStops || byTemplate.get(t.id) || []).map((s: any) => {
+        const urn = s.station_urn || s.arrival_station_urn || s.departure_station_urn || "";
         return {
           station_urn: urn,
           station_key: stationKey(urn),

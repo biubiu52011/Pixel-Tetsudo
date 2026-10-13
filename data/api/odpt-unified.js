@@ -718,6 +718,11 @@
             "_nextTimetableIds":Array.isArray(run.next_timetable_ids)?run.next_timetable_ids:[],
             "_timetableProvenance":run.timetable_provenance||"",
             "_sourceRevisionDate":run.source_revision_date||null,
+            "_canonicalTrainTimetableId":run.canonical_timetable_id||null,
+            "_sqlVehicleMappingLevel":run.vehicle_mapping_level||"unresolved",
+            "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
+            "_vehicleEvidenceSource":run.vehicle_evidence_source||null,
+            "_vehicleEvidence":run.vehicle_evidence_url||null,
             "odpt:railDirection":run.rail_direction||"",
             "odpt:trainType":run.train_type||"",
             "odpt:destinationStation":run.destination_station?[run.destination_station]:[],
@@ -731,7 +736,11 @@
                 }
                 return o;
             }),
-            vehicleType:run.vehicle_type_label||null,
+            // Unverified single source label is never promoted into EXACT vehicle
+            // identity / gallery PNG by the browser estimator.
+            vehicleType:(run.vehicle_mapping_level==="dated_schedule_rule" ||
+                run.vehicle_mapping_level==="verified_scheduled_boundary")
+                ? (run.vehicle_type_label||null) : null,
             _positionSource:"supabase-train-run"
         };
     }

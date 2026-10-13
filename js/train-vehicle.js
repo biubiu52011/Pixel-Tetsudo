@@ -23,6 +23,11 @@ var CANONICAL_VEHICLES = {
   "keisei-3700": { displayName: "京成3700形", iconName: "京成3700形", asset: "../images/列车/京成電鉄/京成電鉄_3700形.png", aliases: ["京成3700形","京成電鉄3700形"] },
   "keio-5000": { displayName: "京王5000系", iconName: "京王5000系", asset: "../images/列车/京王電鉄/京王電鉄_5000系.png", aliases: ["京王5000系","京王電鉄5000系"] },
   "odakyu-4000": { displayName: "小田急4000形", iconName: "小田急4000形", asset: "../images/列车/小田急電鉄/小田急電鉄_4000形_標準色.png", aliases: ["小田急4000形","小田急電鉄4000形"] },
+  "metro-16000": {
+    displayName: "東京メトロ16000系", iconName: "東京メトロ16000系",
+    asset: "../images/列车/東京メトロ/東京メトロ_16000系.png",
+    aliases: ["東京メトロ 16000系"]
+  },
   "metro-07-10": { displayName: "東京メトロ07系", iconName: "東京メトロ07系", asset: "../images/列车/東京メトロ/東京メトロ_07系.png", aliases: ["東京メトロ07系(10両)","東京メトロ07系"] },
   "metro-15000-10": { displayName: "東京メトロ15000系", iconName: "東京メトロ15000系", asset: "../images/列车/東京メトロ/東京メトロ_15000系.png", aliases: ["東京メトロ15000系(10両)","東京メトロ15000系"] },
   "tokyu-2020-10": { displayName: "東急2020系", iconName: "東急2020系", asset: "../images/列车/東急電鉄/東急電鉄_2020系.png", aliases: ["東急2020系(10両)","東急2020系"] },
@@ -77,7 +82,7 @@ var CANONICAL_VEHICLES = {
     displayName: "E233系2000番台",
     iconName: "E233系2000番台",
     asset: "../images/列车/JR東日本/JR東日本_E233系_2000番台.png",
-    aliases: ["E233系2000番台"]
+    aliases: ["E233系2000番台", "JR東日本E233系2000番台", "JR E233系2000番台"]
   },
   "jr-east-e531-joban-medium": {
     displayName: "E531系",
