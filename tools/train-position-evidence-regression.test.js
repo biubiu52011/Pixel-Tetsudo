@@ -238,8 +238,9 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
          renderer.includes('node.getAttribute("aria-label")') &&
          renderer.includes('svg.addEventListener("click"'),
     "mobile six train details must be accessible by selection");
-  assert(css.includes('position: fixed;') &&
-         css.includes('bottom: calc(84px + env(safe-area-inset-bottom));'),
+  const trainDetailCss=read("css/trains.css");
+  assert(trainDetailCss.includes('position: fixed;') &&
+         trainDetailCss.includes('bottom: calc(84px + env(safe-area-inset-bottom));'),
     "selected train details must be visible near the mobile viewport, not hidden below a long map");
   assert(trackSrc.includes("sixLoopStartIndex")&&trackSrc.includes("idx === points.length - 1 ? 0"),
     "six ring must rejoin Tochomae instead of a tail station");
