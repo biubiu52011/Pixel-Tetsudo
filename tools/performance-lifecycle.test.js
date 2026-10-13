@@ -88,10 +88,13 @@ assert.ok(/var sourcePromise = hasRealtimePositionApi\(lineId\)/.test(odptUnifie
   /: getCachedTrainRuns\(lineId\)/.test(odptUnifiedSrc),
   'realtime API lines must use API timetable only; non-realtime lines use SQL only');
 assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
-  /vehicleType:run\.vehicle_type_label\|\|null/.test(odptUnifiedSrc) &&
+  /"_sqlVehicleCandidateLabel":run\.vehicle_type_candidates\|\|""/.test(odptUnifiedSrc) &&
+  /vehicleType:\(run\.vehicle_mapping_level==="dated_schedule_rule"/.test(odptUnifiedSrc) &&
+  /run\.vehicle_mapping_level==="verified_scheduled_boundary"/.test(odptUnifiedSrc) &&
+  /"_canonicalTrainTimetableId":run\.canonical_timetable_id\|\|null/.test(odptUnifiedSrc) &&
   /body\.partial===true/.test(odptUnifiedSrc) &&
   /_timetableCoverage="partial"/.test(odptUnifiedSrc),
-  'client must retain partial-coverage markers, verified runs, and manual vehicle evidence');
+  'client must retain partial coverage and canonical identity, but suppress candidate-only vehicle PNG identity');
 console.log('train-run-SQL-completeness: 3 PASS');
 
 const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');
