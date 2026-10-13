@@ -1183,10 +1183,10 @@
             if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
               try {
                 var _derivedVehicleEvidence = null;
-                // Arakawa trainNumber identifies the vehicle itself, not an
-                // ODPT timetable operation. Do not feed it into operation-code rules.
+                // Ask the SAME registered number-to-model scripts on every
+                // line, including Arakawa. A bare ODPTnnnn is not a physical
+                // car number: without a matching sourced rule it stays UNKNOWN.
                 if (!odptVehicleType && window.TrainOperationEvidence &&
-                    lid !== "Arakawa" &&
                     typeof window.TrainOperationEvidence.resolveEvidence === "function") {
 
                   var _evidenceStart = _perfNow();
