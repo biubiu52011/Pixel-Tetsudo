@@ -15061,7 +15061,8 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/総武線快速横須賀線.png",
         "order": 14,
         "lineIds": [
-          "Yokosuka"
+          "Yokosuka",
+          "SobuRapid"
         ],
         "operatorGroup": "JR_EAST"
       },
@@ -24180,6 +24181,7 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/総武線快速横須賀線.png",
         "order": 14,
         "lineIds": [
+          "Yokosuka",
           "SobuRapid"
         ],
         "operatorGroup": "JR_EAST"

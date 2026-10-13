@@ -615,6 +615,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   function _trainPositionRank(p) {
     if (!p) return 3;
     if (p.positionSource === "realtime-api" || p.estimated === false) return 0;
+    if (p.positionSource === "supabase-train-run") return 1;
     if (p.positionSource === "train-timetable") return 1;
     if (p.positionSource === "station-timetable") return 2;
     return p.estimated === true ? 1 : 0;

@@ -52,7 +52,7 @@
     if (!lineId || !fusedLine || !Array.isArray(fusedLine.realtimePositions)) return;
     var now = Date.now();
     var nextExpiry = 0;
-    fusedLine.realtimePositions.forEach(function(p) {
+    getRealtimePositions(lineId).forEach(function(p) {
       if (!p || p.positionSource !== "realtime-api" || !p.sourceValidUntil) return;
       var ts = Date.parse(p.sourceValidUntil);
       if (!isNaN(ts) && ts >= now && (!nextExpiry || ts < nextExpiry)) nextExpiry = ts;
@@ -64,6 +64,7 @@
     _realtimeExpiryTimer = setTimeout(function() {
       _realtimeExpiryTimer = null;
       if (currentLine !== lineId || !detailEl || detailEl.classList.contains("hidden")) return;
+      if (window.DataFusion && window.DataFusion.loadTrainPositions) window.DataFusion.loadTrainPositions();
       var latest = getLinesData()[lineId];
       if (latest && mapEl) {
         renderTrainMap(mapEl, latest, lineId);
@@ -118,6 +119,30 @@
               _timetablePartners.indexOf(id) < 0) _timetablePartners.push(id);
         });
       }
+      // Activate the same extension/branch scope that getRealtimePositions renders.
+      // Presentation membership is separate: adding a data dependency must not
+      // change system geometry or the title.
+      var _extensions = _fusionExtensionLines(lineId) || [];
+      var _positionLines = (window.RailwayDB && window.RailwayDB.getAllLines)
+        ? window.RailwayDB.getAllLines() : lines;
+      _positionLines = _positionLines || lines;
+      var _branches = (_positionLines[lineId] && _positionLines[lineId].branches) || [];
+      var _dependencies = _extensions.map(function(ext) { return ext.lid; });
+      if (!_extensions.length) {
+        _dependencies = _dependencies.concat(_branches);
+        Object.keys(_positionLines).forEach(function(id) {
+          if (_positionLines[id] && _positionLines[id].branchOf === lineId) _dependencies.push(id);
+        });
+      }
+      _dependencies.forEach(function(id) {
+        if (_positionLines[id] && _requestedLines.indexOf(id) < 0) _requestedLines.push(id);
+      });
+      window.TrainsActivePositionLineIds = _requestedLines.slice();
+      _requestedLines.forEach(function(id) {
+        if (window.ODPTClient && window.ODPTClient.hasRealtimePositionApi &&
+            !window.ODPTClient.hasRealtimePositionApi(id) && id !== lineId &&
+            _timetablePartners.indexOf(id) < 0) _timetablePartners.push(id);
+      });
       var _activationPromise = Promise.resolve();
       if (window.ODPTClient && window.ODPTClient.activateRealtimeLines) {
         _activationPromise = window.ODPTClient.activateRealtimeLines(_requestedLines).catch(function(e) {
@@ -193,6 +218,7 @@
       }
       currentSystemLineIds = null;
       window.TrainsActiveSystemLineIds = null;
+      window.TrainsActivePositionLineIds = null;
       if (window.ODPTClient && window.ODPTClient.clearRealtimeLines) window.ODPTClient.clearRealtimeLines();
       if (listEl) listEl.classList.remove("hidden");
       var browser = listEl && listEl.closest("[data-railway-browser]");
@@ -352,8 +378,7 @@
           if (currentLine && lines[currentLine]) {
             try {
               var _cl = lines[currentLine];
-              var _pos = (_cl.realtimePositions && _cl.realtimePositions.length > 0)
-                ? _cl.realtimePositions : (_cl.cachedPositions || []);
+              var _pos = getRealtimePositions(currentLine);
               posHash = currentLine + ":" + _pos.length + ":";
               for (var _pi = 0; _pi < _pos.length; _pi++) {
                 var _tp = _pos[_pi];

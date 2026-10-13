@@ -197,6 +197,7 @@
   var _lastFusedData = null;
   var _lineControlVersion = null;
   var _positionTimer = null;
+  var _positionServiceDate = Object.create(null);
   var _initialized = false;
   var _refreshTimer = null;
   var _cacheTimer = null;
@@ -240,6 +241,23 @@
   // 后台页不再产生计算与 IDB 写入开销（配合 odpt-unified 的拉取暂停双管齐下）。
   function startFusionPolling() {
     if (_cacheTimer) return;
+    // SQL-only lines have no Train API poll to advance their minute clock.
+    // Reuse the existing position timer and stop it with the visibility lifecycle.
+    if (!_positionTimer) _positionTimer = setInterval(function() {
+      if (document.hidden || (window.location.pathname || "").indexOf("trains.html") < 0) return;
+      var lid = (window.location.hash || "").replace(/^#/, "");
+      if (!lid) return;
+      var estimator = window.TrainPositionEstimator;
+      var date = estimator && estimator.getCurrentServiceDate ? estimator.getCurrentServiceDate() : "";
+      var ids = window.TrainsActivePositionLineIds || window.TrainsActiveSystemLineIds || [lid];
+      ids.forEach(function(id) {
+        // Mark a date only after SQL succeeds; transient errors retry next minute.
+        if (date && _positionServiceDate[id] !== date &&
+            !(window.ODPTClient && window.ODPTClient.hasRealtimePositionApi && window.ODPTClient.hasRealtimePositionApi(id))) ensureTimetable(id).catch(function() {});
+      });
+      loadTrainPositions();
+    }, 60000);
+
     // Fusion is source-driven: ODPT updates and manual timetable completion
     // use dirty fusion; initialization and explicit refreshes retain fuseAll().
     // A second
@@ -248,6 +266,7 @@
     _cacheTimer = setInterval(function() { try { saveToCache(); } catch(e) {} }, _refreshIntervalMs);
   }
   function stopFusionPolling() {
+    if (_positionTimer) { clearInterval(_positionTimer); _positionTimer = null; }
     if (_refreshTimer) { clearInterval(_refreshTimer); _refreshTimer = null; }
     if (_cacheTimer) { clearInterval(_cacheTimer); _cacheTimer = null; }
   }
@@ -905,8 +924,7 @@
     try {
       // Position truth must come only from the dedicated realtime container.
       // Realtime positions come only from the dedicated ODPT position store.
-      var positionSource = window.ODPT_TRAIN_POSITIONS;
-      if (!positionSource) return;
+      var positionSource = window.ODPT_TRAIN_POSITIONS || {};
       allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
       if (!allLines || Object.keys(allLines).length === 0) {
         // v4.3.413: DataLayer 未就绪时延迟重试（最多 30 次），
@@ -1326,6 +1344,15 @@
           if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.estimateAllPositions === "function") {
             // Timetable estimation consumes timetable rows only; never fall back to the
             // Timetable estimation reads only the dedicated timetable store.
+            Object.keys(posMap).forEach(function(lid) {
+              if (requestedLineIds && requestedLineIds.length && requestedLineIds.indexOf(lid) < 0) return;
+              posMap[lid] = (posMap[lid] || []).filter(function(p) {
+                return p && p.positionSource === "realtime-api" && _isFreshRealtimeRecord({
+                  "dct:valid": p.sourceValidUntil, "dc:date": p.sourceUpdatedAt,
+                  "odpt:frequency": p.sourceFrequency
+                });
+              });
+            });
             var timetableSource = window.ODPT_TIMETABLES || {};
             var estimated = window.TrainPositionEstimator.estimateAllPositions(
               allLines,
@@ -1784,7 +1811,10 @@
           for (var pi = 0; pi < after.length; pi++) {
             var a = after[pi] || {}, b = before[pi] || {};
             if (_positionIdentity(a) !== _positionIdentity(b) || a.stationIndex !== b.stationIndex ||
-                a.delay !== b.delay || a.destinationStation !== b.destinationStation ||
+                a.segmentToIndex !== b.segmentToIndex || a.segmentProgress !== b.segmentProgress ||
+                a.positionSource !== b.positionSource || a.estimated !== b.estimated ||
+                a.sourceUpdatedAt !== b.sourceUpdatedAt || a.sourceValidUntil !== b.sourceValidUntil ||
+                a.delayMin !== b.delayMin || a.destinationStation !== b.destinationStation ||
                 a.vehicleIconPath !== b.vehicleIconPath) { _positionDirty[id] = true; break; }
           }
         });
@@ -2026,12 +2056,27 @@
     // ODPT-shaped pool by ODPTClient. Re-estimate through evidence without
     // registering those same rows as a second manual timetable source.
     if (_hasOdptTimetable(lineId)) {
-      try {
-        var readyTargets = _expandDirtyLines([lineId], allLines);
-        if (typeof doEstimation === "function") doEstimation(readyTargets);
-        fuseDirty([lineId]);
-      } catch(err) { console.debug("[DataFusion] ready timetable refresh:", err.message); }
-      return Promise.resolve(true);
+      var date = window.TrainPositionEstimator && window.TrainPositionEstimator.getCurrentServiceDate
+        ? window.TrainPositionEstimator.getCurrentServiceDate() : "";
+      var client = window.ODPTClient;
+      var identity = client && client.getLineRailwayIdentity && client.getLineRailwayIdentity(lineId);
+      var op = client && client.LINE_TO_OPERATOR && client.LINE_TO_OPERATOR[lineId];
+      var shared = window.ODPT_TIMETABLES && window.ODPT_TIMETABLES[op] || [];
+      var currentSql = identity && shared.some(function(tt) {
+        var actual = client.parseRailwayIdentity(tt);
+        return tt._positionSource === "supabase-train-run" && tt._serviceDate === date &&
+          actual && actual.key === identity.key;
+      });
+      if (currentSql || (date && _positionServiceDate[lineId] === date)) {
+        _positionServiceDate[lineId] = date;
+        try {
+          var readyTargets = _expandDirtyLines([lineId], allLines);
+          if (typeof doEstimation === "function") doEstimation(readyTargets);
+          else loadTrainPositions();
+          fuseDirty([lineId]);
+        } catch(err) { console.debug("[DataFusion] ready timetable refresh:", err.message); }
+        return Promise.resolve(true);
+      }
     }
     // No realtime API: Supabase is the sole timetable source. A DB failure
     // does not secretly start a second, legacy JS position feed.
@@ -2040,12 +2085,14 @@
     }
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
       if (!rows || !rows.length) return false;
+      _positionServiceDate[lineId] = rows[0]._serviceDate || "";
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }
       try {
         var targets = _expandDirtyLines([lineId], allLines);
         if (typeof doEstimation === "function") doEstimation(targets);
+        else loadTrainPositions();
         fuseDirty([lineId]);
       } catch(err) { console.debug("[DataFusion] ensureTimetable refresh:", err.message); }
       return true;

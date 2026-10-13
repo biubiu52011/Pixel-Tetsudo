@@ -413,3 +413,20 @@ test('Toei 2026 fleet resolves only exact identity evidence to existing gallery 
   assert.equal(tram.verifiedCarNumber,'8501');
   assert.ok(tram.iconPath.endsWith('8501号車_山吹色.png'));
 });
+
+
+test('static railway cache follows the deployed build stamp and legacy version', () => {
+  const vm = require('node:vm');
+  const loader = read('data/core/db-loader.js');
+  const start = loader.indexOf('  var DB_CACHE_VERSION = (function() {');
+  const end = loader.indexOf('  var DB_CACHE_KEY', start);
+  assert.ok(start >= 0 && end > start);
+  function version(src) {
+    const context = { document: { currentScript: { src } } };
+    vm.runInNewContext(loader.slice(start, end), context);
+    return context.DB_CACHE_VERSION;
+  }
+  assert.equal(version('https://example.test/data/core/db-loader.js?build=release-a'), 'release-a');
+  assert.equal(version('https://example.test/data/core/db-loader.js?build=release-b'), 'release-b');
+  assert.equal(version('https://example.test/data/core/db-loader.js?v=4.3.1194'), '4.3.1194');
+});

@@ -43,7 +43,12 @@ for(const rel of ['pages/trains.html','pages/realtime.html']){
                     'train-operation-evidence.js','train-position-estimator.js','data-fusion.js']){
   const pinnedVersion = ['train-position-estimator.js','data-fusion.js'].includes(file)
     ? '4.3.1192' : '4.3.1180';
-  assert(html.includes(file+'?v='+pinnedVersion),rel+' still caches older ODPT mapping: '+file);
+  const escapedFile = file.replace(/\./g, '\\.');
+  const version = html.match(new RegExp(escapedFile + '\\?v=(\\d+\\.\\d+\\.\\d+)'));
+  const actual = version && version[1].split('.').map(Number);
+  const minimum = pinnedVersion.split('.').map(Number);
+  assert(actual && actual[0] === minimum[0] && actual[1] === minimum[1] && actual[2] >= minimum[2],
+    rel+' still caches older ODPT mapping: '+file);
  }
 }
 assert(/function matchRealtimeVehicleEvidence\(/.test(estimator) &&
@@ -59,12 +64,7 @@ assert(/p.vehicleEvidenceConflict\) return p/.test(fusion),
 assert(/now.getUTCHours\(\) < 4/.test(estimator) &&
        /now.getUTCFullYear\(\)/.test(estimator),
   "ODPT calendar and minute calculations must use JST service date");
-for(const htmlPath of ["pages/trains.html","pages/realtime.html"]){
- const html=read(htmlPath);
- assert(html.includes("js/train-position-estimator.js?v=4.3.1192") &&
-        html.includes("js/data-fusion.js?v=4.3.1192"),
-        htmlPath+" must invalidate cached old vehicle join logic");
-}
+// Asset versions were checked against the minimum vehicle-join release above.
 // Exercise the *actual* indexed realtime/TrainTimetable join with two
 // simultaneous records: an ODPT schedule with no vehicle and a sourced
 // timetable row with the same physical itinerary and certified PNG.

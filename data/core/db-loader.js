@@ -1015,7 +1015,7 @@ function applyData(data, i18n) {
   var DB_CACHE_VERSION = (function() {
     try {
       var src = (document.currentScript && document.currentScript.src) || "";
-      var m = src.match(/[?&]v=([^&]+)/);
+      var m = src.match(/[?&](?:build|v)=([^&]+)/);
       if (m && m[1]) return m[1];
     } catch(e) {}
     return "0";

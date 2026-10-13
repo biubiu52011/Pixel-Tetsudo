@@ -717,6 +717,7 @@
                 saturday_holiday:"odpt.Calendar:SaturdayHoliday"
             })[run.calendar_type] || "",
             "_operationCode":run.operation_code||"",
+            "_serviceDate":run.service_date||"",
             "trainOwner":run.operation_owner||"",
             "_scheduledTrainOwnerSource":run.operation_owner_source_url||"",
             // Keep source-provided physical through-service links as evidence,
@@ -776,7 +777,9 @@
         if(hit && Date.now()-hit.at<30000) return Promise.resolve(hit.rows);
         if(_trainRunInflight[key]) return _trainRunInflight[key];
         var url=TRAIN_RUN_CACHE_ENDPOINT+"?line_id="+encodeURIComponent(lineId)+"&service_date="+encodeURIComponent(serviceDate)+"&fallback_only=1";
-        _trainRunInflight[key]=fetch(url,{credentials:"omit"}).then(function(r){
+        var controller = new AbortController();
+        var timeout = setTimeout(function() { controller.abort(); }, 8000);
+        _trainRunInflight[key]=fetch(url,{credentials:"omit",signal:controller.signal}).then(function(r){
             if(!r.ok) throw new Error("TrainRun cache HTTP "+r.status);
             return r.json();
         }).then(function(body){
@@ -796,7 +799,7 @@
             }).filter(Boolean):[];
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
-        }).catch(function(){ return []; }).finally(function(){ delete _trainRunInflight[key]; });
+        }).catch(function(){ return []; }).finally(function(){ clearTimeout(timeout); delete _trainRunInflight[key]; });
         return _trainRunInflight[key];
     }
 
@@ -831,6 +834,7 @@
             var timetablePromises = [];
             var newlyActivatedOps = {};
             var requestedOps = {};
+            var activationDate = _serviceDateJst();
             lineIds.forEach(function(lineId) {
                 var requestedOp = LINE_TO_OPERATOR[lineId];
                 if (requestedOp && hasRealtimePositionApi(lineId)) requestedOps[requestedOp] = true;
@@ -853,7 +857,7 @@
 
                 // A line already activated in this page lifecycle has its timetable
                 // in ODPT_TIMETABLES/_timetableCache. Do not repeat merge work.
-                if (_activatedRealtimeLines[lineId]) return;
+                if (_activatedRealtimeLines[lineId] === _serviceDateJst()) return;
                 if (_realtimeActivationInflight[lineId]) {
                     timetablePromises.push(_realtimeActivationInflight[lineId]);
                     return;
@@ -876,7 +880,7 @@
                         return !(actual && actual.key === identity.key);
                     });
                     window.ODPT_TIMETABLES[op] = keep.concat(rows);
-                    _activatedRealtimeLines[lineId] = true;
+                    _activatedRealtimeLines[lineId] = rows[0]._serviceDate || activationDate;
                 }).catch(function(e) {
                     console.debug("[ODPT] on-demand timetable unavailable:", lineId, e && e.message);
                 }).finally(function() {
@@ -888,9 +892,10 @@
             // Opening another line of an already-active operator must not trigger
             // another operator-wide Train fetch. The 30s poll already owns refresh.
             var newOps = Object.keys(newlyActivatedOps);
-            return Promise.all(timetablePromises).then(function() {
-                return newOps.length ? loadRealtimeData(false, newOps, true) : Promise.resolve();
-            });
+            return Promise.all([
+                Promise.all(timetablePromises),
+                newOps.length ? loadRealtimeData(false, newOps, true) : Promise.resolve()
+            ]);
         },
 
         // 获取运行情报/延误信息

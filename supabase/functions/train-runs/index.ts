@@ -347,31 +347,46 @@ Deno.serve(async (req: Request) => {
       source: "REALTIME_API_LINE", line_id: lineId, service_date: serviceDate, runs: [] });
   }
 
-  const { data: runs, error } = await db.from("train_runs")
-    .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
-    .eq("line_id", lineId).eq("service_date", serviceDate).order("train_number");
-  if (error) return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
-  if (!runs?.length) {
-    try { return await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null); }
-    catch (err) {
-      console.error("[train-runs] Manual SQL template read failed", lineId, String(err));
-      return json({ ok: true, complete: false, cache: "MISS",
-        source: "DATABASE_TEMPLATE_ERROR", line_id: lineId, service_date: serviceDate, runs: [] });
+  async function pages(makeQuery: (first: number, last: number) => any) {
+    const result: any[] = [];
+    for (let first = 0; first < 35000; first += 700) {
+      const { data, error } = await makeQuery(first, first + 699);
+      if (error || !Array.isArray(data)) throw new Error("DB_QUERY_FAILED");
+      result.push(...data);
+      if (data.length < 700) return result;
     }
+    throw new Error("SQL_RESULT_TOO_LARGE");
+  }
+  try {
+    const runs = await pages((first, last) => db.from("train_runs")
+      .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
+      .eq("line_id", lineId).eq("service_date", serviceDate).order("id").range(first, last));
+    if (!runs.length) return await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null);
+    const byRun = new Map<number, any[]>();
+    for (let offset = 0; offset < runs.length; offset += 100) {
+      const ids = runs.slice(offset, offset + 100).map(r => r.id);
+      const stops = await pages((first, last) => db.from("train_run_stops")
+        .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
+        .in("train_run_id", ids).order("train_run_id").order("stop_sequence").range(first, last));
+      for (const stop of stops) {
+        const list = byRun.get(stop.train_run_id) || [];
+        list.push(stop);
+        byRun.set(stop.train_run_id, list);
+      }
+    }
+    const result = runs.map(run => ({ ...run, stops: byRun.get(run.id) || [] }));
+    const validRuns = result.filter(run => run.stops.length >= 2 &&
+      run.stops.every((s: any) => !!s.station_urn) &&
+      run.stops.filter((s: any) => s.arrival_time || s.departure_time).length >= 2);
+    const omittedIncompleteRuns = result.length - validRuns.length;
+    const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
+    const partial = validRuns.length > 0 && !complete;
+    return json({ ok: true, cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS", complete, partial,
+      source: "DATABASE_MANUAL", line_id: lineId, service_date: serviceDate,
+      omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
+  } catch (err) {
+    console.error("[train-runs] SQL read failed", lineId, String(err));
+    return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
   }
 
-  const { data: stops, error: stopError } = await db.from("train_run_stops")
-    .select("train_run_id,stop_sequence,station_key,station_urn,arrival_time,departure_time,arrival_minute,departure_minute")
-    .in("train_run_id", runs.map((r) => r.id)).order("train_run_id").order("stop_sequence");
-  if (stopError) return json({ ok: false, error: "DB_STOP_QUERY_FAILED" }, 500);
-  const byRun = new Map<number, unknown[]>();
-  for (const stop of stops || []) {
-    const list = byRun.get(stop.train_run_id) || [];
-    list.push(stop);
-    byRun.set(stop.train_run_id, list);
-  }
-  const result = runs.map((run) => ({ ...run, stops: byRun.get(run.id) || [] }));
-  const complete = result.length > 0 && result.every((run) => run.stops.length >= 2);
-  return json({ ok: true, cache: complete ? "HIT" : "PARTIAL", complete,
-    source: "DATABASE_MANUAL", line_id: lineId, service_date: serviceDate, runs: complete ? result : [] });
 });

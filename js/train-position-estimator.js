@@ -634,10 +634,12 @@
 
       var positions = [];
       var processedTrainIds = {};
+      var serviceDate = getTokyoServiceDate();
 
       for (var t = 0; t < timetableData.length; t++) {
         var tt = timetableData[t];
         if (!tt) continue;
+        if (tt._serviceDate && tt._serviceDate !== serviceDate) continue;
 
         var run = compileTrainRun(tt, lineId, workLine, stationIndexMap);
         if (!run) continue;
@@ -1142,6 +1144,7 @@
     getCurrentCalendar: getCurrentCalendar,
     getCurrentCalendars: getCurrentCalendars,
     getCurrentMinutes: getCurrentMinutes,
+    getCurrentServiceDate: getTokyoServiceDate,
     normalizeStationKey: normalizeStationKey,
     isLimitedExpress: isLimitedExpress
   };

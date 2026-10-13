@@ -4,6 +4,71 @@
 >
 > 最后人工整理：2026-10-07 JST
 
+
+
+
+
+
+
+## 2026-10-13 JST — train icon deployment release (in progress)
+
+- 用户明确授权完成列车图标部署。发布已验证的最新版整合及 JO 合并展示修复，保留 canonical 实体、车辆/编成证据、同车型 PNG 和实时/SQL 单一链路。原始本地工作仍在备份及 stash。
+- 发布范围：页面/缓存/地图数据融合/SQL 日期查询/现有测试；TokyuMeguro-manual.js 和 normalization backlog 是先前独立修改，本次不提交、不发布。没有新增脚本。
+- 发布前检查：47 node:test PASS；49 排序/JO 地图检查 PASS；77 图片引用 PASS；466 locked PNG 内容校验 PASS；列车图标身份/同车型映射回归 PASS。此前全套 33 工具测试与4工程 guards 已通过。
+- 新修复：db-loader 的缓存 key 识别 deploy workflow 的 ?build=SHA，同时兼容 ?v=，避免新发布继续读取分开 JO/旧图标的静态缓存。新增实际版本键行为测试。
+- Supabase train-runs v59 部署源码已备份，并确认其与 GitHub 最新基准一致；拟发布已测试的日期 run/stop 分页及部分有效数据保留。沿用现有 verify_jwt=false 的公开只读接口，不改 schema，不发布 importer。
+- 完成条件：GitHub CI/CD 与 Release Guards 成功，Pages 实际页面为本次 build，静态图标可访问；Supabase 函数更新并通过真实读请求验证。
+
+## 2026-10-13 JST — JO combined presentation restored after user correction
+
+- 用户明确：横须贺线与总武快速线分开是错误编译产物，不能当作新版设计。此前为接受分开结构而修改 real-data 测试的判断已撤销；原“独立 JO”整合记录是错误判断，以下更正为准。
+- 只恢复两条 canonical line 的 presentation.lineIds = [Yokosuka, SobuRapid]，Yokosuka 为展示 primary。保留独立物理站表、时刻表、运行情报、列车身份、ODPT/API 能力和既有东京站 handover；未合并实体 topology。
+- railway_data.json 与 railway-data.file.js 同步，程序验证两份数据一致，并验证移除这两个成员字段后所有其余 canonical 字段与修改前完全相同。
+- 恢复 JO 单一卡片排序断言，并新增 SobuRapid 不单独占卡片、两线共同成员声明、file fallback 一致、东京站地图延伸和两条实体实时列车身份保留的行为检查。
+- 七页 db-loader 版本统一提升至 4.3.1194，避免旧静态缓存的分开列表继续留在界面。没有新增脚本。
+- 验证：排序/地图检查 PASS；46 node:test 页面/服务日/直通检查 PASS；identity coverage、runinfo scope、frontend smoke PASS；canonical entity guard / home guard / diff check PASS（既有 baseline warnings 保留）。未提交/推送/部署。
+
+## 2026-10-13 JST — latest-main integration completed locally (PASS; deployment pending)
+
+- 用户授权：先保存旧工作区，取得线上新版，迁移仍需要的改动并验证，再更新原项目目录。整合基准 = origin/main 9b7c3915ba6d83e39180368d8428769c5e33734b，较旧本地基准多 115 个提交。
+- 安全保存：22 个原本未提交文件逐文件备份并核对 SHA256；完整 7,705,589 字节 binary patch / manifest 保存在当前对话 visualization/local-backup-before-online-integration。原始工作将另外保留在 Git stash 中；不丢弃恢复材料。
+- 最新架构优先：保留 canonical timetable/source resolution、实体直通链、operation owner/车辆证据、来源 PNG 校验；复用新版单推定与日本时区实现。实时 API 线路保持 API 权威，不以空快照启动 SQL；当前地图中的无实时 API 支线/直通段使用 SQL，维持混合展示。旧 FULL 断流自动切 SQL 不迁移。
+- 迁移增量：SQL-only 行按服务日期限定；现有 position timer 按分钟推进、跨日失败逐线重试；旧推定清理；区间进度/有效期 dirty 检测；支线/延伸数据 scope 与展示体系分离；实时请求与时刻表加载并行；当前空位置快照不复活旧缓存；SQL 优先级及日期 run/stop 分页、有效部分保留。
+- 原本的 TokyuMeguro-manual / normalization backlog 无线上重叠，保留本地更新。旧车辆快照、旧 resolver/exporter 及其旧测试已被新版 canonical 证据/测试取代，不覆盖线上新版；原文件完整保存在备份与 stash。PROGRESS 历史记录保留。
+- 脚本约束：只修改现有工程脚本/页面/测试，不新增工程脚本。HTML 资产版本升到 4.3.1193；版本 guard 允许不低于已验证的发布版本，避免新版本被旧的精确 pin 拒绝。
+- 排序测试修正：新版 canonical 将 Yokosuka / SobuRapid 建为独立 JO presentations，旧 real-data 测试仍要求单一 JO slot。现断言两项独立实体及成员边界；不改变 canonical topology 或公共排序逻辑。
+- 验证：46 node:test checks PASS；33 工具测试/映射/图库检查 PASS；4 Python 工程 guards PASS（保留原有基线警告）；43 JS scripts 语法 PASS；train-runs TypeScript 语法 PASS；git diff --check PASS。Open Code Review 内置委托方式审查整合范围，未发现未解决 high/medium 问题。
+- 未提交本次改动、未推送、未发布 GitHub Pages / Supabase Edge。真实浏览器验收与线上部署验收仍未执行。
+
+## 2026-10-13 JST — GitHub online/local reconciliation audit
+
+- 用户要求与线上仓库核对。两次 git ls-remote 验证线上 main = 9b7c3915ba6d83e39180368d8428769c5e33734b；本地 HEAD/origin-main 缓存仍为 175b87a7095a71fbc3f88411039519fd83e864ea。GitHub compare 确认线上领先 115 个提交、修改 101 个文件。
+- 本地 22 个未提交文件，其中 19 个与线上修改重叠；22 个文件按固定 SHA 读取线上内容，三方文本比较 16 个文件出现冲突，均未执行工作区合并。核对快照与报告保存在当前对话 visualization/repository-check。
+- 线上已实现单次推定、日本时区/服务日、SQL 来源保留，以及 canonical timetable/source resolution、实体直通关联、operation owner 与车辆证据映射。
+- 关键语义差异：线上通过 hasRealtimePositionApi / realtime_position_api_enabled 禁止实时线路查询 SQL；本地允许 SQL 补缺和 FULL 断流回退。整文件覆盖会丢失线上新版字段和证据链，必须按功能迁移。
+- 前轮 27 tests 与委托审查仅验证旧基准工作区，不证明与线上新版兼容；原 local PASS 不应当作可直接发布状态。本次只核对，没有提交、推送、拉取覆盖或部署。
+
+## 2026-10-13 JST — Open Code Review delegation completed (local PASS)
+
+- 用户选择插件内置委托模式；OCR 用于 preview/rule，当前 Codex 执行审查，不需要额外模型 API 端点；未修改 Codex 登录凭据。
+- 本次范围：OCR 选出的 10 个 refactor 文件全部 reviewed，额外手动检查 tools/performance-lifecycle.test.js；共 11 个文件、0 skipped、范围覆盖率 100%。其余 11 个既有车辆相关改动/进度账本未纳入代码审查；不声称全工作区审查完成。
+- 发现并修复 4 项：区间内 segmentProgress/实时有效期变化不触发 dirty fusion（high）；服务日 SQL 失败预先标记日期导致不重试（medium）；SQL 日期与本地日历/分钟轴时区不一致（high）；主线可见 SQL 支线/延伸未激活（medium）。已修复，当前范围无未解决 high/medium findings。
+- 修复方式：细化现有 dirty 比较；按线路记录成功 SQL 日期，现有分钟 timer 重试；日历、推定分钟和实时证据统一日本时区/04:00 服务日；可见位置依赖与 presentation membership 分开跟踪。仍不新增脚本。
+- 验证：27 node:test checks、performance-lifecycle、train-position-evidence-regression、frontend-smoke PASS；服务日测试在 UTC 和 America/Los_Angeles 环境各 13 项 PASS；git diff --check PASS。审查报告保存在当前对话 visualization 目录 trains-review.json。
+- 仍未提交/推送/部署；真实浏览器、GitHub CI/Pages、线上 Supabase Edge 发布尚未验证。
+
+## 2026-10-13 JST — trains realtime / SQL position pipeline (local validation PASS; deployment REVIEW)
+
+- 用户约束：仅改造现有脚本，不新增脚本；保留工作区已有未提交改动。
+- 页面结构：trains.html 现有脚本依赖分组说明、更新相关资源版本；Controller 负责线路激活/生命周期，DataFusion 负责唯一位置融合，Estimator 负责时刻推定，render 负责展示。
+- 数据：现有 ODPTClient 同时启动实时拉取和 SQL 时刻表读取；SQL fallback_only 不再因线路配置 API 而跳过数据库。SQL 无记录且已有时刻表 API 时保留该 API 时刻表回退；无 API 线路 SQL 缺失保持无数据，不启用旧 manual 脚本位置源。
+- 融合：移除两处重复 manual 推定/合并；重算前移除旧推定与过期实时位置。HYBRID 按物理列车去重补缺；FULL 有有效实时时维持权威，断流后允许 SQL；SEGMENTED 保留声明区间规则。SQL 来源标记保留为 supabase-train-run，并持续标为 estimated。
+- 生命周期：复用已有 position timer，每分钟推进无实时 API 的时刻表位置，后台停止；日本 04:00 服务日切换重新读 SQL，旧服务日记录不再推定。当前系统/支线共同加载、共同参与可见位置签名和过期检查；当前空快照不复活 IDB 旧列车。
+- SQL：现有 train-runs/index.ts 的日期 run/stop 查询分页、stop ID 分批；不完整 run 不影响其他有效 run，返回 partial 与 omitted_incomplete_runs。不新增 schema 或 migration。
+- Supabase 只读核查：manual_timetable_templates = 79,473 条 / 191 条线路；train_runs = 9 条 / 2 条线路，最新日期 2026-10-09。实时线上 endpoint 本次未部署修改。
+- 验证：performance-lifecycle、train-position-evidence-regression、frontend-smoke PASS；两个现有 node:test 文件共 24 tests PASS，包含 1,005 个 SQL runs / 8,040 stops 分页、部分有效记录保留、空快照、来源优先、FULL/HYBRID 回退、日本服务日边界。JS 语法与 git diff --check PASS。
+- Open Code Review 已尝试，但因未配置 LLM endpoint 启动失败；不声称 OCR 审查完成。实际浏览器、GitHub CI/Pages 和 Supabase Edge 部署尚未验证。当前为本地可审查改动，未提交/推送/部署。
+
 ## 2026-10-09 JST — UI-004 / UI-002 non-business DOM coupling cleanup (REVIEW)
 
 - 执行者：ChatGPT GitHub connector；直接修改 main，未使用 Work。

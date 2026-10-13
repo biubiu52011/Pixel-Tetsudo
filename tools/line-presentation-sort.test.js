@@ -251,11 +251,41 @@ function ok(cond, name) {
     // Real data: two independent JA systems exist (埼京線・川越線 JA on Saikyo,
     // 川越線・八高線 JA on KawagoeWest) — each is a distinct presentation entity.
     const saikyoJA = pres.filter((e) => e.id === "SaikyoKawagoe" && e.pres && e.pres.code === "JA");
-    ok(jo.length === 1, "real data: JO single slot");
+    ok(jo.length === 1 && jo[0].id === "Yokosuka" &&
+      JSON.stringify(jo[0].pres.lineIds) === JSON.stringify(["Yokosuka", "SobuRapid"]),
+      "real data: combined JO occupies one Yokosuka presentation slot");
+    ok(!pres.some((e) => e.id === "SobuRapid"), "real data: SobuRapid is a member, not a duplicate card");
+    ok(JSON.stringify(raw.lines.SobuRapid.presentation.lineIds) === JSON.stringify(["Yokosuka", "SobuRapid"]),
+      "real data: both physical lines declare the same combined presentation");
+    const derivedContext = { window: {} };
+    vm.runInNewContext(fs.readFileSync(path.join(root, "data/core/railway-data.file.js"), "utf8"), derivedContext);
+    ok(JSON.stringify(derivedContext.window.RAILWAY_DATA.lines.Yokosuka.presentation.lineIds) ===
+      JSON.stringify(raw.lines.Yokosuka.presentation.lineIds) &&
+      JSON.stringify(derivedContext.window.RAILWAY_DATA.lines.SobuRapid.presentation.lineIds) ===
+      JSON.stringify(raw.lines.SobuRapid.presentation.lineIds), "real data: file fallback preserves combined JO presentation");
     ok(saikyoJA.length === 1, "real data: SaikyoKawagoe JA single slot");
     const jaMembers = pres.filter((e) => e.pres && e.pres.code === "JA" && e.id !== "SaikyoKawagoe" && e.id !== "Kawagoe");
     ok(jaMembers.length === 0, "real data: no extra JA slots beyond SaikyoKawagoe/Kawagoe");
     ok(full.indexOf("Yokosuka") === full.indexOf("SobuRapid") - 1, "real data: SobuRapid follows Yokosuka");
+    // Exercise the existing map data reader against the real combined corridor.
+    const positions = {
+      Yokosuka: [{ trainId: "odpt.Train:JR-East.Yokosuka.Live", stationIndex: 0, positionSource: "realtime-api" }],
+      SobuRapid: [{ trainId: "odpt.Train:JR-East.SobuRapid.Live", stationIndex: 1, positionSource: "realtime-api" }]
+    };
+    const dataContext = { window: {
+      UNIFIED_LINES: raw.lines,
+      RailwayDB: { getAllLines() { return raw.lines; } },
+      TrainsActiveSystemLineIds: ["Yokosuka", "SobuRapid"],
+      DataFusion: { getRealtimePositions(id) { return positions[id] || []; } }
+    } };
+    vm.runInNewContext(fs.readFileSync(path.join(root, "js/trains-data.js"), "utf8"), dataContext);
+    const extension = dataContext._fusionExtensionLines("Yokosuka") || [];
+    ok(extension.some((e) => e.lid === "SobuRapid" && e.joinAtEnd === true && e.systemMember === true &&
+      e.baseIdx === raw.lines.Yokosuka.stations.length - 1), "real data: combined JO map continues from Tokyo into SobuRapid");
+    const visible = dataContext.getRealtimePositions("Yokosuka");
+    ok(visible.length === 2 && visible.some((p) => p.trainId === positions.Yokosuka[0].trainId) &&
+      visible.some((p) => p.trainId === positions.SobuRapid[0].trainId && p.fusionLineId === "SobuRapid"),
+      "real data: combined map preserves both physical lines' live train identities");
     // Category ordering on real operators
     const ops = LPS.getOperatorOrder(raw.lines);
     ok(ops.indexOf("JR-East") < ops.indexOf("TokyoMetro"), "real: JR-East before TokyoMetro");

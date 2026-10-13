@@ -127,6 +127,7 @@ function _positionSourceRank(p) {
   // Expired realtime loses priority before dedupe so timetable fallback can
   // take over instead of the renderer deleting the winning stale record later.
   if (p.positionSource === "realtime-api") return _isFreshRealtimePosition(p) ? 0 : 8;
+  if (p.positionSource === "supabase-train-run") return 1;
   if (p.positionSource === "train-timetable") return 1;
   if (p.positionSource === "station-timetable") return 2;
   if (p.estimated === true) return 3;
@@ -195,7 +196,8 @@ function _getBasePositions(lineId) {
   try {
     if (window.DataFusion && window.DataFusion.getRealtimePositions) {
       var pos = window.DataFusion.getRealtimePositions(lineId);
-      if (pos && pos.length > 0) return pos;
+      // Current empty snapshots must not resurrect old cached trains.
+      if (Array.isArray(pos)) return pos;
     }
     if (window.DataLayer && window.DataLayer.getCachedPositions) {
       var cp = window.DataLayer.getCachedPositions(lineId);
