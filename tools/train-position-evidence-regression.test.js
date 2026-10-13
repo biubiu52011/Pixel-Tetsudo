@@ -756,6 +756,7 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
       const attrs={},listeners={};
       return {tagName:tag,attrs,listeners,isConnected:false,
         setAttribute(k,v){attrs[k]=String(v);},
+        setAttributeNS(ns,k,v){attrs[(ns==='http://www.w3.org/1999/xlink'?'xlink:':'')+k]=String(v);},
         getAttribute(k){return attrs[k]??null;},
         removeAttribute(k){delete attrs[k];},
         addEventListener(k,fn){listeners[k]=fn;}
@@ -790,6 +791,8 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
     100,120,{trainNumber:'1251K'},'SaikyoKawagoe',false,'#009744',{idx:11});
   assert.strictEqual(real.tagName,'image');
   assert.strictEqual(real.getAttribute('href'),'../images/列车/JR東日本/E233.png');
+  assert.strictEqual(real.getAttribute('xlink:href'),'../images/列车/JR東日本/E233.png',
+    'SVG XLink and href must reference the same model PNG');
   real.listeners.error();
   assert.strictEqual(sandbox.remembered.length,1);
   assert.strictEqual(nodes.length,2);
