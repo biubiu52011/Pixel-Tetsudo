@@ -340,6 +340,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     date_unverified_runs: validRuns.length - dateVerifiedRuns,
     cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
     source: "DATABASE_MANUAL_TEMPLATES", line_id: lineId, service_date: serviceDate,
+    calendar_status: "selected", selected_calendar: selectedCalendar,
     omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
 }
 
@@ -442,7 +443,8 @@ Deno.serve(async (req: Request) => {
     const omittedIncompleteRuns = result.length - validRuns.length +
       Number(planned.omitted_incomplete_runs || 0);
     const complete = merged.length > 0 && omittedIncompleteRuns === 0 &&
-      (planned.complete === true || planned.runs.length === 0);
+      planned.calendar_status !== "unverified" &&
+      (planned.complete === true || planned.source === "NO_API_NO_DATA");
     const partial = merged.length > 0 && !complete;
     return json({ ok: true, cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
       complete, partial, calendar_status: planned.calendar_status || "selected",
