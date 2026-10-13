@@ -254,6 +254,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       // Keep separate line records/stops; never dedupe by departure time alone.
       id: "canonical-train-timetable:" + mapped.timetable_id,
       canonical_timetable_id: mapped.timetable_id,
+      canonical_group_evidence: mapped.group_evidence,
       line_id: lineId,
       service_date: serviceDate,
       calendar_type: calendarType(t.calendar_urn),

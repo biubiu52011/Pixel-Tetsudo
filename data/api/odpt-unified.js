@@ -698,8 +698,15 @@
     function _trainRunToTimetable(run) {
         var scheduledId = _plannedTrainRunIdentity(run);
         if (!scheduledId) return null;
+        // Only verified same-itinerary/continuation groups share a cross-line
+        // run ID. Single-source trips keep their published-facts identity.
+        var hasSharedCanonicalTrip = run.canonical_timetable_id &&
+            (run.canonical_group_evidence==="verified_continuation" ||
+             run.canonical_group_evidence==="verified_shared_itinerary");
         return {
-            "@id":scheduledId,
+            "@id":hasSharedCanonicalTrip
+                ? ("canonical-sql-trip:" + run.service_date + ":" + run.canonical_timetable_id)
+                : scheduledId,
             "odpt:trainNumber":run.train_number||"",
             "odpt:railway":run.network_key && String(run.network_key).indexOf("odpt.Railway:")===0 ? run.network_key : "odpt.Railway:" + String(run.operator||LINE_TO_OPERATOR[run.line_id]||"") + "." + String(run.network_key||LINE_RAILWAY_CODE[run.line_id]||run.line_id||""),
             "odpt:calendar":({
