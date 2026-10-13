@@ -474,3 +474,33 @@ test('planned timetable candidates retain their source grade without becoming as
   assert.match(edge, /candidateImages\.length === 1 \? candidateImages\[0\] : null/);
   assert.match(src, /plannedVehicleCandidateArtworkPath: tt\._positionSource === 'supabase-train-run'/);
 });
+
+
+test('every canonical railway and declared through boundary retains a valid timetable network identity', () => {
+  const railway = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8'));
+  const lines = railway.lines;
+  const ids = Object.keys(lines);
+  assert.ok(ids.length >= 223, 'the whole canonical railway network must be included in regression coverage');
+  let throughEdges = 0;
+  for (const id of ids) {
+    const line = lines[id];
+    assert.ok(Array.isArray(line.stations) && line.stations.length >= 2, 'missing station order: ' + id);
+    for (const peer of line.throughServices || []) {
+      throughEdges++;
+      assert.ok(lines[peer], 'unknown through-service partner ' + id + ' -> ' + peer);
+      assert.ok((lines[peer].throughServices || []).includes(id),
+        'asymmetric through-service edge ' + id + ' -> ' + peer);
+      assert.ok((line.serviceBoundaries || []).some(b =>
+        b.lineId === peer && Array.isArray(b.handoverStations) && b.handoverStations.length),
+        'through service lacks verified boundary ' + id + ' -> ' + peer);
+    }
+  }
+  assert.ok(throughEdges >= 150, 'expected all known direct through-service edges');
+
+  const config = fs.readFileSync(path.join(__dirname, '../data/core/data-config-bundle.js'), 'utf8');
+  const liveBlock = /var REALTIME_POSITION_API_LINES = Object.freeze\(\{([\s\S]*?)\}\);/.exec(config);
+  assert.ok(liveBlock, 'canonical realtime capability registry missing');
+  const live = [...liveBlock[1].matchAll(/"([^"]+)": true/g)].map(m => m[1]);
+  assert.equal(new Set(live).size, live.length, 'duplicate realtime capability keys');
+  for (const id of live) assert.ok(lines[id], 'realtime capability references noncanonical line: ' + id);
+});
