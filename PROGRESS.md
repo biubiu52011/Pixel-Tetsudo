@@ -1,6 +1,16 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-13 JST — realtime 分支梳理与增量落地（REVIEW）
+
+- 依据提交历史梳理 9 个 realtime 相关远程分支与 main 的关系：`ome-itsukaichi-isolation`（data-state.js/line-card.js/runinfo-scope 测试与 main 逐字节一致）、`yamanote-single-chain`（data-fusion.js 已含 "No parallel realtime merge"、无 Composite mode 残留）、`yamanote-canonical-station-indices`（trains-geometry.js 与 main SAME，canonical index 断言已在）、`odpt-realtime-vehicle-evidence`（JST 服务日修正 `_snapshotJstNow` 已在 main）、`odpt-dual-source-model`（main 已有 matched-timetable 与 dated_operation_owner）、`odpt-default-markers`（main 的 roster/vehicle 证据链已超越分支）均已吸收；`realtime-source-authority` 的 `_realtimeSourceIdentity` 已在 main。
+- 移植 `fix/double-column-loop-readability-20261011` 的双列环可读性增量：`js/trains-geometry.js` 双列环 rectW 加宽（移动 120/桌面 132，普通环 63/67.2 不变）、修复 `svgW = rectW + _isMobileView() ? 225 : 240` 运算符优先级 bug（恒取 225/240，丢弃动态环宽）、返回对象补 `isDoubleColumnLoop`；`js/trains-render.js` 站名标签双列偏移 ±24、新增 `_trainLabelDisplayX` 将环方向标题移入内环走廊并在初绘/逐帧两处调用。保留 main 的 canonical index 存储（分支旧 loopPts.push 不回退）。
+- 移植 `fix/realtime-source-fusion-safe-20261010` 的 3 项独立修复：`_isFreshRealtimeRecord` 拒绝未来 `dc:date`（> now+60s 时钟偏差）；ODPT railway 多候选匹配改唯一匹配（`_mappedMatches.length===1` / 精确 `_exactMatches`），移除子串猜测兜底；`_linePositionIndex` 空 trainId 不折叠、`set` 前判空。其余分支改动（_uniqueMatchedChain/_timetableFallbackReason/odpt-unified 缓存）已被 main 10-13 融合管道重写取代，不移植。
+- 测试：`train-position-evidence-regression.test.js` 新增双列环布局、唯一匹配、空 trainId、未来时间戳 4 组断言；railway-browser-contract 26 pass、vehicle-icon/runinfo/performance 全 PASS，brace/arch/ci/home 4 个 Python guards PASS，`git diff --check` 通过。trains.html 的 trains-geometry/trains-render 版本升至 4.3.1197。
+- 未提交/推送/部署；先前本地 TokyuMeguro-manual.js / normalization backlog / PROGRESS 部署记录保留。真实浏览器视觉由用户人工确认（项目规则：禁止系统截图确认）。
+
 ## 2026-10-13 JST — mapping cleanup and snapshot validity optimization
+
+- Deployment verified: `6f0bbf801d530f20395ca126eb0191eb57c3905b`; CI/CD `38348625461`, Pages `38348624436`, Release Guards `38348625389` and canonical sync `38348625381` all succeeded. Published trains HTML uses this build, and all three changed runtime scripts match local SHA256. Deployment audit saved as `mapping-optimization-deployment.json` outside the repository.
 
 - Kept the existing scripts and shared data chain. Vehicle rosters now index owner/car and owner/formation, select the newest snapshot not after service day, then validate active status. Retired/status-conflicting records cannot revive an old active car; canonical alias duplicates converge. Snapshot replacement rebuilds indexes.
 - Evidence network matching caches the verified alias graph, handles deep/cyclic aliases, and parses ODPT railway namespaces explicitly. Removed arbitrary suffix matches; audit uses this exact shared matcher rather than a second alias implementation. Realtime fallback identity uses normalized operator scope.

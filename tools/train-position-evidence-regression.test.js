@@ -8,6 +8,15 @@ for(const js of ["js/data-fusion.js","js/train-position-estimator.js","js/runnin
 
 const fusion=read("js/data-fusion.js");
 assert(/ambiguous realtime line identity/.test(fusion),"ambiguous realtime line identity must remain unresolved");
+assert(fusion.includes('if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];') &&
+       fusion.includes('if (_exactMatches.length === 1) targetLine = _exactMatches[0];') &&
+       !fusion.includes('mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }'),
+  "ODPT railway ownership must not choose the first matching segment on an ambiguous station");
+assert(fusion.includes('var existingIdx = trainId && _linePositionIndex.has(trainId)') &&
+       fusion.includes('if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);'),
+  "ODPT records with missing source train identity must not overwrite each other");
+assert(fusion.includes('updatedMs > now + 60000'),
+  "impossibly future-dated ODPT dc:date must not be accepted as live");
 assert(!/mainLines\.sort[\s\S]{0,500}targetLine\s*=\s*mainLines\[0\]/.test(fusion),"must not choose longest line for ambiguous realtime");
 assert(/_queueChainVehicle/.test(fusion) && /Object\.keys\(_chainVehicleCandidates\)/.test(fusion),
   "vehicle evidence must converge through one chain candidate pool and one registry commit");
@@ -148,6 +157,18 @@ assert(/loopPts\[_sourceRi\]\s*=\s*\{/.test(geometrySource) &&
   "double-column coordinates must be keyed by canonical station index (Harajuku/Shinagawa)");
 assert(!/loopPts\.push\(\{ x: cx \+ halfW, y: cy - halfH \+ _tR/.test(geometrySource),
   "visual row order must not replace source stationIndex in the train layout");
+assert(geometrySource.includes('svgW = rectW + (_isMobileView() ? 225 : 240);'),
+  "loop geometry must include the dynamic track width (conditional precedence)");
+assert(geometrySource.includes('isDoubleColumnLoop: line.isDoubleColumnLoop === true,') &&
+       geometrySource.includes('(_isMobileView() ? 120 : 132)'),
+  "double-column loops must reserve a separate interior direction-label corridor");
+assert(renderer.includes('function _trainLabelDisplayX(trainLayer, px)') &&
+       renderer.includes('_trainLabelDisplayX(trainLayer, px) - (_bbox.x + _bbox.width / 2)') &&
+       renderer.includes('_trainLabelDisplayX(trainLayer, px) + _base'),
+  "loop direction labels must use the same inner corridor in initial and animated layouts");
+assert(renderer.includes('geometry.isDoubleColumnLoop ? 24 :') &&
+       renderer.includes('geometry.isDoubleColumnLoop && side === "right" ? 24 :'),
+  "outer station labels on both double-column tracks must clear train PNG lanes");
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),

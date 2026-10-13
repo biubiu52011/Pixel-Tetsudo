@@ -911,7 +911,10 @@
     var updatedRaw = record["dc:date"];
     if (!updatedRaw) return true;
     var updatedMs = Date.parse(updatedRaw);
-    if (isNaN(updatedMs)) return false;
+    // A provider timestamp in the future is not evidence that a dynamic
+    // position is current; it is an impossible or doctored source update.
+    // Allow 60s clock skew between the provider and this client.
+    if (isNaN(updatedMs) || updatedMs > now + 60000) return false;
     var frequency = Number(record["odpt:frequency"]);
     // Without dct:valid, bound freshness by the provider cadence when supplied.
     // Otherwise use 2 minutes: four normal 30s polling cycles, long enough for
@@ -1084,14 +1087,16 @@
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
               var mappedLids = _railwayCodeLines[railwayName] || [];
-              for (var i = 0; i < matchingLines.length; i++) {
-                var ml = matchingLines[i];
-                if (mappedLids.length > 0) {
-                  if (mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }
-                } else if (ml.lid === railwayName || ml.lid.indexOf(railwayName) >= 0 || railwayName.indexOf(ml.lid) >= 0) {
-                  targetLine = ml;
-                  break;
-                }
+              // The ODPT railway-code mapping can span several project lines.
+              // Shared stations cannot determine which segment owns a train.
+              // Choose the line only when this source has one unique match.
+              var _mappedMatches = matchingLines.filter(function(ml) {
+                return mappedLids.indexOf(ml.lid) >= 0;
+              });
+              if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];
+              if (!targetLine && mappedLids.length === 0) {
+                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === railwayName; });
+                if (_exactMatches.length === 1) targetLine = _exactMatches[0];
               }
             }
             // 2. Ambiguous source identity must stay unresolved.
@@ -1114,7 +1119,8 @@
             if (!posMap[lid]) posMap[lid] = [];
             var _linePositionIndex = _positionIndexByLine[lid];
             if (!_linePositionIndex) _linePositionIndex = _positionIndexByLine[lid] = new Map();
-            var existingIdx = _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
+            // Missing ODPT train ID cannot prove two records are the same train.
+            var existingIdx = trainId && _linePositionIndex.has(trainId) ? _linePositionIndex.get(trainId) : -1;
             if (existingIdx >= 0) {
               var _previousSourceTime = Date.parse(posMap[lid][existingIdx].sourceUpdatedAt || '');
               var _incomingSourceTime = Date.parse(t['dc:date'] || '');
@@ -1270,7 +1276,7 @@
             if (existingIdx >= 0) {
               posMap[lid][existingIdx] = positionData;
             } else {
-              _linePositionIndex.set(trainId, posMap[lid].length);
+              if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);
               posMap[lid].push(positionData);
             }
           }
