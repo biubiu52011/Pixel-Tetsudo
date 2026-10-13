@@ -352,7 +352,9 @@
       operationCode: inputCtx.operationCode ||
         normalizeOperationCode(trainNumber, inputCtx)
     });
-    if (mode === "realtime-derived") providerCtx.requireTrainNumberMatch = true;
+    if (mode === "realtime-derived") {
+      providerCtx = Object.assign({}, providerCtx, { requireTrainNumberMatch: true });
+    }
     for (var i = 0; i < providers.length; i++) {
       var provider = providers[i];
       if (!provider) continue;
