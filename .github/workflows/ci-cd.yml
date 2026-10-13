@@ -33,6 +33,30 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Temporary public Toei train-position page discovery
+        if: github.event_name == 'push'
+        run: |
+          node - <<'NODE'
+          (async () => {
+            const url='https://static.toei.navitime.biz/train-position/?lineId=5&lang=ja';
+            try {
+              const resp=await fetch(url,{signal:AbortSignal.timeout(12000)});
+              const html=await resp.text();
+              const scripts=[...html.matchAll(/<script[^>]+src=["']([^"']+)/ig)].map(m=>m[1]);
+              const links=[...html.matchAll(/<link[^>]+href=["']([^"']+)/ig)].map(m=>m[1]).filter(x=>/\\.js|asset|manifest/i.test(x));
+              console.log('TOEI_PAGE_PUBLIC',JSON.stringify({status:resp.status,bytes:html.length,scripts:scripts.slice(0,30),links:links.slice(0,12),hasAppMount:/id=["']app|id=["']root/.test(html)}));
+              for(const item of scripts.filter(x=>/\\.js(?:$|\\?)/.test(x)).slice(0,4)){
+                const scriptURL=new URL(item,url);
+                if(scriptURL.origin!=='https://static.toei.navitime.biz')continue;
+                const jr=await fetch(scriptURL,{signal:AbortSignal.timeout(12000)});
+                const js=await jr.text();
+                const words=['axios','/api/','train-position','vehicle','carNo','carNumber','lineId','trainPosition'];
+                console.log('TOEI_BUNDLE_PUBLIC',JSON.stringify({path:scriptURL.pathname,status:jr.status,bytes:js.length,flags:words.filter(w=>js.includes(w)),apiHostMatches:[...new Set([...js.matchAll(/https?:\\/\\/[a-zA-Z0-9._-]+/g)].map(m=>m[0].split('/')[2]))].filter(x=>/toei|navitime/i.test(x)).slice(0,12)}));
+              }
+            }catch(e){console.log('TOEI_PAGE_UNAVAILABLE',e.name||'error');}
+          })();
+          NODE
+
       - name: Railway browser cross-page contract
         run: node --test tests/railway-browser-contract.test.cjs
 
