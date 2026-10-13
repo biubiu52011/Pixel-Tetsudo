@@ -344,18 +344,29 @@
     var familyHit = null;
     var referenceHit = null;
     var runHits = [];
-    var providerCtx = mode === "realtime-derived"
-      ? Object.assign({}, ctx || {}, { requireTrainNumberMatch: true }) : (ctx || {});
+    // The API/SQL provide the train number. Registered line-operation scripts
+    // interpret its documented working code and supply the model evidence.
+    // Keep one arbitration path; do not bypass it in DataFusion or the renderer.
+    var inputCtx = ctx || {};
+    var providerCtx = Object.assign({}, inputCtx, {
+      operationCode: inputCtx.operationCode ||
+        normalizeOperationCode(trainNumber, inputCtx)
+    });
+    if (mode === "realtime-derived") providerCtx.requireTrainNumberMatch = true;
     for (var i = 0; i < providers.length; i++) {
       var provider = providers[i];
       if (!provider) continue;
       var isFamily = provider.id === "canonical-vehicle-family-rules";
       var isReference = provider.id === "canonical-timetable-reference-vehicles";
-      var isRunEvidence = provider.id === "canonical-dated-vehicle-evidence" ||
+      var isCanonicalRun = provider.id === "canonical-dated-vehicle-evidence" ||
         provider.id === "canonical-vehicle-operation-evidence";
-      if (!isFamily && !isReference && !isRunEvidence) continue;
+      // Other already-registered line-specific scripts were previously skipped
+      // even after register(provider). Admit their sourced evidence to the SAME
+      // conflict/date/candidate checks, never as an icon/line-name fallback.
       var rec = normalizeEvidence(provider, provider.resolveEvidence(trainNumber, providerCtx));
       if (!rec) continue;
+      if (!isFamily && !isReference && !isCanonicalRun &&
+          (!rec.sourceUrl || !rec.observedDate)) continue;
       if (isFamily) familyHit = rec;
       else if (isReference) referenceHit = rec;
       else runHits.push(rec);
