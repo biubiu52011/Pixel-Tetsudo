@@ -44,6 +44,25 @@ for(const rel of ['pages/trains.html','pages/realtime.html']){
   assert(html.includes(file+'?v=4.3.1180'),rel+' still caches older ODPT mapping: '+file);
  }
 }
+assert(/function matchRealtimeVehicleEvidence\(/.test(estimator) &&
+       /_timetableIndexCache.index\[op\]/.test(estimator) &&
+       /matchRealtimeVehicleEvidence:\s*matchRealtimeVehicleEvidence/.test(estimator),
+  "ODPT realtime trains must join the already indexed timetable evidence on FULL lines");
+assert(/matchRealtimeVehicleEvidence\(\s*_liveLineId,_live,allLines\)/.test(fusion) &&
+       /verifiedTimetableArtworkPath:_scheduleModel.artworkPath/.test(fusion) &&
+       /vehicleEvidenceConflict = _mergedVehicle.identityStatus !== 'EXACT'/.test(fusion),
+  "live+schedule exact vehicle identity must pass through the single PNG resolver");
+assert(/p.vehicleEvidenceConflict\) return p/.test(fusion),
+  "a live/timetable model conflict must not inherit a stale chain default");
+assert(/now.getUTCHours\(\) < 4/.test(estimator) &&
+       /now.getUTCFullYear\(\)/.test(estimator),
+  "ODPT calendar and minute calculations must use JST service date");
+for(const htmlPath of ["pages/trains.html","pages/realtime.html"]){
+ const html=read(htmlPath);
+ assert(html.includes("js/train-position-estimator.js?v=4.3.1192") &&
+        html.includes("js/data-fusion.js?v=4.3.1192"),
+        htmlPath+" must invalidate cached old vehicle join logic");
+}
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
