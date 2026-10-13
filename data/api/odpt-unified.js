@@ -650,6 +650,10 @@
     var _trainRunCache = {};
     var _trainRunInflight = {};
     var _trainRunLastWarning = {};
+    var _trainRunLastStatus = Object.create(null);
+    function getTrainRunStatus(lineId) {
+        return _trainRunLastStatus[lineId] || null;
+    }
     function _serviceDateJst() {
         var now = new Date();
         var parts = new Intl.DateTimeFormat("en-CA", {
@@ -730,6 +734,9 @@
             "_previousTimetableIds":Array.isArray(run.previous_timetable_ids)?run.previous_timetable_ids:[],
             "_nextTimetableIds":Array.isArray(run.next_timetable_ids)?run.next_timetable_ids:[],
             "_timetableProvenance":run.timetable_provenance||"",
+            "_planSource":run.plan_source || "sql-planned",
+            "_serviceId":run.service_id || "",
+            "_plannedTripId":run.trip_id || "",
             "_sourceRevisionDate":run.source_revision_date||null,
             // Structural timetable completeness is not current-diamond validity.
             "_timetableValidity":run.timetable_validity||"undated_not_current_verified",
@@ -737,6 +744,8 @@
             "_canonicalTrainTimetableId":run.canonical_timetable_id||null,
             "_sqlVehicleMappingLevel":run.vehicle_mapping_level||"unresolved",
             "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
+            "_sqlCandidateArtworkPath":run.vehicle_candidate_artwork_path||null,
+            "_sqlCandidateArtworkStatus":run.vehicle_candidate_artwork_status||null,
             "_vehicleEvidenceSource":run.vehicle_evidence_source||null,
             "_vehicleEvidence":run.vehicle_evidence_url||null,
             "_sqlVehicleArtworkPath":run.vehicle_artwork_path||null,
@@ -811,6 +820,22 @@
             if(!r.ok) throw new Error("TrainRun cache HTTP "+r.status);
             return r.json();
         }).then(function(body){
+            if (!body || body.ok !== true) {
+                throw new Error("TrainRun source rejected: " + (body && body.error || "invalid-response"));
+            }
+            _trainRunLastStatus[lineId] = {
+                serviceDate: serviceDate, source: body.source || "",
+                complete: body.complete === true, partial: body.partial === true,
+                calendarStatus: body.calendar_status || "",
+                omittedIncompleteRuns: Number(body.omitted_incomplete_runs) || 0,
+                runs: Array.isArray(body.runs) ? body.runs.length : 0,
+                updatedAt: Date.now()
+            };
+            if (body.source === "CALENDAR_NOT_VERIFIED" &&
+                Date.now() - (_trainRunLastWarning[key] || 0) > 60000) {
+                _trainRunLastWarning[key] = Date.now();
+                console.warn("[ODPT] Planned service calendar is not verified:", lineId, serviceDate);
+            }
             // Explicit partial coverage is usable for verified individual runs,
             // but must remain distinguishable from a complete line timetable.
             var usable=body&&Array.isArray(body.runs)&&(body.complete===true||body.partial===true);
@@ -828,6 +853,11 @@
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
         }).catch(function(err){
+            _trainRunLastStatus[lineId] = {
+                serviceDate: serviceDate, source: "SOURCE_ERROR", complete: false,
+                partial: false, calendarStatus: "unknown", runs: 0,
+                error: String(err && err.message || err), updatedAt: Date.now()
+            };
             // Keep the user-visible fallback, but do not disguise a failed SQL
             // request as a confirmed no-service timetable. Throttle diagnostics.
             var now=Date.now();
@@ -859,6 +889,7 @@
         keysConfigured: keysConfigured,
         validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
         getCachedTrainRuns: getCachedTrainRuns,
+        getTrainRunStatus: getTrainRunStatus,
         hasRealtimePositionApi: hasRealtimePositionApi,
         getTimetableIdentity: getTimetableIdentity,
 

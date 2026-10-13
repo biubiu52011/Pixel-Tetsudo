@@ -107,8 +107,19 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       return true;
     });
   }
-  if (!templates.length) return json({ ok: true, complete: false, cache: "MISS",
-    source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
+  if (!templates.length) {
+    // A missing calendar is not evidence that the line has no trains.
+    // In particular, some imported intercity timetables contain Weekday-only
+    // rows even though their actual operation calendar was never verified.
+    const { data: other, error: otherError } = await db.from("manual_timetable_templates")
+      .select("calendar_urn").eq("line_key", lineId).limit(1);
+    if (otherError) throw otherError;
+    const hasOtherCalendar = !!(other && other.length);
+    return json({ ok: true, complete: false, partial: false, cache: "MISS",
+      source: hasOtherCalendar ? "CALENDAR_NOT_VERIFIED" : "NO_API_NO_DATA",
+      calendar_status: hasOtherCalendar ? "unverified" : "no_source",
+      no_service_confirmed: false, line_id: lineId, service_date: serviceDate, runs: [] });
+  }
 
 
   // Canonical train schedule is the sole identity authority; original source
@@ -236,9 +247,39 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     }
   }
 
+  // Project a *candidate* generic picture only when the historical source
+  // names one model AND the gallery has exactly one generic image for the
+  // same operator + same vehicle model. This is NOT verified current stock,
+  // a carset or an artwork override; TrainVehicle decides definitive icons.
+  const candidateModels = [...new Set(templates.filter((t: any) => {
+    const m = sourceResolution.get(t.id);
+    return m?.mapping_level === "source_single_type_candidate" &&
+      !!String(t.vehicle_type_label || "").trim() &&
+      !String(t.vehicle_type_label).includes("/");
+  }).map((t: any) => String(t.vehicle_type_label).trim()))];
+  const candidateArtworkByOwnerModel = new Map<string, string[]>();
+  for (let i = 0; i < candidateModels.length; i += 50) {
+    const { data: imageRows, error: imageError } = await db.from("vehicle_image_assets")
+      .select("operator,vehicle_type,image_path")
+      .eq("is_generic", true).eq("asset_status", "available")
+      .in("vehicle_type", candidateModels.slice(i, i + 50));
+    if (imageError) throw imageError;
+    for (const image of imageRows || []) {
+      const key = String(image.operator) + "\u0000" + String(image.vehicle_type).trim();
+      const paths = candidateArtworkByOwnerModel.get(key) || [];
+      if (image.image_path && !paths.includes(image.image_path)) paths.push(image.image_path);
+      candidateArtworkByOwnerModel.set(key, paths);
+    }
+  }
+
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     const mapped = sourceResolution.get(t.id);
+    const ownerFromUrn = /^odpt\.Railway:([^.]+)\./.exec(String(t.railway_urn || ""))?.[1] || "";
+    const candidateKey = ownerFromUrn + "\u0000" + String(t.vehicle_type_label || "").trim();
+    const candidateImages = mapped.mapping_level === "source_single_type_candidate"
+      ? (candidateArtworkByOwnerModel.get(candidateKey) || []) : [];
+    const candidateArtwork = candidateImages.length === 1 ? candidateImages[0] : null;
     const ruleType = (mapped.mapping_level === "dated_schedule_rule" || mapped.mapping_level === "dated_operation_owner") ? String(mapped.vehicle_type || "") : "";
     const verifiedBoundaryType = String(boundaryVehicle.get(t.id) || "");
     const conflict = !!(ruleType && verifiedBoundaryType && ruleType !== verifiedBoundaryType);
@@ -258,6 +299,9 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       line_id: lineId,
       service_date: serviceDate,
       calendar_type: calendarType(t.calendar_urn),
+      service_id: t.calendar_urn,
+      trip_id: "canonical-train-timetable:" + mapped.timetable_id,
+      plan_source: "sql-recurring-timetable",
       operator, network_key: t.railway_urn,
       train_number: t.train_number,
       operation_code: mapped.operation_code || "",
@@ -270,6 +314,9 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       // Only decisive, source-dated timetable rules may identify a planned type.
       vehicle_type_label: exactScheduleType || null,
       vehicle_type_candidates: t.vehicle_type_label || null,
+      vehicle_candidate_artwork_path: candidateArtwork,
+      vehicle_candidate_artwork_status: candidateArtwork
+        ? "historical-single-model-operator-generic-unverified" : null,
       vehicle_mapping_level: scheduleLevel,
       vehicle_evidence_source: ruleType && !conflict ? (mapped.mapping_level === "dated_operation_owner" ? "database-dated-operation-owner" : "database-dated-schedule-rule")
         : verifiedBoundaryType && !conflict ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
@@ -326,6 +373,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     date_unverified_runs: validRuns.length - dateVerifiedRuns,
     cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
     source: "DATABASE_MANUAL_TEMPLATES", line_id: lineId, service_date: serviceDate,
+    calendar_status: "selected", selected_calendar: selectedCalendar,
     omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
 }
 
@@ -381,16 +429,64 @@ Deno.serve(async (req: Request) => {
         byRun.set(stop.train_run_id, list);
       }
     }
-    const result = runs.map(run => ({ ...run, stops: byRun.get(run.id) || [] }));
+    const result = runs.map(run => ({
+      ...run, plan_source: "sql-date-specific-run",
+      service_id: String(run.calendar_type || ""),
+      trip_id: "dated-run:" + String(run.id),
+      timetable_validity: "date_specific_source_unverified",
+      timetable_date_verified: false,
+      stops: byRun.get(run.id) || []
+    }));
     const validRuns = result.filter(run => run.stops.length >= 2 &&
       run.stops.every((s: any) => !!s.station_urn) &&
       run.stops.filter((s: any) => s.arrival_time || s.departure_time).length >= 2);
-    const omittedIncompleteRuns = result.length - validRuns.length;
-    const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
-    const partial = validRuns.length > 0 && !complete;
-    return json({ ok: true, cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS", complete, partial,
-      source: "DATABASE_MANUAL", line_id: lineId, service_date: serviceDate,
-      omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
+
+    // Date-specific records are an overlay, not permission to hide the rest
+    // of the published recurring timetable. Both feed the SAME ODPT-shaped
+    // estimator, with exact itinerary deduplication across the sources.
+    const fallback = await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null);
+    const planned = await fallback.json();
+    if (!planned.ok || !Array.isArray(planned.runs)) throw new Error("INVALID_RECURRING_PLAN");
+    function itineraryKey(run: any) {
+      const stops = run.stops || [];
+      if (!run.train_number || stops.length < 2) return "";
+      const facts = stops.map((s: any) => [
+        String(s.station_urn || s.station_key || ""),
+        String(s.arrival_time || ""),
+        String(s.departure_time || "")
+      ]);
+      if (facts.some((s: string[]) => !s[0])) return "";
+      return JSON.stringify([lineId, serviceDate, String(run.train_number), facts]);
+    }
+    const merged = [...planned.runs];
+    const existing = new Set(merged.map(itineraryKey).filter(Boolean));
+    let dateOverrides = 0;
+    for (const dated of validRuns) {
+      const key = itineraryKey(dated);
+      if (key && existing.has(key)) {
+        // The date-specific fact wins over an identical recurring duplicate.
+        const index = merged.findIndex((run: any) => itineraryKey(run) === key);
+        merged[index] = dated;
+        dateOverrides++;
+      } else {
+        merged.push(dated);
+        if (key) existing.add(key);
+      }
+    }
+    const omittedIncompleteRuns = result.length - validRuns.length +
+      Number(planned.omitted_incomplete_runs || 0);
+    const complete = merged.length > 0 && omittedIncompleteRuns === 0 &&
+      planned.calendar_status !== "unverified" &&
+      (planned.complete === true || planned.source === "NO_API_NO_DATA");
+    const partial = merged.length > 0 && !complete;
+    return json({ ok: true, cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
+      complete, partial, calendar_status: planned.calendar_status || "selected",
+      source: "DATABASE_PLAN_MERGED", line_id: lineId, service_date: serviceDate,
+      dated_runs: validRuns.length, recurring_runs: planned.runs.length,
+      exact_date_overrides: dateOverrides,
+      date_verified_runs: Number(planned.date_verified_runs || 0),
+      date_unverified_runs: merged.length - Number(planned.date_verified_runs || 0),
+      omitted_incomplete_runs: omittedIncompleteRuns, runs: merged });
   } catch (err) {
     console.error("[train-runs] SQL read failed", lineId, String(err));
     return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);

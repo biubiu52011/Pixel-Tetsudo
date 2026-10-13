@@ -176,14 +176,16 @@ test('station alias identities from supplied SQL timetables match existing canon
 });
 
 // Exercise the production SQL read block with a paginated database stub.
-async function readSqlRuns(runs, stops) {
+async function readSqlRuns(runs, stops, recurringRows = []) {
   const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
   const begin = edge.lastIndexOf('  async function pages(');
   const body = edge.slice(begin, edge.lastIndexOf('\n});'))
     .replace('makeQuery: (first: number, last: number) => any', 'makeQuery')
     .replace('const result: any[]', 'const result')
     .replace('new Map<number, any[]>()', 'new Map()')
-    .replace(/\(s: any\)/g, '(s)');
+    .replace(/\(s: any\)/g, '(s)')
+    .replace(/\(run: any\)/g, '(run)')
+    .replace(/\(s: string\[\]\)/g, '(s)');
   const db = { from(table) {
     let rows = table === 'train_runs' ? runs : stops;
     const query = {
@@ -194,8 +196,14 @@ async function readSqlRuns(runs, stops) {
     return query;
   } };
   return vm.runInNewContext('(async function() {' + body + '})()', {
-    db, lineId: 'Test', serviceDate: '2026-10-13', console,
-    json(value) { return value; }, readManualTemplateRuns() { throw Error('unexpected template fallback'); }
+    db, lineId: 'Test', serviceDate: '2026-10-13', source: { timetable_operator: 'Test' }, console,
+    json(value) { return value; }, readManualTemplateRuns() {
+      return Promise.resolve({ json: async () => ({
+        ok: true, complete: recurringRows.length > 0, runs: recurringRows,
+        source: recurringRows.length ? 'DATABASE_MANUAL_TEMPLATES' : 'NO_API_NO_DATA',
+        omitted_incomplete_runs: 0
+      }) });
+    }
   });
 }
 
@@ -411,4 +419,88 @@ test('SQL adapter preserves timetable revision verification without inventing cu
   assert.equal(tt._positionSource, 'supabase-train-run');
   assert.match(fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8'),
     /timetableValidity:\s*tt\._positionSource === "supabase-train-run"/);
+});
+
+
+test('date-specific SQL train-run supplements, never hides, the recurring plan', async () => {
+  const stopsFor = (id, n) => [
+    { train_run_id: id, stop_sequence: 0, station_urn: 'odpt.Station:TokyoMetro.Ginza.A',
+      departure_time: '10:0' + n },
+    { train_run_id: id, stop_sequence: 1, station_urn: 'odpt.Station:TokyoMetro.Ginza.B',
+      arrival_time: '10:2' + n }
+  ];
+  const recurring = [
+    { train_number: 'A1001', plan_source: 'sql-recurring-timetable',
+      stops: [{ station_urn: 'odpt.Station:TokyoMetro.Ginza.A', departure_time: '10:01' },
+              { station_urn: 'odpt.Station:TokyoMetro.Ginza.B', arrival_time: '10:21' }] },
+    { train_number: 'A1003', plan_source: 'sql-recurring-timetable',
+      stops: [{ station_urn: 'odpt.Station:TokyoMetro.Ginza.A', departure_time: '10:03' },
+              { station_urn: 'odpt.Station:TokyoMetro.Ginza.B', arrival_time: '10:23' }] }
+  ];
+  const merged = await readSqlRuns([{ id: 1, train_number: 'A1001' }], stopsFor(1, 1), recurring);
+  assert.equal(merged.complete, true);
+  assert.equal(merged.source, 'DATABASE_PLAN_MERGED');
+  assert.equal(merged.recurring_runs, 2);
+  assert.equal(merged.dated_runs, 1);
+  assert.equal(merged.exact_date_overrides, 1);
+  assert.equal(merged.runs.length, 2);
+  assert.equal(merged.runs.find(r => r.train_number === 'A1001').plan_source, 'sql-date-specific-run');
+  assert.equal(merged.runs.find(r => r.train_number === 'A1003').plan_source, 'sql-recurring-timetable');
+
+  const changed = await readSqlRuns([{ id: 1, train_number: 'A1001' }], stopsFor(1, 2), recurring);
+  assert.equal(changed.exact_date_overrides, 0);
+  assert.equal(changed.runs.length, 3, 'same number but different itinerary cannot be silently collapsed');
+});
+
+test('unknown calendar is never silently reinterpreted as no train or a verified weekday service', () => {
+  const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(edge, /"CALENDAR_NOT_VERIFIED"/);
+  assert.match(edge, /no_service_confirmed: false/);
+  assert.match(edge, /planned\.calendar_status !== "unverified"/);
+  assert.doesNotMatch(edge, /if\s*\(!templates\.length\)\s*templates\s*=\s*weekday/i);
+});
+
+test('planned timetable candidates retain their source grade without becoming asserted rolling stock', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8');
+  assert.match(src, /_sqlSourceCandidates = tt\._positionSource === 'supabase-train-run'/);
+  assert.match(src, /plannedVehicleCandidates: _plannedCandidates\.slice\(\)/);
+  assert.match(src, /vehicleIdentityStatus: vehResult\.identityStatus \|\| 'UNKNOWN'/);
+  assert.match(src, /vehicleIconPath: vehResult\.iconPath \|\| ''/);
+  const client = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  assert.match(client, /"_planSource":run\.plan_source/);
+  assert.match(client, /getTrainRunStatus: getTrainRunStatus/);
+  const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(edge, /ownerFromUrn \+ "\\u0000" \+ String\(t\.vehicle_type_label/);
+  assert.match(edge, /candidateImages\.length === 1 \? candidateImages\[0\] : null/);
+  assert.match(src, /plannedVehicleCandidateArtworkPath: tt\._positionSource === 'supabase-train-run'/);
+});
+
+
+test('every canonical railway and declared through boundary retains a valid timetable network identity', () => {
+  const railway = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8'));
+  const lines = railway.lines;
+  const ids = Object.keys(lines);
+  assert.ok(ids.length >= 223, 'the whole canonical railway network must be included in regression coverage');
+  let throughEdges = 0;
+  for (const id of ids) {
+    const line = lines[id];
+    assert.ok(Array.isArray(line.stations) && line.stations.length >= 2, 'missing station order: ' + id);
+    for (const peer of line.throughServices || []) {
+      throughEdges++;
+      assert.ok(lines[peer], 'unknown through-service partner ' + id + ' -> ' + peer);
+      assert.ok((lines[peer].throughServices || []).includes(id),
+        'asymmetric through-service edge ' + id + ' -> ' + peer);
+      assert.ok((line.serviceBoundaries || []).some(b =>
+        b.lineId === peer && Array.isArray(b.handoverStations) && b.handoverStations.length),
+        'through service lacks verified boundary ' + id + ' -> ' + peer);
+    }
+  }
+  assert.ok(throughEdges >= 150, 'expected all known direct through-service edges');
+
+  const config = fs.readFileSync(path.join(__dirname, '../data/core/data-config-bundle.js'), 'utf8');
+  const liveBlock = /var REALTIME_POSITION_API_LINES = Object.freeze\(\{([\s\S]*?)\}\);/.exec(config);
+  assert.ok(liveBlock, 'canonical realtime capability registry missing');
+  const live = [...liveBlock[1].matchAll(/"([^"]+)": true/g)].map(m => m[1]);
+  assert.equal(new Set(live).size, live.length, 'duplicate realtime capability keys');
+  for (const id of live) assert.ok(lines[id], 'realtime capability references noncanonical line: ' + id);
 });

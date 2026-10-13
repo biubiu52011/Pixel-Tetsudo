@@ -534,6 +534,12 @@
     // Read the actual SQL/manual timetable model evidence already carried
     // through the existing ODPT adapter. Multiple models remain multiple
     // candidates: neither artwork availability nor line name may guess one.
+    // SQL stores historical planned-vehicle labels separately from sourced,
+    // train-level decisive mappings. Keep all candidates visible to diagnostics
+    // without converting "one line has one candidate" into an observed vehicle.
+    var _sqlSourceCandidates = tt._positionSource === 'supabase-train-run'
+      ? String(tt._sqlVehicleCandidateLabel || '').split(/\s*\/\s*/)
+          .map(function(v) { return v.trim(); }).filter(Boolean) : [];
     var _declaredVehicleInput = String(tt.vehicleType || '').trim();
     var _timetableVehicleInput = [_operationVehicleInput, _declaredVehicleInput]
       .filter(Boolean).filter(function(v,i,a) { return a.indexOf(v) === i; }).join(' / ');
@@ -557,6 +563,21 @@
       });
       if (_compatible) _timetableVehicleInput = _operationModels[0];
     }
+    // A historical generic PNG candidate may become usable only after the
+    // existing dated operation/reference resolver independently confirms the
+    // SAME unique model. The SQL candidate itself never decides identity.
+    var _evidenceBackedCandidateArt = '';
+    if (!_plannedSqlVehicle && _resolvedEvidence && _resolvedEvidence.decisive === true &&
+        _resolvedEvidence.sourceUrl && _resolvedEvidence.observedDate &&
+        _operationModels.length === 1 && _sqlSourceCandidates.length === 1 &&
+        tt._sqlCandidateArtworkPath &&
+        window.TrainIcons && typeof window.TrainIcons.resolveCanonicalVehicle === 'function') {
+      var _ruleModel = window.TrainIcons.resolveCanonicalVehicle(_operationModels[0]);
+      var _sourceModel = window.TrainIcons.resolveCanonicalVehicle(_sqlSourceCandidates[0]);
+      if (_ruleModel && _sourceModel && _ruleModel === _sourceModel) {
+        _evidenceBackedCandidateArt = String(tt._sqlCandidateArtworkPath || '');
+      }
+    }
     var _assignmentFormations = {};
     if (_resolvedEvidence && _resolvedEvidence.formationId) {
       String(_resolvedEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).forEach(function(fid) {
@@ -579,11 +600,11 @@
       verifiedTimetableArtworkPath: _plannedSqlVehicle &&
         (tt._sqlVehicleMappingLevel === 'dated_schedule_rule' ||
          tt._sqlVehicleMappingLevel === 'dated_operation_owner')
-          ? String(tt._sqlVehicleArtworkPath || '') : '',
+          ? String(tt._sqlVehicleArtworkPath || '') : _evidenceBackedCandidateArt,
       verifiedTimetableModel: _plannedSqlVehicle &&
         (tt._sqlVehicleMappingLevel === 'dated_schedule_rule' ||
          tt._sqlVehicleMappingLevel === 'dated_operation_owner')
-          ? _declaredVehicleInput : '',
+          ? _declaredVehicleInput : (_evidenceBackedCandidateArt ? _operationModels[0] : ''),
       timetableEvidence: _assignmentMatches,
       formationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
       formationCandidates: Object.keys(_assignmentFormations),
@@ -600,6 +621,10 @@
       assignmentMatches: _assignmentMatches,
       assignmentFormations: Object.keys(_assignmentFormations),
       timetableVehicleInput: _timetableVehicleInput,
+      plannedVehicleCandidates: _sqlSourceCandidates,
+      plannedVehicleCandidateStatus: tt._positionSource === 'supabase-train-run'
+        ? (tt._sqlVehicleMappingLevel || 'unresolved') : '',
+      candidateArtworkConfirmedByDatedRule: !!_evidenceBackedCandidateArt,
       vehicleResult: vehResult
     };
     return run.identity;
@@ -769,6 +794,14 @@
           var _assignmentFormationIds = _runIdentity.assignmentFormations;
           var _timetableVehicleInput = _runIdentity.timetableVehicleInput;
           var vehResult = _runIdentity.vehicleResult;
+          var _plannedCandidates = _runIdentity.plannedVehicleCandidates || [];
+          var _resolvedCandidates = Array.isArray(vehResult.candidates) ? vehResult.candidates : [];
+          var _visibleCandidates = _resolvedCandidates.slice();
+          _plannedCandidates.forEach(function(label) {
+            if (_visibleCandidates.indexOf(label) < 0) _visibleCandidates.push(label);
+          });
+          // Vehicle identity status always comes from TrainVehicle; a SQL
+          // historical candidate must not promote UNKNOWN to NARROWED/EXACT.
           var trainClass = vehResult.name || '';
           var _vehicleType = vehResult.vehicleTypeStr || '';
           // Missing resolver means unresolved identity; timetable data must not
@@ -792,6 +825,10 @@
               ? (tt._timetableValidity || "undated_not_current_verified") : null,
             timetableDateVerified: tt._positionSource === "supabase-train-run"
               ? tt._timetableDateVerified === true : null,
+            plannedTripId: tt._plannedTripId || timetableIdentity,
+            planSource: tt._planSource || "odpt-scheduled-timetable",
+            serviceId: tt._serviceId || run.calendar || "",
+            sourceRevisionDate: tt._sourceRevisionDate || null,
             segmentToIndex: segmentToIndex,
             segmentProgress: segmentProgress,
             extrapolated: extrapolated,
@@ -803,7 +840,16 @@
             vehicleFormationCandidates: _assignmentFormationIds.slice(),
             vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
             vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
-            vehicleCandidates: vehResult.candidates || [],
+            vehicleCandidates: _visibleCandidates,
+            plannedVehicleCandidates: _plannedCandidates.slice(),
+            plannedVehicleCandidateStatus: _runIdentity.plannedVehicleCandidateStatus,
+            // Candidate art is informational; never substitute it for the
+            // TrainVehicle resolver's verified vehicleIconPath.
+            plannedVehicleCandidateArtworkPath: tt._positionSource === 'supabase-train-run'
+              ? (tt._sqlCandidateArtworkPath || '') : '',
+            plannedVehicleCandidateArtworkStatus: tt._positionSource === 'supabase-train-run'
+              ? (tt._sqlCandidateArtworkStatus || '') : '',
+            candidateArtworkConfirmedByDatedRule: !!_runIdentity.candidateArtworkConfirmedByDatedRule,
             typeName: trainClassification.typeName,
             isLimitedExpress: trainClassification.isLimitedExpress,
             isThroughTrain: trainClassification.isThroughTrain,
