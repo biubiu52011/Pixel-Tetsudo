@@ -160,18 +160,21 @@ assert(/loopPts\[_sourceRi\]\s*=\s*\{/.test(geometrySource) &&
   "double-column coordinates must be keyed by canonical station index (Harajuku/Shinagawa)");
 assert(!/loopPts\.push\(\{ x: cx \+ halfW, y: cy - halfH \+ _tR/.test(geometrySource),
   "visual row order must not replace source stationIndex in the train layout");
-assert(geometrySource.includes('svgW = rectW + (_isMobileView() ? 225 : 240);'),
-  "loop geometry must include the dynamic track width (conditional precedence)");
-assert(geometrySource.includes('isDoubleColumnLoop: line.isDoubleColumnLoop === true,') &&
-       geometrySource.includes('(_isMobileView() ? 120 : 132)'),
-  "double-column loops must reserve a separate interior direction-label corridor");
-assert(renderer.includes('function _trainLabelDisplayX(trainLayer, px)') &&
-       renderer.includes('_trainLabelDisplayX(trainLayer, px) - (_bbox.x + _bbox.width / 2)') &&
-       renderer.includes('_trainLabelDisplayX(trainLayer, px) + _base'),
-  "loop direction labels must use the same inner corridor in initial and animated layouts");
-assert(renderer.includes('geometry.isDoubleColumnLoop ? 24 :') &&
-       renderer.includes('geometry.isDoubleColumnLoop && side === "right" ? 24 :'),
-  "outer station labels on both double-column tracks must clear train PNG lanes");
+// Visual contract: 2026-10-11 restored loop design is the approved baseline.
+// A realtime/vehicle fix must not silently re-apply the reverted wide-ring PR.
+assert(geometrySource.includes('var rectW = _isMobileView() ? 63 : 67.2, rectH = loopRectH;') &&
+       geometrySource.includes('svgW = _isMobileView() ? 225 : 240;'),
+  "loop ring and canvas must retain approved mobile/desktop dimensions");
+assert(!geometrySource.includes('(_isMobileView() ? 120 : 132)') &&
+       !geometrySource.includes('isDoubleColumnLoop: line.isDoubleColumnLoop === true,'),
+  "do not reintroduce wider double-column loop geometry");
+assert(!renderer.includes('_trainLabelDisplayX') &&
+       !renderer.includes('geometry.isDoubleColumnLoop ? 24 :') &&
+       !renderer.includes('geometry.isDoubleColumnLoop && side === "right" ? 24 :'),
+  "loop direction captions and station names must retain original placement");
+assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
+       renderer.includes("'translate(' + (px + _base) + ',0)'"),
+  "initial and animated captions must remain centered on their train");
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),
