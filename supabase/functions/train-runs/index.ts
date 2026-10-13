@@ -107,8 +107,19 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       return true;
     });
   }
-  if (!templates.length) return json({ ok: true, complete: false, cache: "MISS",
-    source: "NO_API_NO_DATA", line_id: lineId, service_date: serviceDate, runs: [] });
+  if (!templates.length) {
+    // A missing calendar is not evidence that the line has no trains.
+    // In particular, some imported intercity timetables contain Weekday-only
+    // rows even though their actual operation calendar was never verified.
+    const { data: other, error: otherError } = await db.from("manual_timetable_templates")
+      .select("calendar_urn").eq("line_key", lineId).limit(1);
+    if (otherError) throw otherError;
+    const hasOtherCalendar = !!(other && other.length);
+    return json({ ok: true, complete: false, partial: false, cache: "MISS",
+      source: hasOtherCalendar ? "CALENDAR_NOT_VERIFIED" : "NO_API_NO_DATA",
+      calendar_status: hasOtherCalendar ? "unverified" : "no_source",
+      no_service_confirmed: false, line_id: lineId, service_date: serviceDate, runs: [] });
+  }
 
 
   // Canonical train schedule is the sole identity authority; original source
@@ -258,6 +269,9 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       line_id: lineId,
       service_date: serviceDate,
       calendar_type: calendarType(t.calendar_urn),
+      service_id: t.calendar_urn,
+      trip_id: "canonical-train-timetable:" + mapped.timetable_id,
+      plan_source: "sql-recurring-timetable",
       operator, network_key: t.railway_urn,
       train_number: t.train_number,
       operation_code: mapped.operation_code || "",
@@ -381,16 +395,63 @@ Deno.serve(async (req: Request) => {
         byRun.set(stop.train_run_id, list);
       }
     }
-    const result = runs.map(run => ({ ...run, stops: byRun.get(run.id) || [] }));
+    const result = runs.map(run => ({
+      ...run, plan_source: "sql-date-specific-run",
+      service_id: String(run.calendar_type || ""),
+      trip_id: "dated-run:" + String(run.id),
+      timetable_validity: "date_specific_source_unverified",
+      timetable_date_verified: false,
+      stops: byRun.get(run.id) || []
+    }));
     const validRuns = result.filter(run => run.stops.length >= 2 &&
       run.stops.every((s: any) => !!s.station_urn) &&
       run.stops.filter((s: any) => s.arrival_time || s.departure_time).length >= 2);
-    const omittedIncompleteRuns = result.length - validRuns.length;
-    const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
-    const partial = validRuns.length > 0 && !complete;
-    return json({ ok: true, cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS", complete, partial,
-      source: "DATABASE_MANUAL", line_id: lineId, service_date: serviceDate,
-      omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
+
+    // Date-specific records are an overlay, not permission to hide the rest
+    // of the published recurring timetable. Both feed the SAME ODPT-shaped
+    // estimator, with exact itinerary deduplication across the sources.
+    const fallback = await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null);
+    const planned = await fallback.json();
+    if (!planned.ok || !Array.isArray(planned.runs)) throw new Error("INVALID_RECURRING_PLAN");
+    function itineraryKey(run: any) {
+      const stops = run.stops || [];
+      if (!run.train_number || stops.length < 2) return "";
+      const facts = stops.map((s: any) => [
+        String(s.station_urn || s.station_key || ""),
+        String(s.arrival_time || ""),
+        String(s.departure_time || "")
+      ]);
+      if (facts.some((s: string[]) => !s[0])) return "";
+      return JSON.stringify([lineId, serviceDate, String(run.train_number), facts]);
+    }
+    const merged = [...planned.runs];
+    const existing = new Set(merged.map(itineraryKey).filter(Boolean));
+    let dateOverrides = 0;
+    for (const dated of validRuns) {
+      const key = itineraryKey(dated);
+      if (key && existing.has(key)) {
+        // The date-specific fact wins over an identical recurring duplicate.
+        const index = merged.findIndex((run: any) => itineraryKey(run) === key);
+        merged[index] = dated;
+        dateOverrides++;
+      } else {
+        merged.push(dated);
+        if (key) existing.add(key);
+      }
+    }
+    const omittedIncompleteRuns = result.length - validRuns.length +
+      Number(planned.omitted_incomplete_runs || 0);
+    const complete = merged.length > 0 && omittedIncompleteRuns === 0 &&
+      (planned.complete === true || planned.runs.length === 0);
+    const partial = merged.length > 0 && !complete;
+    return json({ ok: true, cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
+      complete, partial, calendar_status: planned.calendar_status || "selected",
+      source: "DATABASE_PLAN_MERGED", line_id: lineId, service_date: serviceDate,
+      dated_runs: validRuns.length, recurring_runs: planned.runs.length,
+      exact_date_overrides: dateOverrides,
+      date_verified_runs: Number(planned.date_verified_runs || 0),
+      date_unverified_runs: merged.length - Number(planned.date_verified_runs || 0),
+      omitted_incomplete_runs: omittedIncompleteRuns, runs: merged });
   } catch (err) {
     console.error("[train-runs] SQL read failed", lineId, String(err));
     return json({ ok: false, error: "DB_QUERY_FAILED" }, 500);
