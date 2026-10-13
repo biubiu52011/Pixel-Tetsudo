@@ -208,10 +208,18 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
   const trackSrc=read("js/train-track-layout.js");
   assert(trackSrc.includes("sixLoopStartIndex")&&trackSrc.includes("idx === points.length - 1 ? 0"),
     "six ring must rejoin Tochomae instead of a tail station");
-  assert(renderer.includes('svg.style.maxWidth = "none"')&&
-         renderer.includes('_mapWrap.style.width = Math.ceil(svgW) + "px"')&&
-         renderer.includes('tp-six-pan-hint'),
-    "six map must pan horizontally at readable 1:1 scale");
+  const css=read("css/trains.css");
+  assert(renderer.includes('el.classList.toggle("tp-six-fixed-map", !!geometry.isSixShapedLoop)') &&
+         renderer.includes('svg.style.width = "100%"') &&
+         renderer.includes('el.scrollLeft = 0;') &&
+         !renderer.includes('svg.style.maxWidth = "none"') &&
+         !renderer.includes('_mapWrap.style.width = Math.ceil(svgW) + "px"') &&
+         !renderer.includes('tp-six-pan-hint'),
+    "six diagram must stay fixed inside the responsive viewport without panning");
+  assert(css.includes('.tp-line-map.tp-six-fixed-map { overflow-x: hidden; overflow-x: clip; }') &&
+         css.includes('.tp-six-fixed-map .tp-map-wrap svg { width: 100%; max-width: 100%; height: auto; }'),
+    "six map must scale its complete viewBox into the screen instead of clipping it");
+  assert(six.svgW < 450,"six composition must not waste horizontal space when scaled on mobile");
   assert(renderer.includes('anchor = "end";')&&renderer.includes('geometry.isSixShapedLoop && geometry.isDualLoop6'),
     "six labels must stay outside the ring at mobile widths");
 }

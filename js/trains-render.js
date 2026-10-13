@@ -604,6 +604,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       var stationCoords = geometry.stationCoords;
       var svgW = geometry.svgW;
       var svgH = geometry.svgH;
+      // Fixed 6-shaped diagram: only trains may move, never the SVG canvas.
+      el.classList.toggle("tp-six-fixed-map", !!geometry.isSixShapedLoop);
       var isMobileView = _isMobileView();
       var color = geometry.color;
       
@@ -631,10 +633,6 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // === Full rebuild: create new SVG with separated layers ===
       var svgNS = "http://www.w3.org/2000/svg";
       var svg = document.createElementNS(svgNS, "svg");
-      if (geometry.isSixShapedLoop) {
-        svg.style.width = Math.ceil(svgW) + "px";
-        svg.style.maxWidth = "none";
-      }
       svg.setAttribute("xmlns", svgNS);
       svg.setAttribute("viewBox", "0 0 " + svgW + " " + svgH);
       svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -915,17 +913,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // （tp-est-note、下・中央）に置く。
       el.innerHTML = '<div class="tp-map-wrap"></div>';
       var _mapWrap = el.querySelector('.tp-map-wrap');
-      if (geometry.isSixShapedLoop) {
-        _mapWrap.style.width = Math.ceil(svgW) + "px";
-        _mapWrap.style.maxWidth = "none";
-        // Keep the hint in the horizontal scroll viewport, not within the SVG.
-        var _panHint = document.createElement("div");
-        _panHint.className = "tp-six-pan-hint";
-        _panHint.textContent = window.currentLang === "zh" ? "⇆ 左右滑动查看完整线路图" :
-          (window.currentLang === "en" ? "⇆ Swipe horizontally to view the full map" :
-          (window.currentLang === "ko" ? "⇆ 좌우로 스와이프해 전체 노선도 보기" : "⇆ 左右にスワイプして全体を表示"));
-        el.insertBefore(_panHint, _mapWrap);
-      }
+      // Six-shaped and ordinary diagrams both render at 100% of the available
+      // viewport width. Do not inject a wider intrinsic-size scroll surface.
       // v4.3.938: 竖列支线名 HTML 图注（SVG 上方，线色着色，多条以 · 分隔）
       if (_branchNoteItems.length) {
         var _bnEl = document.createElement('div');
@@ -941,14 +930,19 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       }
       _mapWrap.appendChild(svg);
 
-      // v4.3.539: 线路图放大 150% 后初始视图居中裁切——视口中心对准图中心，
-      // 左右两侧对称溢出，用户可向两端滚动查看（scrollLeft 全程可达，无 flex 溢出不可达问题）。
-      requestAnimationFrame(function () {
-        try {
-          var _scW = el.scrollWidth, _ccW = el.clientWidth;
-          if (_scW > _ccW) el.scrollLeft = Math.round((_scW - _ccW) / 2);
-        } catch (_e) { /* best-effort centering */ }
-      });
+      // Keep historical overflow centering for other route types only.
+      // Six-shaped diagrams are fully contained within a fixed viewport.
+      if (geometry.isSixShapedLoop) {
+        // No sideways scroll or layout jump on ODPT refresh / language change.
+        el.scrollLeft = 0;
+      } else {
+        requestAnimationFrame(function () {
+          try {
+            var _scW = el.scrollWidth, _ccW = el.clientWidth;
+            if (_scW > _ccW) el.scrollLeft = Math.round((_scW - _ccW) / 2);
+          } catch (_e) { /* best-effort centering */ }
+        });
+      }
       
       // Clamp over-long station names into available width (industry practice:
       // shrink, never clip). Runs after mount so getBBox is accurate.

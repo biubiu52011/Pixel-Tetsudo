@@ -309,7 +309,7 @@
       var leftMargin = _isMobileView() ? 12 : 12.8;
       // The approved narrow 6-shaped ring needs independent space for station
       // names and transfers on both sides; never squeeze all lanes into 360px.
-      var marginRight = _isMobileView() ? 24 : 28;
+      var marginRight = _isMobileView() ? 14 : 28;
       var marginTopBot = _isMobileView() ? 60 : 64;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
@@ -329,15 +329,15 @@
         _leftWidest = Math.max(_leftWidest, _sixNameW(_leftIds6[_lw6]));
       for (var _rw6 = 0; _rw6 < _rightIds6.length; _rw6++)
         _rightWidest = Math.max(_rightWidest, _sixNameW(_rightIds6[_rw6]));
-      // Each vertical rail has its own name and transfer-icon corridor.
-      // Use native horizontal panning on mobile rather than shrinking the
-      // labels or inflating the ring until the last column gets clipped.
+      // Keep three measurable name/transfer lanes and the agreed 63px ring.
+      // The SVG viewBox holds the whole diagram; the renderer fits this fixed
+      // composition to the visible mobile viewport without sideways panning.
       var _sixTailLane = Math.max(92, _tailWidest);
       var _sixLeftLane = Math.max(92, _leftWidest);
       var _sixRightLane = Math.max(92, _rightWidest);
-      var stubX = leftMargin + _sixTailLane + 18;
-      var tailAreaWidth = stubX + _sixLeftLane + 34;
-      svgW = tailAreaWidth + loopRectW + 20 + _sixRightLane + marginRight;
+      var stubX = leftMargin + _sixTailLane + 16;
+      var tailAreaWidth = stubX + _sixLeftLane + 24;
+      svgW = tailAreaWidth + loopRectW + 16 + _sixRightLane + marginRight;
       // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
       // v4.3.504: junction 在左列第 7 位（中点偏上 0.5/14×rectH），tail 顶 = loopCy−juncOff−tailTotalHeight ≥ 边距
       var tailCount = hikarigaokaStations.length - 1;
