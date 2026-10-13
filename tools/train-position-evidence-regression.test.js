@@ -231,9 +231,20 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
     "tail motion and last loop station must follow canonical topology");
   assert(sixLayout[0].y < six.stationCoords[5].y,
     "outbound Hikarigaoka marker must move UP the screen");
-  assert(renderer.includes('if (_sixMap && _isMobileView())') &&
+  assert(renderer.includes("function _sixTrainDirectionLane(") &&
+         renderer.includes('data-six-direction-visible') &&
+         renderer.includes('var _actualLane = _sixTrainDirectionLane(') &&
+         renderer.includes('var _sixLane = label.getAttribute("data-six-direction-visible")') &&
+         !renderer.includes('if (_sixMap && _isMobileView()) {') &&
          !renderer.includes("labelText = labelText.slice(0, 2);"),
-    "mobile six direction/destination must not be broken into tiny shards");
+    "mobile Oedo must SHOW full direction labels in the stable inside-track lanes");
+  assert(renderer.includes('labelText = _trainDestText(_tailDest === "Hikarigaoka" ? "Hikarigaoka" : "Tochomae");') &&
+         renderer.includes('return !!LOOP_DIR_NAMES[String(dirName).split(/[:.]/).pop()];'),
+    "Oedo tail must show its true travel direction while recognizing full ODPT loop direction");
+  assert(renderer.includes('ldir.setAttribute("font-size", _sixLane ? "9" : "8");') &&
+         renderer.includes('labelGroup.insertBefore(_whitePlate, labelGroup.firstChild);'),
+    "full mobile direction must be visible on a legible light label plate");
+
   assert(renderer.includes("tp-six-train-detail") &&
          renderer.includes('node.getAttribute("aria-label")') &&
          renderer.includes('svg.addEventListener("click"'),

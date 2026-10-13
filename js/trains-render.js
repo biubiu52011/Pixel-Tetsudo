@@ -1073,7 +1073,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
 
   // Public identification is the scheduled train number, not the vehicle's
   // operation/carset assignment. Internal IDs and SQL keys are never labels.
-  function _trainMarkerTitle(p) {
+  function _trainMarkerTitle(p, lineId) {
     var tip = [];
     var lang = String(window.currentLang || "ja").toLowerCase();
     var number = String((p && p.trainNumber) || "").trim();
@@ -1098,7 +1098,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
           "リアルタイムデータに車号・形式なし"));
     } else tip.push(/^zh/.test(lang) ? "车型未判定" :
       (lang === "en" ? "Vehicle type unknown" : "車両形式未判定"));
-    if (p && p.railDirection) {
+    if (lineId === "Oedo" && _isOedoTailTrain(lineId, p) && p && p.destinationStation) {
+      var _towardHikarigaoka = String(p.destinationStation).split(/[:.]/).pop() === "Hikarigaoka";
+      var _towardText = _trainDestText(_towardHikarigaoka ? "Hikarigaoka" : "Tochomae");
+      tip.push(_towardText + (/^zh/.test(lang) ? "方向" : (lang === "en" ? " bound" : "方面")));
+    } else if (p && p.railDirection) {
       var _loopD = String(p.railDirection).split(/[:.]/).pop();
       var _loopNames = { InnerLoop: ["内回り", "内环", "Inner", "내선"], OuterLoop: ["外回り", "外环", "Outer", "외선"],
                          Inner: ["内回り", "内环", "Inner", "내선"], Outer: ["外回り", "外环", "Outer", "외선"] };
@@ -1159,7 +1163,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       marker.setAttribute("stroke-width", "1.5");
       marker.setAttribute("data-position-unresolved", "true");
     }
-    var titleText = _trainMarkerTitle(p);
+    var titleText = _trainMarkerTitle(p, lineId);
     if (titleText) _setTrainMarkerTooltip(marker, titleText, svgNS);
     marker.setAttribute("data-train-id", String(trainUid));
     marker.setAttribute("data-marker-kind", knownVehicle ? "vehicle" : "unresolved");
@@ -1311,7 +1315,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         // The SVG marker survives polling, but its verified carset may change.
         // Refresh the same tooltip instead of retaining a stale train number
         // or a previous day's physical formation.
-        var _freshTitle = _trainMarkerTitle(p);
+        var _freshTitle = _trainMarkerTitle(p, lineId);
         _setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS);
         // Update existing icon position.
         // TrainTrackLayout owns target geometry; this marker owns interpolation.
@@ -1554,7 +1558,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
 
   function _isLoopDirName(dirName) {
     if (!dirName) return false;
-    return !!LOOP_DIR_NAMES[String(dirName).split('.').pop()];
+    // ODPT can send either RailDirection.InnerLoop or odpt:RailDirection:InnerLoop.
+    return !!LOOP_DIR_NAMES[String(dirName).split(/[:.]/).pop()];
   }
 
   // 大江户线六字形的同线开放尾段列车识别：不是独立 branchOf 支线。
@@ -1639,6 +1644,43 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     return moveDir === 'down' ? py + 28 : py + 25;
   }
 
+  // Fixed mobile Oedo diagram: render the COMPLETE passenger-facing
+  // direction in existing track corridors. The 6 shape has three rails:
+  //   open tail → right of its rail; loop-left → inside ring on the left;
+  //   loop-right → inside ring on the right.
+  // Return null outside this special geometry; regular lines stay untouched.
+  function _sixTrainDirectionLane(trainLayer, p, lineId, px, py, labelW, moveDir) {
+    var svg = trainLayer && trainLayer.ownerSVGElement;
+    var geom = svg && svg.__geometry;
+    if (!geom || !geom.isSixShapedLoop || !_isMobileView()) return null;
+    var idx = p && p.stationIndex != null ? Number(p.stationIndex) : NaN;
+    var station = isFinite(idx) && geom.stationCoords ? geom.stationCoords[idx] : null;
+    if (!station) return null;
+    var junctionX = geom.junctionX;
+    var width = isFinite(Number(labelW)) ? Number(labelW) : 0;
+    var isTail = _isOedoTailTrain(lineId, p);
+    if (isTail) {
+      // The open tail is ONE railway with a ring, not a separate branch.
+      // Markers do not cover the tail station names (those remain on its left).
+      var tailRailX = idx === 0 ? junctionX : station.x;
+      var rightBound = junctionX - 4;
+      return {
+        x: Math.max(3, Math.min(tailRailX + 8, rightBound - width)),
+        y: _trainLabelY("dir", py, moveDir)
+      };
+    }
+    // Fit complete three-character Japanese loop directions within the ring.
+    // Opposite columns use opposite vertical sides of their train marker,
+    // so even adjacent Inner/Outer trains do not overwrite each other.
+    var rightRail = geom.stationCoords[idx].side === "right";
+    var x = rightRail ? junctionX + geom.loopRectW - 4 - width : junctionX + 4;
+    return {
+      x: Math.max(junctionX + 3,
+        Math.min(x, junctionX + geom.loopRectW - width - 3)),
+      y: rightRail ? py + 17 : py - 14
+    };
+  }
+
   function _trainLabelSignature(p, lineId) {
     return [
       lineId || "",
@@ -1659,7 +1701,12 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     var labelText = '';
     // v4.3.475: 大江户线光丘段列车显示真实终点（光丘/都厅前），不走环线"内回/外回"标签
     if (_isOedoTailTrain(lineId, p)) {
-      labelText = _trainDestText(p.destinationStation);
+      // On the open tail, ODPT loop flags do not mean Inner/Outer, and a
+      // terminal inside the closed loop does not describe which way this
+      // train is currently running through the tail.
+      var _tailDest = String(p.destinationStation || "").split(/[:.]/).pop();
+      if (_tailDest)
+        labelText = _trainDestText(_tailDest === "Hikarigaoka" ? "Hikarigaoka" : "Tochomae");
     } else if (isLoopDir) {
       // Loop direction is the passenger-facing service label. destinationStation
       // may only describe a timetable turnback/data boundary and must not override
@@ -1674,8 +1721,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       labelText = _resolveStationLoose(dn) || dn;
     }
     if (!labelText) return;
-    // Never shorten six-loop directions or terminal names into fragments.
-    // Dense mobile captions are suppressed at the single sync entrypoint.
+    // Keep full InnerLoop/OuterLoop and actual Oedo open-tail directions.
+    // Position labels into reserved rail corridors instead of truncating.
     // v4.3.53x: 东急线列车等级（种别）显示——ODPT trainType → 种别名（TRAIN_TYPE_NAMES），
     // 标签格式：方向箭头 + 种别名 + 终点站（例：▼ 特急 元町・中華街）
     var _ovShow = _getLineOverride(lineId);
@@ -1693,12 +1740,14 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       dirSym = moveDir === 'down' ? 'down' : (moveDir === 'up' ? 'up' : '');
     }
     // v4.3.960: 方向箭头+终点站为一个整体，列车图标对标这个整体的中央（X 居中）
-    var _labelY = _trainLabelY('dir', py, moveDir);
+    var _sixLane = _sixTrainDirectionLane(trainLayer, p, lineId, px, py, 0, moveDir);
+    var _labelY = _sixLane ? _sixLane.y : _trainLabelY('dir', py, moveDir);
     var labelGroup = document.createElementNS(svgNS, "g");
     labelGroup.setAttribute("data-train-label-for", String(trainUid));
     labelGroup.setAttribute("data-label-pos", "dir");
     labelGroup.setAttribute("data-dir-sym", dirSym || "");
     labelGroup.setAttribute("data-label-signature", _trainLabelSignature(p, lineId));
+    if (_sixLane) labelGroup.setAttribute("data-six-direction-visible", "true");
     // 三角在 g 坐标系 (0, labelY)
     if (dirSym) {
       var tri = document.createElementNS(svgNS, "path");
@@ -1721,7 +1770,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     ldir.setAttribute("x", "8");
     ldir.setAttribute("y", String(_labelY));
     ldir.setAttribute("text-anchor", "start");
-    ldir.setAttribute("font-size", "8");
+    ldir.setAttribute("font-size", _sixLane ? "9" : "8");
     ldir.setAttribute("fill", "#666");
     ldir.setAttribute("class", "train-label-dir");
     ldir.textContent = labelText;
@@ -1731,9 +1780,24 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     try {
       var _bbox = labelGroup.getBBox();
       var _offsetX = px - (_bbox.x + _bbox.width / 2);
+      if (_sixLane) {
+        var _actualLane = _sixTrainDirectionLane(trainLayer, p, lineId, px, py, _bbox.width, moveDir);
+        _offsetX = _actualLane.x - _bbox.x;
+        labelGroup.setAttribute("data-six-caption-bbox-x", String(_bbox.x));
+        labelGroup.setAttribute("data-six-caption-width", String(_bbox.width));
+        // A light badge behind full text ensures train symbols remain readable
+        // over moving dots without covering any adjacent station-name corridor.
+        var _whitePlate = document.createElementNS(svgNS, "rect");
+        _whitePlate.setAttribute("x", String(_bbox.x - 1));
+        _whitePlate.setAttribute("y", String(_bbox.y - 1));
+        _whitePlate.setAttribute("width", String(_bbox.width + 2));
+        _whitePlate.setAttribute("height", String(_bbox.height + 2));
+        _whitePlate.setAttribute("rx", "2");
+        _whitePlate.setAttribute("fill", "rgba(255,255,255,0.88)");
+        labelGroup.insertBefore(_whitePlate, labelGroup.firstChild);
+      }
       labelGroup.setAttribute("transform", "translate(" + _offsetX + ",0)");
-      // Cache the centering baseline (label geometry is static; only px/py move),
-      // so per-frame label sync is pure attribute update, never remove+recreate.
+      // Cache regular-label centering so per-frame sync never recreates DOM.
       labelGroup.setAttribute("data-base-offset", String(-(_bbox.x + _bbox.width / 2)));
     } catch(_e) {}
   }
@@ -1744,7 +1808,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     var label = trainLayer.querySelector('[data-train-label-for="' + String(trainUid).replace(/"/g, '') + '"]');
     if (!label) return;
     var moveDir = _trainMoveDir(p, lineId);
-    var _labelY = _trainLabelY('dir', py, moveDir);
+    var _sixLane = label.getAttribute("data-six-direction-visible") === "true"
+      ? _sixTrainDirectionLane(trainLayer, p, lineId, px, py,
+          parseFloat(label.getAttribute("data-six-caption-width")), moveDir) : null;
+    var _labelY = _sixLane ? _sixLane.y : _trainLabelY('dir', py, moveDir);
     var tri = label.querySelector('.train-label-tri');
     if (tri) {
       var dirSym = label.getAttribute('data-dir-sym') || '';
@@ -1757,7 +1824,12 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (txt) txt.setAttribute('y', String(_labelY));
     var _base = parseFloat(label.getAttribute('data-base-offset') || '0');
     if (!isFinite(_base)) _base = 0;
-    label.setAttribute('transform', 'translate(' + (px + _base) + ',0)');
+    if (_sixLane) {
+      var _bboxX = parseFloat(label.getAttribute("data-six-caption-bbox-x") || "0");
+      label.setAttribute('transform', 'translate(' + (_sixLane.x - _bboxX) + ',0)');
+    } else {
+      label.setAttribute('transform', 'translate(' + (px + _base) + ',0)');
+    }
   }
 
   // Keep label content synchronized with the current service segment while
@@ -1767,12 +1839,9 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     var _sixMap = trainLayer && trainLayer.ownerSVGElement &&
       trainLayer.ownerSVGElement.__geometry &&
       trainLayer.ownerSVGElement.__geometry.isSixShapedLoop;
-    if (_sixMap && _isMobileView()) {
-      // Never overlay tiny "内"/"光が" shards on fixed-size mobile stations.
-      // Full live direction/destination/train number stays in marker details.
-      if (existing) existing.parentNode.removeChild(existing);
-      return;
-    }
+    // Restore passenger-facing direction tags for *all* evidenced Oedo trains.
+    // The same append/move lifecycle places them in reserved internal lanes;
+    // never suppress a whole line's direction just to solve collisions.
     var signature = _trainLabelSignature(p, lineId);
     if (existing && existing.getAttribute("data-label-signature") !== signature) {
       existing.parentNode.removeChild(existing);
