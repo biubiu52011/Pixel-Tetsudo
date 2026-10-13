@@ -744,6 +744,8 @@
             "_canonicalTrainTimetableId":run.canonical_timetable_id||null,
             "_sqlVehicleMappingLevel":run.vehicle_mapping_level||"unresolved",
             "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
+            "_sqlCandidateArtworkPath":run.vehicle_candidate_artwork_path||null,
+            "_sqlCandidateArtworkStatus":run.vehicle_candidate_artwork_status||null,
             "_vehicleEvidenceSource":run.vehicle_evidence_source||null,
             "_vehicleEvidence":run.vehicle_evidence_url||null,
             "_sqlVehicleArtworkPath":run.vehicle_artwork_path||null,
