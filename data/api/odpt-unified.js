@@ -297,7 +297,8 @@
         "NambuBranch": "JR-East",
 
         "Kinugawa": "Tobu",
-        "NipporiToneri": "Toei",
+        "Nippori_Toneri": "Toei", // canonical railway_data.json / SQL line ID
+        "NipporiToneri": "Toei", // compatibility alias
         "Noda": "Tobu",
         "OdakyuEnoshima": "Odakyu",
 
@@ -428,7 +429,8 @@
       "TsurumiOkawa": "TsurumiOkawaBranch",
       "ChiyodaBranch": "Chiyoda",
       "Noda": "TobuUrbanPark",
-      "NipporiToneri": "NipporiToneri",
+      "Nippori_Toneri": "NipporiToneri", // canonical line ID -> ODPT railway
+      "NipporiToneri": "NipporiToneri", // compatibility alias
       "TobuIsesaki": "Isesaki",
       "TobuDaishi": "Daishi",
       "KeioInokashira": "Inokashira",
