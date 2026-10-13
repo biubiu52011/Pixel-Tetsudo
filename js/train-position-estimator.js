@@ -784,8 +784,8 @@
           _plannedCandidates.forEach(function(label) {
             if (_visibleCandidates.indexOf(label) < 0) _visibleCandidates.push(label);
           });
-          var _identityStatus = vehResult.identityStatus || 'UNKNOWN';
-          if (_identityStatus === 'UNKNOWN' && _plannedCandidates.length) _identityStatus = 'NARROWED';
+          // Vehicle identity status always comes from TrainVehicle; a SQL
+          // historical candidate must not promote UNKNOWN to NARROWED/EXACT.
           var trainClass = vehResult.name || '';
           var _vehicleType = vehResult.vehicleTypeStr || '';
           // Missing resolver means unresolved identity; timetable data must not
@@ -822,11 +822,8 @@
             operationEvidence: _assignmentMatches,
             vehicleFormationId: _assignmentFormationIds.length === 1 ? _assignmentFormationIds[0] : '',
             vehicleFormationCandidates: _assignmentFormationIds.slice(),
-            vehicleIdentityStatus: _identityStatus,
-            vehicleIdentityReason: _identityStatus === 'NARROWED' &&
-              vehResult.identityStatus === 'UNKNOWN'
-                ? 'historical-planned-vehicle-candidates-unverified'
-                : (vehResult.identityReason || 'no-vehicle-evidence'),
+            vehicleIdentityStatus: vehResult.identityStatus || 'UNKNOWN',
+            vehicleIdentityReason: vehResult.identityReason || 'no-vehicle-evidence',
             vehicleCandidates: _visibleCandidates,
             plannedVehicleCandidates: _plannedCandidates.slice(),
             plannedVehicleCandidateStatus: _runIdentity.plannedVehicleCandidateStatus,
