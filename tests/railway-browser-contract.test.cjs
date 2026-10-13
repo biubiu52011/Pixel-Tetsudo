@@ -342,7 +342,9 @@ test('Toden historical literal car-number inputs resolve 33 car models; current 
   assert.ok(fusion.includes('/^\\d{4}$/.test(positionData.trainNumber)'),
     'legacy literal physical car number may resolve; ODPTnnnn must never be stripped');
   assert.match(fusion, /railway: railway,/);
-  assert.match(fusion, /window\.TrainOperationEvidence &&\s*lid !== "Arakawa"/);
+  assert.match(fusion, /if \(!odptVehicleType && window\.TrainOperationEvidence &&/);
+  assert.doesNotMatch(fusion, /lid !== "Arakawa"/,
+    'Arakawa train numbers must reach the same registered script resolver, without pretending trip IDs are physical car numbers');
 });
 
 test('Toei 2026 fleet resolves only exact identity evidence to existing gallery PNGs', () => {
