@@ -8,7 +8,9 @@
 - 提交：`5e847bae`（代码）；`20d1837f`、`292e6a80`（补充并隔离已有 `tools/train-vehicle-icon-resolution.test.js` 的 source-dated owner/候选负例回归）。
 - 测试：最新版 `292e6a80` 的 GitHub Release Guards 已成功，CI Validate 已成功。GitHub Pages 的最终部署及交互可视化仍需以最新 Actions 与真实浏览器检查为准；无外网 DNS 时不伪称生产 PNG HTTP 200。
 - 限制：本次恢复的是已有充分证据的 PNG 通路，不代表 223 条线路的每一趟列车都能断言具体车型。无证据列车保留灰点，不凭运营线路、车次或图片名称猜测。
-- 后续：若用户所指为其它具体线路仍不显示，按该线路的 `vehicleIdentityStatus`、`vehicleIconPath`、浏览器 SVG image/error 与 ODPT 源记录排查，禁止批量填充猜测车型。
+- 浏览器兼容补充：列车 SVG `<image>` 创建及路径更新时，现同步设置 SVG2 `href` 和带命名空间的 `xlink:href`，与既有站内图标双引用策略对齐，降低 Safari/iOS 兼容风险（`1cf11ed9`）。新增 `tools/train-vehicle-icon-resolution.test.js` 双属性回归（`e21bfab7`），`tools/train-position-evidence-regression.test.js` 的仿真 DOM 补充 `setAttributeNS` 和真实 SVG 双属性断言（`839be1a8`）；测试不依赖改变车型判断。
+- CI 修复记录：`e21bfab7` 曾在 Train Position Evidence 回归测试失败（模拟 SVG 节点遗漏标准 `setAttributeNS`，非生产 JavaScript 运行时缺失）；已针对 test fixture 修复，`839be1a8` Validate 与 Release Guards 成功，最终 Pages 以 Actions 验收结果为准。
+- 后续：若用户所指为其它具体线路仍不显示，按该线路的 `vehicleIdentityStatus`、`vehicleIconPath`、浏览器 SVG image/error 与 ODPT 源记录排查；线型参考图片本身不能证明某一具体班次使用该车，禁止批量填充猜测车型。
 
 
 ## 2026-10-13 JST — GitHub × Supabase 结构体检整改（PARTIAL）
