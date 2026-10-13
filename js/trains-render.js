@@ -1095,7 +1095,13 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     }
     if (p && p.vehicleType) tip.push(p.vehicleType);
     else if (p && p.trainClass) tip.push(p.trainClass);
-    else tip.push(/^zh/.test(lang) ? "车型未判定" :
+    else if (p && p.vehicleEvidenceGap === "odpt-trip-id-without-car-number") {
+      // Distinguish missing *vehicle evidence* from a failed image request.
+      // Do not display the internal ODPTnnnn trip ID as a physical car number.
+      tip.push(/^zh/.test(lang) ? "实时数据未提供车辆编号／车型" :
+        (lang === "en" ? "Vehicle ID/model not supplied by live data" :
+          "リアルタイムデータに車号・形式なし"));
+    } else tip.push(/^zh/.test(lang) ? "车型未判定" :
       (lang === "en" ? "Vehicle type unknown" : "車両形式未判定"));
     if (p && p.destinationStation) tip.push(_trainDestText(p.destinationStation));
     return tip.join(" | ");
