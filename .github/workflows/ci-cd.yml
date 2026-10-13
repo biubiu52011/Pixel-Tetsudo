@@ -44,7 +44,7 @@ jobs:
               const html=await resp.text();
               const scripts=[...html.matchAll(/<script[^>]+src=["']([^"']+)/ig)].map(m=>m[1]).concat(['/_nuxt/CV3z3yxR.js','/_nuxt/ClIE1Ox8.js']);
               const links=[...html.matchAll(/<link[^>]+href=["']([^"']+)/ig)].map(m=>m[1]).filter(x=>/\\.js|asset|manifest/i.test(x));
-              console.log('TOEI_PAGE_PUBLIC',JSON.stringify({status:resp.status,bytes:html.length,scripts:scripts.slice(0,30),links:links.slice(0,12),hasAppMount:/id=["']app|id=["']root/.test(html)}));
+              console.log('TOEI_PAGE_PUBLIC',JSON.stringify({status:resp.status,bytes:html.length,scripts:scripts.slice(0,30),links:links.slice(0,12),hasAppMount:/id=["']app|id=["']root/.test(html),frameOptions:resp.headers.get('x-frame-options'),frameAncestors:(resp.headers.get('content-security-policy')||'').match(/frame-ancestors[^;]*/)?.[0]||null}));
               for(const item of scripts.filter(x=>x.includes('.js')).slice(0,4)){
                 const scriptURL=new URL(item,url);
                 if(scriptURL.origin!=='https://static.toei.navitime.biz')continue;
@@ -101,7 +101,7 @@ jobs:
                         status:ar.status,type:ar.headers.get('content-type'),
                         cors:ar.headers.get('access-control-allow-origin'),
                         length:raw.length,keys:result?Object.keys(result).slice(0,18):[],
-                        trainCount:trains.length,firstTrainKeys:trains[0]?Object.keys(trains[0]).slice(0,20):[]
+                        trainCount:trains.length,firstTrainKeys:trains[0]?Object.keys(trains[0]).slice(0,20):[],sample:trains.slice(0,4).map(t=>({no:t.no,type:t.type,id:t.id,direction:t.direction,icon:t.sakura_vehicle_icon,lappingCar:t.arakawa_lapping?.car_number||null}))
                       }));
                     }catch(e){console.log('TOEI_FIRST_PARTY_API_UNAVAILABLE',e.name);}
                   }
