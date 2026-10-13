@@ -183,7 +183,9 @@ async function readSqlRuns(runs, stops, recurringRows = []) {
     .replace('makeQuery: (first: number, last: number) => any', 'makeQuery')
     .replace('const result: any[]', 'const result')
     .replace('new Map<number, any[]>()', 'new Map()')
-    .replace(/\(s: any\)/g, '(s)');
+    .replace(/\(s: any\)/g, '(s)')
+    .replace(/\(run: any\)/g, '(run)')
+    .replace(/\(s: string\[\]\)/g, '(s)');
   const db = { from(table) {
     let rows = table === 'train_runs' ? runs : stops;
     const query = {
