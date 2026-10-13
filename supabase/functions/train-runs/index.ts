@@ -117,7 +117,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   for (let i = 0; i < templates.length; i += 100) {
     const ids = templates.slice(i, i + 100).map((t: any) => t.id);
     const { data, error } = await db.from("train_timetable_source_resolution")
-      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date")
+      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path")
       .in("source_template_id", ids);
     if (error) throw error;
     for (const row of data || []) sourceResolution.set(row.source_template_id, row);
@@ -272,6 +272,8 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
         : verifiedBoundaryType && !conflict ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
       vehicle_evidence_source_id: ruleType && !conflict ? mapped.vehicle_source_id : null,
       vehicle_evidence_url: ruleType && !conflict ? mapped.vehicle_source_url : null,
+      // Only source-dated unique model PNG; never a guessed formation/livery.
+      vehicle_artwork_path: ruleType && !conflict ? (mapped.vehicle_artwork_path || null) : null,
       source_trip_id: t.source_trip_id || null,
       previous_timetable_ids: t.previous_timetable_ids || [],
       next_timetable_ids: t.next_timetable_ids || [],

@@ -723,6 +723,7 @@
             "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
             "_vehicleEvidenceSource":run.vehicle_evidence_source||null,
             "_vehicleEvidence":run.vehicle_evidence_url||null,
+            "_sqlVehicleArtworkPath":run.vehicle_artwork_path||null,
             "odpt:railDirection":run.rail_direction||"",
             "odpt:trainType":run.train_type||"",
             "odpt:destinationStation":run.destination_station?[run.destination_station]:[],
