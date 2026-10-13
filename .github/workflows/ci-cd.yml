@@ -35,7 +35,7 @@ jobs:
 
       # One-time read-only probe. Never print the ODPT consumer key or request URL.
       - name: One-time Arakawa live vehicle pipeline diagnosis
-        if: contains(github.event.head_commit.message, 'chore(diagnostics): one-time Arakawa vehicle probe')
+        if: github.event_name == 'push'
         run: |
           node - <<'NODE'
           const fs=require('fs'),vm=require('vm');
