@@ -36,6 +36,9 @@ jobs:
       - name: Railway browser cross-page contract
         run: node --test tests/railway-browser-contract.test.cjs
 
+      - name: Service-day and SQL/ODPT through-chain regression
+        run: node --test tests/train-position-service-day.test.cjs
+
       - name: RunInfo semantic and identity tests
         run: |
           node tools/runinfo-evaluator.test.js

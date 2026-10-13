@@ -297,7 +297,8 @@
         "NambuBranch": "JR-East",
 
         "Kinugawa": "Tobu",
-        "NipporiToneri": "Toei",
+        "Nippori_Toneri": "Toei", // canonical railway_data.json / SQL line ID
+        "NipporiToneri": "Toei", // compatibility alias
         "Noda": "Tobu",
         "OdakyuEnoshima": "Odakyu",
 
@@ -428,7 +429,8 @@
       "TsurumiOkawa": "TsurumiOkawaBranch",
       "ChiyodaBranch": "Chiyoda",
       "Noda": "TobuUrbanPark",
-      "NipporiToneri": "NipporiToneri",
+      "Nippori_Toneri": "NipporiToneri", // canonical line ID -> ODPT railway
+      "NipporiToneri": "NipporiToneri", // compatibility alias
       "TobuIsesaki": "Isesaki",
       "TobuDaishi": "Daishi",
       "KeioInokashira": "Inokashira",
@@ -647,6 +649,7 @@
     var TRAIN_RUN_CACHE_ENDPOINT = "https://pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs";
     var _trainRunCache = {};
     var _trainRunInflight = {};
+    var _trainRunLastWarning = {};
     function _serviceDateJst() {
         var now = new Date();
         var parts = new Intl.DateTimeFormat("en-CA", {
@@ -728,6 +731,9 @@
             "_nextTimetableIds":Array.isArray(run.next_timetable_ids)?run.next_timetable_ids:[],
             "_timetableProvenance":run.timetable_provenance||"",
             "_sourceRevisionDate":run.source_revision_date||null,
+            // Structural timetable completeness is not current-diamond validity.
+            "_timetableValidity":run.timetable_validity||"undated_not_current_verified",
+            "_timetableDateVerified":run.timetable_date_verified===true,
             "_canonicalTrainTimetableId":run.canonical_timetable_id||null,
             "_sqlVehicleMappingLevel":run.vehicle_mapping_level||"unresolved",
             "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
@@ -756,6 +762,28 @@
             _positionSource:"supabase-train-run"
         };
     }
+    // One timetable identity for ODPT pool merges and DataFusion lazy loading.
+    // A public train number can recur in multiple calendars, directions or trips.
+    // Do not treat an incomplete row as a duplicate of another scheduled run.
+    function getTimetableIdentity(tt) {
+        if (!tt) return "";
+        var railway = String(tt['odpt:railway'] || "");
+        var calendar = String(tt['odpt:calendar'] || "");
+        var sourceId = tt['owl:sameAs'] || tt['@id'];
+        if (sourceId) return ["source", railway, calendar, String(sourceId)].join("|");
+        var number = String(tt['odpt:trainNumber'] || "");
+        var stops = tt['odpt:trainTimetableObject'];
+        if (!railway || !calendar || !number || !Array.isArray(stops) || stops.length < 2) return "";
+        var first = stops[0] || {}, last = stops[stops.length - 1] || {};
+        var origin = first['odpt:departureStation'] || first['odpt:arrivalStation'];
+        var departure = first['odpt:departureTime'] || first['odpt:arrivalTime'];
+        var terminus = last['odpt:arrivalStation'] || last['odpt:departureStation'];
+        var arrival = last['odpt:arrivalTime'] || last['odpt:departureTime'];
+        if (!origin || !departure || !terminus || !arrival) return "";
+        return ["trip", railway, calendar, number, tt['odpt:railDirection'] || "",
+            origin, departure, terminus, arrival, stops.length].join("|");
+    }
+
     // Line capability, not operator-wide Train availability or live row count.
     function hasRealtimePositionApi(lineId) {
         var op = LINE_TO_OPERATOR[lineId];
@@ -799,7 +827,16 @@
             }).filter(Boolean):[];
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
-        }).catch(function(){ return []; }).finally(function(){ clearTimeout(timeout); delete _trainRunInflight[key]; });
+        }).catch(function(err){
+            // Keep the user-visible fallback, but do not disguise a failed SQL
+            // request as a confirmed no-service timetable. Throttle diagnostics.
+            var now=Date.now();
+            if(now-(_trainRunLastWarning[key]||0)>60000){
+                _trainRunLastWarning[key]=now;
+                console.warn("[ODPT] SQL timetable request failed:",lineId,serviceDate,err&&err.message);
+            }
+            return [];
+        }).finally(function(){ clearTimeout(timeout); delete _trainRunInflight[key]; });
         return _trainRunInflight[key];
     }
 
@@ -823,6 +860,7 @@
         validateAuthoritativeRealtimeConfig: validateAuthoritativeRealtimeConfig,
         getCachedTrainRuns: getCachedTrainRuns,
         hasRealtimePositionApi: hasRealtimePositionApi,
+        getTimetableIdentity: getTimetableIdentity,
 
         clearRealtimeLines: function() {
             Object.keys(_activeRealtimeOperators).forEach(function(op) { delete _activeRealtimeOperators[op]; });
@@ -1885,12 +1923,12 @@
                 if (newTimetables[op] && newTimetables[op].length > 0) {
                     // v4.3.512: 池级去重——跨 lid 共用同一 ODPT railway（Kawagoe/KawagoeWest 等）
                     // 会重复 concat 同一批记录；单线拆分的 dedup 只覆盖拆分内，这里是全池去重。
-                    var seenAll = {}, deduped = [];
+                    var seenAll = Object.create(null), deduped = [];
                     newTimetables[op].forEach(function(tt) {
                         if (!tt) return;
-                        var k = (tt['odpt:trainNumber'] || '') + '|' + (tt['odpt:railway'] || '') + '|' + (tt['odpt:calendar'] || '') + '|' + (tt['odpt:railDirection'] || '');
-                        if (seenAll[k]) return;
-                        seenAll[k] = true;
+                        var k = getTimetableIdentity(tt);
+                        if (k && seenAll[k]) return;
+                        if (k) seenAll[k] = true;
                         deduped.push(tt);
                     });
                     newTimetables[op] = deduped;

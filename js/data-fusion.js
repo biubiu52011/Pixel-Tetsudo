@@ -1941,15 +1941,17 @@
             if (!window.ODPT_TIMETABLES[lineInfo.operator]) {
               window.ODPT_TIMETABLES[lineInfo.operator] = [];
             }
-            var existingIds = {};
+            var existingIds = Object.create(null);
             window.ODPT_TIMETABLES[lineInfo.operator].forEach(function(t) {
-              var id = t['odpt:trainNumber'] || t['odpt:train'] || JSON.stringify(t);
-              existingIds[id] = true;
+              var id = window.ODPTClient.getTimetableIdentity(t);
+              if (id) existingIds[id] = true;
             });
             data.forEach(function(t) {
-              var id = t['odpt:trainNumber'] || t['odpt:train'] || JSON.stringify(t);
-              if (!existingIds[id]) {
+              var id = window.ODPTClient.getTimetableIdentity(t);
+              // Unknown identity is not permission to discard a published trip.
+              if (!id || !existingIds[id]) {
                 window.ODPT_TIMETABLES[lineInfo.operator].push(t);
+                if (id) existingIds[id] = true;
               }
             });
           }
