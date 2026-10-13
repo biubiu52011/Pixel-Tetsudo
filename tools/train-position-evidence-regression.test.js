@@ -469,8 +469,11 @@ for (const synthetic of ["est_12","supabase:TrainRun:12","manual-template:12","o
 const odptAdapterSource=read("data/api/odpt-unified.js");
 assert(odptAdapterSource.includes("function _plannedTrainRunIdentity(run)"),
   "SQL timetable records must use a scheduled-trip identity");
-assert(odptAdapterSource.includes('"@id":scheduledId'),
-  "SQL row primary keys must not serve as chain identities");
+assert(odptAdapterSource.includes('"@id":hasSharedCanonicalTrip') &&
+  odptAdapterSource.includes('run.canonical_group_evidence==="verified_continuation"') &&
+  odptAdapterSource.includes('run.canonical_group_evidence==="verified_shared_itinerary"') &&
+  odptAdapterSource.includes(': scheduledId,'),
+  "Only verified shared-physical trips may use canonical train identity; single-source runs retain published-facts IDs");
 assert(!odptAdapterSource.includes('"@id":"supabase:TrainRun:"+run.id'),
   "SQL row IDs must not be presented as stable run identities");
 assert(renderSource.includes('_setTrainMarkerTooltip(existingIcon, _freshTitle, svgNS);'),
