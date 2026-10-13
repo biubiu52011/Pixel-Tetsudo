@@ -307,9 +307,9 @@
       if (_needH6 > loopRectH) loopRectH = _needH6;
       
       var leftMargin = _isMobileView() ? 12 : 12.8;
-      // v4.3.502: 双列后右列站名朝外（anchor=start），marginRight 需容纳站名——
-      // 移动 92 / 桌面 84（右列站名空间 = marginRight−16 ≥ 68px，4 字站名全尺寸显示）。
-      var marginRight = _isMobileView() ? 30 : 32 + (_isMobileView() ? 64 : 84);
+      // The approved narrow 6-shaped ring needs independent space for station
+      // names and transfers on both sides; never squeeze all lanes into 360px.
+      var marginRight = _isMobileView() ? 24 : 28;
       var marginTopBot = _isMobileView() ? 60 : 64;
       // v4.3.482: tail 列宽与直线支线同源（GEOM.BRANCH_COL_W × 本图缩放系数）。
       // 移动端容器是 1:1 硬约束，tail 列让位给环（保底 BRANCH_COL_W×1.1 ≈ 现状 105px）。
@@ -324,26 +324,20 @@
       var _tailWidest = 0;
       for (var _tw6 = 1; _tw6 < hikarigaokaStations.length; _tw6++)
         _tailWidest = Math.max(_tailWidest, _sixNameW(hikarigaokaStations[_tw6]));
-      var _leftTopWidest = 0;
-      for (var _lw6 = 0; _lw6 < _juncIdx6; _lw6++)
-        _leftTopWidest = Math.max(_leftTopWidest, _sixNameW(_leftIds6[_lw6]));
-      // v4.3.513: 光丘尾竖线不穿左列上方站名——桌面 tail 列扩到"竖线右侧容纳左列上方 5 字
-      // 全尺寸文字带"（三区分离：光丘尾文字带|竖线|左列上方文字带|环，junctionX≥stubX+10+88+10）；
-      // 移动端容器 1:1 硬约束下 tailCap 保持现状（剩余穿线站名用白色描边遮线，见 _renderStationNode）。
-      var _tailCap = _isMobileView()
-        ? _isMobileView() ? 144 : 153.6
-        : Math.max(GEOM.BRANCH_COL_W * 1.6, 10 + _tailWidest + 10 + _leftTopWidest + 10);
-      var tailAreaWidth = Math.min(_tailCap,
-                                   Math.max(GEOM.BRANCH_COL_W * 1.1,
-                                            _cw6Content - leftMargin - loopRectW - marginRight));
-      
-      var naturalW = leftMargin + tailAreaWidth + loopRectW + marginRight;
-      if (_isMobileView()) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 63 : 67.2);
-      } else if (naturalW > _cw6Content) {
-        loopRectW = Math.max(_cw6Content - leftMargin - tailAreaWidth - marginRight, _isMobileView() ? 63 : 67.2);
-      }
-      svgW = leftMargin + tailAreaWidth + loopRectW + marginRight;
+      var _leftWidest = 0, _rightWidest = 0;
+      for (var _lw6 = 0; _lw6 < _leftIds6.length; _lw6++)
+        _leftWidest = Math.max(_leftWidest, _sixNameW(_leftIds6[_lw6]));
+      for (var _rw6 = 0; _rw6 < _rightIds6.length; _rw6++)
+        _rightWidest = Math.max(_rightWidest, _sixNameW(_rightIds6[_rw6]));
+      // Each vertical rail has its own name and transfer-icon corridor.
+      // Use native horizontal panning on mobile rather than shrinking the
+      // labels or inflating the ring until the last column gets clipped.
+      var _sixTailLane = Math.max(92, _tailWidest);
+      var _sixLeftLane = Math.max(92, _leftWidest);
+      var _sixRightLane = Math.max(92, _rightWidest);
+      var stubX = leftMargin + _sixTailLane + 18;
+      var tailAreaWidth = stubX + _sixLeftLane + 34;
+      svgW = tailAreaWidth + loopRectW + 20 + _sixRightLane + marginRight;
       // Tail 高度先算（依赖 loopRectH），svgH 须同时容纳环（垂直居中）与向上伸出的光丘尾。
       // v4.3.504: junction 在左列第 7 位（中点偏上 0.5/14×rectH），tail 顶 = loopCy−juncOff−tailTotalHeight ≥ 边距
       var tailCount = hikarigaokaStations.length - 1;
@@ -356,7 +350,7 @@
       
       // ============ Geometry calculation ============
       // Loop center - derived from svg size, not independently set
-      var loopCx = svgW - marginRight - loopRectW / 2;
+      var loopCx = tailAreaWidth + loopRectW / 2;
       var loopCy = svgH / 2;
       var loopHalfW = loopRectW / 2;
       var loopHalfH = loopRectH / 2;
@@ -371,7 +365,7 @@
       // v4.3.511: 光丘尾站名改朝左（用户指令）——竖线右移，保证最宽站
       // （西新宿五丁目 6 字 ≈105.6px）全尺寸朝左时文字左缘仍 ≥ leftMargin（12/12.8px）。
       // v4.3.514: 宽度取光丘尾列实际最长站名（_tailWidest 动态），不硬编码 105.6。
-      var stubX = Math.max(leftMargin + _isMobileView() ? 15 : 16, leftMargin + 10 + _tailWidest);
+      // stubX already comes from the measured tail label lane.
       var stubY = junctionY;
       
       // Tail station coordinates: first = junction (Tochomae, 环左缘 1/2 处), rest = along vertical line at stubX
@@ -403,8 +397,15 @@
         loopPts6.push({ x: loopCx + loopHalfW, y: loopCy - loopHalfH + _tr6 * loopRectH, side: "right", stationId: loopStations[_rightStart + ri6] });
       }
       
-      // Combine all station coords (tail stations first, then loop stations excluding junction)
-      stationCoords = hikarigaokaLinePts.concat(loopPts6.filter(function(_pt6){ return _pt6.stationId !== stations[0]; }));
+      // Geometry may be drawn in column order, but train positions always
+      // refer to canonical line.stations indices. Never use visual row order.
+      stationCoords = new Array(stations.length);
+      for (var _tailI6 = 0; _tailI6 < hikarigaokaLinePts.length; _tailI6++)
+        stationCoords[_tailI6] = hikarigaokaLinePts[_tailI6];
+      for (var _loopI6 = 0; _loopI6 < loopPts6.length; _loopI6++) {
+        var _canonicalI6 = stations.indexOf(loopPts6[_loopI6].stationId);
+        if (_canonicalI6 >= 0) stationCoords[_canonicalI6] = loopPts6[_loopI6];
+      }
       
       // ============ Route elements for static layer ============
       // Main loop rectangle (heavier visual weight = primary)
@@ -751,6 +752,7 @@
       svgH: svgH,
       isLoop: isLoop,
       isSixShapedLoop: isSixShapedLoop,
+      sixLoopStartIndex: isSixShapedLoop ? hikarigaokaIdx + 1 : null,
       isDualLoop6: isSixShapedLoop, // v4.3.502: 六形环环段左右二分（双列）——站名朝外、clamp 走通用
       sp: sp,
       color: color,

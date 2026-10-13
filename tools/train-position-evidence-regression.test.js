@@ -175,6 +175,46 @@ assert(!renderer.includes('_trainLabelDisplayX') &&
 assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
        renderer.includes("'translate(' + (px + _base) + ',0)'"),
   "initial and animated captions must remain centered on their train");
+
+// Six-shaped loop regression: preserve the approved narrow 6 shape, correct
+// physical station indices, and provide text/icon lanes without clipping.
+{
+  const ctx={
+    window:{currentLang:"ja",RailwayDB:{resolveStationName:(id)=>id==="S12"?"西新宿五丁目":id==="S20"?"麻布十番":id}},
+    _routeGeometryCache:{},_geomKey:(id)=>id,
+    _getTransferMap:()=>({}),_isMobileView:()=>true,
+    _throughDirForStation:()=>null,_throughChipRows:()=>0,
+    getLinesData:()=>({}),GEOM:{BRANCH_COL_W:96,BRANCH_STUB:20,MAIN_BASE_W_MAX:820,MOBILE_CONTENT_W:297},
+  };
+  vm.runInNewContext(geometrySource,vm.createContext(ctx),{filename:"trains-geometry.js"});
+  const ids=["Tochomae",...Array.from({length:9},(_,i)=>"S"+(i+1)),"Hikarigaoka",
+    ...Array.from({length:27},(_,i)=>"S"+(i+11))];
+  const six=ctx.computeRouteGeometry({id:"Oedo",type:"loop",isSixShapedLoop:true,
+    stations:ids,color:"#bd006b"},"Oedo");
+  assert.strictEqual(six.stationCoords.length,ids.length,"six diagram must retain every station");
+  ids.forEach((id,i)=>assert.strictEqual(six.stationCoords[i]&&six.stationCoords[i].stationId,id,
+    "six position indexed incorrectly at "+i));
+  const rect=six.routeElements.find(e=>e.type==="rect");
+  assert.strictEqual(rect.attrs.width,63,"six ring must preserve approved mobile width");
+  assert.strictEqual(six.sixLoopStartIndex,11,"six loop must begin after Hikarigaoka tail");
+  assert(six.stationCoords[1].x < six.junctionX &&
+    six.stationCoords[37].x===six.junctionX &&
+    six.stationCoords[18].x>six.junctionX,"six tail and ring rails must stay distinct");
+  assert(six.svgW>360 && six.svgW>six.junctionX+63+110,
+    "six mobile map must preserve a real right-column name/icon lane");
+  assert(six.stationCoords[1].x-12-8*16>0,"tail names must not clip at left edge");
+  assert(six.junctionX-12-8*16>six.stationCoords[1].x,
+    "ring-left names must not cross the tail rail");
+  const trackSrc=read("js/train-track-layout.js");
+  assert(trackSrc.includes("sixLoopStartIndex")&&trackSrc.includes("idx === points.length - 1 ? 0"),
+    "six ring must rejoin Tochomae instead of a tail station");
+  assert(renderer.includes('svg.style.maxWidth = "none"')&&
+         renderer.includes('_mapWrap.style.width = Math.ceil(svgW) + "px"')&&
+         renderer.includes('tp-six-pan-hint'),
+    "six map must pan horizontally at readable 1:1 scale");
+  assert(renderer.includes('anchor = "end";')&&renderer.includes('geometry.isSixShapedLoop && geometry.isDualLoop6'),
+    "six labels must stay outside the ring at mobile widths");
+}
 const trackLayoutSource=read("js/train-track-layout.js");
 const trainsCssSource=read("css/trains.css");
 assert(!/transition:\s*x\s+14s[\s\S]{0,120}y\s+14s/.test(trainsCssSource),

@@ -163,50 +163,18 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (o.tx != null) { tx = o.tx; ty = o.ty; anchor = o.anchor || "start"; }
     else if (side === "top") { tx = o.x; ty = o.y - (isJunction ? 14 : 10); anchor = "middle"; }
     else if (side === "bottom") { tx = o.x; ty = o.y + (isJunction ? 19 : 15); anchor = "middle"; }
-    // v4.3.509/511: 六形环双列——**主干（环站）左列统一朝左**（v4.3.511 用户指令：
-    // 左列上方麻布十番〜新宿由朝右改朝左，与左列下方一致）；**枝干光丘尾站名朝左**
-    // （v4.3.511 用户指令），右缘动态避让左列上方站名带（被避让站右缘左移，
-    // 画布左限由 clamp 缩字兜底）；**Tochomae junction 保持岔路朝右**（v4.3.505 用户裁定）。
+    // Mobile + desktop: tail and ring-left station names stay OUTSIDE the
+    // narrow ring, separated from each other by geometry-reserved name lanes.
     else if (side === "left" && geometry.isSixShapedLoop && geometry.isDualLoop6) {
-      var _sixSide, _sixTx = null;
-      if (o.x < geometry.junctionX || isJunction) {
-        if (isJunction) {
-          // Tochomae junction：岔路站名朝右（v4.3.505 用户裁定，占用检测仅作兜底）
-          _sixSide = _pickSixLabelSide(o, geometry, svgW);
-        } else {
-          // 光丘尾站名朝左——右缘避让左列上方站名带（文字带 y±8 重叠即避让）
-          _sixSide = "left";
-          _sixTx = o.x - 10;
-          var _scs6 = geometry.stationCoords || [];
-          if (!isMobileView) {
-            for (var _b6 = 0; _b6 < _scs6.length; _b6++) {
-              var _bc6 = _scs6[_b6];
-              if (_bc6.stationId === o.stationId) continue;
-              if (Math.abs(_bc6.x - geometry.junctionX) >= 0.5) continue; // 只看左列站
-              if (!(_bc6.y < geometry.junctionY)) continue;               // 只看左列上方
-              if (Math.abs(_bc6.y - o.y) >= 16) continue;                 // 文字带（±8）不重叠
-              var _bn6 = (window.RailwayDB && window.RailwayDB.resolveStationName)
-                ? (window.RailwayDB.resolveStationName(_bc6.stationId, window.currentLang) || _bc6.stationId)
-                : _bc6.stationId;
-              var _bw6 = (_bn6 || "").length * 16 * 1.1;
-              var _bl6 = geometry.junctionX - 10 - _bw6;                  // 左列站名朝左的左缘
-              var _lim6 = _bl6 - 4;
-              if (_sixTx > _lim6) _sixTx = _lim6;
-            }
-          }
-        }
-      } else {
-        // 主干环站：v4.3.846 移动端环左列改朝右进环内，桌面端保持朝左
-        _sixSide = isMobileView ? "right" : "left";
-      }
-      tx = (_sixTx != null) ? _sixTx : ((_sixSide === "right") ? (o.x + (isJunction ? 14 : 10)) : (o.x - (isJunction ? 14 : 10)));
-      ty = o.y; anchor = (_sixSide === "right") ? "start" : "end";
+      tx = o.x - (isJunction ? 18 : 12);
+      ty = o.y;
+      anchor = "end";
     }
     else if (side === "left" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
     else if (side === "left") { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
     else if (side === "dual") { tx = o.x - (isJunction ? 16 : 12); ty = o.y; anchor = "end"; }
     else if (side === "right" && geometry.isSixShapedLoop && !geometry.isDualLoop6) { tx = o.x - (isJunction ? 14 : 10); ty = o.y; anchor = "end"; }
-    else { tx = o.x + (isJunction ? 14 : 10); ty = o.y; anchor = "start"; }
+    else { tx = o.x + (geometry.isSixShapedLoop ? 16 : (isJunction ? 14 : 10)); ty = o.y; anchor = "start"; }
 
     var label = document.createElementNS(svgNS, "text");
     label.setAttribute("x", tx);
@@ -242,16 +210,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     var _clampAvail = (side === "dual" || side === "left") ? (tx - 4) : ((side === "right") ? (svgW - 2 - tx) : 0);
     if (geometry.isSixShapedLoop) {
       if (geometry.isDualLoop6) {
-        // v4.3.506/511: 双列模式——右列站走通用 clamp（svgW-2-tx）。
-        // 站名朝右的 left 站（_sixSide==='right'，现仅 Tochomae junction）走窄空间 clamp：
-        // - 左列上方站与 Tochomae（x==junctionX，环内）：名到右列圆点左缘前（junctionX+loopRectW−7−4−tx）
-        // 光丘尾与左列上方站已改朝左（v4.3.511），走通用 left clamp（tx-4，避让后的右缘）。
-        if (side === "left" && _sixSide === "right") {
-          var _rDotL6 = geometry.junctionX + (geometry.loopRectW || 72) - 7;
-          _clampAvail = o.x < geometry.junctionX
-            ? (isMobileView ? Math.max(40, Math.floor(tx - 4)) : Math.max(40, Math.floor(geometry.junctionX - tx - 4)))
-            : Math.max(40, Math.floor(_rDotL6 - 4 - tx));
-        }
+        // Text stays outside the ring; generic left/right width limits apply.
       } else if (geometry.junctionX === null || o.x >= geometry.junctionX) {
         // Loop stations: name area = half the loop width (shared by both sides)
         var _sc6 = isMobileView ? 1.5 : 1.3;
@@ -672,6 +631,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // === Full rebuild: create new SVG with separated layers ===
       var svgNS = "http://www.w3.org/2000/svg";
       var svg = document.createElementNS(svgNS, "svg");
+      if (geometry.isSixShapedLoop) {
+        svg.style.width = Math.ceil(svgW) + "px";
+        svg.style.maxWidth = "none";
+      }
       svg.setAttribute("xmlns", svgNS);
       svg.setAttribute("viewBox", "0 0 " + svgW + " " + svgH);
       svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
@@ -952,6 +915,17 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // （tp-est-note、下・中央）に置く。
       el.innerHTML = '<div class="tp-map-wrap"></div>';
       var _mapWrap = el.querySelector('.tp-map-wrap');
+      if (geometry.isSixShapedLoop) {
+        _mapWrap.style.width = Math.ceil(svgW) + "px";
+        _mapWrap.style.maxWidth = "none";
+        // Keep the hint in the horizontal scroll viewport, not within the SVG.
+        var _panHint = document.createElement("div");
+        _panHint.className = "tp-six-pan-hint";
+        _panHint.textContent = window.currentLang === "zh" ? "⇆ 左右滑动查看完整线路图" :
+          (window.currentLang === "en" ? "⇆ Swipe horizontally to view the full map" :
+          (window.currentLang === "ko" ? "⇆ 좌우로 스와이프해 전체 노선도 보기" : "⇆ 左右にスワイプして全体を表示"));
+        el.insertBefore(_panHint, _mapWrap);
+      }
       // v4.3.938: 竖列支线名 HTML 图注（SVG 上方，线色着色，多条以 · 分隔）
       if (_branchNoteItems.length) {
         var _bnEl = document.createElement('div');
@@ -1103,6 +1077,12 @@ function _isTrainArtworkFailureActive(trainUid, p) {
           "リアルタイムデータに車号・形式なし"));
     } else tip.push(/^zh/.test(lang) ? "车型未判定" :
       (lang === "en" ? "Vehicle type unknown" : "車両形式未判定"));
+    if (p && p.railDirection) {
+      var _loopD = String(p.railDirection).split(/[:.]/).pop();
+      var _loopNames = { InnerLoop: ["内回り", "内环", "Inner", "내선"], OuterLoop: ["外回り", "外环", "Outer", "외선"],
+                         Inner: ["内回り", "内环", "Inner", "내선"], Outer: ["外回り", "外环", "Outer", "외선"] };
+      if (_loopNames[_loopD]) tip.push(_loopNames[_loopD][/^zh/.test(lang) ? 1 : (lang === "en" ? 2 : (lang === "ko" ? 3 : 0))]);
+    }
     if (p && p.destinationStation) tip.push(_trainDestText(p.destinationStation));
     return tip.join(" | ");
   }
@@ -1668,6 +1648,18 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       labelText = _resolveStationLoose(dn) || dn;
     }
     if (!labelText) return;
+    var _sixLabels = trainLayer && trainLayer.ownerSVGElement &&
+      trainLayer.ownerSVGElement.__geometry &&
+      trainLayer.ownerSVGElement.__geometry.isSixShapedLoop;
+    if (_sixLabels) {
+      // Static diagram labels and interchange icons have precedence over
+      // repeated full-size train captions; full text remains in marker title.
+      if (isLoopDir && !_isOedoBranchTrain(lineId, p))
+        labelText = /^(InnerLoop|Inner)$/.test(dn) ? (lang === "en" ? "In" : (lang === "ko" ? "내" : "内")) :
+          (lang === "en" ? "Out" : (lang === "ko" ? "외" : (lang === "zh" ? "外" : "外")));
+      else if (labelText.length > 2)
+        labelText = labelText.slice(0, 2);
+    }
     // v4.3.53x: 东急线列车等级（种别）显示——ODPT trainType → 种别名（TRAIN_TYPE_NAMES），
     // 标签格式：方向箭头 + 种别名 + 终点站（例：▼ 特急 元町・中華街）
     var _ovShow = _getLineOverride(lineId);

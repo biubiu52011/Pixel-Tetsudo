@@ -147,7 +147,16 @@
       var moveDir = opts.getDisplayMoveDir ? opts.getDisplayMoveDir(position, lineId) : null;
       var _loopDirection = String(position && position.railDirection || "").split(/[:.]/).pop();
       var _closedLoop = !!(stationCoords && stationCoords._loopRect && points === stationCoords);
-      if (_closedLoop && /^(InnerLoop|Inner|OuterLoop|Outer)$/.test(_loopDirection)) {
+      var _sixRingStart = geometry && geometry.isSixShapedLoop && points === stationCoords
+        ? Number(geometry.sixLoopStartIndex) : NaN;
+      if (isFinite(_sixRingStart) && _sixRingStart > 0 &&
+          /^(InnerLoop|Inner|OuterLoop|Outer)$/.test(_loopDirection) &&
+          (idx === 0 || idx >= _sixRingStart)) {
+        var _sixStep = /^(InnerLoop|Inner)$/.test(_loopDirection) ? -1 : 1;
+        toIdx = idx === 0 ? (_sixStep > 0 ? _sixRingStart : points.length - 1)
+          : (_sixStep > 0 && idx === points.length - 1 ? 0
+            : (_sixStep < 0 && idx === _sixRingStart ? 0 : idx + _sixStep));
+      } else if (_closedLoop && /^(InnerLoop|Inner|OuterLoop|Outer)$/.test(_loopDirection)) {
         // A loop has no terminal index. Preserve ODPT loop direction through
         // the last/first station boundary instead of clamping at either end.
         // The station order defines the positive route direction; laneSign keeps
