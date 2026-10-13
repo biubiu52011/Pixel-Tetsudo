@@ -25,6 +25,15 @@ const estimatorSource=estimator;
 const fusionSource=fusion;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
+assert(/serviceTime:\s*_snapshotServiceTime/.test(fusion) &&
+       /requireTrainNumberMatch:\s*true/.test(read("data/timetables/train-operation-evidence.js")),
+  "ODPT live mapping must admit only dated, exact train-number formation observations");
+assert(/timetableVehicleType:\s*_realtimeReferenceModel/.test(fusion) &&
+       /positionData\.vehicleFormationCandidates = _rtFormations/.test(fusion),
+  "ODPT train vehicle reference and dated formation must share the canonical resolver");
+assert(/_snapshotJstNow\.getUTCHours\(\)/.test(fusion) &&
+       /_serviceDayNow\.getUTCDate\(\)/.test(fusion),
+  "ODPT train evidence date must use JST rather than client device timezone");
 const tobuEvidence=read("data/timetables/tobu-limited-express-vehicle-evidence.js");
 assert(/TRAIN_VEHICLE_EVIDENCE_PROVIDERS/.test(tobuEvidence),"Tobu exact-train evidence must register through generic provider registry");
 assert(/id:\s*"tobu-official-limited-express-2026"/.test(tobuEvidence),"vehicle evidence provider must expose stable provenance id");
