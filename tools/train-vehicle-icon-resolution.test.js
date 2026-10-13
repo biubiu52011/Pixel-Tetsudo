@@ -432,10 +432,14 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   const estimatorSrc = read('js/train-position-estimator.js');
   const edge = read('supabase/functions/train-runs/index.ts');
   const adapter = read('data/api/odpt-unified.js');
-  assert.ok(edge.includes('vehicle_type_label: boundaryVehicle.get(t.id) || t.vehicle_type_label || null'),
-    'Edge SQL response must retain the revised reference model');
-  assert.ok(adapter.includes('vehicleType:run.vehicle_type_label||null'),
-    'ODPT-shaped SQL adapter must pass the reference model unchanged');
+  assert.ok(edge.includes('vehicle_type_label: exactScheduleType || null') &&
+    edge.includes('vehicle_type_candidates: t.vehicle_type_label || null') &&
+    edge.includes('vehicle_mapping_level: scheduleLevel'),
+    'Edge SQL response must return verified scheduled model separately from candidate labels');
+  assert.ok(adapter.includes('run.vehicle_mapping_level==="dated_schedule_rule"') &&
+    adapter.includes('run.vehicle_mapping_level==="verified_scheduled_boundary"') &&
+    adapter.includes('vehicleType:(run.vehicle_mapping_level==='),
+    'ODPT-shaped SQL adapter must only promote verified scheduled types, never candidate labels');
 
   let hh = 10, mm = 24, operationLookups = 0;
   class FixedDate extends Date {
@@ -477,6 +481,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
           'odpt:arrivalTime': arrival}
       ],
       vehicleType: model, _positionSource: 'supabase-train-run',
+      _sqlVehicleMappingLevel: 'verified_scheduled_boundary',
       _serviceDate: '2026-10-12'
     };
   }
