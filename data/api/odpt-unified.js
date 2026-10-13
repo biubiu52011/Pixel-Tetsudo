@@ -649,6 +649,7 @@
     var TRAIN_RUN_CACHE_ENDPOINT = "https://pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs";
     var _trainRunCache = {};
     var _trainRunInflight = {};
+    var _trainRunLastWarning = {};
     function _serviceDateJst() {
         var now = new Date();
         var parts = new Intl.DateTimeFormat("en-CA", {
@@ -730,6 +731,9 @@
             "_nextTimetableIds":Array.isArray(run.next_timetable_ids)?run.next_timetable_ids:[],
             "_timetableProvenance":run.timetable_provenance||"",
             "_sourceRevisionDate":run.source_revision_date||null,
+            // Structural timetable completeness is not current-diamond validity.
+            "_timetableValidity":run.timetable_validity||"undated_not_current_verified",
+            "_timetableDateVerified":run.timetable_date_verified===true,
             "_canonicalTrainTimetableId":run.canonical_timetable_id||null,
             "_sqlVehicleMappingLevel":run.vehicle_mapping_level||"unresolved",
             "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
@@ -823,7 +827,16 @@
             }).filter(Boolean):[];
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
-        }).catch(function(){ return []; }).finally(function(){ clearTimeout(timeout); delete _trainRunInflight[key]; });
+        }).catch(function(err){
+            // Keep the user-visible fallback, but do not disguise a failed SQL
+            // request as a confirmed no-service timetable. Throttle diagnostics.
+            var now=Date.now();
+            if(now-(_trainRunLastWarning[key]||0)>60000){
+                _trainRunLastWarning[key]=now;
+                console.warn("[ODPT] SQL timetable request failed:",lineId,serviceDate,err&&err.message);
+            }
+            return [];
+        }).finally(function(){ clearTimeout(timeout); delete _trainRunInflight[key]; });
         return _trainRunInflight[key];
     }
 
