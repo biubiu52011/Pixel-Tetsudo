@@ -17,7 +17,10 @@
   }
   function op(n){
     var raw=String(n||"").toUpperCase().trim();
-    var m=raw.match(/(?:^|[^0-9])(\d{1,2})([TKNH])(?:\([^)]*\))?$/);
+    // ODPT uses full service numbers such as 1849T; the sourced operation
+    // table uses the final two digits (49T). Do not infer the vehicle from
+    // the leading service/hour digits.
+    var m=raw.match(/^(?:A|B)?\d{0,2}(\d{2})([TKNH])(?:\([^)]*\))?$/);
     return m?{number:parseInt(m[1],10),letter:m[2]}:null;
   }
   function resolveEvidence(trainNumber,ctx){
