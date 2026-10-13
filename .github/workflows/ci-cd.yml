@@ -66,6 +66,30 @@ jobs:
                 });
               }
               console.log("TOEI_PUBLIC_CONTRACT",JSON.stringify({total:data.length,byRailway:lines}));
+              const fs=require('fs'),vm=require('vm'),window={};
+              vm.runInNewContext(fs.readFileSync('js/train-vehicle.js','utf8'),{window,console:{debug(){},log(){}}},{filename:'train-vehicle.js'});
+              const status={};
+              for(const record of data){
+                const short=String(record["odpt:railway"]||"").split('.').pop();
+                const ctx={
+                  operator:String(record["odpt:operator"]||"").replace('odpt.Operator:',''),
+                  lineId:short,railway:record["odpt:railway"],
+                  trainOwner:record["odpt:trainOwner"]||'',
+                  trainNumber:record["odpt:trainNumber"]||'',
+                  realtimeVehicleType:record["odpt:vehicleType"]||''
+                };
+                const v=window.TrainVehicle.resolve(ctx);
+                const kind=window.TrainVehicle.selectMarkerArtwork({vehicleResolvedUpstream:v.identityStatus==='EXACT',vehicleIconPath:v.iconPath},false);
+                const key=short+'|'+String(ctx.trainOwner).replace('odpt.Operator:','');
+                const stat=status[key]||(status[key]={n:0,exact:0,vehiclePNG:0,missingPNG:0,models:[],examples:[]});
+                stat.n++;
+                if(v.identityStatus==='EXACT')stat.exact++;
+                if(kind.kind==='vehicle')stat.vehiclePNG++;
+                if(v.identityStatus==='EXACT'&&!v.iconPath)stat.missingPNG++;
+                if(v.name&&!stat.models.includes(v.name))stat.models.push(v.name);
+                if(stat.examples.length<2)stat.examples.push({number:ctx.trainNumber,status:v.identityStatus,icon:v.iconPath||null});
+              }
+              console.log("TOEI_PUBLIC_VEHICLE_RESOLUTION",JSON.stringify(status));
             }catch(e){console.log("TOEI_PUBLIC_UNAVAILABLE",e.name||"error",String(e.message||"").slice(0,120))}
           })();
           NODE
