@@ -144,7 +144,13 @@ function _trainIdentityKey(p, lineId) {
   var id = p.runningChainId || p.trainId ||
     p.sourceTrainId || p.timetableObjectId || "";
   id = String(id).trim();
-  return id;
+  if (!id) return "";
+  // A running chain identifies one physical service across companies, not one
+  // interchangeable position record. A Metro SQL segment and a JR live segment
+  // must remain separately addressable when a through-line view includes both.
+  // Within one origin line, realtime still wins over a duplicate timetable row.
+  var segmentLineId = p.fusionLineId || lineId || "";
+  return segmentLineId + "::" + id;
 }
 
 function _positionCompleteness(p) {
