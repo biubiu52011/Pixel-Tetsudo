@@ -64,16 +64,29 @@ jobs:
                   if(found.length)snippets[needle]=found;
                 }
                 console.log('TOEI_BUNDLE_CONTEXTS',JSON.stringify(snippets).slice(0,10500));
+                if(scriptURL.pathname.endsWith('/D4MSdADB.js')){
+                  for(const word of ['mappedParams(){','class xt','baseURL','apiBase','apiUrl','API_URL','api.toei','/train/positions']){
+                    let k=js.indexOf(word);
+                    if(k>=0)console.log('TOEI_CORE_REQUEST_DETAIL',JSON.stringify({word,excerpt:js.slice(Math.max(0,k-190),k+410).replace(/[A-Za-z0-9_-]{45,}/g,'[token]')}));
+                  }
+                }
                 if(scriptURL.pathname.endsWith('/CV3z3yxR.js')){
                   console.log('TOEI_ROUTE_MODULE_IMPORTS',js.slice(0,850).replace(/[A-Za-z0-9_-]{40,}/g,'[token]'));
                   for(const word of ['class Ht extends','new Ht(','/train/positions/','arakawaLapping','trainPositions','useFetch','train_positions_']){
                     const k=js.indexOf(word);
                     if(k>=0)console.log('TOEI_ROUTE_DETAIL',JSON.stringify({word,excerpt:js.slice(Math.max(0,k-350),k+600).replace(/[A-Za-z0-9_-]{50,}/g,'[token]')}));
                   }
-                  const csvURL=new URL('/setting-train-position/train_positions_5.csv',url);
+                  const csvURL=new URL('/setting-train-position/train_positions_sakura.csv',url);
                   const csvResp=await fetch(csvURL,{signal:AbortSignal.timeout(12000)});
                   const csv=await csvResp.text();
                   console.log('TOEI_CONFIG_CSV',JSON.stringify({status:csvResp.status,length:csv.length,first:csv.split('\\n').slice(0,3).map(x=>x.slice(0,160))}));
+                  const apiURL=new URL('/train/positions/5?lang=ja',url);
+                  const apiResp=await fetch(apiURL,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(12000)});
+                  const apiRaw=await apiResp.text();
+                  let body;
+                  try{body=JSON.parse(apiRaw)}catch{}
+                  console.log('TOEI_STATIC_API_TRIAL',JSON.stringify({status:apiResp.status,type:apiResp.headers.get('content-type'),length:apiRaw.length,topKeys:body&&Object.keys(body).slice(0,20),positions:body?.positions&&Object.keys(body.positions).slice(0,5),trainCount:body?.trains?.length}));
+
                 }
               }
             }catch(e){console.log('TOEI_PAGE_UNAVAILABLE',e.name||'error');}
