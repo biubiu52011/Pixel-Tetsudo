@@ -69,6 +69,17 @@ jobs:
                 return {number,op,vehicleStatus:result.identityStatus,hasIcon:!!result.iconPath,markerKind:image.kind};
               });
               console.log('ODPT_ARAKAWA_DIAG',JSON.stringify({totalToei:all.length,arakawa:rows.length,samples}));
+              console.log('ODPT_ARAKAWA_FIELD_AUDIT',JSON.stringify({
+                fields:Object.keys(rows[0]||{}).sort(),
+                identitySamples:rows.slice(0,3).map(x=>({
+                  trainNumber:x['odpt:trainNumber']||null,
+                  train:x['odpt:train']||null,
+                  sameAs:x['owl:sameAs']||null,
+                  vehicleType:x['odpt:vehicleType']||null,
+                  carNumber:x['odpt:carNumber']||x['odpt:vehicleCarNumber']||null,
+                  owner:x['odpt:trainOwner']||null
+                }))
+              }));
             }catch(e){console.log('ODPT_PROBE_UNAVAILABLE',String(e?.message||e).replace(/acl:consumerKey=[^&\\s]+/g,'[redacted]'))}
           })();
           NODE
