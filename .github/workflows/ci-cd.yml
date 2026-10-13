@@ -87,6 +87,24 @@ jobs:
                   try{body=JSON.parse(apiRaw)}catch{}
                   console.log('TOEI_STATIC_API_TRIAL',JSON.stringify({status:apiResp.status,type:apiResp.headers.get('content-type'),length:apiRaw.length,topKeys:body&&Object.keys(body).slice(0,20),positions:body?.positions&&Object.keys(body.positions).slice(0,5),trainCount:body?.trains?.length}));
                   console.log('TOEI_HTML_CONFIG',JSON.stringify({nuxtData:html.includes('__NUXT_DATA__'),apiStrings:[...new Set(html.match(/https?:[^<" ]+/g)||[])].map(x=>x.slice(0,105)).filter(x=>/toei|navitime|api/i.test(x)).slice(0,12)}));
+                  for(const requestURL of [
+                    'https://toei.navitime.biz/train/positions/5?lang=ja',
+                    'https://toei.navitime.biz/api/train/positions/5?lang=ja'
+                  ]){
+                    try {
+                      const ar=await fetch(requestURL,{headers:{Accept:'application/json'},signal:AbortSignal.timeout(12000)});
+                      const raw=await ar.text();
+                      let result;try{result=JSON.parse(raw)}catch{}
+                      const trains=Array.isArray(result?.trains)?result.trains:[];
+                      console.log('TOEI_FIRST_PARTY_API',JSON.stringify({
+                        host:new URL(requestURL).host,path:new URL(requestURL).pathname,
+                        status:ar.status,type:ar.headers.get('content-type'),
+                        cors:ar.headers.get('access-control-allow-origin'),
+                        length:raw.length,keys:result?Object.keys(result).slice(0,18):[],
+                        trainCount:trains.length,firstTrainKeys:trains[0]?Object.keys(trains[0]).slice(0,20):[]
+                      }));
+                    }catch(e){console.log('TOEI_FIRST_PARTY_API_UNAVAILABLE',e.name);}
+                  }
 
                 }
               }
