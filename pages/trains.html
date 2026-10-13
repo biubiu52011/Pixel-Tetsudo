@@ -6,7 +6,7 @@
 
 <meta charset="UTF-8">
 
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.shonan-monorail.co.jp https://chiba-monorail.co.jp; font-src 'self'; connect-src 'self' https://api-challenge.odpt.org https://api.odpt.org https://r.jina.ai https://pnupwfmgbtxqhpzsrhfn.supabase.co; upgrade-insecure-requests; frame-src https://www.openstreetmap.org; object-src none;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://www.shonan-monorail.co.jp https://chiba-monorail.co.jp; font-src 'self'; connect-src 'self' https://api-challenge.odpt.org https://api.odpt.org https://r.jina.ai https://pnupwfmgbtxqhpzsrhfn.supabase.co; upgrade-insecure-requests; frame-src https://www.openstreetmap.org https://static.toei.navitime.biz; object-src none;">
 
 <meta name="color-scheme" content="light"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 
@@ -66,6 +66,15 @@
 
 <div id="trainsDetailTitle" class="detail-title">
 
+</div>
+
+<div id="trainsOfficialVehicleView" class="tp-official-vehicle-view hidden">
+  <details>
+    <summary>公式車両アイコン・実車の形式を見る（都電荒川線）</summary>
+    <p>公式サイトの独立した走行位置情報です。ODPTの運行番号と実車番号を推測して結び付けるものではありません。</p>
+    <iframe title="東京都交通局・都電荒川線公式車両位置" loading="lazy" referrerpolicy="no-referrer" data-official-vehicle-frame></iframe>
+    <a href="https://static.toei.navitime.biz/train-position/?lineId=5&amp;lang=ja" target="_blank" rel="noopener noreferrer">公式ページで開く ↗</a>
+  </details>
 </div>
 
 <div id="trainsMapContainer" class="tp-line-map">
