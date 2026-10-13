@@ -8,6 +8,13 @@
 - 测试：`train-position-evidence-regression.test.js` 新增双列环布局、唯一匹配、空 trainId、未来时间戳 4 组断言；railway-browser-contract 26 pass、vehicle-icon/runinfo/performance 全 PASS，brace/arch/ci/home 4 个 Python guards PASS，`git diff --check` 通过。trains.html 的 trains-geometry/trains-render 版本升至 4.3.1197。
 - 未提交/推送/部署；先前本地 TokyuMeguro-manual.js / normalization backlog / PROGRESS 部署记录保留。真实浏览器视觉由用户人工确认（项目规则：禁止系统截图确认）。
 
+## 2026-10-13 JST — realtime 实机体检与 ODPT 命名空间修复（REVIEW）
+
+- 实机体检（桌面浏览器 + DevTools）确认：线上 trains.html 三脚本均为 4.3.1197 且 SHA256 与本地一致；山手线双列环（#Yamanote）左右站名、内环/外环方向标签（环带走廊）、换乘字母（JA/JS/JB/M/S/E/KD/OH/JK/JC/G/JO/JE/JU/JT/Y）均无遮挡；京叶线（#Keiyo）站点/换乘字母正常；console 无 JS 错误；运行情报弹窗（埼京线·川越线）直接显示 ODPT text 原文（平常運転，更新 16:12）。湘南单轨官网外部状态图 2 个 404 属 runinfo 降级，非本次范围。
+- 体检发现并修复唯一匹配回归（提交 `55de0918`）：ODPT `odpt:railway` 带运营商命名空间前缀（如 `JR-East.Joban`），而 `_railwayCodeLines` 的 key 是无前缀短名（`Joban`），导致修复前唯一匹配永远 miss、京叶线/常磐线位置落入 ambiguous 分支（console 曾出现 1473E/JR-East.Keiyo、2394M/JR-East.Joban 两例）。修复：`var _shortRailway = String(railwayName).split(".").pop();` 后再查 `_railwayCodeLines[_shortRailway]` 与 `_exactMatches`；映射命中如 `JR-East.Joban` → `JobanMain`（常磐線本線），未映射短名走精确匹配（`Keiyo` → 京叶线）。测试补命名空间规范化断言；`train-position-evidence-regression.test.js` 全 PASS。
+- 部署确认：55de0918 推送后线上 data-fusion.js SHA256 与本地 match=True 且含 `_shortRailway`；页面刷新后 console ambiguous 日志消失，新 build 以 `?build_ead08907a08956` 出现在 odpt-unified.js 等资源 URL。远程 main HEAD = 55de0918a267d6ef411e250086ead08907a08956，本地与 origin/main 0 ahead / 0 behind。
+- 视觉验收由用户人工确认（项目规则：禁止系统截图确认；诊断截图用完即删）。
+
 ## 2026-10-13 JST — mapping cleanup and snapshot validity optimization
 
 - Deployment verified: `6f0bbf801d530f20395ca126eb0191eb57c3905b`; CI/CD `38348625461`, Pages `38348624436`, Release Guards `38348625389` and canonical sync `38348625381` all succeeded. Published trains HTML uses this build, and all three changed runtime scripts match local SHA256. Deployment audit saved as `mapping-optimization-deployment.json` outside the repository.
