@@ -615,6 +615,28 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   assert.strictEqual(operationLookups, 0,
     'dated operation/formation numbers must not gate SQL reference model icons');
 
+  // A source-dated operation-owner mapping is equally eligible for its
+  // already-certified model-exact PNG. It must not be dropped merely because
+  // the SQL mapping level is not "dated_schedule_rule".
+  const ownerArtwork = 'images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png';
+  const ownerRun = sqlRinkai('OWNER1', 'OwnerCertifiedOnlyModel', '10:30', '10:35', 'ShinKiba', 'Shinonome');
+  ownerRun._sqlVehicleMappingLevel = 'dated_operation_owner';
+  ownerRun._sqlVehicleArtworkPath = ownerArtwork;
+  windowForEstimate.TrainPositionEstimator.registerManualTimetable('Rinkai', rows.concat(ownerRun));
+  hh = 10; mm = 32;
+  const ownerEstimate = getRunningTrain();
+  assert.strictEqual(ownerEstimate.trainNumber, 'OWNER1');
+  assert.strictEqual(ownerEstimate.vehicleIdentityStatus, 'EXACT');
+  assert.strictEqual(ownerEstimate.vehicleIconPath, '../' + ownerArtwork);
+  assert.strictEqual(windowForEstimate.TrainVehicle.selectMarkerArtwork(ownerEstimate, false).kind, 'vehicle');
+  // No promotion of an unverified candidate merely because that same artwork exists.
+  ownerRun._sqlVehicleMappingLevel = 'source_single_type_candidate';
+  windowForEstimate.TrainPositionEstimator.registerManualTimetable('Rinkai', rows.concat(ownerRun));
+  const candidateEstimate = getRunningTrain();
+  assert.strictEqual(candidateEstimate.vehicleIconPath, '',
+    'candidate-only model must not gain the operation-owner PNG');
+  console.log('Dated operation-owner SQL -> exact PNG, candidate -> neutral: 2 PASS');
+
   assert.strictEqual(windowForEstimate.TrainVehicle.resolve({
     timetableVehicleType: '70-000形 / 71-000形'
   }).iconPath, '', 'unresolved SQL candidate must not invent a model');
