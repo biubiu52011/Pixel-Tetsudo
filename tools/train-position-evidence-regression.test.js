@@ -12,6 +12,9 @@ assert(fusion.includes('if (_mappedMatches.length === 1) targetLine = _mappedMat
        fusion.includes('if (_exactMatches.length === 1) targetLine = _exactMatches[0];') &&
        !fusion.includes('mappedLids.indexOf(ml.lid) >= 0) { targetLine = ml; break; }'),
   "ODPT railway ownership must not choose the first matching segment on an ambiguous station");
+assert(fusion.includes('var _shortRailway = String(railwayName).split(".").pop();') &&
+       fusion.includes('_railwayCodeLines[_shortRailway]'),
+  "ODPT railway namespace prefix must be normalized before unique-match lookup");
 assert(fusion.includes('var existingIdx = trainId && _linePositionIndex.has(trainId)') &&
        fusion.includes('if (trainId) _linePositionIndex.set(trainId, posMap[lid].length);'),
   "ODPT records with missing source train identity must not overwrite each other");

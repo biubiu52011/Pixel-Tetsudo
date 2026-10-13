@@ -1086,7 +1086,11 @@
               // v4.3.437: 先用 LINE_RAILWAY_CODE 反查 odpt railway 短名 → 项目线 key 列表
               // （如 SaikyoKawagoe→[Saikyo,Kawagoe]、Kawagoe→[KawagoeWest]），集合匹配比
               // 子串猜测更准——避免川越〜高麗川的 Kawagoe 数据错配到大宮〜川越段。
-              var mappedLids = _railwayCodeLines[railwayName] || [];
+              // ODPT railway codes arrive with an operator namespace prefix
+              // ("JR-East.Joban") while LINE_RAILWAY_CODE stores bare short
+              // names ("Joban"). Normalize to the short name for lookup.
+              var _shortRailway = String(railwayName).split(".").pop();
+              var mappedLids = _railwayCodeLines[_shortRailway] || [];
               // The ODPT railway-code mapping can span several project lines.
               // Shared stations cannot determine which segment owns a train.
               // Choose the line only when this source has one unique match.
@@ -1095,7 +1099,7 @@
               });
               if (_mappedMatches.length === 1) targetLine = _mappedMatches[0];
               if (!targetLine && mappedLids.length === 0) {
-                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === railwayName; });
+                var _exactMatches = matchingLines.filter(function(ml) { return ml.lid === _shortRailway; });
                 if (_exactMatches.length === 1) targetLine = _exactMatches[0];
               }
             }
