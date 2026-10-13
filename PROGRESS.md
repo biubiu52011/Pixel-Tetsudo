@@ -1,5 +1,16 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-13 JST — SQL 已核验车辆 PNG 路径断链修复（REVIEW）
+
+- 根因：`train-runs` 经 `train_timetable_source_resolution` 已传回 source-dated `dated_operation_owner` 车型与 `vehicle_artwork_path`，但 `js/train-position-estimator.js` 的 `resolveTrainRunIdentity` 和 `matchRealtimeVehicleEvidence` 只让 `dated_schedule_rule` 携带图片。既有 TrainVehicle 解析器因此收到确认车型却丢失可用 PNG，渲染退化为中性点。
+- SQL 只读核验：`train_timetable_vehicle_mappings` 中 `dated_operation_owner` 64 个车型映射，`train_timetable_vehicle_artwork` 均为已登记的 `相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png`；GitHub 列车图库 468 张 PNG、Supabase 467 条资产登记、38 个编成图标链接，SQL 引用路径均存在于 Git 树。
+- 修复：仅扩展现有 `js/train-position-estimator.js` 的 3 个 source-dated PNG 许可条件，从仅 `dated_schedule_rule` 改为允许 `dated_operation_owner`。模型仍必须是单一来源认证的同一 identity，路径仍须经过 `TrainVehicle.resolve` 的 exact-model + gallery path 检查；不把 `source_single_type_candidate` 升级成准确车型，不引入新脚本/映射表，也不更改 SQL/RLS/静态拓扑。
+- 提交：`5e847bae`（代码）；`20d1837f`、`292e6a80`（补充并隔离已有 `tools/train-vehicle-icon-resolution.test.js` 的 source-dated owner/候选负例回归）。
+- 测试：最新版 `292e6a80` 的 GitHub Release Guards 已成功，CI Validate 已成功。GitHub Pages 的最终部署及交互可视化仍需以最新 Actions 与真实浏览器检查为准；无外网 DNS 时不伪称生产 PNG HTTP 200。
+- 限制：本次恢复的是已有充分证据的 PNG 通路，不代表 223 条线路的每一趟列车都能断言具体车型。无证据列车保留灰点，不凭运营线路、车次或图片名称猜测。
+- 后续：若用户所指为其它具体线路仍不显示，按该线路的 `vehicleIdentityStatus`、`vehicleIconPath`、浏览器 SVG image/error 与 ODPT 源记录排查，禁止批量填充猜测车型。
+
+
 ## 2026-10-13 JST — GitHub × Supabase 结构体检整改（PARTIAL）
 
 - 范围：只修复已确认且不改变线路事实/身份/RLS 的问题。没有批量删除手动时刻表、迁移 pg_net、覆盖已验证车型或复活第二套位置推定。
