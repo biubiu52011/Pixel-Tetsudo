@@ -464,9 +464,13 @@ test('planned timetable candidates retain their source grade without becoming as
   const src = fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8');
   assert.match(src, /_sqlSourceCandidates = tt\._positionSource === 'supabase-train-run'/);
   assert.match(src, /plannedVehicleCandidates: _plannedCandidates\.slice\(\)/);
-  assert.match(src, /'historical-planned-vehicle-candidates-unverified'/);
+  assert.match(src, /vehicleIdentityStatus: vehResult\.identityStatus \|\| 'UNKNOWN'/);
   assert.match(src, /vehicleIconPath: vehResult\.iconPath \|\| ''/);
   const client = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
   assert.match(client, /"_planSource":run\.plan_source/);
   assert.match(client, /getTrainRunStatus: getTrainRunStatus/);
+  const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(edge, /ownerFromUrn \+ "\\u0000" \+ String\(t\.vehicle_type_label/);
+  assert.match(edge, /candidateImages\.length === 1 \? candidateImages\[0\] : null/);
+  assert.match(src, /plannedVehicleCandidateArtworkPath: tt\._positionSource === 'supabase-train-run'/);
 });
