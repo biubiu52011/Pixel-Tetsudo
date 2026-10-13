@@ -65,7 +65,7 @@ jobs:
                 }
                 console.log('TOEI_BUNDLE_CONTEXTS',JSON.stringify(snippets).slice(0,10500));
                 if(scriptURL.pathname.endsWith('/D4MSdADB.js')){
-                  for(const word of ['mappedParams(){','class xt','baseURL','apiBase','apiUrl','API_URL','api.toei','/train/positions']){
+                  for(const word of ['mappedParams(){','return Hy(n)','Hy=','function Hy','apiBase','apiUrl','API_URL','api.toei','/train/positions','_nuxt','/api/','apiEndpoint','API_HOST']){
                     let k=js.indexOf(word);
                     if(k>=0)console.log('TOEI_CORE_REQUEST_DETAIL',JSON.stringify({word,excerpt:js.slice(Math.max(0,k-190),k+410).replace(/[A-Za-z0-9_-]{45,}/g,'[token]')}));
                   }
@@ -86,6 +86,7 @@ jobs:
                   let body;
                   try{body=JSON.parse(apiRaw)}catch{}
                   console.log('TOEI_STATIC_API_TRIAL',JSON.stringify({status:apiResp.status,type:apiResp.headers.get('content-type'),length:apiRaw.length,topKeys:body&&Object.keys(body).slice(0,20),positions:body?.positions&&Object.keys(body.positions).slice(0,5),trainCount:body?.trains?.length}));
+                  console.log('TOEI_HTML_CONFIG',JSON.stringify({nuxtData:html.includes('__NUXT_DATA__'),apiStrings:[...new Set(html.match(/https?:[^<" ]+/g)||[])].map(x=>x.slice(0,105)).filter(x=>/toei|navitime|api/i.test(x)).slice(0,12)}));
 
                 }
               }
