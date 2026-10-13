@@ -247,9 +247,39 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     }
   }
 
+  // Project a *candidate* generic picture only when the historical source
+  // names one model AND the gallery has exactly one generic image for the
+  // same operator + same vehicle model. This is NOT verified current stock,
+  // a carset or an artwork override; TrainVehicle decides definitive icons.
+  const candidateModels = [...new Set(templates.filter((t: any) => {
+    const m = sourceResolution.get(t.id);
+    return m?.mapping_level === "source_single_type_candidate" &&
+      !!String(t.vehicle_type_label || "").trim() &&
+      !String(t.vehicle_type_label).includes("/");
+  }).map((t: any) => String(t.vehicle_type_label).trim()))];
+  const candidateArtworkByOwnerModel = new Map<string, string[]>();
+  for (let i = 0; i < candidateModels.length; i += 50) {
+    const { data: imageRows, error: imageError } = await db.from("vehicle_image_assets")
+      .select("operator,vehicle_type,image_path")
+      .eq("is_generic", true).eq("asset_status", "available")
+      .in("vehicle_type", candidateModels.slice(i, i + 50));
+    if (imageError) throw imageError;
+    for (const image of imageRows || []) {
+      const key = String(image.operator) + "\u0000" + String(image.vehicle_type).trim();
+      const paths = candidateArtworkByOwnerModel.get(key) || [];
+      if (image.image_path && !paths.includes(image.image_path)) paths.push(image.image_path);
+      candidateArtworkByOwnerModel.set(key, paths);
+    }
+  }
+
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     const mapped = sourceResolution.get(t.id);
+    const ownerFromUrn = /^odpt\.Railway:([^.]+)\./.exec(String(t.railway_urn || ""))?.[1] || "";
+    const candidateKey = ownerFromUrn + "\u0000" + String(t.vehicle_type_label || "").trim();
+    const candidateImages = mapped.mapping_level === "source_single_type_candidate"
+      ? (candidateArtworkByOwnerModel.get(candidateKey) || []) : [];
+    const candidateArtwork = candidateImages.length === 1 ? candidateImages[0] : null;
     const ruleType = (mapped.mapping_level === "dated_schedule_rule" || mapped.mapping_level === "dated_operation_owner") ? String(mapped.vehicle_type || "") : "";
     const verifiedBoundaryType = String(boundaryVehicle.get(t.id) || "");
     const conflict = !!(ruleType && verifiedBoundaryType && ruleType !== verifiedBoundaryType);
@@ -284,6 +314,9 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       // Only decisive, source-dated timetable rules may identify a planned type.
       vehicle_type_label: exactScheduleType || null,
       vehicle_type_candidates: t.vehicle_type_label || null,
+      vehicle_candidate_artwork_path: candidateArtwork,
+      vehicle_candidate_artwork_status: candidateArtwork
+        ? "historical-single-model-operator-generic-unverified" : null,
       vehicle_mapping_level: scheduleLevel,
       vehicle_evidence_source: ruleType && !conflict ? (mapped.mapping_level === "dated_operation_owner" ? "database-dated-operation-owner" : "database-dated-schedule-rule")
         : verifiedBoundaryType && !conflict ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
