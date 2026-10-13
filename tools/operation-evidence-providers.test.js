@@ -193,3 +193,37 @@ console.log("operation evidence providers: PASS");
   console.log("ODPT number -> existing model -> certified PNG -> marker: 8 PASS");
   console.log("ODPT number -> existing line-script -> canonical model: 7 PASS");
 })();
+
+
+(function(){
+  // Nippori-Toneri is Toei-operated but is NOT among the Toei odpt:Train
+  // live railways confirmed by the public feed. SQL manual rows carry
+  // 330形 as source_single_type_candidate, NOT actual vehicle confirmation.
+  // Ensure that only an explicit exact model can select one of the three
+  // existing PNGs, and line/operator alone cannot select 330形 by default.
+  const sandbox={window:{},console:{debug(){}}};
+  vm.createContext(sandbox);
+  vm.runInContext(fs.readFileSync("js/train-vehicle.js","utf8"),sandbox);
+  const resolve=sandbox.window.TrainVehicle.resolve;
+  const marker=sandbox.window.TrainVehicle.selectMarkerArtwork;
+  const base={lineId:"Nippori_Toneri",operator:"Toei",trainNumber:"1050A",serviceDate:"2026-10-13"};
+  const unresolved=resolve(base);
+  assert.strictEqual(unresolved.identityStatus,"UNKNOWN",
+    "Nippori-Toneri operation number alone cannot infer a 330形");
+  assert.strictEqual(unresolved.iconPath,"");
+  const expected=[
+    ["日暮里・舎人ライナー300形","都営地下鉄_300形.png"],
+    ["日暮里・舎人ライナー320形","都営地下鉄_320形.png"],
+    ["日暮里・舎人ライナー330形","都営地下鉄_330形.png"]
+  ];
+  expected.forEach(([model,png])=>{
+    // The explicit realtimeVehicleType models verified evidence supplied by
+    // an external source; it must NOT come from SQL's candidate-only label.
+    const v=resolve({...base,realtimeVehicleType:model});
+    assert.strictEqual(v.identityStatus,"EXACT");
+    assert(v.iconPath.endsWith("/"+png),"no exact gallery PNG for "+model);
+    assert(fs.existsSync(v.iconPath.replace("../","")),model+" image file missing");
+    assert.strictEqual(marker({vehicleResolvedUpstream:true,vehicleIconPath:v.iconPath},false).kind,"vehicle");
+  });
+  console.log("Nippori-Toneri 3 verified models -> exact PNG, candidate-only stays neutral: 4 PASS");
+})();
