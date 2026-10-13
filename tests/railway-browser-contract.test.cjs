@@ -434,3 +434,21 @@ test('static railway cache follows the deployed build stamp and legacy version',
   assert.equal(version('https://example.test/data/core/db-loader.js?build=release-b'), 'release-b');
   assert.equal(version('https://example.test/data/core/db-loader.js?v=4.3.1194'), '4.3.1194');
 });
+
+test('first-party tram vehicle view is lazy and does not assign ODPT trip numbers to car PNGs', () => {
+  const html = read('pages/trains.html');
+  const controller = read('js/trains-page.js');
+  const css = read('css/trains.css');
+  assert.match(html, /id="trainsOfficialVehicleView" class="tp-official-vehicle-view hidden"/);
+  assert.match(html, /id="trainsOfficialVehicleFrame"|data-official-vehicle-frame/);
+  assert.match(html, /frame-src[^"]*https:\/\/static\.toei\.navitime\.biz/);
+  assert.match(html, /loading="lazy"[^>]*data-official-vehicle-frame/);
+  assert.match(html, /target="_blank" rel="noopener noreferrer"/);
+  assert.doesNotMatch(html, /data-official-vehicle-frame[^>]*src=/);
+  assert.match(controller, /_official\.classList\.toggle\("hidden", lineId !== "Arakawa"\)/);
+  assert.match(controller, /_officialDetails\.open && currentLine === "Arakawa"/);
+  assert.match(controller, /_frame\.setAttribute\("src", "https:\/\/static\.toei\.navitime\.biz\/train-position\/\?lineId=5&lang=ja"\)/);
+  assert.match(controller, /_frame\.removeAttribute\("src"\)/);
+  assert.doesNotMatch(controller, /fetch\([^)]*toei\.navitime/);
+  assert.match(css, /\.tp-official-vehicle-view iframe/);
+});
