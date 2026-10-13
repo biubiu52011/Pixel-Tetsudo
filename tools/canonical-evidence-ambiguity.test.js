@@ -33,4 +33,20 @@ assert.equal(resolve([ike],{serviceDate:"2026-04-17",operationCode:"A12",lineId:
  "40103F","canonical alias must come from SQL evidence-domain configuration");
 assert.equal(resolve([ike],{serviceDate:"2026-04-17",operationCode:"A12",lineId:"Tojo"},alias),null,
  "unrelated lines must never inherit another operator's observed carset");
+{
+ const sandbox={window:{},console:{debug(){}}};
+ vm.createContext(sandbox);vm.runInContext(code,sandbox);
+ const matches=sandbox.window.TrainOperationEvidence.matchesNetwork;
+ assert.equal(matches('seibu-shinjuku',{railway:'odpt.Railway:Seibu.Shinjuku'}),false);
+ assert.equal(matches('seibu-shinjuku',{railway:'odpt.Railway:Seibu.SeibuShinjuku'}),true);
+ assert.equal(matches('seibu-shinjuku',{lineId:'UnrelatedSeibuShinjuku'}),false,'suffix is not source identity');
+ sandbox.window.VEHICLE_NETWORK_ALIASES=[
+  ...Array.from({length:6},(_,i)=>({alias_key:'n'+(i+1),canonical_network_key:'n'+i,alias_scope:'exact'})).reverse(),
+  {alias_key:'n0',canonical_network_key:'n6',alias_scope:'exact'},
+  {alias_key:'ignored',canonical_network_key:'n0',alias_scope:'candidate'}];
+ assert.equal(matches('n0',{lineId:'n6'}),true,'deep aliases resolve without arbitrary pass limits');
+ assert.equal(matches('n0',{lineId:'ignored'}),false,'unverified aliases remain excluded');
+ sandbox.window.VEHICLE_NETWORK_ALIASES=[];
+ assert.equal(matches('n0',{lineId:'n6'}),false,'replaced snapshot invalidates matcher cache');
+}
 console.log("canonical evidence ambiguity tests: PASS");

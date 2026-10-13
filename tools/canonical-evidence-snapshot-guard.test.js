@@ -132,5 +132,7 @@ const jsFamily=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_FAMILY_RULES));
 assert.deepStrictEqual(jsFamily,snapshot.familyRules,"JSON and browser JS family-rule snapshots must match exactly");
 const jsReference=JSON.parse(JSON.stringify(sandbox.window.VEHICLE_REFERENCE_RULES));
 assert.deepStrictEqual(jsReference,snapshot.referenceRules,"JSON and browser JS reference-rule snapshots must match exactly");
+assert.deepStrictEqual(JSON.parse(JSON.stringify(sandbox.window.VEHICLE_CARSETS)),snapshot.carsets,
+  "JSON and browser JS car-number rosters must match exactly");
 
 console.log("canonical evidence snapshot guard: PASS ("+snapshot.records.length+" records)");

@@ -245,24 +245,48 @@ function resolveTodenArakawaLiveCar(ctx) {
 
 // Exact source-supplied physical IDs only. Public train numbers are never car
 // numbers here. Scope to the vehicle owner on through services, not the host line.
+let rosterSource = null;
+let rosterCars = Object.create(null);
+let rosterFormations = Object.create(null);
 function resolveRosterCar(ctx) {
-  var number = String(ctx.realtimeCarNumber || ctx.vehicleCarNumber || '').trim();
-  var formation = String(ctx.formationId || '').trim();
-  var owner = normOp(ctx.trainOwner || ctx.assignmentOperator || ctx.operator);
-  var day = String(ctx.serviceDate || '');
+  const number = String(ctx.realtimeCarNumber || ctx.vehicleCarNumber || '').trim();
+  const formation = String(ctx.formationId || '').trim();
+  const owner = normOp(ctx.trainOwner || ctx.assignmentOperator || ctx.operator);
+  const day = String(ctx.serviceDate || '');
   if ((!number && !formation) || !owner || !/^\d{4}-\d{2}-\d{2}$/.test(day)) return null;
-  var hits = (window.VEHICLE_CARSETS || []).filter(function(r) {
-    var rosterOwner = r.operator === '東京臨海高速鉄道' ? 'TWR' : normOp(r.operator);
-    return rosterOwner === owner && r.status === '運用中' && r.source_url &&
-      /^\d{4}-\d{2}-\d{2}$/.test(r.snapshot_date || '') && r.snapshot_date <= day &&
-      (!number || (Array.isArray(r.cars) && r.cars.indexOf(number) >= 0)) &&
-      (number || r.carset_id === formation);
+  const roster = window.VEHICLE_CARSETS;
+  if (roster !== rosterSource) {
+    rosterSource = roster;
+    rosterCars = Object.create(null);
+    rosterFormations = Object.create(null);
+    (Array.isArray(roster) ? roster : []).forEach(function(r) {
+      if (!r || !r.source_url || !r.vehicle_type || !r.carset_id ||
+          !/^\d{4}-\d{2}-\d{2}$/.test(r.snapshot_date || '')) return;
+      const rosterOwner = r.operator === '東京臨海高速鉄道' ? 'TWR' : normOp(r.operator);
+      if (!rosterOwner) return;
+      const formationKey = rosterOwner + '|' + r.carset_id;
+      (rosterFormations[formationKey] || (rosterFormations[formationKey] = [])).push(r);
+      (Array.isArray(r.cars) ? r.cars : []).forEach(function(car) {
+        const carKey = rosterOwner + '|' + car;
+        (rosterCars[carKey] || (rosterCars[carKey] = [])).push(r);
+      });
+    });
+  }
+  const scoped = (number ? rosterCars[owner + '|' + number] : rosterFormations[owner + '|' + formation]) || [];
+  const dated = scoped.filter(function(r) { return r.snapshot_date <= day; });
+  const latestDate = dated.reduce(function(latest,r) { return r.snapshot_date > latest ? r.snapshot_date : latest; },'');
+  const hits = dated.filter(function(r) { return r.snapshot_date === latestDate; });
+  // Resolve the newest applicable snapshot before checking active status.
+  // Otherwise a retired unit can silently fall back to an older active roster.
+  if (!hits.length || hits.some(function(r) { return r.status !== '運用中'; })) return null;
+  const identities = Object.create(null);
+  hits.forEach(function(r) {
+    const canonical = resolveCanonicalVehicle(r.vehicle_type);
+    identities[(canonical ? canonical.displayName : r.vehicle_type) + '|' + r.carset_id] = r;
   });
-  var identities = {};
-  hits.forEach(function(r) { identities[r.vehicle_type + '|' + r.carset_id] = r; });
-  var keys = Object.keys(identities);
+  const keys = Object.keys(identities);
   if (keys.length !== 1) return null;
-  var hit = identities[keys[0]];
+  const hit = identities[keys[0]];
   return {number:number,name:hit.vehicle_type,formationId:hit.carset_id,sourceUrl:hit.source_url};
 }
 

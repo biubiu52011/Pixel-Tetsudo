@@ -1035,7 +1035,7 @@
             stationKey = window.RuntimeConfig.STATION_ALIAS[stationKey];
           }
           var delayMin = t["odpt:delay"] != null ? (parseInt(t["odpt:delay"], 10) || 0) : 0;
-          var trainId = _realtimeSourceIdentity(t, op, railwayName);
+          var trainId = _realtimeSourceIdentity(t, top, railwayName);
           var trainNumber = String(t["odpt:trainNumber"] || t["odpt:train"] || "");
           var railDirection = t["odpt:railDirection"] || "";
           var directionName = "";

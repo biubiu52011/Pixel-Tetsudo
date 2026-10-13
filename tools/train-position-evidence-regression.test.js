@@ -364,7 +364,7 @@ assert(fusionSource.includes('_sources.indexOf("realtime") >= 0') &&
   'vehicle projection must preserve realtime evidence flags when the resolver converges multiple sources');
 assert(fusionSource.includes('_evSources.indexOf("realtime") < 0 && _evResolution.source !== "realtime"'),
   'positionless realtime vehicle evidence must use the canonical sources array rather than require a single-source resolver result');
-assert(fusionSource.includes('var trainId = _realtimeSourceIdentity(t, op, railwayName);') &&
+assert(fusionSource.includes('var trainId = _realtimeSourceIdentity(t, top, railwayName);') &&
        fusionSource.includes("record['owl:sameAs'] || record['odpt:train']") &&
        fusionSource.includes('var trainNumber = String(t["odpt:trainNumber"] || t["odpt:train"] || "");') &&
        fusionSource.includes('trainId: trainId,') &&

@@ -67,30 +67,42 @@
   function _evidenceNetworkToken(s) {
     return String(s || "").toLowerCase().replace(/[^a-z0-9]/g, "");
   }
+  let networkAliasSource = null;
+  let networkAliasEdges = Object.create(null);
+  let networkMatchesCache = Object.create(null);
   function _evidenceNetworkMatches(networkKey, ctx) {
     ctx = ctx || {};
-    var key = _evidenceNetworkToken(networkKey);
+    const key = _evidenceNetworkToken(networkKey);
     if (!key) return false;
-    var accepted = {};
-    accepted[key] = true;
-    var aliases = window.VEHICLE_NETWORK_ALIASES || [];
-    for (var pass = 0; pass < 3; pass++) {
-      aliases.forEach(function(row) {
-        if (!row || (row.alias_scope !== "evidence_domain" &&
-                     row.alias_scope !== "exact")) return;
-        if (accepted[_evidenceNetworkToken(row.canonical_network_key)]) {
-          var alias = _evidenceNetworkToken(row.alias_key);
-          if (alias) accepted[alias] = true;
-        }
+    const aliases = window.VEHICLE_NETWORK_ALIASES;
+    if (aliases !== networkAliasSource) {
+      networkAliasSource = aliases;
+      networkAliasEdges = Object.create(null);
+      networkMatchesCache = Object.create(null);
+      (Array.isArray(aliases) ? aliases : []).forEach(function(row) {
+        if (!row || (row.alias_scope !== 'evidence_domain' && row.alias_scope !== 'exact')) return;
+        const canonical = _evidenceNetworkToken(row.canonical_network_key);
+        const alias = _evidenceNetworkToken(row.alias_key);
+        if (canonical && alias) (networkAliasEdges[canonical] || (networkAliasEdges[canonical] = [])).push(alias);
       });
     }
+    let accepted = networkMatchesCache[key];
+    if (!accepted) {
+      accepted = Object.create(null);
+      accepted[key] = true;
+      const pending = [key];
+      for (let i = 0; i < pending.length; i++) {
+        (networkAliasEdges[pending[i]] || []).forEach(function(alias) {
+          if (!accepted[alias]) { accepted[alias] = true; pending.push(alias); }
+        });
+      }
+      networkMatchesCache[key] = accepted;
+    }
     return [ctx.lineId, ctx.railway].some(function(raw) {
-      var source = _evidenceNetworkToken(raw);
-      if (!source) return false;
-      return Object.keys(accepted).some(function(expected) {
-        return source === expected || (expected.length >= 6 &&
-          source.slice(-expected.length) === expected);
-      });
+      if (accepted[_evidenceNetworkToken(raw)]) return true;
+      // Parse the ODPT railway namespace; arbitrary suffixes are not identities.
+      const railway = String(raw || '').match(/^odpt\.Railway:[^.]+\.(.+)$/);
+      return !!(railway && accepted[_evidenceNetworkToken(railway[1])]);
     });
   }
 
@@ -454,6 +466,7 @@
 
 
   window.TrainOperationEvidence = {
+    matchesNetwork: _evidenceNetworkMatches,
     register: register,
     normalizeEvidence: normalizeEvidence,
     normalizeOperationCode: normalizeOperationCode,

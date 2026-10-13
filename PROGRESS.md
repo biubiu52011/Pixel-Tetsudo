@@ -1,6 +1,15 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-13 JST — mapping cleanup and snapshot validity optimization
+
+- Kept the existing scripts and shared data chain. Vehicle rosters now index owner/car and owner/formation, select the newest snapshot not after service day, then validate active status. Retired/status-conflicting records cannot revive an old active car; canonical alias duplicates converge. Snapshot replacement rebuilds indexes.
+- Evidence network matching caches the verified alias graph, handles deep/cyclic aliases, and parses ODPT railway namespaces explicitly. Removed arbitrary suffix matches; audit uses this exact shared matcher rather than a second alias implementation. Realtime fallback identity uses normalized operator scope.
+- Coverage audit now uses the estimator's Japan service date/calendar and separates historical from current eligible evidence: 223 lines audited, 35 with stored evidence, 17 with currently eligible rules on 2026-10-13 weekday. Eligibility still requires exact train/run matching; it does not certify every train or today's formation.
+- Extended existing tests for retirement, future snapshots, conflicting status, deep/cyclic aliases, cache replacement, suffix isolation and JSON/browser roster parity. 31 tools suites and 49 service-day/browser tests passed; four Python release guards and HTML/script verification passed. OCR delegation review includes changed runtime/audit and manually includes test files; unrelated Meguro/backlog changes preserved.
+
 ## 2026-10-13 JST — all-line vehicle mapping and deduplication
+
+- Deployment confirmed: `daf7b982be7035ce0a130b02b5a1514f8e07c16c` pushed to main. CI/CD `38347461263`, Release Guards `38347461260`, canonical sync `38347461271`, Pages `38347461046` all succeeded. Published HTML points to this build; runtime/evidence/05 shuttle PNG match local hashes. Final service-day/browser total: 49 tests passed.
 
 - No new project scripts. Shared `TrainVehicle` now resolves source-supplied car/formation IDs against sourced SQL carsets, scoped to owner and snapshot date. Physical identity outranks planned references; contradictory physical/model evidence blocks PNG selection.
 - Existing canonical exporter admits every source/date/calendar-complete network, instead of Saikyo only: 2,660 references (Saikyo 826, Chiyoda–Joban–Odakyu 1,593, Odakyu main 241). The 67 Tobu rows without calendar remain excluded from this provider; existing Tobu evidence stays intact. Added 8 TWR carsets / 80 car IDs through the Supabase read-only connector export, without exposing credentials.

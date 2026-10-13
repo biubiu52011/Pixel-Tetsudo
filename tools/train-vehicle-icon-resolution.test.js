@@ -28,6 +28,16 @@ function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
   const roster=ctx.window.VEHICLE_CARSETS;
   ctx.window.VEHICLE_CARSETS=roster.concat({...roster[4],carset_id:'conflicting'});
   assert.strictEqual(resolve({...base,timetableVehicleType:''}).identityStatus,'UNKNOWN');
+  const physical={...base,timetableVehicleType:''};
+  const newer={...roster[4],snapshot_date:'2026-10-14',status:'廃車'};
+  ctx.window.VEHICLE_CARSETS=roster.concat(newer);
+  assert.strictEqual(resolve(physical).name,'東京臨海高速鉄道71-000形','future roster must not rewrite past identity');
+  assert.strictEqual(resolve({...physical,serviceDate:'2026-10-15'}).identityStatus,'UNKNOWN','retired car must not fall back to older active snapshot');
+  assert.strictEqual(resolve({...physical,realtimeCarNumber:'',formationId:'Z11',formationCandidates:['Z11'],serviceDate:'2026-10-15'}).identityStatus,'UNKNOWN');
+  ctx.window.VEHICLE_CARSETS=roster.concat({...newer,status:'運用中',vehicle_type:'70-000形'});
+  assert.strictEqual(resolve({...physical,serviceDate:'2026-10-15'}).name,'東京臨海高速鉄道70-000形','latest applicable snapshot wins');
+  ctx.window.VEHICLE_CARSETS=roster.concat({...newer,status:'運用中'},newer);
+  assert.strictEqual(resolve({...physical,serviceDate:'2026-10-15'}).identityStatus,'UNKNOWN','conflicting status at one snapshot is unresolved');
   console.log('Physical car / owner / date / formation / planned model arbitration: PASS');
 }
 
