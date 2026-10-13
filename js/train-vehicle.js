@@ -190,7 +190,7 @@ var CANONICAL_VEHICLES = {
  *
  * Fleet 33 cars: https://www.kotsu.metro.tokyo.jp/about/service/toden.html
  * Vehicle/no. livery: https://2nd-train.net/formations/affiliation/216/荒川車両検修所/
- * 8501 was rebuilt from 2026-04-16; no verified new-livery PNG yet.
+ * 8501 was refurbished in April 2026; pixel artwork provided by the project owner.
  * https://www.kotsu.metro.tokyo.jp/pickup_information/news/toden/2026/tdn_p_2026041512633_h.html
  */
 var TODEN_ARAKAWA_BY_CAR = Object.create(null);
@@ -198,7 +198,7 @@ var TODEN_ARAKAWA_BY_CAR = Object.create(null);
   { cars: "7701 7702", name: "都電7700形（みどり）", asset: "../images/列车/都営地下鉄/都営地下鉄_7700形_みどり.png" },
   { cars: "7703 7704 7705", name: "都電7700形（あお）", asset: "../images/列车/都営地下鉄/都営地下鉄_7700形_あお.png" },
   { cars: "7706 7707 7708", name: "都電7700形（えんじ）", asset: "../images/列车/都営地下鉄/都営地下鉄_7700形_えんじ.png" },
-  { cars: "8501", name: "都電8500形（8501号車・リニューアル）", asset: null },
+  { cars: "8501", name: "都電8500形（8501号車・リニューアル）", asset: "../images/列车/都営地下鉄/都営地下鉄_8500形_8501号車_山吹色.png" },
   { cars: "8502 8503 8504 8505", name: "都電8500形", asset: "../images/列车/都営地下鉄/都営地下鉄_8500形.png" },
   { cars: "8801 8802 8803 8804 8805", name: "都電8800形（ローズレッド）", asset: "../images/列车/都営地下鉄/都営地下鉄_8800形_ローズレッド.png" },
   { cars: "8806 8807", name: "都電8800形（バイオレット）", asset: "../images/列车/都営地下鉄/都営地下鉄_8800形_バイオレット.png" },

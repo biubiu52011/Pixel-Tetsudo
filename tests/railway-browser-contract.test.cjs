@@ -283,7 +283,7 @@ test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and
     ['7701 7702','都電7700形（みどり）','7700形_みどり.png'],
     ['7703 7704 7705','都電7700形（あお）','7700形_あお.png'],
     ['7706 7707 7708','都電7700形（えんじ）','7700形_えんじ.png'],
-    ['8501','都電8500形（8501号車・リニューアル）',null],
+    ['8501','都電8500形（8501号車・リニューアル）','8500形_8501号車_山吹色.png'],
     ['8502 8503 8504 8505','都電8500形','8500形.png'],
     ['8801 8802 8803 8804 8805','都電8800形（ローズレッド）','8800形_ローズレッド.png'],
     ['8806 8807','都電8800形（バイオレット）','8800形_バイオレット.png'],
@@ -309,8 +309,14 @@ test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and
       if (imageFile) {
         assert.ok(resolved.iconPath.endsWith('/都営地下鉄_' + imageFile),number);
         assert.ok(fs.existsSync(path.join(root,resolved.iconPath.replace('../',''))),number);
+        if (number === '8501') {
+          const png = fs.readFileSync(path.join(root,resolved.iconPath.replace('../','')));
+          assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a');
+          assert.equal(png.readUInt32BE(16),82);
+          assert.equal(png.readUInt32BE(20),98);
+        }
       } else {
-        assert.equal(resolved.iconPath,'',number + ' must not claim the retired 8501 livery');
+        assert.equal(resolved.iconPath,'',number + ' must not claim unverified artwork');
       }
       count++;
     }
