@@ -99,6 +99,11 @@ assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
  rows.push({...rows[0],vehicleType:"Example3000系",formationIds:["301F"]});
  assert.strictEqual(resolve("1203K",ctx,"realtime-derived"),null,
    "conflicting realtime carset evidence must fail closed");
+ rows.pop();
+ dated.push({...dated[0],trainNumber:"1203K",vehicleType:"Example1000系",
+   formationIds:["999F"]});
+ assert.strictEqual(resolve("1203K",ctx,"realtime-derived"),null,
+   "same-model contradictory dated formations must also fail closed");
 })();
-console.log("ODPT dated train-number vehicle evidence: 7 PASS");
+console.log("ODPT dated train-number vehicle evidence: 8 PASS");
 console.log("operation evidence providers: PASS");
