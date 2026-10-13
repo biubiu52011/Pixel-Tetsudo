@@ -505,7 +505,9 @@ assert(edgeSource.includes('if (lineId === "SaikyoKawagoe" && selectedCalendar)'
        edgeSource.includes('stopName(first) !== "Osaki"') &&
        edgeSource.includes('if (list.length !== 1) return;') &&
        edgeSource.includes('candidates.includes(verifiedModel)') &&
-       edgeSource.includes('vehicle_evidence_source: boundaryVehicle.has(t.id)'),
+       edgeSource.includes('verifiedBoundaryType && !conflict ? "verified-scheduled-boundary:Rinkai/Osaki"') &&
+       edgeSource.includes('vehicle_mapping_level: scheduleLevel') &&
+       edgeSource.includes('const conflict = !!(ruleType && verifiedBoundaryType && ruleType !== verifiedBoundaryType)'),
   "boundary model projection must require exactly one compatible scheduled counterpart");
 assert(estimatorSource.includes('_declaredModels.length === 1 && _operationModels.length > 1') &&
        estimatorSource.includes('_operationModels.indexOf(_declaredModels[0]) >= 0'),
