@@ -105,6 +105,16 @@ assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
   /_timetableCoverage="partial"/.test(odptUnifiedSrc),
   'client must retain partial coverage and canonical identity, but suppress candidate-only vehicle PNG identity');
 console.log('train-run-SQL-completeness: 3 PASS');
+assert.ok(/group_evidence,timetable_validity,mapping_level/.test(trainRunsReadThroughSrc) &&
+  /timetable_validity: mapped\.timetable_validity/.test(trainRunsReadThroughSrc) &&
+  /timetable_date_verified: mapped\.timetable_validity === "date_verified"/.test(trainRunsReadThroughSrc),
+  'SQL response must carry the canonical source-date validity, not infer freshness from stop completeness');
+assert.ok(/date_verified_runs: dateVerifiedRuns/.test(trainRunsReadThroughSrc) &&
+  /date_unverified_runs: validRuns\.length - dateVerifiedRuns/.test(trainRunsReadThroughSrc),
+  'API must disclose unverified timetable counts without discarding valid stops');
+console.log('train-run-date-verification-metadata: 2 PASS');
+
+
 
 const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');
 assert.ok(/"_operationCode":run\.operation_code\|\|""/.test(odptUnifiedSrc),
