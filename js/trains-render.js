@@ -1129,6 +1129,9 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       marker.setAttribute("width", "14");
       marker.setAttribute("height", "18");
       marker.setAttribute("href", spec.iconSrc);
+      // Safari/iOS SVG <image> compatibility: keep the SVG2 and XLink
+      // references identical; no new vehicle or asset selection occurs here.
+      marker.setAttributeNS("http://www.w3.org/1999/xlink", "href", spec.iconSrc);
       marker.setAttribute("preserveAspectRatio", "xMidYMid meet");
       marker.addEventListener("error", function () {
         if (!trainLayer || !trainLayer.isConnected || !marker.isConnected) return;
@@ -1290,6 +1293,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         if (markerSpec.kind === "vehicle" &&
             existingIcon.getAttribute("href") !== markerSpec.iconSrc) {
           existingIcon.setAttribute("href", markerSpec.iconSrc);
+          existingIcon.setAttributeNS("http://www.w3.org/1999/xlink", "href", markerSpec.iconSrc);
           existingIcon.setAttribute("visibility", "visible");
         }
         // The SVG marker survives polling, but its verified carset may change.
