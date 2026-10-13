@@ -41,7 +41,9 @@ for(const rel of ['pages/trains.html','pages/realtime.html']){
  const html=read(rel);
  for(const file of ['odpt-unified.js','train-vehicle.js','vehicle-operation-evidence-data.js',
                     'train-operation-evidence.js','train-position-estimator.js','data-fusion.js']){
-  assert(html.includes(file+'?v=4.3.1180'),rel+' still caches older ODPT mapping: '+file);
+  const pinnedVersion = ['train-position-estimator.js','data-fusion.js'].includes(file)
+    ? '4.3.1192' : '4.3.1180';
+  assert(html.includes(file+'?v='+pinnedVersion),rel+' still caches older ODPT mapping: '+file);
  }
 }
 assert(/function matchRealtimeVehicleEvidence\(/.test(estimator) &&
