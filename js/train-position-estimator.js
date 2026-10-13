@@ -577,10 +577,12 @@
       // certified against the same source-dated canonical train timetable.
       // This is NOT a live formation observation or a model guess.
       verifiedTimetableArtworkPath: _plannedSqlVehicle &&
-        tt._sqlVehicleMappingLevel === 'dated_schedule_rule'
+        (tt._sqlVehicleMappingLevel === 'dated_schedule_rule' ||
+         tt._sqlVehicleMappingLevel === 'dated_operation_owner')
           ? String(tt._sqlVehicleArtworkPath || '') : '',
       verifiedTimetableModel: _plannedSqlVehicle &&
-        tt._sqlVehicleMappingLevel === 'dated_schedule_rule'
+        (tt._sqlVehicleMappingLevel === 'dated_schedule_rule' ||
+         tt._sqlVehicleMappingLevel === 'dated_operation_owner')
           ? _declaredVehicleInput : '',
       timetableEvidence: _assignmentMatches,
       formationId: Object.keys(_assignmentFormations).length === 1 ? Object.keys(_assignmentFormations)[0] : '',
@@ -1116,7 +1118,8 @@
       // A source-dated unique PNG may accompany a certified SQL vehicle;
       // the TrainVehicle authority will validate it against the same model.
       if (model && tt._positionSource === 'supabase-train-run' &&
-          tt._sqlVehicleMappingLevel === 'dated_schedule_rule' &&
+          (tt._sqlVehicleMappingLevel === 'dated_schedule_rule' ||
+           tt._sqlVehicleMappingLevel === 'dated_operation_owner') &&
           String(tt.vehicleType || '').trim() &&
           window.TrainIcons && window.TrainIcons.resolveVehicleDisplayName &&
           window.TrainIcons.resolveVehicleDisplayName(tt.vehicleType) === model) {
