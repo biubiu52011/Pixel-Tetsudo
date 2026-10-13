@@ -1747,7 +1747,12 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     labelGroup.setAttribute("data-label-pos", "dir");
     labelGroup.setAttribute("data-dir-sym", dirSym || "");
     labelGroup.setAttribute("data-label-signature", _trainLabelSignature(p, lineId));
-    if (_sixLane) labelGroup.setAttribute("data-six-direction-visible", "true");
+    if (_sixLane) {
+      labelGroup.setAttribute("data-six-direction-visible", "true");
+      // Transparent to pointer events, so selecting the underlying real train
+      // marker still opens its complete direction and vehicle details.
+      labelGroup.setAttribute("pointer-events", "none");
+    }
     // 三角在 g 坐标系 (0, labelY)
     if (dirSym) {
       var tri = document.createElementNS(svgNS, "path");
@@ -1788,8 +1793,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         // A light badge behind full text ensures train symbols remain readable
         // over moving dots without covering any adjacent station-name corridor.
         var _whitePlate = document.createElementNS(svgNS, "rect");
+        _whitePlate.setAttribute("class", "train-direction-plate");
         _whitePlate.setAttribute("x", String(_bbox.x - 1));
         _whitePlate.setAttribute("y", String(_bbox.y - 1));
+        labelGroup.setAttribute("data-six-plate-y-offset", String(_bbox.y - 1 - _labelY));
         _whitePlate.setAttribute("width", String(_bbox.width + 2));
         _whitePlate.setAttribute("height", String(_bbox.height + 2));
         _whitePlate.setAttribute("rx", "2");
@@ -1822,6 +1829,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     }
     var txt = label.querySelector('.train-label-dir');
     if (txt) txt.setAttribute('y', String(_labelY));
+    if (_sixLane) {
+      var _plate = label.querySelector(".train-direction-plate");
+      var _plateOffsetY = parseFloat(label.getAttribute("data-six-plate-y-offset") || "0");
+      if (_plate) _plate.setAttribute("y", String(_labelY + _plateOffsetY));
+    }
     var _base = parseFloat(label.getAttribute('data-base-offset') || '0');
     if (!isFinite(_base)) _base = 0;
     if (_sixLane) {

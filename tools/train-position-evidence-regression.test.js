@@ -242,8 +242,10 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
          renderer.includes('return !!LOOP_DIR_NAMES[String(dirName).split(/[:.]/).pop()];'),
     "Oedo tail must show its true travel direction while recognizing full ODPT loop direction");
   assert(renderer.includes('ldir.setAttribute("font-size", _sixLane ? "9" : "8");') &&
-         renderer.includes('labelGroup.insertBefore(_whitePlate, labelGroup.firstChild);'),
-    "full mobile direction must be visible on a legible light label plate");
+         renderer.includes('labelGroup.insertBefore(_whitePlate, labelGroup.firstChild);') &&
+         renderer.includes('labelGroup.setAttribute("pointer-events", "none");') &&
+         renderer.includes('if (_plate) _plate.setAttribute("y", String(_labelY + _plateOffsetY));'),
+    "full direction plate must follow its train without swallowing train selection");
 
   assert(renderer.includes("tp-six-train-detail") &&
          renderer.includes('node.getAttribute("aria-label")') &&
