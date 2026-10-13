@@ -77,6 +77,10 @@ assert.ok(/operation_code: mapped\.operation_code \|\| ""/.test(trainRunsReadThr
   /mapped\.mapping_level === "dated_operation_owner"/.test(trainRunsReadThroughSrc) &&
   /run\.vehicle_mapping_level==="dated_operation_owner"/.test(odptUnifiedSrc),
   'unique dated operation owner joins must persist as planned vehicle evidence without fallback guesses');
+assert.ok(/operation_owner: mapped\.operation_owner \|\| null/.test(trainRunsReadThroughSrc) &&
+  /"trainOwner":run\.operation_owner\|\|""/.test(odptUnifiedSrc),
+  'operator ownership may enter existing train identity resolution only as source-backed metadata');
+console.log('train-run-curated-owner-bridge: PASS');
 console.log('train-run-canonical-operation-vehicle-bridge: PASS');
 console.log('train-run-SQL-fallback: 5 PASS');
 

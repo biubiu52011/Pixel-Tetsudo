@@ -117,7 +117,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   for (let i = 0; i < templates.length; i += 100) {
     const ids = templates.slice(i, i + 100).map((t: any) => t.id);
     const { data, error } = await db.from("train_timetable_source_resolution")
-      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path,operation_code,operation_source_id,operation_revision_date")
+      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path,operation_code,operation_source_id,operation_revision_date,operation_owner,operation_owner_source_url")
       .in("source_template_id", ids);
     if (error) throw error;
     for (const row of data || []) sourceResolution.set(row.source_template_id, row);
@@ -261,6 +261,8 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       operator, network_key: t.railway_urn,
       train_number: t.train_number,
       operation_code: mapped.operation_code || "",
+      operation_owner: mapped.operation_owner || null,
+      operation_owner_source_url: mapped.operation_owner_source_url || null,
       rail_direction: t.direction_urn,
       train_type: t.train_type_urn,
       destination_station: t.destination_urns?.[0] || null,

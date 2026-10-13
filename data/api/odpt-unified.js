@@ -717,6 +717,8 @@
                 saturday_holiday:"odpt.Calendar:SaturdayHoliday"
             })[run.calendar_type] || "",
             "_operationCode":run.operation_code||"",
+            "trainOwner":run.operation_owner||"",
+            "_scheduledTrainOwnerSource":run.operation_owner_source_url||"",
             // Keep source-provided physical through-service links as evidence,
             // not as proof of a shared vehicle without boundary/time checks.
             "_sourceTripId":run.source_trip_id ||
