@@ -1169,6 +1169,14 @@
             var odptTrainOwner = t["odpt:trainOwner"] || t["trainOwner"] || "";
             positionData.trainOwner = odptTrainOwner;
             positionData.realtimeVehicleType = odptVehicleType;
+            // Live Toei.Arakawa ODPTnnnn values are trip IDs, not physical
+            // tram car numbers (observed against ODPT on 2026-10-13).
+            // Expose why the renderer has no model PNG; never turn ODPT digits
+            // into a guessed 7700/8500/8800/8900/9000 series identity.
+            if (lid === "Arakawa" && /^ODPT\d+$/i.test(positionData.trainNumber) &&
+                !odptVehicleType && !t.vehicleCarNumber && !t.carNumber) {
+              positionData.vehicleEvidenceGap = "odpt-trip-id-without-car-number";
+            }
             // An explicit vehicle type carried by the realtime record is train-level
             // evidence. Register it before resolving so the same train number can
             // reuse that evidence without depending on the current display line.
@@ -1235,9 +1243,11 @@
                   trainOwner: odptTrainOwner,
                   trainNumber: positionData.trainNumber,
                   railway: railway,
-                  // Arakawa explicitly encodes car IDs in trainNumber. Other
-                  // adapters must supply a separate physical-ID field.
-                  realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" && trainOpShort === "Toei"
+                  // Only legacy literal four-digit Arakawa car-number fields
+                // may identify a physical tram; ODPTnnnn is a trip ID.
+                // For other operators, use only separate source car fields.
+                realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" &&
+                  trainOpShort === "Toei" && /^\d{4}$/.test(positionData.trainNumber)
                     ? positionData.trainNumber : _sourceCar,
                   stationIndex: idx,
                   trainType: rawType,
