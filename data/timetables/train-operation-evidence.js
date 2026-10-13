@@ -121,7 +121,7 @@
           if (!r || r.validDate !== d) continue;
           if (!_evidenceNetworkMatches(r.networkKey, ctx)) continue;
           var trainMatch = r.trainNumbers && r.trainNumbers.indexOf(n) >= 0;
-          var opMatch = ctx.operationCode && String(ctx.operationCode) === String(r.operationCode);
+          var opMatch = !ctx.requireTrainNumberMatch && ctx.operationCode && String(ctx.operationCode) === String(r.operationCode);
           if (trainMatch || opMatch) matches.push(r);
         }
         if (!matches.length) return null;
@@ -189,7 +189,7 @@
           var r=records[i];
           if (!r || r.validDate !== d || !_evidenceNetworkMatches(r.networkKey, ctx)) continue;
           if (r.trainNumber && String(r.trainNumber) === n) exactTrain.push(r);
-          else if (r.operationCode && op && String(r.operationCode) === op) operation.push(r);
+          else if (!ctx.requireTrainNumberMatch && r.operationCode && op && String(r.operationCode) === op) operation.push(r);
         }
         var matches = exactTrain.length ? exactTrain : operation;
         if (!matches.length) return null;
@@ -319,14 +319,16 @@
   }
   registerCanonicalReferenceProvider();
 
-  // Single evidence resolver. Realtime-derived mode intentionally admits only
-  // structural/family providers; fallback mode uses the existing canonical
-  // providers in priority order. No parallel realtime resolver is maintained.
+  // One evidence resolver for both realtime and timetable estimation. Live
+  // rows may consume same-service-day dated train-number proof, but MUST NOT
+  // borrow a physical carset merely from an operation code used by other runs.
   function resolveEvidence(trainNumber, ctx, mode) {
     mode = mode || "fallback";
     var familyHit = null;
     var referenceHit = null;
     var runHits = [];
+    var providerCtx = mode === "realtime-derived"
+      ? Object.assign({}, ctx || {}, { requireTrainNumberMatch: true }) : (ctx || {});
     for (var i = 0; i < providers.length; i++) {
       var provider = providers[i];
       if (!provider) continue;
@@ -334,18 +336,36 @@
       var isReference = provider.id === "canonical-timetable-reference-vehicles";
       var isRunEvidence = provider.id === "canonical-dated-vehicle-evidence" ||
         provider.id === "canonical-vehicle-operation-evidence";
-      if (!isFamily && !isReference && (mode === "realtime-derived" || !isRunEvidence)) continue;
-      var rec = normalizeEvidence(provider, provider.resolveEvidence(trainNumber, ctx || {}));
+      if (!isFamily && !isReference && !isRunEvidence) continue;
+      var rec = normalizeEvidence(provider, provider.resolveEvidence(trainNumber, providerCtx));
       if (!rec) continue;
       if (isFamily) familyHit = rec;
       else if (isReference) referenceHit = rec;
       else runHits.push(rec);
     }
 
-    // Realtime-derived identity uses the structural provider directly.
-    // Timetable fallback keeps B/C structural rules as constraints, but a
-    // dated, traced Grade-A single-fleet rule may also decide vehicle identity.
-    if (mode === "realtime-derived") return referenceHit || familyHit;
+    // Realtime never treats a bare working number as a physical carset proof.
+    // Canonical dated providers above require the exact public train number,
+    // current service date, unique model/formation, and traceable source.
+    if (mode === "realtime-derived") {
+      var liveModels = {};
+      runHits.forEach(function(hit) {
+        if (hit.decisive && hit.vehicleType) liveModels[hit.vehicleType] = hit;
+      });
+      var liveNames = Object.keys(liveModels);
+      if (liveNames.length > 1) return null;
+      if (liveNames.length === 1) {
+        var liveName = liveNames[0];
+        if (familyHit &&
+            ((familyHit.vehicleType && familyHit.vehicleType !== liveName) ||
+             (familyHit.vehicleCandidates.length &&
+              familyHit.vehicleCandidates.indexOf(liveName) < 0))) return null;
+        return liveModels[liveName];
+      }
+      // A published train/calendar reference is a planned model, not a live
+      // formation. Its provenance stays distinct in the downstream adapter.
+      return referenceHit || familyHit;
+    }
 
     // A/C dated run evidence may decide identity, but all decisive providers
     // must agree before structural constraints are applied.
