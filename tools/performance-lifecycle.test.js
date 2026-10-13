@@ -73,6 +73,11 @@ assert.ok(/\.range\(first, last\)/.test(trainRunsReadThroughSrc),
   'SQL timetable reads must paginate rather than silently truncate stops');
 assert.ok(!/req\.method === "POST"/.test(trainRunsReadThroughSrc),
   'public train-runs endpoint must remain GET-only and must not accept browser cache writes');
+assert.ok(/operation_code: mapped\.operation_code \|\| ""/.test(trainRunsReadThroughSrc) &&
+  /mapped\.mapping_level === "dated_operation_owner"/.test(trainRunsReadThroughSrc) &&
+  /run\.vehicle_mapping_level==="dated_operation_owner"/.test(odptUnifiedSrc),
+  'unique dated operation owner joins must persist as planned vehicle evidence without fallback guesses');
+console.log('train-run-canonical-operation-vehicle-bridge: PASS');
 console.log('train-run-SQL-fallback: 5 PASS');
 
 assert.ok(/if \(source\?\.realtime_position_api_enabled\)/.test(trainRunsReadThroughSrc) &&

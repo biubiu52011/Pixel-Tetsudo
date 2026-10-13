@@ -498,6 +498,7 @@
     // independent of historical operation/formation observations.
     var _plannedSqlVehicle = tt._positionSource === 'supabase-train-run' &&
       (tt._sqlVehicleMappingLevel === 'dated_schedule_rule' ||
+       tt._sqlVehicleMappingLevel === 'dated_operation_owner' ||
        tt._sqlVehicleMappingLevel === 'verified_scheduled_boundary') &&
       !!String(tt.vehicleType || '').trim() &&
       String(tt.vehicleType).split('/').length === 1;

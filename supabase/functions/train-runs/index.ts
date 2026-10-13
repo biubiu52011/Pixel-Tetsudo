@@ -117,7 +117,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   for (let i = 0; i < templates.length; i += 100) {
     const ids = templates.slice(i, i + 100).map((t: any) => t.id);
     const { data, error } = await db.from("train_timetable_source_resolution")
-      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path")
+      .select("source_template_id,timetable_id,member_role,group_evidence,mapping_level,vehicle_type,vehicle_source_id,vehicle_source_url,vehicle_revision_date,vehicle_artwork_path,operation_code,operation_source_id,operation_revision_date")
       .in("source_template_id", ids);
     if (error) throw error;
     for (const row of data || []) sourceResolution.set(row.source_template_id, row);
@@ -239,12 +239,12 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   const result = templates.map((t) => {
     const operator = timetableOperator || /^odpt\.Railway:([^.]+)\./.exec(t.railway_urn || "")?.[1] || "";
     const mapped = sourceResolution.get(t.id);
-    const ruleType = mapped.mapping_level === "dated_schedule_rule" ? String(mapped.vehicle_type || "") : "";
+    const ruleType = (mapped.mapping_level === "dated_schedule_rule" || mapped.mapping_level === "dated_operation_owner") ? String(mapped.vehicle_type || "") : "";
     const verifiedBoundaryType = String(boundaryVehicle.get(t.id) || "");
     const conflict = !!(ruleType && verifiedBoundaryType && ruleType !== verifiedBoundaryType);
     const exactScheduleType = conflict ? "" : (ruleType || verifiedBoundaryType);
     const scheduleLevel = conflict ? "conflicting_scheduled_evidence"
-      : ruleType ? "dated_schedule_rule"
+      : ruleType ? mapped.mapping_level
       : verifiedBoundaryType ? "verified_scheduled_boundary"
       : mapped.mapping_level || "unresolved";
     const completeStops = mapped.group_evidence === "verified_continuation"
@@ -260,7 +260,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       calendar_type: calendarType(t.calendar_urn),
       operator, network_key: t.railway_urn,
       train_number: t.train_number,
-      operation_code: "",
+      operation_code: mapped.operation_code || "",
       rail_direction: t.direction_urn,
       train_type: t.train_type_urn,
       destination_station: t.destination_urns?.[0] || null,
@@ -269,7 +269,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       vehicle_type_label: exactScheduleType || null,
       vehicle_type_candidates: t.vehicle_type_label || null,
       vehicle_mapping_level: scheduleLevel,
-      vehicle_evidence_source: ruleType && !conflict ? "database-dated-schedule-rule"
+      vehicle_evidence_source: ruleType && !conflict ? (mapped.mapping_level === "dated_operation_owner" ? "database-dated-operation-owner" : "database-dated-schedule-rule")
         : verifiedBoundaryType && !conflict ? "verified-scheduled-boundary:Rinkai/Osaki" : null,
       vehicle_evidence_source_id: ruleType && !conflict ? mapped.vehicle_source_id : null,
       vehicle_evidence_url: ruleType && !conflict ? mapped.vehicle_source_url : null,

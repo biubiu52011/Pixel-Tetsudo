@@ -747,6 +747,7 @@
             // Unverified single source label is never promoted into EXACT vehicle
             // identity / gallery PNG by the browser estimator.
             vehicleType:(run.vehicle_mapping_level==="dated_schedule_rule" ||
+                run.vehicle_mapping_level==="dated_operation_owner" ||
                 run.vehicle_mapping_level==="verified_scheduled_boundary")
                 ? (run.vehicle_type_label||null) : null,
             _positionSource:"supabase-train-run"
