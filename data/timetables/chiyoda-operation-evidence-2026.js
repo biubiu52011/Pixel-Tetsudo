@@ -17,7 +17,10 @@
   }
   function op(trainNumber){
     var raw=String(trainNumber||"").toUpperCase().trim();
-    var m=raw.match(/(?:^|[^0-9])(?:A|B)?(\d{1,2})([KSE])$/);
+    // Public ODPT train numbers such as 1831S encode the two-digit
+    // working number 31S. Keep the operator suffix and discard only the
+    // documented leading service digits; never map on a number alone.
+    var m=raw.match(/^(?:A|B)?\d{0,2}(\d{2})([KSE])$/);
     return m ? {number:parseInt(m[1],10),letter:m[2]} : null;
   }
   function resolveEvidence(trainNumber,ctx){
