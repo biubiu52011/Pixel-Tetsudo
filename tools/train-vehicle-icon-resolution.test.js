@@ -268,6 +268,44 @@ assert.strictEqual(yamanoteCombined.identityStatus,'EXACT');
 assert.strictEqual(yamanoteCombined.name,'E235系0番台（山手線）');
 assert.strictEqual(yamanoteCombined.source,'realtime+timetable');
 assert.ok(yamanoteCombined.iconPath.endsWith('JR東日本_E235系_0番台.png'));
+// Explicit operator-qualified exact names from verified operation evidence
+// must map to the same model PNG instead of an unresolved/default marker.
+[
+  ['JR E231系800番台(10両)', 'JR東日本_E231系_800番台.png'],
+  ['東葉高速2000系(10両)', '東葉高速鉄道_2000系.png'],
+  ['相鉄21000系(8両)', '相模鉄道_21000系.png']
+].forEach(function(pair) {
+  const resolved = realCtx.window.TrainVehicle.resolve({realtimeDerivedVehicleType:pair[0]});
+  assert.strictEqual(resolved.identityStatus,'EXACT',pair[0]);
+  assert.ok((resolved.iconPath || '').endsWith(pair[1]),pair[0]+' lacks exact PNG: '+resolved.iconPath);
+  const markerArt = realCtx.window.TrainVehicle.selectMarkerArtwork({
+    vehicleResolvedUpstream:true,vehicleIconPath:resolved.iconPath,vehicleType:resolved.vehicleTypeStr
+  },false);
+  assert.strictEqual(markerArt.kind,'vehicle',pair[0]+' still displays default marker');
+});
+// SQL certified exact artwork is a projection ONLY of the same verified
+// timetable model. No general path, unrelated model, or formation override.
+const dbArtPath='images/列车/Example/Example_exact.png';
+const dbIcon = realCtx.window.TrainVehicle.resolve({
+  timetableVehicleType:'ExactCertifiedOnlyModel',
+  verifiedTimetableModel:'ExactCertifiedOnlyModel',
+  verifiedTimetableArtworkPath:dbArtPath
+});
+assert.strictEqual(dbIcon.iconPath,'../'+dbArtPath);
+assert.strictEqual(realCtx.window.TrainVehicle.selectMarkerArtwork({
+  vehicleResolvedUpstream:true,vehicleType:dbIcon.name,vehicleIconPath:dbIcon.iconPath
+},false).kind,'vehicle');
+[
+ {verifiedTimetableModel:'DifferentModel',verifiedTimetableArtworkPath:dbArtPath},
+ {verifiedTimetableModel:'ExactCertifiedOnlyModel',verifiedTimetableArtworkPath:'images/列车/Example/../../wrong.png'},
+ {verifiedTimetableModel:'ExactCertifiedOnlyModel',verifiedTimetableArtworkPath:'images/列车/Example/wrong.svg'}
+].forEach(function(invalid) {
+ const r=realCtx.window.TrainVehicle.resolve(Object.assign({
+  timetableVehicleType:'ExactCertifiedOnlyModel'
+ },invalid));
+ assert.strictEqual(r.iconPath,'','uncertified SQL artwork leaked');
+});
+console.log('Realtime exact aliases + certified SQL artwork fallback: PASS');
 console.log('Yamanote single canonical realtime/SQL mapping: PASS');
 
 // The same verified single-fleet record must resolve identically on the
