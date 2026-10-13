@@ -1100,10 +1100,15 @@
       var vehicle = identity && identity.vehicleResult;
       var model = vehicle && vehicle.identityStatus === 'EXACT' ? vehicle.name : '';
       if (!found[signature]) {
-        found[signature] = { model:model, artworkPath: '',
+        found[signature] = { model:'', artworkPath: '',
           timetableObjectId:run.timetableObjectId };
-      } else if (found[signature].model !== model) {
-        return { conflict:true, reason:'conflicting-duplicate-timetable-model' };
+      }
+      // Official ODPT schedules often have no vehicle field; an identical
+      // itinerary imported from a sourced manual/SQL timetable can supply it.
+      // Missing evidence is not a contradictory second model assertion.
+      if (model) {
+        if (found[signature].model && found[signature].model !== model) return null;
+        found[signature].model = model;
       }
       // A source-dated unique PNG may accompany a certified SQL vehicle;
       // the TrainVehicle authority will validate it against the same model.
