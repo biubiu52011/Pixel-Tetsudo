@@ -122,6 +122,11 @@ console.log("operation evidence providers: PASS");
     "data/timetables/tozai-operation-evidence-2026.js",
     "data/timetables/keiyo-operation-evidence.js"
   ].forEach(path=>vm.runInContext(fs.readFileSync(path,"utf8"),sandbox,{filename:path}));
+  // Exercise the existing canonical artwork selector too, not just the
+  // operation provider's text label. Without this the UI can still be grey
+  // even when the number-to-model script returns a non-empty vehicle type.
+  vm.runInContext(fs.readFileSync("js/train-vehicle.js","utf8"),sandbox,
+    {filename:"js/train-vehicle.js"});
   const evidence=sandbox.window.TrainOperationEvidence;
   const live=(n,line,railway,serviceDate="2026-10-13")=>
     evidence.resolveEvidence(n,{lineId:line,railway,serviceDate},"realtime-derived");
@@ -144,5 +149,45 @@ console.log("operation evidence providers: PASS");
 
   assert.strictEqual(live("1849T","Asakusa","Toei.Asakusa","2026-01-01"),null,
     "line-specific mappings must respect their effective date");
+  const cases=[
+    ["1849T","Asakusa","Toei.Asakusa","都営5500形","都営地下鉄_5500形.png"],
+    ["1831S","Chiyoda","TokyoMetro.Chiyoda","東京メトロ16000系","東京メトロ_16000系.png"],
+    ["1812K","Chiyoda","TokyoMetro.Chiyoda","JR東日本E233系2000番台","JR東日本_E233系_2000番台.png"],
+    ["1845E","Chiyoda","TokyoMetro.Chiyoda","小田急4000形","小田急電鉄_4000形_標準色.png"],
+    ["631","Meguro","Tokyu.Meguro","相鉄21000系(8両)","相模鉄道_21000系.png"],
+    ["507K","Tozai","TokyoMetro.Tozai","JR E231系800番台(10両)","JR東日本_E231系_800番台.png"],
+    ["650T","Tozai","TokyoMetro.Tozai","東葉高速2000系(10両)","東葉高速鉄道_2000系.png"]
+  ];
+  const toNative=x=>JSON.parse(JSON.stringify(x));
+  for(const [number,line,railway,expectedModel,png] of cases){
+    const evidenceHit=live(number,line,railway);
+    assert(evidenceHit && evidenceHit.vehicleType===expectedModel && evidenceHit.decisive,
+      line+" "+number+" must return sourced, decisive model evidence");
+    const resolved=sandbox.window.TrainVehicle.resolve(toNative({
+      lineId:line,operator:"Toei",railway:"odpt.Railway:"+railway,
+      trainNumber:number,serviceDate:"2026-10-13",
+      realtimeDerivedVehicleType:evidenceHit.vehicleType
+    }));
+    assert.strictEqual(resolved.identityStatus,"EXACT",number+" identity");
+    assert(resolved.iconPath && resolved.iconPath.endsWith("/"+png),
+      number+" selected model has no canonical PNG");
+    assert(fs.existsSync(resolved.iconPath.replace("../","")),
+      number+" canonical PNG does not exist in Git repository");
+    const marker=sandbox.window.TrainVehicle.selectMarkerArtwork(toNative({
+      vehicleResolvedUpstream:true,vehicleIconPath:resolved.iconPath
+    }),false);
+    assert.strictEqual(marker.kind,"vehicle",number+" renderer must select PNG instead of grey marker");
+  }
+  // All Toei-owned Shinjuku trains share a model, but the artwork archive
+  // distinguishes 1/2nd and 3rd+ generations. Without a dated carset it is
+  // false to assign either specific PNG; do not make CI green by guessing.
+  const shinjuku=sandbox.window.TrainVehicle.resolve(toNative({
+    lineId:"Shinjuku",operator:"Toei",trainOwner:"odpt.Operator:Toei",
+    railway:"odpt.Railway:Toei.Shinjuku",trainNumber:"1705T"
+  }));
+  assert.strictEqual(shinjuku.name,"都営10-300形");
+  assert.strictEqual(shinjuku.identityStatus,"EXACT");
+  assert.strictEqual(shinjuku.iconPath,"");
+  console.log("ODPT number -> existing model -> certified PNG -> marker: 7 PASS");
   console.log("ODPT number -> existing line-script -> canonical model: 7 PASS");
 })();
