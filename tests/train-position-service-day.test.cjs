@@ -196,7 +196,7 @@ async function readSqlRuns(runs, stops, recurringRows = []) {
     return query;
   } };
   return vm.runInNewContext('(async function() {' + body + '})()', {
-    db, lineId: 'Test', serviceDate: '2026-10-13', console,
+    db, lineId: 'Test', serviceDate: '2026-10-13', source: { timetable_operator: 'Test' }, console,
     json(value) { return value; }, readManualTemplateRuns() {
       return Promise.resolve({ json: async () => ({
         ok: true, complete: recurringRows.length > 0, runs: recurringRows,
