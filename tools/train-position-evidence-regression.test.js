@@ -657,10 +657,14 @@ assert(/serviceDate:\s*String\(_runIdentity\.key/.test(estimatorSource),
   "estimated assignments must retain the exact service date");
 assert(/serviceDate:\s*_snapshotServiceDate/.test(fusionSource),
   "realtime positions must carry the evidence service date");
-const titleStart=renderSource.indexOf("  function _trainMarkerTitle(p) {");
+const titleStart=renderSource.indexOf("  function _trainMarkerTitle(p, lineId) {");
 const titleEnd=renderSource.indexOf("  // SVG image title attributes",titleStart);
 assert(titleStart>=0&&titleEnd>titleStart,"existing train marker title helper missing");
-const trainNumberSandbox={window:{currentLang:"ja",TRAIN_TYPE_NAMES:{}},_trainDestText:s=>s};
+const trainNumberSandbox={
+  window:{currentLang:"ja",TRAIN_TYPE_NAMES:{}},
+  _trainDestText:s=>s,
+  _isOedoTailTrain:(lid,p)=>lid==="Oedo"&&p&&Number(p.stationIndex)>=1&&Number(p.stationIndex)<=10
+};
 vm.createContext(trainNumberSandbox);
 vm.runInContext(renderSource.slice(titleStart,titleEnd)+
   "\nthis.trainMarkerTitle=_trainMarkerTitle;",trainNumberSandbox);
@@ -669,6 +673,11 @@ const sample={trainNumber:"1151G",vehicleType:"E235系0番台",destinationStatio
   vehicleFormationId:"トウ01",operationCode:"51G"};
 assert(trainTitle(sample).includes("列車番号 1151G"),"valid train number should be primary label");
 assert(trainTitle(sample).includes("E235系0番台"),"keep confirmed vehicle type in tooltip");
+assert(trainTitle({railDirection:"odpt:RailDirection:InnerLoop",stationIndex:15},"Oedo").includes("内回り"),
+  "Oedo loop train details must retain complete InnerLoop direction");
+const oedoTailTitle=trainTitle({stationIndex:5,destinationStation:"Hikarigaoka",railDirection:"InnerLoop"},"Oedo");
+assert(oedoTailTitle.includes("Hikarigaoka方面")&&!oedoTailTitle.includes("内回り"),
+  "Oedo open-tail train details must show Hikarigaoka rather than an incorrect loop direction");
 assert(!trainTitle(sample).includes("トウ01")&&!/運用|編成|Carset|Operation/i.test(trainTitle(sample)),
   "operation and formation fields must not appear in public marker titles");
 for (const synthetic of ["est_12","supabase:TrainRun:12","manual-template:12","odpt.Train:X","planned-trip:x"]) {
