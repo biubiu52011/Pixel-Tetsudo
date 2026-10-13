@@ -630,8 +630,11 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   assert.strictEqual(ownerEstimate.vehicleIconPath, '../' + ownerArtwork);
   assert.strictEqual(windowForEstimate.TrainVehicle.selectMarkerArtwork(ownerEstimate, false).kind, 'vehicle');
   // No promotion of an unverified candidate merely because that same artwork exists.
-  ownerRun._sqlVehicleMappingLevel = 'source_single_type_candidate';
-  windowForEstimate.TrainPositionEstimator.registerManualTimetable('Rinkai', rows.concat(ownerRun));
+  const candidateRun = sqlRinkai('OWNER1', 'OwnerCertifiedOnlyModel',
+    '10:30', '10:35', 'ShinKiba', 'Shinonome');
+  candidateRun._sqlVehicleMappingLevel = 'source_single_type_candidate';
+  candidateRun._sqlVehicleArtworkPath = ownerArtwork;
+  windowForEstimate.TrainPositionEstimator.registerManualTimetable('Rinkai', rows.concat(candidateRun));
   const candidateEstimate = getRunningTrain();
   assert.strictEqual(candidateEstimate.vehicleIconPath, '',
     'candidate-only model must not gain the operation-owner PNG');
