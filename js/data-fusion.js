@@ -927,11 +927,15 @@
       // Service date/calendar are shared by all vehicle-evidence lookups in
       // this snapshot; calculate once instead of allocating a Date per train.
       var _snapshotNow = new Date();
-      // Keep realtime and timetable IDs on the same 04:00 JST service-day.
-      var _serviceDayNow = new Date(_snapshotNow.getTime());
-      if (_serviceDayNow.getHours() < 4) _serviceDayNow.setDate(_serviceDayNow.getDate() - 1);
-      var _snapshotServiceDate = _serviceDayNow.getFullYear() + "-" + String(_serviceDayNow.getMonth() + 1).padStart(2, "0") + "-" + String(_serviceDayNow.getDate()).padStart(2, "0");
-      var _snapshotServiceDay = _serviceDayNow.getDay();
+      // Keep actual JST dates across overseas browsers. At 00:00–03:59 JST,
+      // railway service remains on the preceding day and times are 24:00+.
+      var _snapshotJstNow = new Date(_snapshotNow.getTime() + 9 * 60 * 60 * 1000);
+      var _snapshotJstHour = _snapshotJstNow.getUTCHours();
+      var _snapshotServiceTime = String(_snapshotJstHour < 4 ? _snapshotJstHour + 24 : _snapshotJstHour).padStart(2, "0") +
+        ":" + String(_snapshotJstNow.getUTCMinutes()).padStart(2, "0");
+      var _serviceDayNow = new Date(_snapshotJstNow.getTime() - (_snapshotJstHour < 4 ? 86400000 : 0));
+      var _snapshotServiceDate = _serviceDayNow.getUTCFullYear() + "-" + String(_serviceDayNow.getUTCMonth() + 1).padStart(2, "0") + "-" + String(_serviceDayNow.getUTCDate()).padStart(2, "0");
+      var _snapshotServiceDay = _serviceDayNow.getUTCDay();
       // Share the estimator's Cabinet Office holiday/service-day calendar.
       // Weekday arithmetic misclassified Japanese public holidays (e.g.
       // 2026-10-12) and broke exact train-number reference lookups.
@@ -1140,16 +1144,38 @@
                     operator: trainOpShort,
                     trainOwner: odptTrainOwner,
                     trainNumber: positionData.trainNumber,
+                    railDirection: railDirection,
+                    destinationStation: destStations,
                     serviceDate: _snapshotServiceDate,
+                    serviceTime: _snapshotServiceTime,
                     calendarType: _snapshotCalendarType
                   }, "realtime-derived");
                   _vehicleEvidenceMs += _perfNow() - _evidenceStart;
                 }
-                if (_derivedVehicleEvidence && _derivedVehicleEvidence.evidenceRole === "timetable-reference")
-                  positionData.vehicleEvidenceSource = "planned-timetable-reference";
-                var _derivedVehicleType = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
+                var _isPlannedReference = !!(_derivedVehicleEvidence &&
+                  _derivedVehicleEvidence.evidenceRole === "timetable-reference");
+                if (_derivedVehicleEvidence) {
+                  positionData.vehicleEvidenceSource = _isPlannedReference
+                    ? "planned-timetable-reference"
+                    : (_derivedVehicleEvidence.providerId || "dated-or-structural-evidence");
+                  positionData.operationEvidence = [_derivedVehicleEvidence];
+                }
+                var _evidenceVehicleInput = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
                   ? _derivedVehicleEvidence.vehicleType
                   : (_derivedVehicleEvidence && _derivedVehicleEvidence.vehicleCandidates || []).join(" / ");
+                var _derivedVehicleType = _isPlannedReference ? "" : _evidenceVehicleInput;
+                var _realtimeReferenceModel = _isPlannedReference ? _evidenceVehicleInput : "";
+                // A published reference proves a model, never a day's carset.
+                // Only a unique, dated, decisive train observation may attach
+                // formation evidence to an ODPT realtime position.
+                var _rtFormations = _derivedVehicleEvidence && _derivedVehicleEvidence.decisive &&
+                  !_isPlannedReference && _derivedVehicleEvidence.formationId
+                    ? String(_derivedVehicleEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).map(function(v) {
+                        return v.trim();
+                      }).filter(Boolean) : [];
+                _rtFormations = _rtFormations.filter(function(v,i,a){return a.indexOf(v) === i;});
+                positionData.vehicleFormationCandidates = _rtFormations;
+                positionData.vehicleFormationId = _rtFormations.length === 1 ? _rtFormations[0] : "";
                 var _vehicleStart = _perfNow();
                 _vehicleResolveCalls++;
                 var _rtVehicle = window.TrainVehicle.resolve({
@@ -1165,8 +1191,12 @@
                   trainType: rawType,
                   destinationStation: destStations,
                   trainId: trainId,
+                  serviceDate: _snapshotServiceDate,
+                  formationId: positionData.vehicleFormationId || "",
+                  formationCandidates: positionData.vehicleFormationCandidates || [],
                   realtimeVehicleType: odptVehicleType,
-                  realtimeDerivedVehicleType: _derivedVehicleType
+                  realtimeDerivedVehicleType: _derivedVehicleType,
+                  timetableVehicleType: _realtimeReferenceModel
                 });
                 _vehicleResolveMs += _perfNow() - _vehicleStart;
                 _projectVehicleResolution(positionData, _rtVehicle, false);
