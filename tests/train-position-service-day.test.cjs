@@ -385,3 +385,30 @@ test('Nippori-Toneri canonical line ID maps to the Toei ODPT railway', () => {
   const railway = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8'));
   assert.ok(railway.lines.Nippori_Toneri);
 });
+
+
+test('SQL adapter preserves timetable revision verification without inventing current dates', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  const start = src.indexOf('    function _trainRunToTimetable(run) {');
+  const end = src.indexOf('    // One timetable identity', start);
+  assert.ok(start >= 0 && end > start);
+  const ctx = { _plannedTrainRunIdentity() { return 'planned-trip:test'; },
+    _dbStopClock(t) { return t; }, LINE_TO_OPERATOR: {}, LINE_RAILWAY_CODE: {} };
+  vm.runInNewContext(src.slice(start, end), ctx);
+  const row = {
+    line_id: 'Chiyoda', operator: 'TokyoMetro', network_key: 'odpt.Railway:TokyoMetro.Chiyoda',
+    train_number: '1234K', service_date: '2026-10-13', calendar_type: 'weekday',
+    timetable_validity: 'undated_not_current_verified', timetable_date_verified: false,
+    stops: [
+      { station_urn: 'odpt.Station:TokyoMetro.Chiyoda.YoyogiUehara', departure_time: '10:10' },
+      { station_urn: 'odpt.Station:TokyoMetro.Chiyoda.Ayase', arrival_time: '10:45' }
+    ]
+  };
+  const tt = ctx._trainRunToTimetable(row);
+  assert.equal(tt._timetableValidity, 'undated_not_current_verified');
+  assert.equal(tt._timetableDateVerified, false);
+  assert.equal(tt._sourceRevisionDate, null);
+  assert.equal(tt._positionSource, 'supabase-train-run');
+  assert.match(fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8'),
+    /timetableValidity:\s*tt\._positionSource === "supabase-train-run"/);
+});
