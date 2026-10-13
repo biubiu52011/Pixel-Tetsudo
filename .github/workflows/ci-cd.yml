@@ -52,6 +52,18 @@ jobs:
                 const js=await jr.text();
                 const words=['axios','/api/','train-position','vehicle','carNo','carNumber','lineId','trainPosition'];
                 console.log('TOEI_BUNDLE_PUBLIC',JSON.stringify({path:scriptURL.pathname,status:jr.status,bytes:js.length,flags:words.filter(w=>js.includes(w)),includesToei:js.includes('toei'),includesNavitime:js.includes('navitime')}));
+                const needles=['train-position','vehicle','tram','/api/','api/','trainPosition','trainId','carNo','carNumber','sharyo','/v1/','/v2/'];
+                const snippets={};
+                for(const needle of needles){
+                  let at=0,found=[],max=0;
+                  while((at=js.indexOf(needle,at))>=0 && found.length<3 && max<3000){
+                    const chunk=js.slice(Math.max(0,at-85),Math.min(js.length,at+135))
+                      .replace(/(?:[A-Za-z0-9_-]{32,})/g,'[long-token-redacted]');
+                    found.push(chunk);at+=needle.length;max++;
+                  }
+                  if(found.length)snippets[needle]=found;
+                }
+                console.log('TOEI_BUNDLE_CONTEXTS',JSON.stringify(snippets).slice(0,10500));
               }
             }catch(e){console.log('TOEI_PAGE_UNAVAILABLE',e.name||'error');}
           })();
