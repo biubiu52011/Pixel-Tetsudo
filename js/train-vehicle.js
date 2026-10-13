@@ -232,6 +232,50 @@ function resolveTodenArakawaLiveCar(ctx) {
   return name ? { number: number, name: name } : null;
 }
 
+// Verified Toei vehicle identities and available owner-gallery artwork.
+// Fleet sources: Tokyo Metropolitan Bureau of Transportation vehicle diagrams
+// https://www.kotsu.metro.tokyo.jp/about/koukai/vehicle_outline/model_diagram/
+// https://www.kotsu.metro.tokyo.jp/about/service/subway.html
+// https://www.kotsu.metro.tokyo.jp/about/service/nippori_toneri.html
+// Artwork identity is exact only; bare multi-appearance families carry no PNG.
+[
+  { id: "toei-fleet-0", displayName: "都営5500形", asset: "../images/列车/都営地下鉄/都営地下鉄_5500形.png", aliases: ["都営地下鉄5500形","東京都交通局5500形"] },
+  { id: "toei-fleet-1", displayName: "都営6300形", asset: "../images/列车/都営地下鉄/都営地下鉄_6300形_3次車.png", aliases: ["都営地下鉄6300形","東京都交通局6300形","都営6300形（3次車）"] },
+  { id: "toei-fleet-2", displayName: "都営6500形", asset: "../images/列车/都営地下鉄/都営地下鉄_6500形.png", aliases: ["都営地下鉄6500形","東京都交通局6500形"] },
+  { id: "toei-fleet-3", displayName: "都営10-300形", asset: null, aliases: ["都営地下鉄10-300形","東京都交通局10-300形"] },
+  { id: "toei-fleet-4", displayName: "都営10-300形（1・2次車）", asset: "../images/列车/都営地下鉄/都営地下鉄_10-300形_1・2次車.png", aliases: [] },
+  { id: "toei-fleet-5", displayName: "都営10-300形（3次車以降）", asset: "../images/列车/都営地下鉄/都営地下鉄_10-300形_3次車以降.png", aliases: [] },
+  { id: "toei-fleet-6", displayName: "都営12-000形（4次車）", asset: "../images/列车/都営地下鉄/都営地下鉄_12-000形_4次車.png", aliases: [] },
+  { id: "toei-fleet-7", displayName: "都営12-600形", asset: null, aliases: ["都営地下鉄12-600形","東京都交通局12-600形"] },
+  { id: "toei-fleet-8", displayName: "都営12-600形（1次車）", asset: "../images/列车/都営地下鉄/都営地下鉄_12-600形_1次車.png", aliases: [] },
+  { id: "toei-fleet-9", displayName: "都営12-600形（前期車）", asset: "../images/列车/都営地下鉄/都営地下鉄_12-600形_前期車.png", aliases: [] },
+  { id: "toei-fleet-10", displayName: "都営12-600形（後期車）", asset: "../images/列车/都営地下鉄/都営地下鉄_12-600形_後期車.png", aliases: [] },
+  { id: "toei-fleet-11", displayName: "日暮里・舎人ライナー300形", asset: "../images/列车/都営地下鉄/都営地下鉄_300形.png", aliases: ["都営日暮里・舎人ライナー300形"] },
+  { id: "toei-fleet-12", displayName: "日暮里・舎人ライナー320形", asset: "../images/列车/都営地下鉄/都営地下鉄_320形.png", aliases: ["都営日暮里・舎人ライナー320形"] },
+  { id: "toei-fleet-13", displayName: "日暮里・舎人ライナー330形", asset: "../images/列车/都営地下鉄/都営地下鉄_330形.png", aliases: ["都営日暮里・舎人ライナー330形"] }
+].forEach(function(rec) {
+  CANONICAL_VEHICLES[rec.id] = {
+    displayName: rec.displayName,
+    iconName: rec.displayName,
+    asset: rec.asset,
+    aliases: rec.aliases
+  };
+});
+
+// ODPT trainOwner (not operator) identifies the actual operator's rolling
+// stock on through-service lines. Only these two Toei-owned fleets are
+// single-model today; Mita and Oedo have multiple models. Do not guess there.
+function resolveToeiOwnerSingleFleet(ctx) {
+  if (normOp(ctx.operator) !== "Toei") return null;
+  var owner = String(ctx.trainOwner || "").replace(/^odpt\.(?:Operator|TrainOwner):/, "");
+  if (owner !== "Toei") return null;
+  if (ctx.lineId === "Asakusa" && ctx.railway === "odpt.Railway:Toei.Asakusa")
+    return "都営5500形";
+  if (ctx.lineId === "Shinjuku" && ctx.railway === "odpt.Railway:Toei.Shinjuku")
+    return "都営10-300形";
+  return null;
+}
+
 var CANONICAL_VEHICLE_ALIAS_INDEX = {};
 var CANONICAL_VEHICLE_ALIAS_CONFLICTS = {};
 function _registerCanonicalVehicleAlias(alias, rec) {
@@ -802,6 +846,12 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     ctx = ctx || {};
     var assignmentOperator = normOp(ctx.assignmentOperator || ctx.operationOperator || '');
     var tcar = resolveTodenArakawaLiveCar(ctx);
+    // A source-supplied exact vehicle model outranks a generic fleet constraint.
+    // Keep the latter only for trains without model evidence (never invent variants).
+    var hasExplicitVehicle = !!(String(ctx.realtimeVehicleType || '').trim() ||
+      String(ctx.realtimeDerivedVehicleType || '').trim() ||
+      String(ctx.timetableVehicleType || '').trim());
+    var toeiFleet = hasExplicitVehicle ? null : resolveToeiOwnerSingleFleet(ctx);
 
     // One identity arbitration path for realtime, realtime-derived and
     // timetable/SQL evidence. Normalize *registered exact aliases* before
@@ -819,7 +869,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       { source: 'realtime', value: ctx.realtimeVehicleType },
       { source: 'realtime-derived', value: ctx.realtimeDerivedVehicleType },
       { source: 'timetable', value: ctx.timetableVehicleType },
-      { source: 'official-realtime-car-number', value: tcar && tcar.name }
+      { source: 'official-realtime-car-number', value: tcar && tcar.name },
+      { source: 'official-train-owner-single-fleet', value: toeiFleet }
     ].forEach(function(group) {
       splitCandidates(group.value).forEach(function(rawCandidate) {
         var candidate = admittedIdentity(rawCandidate);
@@ -887,6 +938,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       // so downstream diagnostics can distinguish the evidence channel.
       if (tcar && chosen === tcar.name) {
         identityReason = 'verified-toden-realtime-car-number';
+      } else if (toeiFleet && chosen === toeiFleet) {
+        identityReason = 'verified-toei-owner-single-fleet';
       } else if (chosenSrc === 'timetable') {
         identityReason = 'timetable-vehicle-evidence';
       } else {

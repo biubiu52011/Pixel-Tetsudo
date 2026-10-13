@@ -340,3 +340,76 @@ test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and
   assert.match(fusion, /railway: railway,/);
   assert.match(fusion, /window\.TrainOperationEvidence &&\s*lid !== "Arakawa"/);
 });
+
+test('Toei 2026 fleet resolves only exact identity evidence to existing gallery PNGs', () => {
+  const vm = require('node:vm');
+  const window = {};
+  vm.runInNewContext(read('js/train-vehicle.js'), {window,console:{debug(){}}});
+  const scenarios = [
+    ['都営5500形','5500形.png'],
+    ['都営6300形','6300形_3次車.png'],
+    ['都営6500形','6500形.png'],
+    ['都営10-300形',null],
+    ['都営10-300形（1・2次車）','10-300形_1・2次車.png'],
+    ['都営10-300形（3次車以降）','10-300形_3次車以降.png'],
+    ['都営12-000形（4次車）','12-000形_4次車.png'],
+    ['都営12-600形',null],
+    ['都営12-600形（1次車）','12-600形_1次車.png'],
+    ['都営12-600形（前期車）','12-600形_前期車.png'],
+    ['都営12-600形（後期車）','12-600形_後期車.png'],
+    ['日暮里・舎人ライナー300形','300形.png'],
+    ['日暮里・舎人ライナー320形','320形.png'],
+    ['日暮里・舎人ライナー330形','330形.png']
+  ];
+  for (const [vehicleName,imageName] of scenarios) {
+    const r = window.TrainVehicle.resolve({realtimeVehicleType:vehicleName});
+    assert.equal(r.identityStatus,'EXACT',vehicleName);
+    assert.equal(r.name,vehicleName);
+    if (imageName) {
+      assert.ok(r.iconPath.endsWith('/都営地下鉄_' + imageName),vehicleName);
+      assert.ok(fs.existsSync(path.join(root,r.iconPath.replace('../',''))),vehicleName);
+    } else {
+      assert.equal(r.iconPath,'',vehicleName + ' has multiple vehicle appearances');
+    }
+  }
+  for (const [alias,canonical] of [
+    ['都営地下鉄5500形','都営5500形'],
+    ['東京都交通局6300形','都営6300形'],
+    ['東京都交通局6500形','都営6500形'],
+    ['都営地下鉄10-300形','都営10-300形']
+  ]) {
+    assert.equal(window.TrainVehicle.resolve({realtimeVehicleType:alias}).name,canonical);
+  }
+  const asakusa = {lineId:'Asakusa',operator:'Toei',railway:'odpt.Railway:Toei.Asakusa'};
+  const shinjuku = {lineId:'Shinjuku',operator:'Toei',railway:'odpt.Railway:Toei.Shinjuku'};
+  const a = window.TrainVehicle.resolve({...asakusa,trainOwner:'odpt.Operator:Toei',trainNumber:'821T'});
+  assert.equal(a.name,'都営5500形');
+  assert.equal(a.identityReason,'verified-toei-owner-single-fleet');
+  assert.ok(a.iconPath.endsWith('都営地下鉄_5500形.png'));
+  const sj = window.TrainVehicle.resolve({...shinjuku,trainOwner:'odpt.Operator:Toei'});
+  assert.equal(sj.name,'都営10-300形');
+  assert.equal(sj.iconPath,'','cannot guess Shinjuku first- vs third-generation front');
+  for (const params of [
+    {...asakusa,trainNumber:'821T'}, // No proof the car is owned by Toei
+    {...asakusa,trainOwner:'odpt.Operator:Hokuso',trainNumber:'829N'},
+    {...asakusa,trainOwner:'odpt.Operator:Toei',railway:'odpt.Railway:Toei.Mita'},
+    {...shinjuku,trainOwner:'odpt.Operator:Keio'},
+    {...shinjuku,trainOwner:'odpt.Operator:Toei',operator:'JR-East'},
+    {lineId:'Mita',operator:'Toei',railway:'odpt.Railway:Toei.Mita',trainOwner:'odpt.Operator:Toei'},
+    {lineId:'Oedo',operator:'Toei',railway:'odpt.Railway:Toei.Oedo',trainOwner:'odpt.Operator:Toei'},
+    {lineId:'NipporiToneri',operator:'Toei',railway:'odpt.Railway:Toei.NipporiToneri',trainOwner:'odpt.Operator:Toei'}
+  ]) {
+    assert.equal(window.TrainVehicle.resolve(params).identityStatus,'UNKNOWN',JSON.stringify(params));
+  }
+  assert.equal(window.TrainVehicle.resolve({...asakusa,trainOwner:'odpt.Operator:Hokuso',
+    realtimeVehicleType:'北総7500形'}).name,'北総7500形','other operator evidence unaffected');
+  assert.equal(window.TrainVehicle.resolve({...shinjuku,trainOwner:'odpt.Operator:Toei',
+    realtimeVehicleType:'都営10-300形（3次車以降）'}).name,'都営10-300形（3次車以降）');
+  assert.equal(window.TrainVehicle.resolve({...asakusa,trainOwner:'odpt.Operator:Toei',
+    realtimeVehicleType:'都営5500形'}).name,'都営5500形');
+  // 33 car-specific Toden assignments must still outrank operator-wide evidence.
+  const tram = window.TrainVehicle.resolve({lineId:'Arakawa',operator:'Toei',
+    railway:'odpt.Railway:Toei.Arakawa',realtimeCarNumber:'8501'});
+  assert.equal(tram.verifiedCarNumber,'8501');
+  assert.ok(tram.iconPath.endsWith('8501号車_山吹色.png'));
+});
