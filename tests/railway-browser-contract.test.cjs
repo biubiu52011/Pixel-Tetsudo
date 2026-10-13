@@ -275,7 +275,7 @@ test('ODPT FULL runtime lines with exact IDs bypass SQL and remain registered', 
   }
 });
 
-test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and matching gallery PNGs', () => {
+test('Toden historical literal car-number inputs resolve 33 car models; current ODPT trip IDs must not', () => {
   const vm = require('node:vm');
   const window = {};
   vm.runInNewContext(read('js/train-vehicle.js'), {window, console:{debug(){}}}, {filename:'train-vehicle.js'});
@@ -322,7 +322,7 @@ test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and
     }
   }
   assert.equal(count,33);
-  for (const number of ['0000','7007','7501','7700','7709','8506','8811','8909','9000','9003','ODPT0059','7701F','07701','']) {
+  for (const number of ['0000','7007','7501','7700','7709','8506','8811','8909','9000','9003','ODPT0059','ODPT2503','ODPT2529','7701F','07701','']) {
     assert.equal(window.TrainVehicle.resolve({...context,realtimeCarNumber:number}).identityStatus,'UNKNOWN',number);
   }
   for (const change of [
@@ -337,6 +337,10 @@ test('Toden Arakawa live vehicle numbers resolve all 33 cars to exact models and
   assert.equal(conflict.iconPath,'');
   const fusion = read('js/data-fusion.js');
   assert.match(fusion, /realtimeCarNumber: lid === "Arakawa"/);
+  assert.ok(fusion.includes('positionData.vehicleEvidenceGap = "odpt-trip-id-without-car-number"'),
+    'observed ODPT trip ID must be labelled as missing physical car evidence');
+  assert.ok(fusion.includes('/^\\d{4}$/.test(positionData.trainNumber)'),
+    'legacy literal physical car number may resolve; ODPTnnnn must never be stripped');
   assert.match(fusion, /railway: railway,/);
   assert.match(fusion, /window\.TrainOperationEvidence &&\s*lid !== "Arakawa"/);
 });
