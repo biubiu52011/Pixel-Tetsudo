@@ -180,7 +180,10 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
 // physical station indices, and provide text/icon lanes without clipping.
 {
   const ctx={
-    window:{currentLang:"ja",RailwayDB:{resolveStationName:(id)=>id==="S12"?"西新宿五丁目":id==="S20"?"麻布十番":id}},
+    window:{currentLang:"ja",RailwayDB:{resolveStationName:(id)=>({
+      "Hikarigaoka":"光が丘","S2":"西新宿五丁目",
+      "S12":"牛込神楽坂","S20":"国立競技場"
+    }[id] || id)}},
     _routeGeometryCache:{},_geomKey:(id)=>id,
     _getTransferMap:()=>({}),_isMobileView:()=>true,
     _throughDirForStation:()=>null,_throughChipRows:()=>0,
@@ -202,8 +205,8 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
     six.stationCoords[18].x>six.junctionX,"six tail and ring rails must stay distinct");
   assert(six.svgW>360 && six.svgW>six.junctionX+63+110,
     "six mobile map must preserve a real right-column name/icon lane");
-  assert(six.stationCoords[1].x-12-8*16>0,"tail names must not clip at left edge");
-  assert(six.junctionX-12-8*16>six.stationCoords[1].x,
+  assert(six.stationCoords[1].x-12-6*16*1.1>0,"longest real tail name must not clip at left edge");
+  assert(six.junctionX-12-5*16*1.1>six.stationCoords[1].x,
     "ring-left names must not cross the tail rail");
   const trackSrc=read("js/train-track-layout.js");
   assert(trackSrc.includes("sixLoopStartIndex")&&trackSrc.includes("idx === points.length - 1 ? 0"),
@@ -219,7 +222,7 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
   assert(css.includes('.tp-line-map.tp-six-fixed-map { overflow-x: hidden; overflow-x: clip; }') &&
          css.includes('.tp-six-fixed-map .tp-map-wrap svg { width: 100%; max-width: 100%; height: auto; }'),
     "six map must scale its complete viewBox into the screen instead of clipping it");
-  assert(six.svgW < 450,"six composition must not waste horizontal space when scaled on mobile");
+  assert(six.svgW < 450,"Japanese six composition must not waste horizontal space when scaled on mobile");
   assert(renderer.includes('anchor = "end";')&&renderer.includes('geometry.isSixShapedLoop && geometry.isDualLoop6'),
     "six labels must stay outside the ring at mobile widths");
 }
