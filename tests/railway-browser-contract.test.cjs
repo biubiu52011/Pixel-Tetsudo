@@ -186,7 +186,8 @@ test('direct through railway loads its timetable evidence and shares one estimat
   assert.match(page, /RunningChainResolver\.getDirectThroughLines\(lineId\)/);
   assert.match(page, /if \(!lines\[id\]\) return/);
   assert.match(page, /_requestedLines\.indexOf\(id\) < 0/);
-  assert.match(page, /!window\.ODPTClient\.hasRealtimePositionApi\(id\)/);
+  assert.match(page, /if \(needsSqlTrainPlan\(id\)/);
+  assert.match(page, /policy\.sqlPlannedFallback === true/);
   assert.match(page, /_timetablePartners\.map\(function\(id\)/);
   assert.match(fusion, /if \(_hasOdptTimetable\(lineId\)\) \{/);
   assert.match(estimator, /scheduledItineraryKey: run\.scheduledItineraryKey/);
