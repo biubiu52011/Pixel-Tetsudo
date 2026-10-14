@@ -1,12 +1,14 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 本地备份、线上同步与 trains.html 公开发布（IN_PROGRESS）
+## 2026-10-14 JST — 本地备份、线上同步与 trains.html 公开发布（DONE）
 
 - 用户明确授权保留本地备份、与线上同步并公开对接 trains.html。24 个文件逐文件 SHA256 备份通过；原始完整 binary patch 和 manifest 保存在 recovery/local-backup-20261014-before-publish，Git stash backup-before-non-full-sql-publish-20261014 继续保留。
 - 工作区已快进至 origin/main 5483796c8cbed364b0158a95ab7f6a5de9e31cac，在最新脚本上合入非 FULL SQL 策略；保留线上新增日历有效性、候选车型分级、列车去重、荒川 ODPT trip ID 保护、渲染和日期叠加功能。未覆盖 Supabase v142/v7 函数。
 - 发布范围为既有 ODPTClient、DataFusion、trains-page 的共用 SQL 选择规则、共享配置注释、七页相关资源版本 4.3.1199 及回归测试／执行记录。本地其他原有数据、Meguro manual、normalization backlog、db-loader 改动在备份／工作区保留，独立于本次发布。
 - 最新基准验证：31 tools suites、61 node:test checks、4 Python guards PASS；保留既有 baseline warnings。SQL 已有 210 非 FULL 线路，13 FULL 禁用 SQL，新增班次导入及 PNG 检查记录见本次报告。
-- 下一步：推送本次发布提交，确认 GitHub CI／Release Guards／Pages 和公开 trains.html 的 build 与接口，再记录部署结果。
+- 发布代码提交：0cccd721bf834f568f7a881b7879be7aa9ad5e3d。CI / CD 38495454495、Release Guards 38495454599、Pages 38495454358 全部 success；公开四个改动脚本 HTTP 200、SHA256 与提交内容一致，页面资源版本 4.3.1199。
+- 真实浏览器 DOM 验收通过：公开 trains.html 山手线显示 planned-trip 1000G／929G 等 SQL 班次及原生 E235系0番台 PNG；埼京线显示 odpt.Train／urn:ucode 实时标记，接口为 REALTIME_API_LINE BYPASS；没有浏览器 error 日志。未使用系统截图或声明人工视觉验收。
+- 原有六个独立本地修改逐文件 SHA256 与备份一致；备份、binary patch 和 Git stash 均保留。发布验收材料存放在 recovery/local-backup-20261014-before-publish。
 
 
 

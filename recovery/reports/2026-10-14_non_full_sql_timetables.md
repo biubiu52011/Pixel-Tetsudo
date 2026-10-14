@@ -1,6 +1,6 @@
 # 2026-10-14 JST — 非 FULL SQL 时刻表及车型证据链
 
-执行者：Codex。数据库已更新；前端改动在本地，未提交、推送或发布。
+执行者：Codex。数据库已更新；前端已在用户授权后完成本地备份、线上整合和公开发布。下方原始 SQL 执行记录保留，发布验收见文末。
 
 ## 规则与实现
 
@@ -46,3 +46,12 @@ SET sql_planned_fallback_enabled = id <> ALL (ARRAY[
 - 未进行真实浏览器交互验收（browser runtime: NOT VERIFIED）。未执行 GitHub CI/CD 或 Pages 发布；未部署或降级现有 Supabase train-runs v142、timetable-ingest v7，直接复用它们已有的 SQL eligibility 支持。
 
 审计材料保存在本次对话 visualization 的 `non-full-sql` 目录：upstream-audit.json、live-serving-audit.json、vehicle-mapping-audit.json、sql-evidence-png-chain.json。相关原始本地文件及核对用线上固定版本快照也保存在该目录。
+
+## 用户授权后的公开发布验收
+
+- 发布代码提交：0cccd721bf834f568f7a881b7879be7aa9ad5e3d；最新线上基准 5483796c 已完整吸收，本次策略在新版实现上合入。
+- 本地 24 个文件备份经 SHA256 确认；完整补丁、manifest 和 Git stash 保留。6 个原有独立本地修改保持原样。
+- 最新基准的 31 工具测试套件、61 页面／服务日测试、4 Python guards 和 PNG 校验通过。
+- CI / CD 38495454495、Release Guards 38495454599、Pages 38495454358 均 success。公开四个修改脚本 HTTP 200、哈希匹配，资源版本 4.3.1199。
+- 公开页面真实浏览器 DOM：山手线 SQL planned-trip 1000G／929G 等 → E235系0番台 PNG；埼京线为 ODPT Train 实时标记。错误日志为空。未进行系统截图或人工视觉确认。
+- 公开地址：https://biubiu52011.github.io/Pixel-Tetsudo/pages/trains.html 。
