@@ -243,7 +243,7 @@ test('live API registry remains intact; only explicit HYBRID source may bypass S
   // Never skip their ODPT timetable source based solely on coverage mode.
   const extraOptIns = [...bundled.matchAll(/"([^"]+)": \{ mode: "HYBRID", sqlPlannedFallback: true \}/g)];
   assert.equal(extraOptIns.length, 0, 'unverified SQL opt-ins would hide existing ODPT timetables');
-  assert.match(importer, /if \(line\.realtime_position_api_enabled === true\)/);
+  assert.match(importer, /if \(line\.realtime_position_api_enabled === true &&[\s\S]*?line\.sql_planned_fallback_enabled !== true/);
 });
 
 test('runtime configuration source matches the deployed config-bundle section', () => {
