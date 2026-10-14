@@ -1,13 +1,26 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 上野东京运行走廊语义修正（发布验收中）
+## 2026-10-14 JST — 常磐快速・成田线组合范围补齐（发布验收中）
+
+- 用户指出标题包含成田线但地图只绘常磐快速，先前验收漏查该范围。根因：NaritaAbikoBranch 物理 branchOf=Narita，Joban presentation.lineIds 只有 Joban；原 geometry／positions 仅依父子关系，漏掉另一个父线下的组合展示成员。
+- Joban 既有 presentation.lineIds 增加 NaritaAbikoBranch。共享 LinePresentationService.getMapBranchIds 根据 canonical 支线与显式组合成员范围统一给 geometry、train positions、activation 供给。保留 NaritaAbikoBranch.branchOf=Narita、原拓扑／运行情报／SQL source identity，不重新建表、改名或复制站表。
+- 我孙子 junction 与东我孙子、湖北、新木、布佐、木下、小林、安食、下总松崎、成田九个站点使用既有支线几何；支线 SQL 列车以 branch fusionRole 投影到该列。成田主线原页面仍保留我孙子支线和机场支线。
+- Supabase 原有平日 80／SaturdayHoliday 80 班次；本次只读核对，未修改 SQL。新增真实数据结构回归同时验证成员范围、双页面分支、物理归属、支线列车、移动／桌面九站坐标与画布边界。
+- 验证：31 tools suites、64 页面／服务日检查、4 Python guards PASS（既有 baseline warnings 保留）。相关资源版本 4.3.1201。原有其他本地修改保留，数据发布仅含 presentation.lineIds 增量。
+- 下一步：同步上线并实际检查公开 Joban 地图的支线站点和支线列车；此前截图／视觉声明不代替这次验收。
+
+
+
+## 2026-10-14 JST — 上野东京运行走廊语义修正（DONE）
 
 - 用户更正：上野东京线是连接品川—上野的共用运行走廊，不是独立线路；常磐以上野为基本终点，部分班次（含特急）按实际时刻表延伸品川。
 - 复用 RuntimeConfig 的走廊角色声明、共享 LinePresentationService／DataState／LineCard、trains-data 和 RunningChainResolver：走廊不生成独立线路卡片或直通标志，不参与列车跨线路后继拼接；原 source records／站表／SQL 保留。Joban presentation.originStation=Ueno，只影响基础区间文字，保留所有品川延伸停站与特急实际目的地。
 - 修正所有线路交接条件：前段末站必须等于后段首站，不能只因两站同属 handoverStations 集合而串联。成田线等真实跨线关系与证据判断保留。
 - 测试：63 页面／服务日检查、31 tools suites、49 线路排序、运行情报隔离、4 Python guards PASS（既有 baseline warnings 保留）。新增多交接站误串复现、走廊隐藏／真实成田直通保留、常磐上野基础区间卡片检查。相关七页资源版本 4.3.1200。
 - 既有独立本地数据改动不纳入本次发布；railway_data.json／file fallback 仅发布 presentation.originStation 增量。修改前文件备份于 recovery/local-backup-20261014-before-corridor-fix。
-- 待确认：GitHub CI／Pages 及公开 Joban 页面；浏览器视觉未做系统截图确认。
+- 最终发布 HEAD：5e18ad0a0b4158b537f8c78000ce99ee54914210（生产增量 ea75bbb3／4505d6f7；测试调用参数修正 5e18ad0a）。CI / CD 38504289194、Release Guards 38504289184、Pages 38504288765 均 success。
+- 公开浏览器 DOM：常磐卡片为 上野↔土浦，UenoTokyo 独立卡片数 0；地图保留 品川／上野，直通上野东京文本 0，列车标记中 UenoTokyo 误串 ID 0。按真实班次停站及 destination 保留品川始发／终到，包括特急。未做系统截图或宣称人工视觉验收。
+- 发布完成后的验收记录保存在本地；原有六项独立修改保持，JSON／file fallback 仅向线上增加 originStation 字段。
 
 
 

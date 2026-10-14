@@ -284,6 +284,34 @@
     return !!(line && line.branchOf);
   }
 
+  // A passenger presentation may include a branching member whose physical
+  // parent is another canonical line. Keep that ownership intact while using
+  // the SAME display scope for geometry, activation and train placement.
+  function getMapBranchIds(lineId, allLines) {
+    allLines = allLines || window.UNIFIED_LINES || {};
+    var own = allLines[lineId];
+    if (!own) return [];
+    var result = [];
+    function add(id) {
+      if (id !== lineId && allLines[id] && result.indexOf(id) < 0) result.push(id);
+    }
+    (own.branches || []).forEach(add);
+    Object.keys(allLines).forEach(function(id) {
+      if (allLines[id] && allLines[id].branchOf === lineId) add(id);
+    });
+    getPresentationMembers(lineId, allLines).forEach(function(id) {
+      var member = allLines[id];
+      if (!member || id === lineId) return;
+      var stations = member.stations || [];
+      var joins = [stations[0], stations[stations.length - 1]];
+      if (joins.some(function(station) {
+        var index = (own.stations || []).indexOf(station);
+        return index > 0 && index < own.stations.length - 1;
+      })) add(id);
+    });
+    return result;
+  }
+
   window.LinePresentationService = {
     getDisplayOrder: getDisplayOrder,
     getPresentationOrder: getPresentationOrder,
@@ -294,6 +322,7 @@
     getPresentation: getPresentation,
     getPrimaryPresentation: getPrimaryPresentation,
     getPresentationMembers: getPresentationMembers,
-    isBranch: isBranch
+    isBranch: isBranch,
+    getMapBranchIds: getMapBranchIds
   };
 })();

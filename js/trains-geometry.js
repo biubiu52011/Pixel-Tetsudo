@@ -148,8 +148,10 @@
     // Get branch lines
     var allLines = getLinesData();
     var branchLines = [];
+    var mapBranches = window.LinePresentationService && window.LinePresentationService.getMapBranchIds
+      ? window.LinePresentationService.getMapBranchIds(lineId, allLines) : null;
     for (var bid in allLines) {
-      if (allLines[bid].branchOf === lineId && bid !== lineId) {
+      if (bid !== lineId && (mapBranches ? mapBranches.indexOf(bid) >= 0 : allLines[bid].branchOf === lineId)) {
         var bl = allLines[bid];
         branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }

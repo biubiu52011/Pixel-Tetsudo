@@ -16241,7 +16241,8 @@ window.RAILWAY_DATA = {
         "icon": "../images/鉄道/JR東日本/常磐線快速.png",
         "order": 9,
         "lineIds": [
-          "Joban"
+          "Joban",
+          "NaritaAbikoBranch"
         ],
         "operatorGroup": "JR_EAST"
       },
