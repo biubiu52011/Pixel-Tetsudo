@@ -1,6 +1,15 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 常磐快速越过实时范围后 SQL 接续（SQL／本地完成，公开发布验收中）
+## 2026-10-14 JST — 图标与方向紧贴并整体上下避让（本地完成，发布验收中）
+
+- 用户指出文字被推到数站以外。复用共享 resolveLabels，输入图标及完整方向文字的联合矩形，最近上下槽位避让；renderer给图标与文字相同位移，保持原始固定间距及居中，删除长虚线引导。
+- 保留原始几何／动画坐标，逐帧恢复原transform再计算整体位移，PNG方向翻转保留，避免累计偏移。大江户六形专用布局保留。仅trains资源4.3.1212，SQL与车型不改。
+- 31 tools suites、64 Node checks及4 Python guards通过；实际renderer回归验证图标文字相同位移、间距固定、重复刷新不累计，另测最近上方槽位和源顺序稳定。浏览器工具本轮连接超时，未声称实际页面测量。
+- 修改前备份 recovery/local-backup-20261014-before-compact-train-caption；六项独立修改保留。
+
+
+
+## 2026-10-14 JST — 常磐快速越过实时范围后 SQL 接续（DONE：5df7c18f已发布并验收）
 
 - 根因：JobanRapid 时刻表在取手截断；JobanMain SQL 来源缺少前后官方运行段标识。修改前 SQL 和官方原件备份 recovery/joban-continuity-20261014。
 - 逐项核对官方平日357／休日355，共712条原始停站 URN、到发时刻、方向、种别、终点完全一致，仅补 source_trip_id／previous／next；原 source_path、时刻、车型和未核验日期保留。未削弱独立来源导入保护。

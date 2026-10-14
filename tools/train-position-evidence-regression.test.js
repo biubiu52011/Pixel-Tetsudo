@@ -961,7 +961,7 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
   function overlaps(a,b){return a.x<b.x+b.width && a.x+a.width>b.x && a.y<b.y+b.height && a.y+a.height>b.y;}
   for(let i=0;i<placed.length;i++){
     assert.equal(offsets[labels[i].id].x,0,'caption centre must stay aligned with its own train');
-    assert(offsets[labels[i].id].y>=0,'caption avoidance must never move above the train');
+    assert(Number.isFinite(offsets[labels[i].id].y),'paired units must have finite vertical offsets');
     assert(!overlaps(placed[i],obstacle),'caption must avoid station text');
     assert(placed[i].x>=0 && placed[i].y>=0 && placed[i].x+36<=300 && placed[i].y+10<=300);
     for(let j=i+1;j<placed.length;j++)assert(!overlaps(placed[i],placed[j]),'complete destination labels must not overlap');
@@ -981,4 +981,39 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
     assert(anchor('dir',100,direction)>109,'caption must clear the bottom of the 18px train icon');
   }
   console.log('Direction caption below-icon anchor for up/down/unknown: PASS');
+}
+
+// Composite bounds include the icon and its tight caption, not the caption alone.
+{
+  const ctx={window:{}};
+  vm.runInNewContext(read('js/train-track-layout.js'),ctx);
+  const units=[{id:'a',x:50,y:60,width:40,height:30},{id:'b',x:50,y:60,width:40,height:30}];
+  const shifts=ctx.window.TrainTrackLayout.resolveLabels(units,[],{x:0,y:0,width:300,height:300});
+  assert.equal(shifts.a.y,0);
+  assert.equal(shifts.b.y,34);
+  const obstacle={x:50,y:90,width:40,height:30};
+  const nearest=ctx.window.TrainTrackLayout.resolveLabels([units[0]],[obstacle],{x:0,y:0,width:300,height:300});
+  assert.equal(nearest.a.y,-34,'unit may move upward when the nearest lower slot is occupied');
+  const renderer=read('js/trains-render.js');
+  assert(renderer.includes("marker.setAttribute('transform', shift +"));
+  assert(renderer.includes("label.setAttribute('transform', shift +"));
+  assert(!renderer.includes("link.setAttribute('data-train-caption-link'"),'captions must not acquire detached leader lines');
+}
+
+{
+ const ctx={window:{}};vm.runInNewContext(read('js/train-track-layout.js'),ctx);
+ function node(attrs,b,label){return {attrs:{...attrs},getAttribute(k){return this.attrs[k]||null;},setAttribute(k,v){this.attrs[k]=String(v);},removeAttribute(k){delete this.attrs[k];},closest(){return label?this:null;},getBoundingClientRect(){const m=(this.attrs.transform||'').match(/^translate\(([-0-9.]+),([-0-9.]+)\)/);const x=b.x+(m?+m[1]:0),y=b.y+(m?+m[2]:0);return {x,y,width:b.width,height:b.height,right:x+b.width,bottom:y+b.height};}};}
+ const icon=node({'data-train-id':'p','data-marker-raw-transform':''},{x:60,y:60,width:14,height:18});
+ const label=node({'data-train-label-for':'p','data-label-raw-transform':'translate(0,0)'},{x:47,y:84,width:40,height:10},true);
+ const obstacle=node({},{x:47,y:84,width:40,height:10});
+ const svg={__geometry:{},getScreenCTM:()=>({a:1,d:1}),getBoundingClientRect:()=>({x:0,y:0,width:300,height:300}),querySelectorAll:()=>[obstacle,icon]};
+ const layer={ownerSVGElement:svg,querySelectorAll:s=>s==='[data-train-id]'?[icon]:s==='[data-train-label-for]'?[label]:[]};
+ const renderer=read('js/trains-render.js'),start=renderer.indexOf('  function _resolveTrainLabelCollisions('),end=renderer.indexOf('  // v4.3.454:',start);
+ vm.runInNewContext(renderer.slice(start,end)+';this.layout=_resolveTrainLabelCollisions;',ctx);
+ ctx.layout(layer);const first=[icon.attrs.transform,label.attrs.transform];
+ assert.equal(first[0].trim(),first[1].replace(/ translate\(0,0\)$/,''));
+ assert.equal(label.getBoundingClientRect().y-icon.getBoundingClientRect().bottom,6);
+ ctx.layout(layer);assert.deepEqual([icon.attrs.transform,label.attrs.transform],first);
+ assert.equal(label.getBoundingClientRect().y-icon.getBoundingClientRect().bottom,6);
+ console.log('Paired marker/caption renderer spacing and repeat frames: PASS');
 }

@@ -330,10 +330,10 @@
       .forEach(function (label) {
         var best = null;
         var stepY = Math.max(12, label.height + 4);
-        // A direction caption belongs directly below its own train. Keep its
-        // horizontal centre fixed; collisions may only move it farther down.
+        // The renderer supplies the complete icon + caption rectangle. Move
+        // that unit to the nearest vertical slot, preserving their spacing.
         for (var row = 0; row <= labels.length + placed.length + 2 && !best; row++) {
-          var dy = row * stepY;
+          var dy = row === 0 ? 0 : Math.ceil(row / 2) * stepY * (row % 2 ? 1 : -1);
           var box = {x: label.x, y: label.y + dy, width: label.width, height: label.height};
           if (bounds && (box.x < bounds.x || box.y < bounds.y ||
               box.x + box.width > bounds.x + bounds.width || box.y + box.height > bounds.y + bounds.height)) continue;

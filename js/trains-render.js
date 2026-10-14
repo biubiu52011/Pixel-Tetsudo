@@ -1035,6 +1035,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // model is known. This is a neutral location dot, not a vehicle drawing.
       icon.setAttribute('cx', String(px));
       icon.setAttribute('cy', String(py));
+      icon.removeAttribute('transform');
+      icon.setAttribute('data-marker-raw-transform', '');
       return;
     }
     if (tag === 'image') {
@@ -1046,6 +1048,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       } else {
         icon.removeAttribute('transform');
       }
+      icon.setAttribute('data-marker-raw-transform', icon.getAttribute('transform') || '');
       return;
     }
 
@@ -1466,7 +1469,15 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (!matrix || !matrix.a || !matrix.d) return;
     var links = trainLayer.querySelectorAll('[data-train-caption-link]');
     for (var k = 0; k < links.length; k++) links[k].parentNode.removeChild(links[k]);
-    var labels = [], groups = {}, boxes = {};
+    var labels = [], groups = {}, markers = {};
+    var icons = trainLayer.querySelectorAll('[data-train-id]');
+    for (var m = 0; m < icons.length; m++) {
+      var icon = icons[m];
+      var iconRaw = icon.getAttribute('data-marker-raw-transform') || '';
+      if (iconRaw) icon.setAttribute('transform', iconRaw);
+      else icon.removeAttribute('transform');
+      markers[icon.getAttribute('data-train-id')] = icon;
+    }
     var nodes = trainLayer.querySelectorAll('[data-train-label-for]');
     for (var i = 0; i < nodes.length; i++) {
       var node = nodes[i];
@@ -1476,40 +1487,31 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       node.setAttribute('data-label-raw-transform', raw);
       var rect = node.getBoundingClientRect();
       var id = node.getAttribute('data-train-label-for');
-      if (rect.width && rect.height) {
-        labels.push({id: id, x: rect.x, y: rect.y, width: rect.width, height: rect.height});
+      var marker = markers[id];
+      if (marker && rect.width && rect.height) {
+        var iconBox = marker.getBoundingClientRect();
+        var left = Math.min(rect.x, iconBox.x), top = Math.min(rect.y, iconBox.y);
+        labels.push({id: id, x: left, y: top,
+          width: Math.max(rect.right, iconBox.right) - left,
+          height: Math.max(rect.bottom, iconBox.bottom) - top});
         groups[id] = node;
-        boxes[id] = rect;
       }
     }
     var obstacles = [];
     var fixed = svg.querySelectorAll('text, [data-train-id]');
     for (var j = 0; j < fixed.length; j++) {
-      if (fixed[j].closest('[data-train-label-for]')) continue;
+      if (fixed[j].closest('[data-train-label-for]') ||
+          groups[fixed[j].getAttribute('data-train-id')]) continue;
       var box = fixed[j].getBoundingClientRect();
       if (box.width && box.height) obstacles.push({x: box.x, y: box.y, width: box.width, height: box.height});
     }
     var bounds = svg.getBoundingClientRect();
     var offsets = layout.resolveLabels(labels, obstacles, bounds);
     Object.keys(offsets).forEach(function (id) {
-      var label = groups[id], offset = offsets[id];
-      label.setAttribute('transform', 'translate(' + (offset.x / matrix.a) + ',' +
-        (offset.y / matrix.d) + ') ' + label.getAttribute('data-label-raw-transform'));
-      if (offset.x || offset.y) {
-        var rect = boxes[id];
-        var link = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        var x = rect.x + rect.width / 2, y = rect.y + rect.height / 2;
-        link.setAttribute('data-train-caption-link', id);
-        link.setAttribute('x1', String((x - matrix.e) / matrix.a));
-        link.setAttribute('y1', String((y - matrix.f) / matrix.d));
-        link.setAttribute('x2', String((x + offset.x - matrix.e) / matrix.a));
-        link.setAttribute('y2', String((y + offset.y - matrix.f) / matrix.d));
-        link.setAttribute('stroke', '#999');
-        link.setAttribute('stroke-width', '0.5');
-        link.setAttribute('stroke-dasharray', '2 2');
-        link.setAttribute('pointer-events', 'none');
-        trainLayer.insertBefore(link, trainLayer.firstChild);
-      }
+      var label = groups[id], marker = markers[id], offset = offsets[id];
+      var shift = 'translate(' + (offset.x / matrix.a) + ',' + (offset.y / matrix.d) + ') ';
+      label.setAttribute('transform', shift + label.getAttribute('data-label-raw-transform'));
+      marker.setAttribute('transform', shift + (marker.getAttribute('data-marker-raw-transform') || ''));
     });
   }
 
