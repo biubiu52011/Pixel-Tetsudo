@@ -1469,11 +1469,14 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (!matrix || !matrix.a || !matrix.d) return;
     var links = trainLayer.querySelectorAll('[data-train-caption-link]');
     for (var k = 0; k < links.length; k++) links[k].parentNode.removeChild(links[k]);
+    var oldBadges = trainLayer.querySelectorAll('[data-train-fold-badge]');
+    for (var f=0;f<oldBadges.length;f++) oldBadges[f].parentNode.removeChild(oldBadges[f]);
     var labels = [], groups = {}, markers = {};
     var icons = trainLayer.querySelectorAll('[data-train-id]');
     for (var m = 0; m < icons.length; m++) {
       var icon = icons[m];
       var iconRaw = icon.getAttribute('data-marker-raw-transform') || '';
+      icon.removeAttribute('display');
       if (iconRaw) icon.setAttribute('transform', iconRaw);
       else icon.removeAttribute('transform');
       markers[icon.getAttribute('data-train-id')] = icon;
@@ -1483,6 +1486,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       var node = nodes[i];
       var raw = node.getAttribute('data-label-raw-transform');
       if (!raw) raw = node.getAttribute('transform') || 'translate(0,0)';
+      node.removeAttribute('display');
       node.setAttribute('transform', raw);
       node.setAttribute('data-label-raw-transform', raw);
       var rect = node.getBoundingClientRect();
@@ -1491,9 +1495,13 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       if (marker && rect.width && rect.height) {
         var iconBox = marker.getBoundingClientRect();
         var left = Math.min(rect.x, iconBox.x), top = Math.min(rect.y, iconBox.y);
+        var pairWidth = Math.max(rect.right, iconBox.right) - left;
+        var foldWidth = 36 * Math.abs(matrix.a);
+        if (pairWidth < foldWidth) left -= (foldWidth - pairWidth) / 2;
         labels.push({id: id, x: left, y: top,
-          width: Math.max(rect.right, iconBox.right) - left,
-          height: Math.max(rect.bottom, iconBox.bottom) - top});
+          width: Math.max(pairWidth, foldWidth),
+          height: Math.max(rect.bottom, iconBox.bottom) - top + 18 * Math.abs(matrix.d),
+          foldKey: String(node.getAttribute('data-dir-sym') || '')});
         groups[id] = node;
       }
     }
@@ -1506,13 +1514,96 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       if (box.width && box.height) obstacles.push({x: box.x, y: box.y, width: box.width, height: box.height});
     }
     var bounds = svg.getBoundingClientRect();
-    var offsets = layout.resolveLabels(labels, obstacles, bounds);
+    var offsets = layout.resolveLabels(labels, obstacles, bounds, {maxShift:72});
+    var folded = {};
     Object.keys(offsets).forEach(function (id) {
       var label = groups[id], marker = markers[id], offset = offsets[id];
+      if (offset.collapsedInto) {
+        label.setAttribute('display', 'none');
+        marker.setAttribute('display', 'none');
+        (folded[offset.collapsedInto] = folded[offset.collapsedInto] || [offset.collapsedInto]).push(id);
+        return;
+      }
       var shift = 'translate(' + (offset.x / matrix.a) + ',' + (offset.y / matrix.d) + ') ';
       label.setAttribute('transform', shift + label.getAttribute('data-label-raw-transform'));
       marker.setAttribute('transform', shift + (marker.getAttribute('data-marker-raw-transform') || ''));
+    });    _syncTrainFoldBadges(trainLayer, folded, groups, markers);
+  }
+
+  function _syncTrainFoldBadges(layer, folded, groups, markers) {
+    Object.keys(folded).forEach(function(id) {
+      var label=groups[id], ids=folded[id], ns='http://www.w3.org/2000/svg';
+      var box=label.getBBox(), cx=box.x+box.width/2, y=box.y+box.height+3;
+      var badge=document.createElementNS(ns,'g');
+      badge.setAttribute('data-train-fold-badge',id);
+      badge.setAttribute('role','button');badge.setAttribute('tabindex','0');
+      badge.setAttribute('pointer-events','all');
+      var lang=window.currentLang||'ja';
+      var action=/^zh/.test(lang)?'展开列车':lang==='en'?'Show trains':'列車を展開';
+      badge.setAttribute('aria-label',action+' ('+ids.length+')');
+      badge.style.cursor='pointer';
+      var plate=document.createElementNS(ns,'rect');
+      plate.setAttribute('x',cx-17);plate.setAttribute('y',y);
+      plate.setAttribute('width',34);plate.setAttribute('height',16);
+      plate.setAttribute('rx',8);plate.setAttribute('fill','#fff');
+      plate.setAttribute('stroke','#64748b');badge.appendChild(plate);
+      var text=document.createElementNS(ns,'text');
+      text.setAttribute('x',cx);text.setAttribute('y',y+11);
+      text.setAttribute('text-anchor','middle');text.setAttribute('font-size','10');
+      text.setAttribute('fill','#334155');text.textContent='+'+(ids.length-1);badge.appendChild(text);
+      function open(e) {e.stopPropagation();e.preventDefault();_openTrainFoldList(layer,ids,groups,markers,badge);}
+      badge.addEventListener('click',open);
+      badge.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')open(e);});
+      label.appendChild(badge);
     });
+  }
+
+  // The folded view is a display group, never a coupled consist or merged run.
+  // Each selectable entry keeps its own icon, full caption and source marker.
+  function _openTrainFoldList(layer, ids, groups, markers, anchor) {
+    if (layer._closeTrainFoldPopover) layer._closeTrainFoldPopover(false);
+    var panel=document.createElement('div'), lang=window.currentLang||'ja';
+    panel.className='train-fold-popover';panel.setAttribute('role','dialog');
+    panel.setAttribute('aria-label',/^zh/.test(lang)?'列车列表':lang==='en'?'Trains':'列車一覧');
+    var close=document.createElement('button');close.className='train-fold-close';
+    close.textContent=/^zh/.test(lang)?'收起':lang==='en'?'Close':'閉じる';
+    function outside(e){if(!panel.contains(e.target)&&!anchor.contains(e.target))dismiss(false);}
+    function dismiss(focus){
+      panel.remove();document.removeEventListener('pointerdown',outside,true);
+      if(observer)observer.disconnect();
+      if(layer._trainFoldPopover===panel){layer._trainFoldPopover=null;layer._closeTrainFoldPopover=null;}
+      if(focus!==false&&anchor.isConnected)anchor.focus();
+    }
+    var observer=typeof MutationObserver==='function'?new MutationObserver(function(){if(!layer.isConnected)dismiss(false);}):null;
+    close.addEventListener('click',function(){dismiss(true);});panel.appendChild(close);
+    ids.forEach(function(id){
+      var marker=markers[id], label=groups[id];
+      if(!marker||!label)return;
+      var button=document.createElement('button');button.className='train-fold-entry';
+      var href=marker.getAttribute('href')||marker.getAttribute('xlink:href');
+      if(href){var image=document.createElement('img');image.src=href;image.alt='';button.appendChild(image);}
+      else {var dot=document.createElement('span');dot.className='train-fold-neutral';button.appendChild(dot);}
+      var caption=document.createElement('span');
+      var clone=label.cloneNode(true), badges=clone.querySelectorAll('[data-train-fold-badge]');
+      for(var i=0;i<badges.length;i++)badges[i].remove();
+      var direction=label.getAttribute('data-dir-sym');
+      caption.textContent=(direction==='up'?'▲ ':direction==='down'?'▼ ':'')+clone.textContent;button.appendChild(caption);
+      var title=marker.querySelector('title'), number=document.createElement('small');
+      number.textContent=title?title.textContent:'';button.appendChild(number);
+      button.addEventListener('click',function(){
+        dismiss(false);
+        marker.dispatchEvent(new MouseEvent('click',{bubbles:true}));
+      });
+      panel.appendChild(button);
+    });
+    panel.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();dismiss();}});
+    document.body.appendChild(panel);layer._trainFoldPopover=panel;layer._closeTrainFoldPopover=dismiss;
+    document.addEventListener('pointerdown',outside,true);
+    if(observer)observer.observe(document.body,{childList:true,subtree:true});
+    var rect=anchor.getBoundingClientRect();
+    panel.style.left=Math.max(8,Math.min(window.innerWidth-188,rect.x+rect.width/2-90))+'px';
+    panel.style.top=Math.max(8,Math.min(window.innerHeight-340,rect.bottom+6))+'px';
+    close.focus();
   }
 
   // v4.3.454: 列车终点/方向标签——方向在上（7px #999）、终点在下（8px #666）

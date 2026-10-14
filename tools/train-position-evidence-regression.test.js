@@ -950,7 +950,7 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
   const result=api.resolveAll(trains,coords,{},'Joban',{});
   assert.equal(result.filter(Boolean).length,12);
   for(let i=0;i<result.length;i++) for(let j=i+1;j<result.length;j++)
-    assert(Math.abs(result[i].x-result[j].x)>=15 || Math.abs(result[i].y-result[j].y)>=20,'same-station trains must not overlap');
+    assert.equal(result[i].x,result[j].x,'same-lane train source anchors must not acquire sideways collision slots');
   const reverse=api.resolveAll(trains.slice().reverse(),coords,{},'Joban',{}).reverse();
   assert.equal(JSON.stringify(result),JSON.stringify(reverse),'source row order must not change marker placement');
   const labels=Array.from({length:8},(_,i)=>({id:'train-'+i,x:110,y:60,width:36,height:10}));
@@ -993,7 +993,7 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
   assert.equal(shifts.b.y,34);
   const obstacle={x:50,y:90,width:40,height:30};
   const nearest=ctx.window.TrainTrackLayout.resolveLabels([units[0]],[obstacle],{x:0,y:0,width:300,height:300});
-  assert.equal(nearest.a.y,-34,'unit may move upward when the nearest lower slot is occupied');
+  assert.equal(nearest.a.y,-4,'unit uses the nearest small vertical clearance rather than a whole-row jump');
   const renderer=read('js/trains-render.js');
   assert(renderer.includes("marker.setAttribute('transform', shift +"));
   assert(renderer.includes("label.setAttribute('transform', shift +"));

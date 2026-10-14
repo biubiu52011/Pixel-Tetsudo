@@ -1,6 +1,15 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 中央快速 SQL 车型与完整运行段（SQL／本地完成，发布验收中）
+## 2026-10-14 JST — 列车整体上下排布与密集折叠（IN_PROGRESS：上线验收中）
+- 目标：中央快速、常磐快速及共享普通线路图取消横向拥挤槽位；保留实际方向轨道，图标与完整方向文字紧贴、同量上下位移。常磐本线同样适用。大江户六字环形既有专用布局保留。
+- 路径：trains.html → TrainTrackLayout.resolveAll／resolveLabels → trains-render。realtime.html不加载线路图renderer，未修改其无关资源；其他页面无此列车位置图。
+- 普通线路底层保留源位置锚点，联合图标／文字矩形就近寻找上下空隙；默认位移最多72屏幕像素。局部同方向密集组放不下时折叠为＋N，不跨方向合并，不改运行链或真实列车数据。不同方向/无邻近组继续独立显示。
+- 点击／键盘展开显示可滚动列表，每项图标在上、完整方向在下，并可选择原列车详情。列表支持关闭、Escape、点击外部、切线清理；原始每列车marker与caption保留。
+- 修改共享js/train-track-layout.js、js/trains-render.js、css/trains.css，trains.html资源4.3.1214；tests新增train-fold-layout并修订旧横向槽位断言为原位置锚点。34 tools suites和4守卫PASS，覆盖ChuoRapid／Joban／JobanMain的同站15车、倒序刷新、有限位移、全部身份保留、方向隔离和逐车选择；既有图标文字6px间距/重复帧回归PASS。
+- 浏览器工具超时，browser runtime: NOT VERIFIED。本地原件备份recovery/train-layout-20261014。未涉及SQL车型与时刻表更改。
+
+
+## 2026-10-14 JST — 中央快速 SQL 车型与完整运行段（已发布，浏览器运行验收待补）
 
 - 复用 Supabase train_vehicle_rules／evidence_sources、canonical members/stops、现有 exporter、TrainOperationEvidence／TrainVehicle 和原生 PNG。ChuoRapid 保持独立 presentation，未合并青梅／中央本线页面或复制拓扑。
 - 1,087条官方 ODPT 记录（581平日／506休日）逐站逐时与SQL完全一致。JR East E233／0番台、绿色车及河口湖分割运用官方资料支持计划车型参考；写入1,081个 exact train-number/calendar Grade-C E233系0番台参考，覆盖1,087模板，适用2026-10-14至2026-11-30。不按后缀或线路设默认车型，不声称当天编组、涂装、车辆号或12辆实况。
@@ -15,6 +24,8 @@
 
 
 - 用户补充分割／併合运行：车型接续不证明编组不变。共享 DataFusion 的编组缓存和候选合并现要求相同 sourceRailway＋published trainNumber，未知或不同运行段不继承整组 carset／证据；本段独立证据保留，车型跨实时覆盖边界仍接续。estimator保留源railway供此校验。新增formation-segment-continuity实际函数回归覆盖同段丢帧、常磐→成田段、改号、未知来源、独立证据和跨日隔离。这里只修编组证据安全边界；尚无逐列车split/join组成关系，未把多候选车型或多个编组ID画成连挂列车。盛冈与大月官方资料已核对，不能将所有成田直通一概固定为减5辆。
+
+- 发布验收：实现提交aca17169415cc52cd7b2f0964fd44c17a3fa33d4；自动证据同步2142a0a53eba7f22aa6fbc80f48c7ae694ff0c4a已快进到本地，验证仅排序变化、所有事实保留。33 tools suites与4守卫PASS；CI/CD、Release Guards、证据同步、最终Pages部署success。四个公开运行脚本200并与本地逐字MATCH。browser runtime: NOT VERIFIED（浏览器工具持续超时）；未声称完成逐列车分割併合组成展示。
 
 ## 2026-10-14 JST — 图标与方向紧贴并整体上下避让（DONE：2bb60875已公开部署，浏览器连接不可用）
 

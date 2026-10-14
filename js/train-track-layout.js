@@ -222,9 +222,11 @@
     var normal = normalFromTangent(base.tangent);
     var key = trackKey(position, base.idx, base.nextIdx, lane);
     var slot = occupancy ? occupancy.get(key, index) : { ordinal: 0, total: 1 };
-    // Keep an individual train on a stable lateral slot when neighbours enter or
-    // leave the same segment. Identity owns the slot; current occupancy does not.
-    var stackOrdinal = slot.total > 1 ? stableStackOrdinal(position, index) : 0;
+    // Preserve physical direction lanes. Dense regular-line trains are arranged
+    // together with their captions by resolveLabels; only six-loop geometry
+    // retains its dedicated lateral placement.
+    var stackOrdinal = geometry && geometry.isSixShapedLoop && slot.total > 1
+      ? stableStackOrdinal(position, index) : 0;
     var stackOffset = stackOrdinal * (opts.stackGap || DEFAULTS.stackGap);
     var laneGap = opts.laneGap || DEFAULTS.laneGap;
     var lateral = lane * laneGap + stackOffset;
@@ -295,14 +297,14 @@
     var result = positions.map(function (p, i) {
       return resolve(p, positions, i, stationCoords, geometry, lineId, opts, occupancy);
     });
-    // Hash slots can collide, including trains on adjacent station segments.
-    // Resolve those display collisions without changing the source position.
+    // The six-loop renderer owns a dedicated geometry layout. Regular lines keep
+    // source anchors here and resolve icon + caption collisions as one unit.
     var placed = [];
     positions.map(function (p, i) { return { id: stableTrainKey(p), index: i }; })
       .sort(function (a, b) { return a.id.localeCompare(b.id); })
       .forEach(function (entry) {
         var loc = result[entry.index];
-        if (!loc) return;
+        if (!loc || !(geometry && geometry.isSixShapedLoop)) return;
         var originX = loc.x, originY = loc.y;
         for (var attempt = 0; attempt <= positions.length * 2; attempt++) {
           var offset = attempt === 0 ? 0 : Math.ceil(attempt / 2) * 18 * (attempt % 2 ? 1 : -1);
@@ -319,32 +321,57 @@
 
   // Screen-space caption rectangles, measured by the renderer. Pure layout
   // keeps station text, train icons and complete destinations readable.
-  function resolveLabels(labels, obstacles, bounds) {
-    var placed = (obstacles || []).slice();
-    var output = {};
+  function resolveLabels(labels, obstacles, bounds, options) {
+    options = options || {};
+    var placed = (obstacles || []).slice(), visible = [], output = {};
+    var maxShift = options.maxShift == null ? Infinity : options.maxShift;
     function intersects(a, b) {
       return a.x < b.x + b.width + 2 && a.x + a.width + 2 > b.x &&
         a.y < b.y + b.height + 2 && a.y + a.height + 2 > b.y;
     }
-    labels.slice().sort(function (a, b) { return a.id.localeCompare(b.id); })
-      .forEach(function (label) {
-        var best = null;
-        var stepY = Math.max(12, label.height + 4);
-        // The renderer supplies the complete icon + caption rectangle. Move
-        // that unit to the nearest vertical slot, preserving their spacing.
-        for (var row = 0; row <= labels.length + placed.length + 2 && !best; row++) {
-          var dy = row === 0 ? 0 : Math.ceil(row / 2) * stepY * (row % 2 ? 1 : -1);
-          var box = {x: label.x, y: label.y + dy, width: label.width, height: label.height};
-          if (bounds && (box.x < bounds.x || box.y < bounds.y ||
-              box.x + box.width > bounds.x + bounds.width || box.y + box.height > bounds.y + bounds.height)) continue;
-          if (!placed.some(function (other) { return intersects(box, other); })) {
-            best = box; output[label.id] = {x: 0, y: dy}; break;
-          }
+    function findSlot(label, limit) {
+      var candidates = [0];
+      placed.forEach(function(other) {
+        if (label.x < other.x + other.width + 2 && label.x + label.width + 2 > other.x) {
+          candidates.push(other.y - label.height - 4 - label.y);
+          candidates.push(other.y + other.height + 4 - label.y);
         }
-        // A fully occupied viewport must not silently drop a destination.
-        placed.push(best || label);
-        if (!best) output[label.id] = {x: 0, y: 0};
       });
+      if (bounds) {
+        candidates.push(bounds.y - label.y);
+        candidates.push(bounds.y + bounds.height - label.height - label.y);
+      }
+      candidates.sort(function(a,b) { return Math.abs(a)-Math.abs(b) || b-a; });
+      for (var i=0;i<candidates.length;i++) {
+        var dy=candidates[i];
+        if (Math.abs(dy)>limit) continue;
+        var box={x:label.x,y:label.y+dy,width:label.width,height:label.height};
+        if (bounds && (box.y<bounds.y || box.y+box.height>bounds.y+bounds.height)) continue;
+        if (!placed.some(function(other){return intersects(box,other);})) return {box:box,dy:dy};
+      }
+      return null;
+    }
+    labels.slice().sort(function(a,b){return a.id.localeCompare(b.id);}).forEach(function(label) {
+      var best=findSlot(label,label.expanded?Infinity:maxShift);
+      var neighbour=visible.filter(function(other) {
+        return other.label.foldKey===label.foldKey &&
+          Math.abs(other.label.y-label.y)<=maxShift &&
+          label.x<other.label.x+other.label.width && label.x+label.width>other.label.x;
+      }).sort(function(a,b){
+        return Math.abs(a.label.y-label.y)-Math.abs(b.label.y-label.y) ||
+          a.label.id.localeCompare(b.label.id);
+      })[0];
+      if (!best && neighbour && !label.expanded) {
+        output[label.id]={x:0,y:0,collapsedInto:neighbour.label.id};
+        return;
+      }
+      // A train with no nearby compatible group remains individually visible.
+      if (!best) best=findSlot(label,Infinity);
+      var dy=best?best.dy:0;
+      output[label.id]={x:0,y:dy};
+      placed.push(best?best.box:label);
+      visible.push({label:label});
+    });
     return output;
   }
 

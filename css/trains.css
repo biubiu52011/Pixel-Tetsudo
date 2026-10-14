@@ -94,3 +94,12 @@
 }
 
 
+
+/* Dense trains stay as paired units; the folded list preserves every train. */
+.train-fold-popover { box-sizing:border-box; position:fixed; z-index:10050; width:180px; max-height:min(330px,calc(100vh - 16px)); overflow:auto; padding:8px; border:1px solid #94a3b8; border-radius:12px; background:var(--bg-color,#fff); color:var(--text-color,#222); box-shadow:0 8px 24px #0003; }
+.train-fold-close { display:block; margin:0 0 6px auto; padding:4px 10px; border:1px solid #94a3b8; border-radius:8px; background:transparent; color:inherit; cursor:pointer; }
+.train-fold-entry { display:flex; flex-direction:column; align-items:center; gap:4px; width:100%; padding:8px 4px; border:0; border-radius:8px; background:transparent; color:inherit; cursor:pointer; font:inherit; }
+.train-fold-entry:hover,.train-fold-entry:focus-visible { background:#94a3b826; outline:2px solid #64748b; }
+.train-fold-entry img { width:14px; height:18px; object-fit:contain; }
+.train-fold-entry small { font-size:10px; overflow-wrap:anywhere; }
+.train-fold-neutral { width:8px; height:8px; margin:5px 3px; border-radius:50%; background:#64748b; }
