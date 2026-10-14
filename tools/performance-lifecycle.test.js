@@ -131,7 +131,7 @@ console.log('train-run-vehicle-evidence-bridge: 3 PASS');
 // their existing lazy manual vehicle evidence, gated by presence of ODPT rows.
 const ensureTimetableSrc = fusion.split('  function ensureTimetable(lineId) {')[1]
   .split('  function ensureManualTimetable(lineId) {')[0];
-assert.ok(/if \(liveApi\) \{/.test(ensureTimetableSrc) &&
+assert.ok(/if \(liveApi && !_sqlPartialPlan\) \{/.test(ensureTimetableSrc) &&
   /return _hasOdptTimetable\(lineId\) \? ensureManualTimetable\(lineId\) : Promise\.resolve\(false\)/.test(ensureTimetableSrc) &&
   /if \(!rows \|\| !rows\.length\) return false/.test(ensureTimetableSrc) &&
   /\.catch\(function\(\) \{ return false; \}\)/.test(ensureTimetableSrc) &&
