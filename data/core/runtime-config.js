@@ -86,9 +86,10 @@
       // parallel manual timetable or infer additional position PINs.
       "SaikyoKawagoe": { mode: "FULL", manualTimetableEvidence: false },
       // Kawagoe (Kawagoe–Komagawa) has a Train API but not proven full coverage.
-      // Use ODPT TrainTimetable + the shared JS estimator for uncovered trains,
-      // never the legacy manual/SQL timetable as an additional authority.
-      "Kawagoe": { mode: "HYBRID", manualTimetableEvidence: false },
+      // An independently sourced, *partial* official plan is allowed only as a
+      // SQL fallback for missing realtime segments. Never revive retired
+      // rolling-stock claims from the legacy JS manual timetable.
+      "Kawagoe": { mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true },
       "Oedo": { mode: "FULL" },
       "Arakawa": { mode: "FULL" },
       "KeioMain": { mode: "FULL" },
