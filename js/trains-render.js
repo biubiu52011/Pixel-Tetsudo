@@ -34,13 +34,15 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   return !!active;
 }
 
-  function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile) {
-    var sz = _throughChipSize(lineObj, mobile);
+  function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile, maxWidth) {
+    var sz = _throughChipSize(lineObj, mobile, maxWidth);
     var label = sz.label;
     var w = sz.w, h = sz.h;
     var lc = lineObj.color || "#555";
     var chip = document.createElementNS(ns, "g");
     chip.setAttribute("transform", "translate(" + x + "," + y + ")");
+    chip.setAttribute("class", "through-chip");
+    chip.setAttribute("data-through-line", lineObj.lineId || "");
     layer.appendChild(chip);
     var bg = document.createElementNS(ns, "rect");
     bg.setAttribute("x", "0");
@@ -90,8 +92,17 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     txt.setAttribute("fill", lc);
     txt.setAttribute("font-weight", "700");
     txt.setAttribute("dominant-baseline", "central");
-    txt.textContent = label;
+    sz.lines.forEach(function(line, i) {
+      var span = document.createElementNS(ns, "tspan");
+      span.setAttribute("x", sz.textX);
+      span.setAttribute("y", 4 + sz.fontSize / 2 + i * (sz.fontSize + 2));
+      span.textContent = line;
+      txt.appendChild(span);
+    });
     chip.appendChild(txt);
+    var title = document.createElementNS(ns, "title");
+    title.textContent = lineObj.title || _throughBadgeText(lineObj);
+    chip.appendChild(title);
     return w; // consumed width (for flow layout advance)
   }
   
@@ -418,67 +429,28 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         staticLayer.appendChild(more);
       }
 
-      // Through-service boxed labels anchored to the station in the through direction
-      var thruList = [];
-      for (var tI = 0; tI < txLines.length; tI++) {
-        if (txLines[tI] && txLines[tI].through) thruList.push(txLines[tI]);
-      }
-      thruList = _normalizeThroughChipList(thruList);
-      var _scs = o.stationCoords || [];
-      var _chipGap = 6;
-      var _middleGap = 4;
-      var _laneGapMiddle = isMobileView ? 24 : 20;
-      var _renderChipAt = function(item, x0, y0) {
-        var s0 = _throughChipSize(item, isMobileView);
-        var lx0 = Math.max(2, Math.min(x0, svgW - s0.w - 2));
-        var ly0 = Math.max(2, Math.min(y0, svgH - s0.h - 2));
-        item._throughSide = lx0 < o.x ? "left" : "right";
-        _renderThroughChip(staticLayer, svgNS, lx0, ly0, item, ICON, isMobileView);
-      };
-      // Endpoint through chips: horizontal row centred on the endpoint dot.
-      // Middle through chips remain vertical in the side lane below.
-      var _layoutEndpoint = function(dir, baseY) {
-        var list = thruList.filter(function(x) { return x && x.dir === dir; });
-        if (!list.length) return;
-        var totalW = 0;
-        var maxH = 0;
-        var sizes = [];
-        for (var li = 0; li < list.length; li++) {
-          sizes[li] = _throughChipSize(list[li], isMobileView);
-          totalW += sizes[li].w;
-          maxH = Math.max(maxH, sizes[li].h);
-        }
-        totalW += (list.length - 1) * _chipGap;
-        var cx = o.x - totalW / 2;
-        for (var lj = 0; lj < list.length; lj++) {
-          _renderChipAt(list[lj], cx, baseY + (maxH - sizes[lj].h) / 2);
-          cx += sizes[lj].w + _chipGap;
-        }
-      };
-      _layoutEndpoint("up", o.y - 16 - (isMobileView ? 26 : 22));
-      var _chipBot = iy0 + rows * ICON + (rows - 1) * GAP + 2;
-      _layoutEndpoint("down", Math.max(_chipBot + 4, o.y + 8));
-
-      var _middleList = thruList.filter(function(x) {
-        return x && x.dir !== "up" && x.dir !== "down";
+      // Through labels stay in their station's name/transfer column.
+      var thruList = _normalizeThroughChipList(txLines.filter(function(it) { return it && it.through; }));
+      var chipWidth = geometry.throughChipMaxWidth || (isMobileView ? 148 : 124);
+      var upward = [], below = [];
+      thruList.forEach(function(it) {
+        var display = Object.assign({}, it);
+        if (geometry.isLoop) display.dir = "middle";
+        (display.dir === "up" ? upward : below).push(display);
       });
-      if (_middleList.length) {
-        var _middleSizes = [];
-        var _middleH = 0;
-        for (var mi = 0; mi < _middleList.length; mi++) {
-          _middleSizes[mi] = _throughChipSize(_middleList[mi], isMobileView);
-          _middleH += _middleSizes[mi].h;
-        }
-        _middleH += (_middleList.length - 1) * _middleGap;
-        var _middleY = o.y - _middleH / 2;
-        var _middleLeftLane = anchor === "start";
-        for (var mj = 0; mj < _middleList.length; mj++) {
-          var _ms = _middleSizes[mj];
-          var _mx = _middleLeftLane ? (o.x - _ms.w - _laneGapMiddle) : (o.x + _laneGapMiddle);
-          _renderChipAt(_middleList[mj], _mx, _middleY);
-          _middleY += _ms.h + _middleGap;
-        }
-      }
+      var bounds = {minX:2, maxX:svgW-2};
+      var drawGroup = function(items, x, y, align, width) {
+        _layoutThroughChipGroup(items, isMobileView, width, x, y, align, bounds).forEach(function(p) {
+          p.item._throughSide = align === "end" ? "left" : "right";
+          _renderThroughChip(staticLayer, svgNS, p.x, p.y, p.item, ICON, isMobileView, width);
+        });
+      };
+      var aboveH = _throughChipHeight(upward, isMobileView, chipWidth);
+      drawGroup(upward, o.x, o.y - 18 - aboveH, "middle", chipWidth);
+      var belowY = Math.max(ty + 12, iy0 + rows * (ICON + GAP) + 4);
+      var sideWidth = anchor === "end" ? tx - 2 : anchor === "start" ? svgW - 2 - tx : chipWidth;
+      drawGroup(below, tx, belowY, anchor, Math.min(chipWidth, sideWidth));
+
     }
   }
 

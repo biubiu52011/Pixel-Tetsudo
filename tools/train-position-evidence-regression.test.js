@@ -183,7 +183,7 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
   for(const mobile of [true,false]) {
     const ctx={window:{currentLang:"ja"},_routeGeometryCache:{},_geomKey:id=>id,
       _getTransferMap:()=>({}),_isMobileView:()=>mobile,
-      _throughDirForStation:()=>null,_throughChipRows:()=>0,
+      _throughDirForStation:()=>null,_throughChipHeight:()=>0,
       getLinesData:()=>({}),GEOM:{BRANCH_COL_W:96,BRANCH_STUB:20,MOBILE_CONTENT_W:297}};
     vm.runInNewContext(geometrySource,ctx);
     vm.runInNewContext(read("js/train-track-layout.js"),ctx);
@@ -228,7 +228,7 @@ assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
     }[id] || id)}},
     _routeGeometryCache:{},_geomKey:(id)=>id,
     _getTransferMap:()=>({}),_isMobileView:()=>true,
-    _throughDirForStation:()=>null,_throughChipRows:()=>0,
+    _throughDirForStation:()=>null,_throughChipHeight:()=>0,
     getLinesData:()=>({}),GEOM:{BRANCH_COL_W:96,BRANCH_STUB:20,MAIN_BASE_W_MAX:820,MOBILE_CONTENT_W:297},
   };
   vm.runInNewContext(geometrySource,vm.createContext(ctx),{filename:"trains-geometry.js"});

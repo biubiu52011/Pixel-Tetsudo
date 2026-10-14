@@ -35,38 +35,59 @@ function _throughBadgeText(lineObj) {
 
 function _throughShortName(lineObj, mobile) {
   if (lineObj && lineObj.overflowCount) return "+" + lineObj.overflowCount;
-  var nm = lineObj.name;
-  var m = nm.match(/[（(]([^）)]*ライン)[）)]/);
-  if (m) nm = m[1];
-  var maxN = mobile ? 5 : 7;
-  return nm.length > maxN ? nm.slice(0, maxN) + "…" : nm;
+  var nm = String(lineObj.name || lineObj.lineId || "").replace(/直通|직통|Through Service/gi, "").replace(/\s+/g, " ").trim();
+  var m = nm.match(/[（(]([^）)]*(?:ライン|路線|路线))[）)]/);
+  nm = m ? m[1] : nm.split(/[（(]/)[0].trim();
+  return nm;
 }
 
-function _throughChipSize(lineObj, mobile) {
+function _throughChipSize(lineObj, mobile, maxWidth) {
   var nm = _throughShortName(lineObj, mobile);
-  var throughLbl = (typeof window.t === "function" && window.t("train.through")) ? window.t("train.through") : "直通";
-  var label = lineObj && lineObj.overflowCount ? (throughLbl + nm) : (throughLbl + nm);
+  var throughLbl = (window.t ? window.t("train.through") : "直通").trim();
+  var label = throughLbl + (/^[A-Za-z]/.test(throughLbl) ? " " : "") + nm;
   var fontSize = mobile ? 11 : 9;
-  var arrowSlot = mobile ? 12 : 11;
-  var gap = mobile ? 10 : 8;
-  var padX = mobile ? 5 : 4;
-  var padEnd = mobile ? 8 : 6;
-  var maxW = mobile ? 148 : 124;
-  var textW = _measureThroughLabelWidth(label, fontSize);
-  var rawW = padX + arrowSlot + gap + textW + padEnd;
-  var contentH = Math.max(fontSize + 8, mobile ? 20 : 16);
-  var w = Math.min(maxW, rawW);
-  var contentW = arrowSlot + gap + textW;
-  var contentX = padX;
-  return {
-    w: w,
-    h: contentH,
-    label: label,
-    fontSize: fontSize,
-    rowH: contentH + (mobile ? 4 : 4),
-    arrowX: contentX + arrowSlot / 2,
-    textX: contentX + arrowSlot + gap
-  };
+  var narrow = maxWidth && maxWidth < 100;
+  var arrowSlot = narrow ? 8 : (mobile ? 12 : 11), gap = narrow ? 4 : (mobile ? 10 : 8);
+  var padX = mobile ? 5 : 4, padEnd = narrow ? 5 : (mobile ? 8 : 6);
+  var maxW = Math.max(48, Math.min(maxWidth || (mobile ? 148 : 124), mobile ? 148 : 124));
+  var overhead = padX + arrowSlot + gap + padEnd;
+  var available = maxW - overhead;
+  var wrapped = _measureThroughLabelWidth(label, fontSize) > available;
+  var lines = wrapped ? [throughLbl] : [], current = "";
+  Array.from(wrapped ? nm : label).forEach(function(ch) {
+    if (current && _measureThroughLabelWidth(current + ch, fontSize) > available) {
+      lines.push(current.trim()); current = "";
+    }
+    current += ch;
+  });
+  if (current.trim()) lines.push(current.trim());
+  var textW = Math.max.apply(null, lines.map(function(x) { return _measureThroughLabelWidth(x, fontSize); }));
+  var h = Math.max(fontSize + 8, lines.length * (fontSize + 2) + 8);
+  return {w: Math.min(maxW, overhead + textW), h: h, label: label, lines: lines,
+    fontSize: fontSize, rowH: h + 4, arrowX: padX + arrowSlot / 2,
+    textX: padX + arrowSlot + gap};
+}
+
+// Reserve the same stacked height during geometry and during rendering.
+function _throughChipHeight(items, mobile, maxWidth, dir) {
+  return _normalizeThroughChipList(items).filter(function(it) { return !dir || it.dir === dir; })
+    .reduce(function(h, it) { return h + _throughChipSize(it, mobile, maxWidth).h + 4; }, 0);
+}
+
+// Place an entire station-owned group before any bounds adjustment.
+function _layoutThroughChipGroup(items, mobile, maxWidth, x, y, align, bounds) {
+  var sizes = items.map(function(it) { return _throughChipSize(it, mobile, maxWidth); });
+  var width = Math.max.apply(null, sizes.map(function(sz) { return sz.w; }));
+  if (!items.length) return [];
+  var left = align === "end" ? x - width : align === "middle" ? x - width / 2 : x;
+  left = Math.max(bounds.minX, Math.min(left, bounds.maxX - width));
+  return items.map(function(it, i) {
+    var sz = sizes[i];
+    var itemX = left + (align === "end" ? width - sz.w : align === "middle" ? (width - sz.w) / 2 : 0);
+    var placed = {item:it, x:itemX, y:y, size:sz};
+    y += sz.h + 4;
+    return placed;
+  });
 }
 
 var _throughLabelMeasureCache = {};
@@ -117,60 +138,18 @@ function _measureThroughLabelWidth(label, fontSize) {
 }
 
 function _normalizeThroughChipList(items) {
-  var byDir = { up: [], down: [], middle: [] };
-  for (var i = 0; i < (items || []).length; i++) {
-    var it = items[i];
-    if (!it || !it.through) continue;
+  var seen = {}, out = [];
+  (items || []).forEach(function(it) {
+    if (!it || !it.through) return;
     var dir = it.dir === "up" || it.dir === "down" ? it.dir : "middle";
-    byDir[dir].push(it);
-  }
-  var out = [];
-  ["up", "down", "middle"].forEach(function(dir) {
-    byDir[dir].sort(function(a, b) {
-      return String(a.lineId || a.name || "").localeCompare(String(b.lineId || b.name || ""));
-    });
-    var maxVisible = 2;
-    for (var j = 0; j < byDir[dir].length && j < maxVisible; j++) {
-      byDir[dir][j]._throughSlot = j;
-      byDir[dir][j]._throughDirGroup = dir;
-      out.push(byDir[dir][j]);
-    }
-    if (byDir[dir].length > maxVisible) {
-      out.push({
-        through: true,
-        dir: dir,
-        _throughSlot: maxVisible,
-        _throughDirGroup: dir,
-        overflowCount: byDir[dir].length - maxVisible,
-        name: "+" + (byDir[dir].length - maxVisible),
-        color: "#6e6e73",
-        title: byDir[dir].slice(maxVisible).map(function(x) { return x.name || x.lineId || ""; }).join(" / ")
-      });
-    }
+    var key = dir + "|" + (it.lineId || it.name || "");
+    if (seen[key]) return;
+    seen[key] = true;
+    out.push(Object.assign({}, it, {dir:dir}));
   });
-  return out;
-}
-
-function _throughChipRows(items, dir) {
-  var n = 0;
-  var hasUp = false;
-  var hasDown = false;
-  var middle = 0;
-  for (var i = 0; i < (items || []).length; i++) {
-    if (!items[i] || !items[i].through) continue;
-    var d = items[i].dir === "up" || items[i].dir === "down" ? items[i].dir : "middle";
-    if (dir) {
-      if (d === dir) n++;
-    } else if (d === "up") {
-      hasUp = true;
-    } else if (d === "down") {
-      hasDown = true;
-    } else {
-      middle++;
-    }
-  }
-  if (dir) return n ? 1 : 0;
-  return (hasUp ? 1 : 0) + (hasDown ? 1 : 0) + Math.min(middle, 3);
+  return out.sort(function(a, b) {
+    return a.dir.localeCompare(b.dir) || String(a.lineId || a.name).localeCompare(String(b.lineId || b.name));
+  });
 }
 
 function _hexToRgba(hex, a) {

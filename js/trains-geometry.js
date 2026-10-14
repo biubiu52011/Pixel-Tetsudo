@@ -93,27 +93,17 @@
     var color = line.color || (window.TrainsColors ? window.TrainsColors.LINE_FALLBACK : "#008803");
     var isLoop = line.type === "loop";
     var isSixShapedLoop = line.isSixShapedLoop === true;
+    var throughChipMaxWidth = isLoop ? (_isMobileView() ? 69 : 74) : (_isMobileView() ? 148 : 124);
     // Transfer map for interchange station icons (single source; read-only)
     var transferMap = _getTransferMap(lineId);
     // Room for boxed through-service labels at line ends: ∧ label sits ABOVE the
     // start station, ∨ label BELOW the last station.
     var thrTopPad = 0, thrBotPad = 0;
-    if (stations.length > 1) {
-      var _thrRowH = _isMobileView() ? 26 : 22;
-      var _throughRowsAt = function(stationId, dir) {
-        var tx = transferMap[stationId] || [];
-        var n = 0;
-        for (var _tr = 0; _tr < tx.length; _tr++) {
-          if (!tx[_tr] || !tx[_tr].through) continue;
-          var d = tx[_tr].dir || _throughDirForStation(lineId, stationId, tx[_tr].lineId) || "middle";
-          if (!dir || d === dir) n++;
-        }
-        return dir ? (n ? 1 : 0) : Math.min(n, 3);
-      };
-      var _topRows = _throughRowsAt(stations[0], "up") || (_throughDirForStation(lineId, stations[0]) === "up" ? 1 : 0);
-      var _botRows = _throughRowsAt(stations[stations.length - 1], "down") || (_throughDirForStation(lineId, stations[stations.length - 1]) === "down" ? 1 : 0);
-      if (_topRows) thrTopPad = _topRows * _thrRowH + 10;
-      if (_botRows) thrBotPad = _botRows * _thrRowH + 10;
+    if (stations.length > 1 && !isLoop) {
+      thrTopPad = _throughChipHeight(transferMap[stations[0]], _isMobileView(), throughChipMaxWidth, "up");
+      thrBotPad = _throughChipHeight(transferMap[stations[stations.length - 1]], _isMobileView(), throughChipMaxWidth, "down");
+      if (thrTopPad) thrTopPad += 10;
+      if (thrBotPad) thrBotPad += 10;
     }
     // v4.3.847-850: 站间距标准 = 换乘图标的高 + 一点空隙（共同规则 5.4.1.5，所有画法一致）——
     // 换乘图标的高 = 行数 × 行高 ROW_H(18px/行 = ICON16+GAP2，5.4.1.11)；行数 = ⌈min(换乘数,16)÷4⌉（每行最多 4 个、行数上限 4
@@ -127,9 +117,9 @@
       for (var _cp = 0; _cp < ids.length; _cp++) {
         var _txLines = transferMap[ids[_cp]] || [];
         var _txN = _txLines.filter(function(t) { return !t.through; }).length;
-        var _thrRows = _throughChipRows(_txLines);
+        var _throughH = _throughChipHeight(_txLines, _isMobileView(), throughChipMaxWidth);
         var _rows = Math.ceil(Math.min(_txN, 16) / 3); // v4.3.877: 4→3（窄列 PER_ROW 降级保守值，防 chip 超高重叠）
-        mx = Math.max(mx, _rows * ROW_H + SP_GAP + _thrRows * (_isMobileView() ? 26 : 22));
+        mx = Math.max(mx, _rows * ROW_H + SP_GAP + _throughH);
       }
       return mx;
     };
@@ -714,6 +704,12 @@
       }
     }
 
+    // End labels are content too: keep the last station-owned stack in view.
+    stationCoords.forEach(function(p) {
+      var h = _throughChipHeight(transferMap[p.stationId], _isMobileView(), throughChipMaxWidth);
+      if (h) svgH = Math.max(svgH, p.y + h + 64);
+    });
+
     // Build geometry object
     var geometry = {
       lineId: lineId,
@@ -723,6 +719,7 @@
       svgW: svgW,
       svgH: svgH,
       isLoop: isLoop,
+      throughChipMaxWidth: throughChipMaxWidth,
       isSixShapedLoop: isSixShapedLoop,
       sixLoopStartIndex: isSixShapedLoop ? hikarigaokaIdx + 1 : null,
       sixTailEndIndex: isSixShapedLoop ? hikarigaokaIdx : null,
