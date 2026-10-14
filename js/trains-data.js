@@ -79,7 +79,7 @@ function getRealtimePositions(lineId) {
         all.push(np);
       }
     }
-    return _dedupeTrainPositions(all, lineId);
+    positions = all;
   }
   var _src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
   var _brs = window.LinePresentationService ? window.LinePresentationService.getMapBranchIds(lineId, _src) : [];
@@ -351,6 +351,8 @@ function _getTransferMap(lineId) {
     var t = declared[di];
     if (!t || !t.station || !t.lineId) continue;
     if (t.lineId === lineId) continue;
+    var internal = window.LinePresentationService ? window.LinePresentationService.getMapBranchIds(lineId, src) : [];
+    if (internal.indexOf(t.lineId) >= 0) continue;
     // Peer members of the active LOS are one passenger-facing operation system.
     // Do not render their internal boundary as a transfer/through chip even when
     // canonical transferStations contains the physical handover.
@@ -378,6 +380,7 @@ function _getTransferMap(lineId) {
   Object.keys(src).forEach(function(peerId) {
     var peer = src[peerId];
     if (!peer || !(peer.branchOf === lineId || own && own.branchOf === peerId)) return;
+    if (window.LinePresentationService && !window.LinePresentationService.isIndependentLine(peerId, src)) return;
     var shared = ownStations.filter(function(station) { return (peer.stations || []).indexOf(station) >= 0; });
     if (shared.length !== 1) return;
     var station = shared[0];
@@ -395,6 +398,7 @@ function _getTransferMap(lineId) {
   // chip can exist (e.g. Keiyo <-> Musashino at Nishi-Funabashi).
   for (var th = 0; th < throughLines.length; th++) {
     var thLineId = throughLines[th];
+    if (window.LinePresentationService && window.LinePresentationService.getMapBranchIds(lineId, src).indexOf(thLineId) >= 0) continue;
     // A boundary between peer members of the active LOS is an internal system
     // segment boundary, not a passenger-facing through-service transfer.
     if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(thLineId) >= 0) continue;

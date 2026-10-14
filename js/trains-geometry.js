@@ -656,7 +656,8 @@
         var _bsp = sp || 24;
         // v4.3.520: junction 在支线站表末位（我孫子支线）→ 反转站序从 junction 向下延伸
         var _gStations = (_jfG.at === _br.stations.length - 1) ? _br.stations.slice().reverse() : _br.stations;
-        var _bcoords = [];
+        var _bcoords = new Array(_br.stations.length);
+        _bcoords[_jfG.at] = {stationId:_jfG.station, x:stationCoords[_jIdx].x, y:_by};
         if (_branchModes[bgi] === 'h') {
           // v4.3.522: 短支线水平直线横排——跳过 junction 站（主干已画），从 junction
           // 向侧边水平排开（站距 = 全支线最宽名 + 12）；列车定位坐标同步横排
@@ -666,7 +667,7 @@
             var _bHx = (_bSide(bgi) === "left")
               ? (_bHx0 - (_bHi + 1) * _branchHSp)
               : (_bHx0 + (_bHi + 1) * _branchHSp);
-            _bcoords.push({ stationId: _gStations[_bsiH], x: _bHx, y: _bHy0 });
+            _bcoords[_br.stations.indexOf(_gStations[_bsiH])] = { stationId: _gStations[_bsiH], x: _bHx, y: _bHy0 };
             _bHi++;
           }
         } else {
@@ -677,7 +678,7 @@
           var _bK = 0;
           for (var _bsi = 0; _bsi < _gStations.length; _bsi++) {
             if (_gStations[_bsi] === _jfG.station) continue;
-            _bcoords.push({ stationId: _gStations[_bsi], x: _bx, y: _by + _bK * _bsp });
+            _bcoords[_br.stations.indexOf(_gStations[_bsi])] = { stationId: _gStations[_bsi], x: _bx, y: _by + _bK * _bsp };
             _bK++;
           }
         }

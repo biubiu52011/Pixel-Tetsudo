@@ -259,7 +259,9 @@
       var line = linesObj[lid];
       if (!line) continue;
       if (((window.RuntimeConfig || {}).SERVICE_CORRIDOR_LINES || {})[lid]) continue;
-      // Canonical branches own independent cards; branchOf is topology, not visibility.
+      // Only officially independent passenger lines own separate cards.
+      if (window.LinePresentationService && typeof window.LinePresentationService.isIndependentLine === "function" &&
+          !window.LinePresentationService.isIndependentLine(lid, linesObj)) continue;
       // 国鉄幹線本名（类比京沪铁路/成渝铁路）不是運行系統：中央本線/東海道本線/東北本線 不进入线路一览，
       // 数据保留作换乘锚点/支线父线。
       if (TRUNK_MAIN_LINE_IDS.indexOf(lid) >= 0) continue;

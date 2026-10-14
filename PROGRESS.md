@@ -1,5 +1,12 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-15 JST — 纠正内部支线误拆范围
+- 用户指出鶴見/千代田/丸ノ内等未独立命名支线不应单列。撤回branchOf一刀切规则；canonical独立presentation作为正式线路展示声明，无声明的内部支线回到父卡片与父图。9内部区间：水郡、方南町、北绫濑、辰野、鹤见海芝浦/大川、成田我孙子/机场、南武浜川崎。8已有正式presentation支线保持独立，西九州新干线按JR九州官方线路名补独立presentation（https://www.jrkyushu-timetable.jp/jr-k_time/r_shinkansen2.html）。
+- LinePresentationService统一独立卡片与父图支线范围，DataState两列表同规则；几何、列车收集与激活同步。组合延伸不再提前返回而漏掉内部支线。支线几何保存junction和canonical站序索引，反向支线不再错位一站。内部交接不标成对外线路入口。源列车号/车型/SQL事实未变。
+- 恢复合图时发现方南町旧站表误含大江户线西新宿五丁目、漏掉两站。按Tokyo Metro官方页（https://www.tokyometro.jp/station/line_marunouchi/index.html）改为中野坂上→中野新桥→中野富士见町→方南町，复用既有canonical别名ID，补站名、顺序/关系索引；删除旧错误区间时长，未猜时刻或坐标。
+- 38工具套件、64 node:test、4守卫PASS。实际本地丸ノ内父图确认官方4站。适用realtime/trains共享卡片，其余页同步已有公共资源；资源4.3.1224。原件recovery/branch-scope-correction-20261015，canonical/fallback仅暂存相关修正，原有5项数据修改保留。不附截图。
+
+
 ## 2026-10-15 JST — 导入东叶/埼玉线路标志
 - 用户提供两张PNG原样导入images/鉄道目录，东叶800×800、埼玉320×320，与附件逐字相同，保留透明度。
 - ToyoRapid/SaitamaRapid的image与presentation.icon接入同一原始PNG；离线fallback同步，七页db-loader版本4.3.1222。卡片与换乘标记复用已有字段，无颜色、车型、SQL或拓扑改动。
@@ -722,3 +729,5 @@
 - 直通标签上线验收：7f4cdcb7生产改动＋d4dc14d4持续检查入口。公开utils/geometry/renderer三个JS HTTP200并逐字MATCH；实际公开大阪环状线天王寺两标签在所属外侧列对齐，大崎显示直通りんかい線／直通相鉄線且无重复/截断。公开截图recovery/through-layout-20261015/osaka-public-after.jpg。Release Guards、Pages success；CI Validate和Deploy均completed（整体状态聚合当时仍in_progress）。原有6项修改保持。
 
 - 独立支线上线验收：2d8ed3bb，CI/CD、Release Guards、Pages全部success，7个公开组件/样式HTTP200并逐字MATCH。公开京急筛选已确认本线/空港/久里滨/逗子/大师5独立卡片，实际点击空港线卡片进入7站独立图；本地成田机场支线3站图亦确认。公开截图keikyu-cards-public.jpg。当前用户页面已刷新，末次实际查看为相铁本线，已确认只保留本线站点与两处支线接续入口；除纳入的北绫濑图标路径外，原有5项独立本地数据修改保留。
+
+- 图标公开验收：dd25bfe0，CI/CD、Release Guards、Pages全部success。公开canonical两条线路的image/presentation.icon已更新，两张原始PNG HTTP200且逐字与附件MATCH。原有5项数据修改保留，未输出截图。

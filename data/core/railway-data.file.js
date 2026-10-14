@@ -38174,15 +38174,11 @@ window.RAILWAY_DATA = {
       "type": "branch",
       "branchOf": "Marunouchi",
       "image": "../images/鉄道/東京メトロ/丸ノ内線.png",
-      "durationTotalMin": 4,
       "stations": [
         "Nakano-Sakaue",
-        "Nishi-Shinjuku-Gochome",
+        "Nakano-Shimbashi",
+        "Nakano-fujimicho",
         "Honancho"
-      ],
-      "durations": [
-        2,
-        2
       ],
       "throughServices": [],
       "transferStations": [],
@@ -40513,7 +40509,22 @@ window.RAILWAY_DATA = {
       "transferStations": [],
       "nameZh": "西九州新干线",
       "nameKo": "니시규슈 신칸센",
-      "serviceBoundaries": []
+      "serviceBoundaries": [],
+      "presentation": {
+        "code": "NishiKyushu",
+        "nameJa": "西九州新幹線",
+        "nameZh": "西九州新干线",
+        "nameEn": "Nishi-Kyushu Shinkansen",
+        "nameKo": "니시규슈 신칸센",
+        "color": "#e60012",
+        "icon": "../images/鉄道/JR九州/Shinkansen_jrk.png",
+        "lineIds": [
+          "NishiKyushuShinkansen"
+        ],
+        "evidence": {
+          "source": "https://www.jrkyushu-timetable.jp/jr-k_time/r_shinkansen2.html"
+        }
+      }
     },
     "OsakaLoop": {
       "name": "OsakaLoop",
@@ -49854,8 +49865,7 @@ window.RAILWAY_DATA = {
       "ChuoSobuLocal"
     ],
     "Nishi-Shinjuku-Gochome": [
-      "Oedo",
-      "MarunouchiBranch"
+      "Oedo"
     ],
     "Tochomae": [
       "Oedo"
@@ -60567,6 +60577,12 @@ window.RAILWAY_DATA = {
     ],
     "Aizu-Minamiwa": [
       "Tadami"
+    ],
+    "Nakano-Shimbashi": [
+      "MarunouchiBranch"
+    ],
+    "Nakano-fujimicho": [
+      "MarunouchiBranch"
     ]
   },
   "lineStationOrder": {
@@ -63808,8 +63824,9 @@ window.RAILWAY_DATA = {
     },
     "MarunouchiBranch": {
       "Nakano-Sakaue": 0,
-      "Nishi-Shinjuku-Gochome": 1,
-      "Honancho": 2
+      "Nakano-Shimbashi": 1,
+      "Nakano-fujimicho": 2,
+      "Honancho": 3
     },
     "ChiyodaBranch": {
       "Ayase": 0,
@@ -65621,5 +65638,4 @@ window.RAILWAY_DATA = {
       ]
     }
   }
-}
-;
+};

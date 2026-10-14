@@ -272,12 +272,20 @@
     return pres ? pres.lineIds.filter(function(id) { return !!allLines[id]; }) : [];
   }
 
-  // Physical branch relationships never opt a child into the parent's map.
-  // Only an explicit combined presentation may include a branch geometry.
+  // Independent passenger lines are explicitly presented as their own line.
+  // Unnamed internal branches stay within their parent, regardless of SQL identity.
+  function isIndependentLine(lineId, allLines) {
+    allLines = allLines || window.UNIFIED_LINES || {};
+    var line = allLines[lineId];
+    return !!(line && (!line.branchOf || getPrimaryPresentation(lineId, allLines)));
+  }
+
   function getMapBranchIds(lineId, allLines) {
     allLines = allLines || window.UNIFIED_LINES || {};
-    return getPresentationMembers(lineId, allLines).filter(function(id) {
-      return id !== lineId && allLines[id].branchOf === lineId;
+    var members = getPresentationMembers(lineId, allLines);
+    return Object.keys(allLines).filter(function(id) {
+      return id !== lineId && allLines[id].branchOf === lineId &&
+        (!isIndependentLine(id, allLines) || members.indexOf(id) >= 0);
     });
   }
 
@@ -304,6 +312,7 @@
     getPrimaryPresentation: getPrimaryPresentation,
     getPresentationMembers: getPresentationMembers,
     getMapBranchIds: getMapBranchIds,
+    isIndependentLine: isIndependentLine,
     isBranch: isBranch
   };
 })();

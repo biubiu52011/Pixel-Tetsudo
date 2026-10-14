@@ -133,7 +133,7 @@
       _positionLines = _positionLines || lines;
       var _branches = window.LinePresentationService ? window.LinePresentationService.getMapBranchIds(lineId, _positionLines) : [];
       var _dependencies = _extensions.map(function(ext) { return ext.lid; });
-      if (!_extensions.length) _dependencies = _dependencies.concat(_branches);
+      _dependencies = _dependencies.concat(_branches);
       _dependencies.forEach(function(id) {
         if (_positionLines[id] && _requestedLines.indexOf(id) < 0) _requestedLines.push(id);
       });
