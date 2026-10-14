@@ -131,41 +131,6 @@ function testThroughResolver() {
   vm.runInNewContext(runningChainSource, { window, console });
   return window.RunningChainResolver;
 }
-
-test('Joban combined presentation draws and places Narita trains without reparenting its line', () => {
-  const lines=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/core/railway_data.json'),'utf8')).lines;
-  const positions={Joban:[{trainId:'joban-live',stationIndex:8,positionSource:'realtime-api'}],
-    NaritaAbikoBranch:[{trainId:'narita-sql',stationIndex:5,positionSource:'supabase-train-run',estimated:true}]};
-  const context={console,document:{querySelector:()=>({clientWidth:503})},window:{
-    innerWidth:503,UNIFIED_LINES:lines,TrainsActiveSystemLineIds:['Joban','NaritaAbikoBranch'],
-    RailwayDB:{getAllLines:()=>lines,resolveStationName:id=>id},
-    DataFusion:{getFusedData:()=>({lines}),getRealtimePositions:id=>positions[id]||[]}
-  }};
-  for(const file of ['js/line-presentation-service.js','js/trains-config.js','js/trains-utils.js','js/trains-data.js','js/trains-geometry.js']) {
-    vm.runInNewContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),context);
-  }
-  context.GEOM=context.window.TrainsConfig.GEOM;
-  const service=context.window.LinePresentationService;
-  assert.deepEqual(Array.from(service.getPresentationMembers('Joban',lines)),['Joban','NaritaAbikoBranch']);
-  assert.ok(service.getMapBranchIds('Joban',lines).includes('NaritaAbikoBranch'));
-  assert.ok(service.getMapBranchIds('Narita',lines).includes('NaritaAbikoBranch'));
-  assert.equal(lines.NaritaAbikoBranch.branchOf,'Narita');
-  const visible=context.getRealtimePositions('Joban');
-  assert.ok(visible.some(p=>p.trainId==='narita-sql'&&p.fusionLineId==='NaritaAbikoBranch'&&p.fusionRole==='branch'));
-  for(const width of [503,1024]) {
-    context.window.innerWidth=width;
-    const geometry=context.computeRouteGeometry(lines.Joban,'Joban');
-    assert.ok(geometry.branchLines.some(b=>b.id==='NaritaAbikoBranch'));
-    const branch=geometry.branchGeom.NaritaAbikoBranch;
-    assert.deepEqual(Array.from(branch,b=>b.stationId),lines.NaritaAbikoBranch.stations.slice(1));
-    assert.ok(branch.every(s=>s.x>=0&&s.x<=geometry.svgW&&s.y>=0&&s.y<=geometry.svgH));
-  }
-  const members=lines.Joban.presentation.lineIds;
-  lines.Joban.presentation.lineIds=['Joban'];
-  assert.ok(!context.computeRouteGeometry(lines.Joban,'Joban').branchLines.some(b=>b.id==='NaritaAbikoBranch'));
-  lines.Joban.presentation.lineIds=members;
-  assert.ok(context.computeRouteGeometry(lines.Joban,'Joban').branchLines.some(b=>b.id==='NaritaAbikoBranch'));
-});
 function segment(number, railway, firstStation, firstClock, lastStation, lastClock) {
   return {
     'odpt:trainNumber': number,

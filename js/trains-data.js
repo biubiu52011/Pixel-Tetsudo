@@ -83,13 +83,8 @@ function getRealtimePositions(lineId) {
   }
   var _src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
   var _brs = [];
-  if (window.LinePresentationService && window.LinePresentationService.getMapBranchIds) {
-    _brs = window.LinePresentationService.getMapBranchIds(lineId, _src);
-  }
   if (_src && _src[lineId] && _src[lineId].branches) {
-    _src[lineId].branches.forEach(function(id) {
-      if (_brs.indexOf(id) < 0) _brs.push(id);
-    });
+    _brs = _src[lineId].branches.slice();
   }
   // branchOf is canonical relationship evidence. Merge it even when the parent
   // also has a branches[] convenience list, because that list may be partial.

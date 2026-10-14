@@ -148,10 +148,8 @@
     // Get branch lines
     var allLines = getLinesData();
     var branchLines = [];
-    var mapBranches = window.LinePresentationService && window.LinePresentationService.getMapBranchIds
-      ? window.LinePresentationService.getMapBranchIds(lineId, allLines) : null;
     for (var bid in allLines) {
-      if (bid !== lineId && (mapBranches ? mapBranches.indexOf(bid) >= 0 : allLines[bid].branchOf === lineId)) {
+      if (allLines[bid].branchOf === lineId && bid !== lineId) {
         var bl = allLines[bid];
         branchLines.push({ id: bid, name: bl.name || bid, color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(bid)) || bl.color || color, stations: bl.stations });
       }
@@ -785,9 +783,8 @@
   }
   
   function _computeLineHash(line) {
-    // Presentation members also determine branch geometry. A refreshed
-    // membership must invalidate a cached map even if the trunk is unchanged.
-    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0') + '|' + (line.isDoubleColumnLoop ? 'D' : '0') + '|' + ((line.presentation && line.presentation.lineIds) || []).join(',');
+    // Simple hash based on stations and type
+    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0') + '|' + (line.isDoubleColumnLoop ? 'D' : '0');
   }
   
   function invalidateRouteGeometryCache(lineId) {

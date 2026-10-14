@@ -131,9 +131,7 @@
       var _positionLines = (window.RailwayDB && window.RailwayDB.getAllLines)
         ? window.RailwayDB.getAllLines() : lines;
       _positionLines = _positionLines || lines;
-      var _branches = window.LinePresentationService && window.LinePresentationService.getMapBranchIds
-        ? window.LinePresentationService.getMapBranchIds(lineId, _positionLines)
-        : (_positionLines[lineId] && _positionLines[lineId].branches) || [];
+      var _branches = (_positionLines[lineId] && _positionLines[lineId].branches) || [];
       var _dependencies = _extensions.map(function(ext) { return ext.lid; });
       if (!_extensions.length) {
         _dependencies = _dependencies.concat(_branches);
