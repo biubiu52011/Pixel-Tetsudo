@@ -894,19 +894,20 @@ window.getTransferHint = function(stationId, lang) {
       // SQL fallback for missing realtime segments. Never revive retired
       // rolling-stock claims from the legacy JS manual timetable.
       "Kawagoe": { mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true },
-      // API-backed HYBRID lines use SQL train-level plans; StationTimetable is not TrainTimetable.
-      "ChuoRapid": { mode: "HYBRID", sqlPlannedFallback: true },
-      "JobanLocal": { mode: "HYBRID", sqlPlannedFallback: true },
-      "KeihinTohoku": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Keiyo": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Musashino": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Nambu": { mode: "HYBRID", sqlPlannedFallback: true },
-      "ShonanShinjuku": { mode: "HYBRID", sqlPlannedFallback: true },
-      "SobuRapid": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Tokaido": { mode: "HYBRID", sqlPlannedFallback: true },
-      "UtsunomiyaJR": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Yamanote": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Yokosuka": { mode: "HYBRID", sqlPlannedFallback: true },
+      // Only source-confirmed HYBRID timetables may opt into SQL;
+      // all other Train API lines retain their existing ODPT timetable path.
+      "ChuoRapid": { mode: "HYBRID" },
+      "JobanLocal": { mode: "HYBRID" },
+      "KeihinTohoku": { mode: "HYBRID" },
+      "Keiyo": { mode: "HYBRID" },
+      "Musashino": { mode: "HYBRID" },
+      "Nambu": { mode: "HYBRID" },
+      "ShonanShinjuku": { mode: "HYBRID" },
+      "SobuRapid": { mode: "HYBRID" },
+      "Tokaido": { mode: "HYBRID" },
+      "UtsunomiyaJR": { mode: "HYBRID" },
+      "Yamanote": { mode: "HYBRID" },
+      "Yokosuka": { mode: "HYBRID" },
       "Oedo": { mode: "FULL" },
       "Arakawa": { mode: "FULL" },
       "KeioMain": { mode: "FULL" },
@@ -926,19 +927,19 @@ window.getTransferHint = function(stationId, lang) {
       // Known partial/limited sources, but no verified local station-pair coverage
       // is stored yet. Keep HYBRID until coveredSegments/excludedSegments can be
       // backed by provider observations; never use SEGMENTED as a placeholder.
-      "Mita": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Mita": { mode: "HYBRID" },
       "Chuo": { mode: "HYBRID" },
       "Ome": { mode: "HYBRID" },
-      "Joban": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Takasaki": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Joban": { mode: "HYBRID" },
+      "Takasaki": { mode: "HYBRID" },
 
       // Official source has insufficient positional granularity on part of this railway.
       "TobuKameido": { mode: "COARSE" },
 
       // Explicitly known not to be complete realtime-position sources.
-      "TobuIsesaki": { mode: "HYBRID", sqlPlannedFallback: true },
-      "TobuNikko": { mode: "HYBRID", sqlPlannedFallback: true },
-      "Tsurumi": { mode: "HYBRID", sqlPlannedFallback: true },
+      "TobuIsesaki": { mode: "HYBRID" },
+      "TobuNikko": { mode: "HYBRID" },
+      "Tsurumi": { mode: "HYBRID" },
       "TsurumiUmiShibaura": { mode: "HYBRID" },
       "TsurumiOkawa": { mode: "HYBRID" },
       "NambuBranch": { mode: "HYBRID" },
