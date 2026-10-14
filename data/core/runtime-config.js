@@ -90,6 +90,19 @@
       // SQL fallback for missing realtime segments. Never revive retired
       // rolling-stock claims from the legacy JS manual timetable.
       "Kawagoe": { mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true },
+      // API-backed HYBRID lines use SQL train-level plans; StationTimetable is not TrainTimetable.
+      "ChuoRapid": { mode: "HYBRID", sqlPlannedFallback: true },
+      "JobanLocal": { mode: "HYBRID", sqlPlannedFallback: true },
+      "KeihinTohoku": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Keiyo": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Musashino": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Nambu": { mode: "HYBRID", sqlPlannedFallback: true },
+      "ShonanShinjuku": { mode: "HYBRID", sqlPlannedFallback: true },
+      "SobuRapid": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Tokaido": { mode: "HYBRID", sqlPlannedFallback: true },
+      "UtsunomiyaJR": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Yamanote": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Yokosuka": { mode: "HYBRID", sqlPlannedFallback: true },
       "Oedo": { mode: "FULL" },
       "Arakawa": { mode: "FULL" },
       "KeioMain": { mode: "FULL" },
@@ -109,19 +122,19 @@
       // Known partial/limited sources, but no verified local station-pair coverage
       // is stored yet. Keep HYBRID until coveredSegments/excludedSegments can be
       // backed by provider observations; never use SEGMENTED as a placeholder.
-      "Mita": { mode: "HYBRID" },
+      "Mita": { mode: "HYBRID", sqlPlannedFallback: true },
       "Chuo": { mode: "HYBRID" },
       "Ome": { mode: "HYBRID" },
-      "Joban": { mode: "HYBRID" },
-      "Takasaki": { mode: "HYBRID" },
+      "Joban": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Takasaki": { mode: "HYBRID", sqlPlannedFallback: true },
 
       // Official source has insufficient positional granularity on part of this railway.
       "TobuKameido": { mode: "COARSE" },
 
       // Explicitly known not to be complete realtime-position sources.
-      "TobuIsesaki": { mode: "HYBRID" },
-      "TobuNikko": { mode: "HYBRID" },
-      "Tsurumi": { mode: "HYBRID" },
+      "TobuIsesaki": { mode: "HYBRID", sqlPlannedFallback: true },
+      "TobuNikko": { mode: "HYBRID", sqlPlannedFallback: true },
+      "Tsurumi": { mode: "HYBRID", sqlPlannedFallback: true },
       "TsurumiUmiShibaura": { mode: "HYBRID" },
       "TsurumiOkawa": { mode: "HYBRID" },
       "NambuBranch": { mode: "HYBRID" },
