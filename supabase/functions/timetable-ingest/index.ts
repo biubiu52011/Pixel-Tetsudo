@@ -75,14 +75,16 @@ Deno.serve(async (request) => {
 
   try {
     const { data: line, error: lineError } = await db.from("railway_lines")
-      .select("id,odpt_operator,odpt_railway,odpt_base_url,timetable_api_enabled,realtime_position_api_enabled")
+      .select("id,odpt_operator,odpt_railway,odpt_base_url,timetable_api_enabled,realtime_position_api_enabled,sql_planned_fallback_enabled")
       .eq("id", job.line_id).single();
-    // This importer is for lines without a usable odpt:Train position API.
-    // Realtime capability is a line property, never inferred from an empty
-    // live snapshot, timetable API availability or a temporary HTTP failure.
+    // Train position coverage is distinct from train-level timetable data.
+    // HYBRID may ingest explicitly opted-in, complete ODPT TrainTimetable rows
+    // into SQL; StationTimetable alone cannot establish one train itinerary.
+    // FULL and non-opted realtime lines remain excluded.
     if (lineError) throw new Error("LINE_CAPABILITY_LOOKUP_FAILED");
     if (!line) throw new Error("LINE_NOT_REGISTERED");
-    if (line.realtime_position_api_enabled === true) {
+    if (line.realtime_position_api_enabled === true &&
+        line.sql_planned_fallback_enabled !== true) {
       throw new Error("REALTIME_API_LINE_NOT_ELIGIBLE_FOR_SQL_TIMETABLE");
     }
     if (!line.timetable_api_enabled || !line.odpt_base_url ||
@@ -105,6 +107,13 @@ Deno.serve(async (request) => {
     if (!response.ok) throw new Error("UPSTREAM_HTTP_" + response.status);
     const rows: unknown = await response.json();
     if (!Array.isArray(rows)) throw new Error("UPSTREAM_NOT_ARRAY");
+    // Some railways publish StationTimetable but not TrainTimetable.
+    // The latter MUST contain a single train's ordered stop sequence; never
+    // transform station board entries into a synthetic train number or route.
+    if (rows.some((r: any) => !r || (r["@type"] &&
+        r["@type"] !== "odpt:TrainTimetable"))) {
+      throw new Error("UPSTREAM_NOT_TRAIN_TIMETABLE");
+    }
     if (rows.length >= 1000) throw new Error("UPSTREAM_POSSIBLY_TRUNCATED");
     if (!rows.length) {
       // Investigate an empty railway-scoped response without guessing a
