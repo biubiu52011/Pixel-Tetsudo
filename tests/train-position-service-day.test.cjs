@@ -562,9 +562,10 @@ test('only source-backed HYBRID railway opts into SQL while other live railways 
   for (const file of ['data/core/runtime-config.js', 'data/core/data-config-bundle.js']) {
     const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
     for (const id of ids) {
-      const line = src.split(/\r?\n/).find(row => row.includes('"' + id + '": {'));
-      assert.ok(line && line.includes('mode: "HYBRID"'), id + ' lost HYBRID classification in ' + file);
-      assert.equal(line.includes('sqlPlannedFallback: true'), id === 'Kawagoe',
+      const occurrences = src.split(/\r?\n/).filter(row => row.includes('"' + id + '": {'));
+      const hybridPolicy = occurrences.find(row => row.includes('mode: "HYBRID"'));
+      assert.ok(hybridPolicy, id + ' lost HYBRID classification in ' + file);
+      assert.equal(hybridPolicy.includes('sqlPlannedFallback: true'), id === 'Kawagoe',
         id + ' cannot select SQL without verified source data');
     }
     assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
