@@ -1059,3 +1059,6 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
  assert.equal(label.getBoundingClientRect().y-icon.getBoundingClientRect().bottom,6);
  console.log('Paired marker/caption renderer spacing and repeat frames: PASS');
 }
+
+// Keep station-owned through-label geometry in the existing CI regression entry.
+require('./through-chip-layout.test.js');
