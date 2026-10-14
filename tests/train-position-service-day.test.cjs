@@ -555,3 +555,42 @@ test('an explicit SQL-partial HYBRID source can load without overriding FULL rea
   assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
   assert.match(fusion, /return mode !== "FULL"/);
 });
+
+
+test('all 19 realtime HYBRID railways choose independently sourced SQL train plans', () => {
+  const ids = ["ChuoRapid","Joban","JobanLocal","Kawagoe","KeihinTohoku","Keiyo","Mita","Musashino","Nambu","ShonanShinjuku","SobuRapid","Takasaki","TobuIsesaki","TobuNikko","Tokaido","Tsurumi","UtsunomiyaJR","Yamanote","Yokosuka"];
+  for (const file of ['data/core/runtime-config.js', 'data/core/data-config-bundle.js']) {
+    const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+    for (const id of ids) {
+      assert.match(src, new RegExp('"' + id +
+        '"\\s*:\\s*\\{[^\\n]*mode:\\s*"HYBRID"[^\\n]*sqlPlannedFallback:\\s*true'),
+        id + ' missing SQL train-plan coverage in ' + file);
+    }
+    assert.equal((src.match(/mode: "HYBRID"[^\n]*sqlPlannedFallback: true/g) || []).length, ids.length);
+    assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
+  }
+  const migration = fs.readFileSync(path.join(__dirname,
+    '../supabase/migrations/20261014002000_enable_sql_planned_fallback_for_all_hybrid_realtime_lines.sql'), 'utf8');
+  for (const id of ids) assert.ok(migration.includes("'" + id + "'"), 'missing SQL permission: ' + id);
+  assert.match(migration, /WHERE realtime_position_api_enabled = true/);
+  const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  assert.match(odpt, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
+  assert.match(odpt, /linePolicy\.sqlPlannedFallback === true/);
+  const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
+  assert.match(fusion, /var needsSqlPlan = !hasLive \|\|/);
+  assert.match(fusion, /source\.sqlPlannedFallback === true\) return false;/);
+  const page = fs.readFileSync(path.join(__dirname, '../js/trains-page.js'), 'utf8');
+  assert.match(page, /function needsSqlTrainPlan\(lineId\)/);
+  assert.match(page, /if \(needsSqlTrainPlan\(id\)/);
+});
+
+test('ODPT StationTimetable is never imported as a full train itinerary for HYBRID', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../supabase/functions/timetable-ingest/index.ts'), 'utf8');
+  assert.match(src, /const url = new URL\("\.\/odpt:TrainTimetable"/);
+  assert.match(src, /UPSTREAM_NOT_TRAIN_TIMETABLE/);
+  assert.match(src, /line\.sql_planned_fallback_enabled !== true/);
+  assert.doesNotMatch(src, /new URL\("\.\/odpt:StationTimetable"/);
+  const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(edge, /source\?\.realtime_position_api_enabled &&/);
+  assert.match(edge, /source\?\.sql_planned_fallback_enabled !== true/);
+});
