@@ -1552,7 +1552,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       text.setAttribute('text-anchor','middle');text.setAttribute('font-size','10');
       text.setAttribute('fill','#334155');text.textContent='+'+(ids.length-1);badge.appendChild(text);
       function open(e) {e.stopPropagation();e.preventDefault();_openTrainFoldList(layer,ids,groups,markers,badge);}
-      badge.addEventListener('click',open);
+      // Activate before an animation frame can replace this SVG badge.
+      badge.addEventListener('pointerdown',open);
       badge.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' ')open(e);});
       label.appendChild(badge);
     });
