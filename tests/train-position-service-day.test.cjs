@@ -557,30 +557,26 @@ test('an explicit SQL-partial HYBRID source can load without overriding FULL rea
 });
 
 
-test('all 19 realtime HYBRID railways choose independently sourced SQL train plans', () => {
+test('only source-backed HYBRID railway opts into SQL while other live railways keep ODPT plans', () => {
   const ids = ["ChuoRapid","Joban","JobanLocal","Kawagoe","KeihinTohoku","Keiyo","Mita","Musashino","Nambu","ShonanShinjuku","SobuRapid","Takasaki","TobuIsesaki","TobuNikko","Tokaido","Tsurumi","UtsunomiyaJR","Yamanote","Yokosuka"];
   for (const file of ['data/core/runtime-config.js', 'data/core/data-config-bundle.js']) {
     const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
-    const policyLines = src.split(/\r?\n/);
     for (const id of ids) {
-      const declared = policyLines.some(row => row.includes('"' + id + '": {') &&
-        row.includes('mode: "HYBRID"') &&
-        row.includes('sqlPlannedFallback: true'));
-      assert.ok(declared, id + ' missing SQL train-plan coverage in ' + file);
+      const line = src.split(/\r?\n/).find(row => row.includes('"' + id + '": {'));
+      assert.ok(line && line.includes('mode: "HYBRID"'), id + ' lost HYBRID classification in ' + file);
+      assert.equal(line.includes('sqlPlannedFallback: true'), id === 'Kawagoe',
+        id + ' cannot select SQL without verified source data');
     }
-    assert.equal((src.match(/mode: "HYBRID"[^\n]*sqlPlannedFallback: true/g) || []).length, ids.length);
     assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
   }
   const migration = fs.readFileSync(path.join(__dirname,
-    '../supabase/migrations/20261014002000_enable_sql_planned_fallback_for_all_hybrid_realtime_lines.sql'), 'utf8');
-  for (const id of ids) assert.ok(migration.includes("'" + id + "'"), 'missing SQL permission: ' + id);
-  assert.match(migration, /WHERE realtime_position_api_enabled = true/);
+    '../supabase/migrations/20261014000401_enable_sourced_partial_kawagoe_plan_fallback.sql'), 'utf8');
+  assert.match(migration, /id = 'Kawagoe'/);
+  assert.doesNotMatch(migration, /'ChuoRapid'/);
   const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
   assert.match(odpt, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
   assert.match(odpt, /linePolicy\.sqlPlannedFallback === true/);
-  // Keep existing train-map coverage until sourced full-day SQL is complete.
-  // This interim must use real TrainTimetable objects, never a station board.
-  assert.match(odpt, /if \(sqlRows && sqlRows.length\) return sqlRows;/);
+  assert.match(odpt, /if \(sqlRows && sqlRows\.length\) return sqlRows;/);
   assert.match(odpt, /tt\['@type'\] !== 'odpt:TrainTimetable'/);
   assert.match(odpt, /tt\['odpt:trainTimetableObject'\]/);
   const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
