@@ -948,8 +948,34 @@
                     !!(linePolicy && linePolicy.mode !== "FULL" &&
                         linePolicy.sqlPlannedFallback === true);
                 var hasTimetableApi = !!(ODPT_ENDPOINTS[op] && ODPT_ENDPOINTS[op].trainTimetable);
-                var sourcePromise = usesSqlPlan ? getCachedTrainRuns(lineId)
-                    : (hasTimetableApi ? self.getCompleteTimetable(op, identity.odptRailway)
+                var sourcePromise = usesSqlPlan ? getCachedTrainRuns(lineId).then(function(sqlRows) {
+                    if (sqlRows && sqlRows.length) return sqlRows;
+                    if (!hasRealtimePositionApi(lineId) || !hasTimetableApi) return [];
+                    // Transitional, NON-SQL fallback while the railway's current
+                    // full-day SQL plan is still being sourced. Only accept actual
+                    // train-numbered ODPT TrainTimetable itineraries, never a
+                    // StationTimetable board or inferred cross-station pairing.
+                    return self.getCompleteTimetable(op, identity.odptRailway).then(function(apiRows) {
+                        var verifiedTrips = (Array.isArray(apiRows) ? apiRows : []).filter(function(tt) {
+                            if (!tt || (tt['@type'] && tt['@type'] !== 'odpt:TrainTimetable') ||
+                                !tt['odpt:trainNumber']) return false;
+                            var stops = tt['odpt:trainTimetableObject'];
+                            return Array.isArray(stops) && stops.length >= 2 &&
+                                stops.filter(function(s) {
+                                    return s && (s['odpt:departureTime'] || s['odpt:arrivalTime']);
+                                }).length >= 2;
+                        });
+                        if (verifiedTrips.length) {
+                            console.warn('[ODPT] HYBRID SQL plan pending; using actual TrainTimetable interim:',
+                                lineId, verifiedTrips.length);
+                        }
+                        return verifiedTrips;
+                    }).catch(function(e) {
+                        console.debug('[ODPT] HYBRID has no verified SQL or TrainTimetable plan:',
+                            lineId, e && e.message);
+                        return [];
+                    });
+                }) : (hasTimetableApi ? self.getCompleteTimetable(op, identity.odptRailway)
                         : Promise.resolve([]));
                 _realtimeActivationInflight[lineId] = sourcePromise.then(function(rows) {
                     if (!rows || !rows.length) return;
