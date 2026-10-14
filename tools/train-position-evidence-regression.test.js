@@ -960,10 +960,25 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
   const placed=labels.map(l=>({...l,x:l.x+offsets[l.id].x,y:l.y+offsets[l.id].y}));
   function overlaps(a,b){return a.x<b.x+b.width && a.x+a.width>b.x && a.y<b.y+b.height && a.y+a.height>b.y;}
   for(let i=0;i<placed.length;i++){
+    assert.equal(offsets[labels[i].id].x,0,'caption centre must stay aligned with its own train');
+    assert(offsets[labels[i].id].y>=0,'caption avoidance must never move above the train');
     assert(!overlaps(placed[i],obstacle),'caption must avoid station text');
     assert(placed[i].x>=0 && placed[i].y>=0 && placed[i].x+36<=300 && placed[i].y+10<=300);
     for(let j=i+1;j<placed.length;j++)assert(!overlaps(placed[i],placed[j]),'complete destination labels must not overlap');
   }
   assert.equal(JSON.stringify(offsets),JSON.stringify(api.resolveLabels(labels.slice().reverse(),[obstacle],bounds)));
   console.log('Independent Joban title and crowded marker/caption layout: PASS');
+}
+
+// Both directions share the same below-icon anchor; the arrow conveys motion.
+{
+  const renderer=read('js/trains-render.js');
+  const start=renderer.indexOf('  function _trainLabelY(');
+  const end=renderer.indexOf('\n  }',start)+4;
+  const anchor=vm.runInNewContext('('+renderer.slice(start,end).trim()+')');
+  for(const direction of ['up','down',null]){
+    assert.equal(anchor('dir',100,direction),121);
+    assert(anchor('dir',100,direction)>109,'caption must clear the bottom of the 18px train icon');
+  }
+  console.log('Direction caption below-icon anchor for up/down/unknown: PASS');
 }

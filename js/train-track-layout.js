@@ -330,20 +330,15 @@
       .forEach(function (label) {
         var best = null;
         var stepY = Math.max(12, label.height + 4);
-        var stepX = Math.max(18, label.width + 4);
-        // Prefer the original caption, then nearby rows, then side columns.
-        for (var ring = 0; ring <= labels.length + placed.length + 2 && !best; ring++) {
-          for (var col = -Math.min(ring, 2); col <= Math.min(ring, 2) && !best; col++) {
-            var row = ring - Math.abs(col);
-            for (var side = 0; side < (row ? 2 : 1); side++) {
-              var dx = col * stepX, dy = row * stepY * (side ? -1 : 1);
-              var box = {x: label.x + dx, y: label.y + dy, width: label.width, height: label.height};
-              if (bounds && (box.x < bounds.x || box.y < bounds.y ||
-                  box.x + box.width > bounds.x + bounds.width || box.y + box.height > bounds.y + bounds.height)) continue;
-              if (!placed.some(function (other) { return intersects(box, other); })) {
-                best = box; output[label.id] = {x: dx, y: dy}; break;
-              }
-            }
+        // A direction caption belongs directly below its own train. Keep its
+        // horizontal centre fixed; collisions may only move it farther down.
+        for (var row = 0; row <= labels.length + placed.length + 2 && !best; row++) {
+          var dy = row * stepY;
+          var box = {x: label.x, y: label.y + dy, width: label.width, height: label.height};
+          if (bounds && (box.x < bounds.x || box.y < bounds.y ||
+              box.x + box.width > bounds.x + bounds.width || box.y + box.height > bounds.y + bounds.height)) continue;
+          if (!placed.some(function (other) { return intersects(box, other); })) {
+            best = box; output[label.id] = {x: 0, y: dy}; break;
           }
         }
         // A fully occupied viewport must not silently drop a destination.

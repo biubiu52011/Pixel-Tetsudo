@@ -1698,10 +1698,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     return null;
   }
 
-  // 方向/终点标签的垂直位置：dir='down' 时方向▼在图标下、终点下移一行；否则方向▲/▶在上、终点在下
+  // Keep direction and destination centred below the icon for either direction.
   function _trainLabelY(labelPos, py, moveDir) {
-    if (labelPos === 'dir') return moveDir === 'down' ? py + 17 : py - 14;
-    return moveDir === 'down' ? py + 28 : py + 25;
+    if (labelPos === 'dir') return py + 21;
+    return py + 32;
   }
 
   // Fixed mobile Oedo diagram: render the COMPLETE passenger-facing

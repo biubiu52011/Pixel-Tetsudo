@@ -1,6 +1,14 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 常磐快速车辆判定补齐（SQL／本地完成，发布验证待完成）
+## 2026-10-14 JST — 方向／目的地标签恢复图标正下方（本地完成，发布待验收）
+
+- 用户指出方向应该在列车图标正下方。常规线路 _trainLabelY 的上／下行共用 py+21，方向箭头仍按实际运行方向；共享 resolveLabels 固定横向中心，只允许向下避让，不再横移或移到图标上方。移位时保留竖直引导，完整终点不裁切。既有大江户六形地图的专用方向走廊继续使用原入口。
+- 适用仅 trains 的共享 renderer/layout；其余六页不加载这两个模块，车型／SQL／拓扑不变。缓存资源 4.3.1210。新增真实函数上下行／未知方向锚点检查与密集标签不横移／不上移回归。
+- 本地 Joban DOM 13 标签全部位于所属 PNG 下方；横向中心最大误差0.000041px、最小间隙5.59px，标签互相重叠0、error0。密集站点仅向下延后标签，并用竖线保持归属。
+- 修改前备份 recovery/local-backup-20261014-before-caption-anchor；原六项独立修改保留。
+
+
+## 2026-10-14 JST — 常磐快速车辆判定补齐（DONE：SQL／公开页面验证通过）
 
 - 用户要求补齐当前 Joban 页车辆判定。复用 Supabase train_vehicle_rules／evidence_sources、既有 export-vehicle-operation-evidence.js、TrainOperationEvidence、TrainVehicle 和原生 PNG；未新增第二套车型 resolver、线路后缀默认值或运行拓扑。
 - 当前公开 JO/J 20260314 平日／休日表、确切列车号／列车种别／首都圈停站及同编组 G 组，与 JR East E231、E531、Hitachi/Tokiwa E657 官方资料交叉核对。按线路+完整列车号+calendar 写入 1,143 个 Grade-C timetable-reference：Joban 682（平日343+休日339，现有班次全部覆盖）、JobanMain 375、NaritaAbikoBranch 86。323M↔1152M／1157M、327M↔462M 为明确刊载的同编组关联，不是所有 M 号默认 E531。北段 E501/E531 混用等未核对号保留未判定。
@@ -9,6 +17,7 @@
 - 修复共享 TrainPositionEstimator 缺失 source calendarType：纯 SQL 位置也能按源 Weekday／SaturdayHoliday 解析车型参考；不根据宿主日期或线路号段猜车型。TrainVehicle 增加 E657 标准模型原生 PNG 的明确目录登记，不从列车号判特殊涂装。三种 PNG 均原生 82×98。
 - 适用页面 trains／realtime 共用车型与推算模块，相关三个资源 4.3.1209；home/history/tourism 不加载该链路，无需改运行逻辑。63 页面／服务日检查、31 tools suites、4 Python guards PASS（保留既有基线警告）。新增完整 SQL-reference→车辆→PNG、纯 SQL 推算平日／休日、跨线／过期隔离及实时车型优先回归。
 - 本地真实 Joban DOM 当前 18 个标记全部 vehicle PNG，未判定 0、浏览器 error 0。来源原件、SHA256 manifest、SQL 导入／导出与修改前备份保存在 recovery/joban-vehicle-evidence-20261014；其他六项既有本地修改保留。
+- 发布 d04a33ebd6502e9446f4a69bc4c4b3bafd4e8e74；CI / CD 38521567650、Release Guards 38521567540、Pages 38521566583 全 success。三个公开脚本 HTTP 200 并逐字匹配提交。公开浏览器当前 18 标记全部 PNG，车型为 E231常磐快速／E531／E657，未判定 0、标签重叠 0、error 0、无横向溢出；加载 build=d04a33eb。SQL 对照再核对：Weekday343/343、SaturdayHoliday339/339。报告 recovery/reports/2026-10-14_joban_vehicle_completion.md；发布后验收记录保留本地。
 
 
 ## 2026-10-14 JST — 页面问题汇总修复（DONE：发布与公开页面验证通过）
