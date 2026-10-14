@@ -156,7 +156,7 @@ const geometrySource=read("js/trains-geometry.js");
 assert(/loopPts\[_sourceRi\]\s*=\s*\{/.test(geometrySource) &&
        /var _sourceRi = _rightSeq\[ri\];/.test(geometrySource) &&
        /loopPts\[_sourceLi\]\s*=\s*\{/.test(geometrySource) &&
-       /var _sourceLi = 9 \+ li;/.test(geometrySource),
+       /var _sourceLi = _leftSeq\[li\];/.test(geometrySource),
   "double-column coordinates must be keyed by canonical station index (Harajuku/Shinagawa)");
 assert(!/loopPts\.push\(\{ x: cx \+ halfW, y: cy - halfH \+ _tR/.test(geometrySource),
   "visual row order must not replace source stationIndex in the train layout");
@@ -175,6 +175,48 @@ assert(!renderer.includes('_trainLabelDisplayX') &&
 assert(renderer.includes('var _offsetX = px - (_bbox.x + _bbox.width / 2);') &&
        renderer.includes("'translate(' + (px + _base) + ',0)'"),
   "initial and animated captions must remain centered on their train");
+
+
+// Ordinary loops share the same two-column template for odd/even station counts.
+{
+  const db=JSON.parse(read("data/core/railway_data.json"));
+  for(const mobile of [true,false]) {
+    const ctx={window:{currentLang:"ja"},_routeGeometryCache:{},_geomKey:id=>id,
+      _getTransferMap:()=>({}),_isMobileView:()=>mobile,
+      _throughDirForStation:()=>null,_throughChipRows:()=>0,
+      getLinesData:()=>({}),GEOM:{BRANCH_COL_W:96,BRANCH_STUB:20,MOBILE_CONTENT_W:297}};
+    vm.runInNewContext(geometrySource,ctx);
+    vm.runInNewContext(read("js/train-track-layout.js"),ctx);
+    for(const id of ["Yamanote","OsakaLoop"]) {
+      const line=db.lines[id],g=ctx.computeRouteGeometry(line,id),points=g.stationCoords;
+      assert.equal(points.length,line.stations.length);
+      line.stations.forEach((sid,i)=>assert.equal(points[i].stationId,sid));
+      assert(points.every(p=>["left","right"].includes(p.side)),id+" must have no top/bottom station row");
+      assert.equal(new Set(points.map(p=>p.x)).size,2);
+      assert.equal(points.filter(p=>p.side==="right").length,Math.ceil(points.length/2));
+      assert.equal(points.filter(p=>p.side==="left").length,Math.floor(points.length/2));
+      for(const side of ["left","right"]) {
+        const ys=points.filter(p=>p.side===side).map(p=>p.y).sort((a,b)=>a-b);
+        for(let i=1;i<ys.length;i++)assert(ys[i]-ys[i-1]>=50-1e-6,"station/icon pitch");
+      }
+      for(let i=0;i<points.length;i++) {
+        const p={trainId:id+i,stationIndex:i,segmentToIndex:(i+1)%points.length,segmentProgress:.5,railDirection:"OuterLoop"};
+        const loc=ctx.window.TrainTrackLayout.resolveAll([p],points,g,id,{laneGap:1e-6})[0];
+        const rect=points._loopRect;
+        assert(Number.isFinite(loc.routePos));
+        const onRail=Math.min(Math.abs(loc.x-(rect.cx-rect.halfW)),Math.abs(loc.x-(rect.cx+rect.halfW)),
+          Math.abs(loc.y-(rect.cy-rect.halfH)),Math.abs(loc.y-(rect.cy+rect.halfH)));
+        assert(onRail<1e-3,id+" join must follow ring, not cut diagonally through the middle");
+      }
+      assert(points.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)&&p.y>0&&p.y<g.svgH));
+      if(id==="Yamanote") {
+        const right=points.filter(p=>p.side==="right").sort((a,b)=>a.y-b.y);
+        assert.equal(right[0].stationId,"Tabata");assert.equal(right.at(-1).stationId,"Shinagawa");
+      }
+    }
+  }
+  console.log("Shared ordinary loop template, odd/even counts, canonical indexing and mobile/desktop: PASS");
+}
 
 // Six-shaped loop regression: preserve the approved narrow 6 shape, correct
 // physical station indices, and provide text/icon lanes without clipping.

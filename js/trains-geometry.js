@@ -457,60 +457,45 @@
       svgW = _isMobileView() ? 225 : 240;
       svgH = loopRectH + (_isMobileView() ? 120 : 128); // v4.3.882: 加括号
       var cx = svgW / 2, cy = svgH / 2;
-      var isDoubleColumnLoop = line.isDoubleColumnLoop === true;
       var halfW = rectW / 2, halfH = rectH / 2;
       var loopPts = [];
-      var i, _t;
-      if (isDoubleColumnLoop) {
-        // JR-official: 30 stations split 15 per column, no station at the
-        // bottom center — wide open middle. Right column (top->bottom):
-        // Tabata..Tokyo..Shinagawa. Left column (top->bottom): Komagome..Osaki.
-        // Vertical pitch adapts to the tallest interchange chip in each column
-        // (name 16 + 3px gap + chip rows + 6px margin) so nothing overlaps.
-        var _rightSeq = [8,7,6,5,4,3,2,1,0,29,28,27,26,25,24];
-        var _colPitch = function(ids) { return _chipPitch(ids); }; // v4.3.847: 复用共同规则 _chipPitch（5.4.1.5）
-        var _rightIds = _rightSeq.map(function(si) { return stations[si]; });
-        var _leftIds = [];
-        for (var _li0 = 0; _li0 < 15; _li0++) _leftIds.push(stations[9 + _li0]);
-        var _pitch = Math.max(_colPitch(_rightIds), _colPitch(_leftIds));
-        var _needH = _pitch * (_rightSeq.length - 1); // v4.3.879: 14→动态（站数延长自动适配）
-        if (_needH > loopRectH) {
-          rectH = _needH;
-          halfH = rectH / 2;
-          svgH = rectH + (_isMobileView() ? 150 : 160); // v4.3.882: 加括号（运算符优先级 bug 修复）
-          cy = svgH / 2;
-        }
-        // Geometry is visually sorted top-to-bottom, but train positions use
-        // canonical line.stations indices. Keep the *same* x/y/side at every
-        // station and store the point at its canonical index; otherwise a
-        // Shinagawa position (24) is mistakenly displayed at Harajuku (24th
-        // point in the visual-order array).
-        for (var ri = 0; ri < _rightSeq.length; ri++) {
-          var _tR = (ri + 0.5) / _rightSeq.length;
-          var _sourceRi = _rightSeq[ri];
-          loopPts[_sourceRi] = { x: cx + halfW, y: cy - halfH + _tR * rectH, side: "right", stationId: stations[_sourceRi] };
-        }
-        for (var li = 0; li < 15; li++) {
-          var _tL = (li + 0.5) / 15;
-          var _sourceLi = 9 + li;
-          loopPts[_sourceLi] = { x: cx - halfW, y: cy - halfH + _tL * rectH, side: "left", stationId: stations[_sourceLi] };
-        }
-      } else {
-        var perimeter = 2 * (rectW + rectH);
-        var startOffset = rectW / 2;
-        for (i = 0; i < stations.length; i++) {
-          var pos = ((i / stations.length) * perimeter + startOffset) % perimeter;
-          var lx, ly, side;
-          if (pos < rectW) { lx = cx - halfW + pos; ly = cy - halfH; side = "top"; }
-          else if (pos < rectW + rectH) { lx = cx + halfW; ly = cy - halfH + (pos - rectW); side = "right"; }
-          else if (pos < 2 * rectW + rectH) { lx = cx + halfW - (pos - rectW - rectH); ly = cy + halfH; side = "bottom"; }
-          else { lx = cx - halfW; ly = cy + halfH - (pos - 2 * rectW - rectH); side = "left"; }
-          loopPts.push({ x: lx, y: ly, side: side, stationId: stations[i], _loopPos: pos });
-        }
+      // One two-column template for every ordinary closed loop. The existing
+      // Yamanote presentation keeps Tabata at the top right and its orientation.
+      // Neither display order nor an odd station count changes source indices.
+      var _rightStart = line.isDoubleColumnLoop ? Math.max(0, stations.indexOf("Tabata")) : 0;
+      var _orderStep = line.isDoubleColumnLoop ? -1 : 1;
+      var _rightCount = Math.ceil(stations.length / 2);
+      var _leftCount = stations.length - _rightCount;
+      var _rightSeq = [], _leftSeq = [];
+      for (var ri = 0; ri < _rightCount; ri++) {
+        _rightSeq.push((_rightStart + _orderStep * ri + stations.length) % stations.length);
       }
+      for (var li = 0; li < _leftCount; li++) {
+        _leftSeq.push((_rightStart - _orderStep * (li + 1) + stations.length) % stations.length);
+      }
+      var _pitch = Math.max(_chipPitch(_rightSeq.map(function(si) { return stations[si]; })),
+        _chipPitch(_leftSeq.map(function(si) { return stations[si]; })));
+      var _needH = _pitch * Math.max(_rightCount, _leftCount);
+      if (_needH > loopRectH) {
+        rectH = _needH;
+        halfH = rectH / 2;
+        svgH = rectH + (_isMobileView() ? 150 : 160);
+        cy = svgH / 2;
+      }
+      for (var ri = 0; ri < _rightSeq.length; ri++) {
+        var _tR = (ri + 0.5) / _rightSeq.length;
+        var _sourceRi = _rightSeq[ri];
+        loopPts[_sourceRi] = { x: cx + halfW, y: cy - halfH + _tR * rectH, side: "right", stationId: stations[_sourceRi], _loopPos: rectW + _tR * rectH };
+      }
+      for (var li = 0; li < _leftSeq.length; li++) {
+        var _tL = (li + 0.5) / _leftSeq.length;
+        var _sourceLi = _leftSeq[li];
+        loopPts[_sourceLi] = { x: cx - halfW, y: cy - halfH + _tL * rectH, side: "left", stationId: stations[_sourceLi], _loopPos: 2 * rectW + rectH + (1 - _tL) * rectH };
+      }
+      var perimeter = 2 * (rectW + rectH);
       // v4.3.950: 环线沿曲线移动——存矩形参数供渲染层沿周长插值
       stationCoords = loopPts;
-      stationCoords._loopRect = { cx: cx, cy: cy, halfW: halfW, halfH: halfH, rectW: rectW, rectH: rectH, perimeter: perimeter };
+      stationCoords._loopRect = { cx: cx, cy: cy, halfW: halfW, halfH: halfH, rectW: rectW, rectH: rectH, perimeter: perimeter, stationOrderSign: _orderStep };
       
       routeElements.push({
         type: 'rect',

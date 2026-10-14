@@ -273,6 +273,10 @@
           _delta += _delta > 0 ? -_perimeter : _perimeter;
         }
         routePos = _fromPos + _delta * (position && position.segmentProgress != null ? clamp(position.segmentProgress, 0, 1) : 0);
+        var _routePoint = loopPosToXY(routePos, stationCoords._loopRect);
+        // Keep lane/clearance offsets, but follow the loop at column joins.
+        px = _routePoint.x + (px - base.point.x);
+        py = _routePoint.y + (py - base.point.y);
       }
     }
     return {

@@ -1312,11 +1312,12 @@ function _isTrainArtworkFailureActive(trainUid, p) {
           _routeDiff = _targetRoutePos - _startRoutePos;
           if (_perimeter > 0) {
             var _loopDirName = String(p && p.railDirection || "").split(/[:.]/).pop();
+            var _orderSign = _loopRect.stationOrderSign || 1;
             if (/^(InnerLoop|Inner)$/.test(_loopDirName)) {
-              // TrainTrackLayout maps InnerLoop to decreasing station/route order.
-              while (_routeDiff > 0) _routeDiff -= _perimeter;
+              // InnerLoop decreases canonical station order; the drawing may be reversed.
+              while (_routeDiff * _orderSign > 0) _routeDiff -= _perimeter * _orderSign;
             } else if (/^(OuterLoop|Outer)$/.test(_loopDirName)) {
-              while (_routeDiff < 0) _routeDiff += _perimeter;
+              while (_routeDiff * _orderSign < 0) _routeDiff += _perimeter * _orderSign;
             } else if (Math.abs(_routeDiff) > _perimeter / 2) {
               _routeDiff += _routeDiff > 0 ? -_perimeter : _perimeter;
             }
