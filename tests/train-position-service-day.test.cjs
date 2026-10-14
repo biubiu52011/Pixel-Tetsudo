@@ -117,7 +117,7 @@ test('Ueno-Tokyo corridor is neither a separate line card nor a through train ha
   context.window.RailwayDB={getLineStations:id=>lines[id].stations,
     resolveStationName:id=>names[id]||id,resolveLineName:()=>lines.Joban.name};
   vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../js/line-card.js'),'utf8'),context);
-  const card=context.window.LineCard.render('Joban',lines.Joban,{mode:'trains'});
+  const card=context.window.LineCard.render(lines.Joban,'Joban',{mode:'trains'});
   assert.match(card,/上野↔ 土浦/);
   assert.doesNotMatch(card,/品川↔/);
 });
