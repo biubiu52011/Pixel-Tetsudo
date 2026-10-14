@@ -1,6 +1,16 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 中央快速あずさ／かいじ E353 图标（上线验收中）
+## 2026-10-14 JST — 高尾实时区间转线与末站图标归位（上线验收中）
+- 用户指出高尾后列车不转线、向画布底部走。共享DataFusion仅按fromStation归属线路，忽略高尾→相模湖的实际toStation；共享布局在最后站idx==nextIdx时用同一坐标计算切向量，零长度退化，且停站偏移朝轨道端点外。
+- 复用canonical serviceBoundaries／handoverStations与真实ODPT from/to区间：只有当前线路不含toStation、同operator伙伴线路包含from/to且物理相邻、from为已声明接续站、伙伴唯一时才转线。不靠目的地推位置，未知/跳站/歧义保持原归属。高尾→相模湖进入ChuoMain index0→1；高尾→西八王子归ChuoRapid index23→22；尚在西八王子→高尾和缺toStation停站不提前转线。
+- 原trainId／sourceRailway／trainNumber不变，源from/to与实际positionLineId保留；车型继续按原证据匹配。编组缓存隔离增加实际positionLineId，防止提供者railway/号码未改时跨物理运行段继承完整编组。共享estimator同样携带positionLineId。
+- 普通末站布局使用最后相邻轨道方向；停站位移朝轨道内侧，起点同样朝内侧。图标与方向依旧整体排布，大江户六字专用偏移保留，无页面CSS补丁，无自动页面跳转、无SQL/拓扑改动。
+- 适用trains.html的所有普通线路图；realtime.html共用DataFusion/estimator位置事实但无SVG排布，资源同步。data-fusion／estimator与trains track-layout版本4.3.1216。
+- 36 tools suites与4守卫PASS。新增真实canonical高尾双向边界、缺失/未知/非相邻/歧义/无边界隔离、末站坐标/主线第一段放置回归；旧Chuo SQL高尾离图、E353、E233、Joban、折叠、Six以及物理运行段编组隔离回归保留。
+- 本地原件备份recovery/takao-handover-20261014。browser runtime: NOT VERIFIED；其他六项本地修改保留。
+
+
+## 2026-10-14 JST — 中央快速あずさ／かいじ E353 图标（已发布，浏览器视觉验收待补）
 - 用户澄清“新宿目的地未识别”实际是缺失列车图标，随后确认影响整批あずさ／かいじ。站名未改；问题是定期特急缺少可用于实时fallback的 exact train/calendar 车型参考，车型目录也未登记E353原生PNG。
 - 使用Supabase技能，复用evidence_sources／train_vehicle_rules、既有exporter、TrainOperationEvidence／TrainVehicle。官方2026年10月八王子双方向平日／休日时刻表逐详情核验102份文档，52平日＋52休日定期あずさ／かいじ／富士回遊列车号。官方车型页 https://www.jreast.co.jp/train/express/azusa_kaiji.html 支持E353计划参考；data-misc运转日注意的临时列车排除，不因M后缀或特急等级默认车型（临时富士回遊可能E257）。
 - 为ChuoRapid实时源与ChuoMain SQL源分别写入104条，合计208条Grade-C timetable-reference，生效2026-10-14至2026-11-30。不声称当天车辆号、辆数、连挂或编组身份。首个事务因旧唯一键不含calendar而回滚，改为与已有规则相同的NULL service_name，列车名称保留在逐号核验清单/原官方页面；后续插入与SQL计数核验成功，无schema/权限/函数更改。
@@ -8,6 +18,8 @@
 - 35 tools suites与4发布守卫PASS。新回归覆盖全部208参考→E353→native PNG、未知/临时号、到期、同号常磐18M仍为原车型、实时车型优先，以及真实新宿终到18M／3120M SQL行→estimator→图标。旧E233回归保持1081独立车型范围。
 - 备份与官方文档：recovery/chuo-destination-20261014；browser runtime: NOT VERIFIED（浏览器工具持续超时）。其他六项本地修改保留。
 
+
+- 上线验收：fd90b8a06a40d23cb59eb3783164f9598c2ededc。CI Validate、Deploy to GitHub Pages及Release Guards均success。公开vehicle/evidence JS逐字MATCH；trains/realtime HTML由发布流程改成build=本提交SHA，确认实际加载新版本（因此不与源码v参数逐字相同）。公开E353 PNG HTTP200、82×98。额外自动pages build任务仍排队，实际CI发布已成功。browser runtime: NOT VERIFIED；未声称视觉PASS。
 
 ## 2026-10-14 JST — 列车整体上下排布与密集折叠（已发布，浏览器视觉验收待补）
 - 目标：中央快速、常磐快速及共享普通线路图取消横向拥挤槽位；保留实际方向轨道，图标与完整方向文字紧贴、同量上下位移。常磐本线同样适用。大江户六字环形既有专用布局保留。

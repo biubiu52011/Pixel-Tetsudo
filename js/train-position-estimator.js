@@ -878,6 +878,7 @@
             trainId: lineId + '_' + trainNumber,
             timetableIdentity: timetableIdentity,
             sourceRailway: tt["odpt:railway"] || "",
+            positionLineId: lineId,
             scheduledItineraryKey: run.scheduledItineraryKey || "",
             runningChainId: timetableIdentity,
             runningChainEvidence: "TIMETABLE_SEGMENT",

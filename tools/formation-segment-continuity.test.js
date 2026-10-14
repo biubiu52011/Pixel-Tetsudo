@@ -28,3 +28,8 @@ seed();sandbox.remember(Object.assign(target('JR-East.NaritaAbiko','823M'),{vehi
 p=target('JR-East.NaritaAbiko','823M');sandbox.inherit(p);
 assert.equal(p.vehicleFormationCandidates.length,0,'fresh model-only branch snapshot cannot rebind previous consist');
 console.log('formation segment continuity: PASS');
+
+seed();
+p=target('JR-East.JobanRapid','123H');p.positionLineId='NaritaAbikoBranch';sandbox.inherit(p);
+assert.equal(p.vehicleFormationCandidates.length,0,'same provider railway/number cannot carry a whole consist after physical line handover');
+assert.equal(p.vehicleResolution.name,model.name,'logical handover retains model continuity');

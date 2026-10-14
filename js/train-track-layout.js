@@ -184,7 +184,8 @@
     var b = points[toIdx] || a;
     var basePt = progress > 0 && toIdx !== idx ? interpolate(a, b, progress) : { x: a.x, y: a.y };
     var canonicalIdx = Math.min(Math.max(0, idx), Math.max(0, points.length - 2));
-    var t = tangentAt(points, idx, toIdx === idx ? canonicalIdx + 1 : toIdx);
+    var t = toIdx === idx ? tangentAt(points, canonicalIdx, canonicalIdx + 1)
+      : tangentAt(points, idx, toIdx);
     return { point: basePt, idx: idx, nextIdx: toIdx, tangent: t, points: points };
   }
 
@@ -249,6 +250,12 @@
       var dirSign = geometry && geometry.isSixShapedLoop && base.nextIdx !== base.idx
         ? 1 : (moveDir === "up" ? -1 : 1);
       if (lane === 0 && !moveDir) dirSign = (slot.ordinal % 2 === 0) ? 1 : -1;
+      // A train waiting at a terminal stays on the track side of the station,
+      // never in the blank canvas beyond the line endpoint.
+      if (!(geometry && geometry.isSixShapedLoop) && base.points.length > 1 && base.idx === base.nextIdx) {
+        if (base.idx === base.points.length - 1) dirSign = -1;
+        else if (base.idx === 0) dirSign = 1;
+      }
       px += base.tangent.x * clearDist * dirSign;
       py += base.tangent.y * clearDist * dirSign;
     }

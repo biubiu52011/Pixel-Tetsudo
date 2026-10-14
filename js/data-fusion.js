@@ -10,6 +10,32 @@
 
   var odptData = { trains: {}, delayInfo: {}, realtimePositions: {} };
   function _positionIdentity(p) { return p && (p.runningChainId || p.trainId) || ""; }
+  // A reported from/to edge owns position across a documented service boundary.
+  // A destination alone never transfers a train to a partner line.
+  function _resolveRealtimeHandover(record, target, lines) {
+    if (!record || !target || !target.line) return null;
+    function key(v) { return String(v || '').split('.').pop().replace(/[-_\s]/g,'').toLowerCase(); }
+    function index(line, station) {
+      var list=line && line.stations || [], n=key(station);
+      for(var i=0;i<list.length;i++)if(key(list[i])===n)return i;
+      return -1;
+    }
+    var from=record['odpt:fromStation'], to=record['odpt:toStation'];
+    if (!from || !to || key(from)===key(to) || index(target.line,to)>=0) return null;
+    var matches=[];
+    (target.line.serviceBoundaries || []).forEach(function(boundary) {
+      var partner=lines[boundary.lineId];
+      if (!partner || partner.operator!==target.line.operator) return;
+      if (!(boundary.handoverStations || []).some(function(station){return key(station)===key(from);})) return;
+      var fromIndex=index(partner,from), toIndex=index(partner,to);
+      // A unique adjacent physical segment and the published handover station
+      // are both required. Skipped/unknown stations are not enough evidence.
+      if(fromIndex<0 || toIndex<0 || Math.abs(fromIndex-toIndex)!==1)return;
+      matches.push({target:{lid:boundary.lineId,idx:fromIndex,line:partner},toIndex:toIndex});
+    });
+    return matches.length===1?matches[0]:null;
+  }
+
   function _realtimeSourceIdentity(record, operator, railway) {
     var explicit = record['owl:sameAs'] || record['odpt:train'];
     if (explicit) return String(explicit);
@@ -88,7 +114,8 @@
   function _formationSegmentKey(p) {
     var railway = String(p && p.sourceRailway || "").split(".").pop();
     var number = String(p && p.trainNumber || "").trim();
-    return railway && number ? railway + "|" + number : "";
+    return railway && number ? railway + "|" + number + "|" +
+      String(p.positionLineId || railway) : "";
   }
 
   function _rememberChainVehicle(p) {
@@ -1133,6 +1160,8 @@
               });
             }
           }
+          var _handover = _resolveRealtimeHandover(t, targetLine, allLines);
+          if (_handover) targetLine = _handover.target;
           if (targetLine) {
             var lid = targetLine.lid;
             var idx = targetLine.idx;
@@ -1159,12 +1188,16 @@
               stationIndex: idx,
               stationId: stationKey,
               sourceRailway: railwayName,
+              positionLineId: lid,
               trainId: trainId,
               trainNumber: trainNumber,
               serviceDate: _snapshotServiceDate,
               delayMin: delayMin,
               railDirection: directionName,
               destinationStation: destStation,
+              sourceFromStation: fromId,
+              sourceToStation: t["odpt:toStation"] || "",
+              segmentToIndex: _handover ? _handover.toIndex : null,
               trainType: rawType,
               typeName: typeName,
               estimated: false,
