@@ -1,6 +1,15 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 列车整体上下排布与密集折叠（IN_PROGRESS：上线验收中）
+## 2026-10-14 JST — 中央快速あずさ／かいじ E353 图标（上线验收中）
+- 用户澄清“新宿目的地未识别”实际是缺失列车图标，随后确认影响整批あずさ／かいじ。站名未改；问题是定期特急缺少可用于实时fallback的 exact train/calendar 车型参考，车型目录也未登记E353原生PNG。
+- 使用Supabase技能，复用evidence_sources／train_vehicle_rules、既有exporter、TrainOperationEvidence／TrainVehicle。官方2026年10月八王子双方向平日／休日时刻表逐详情核验102份文档，52平日＋52休日定期あずさ／かいじ／富士回遊列车号。官方车型页 https://www.jreast.co.jp/train/express/azusa_kaiji.html 支持E353计划参考；data-misc运转日注意的临时列车排除，不因M后缀或特急等级默认车型（临时富士回遊可能E257）。
+- 为ChuoRapid实时源与ChuoMain SQL源分别写入104条，合计208条Grade-C timetable-reference，生效2026-10-14至2026-11-30。不声称当天车辆号、辆数、连挂或编组身份。首个事务因旧唯一键不含calendar而回滚，改为与已有规则相同的NULL service_name，列车名称保留在逐号核验清单/原官方页面；后续插入与SQL计数核验成功，无schema/权限/函数更改。
+- 既有E353 PNG登记唯一车型目录；两个页面train-vehicle／evidence-data资源4.3.1215。有效参考4884→5092，旧参考全保留，records／datedRecords／networkAliases／familyRules／carsets逐项完全一致；inventory从当前SQL同步。
+- 35 tools suites与4发布守卫PASS。新回归覆盖全部208参考→E353→native PNG、未知/临时号、到期、同号常磐18M仍为原车型、实时车型优先，以及真实新宿终到18M／3120M SQL行→estimator→图标。旧E233回归保持1081独立车型范围。
+- 备份与官方文档：recovery/chuo-destination-20261014；browser runtime: NOT VERIFIED（浏览器工具持续超时）。其他六项本地修改保留。
+
+
+## 2026-10-14 JST — 列车整体上下排布与密集折叠（已发布，浏览器视觉验收待补）
 - 目标：中央快速、常磐快速及共享普通线路图取消横向拥挤槽位；保留实际方向轨道，图标与完整方向文字紧贴、同量上下位移。常磐本线同样适用。大江户六字环形既有专用布局保留。
 - 路径：trains.html → TrainTrackLayout.resolveAll／resolveLabels → trains-render。realtime.html不加载线路图renderer，未修改其无关资源；其他页面无此列车位置图。
 - 普通线路底层保留源位置锚点，联合图标／文字矩形就近寻找上下空隙；默认位移最多72屏幕像素。局部同方向密集组放不下时折叠为＋N，不跨方向合并，不改运行链或真实列车数据。不同方向/无邻近组继续独立显示。
@@ -8,6 +17,8 @@
 - 修改共享js/train-track-layout.js、js/trains-render.js、css/trains.css，trains.html资源4.3.1214；tests新增train-fold-layout并修订旧横向槽位断言为原位置锚点。34 tools suites和4守卫PASS，覆盖ChuoRapid／Joban／JobanMain的同站15车、倒序刷新、有限位移、全部身份保留、方向隔离和逐车选择；既有图标文字6px间距/重复帧回归PASS。
 - 浏览器工具超时，browser runtime: NOT VERIFIED。本地原件备份recovery/train-layout-20261014。未涉及SQL车型与时刻表更改。
 
+
+- 发布验收：9e873810f96f979e3c90d6dfe090cd77a28c6aa9排布提交＋49bc017930fbdb1533944a1609df6b0f9d955bef动画折叠按钮响应修复；CI/CD、Release Guards、Pages均success。公开layout、renderer、CSS、trains.html四项200并逐字匹配本地；浏览器工具超时，browser runtime: NOT VERIFIED。原有六项本地修改保留。
 
 ## 2026-10-14 JST — 中央快速 SQL 车型与完整运行段（已发布，浏览器运行验收待补）
 

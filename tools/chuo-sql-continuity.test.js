@@ -1,7 +1,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm'),assert=require('assert');
 const root=path.join(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const snapshot=JSON.parse(read('data/timetables/vehicle-operation-evidence.json'));
-const references=snapshot.referenceRules.filter(r=>r.networkKey==='ChuoRapid');
+const references=snapshot.referenceRules.filter(r=>r.networkKey==='ChuoRapid'&&r.vehicleType==='E233系0番台');
 assert.equal(references.length,1081);
 const evidenceCtx={window:{},console:{debug(){}}};vm.createContext(evidenceCtx);
 for(const p of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js'])vm.runInContext(read(p),evidenceCtx,{filename:p});

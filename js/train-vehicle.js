@@ -7,6 +7,11 @@
   "use strict";
 
 var CANONICAL_VEHICLES = {
+  "jr-e353": {
+    displayName:"E353系", iconName:"E353系",
+    asset:"../images/列车/JR東日本/JR東日本_E353系.png",
+    aliases:["JR東日本E353系","JR E353系","E353系（あずさ・かいじ）"]
+  },
   // JR East standard Chuo Rapid model; no livery/carset/formation inference.
   "jr-e233-0": {
     displayName: "E233系0番台", iconName: "E233系0番台",

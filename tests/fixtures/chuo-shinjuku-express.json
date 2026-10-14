@@ -1,0 +1,190 @@
+[
+  {
+    "id": "canonical-train-timetable:66568",
+    "canonical_timetable_id": 66568,
+    "canonical_group_evidence": "source_only",
+    "line_id": "ChuoMain",
+    "service_date": "2026-10-14",
+    "calendar_type": "weekday",
+    "service_id": "odpt.Calendar:Weekday",
+    "trip_id": "canonical-train-timetable:66568",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoMain",
+    "train_number": "18M",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Inbound",
+    "train_type": "odpt.TrainType:JR-East.LimitedExpress",
+    "destination_station": "odpt.Station:JR-East.Chuo.Shinjuku",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": "E353系（あずさ・かいじ）",
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "source_single_type_candidate",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": null,
+    "previous_timetable_ids": [],
+    "next_timetable_ids": [],
+    "timetable_provenance": "data/timetables/ChuoMain-manual.js",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Matsumoto",
+        "station_key": "Matsumoto",
+        "arrival_time": null,
+        "departure_time": "10:10",
+        "arrival_minute": null,
+        "departure_minute": 610
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Shiojiri",
+        "station_key": "Shiojiri",
+        "arrival_time": "10:18",
+        "departure_time": "10:18",
+        "arrival_minute": 618,
+        "departure_minute": 618
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Okaya",
+        "station_key": "Okaya",
+        "arrival_time": "10:25",
+        "departure_time": "10:26",
+        "arrival_minute": 625,
+        "departure_minute": 626
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Kami-Suwa",
+        "station_key": "Kami-Suwa",
+        "arrival_time": "10:32",
+        "departure_time": "10:33",
+        "arrival_minute": 632,
+        "departure_minute": 633
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Chino",
+        "station_key": "Chino",
+        "arrival_time": null,
+        "departure_time": "10:39",
+        "arrival_minute": null,
+        "departure_minute": 639
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Kobuchizawa",
+        "station_key": "Kobuchizawa",
+        "arrival_time": "10:51",
+        "departure_time": "10:52",
+        "arrival_minute": 651,
+        "departure_minute": 652
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Kofu",
+        "station_key": "Kofu",
+        "arrival_time": "11:15",
+        "departure_time": "11:16",
+        "arrival_minute": 675,
+        "departure_minute": 676
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Takao",
+        "station_key": "Takao",
+        "arrival_time": "11:44",
+        "departure_time": "11:44",
+        "arrival_minute": 704,
+        "departure_minute": 704
+      }
+    ]
+  },
+  {
+    "id": "canonical-train-timetable:66569",
+    "canonical_timetable_id": 66569,
+    "canonical_group_evidence": "source_only",
+    "line_id": "ChuoMain",
+    "service_date": "2026-10-14",
+    "calendar_type": "weekday",
+    "service_id": "odpt.Calendar:Weekday",
+    "trip_id": "canonical-train-timetable:66569",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoMain",
+    "train_number": "3120M",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Inbound",
+    "train_type": "odpt.TrainType:JR-East.LimitedExpress",
+    "destination_station": "odpt.Station:JR-East.Chuo.Shinjuku",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": "E353系（あずさ・かいじ）",
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "source_single_type_candidate",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": null,
+    "previous_timetable_ids": [],
+    "next_timetable_ids": [],
+    "timetable_provenance": "data/timetables/ChuoMain-manual.js",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Kofu",
+        "station_key": "Kofu",
+        "arrival_time": null,
+        "departure_time": "11:32",
+        "arrival_minute": null,
+        "departure_minute": 692
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Isawa-Onsen",
+        "station_key": "Isawa-Onsen",
+        "arrival_time": null,
+        "departure_time": "11:37",
+        "arrival_minute": null,
+        "departure_minute": 697
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Yamanashishi",
+        "station_key": "Yamanashishi",
+        "arrival_time": null,
+        "departure_time": "11:42",
+        "arrival_minute": null,
+        "departure_minute": 702
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Enzan",
+        "station_key": "Enzan",
+        "arrival_time": null,
+        "departure_time": "11:46",
+        "arrival_minute": null,
+        "departure_minute": 706
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Otsuki",
+        "station_key": "Otsuki",
+        "arrival_time": "12:05",
+        "departure_time": "12:06",
+        "arrival_minute": 725,
+        "departure_minute": 726
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Takao",
+        "station_key": "Takao",
+        "arrival_time": "12:21",
+        "departure_time": null,
+        "arrival_minute": 741,
+        "departure_minute": null
+      }
+    ]
+  }
+]
