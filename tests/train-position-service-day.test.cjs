@@ -504,3 +504,50 @@ test('every canonical railway and declared through boundary retains a valid time
   assert.equal(new Set(live).size, live.length, 'duplicate realtime capability keys');
   for (const id of live) assert.ok(lines[id], 'realtime capability references noncanonical line: ' + id);
 });
+
+
+test('all sourced Kawagoe 2026-10 sample trips have a traceable published six-stop service, not inferred stock', () => {
+  const source = JSON.parse(fs.readFileSync(path.join(__dirname,
+    '../data/sources/jreast-kawagoe-2026-10-verified-partial.json'), 'utf8'));
+  const railway = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8'));
+  assert.equal(source.line_id, 'Kawagoe');
+  assert.equal(source.full_line_coverage, false, 'a handful of verified trains is never full coverage');
+  assert.equal(source.source_revision_date, null, 'publication month is not a claimed timetable revision');
+  assert.equal(source.records.length, 5);
+  const seen = new Set();
+  for (const trip of source.records) {
+    assert.match(trip.source_trip_id, /^https:\/\/timetables\.jreast\.co\.jp\/2610\/train\//);
+    assert.ok(['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday'].includes(trip.calendar_urn));
+    const key = trip.calendar_urn + '|' + trip.train_number;
+    assert.ok(!seen.has(key), 'duplicated verified source train');
+    seen.add(key);
+    assert.equal(trip.stops.length, 6);
+    for (const [i, stop] of trip.stops.entries()) {
+      assert.ok(railway.lines.Kawagoe.stations.includes(stop.stationId));
+      const time = stop.arrival || stop.departure;
+      assert.match(time, /^\d{2}:\d{2}$/);
+      if (i === 5) assert.ok(stop.arrival, 'terminal stop must have arrival clock');
+      else assert.ok(stop.departure, 'intermediate sample must have published departure clock');
+    }
+    assert.ok(!('vehicle_type_label' in trip));
+  }
+});
+
+test('an explicit SQL-partial HYBRID source can load without overriding FULL realtime priority', () => {
+  const runCfg = fs.readFileSync(path.join(__dirname, '../data/core/runtime-config.js'), 'utf8');
+  const bundle = fs.readFileSync(path.join(__dirname, '../data/core/data-config-bundle.js'), 'utf8');
+  for (const src of [runCfg, bundle]) {
+    assert.match(src, /"Kawagoe": \{ mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true \}/);
+    assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
+  }
+  const sql = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(sql, /source\?\.sql_planned_fallback_enabled !== true/);
+  assert.match(sql, /sourceSampleOnly = templates\.some/);
+  assert.match(sql, /&& !sourceSampleOnly/);
+  assert.match(sql, /verified-partial-sample/);
+  const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
+  assert.match(odpt, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
+  assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
+  assert.match(fusion, /return mode !== "FULL"/);
+});
