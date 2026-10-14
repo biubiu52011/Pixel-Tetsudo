@@ -20256,21 +20256,20 @@
   "evidenceInventory": {
     "networkCount": 29,
     "networks": [
+      "asakusa",
       "ChibaMonorail",
+      "chiyoda-joban-odakyu",
       "ChuoMain",
       "ChuoRapid",
-      "Joban",
-      "JobanMain",
-      "NaritaAbikoBranch",
-      "Yamanote",
-      "asakusa",
-      "chiyoda-joban-odakyu",
       "hanzomon",
       "hibiya",
       "iketama",
+      "Joban",
+      "JobanMain",
       "keiyo",
       "kodomonokuni",
       "meguro",
+      "NaritaAbikoBranch",
       "odakyu-main",
       "oimachi",
       "saikyo",
@@ -20284,7 +20283,8 @@
       "tokyo-monorail",
       "toyoko-fukutoshin",
       "tozai",
-      "tsukuba-express"
+      "tsukuba-express",
+      "Yamanote"
     ],
     "rows": [
       {
