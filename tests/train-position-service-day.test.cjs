@@ -561,9 +561,11 @@ test('all 19 realtime HYBRID railways choose independently sourced SQL train pla
   const ids = ["ChuoRapid","Joban","JobanLocal","Kawagoe","KeihinTohoku","Keiyo","Mita","Musashino","Nambu","ShonanShinjuku","SobuRapid","Takasaki","TobuIsesaki","TobuNikko","Tokaido","Tsurumi","UtsunomiyaJR","Yamanote","Yokosuka"];
   for (const file of ['data/core/runtime-config.js', 'data/core/data-config-bundle.js']) {
     const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+    const policyLines = src.split(/\r?\n/);
     for (const id of ids) {
-      assert.match(src, new RegExp('"' + id +
-        '"\\s*:\\s*\\{[^\\n]*mode:\\s*"HYBRID"[^\\n]*sqlPlannedFallback:\\s*true'),
+      const line = policyLines.find(row => row.includes('"' + id + '": {'));
+      assert.ok(line && line.includes('mode: "HYBRID"') &&
+        line.includes('sqlPlannedFallback: true'),
         id + ' missing SQL train-plan coverage in ' + file);
     }
     assert.equal((src.match(/mode: "HYBRID"[^\n]*sqlPlannedFallback: true/g) || []).length, ids.length);
