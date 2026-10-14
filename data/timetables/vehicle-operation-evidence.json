@@ -20262,9 +20262,12 @@
       "hanzomon",
       "hibiya",
       "iketama",
+      "Joban",
+      "JobanMain",
       "keiyo",
       "kodomonokuni",
       "meguro",
+      "NaritaAbikoBranch",
       "odakyu-main",
       "oimachi",
       "saikyo",
@@ -20279,10 +20282,7 @@
       "toyoko-fukutoshin",
       "tozai",
       "tsukuba-express",
-      "Yamanote",
-      "JobanMain",
-      "NaritaAbikoBranch",
-      "Joban"
+      "Yamanote"
     ],
     "rows": [
       {
@@ -20396,6 +20396,28 @@
         "max_date": "2026-09-27"
       },
       {
+        "source_network_key": "Joban",
+        "canonical_network_key": "Joban",
+        "alias_scope": "exact",
+        "evidence_kind": "train_rule",
+        "evidence_rows": 682,
+        "exact_rows": 682,
+        "narrowed_rows": 0,
+        "min_date": "2026-10-14",
+        "max_date": "2026-11-30"
+      },
+      {
+        "source_network_key": "JobanMain",
+        "canonical_network_key": "JobanMain",
+        "alias_scope": "exact",
+        "evidence_kind": "train_rule",
+        "evidence_rows": 375,
+        "exact_rows": 375,
+        "narrowed_rows": 0,
+        "min_date": "2026-10-14",
+        "max_date": "2026-11-30"
+      },
+      {
         "source_network_key": "keiyo",
         "canonical_network_key": "keiyo",
         "alias_scope": "exact",
@@ -20438,6 +20460,17 @@
         "narrowed_rows": 0,
         "min_date": "2026-04-16",
         "max_date": "2026-04-16"
+      },
+      {
+        "source_network_key": "NaritaAbikoBranch",
+        "canonical_network_key": "NaritaAbikoBranch",
+        "alias_scope": "exact",
+        "evidence_kind": "train_rule",
+        "evidence_rows": 86,
+        "exact_rows": 86,
+        "narrowed_rows": 0,
+        "min_date": "2026-10-14",
+        "max_date": "2026-11-30"
       },
       {
         "source_network_key": "odakyu-main",
@@ -20713,39 +20746,6 @@
         "narrowed_rows": 0,
         "min_date": "2020-01-21",
         "max_date": null
-      },
-      {
-        "source_network_key": "JobanMain",
-        "canonical_network_key": "JobanMain",
-        "alias_scope": "exact",
-        "evidence_kind": "train_rule",
-        "evidence_rows": 375,
-        "exact_rows": 375,
-        "narrowed_rows": 0,
-        "min_date": "2026-10-14",
-        "max_date": "2026-11-30"
-      },
-      {
-        "source_network_key": "NaritaAbikoBranch",
-        "canonical_network_key": "NaritaAbikoBranch",
-        "alias_scope": "exact",
-        "evidence_kind": "train_rule",
-        "evidence_rows": 86,
-        "exact_rows": 86,
-        "narrowed_rows": 0,
-        "min_date": "2026-10-14",
-        "max_date": "2026-11-30"
-      },
-      {
-        "source_network_key": "Joban",
-        "canonical_network_key": "Joban",
-        "alias_scope": "exact",
-        "evidence_kind": "train_rule",
-        "evidence_rows": 682,
-        "exact_rows": 682,
-        "narrowed_rows": 0,
-        "min_date": "2026-10-14",
-        "max_date": "2026-11-30"
       }
     ]
   },
