@@ -261,12 +261,8 @@
       var ids = window.TrainsActivePositionLineIds || window.TrainsActiveSystemLineIds || [lid];
       ids.forEach(function(id) {
         // Mark a date only after SQL succeeds; transient errors retry next minute.
-        var policy = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
-        var linePolicy = policy && policy.lines && policy.lines[id];
-        var hasLive = !!(window.ODPTClient && window.ODPTClient.hasRealtimePositionApi &&
-          window.ODPTClient.hasRealtimePositionApi(id));
-        var needsSqlPlan = !hasLive || !!(linePolicy && linePolicy.mode !== "FULL" &&
-          linePolicy.sqlPlannedFallback === true);
+        var needsSqlPlan = !!(window.ODPTClient && window.ODPTClient.usesSqlTimetable &&
+          window.ODPTClient.usesSqlTimetable(id));
         if (date && _positionServiceDate[id] !== date && needsSqlPlan) {
           ensureTimetable(id).catch(function() {});
         }
@@ -1932,9 +1928,7 @@
         var probed = window.ODPT_TT_PROBED && window.ODPT_TT_PROBED[l.lineId];
         // A HYBRID line's planned positions come only from SQL TrainTimetable
         // records; never fall back to ODPT StationTimetable or a guessed trip.
-        var policies = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
-        var source = policies && policies.lines && policies.lines[l.lineId];
-        if (source && source.mode !== "FULL" && source.sqlPlannedFallback === true) return false;
+        if (window.ODPTClient.usesSqlTimetable(l.lineId)) return false;
         return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId] && !probed;
       });
 
@@ -2099,17 +2093,12 @@
   }
 
   function ensureTimetable(lineId) {
-    // Real-time position authority remains first. A HYBRID line with an
-    // explicit SQL-plan opt-in may read *sourced* timetable gaps, but FULL
-    // coverage never consumes SQL to synthesize train positions.
-    var liveApi = window.ODPTClient &&
-      typeof window.ODPTClient.hasRealtimePositionApi === "function" &&
-      window.ODPTClient.hasRealtimePositionApi(lineId);
-    var _policyCfg = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
-    var _linePolicy = _policyCfg && _policyCfg.lines && _policyCfg.lines[lineId];
-    var _sqlPartialPlan = !!(_linePolicy && _linePolicy.mode !== "FULL" &&
-      _linePolicy.sqlPlannedFallback === true);
-    if (liveApi && !_sqlPartialPlan) {
+    // Every non-FULL line reads SQL schedules; realtime observations retain
+    // priority for the same physical train. FULL never synthesizes SQL positions.
+    var model = (window.RuntimeConfig || {}).REALTIME_POSITION_POLICY || {};
+    var policy = model.lines && model.lines[lineId];
+    var fullCoverage = (policy && policy.mode || model.defaultMode || "UNKNOWN") === "FULL";
+    if (fullCoverage) {
       // ODPT+JS-only lines must not consume stale manual vehicle/timetable
       // objects; train positions come from ODPT Train and models from evidence.
       if (_manualEvidenceDisabled(lineId)) return Promise.resolve(false);

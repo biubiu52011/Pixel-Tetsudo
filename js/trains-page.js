@@ -75,14 +75,7 @@
 
   function needsSqlTrainPlan(lineId) {
     var api = window.ODPTClient;
-    var hasLive = !!(api && api.hasRealtimePositionApi &&
-      api.hasRealtimePositionApi(lineId));
-    var cfg = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
-    var policy = cfg && cfg.lines && cfg.lines[lineId];
-    // A HYBRID Train API alone does not imply the operator publishes
-    // odpt:TrainTimetable. Its declared plan source is SQL, never a station board.
-    return !hasLive || !!(policy && policy.mode !== "FULL" &&
-      policy.sqlPlannedFallback === true);
+    return !!(api && api.usesSqlTimetable && api.usesSqlTimetable(lineId));
   }
 
   function showLineView(lineId, systemLineIds, expectedIdentity, expectedMemberIdentities) {

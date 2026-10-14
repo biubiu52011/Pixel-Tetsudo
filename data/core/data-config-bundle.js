@@ -894,8 +894,7 @@ window.getTransferHint = function(stationId, lang) {
       // SQL fallback for missing realtime segments. Never revive retired
       // rolling-stock claims from the legacy JS manual timetable.
       "Kawagoe": { mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true },
-      // Only source-confirmed HYBRID timetables may opt into SQL;
-      // all other Train API lines retain their existing ODPT timetable path.
+      // Every non-FULL line uses SQL schedules; Train API capability is independent.
       "ChuoRapid": { mode: "HYBRID" },
       "JobanLocal": { mode: "HYBRID" },
       "KeihinTohoku": { mode: "HYBRID" },
@@ -1166,8 +1165,6 @@ window.getTransferHint = function(stationId, lang) {
     TRANSFER_MAX_ROWS: TRANSFER_MAX_ROWS
   };
 })();
-
-
 
 // ===== platform-data.js =====
 /**

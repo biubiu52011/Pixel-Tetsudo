@@ -1,5 +1,26 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-14 JST — 本地备份、线上同步与 trains.html 公开发布（IN_PROGRESS）
+
+- 用户明确授权保留本地备份、与线上同步并公开对接 trains.html。24 个文件逐文件 SHA256 备份通过；原始完整 binary patch 和 manifest 保存在 recovery/local-backup-20261014-before-publish，Git stash backup-before-non-full-sql-publish-20261014 继续保留。
+- 工作区已快进至 origin/main 5483796c8cbed364b0158a95ab7f6a5de9e31cac，在最新脚本上合入非 FULL SQL 策略；保留线上新增日历有效性、候选车型分级、列车去重、荒川 ODPT trip ID 保护、渲染和日期叠加功能。未覆盖 Supabase v142/v7 函数。
+- 发布范围为既有 ODPTClient、DataFusion、trains-page 的共用 SQL 选择规则、共享配置注释、七页相关资源版本 4.3.1199 及回归测试／执行记录。本地其他原有数据、Meguro manual、normalization backlog、db-loader 改动在备份／工作区保留，独立于本次发布。
+- 最新基准验证：31 tools suites、61 node:test checks、4 Python guards PASS；保留既有 baseline warnings。SQL 已有 210 非 FULL 线路，13 FULL 禁用 SQL，新增班次导入及 PNG 检查记录见本次报告。
+- 下一步：推送本次发布提交，确认 GitHub CI／Release Guards／Pages 和公开 trains.html 的 build 与接口，再记录部署结果。
+
+
+
+## 2026-10-14 JST — 非 FULL 线路统一 SQL 时刻表（数据库完成；前端本地验证完成）
+
+- Workstream：non-full-sql-timetables；执行者 Codex；Commit SHA：未提交。用户明确要求 ODPT／SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG 检查，非 FULL 统一 Supabase SQL。本次要求优先于此前“所有实时 API 线路禁止 SQL”的记录。
+- 复用既有 ODPTClient、RuntimeConfig、DataFusion、trains-page 及 Supabase 导入／canonical mapping 链。覆盖模式与 API 存在性分离：210 非 FULL 使用 SQL，13 FULL 禁用 SQL；实时观测仍优先，缺失或错误 SQL 不复活旧 JS 位置源。日期滚动与直通依赖同步采用新规则。
+- Supabase SQL 更新 railway_lines 的现有 eligibility 字段；通过现有 SQL job／timetable-ingest／persist_odpt_timetable_templates 补齐 18 条线路的平日与休日。36 jobs：26 complete、10 partial、0 failed；新增 12,842 有效班次、220,482 停站，171 不完整上游记录被排除。现有 210 条 SQL 线路、92,320 模板，缺失非 FULL 线路及新增模板 canonical resolution 均为 0。
+- 实测服务接口：Yamanote 522／Mita 406／Rinkai 296，Keiyo 558 PARTIAL，Kawagoe 3 PARTIAL；SaikyoKawagoe FULL BYPASS。山手线实际 SQL 522 条经既有证据／车型解析均得到 E235系0番台同车型原生 PNG。证据不足的其他列车不猜车型或编成。
+- 验证：31 tools suites、50 node:test checks、4 Python guards、JS syntax、diff check PASS；83 canonical artworks、78 refs、466 locked PNG、0 missing native PNG。保留既有工程 baseline warnings。七页相关资源版本升至 4.3.1198，原有未提交改动保留。
+- 修改：data/api/odpt-unified.js、runtime-config.js／data-config-bundle.js、js/data-fusion.js／trains-page.js、两个既有 Supabase function 源文件、两个既有测试、七页资源版本及本进度记录。完整执行与验证记录：recovery/reports/2026-10-14_non_full_sql_timetables.md。
+- 发布边界：数据库 SQL 已执行；前端未提交／推送／发布，browser runtime: NOT VERIFIED。未部署或降级现有 train-runs v142／timetable-ingest v7，它们已经支持 SQL eligibility；本地改动保持较旧工作区接口，不整文件覆盖线上新功能。
+
+
 ## 2026-10-13 JST — SQL 已核验车辆 PNG 路径断链修复（REVIEW）
 
 - 根因：`train-runs` 经 `train_timetable_source_resolution` 已传回 source-dated `dated_operation_owner` 车型与 `vehicle_artwork_path`，但 `js/train-position-estimator.js` 的 `resolveTrainRunIdentity` 和 `matchRealtimeVehicleEvidence` 只让 `dated_schedule_rule` 携带图片。既有 TrainVehicle 解析器因此收到确认车型却丢失可用 PNG，渲染退化为中性点。

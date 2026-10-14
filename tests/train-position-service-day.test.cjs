@@ -551,41 +551,41 @@ test('an explicit SQL-partial HYBRID source can load without overriding FULL rea
   assert.match(sql, /verified-partial-sample/);
   const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
   const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
-  assert.match(odpt, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
-  assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
+  assert.match(odpt, /if \(!usesSqlTimetable\(lineId\)\) return Promise\.resolve\(\[\]\)/);
+  assert.match(fusion, /if \(fullCoverage\) \{/);
   assert.match(fusion, /return mode !== "FULL"/);
 });
 
 
-test('only source-backed HYBRID railway opts into SQL while other live railways keep ODPT plans', () => {
-  const ids = ["ChuoRapid","Joban","JobanLocal","Kawagoe","KeihinTohoku","Keiyo","Mita","Musashino","Nambu","ShonanShinjuku","SobuRapid","Takasaki","TobuIsesaki","TobuNikko","Tokaido","Tsurumi","UtsunomiyaJR","Yamanote","Yokosuka"];
-  for (const file of ['data/core/runtime-config.js', 'data/core/data-config-bundle.js']) {
-    const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
-    for (const id of ids) {
-      const occurrences = src.split(/\r?\n/).filter(row => row.includes('"' + id + '": {'));
-      const hybridPolicy = occurrences.find(row => row.includes('mode: "HYBRID"'));
-      assert.ok(hybridPolicy, id + ' lost HYBRID classification in ' + file);
-      assert.equal(hybridPolicy.includes('sqlPlannedFallback: true'), id === 'Kawagoe',
-        id + ' cannot select SQL without verified source data');
-    }
-    assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
+test('all non-FULL railways use SQL and FULL remains isolated from SQL errors or gaps', () => {
+  const context = { window: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../data/core/runtime-config.js'), 'utf8'), context);
+  const api = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  const start = api.indexOf('    function usesSqlTimetable(lineId) {');
+  const end = api.indexOf('    function getCachedTrainRuns(lineId) {', start);
+  vm.runInNewContext(api.slice(start, end), context);
+  const lines = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8')).lines;
+  const model = context.window.RuntimeConfig.REALTIME_POSITION_POLICY;
+  let sql = 0, full = 0;
+  for (const id of Object.keys(lines)) {
+    const expected = (model.lines[id]?.mode || model.defaultMode) !== 'FULL';
+    assert.equal(context.usesSqlTimetable(id), expected, id);
+    expected ? sql++ : full++;
   }
-  const migration = fs.readFileSync(path.join(__dirname,
-    '../supabase/migrations/20261014000401_enable_sourced_partial_kawagoe_plan_fallback.sql'), 'utf8');
-  assert.match(migration, /id = 'Kawagoe'/);
-  assert.doesNotMatch(migration, /'ChuoRapid'/);
-  const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
-  assert.match(odpt, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
-  assert.match(odpt, /linePolicy\.sqlPlannedFallback === true/);
-  assert.match(odpt, /if \(sqlRows && sqlRows\.length\) return sqlRows;/);
-  assert.match(odpt, /tt\['@type'\] !== 'odpt:TrainTimetable'/);
-  assert.match(odpt, /tt\['odpt:trainTimetableObject'\]/);
+  assert.equal(sql, 210);
+  assert.equal(full, 13);
+  for (const mode of ['HYBRID', 'COARSE', 'SEGMENTED', 'UNKNOWN']) {
+    model.lines.Test = { mode };
+    assert.equal(context.usesSqlTimetable('Test'), true);
+  }
+  model.lines.Test = { mode: 'FULL' };
+  assert.equal(context.usesSqlTimetable('Test'), false);
+  assert.doesNotMatch(api, /HYBRID SQL plan pending|if \(sqlRows && sqlRows/);
   const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
-  assert.match(fusion, /var needsSqlPlan = !hasLive \|\|/);
-  assert.match(fusion, /source\.sqlPlannedFallback === true\) return false;/);
+  assert.match(fusion, /window\.ODPTClient\.usesSqlTimetable\(id\)/);
+  assert.match(fusion, /usesSqlTimetable\(l\.lineId\)\) return false/);
   const page = fs.readFileSync(path.join(__dirname, '../js/trains-page.js'), 'utf8');
-  assert.match(page, /function needsSqlTrainPlan\(lineId\)/);
-  assert.match(page, /if \(needsSqlTrainPlan\(id\)/);
+  assert.match(page, /api\.usesSqlTimetable\(lineId\)/);
 });
 
 test('ODPT StationTimetable is never imported as a full train itinerary for HYBRID', () => {
