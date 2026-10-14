@@ -124,7 +124,7 @@ test('FULL realtime never queries SQL but documented HYBRID source may request a
   assert.match(api, /function hasRealtimePositionApi\(lineId\)/);
   assert.match(api, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
   assert.match(api, /coverage\.mode!=="FULL"&&coverage\.sqlPlannedFallback===true/);
-  assert.match(api, /var sourcePromise = hasRealtimePositionApi\(lineId\)/);
+  assert.match(api, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
   assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
   assert.match(fusion, /_linePolicy\.sqlPlannedFallback === true/);
   assert.match(config, /"SaikyoKawagoe": true/);
@@ -234,9 +234,13 @@ test('live API registry remains intact; only explicit HYBRID source may bypass S
   assert.match(original, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
   assert.match(bundled, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
   assert.match(api, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
-  assert.match(api, /var sourcePromise = hasRealtimePositionApi\(lineId\)/);
+  assert.match(api, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
   assert.match(edge, /source\?\.sql_planned_fallback_enabled !== true/);
   assert.match(bundled, /"Kawagoe": \{ mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true \}/);
+  // The other 18 realtime HYBRID railways have no SQL template yet.
+  // Never skip their ODPT timetable source based solely on coverage mode.
+  const extraOptIns = [...bundled.matchAll(/"([^"]+)": \{ mode: "HYBRID", sqlPlannedFallback: true \}/g)];
+  assert.equal(extraOptIns.length, 0, 'unverified SQL opt-ins would hide existing ODPT timetables');
   assert.match(importer, /if \(line\.realtime_position_api_enabled === true\)/);
 });
 
