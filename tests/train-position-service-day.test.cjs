@@ -563,10 +563,10 @@ test('all 19 realtime HYBRID railways choose independently sourced SQL train pla
     const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
     const policyLines = src.split(/\r?\n/);
     for (const id of ids) {
-      const line = policyLines.find(row => row.includes('"' + id + '": {'));
-      assert.ok(line && line.includes('mode: "HYBRID"') &&
-        line.includes('sqlPlannedFallback: true'),
-        id + ' missing SQL train-plan coverage in ' + file);
+      const declared = policyLines.some(row => row.includes('"' + id + '": {') &&
+        row.includes('mode: "HYBRID"') &&
+        row.includes('sqlPlannedFallback: true'));
+      assert.ok(declared, id + ' missing SQL train-plan coverage in ' + file);
     }
     assert.equal((src.match(/mode: "HYBRID"[^\n]*sqlPlannedFallback: true/g) || []).length, ids.length);
     assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
