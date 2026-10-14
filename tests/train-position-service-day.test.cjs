@@ -578,6 +578,11 @@ test('all 19 realtime HYBRID railways choose independently sourced SQL train pla
   const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
   assert.match(odpt, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
   assert.match(odpt, /linePolicy\.sqlPlannedFallback === true/);
+  // Keep existing train-map coverage until sourced full-day SQL is complete.
+  // This interim must use real TrainTimetable objects, never a station board.
+  assert.match(odpt, /if \(sqlRows && sqlRows.length\) return sqlRows;/);
+  assert.match(odpt, /tt\['@type'\] !== 'odpt:TrainTimetable'/);
+  assert.match(odpt, /tt\['odpt:trainTimetableObject'\]/);
   const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
   assert.match(fusion, /var needsSqlPlan = !hasLive \|\|/);
   assert.match(fusion, /source\.sqlPlannedFallback === true\) return false;/);
