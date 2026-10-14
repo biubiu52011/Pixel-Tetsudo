@@ -938,8 +938,9 @@
                 }
                 // Source capability is per LINE and per RESOURCE:
                 // ODPT StationTimetable cannot be treated as TrainTimetable.
-                // HYBRID uses an independently sourced SQL train-level plan;
-                // ODPT Train positions remain authoritative for the live portion.
+                // Only a verified, explicitly opted-in HYBRID line reads SQL
+                // for planned gaps; the other realtime HYBRID lines retain ODPT.
+                // ODPT Train positions remain authoritative for live locations.
                 // FULL retains the existing ODPT timetable/evidence route.
                 var policy = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
                 var linePolicy = policy && policy.lines && policy.lines[lineId];
