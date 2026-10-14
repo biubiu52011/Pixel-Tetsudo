@@ -82,6 +82,15 @@
     return matches.length === 1 ? matches[0] : null;
   }
 
+  // A timetable connection proves continuity of service, not an unchanged consist.
+  // Keep carset observations on their source railway and published train number;
+  // an unknown segment cannot inherit a whole formation through a split/join.
+  function _formationSegmentKey(p) {
+    var railway = String(p && p.sourceRailway || "").split(".").pop();
+    var number = String(p && p.trainNumber || "").trim();
+    return railway && number ? railway + "|" + number : "";
+  }
+
   function _rememberChainVehicle(p) {
     if (!p || !p.runningChainId) return;
     var resolution = p.vehicleResolution || null;
@@ -104,6 +113,7 @@
     // confirms the same vehicle type but omits its formation field.
     if (!proof && !p.vehicleFormationConflict && _existing && _existing.formationProof &&
         _existing.evidenceServiceDate === p.serviceDate &&
+        _formationSegmentKey(p) && _existing.formationSegmentKey === _formationSegmentKey(p) &&
         _existing.resolution && _existing.resolution.name === resolution.name) {
       proof = _existing.formationProof;
       p.vehicleFormationId = _existing.formationId;
@@ -115,6 +125,7 @@
       formationId: proof ? (p.vehicleFormationId || "") : "",
       formationCandidates: proof ? (p.vehicleFormationCandidates || []).slice() : [],
       formationProof: proof,
+      formationSegmentKey: _formationSegmentKey(p),
       evidenceServiceDate: p.serviceDate || "",
       evidenceRank: _incomingRank,
       lastSeenAt: Date.now()
@@ -142,7 +153,9 @@
     var currentResolution = p.vehicleResolution || null;
     var sameExact = currentResolution && currentResolution.identityStatus === "EXACT" &&
       v.resolution && currentResolution.name === v.resolution.name;
-    if (sameExact && v.formationProof && !p.vehicleFormationId) {
+    var sameFormationSegment = _formationSegmentKey(p) &&
+      v.formationSegmentKey === _formationSegmentKey(p);
+    if (sameExact && sameFormationSegment && v.formationProof && !p.vehicleFormationId) {
       p.vehicleFormationId = v.formationId || "";
       p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
       p.operationEvidence = (p.operationEvidence || []).concat([v.formationProof]);
@@ -151,9 +164,9 @@
     if (currentResolution && currentResolution.identityStatus === "EXACT" &&
         _vehicleEvidenceRank(p) >= (v.evidenceRank || 0)) return p;
     _projectVehicleResolution(p, v.resolution, true);
-    p.vehicleFormationId = v.formationId || "";
-    p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
-    if (v.formationProof) {
+    if (sameFormationSegment && !p.vehicleFormationId && v.formationProof) {
+      p.vehicleFormationId = v.formationId || "";
+      p.vehicleFormationCandidates = (v.formationCandidates || []).slice();
       p.operationEvidence = (p.operationEvidence || []).concat([v.formationProof]);
     }
     return p;
@@ -1505,6 +1518,8 @@
               // Join different evidence channels only for the SAME resolved
               // physical chain, service date and exact vehicle type.
               if (preferred.serviceDate && preferred.serviceDate === other.serviceDate &&
+                  _formationSegmentKey(preferred) &&
+                  _formationSegmentKey(preferred) === _formationSegmentKey(other) &&
                   preferred.vehicleResolution && other.vehicleResolution &&
                   preferred.vehicleResolution.name === other.vehicleResolution.name) {
                 var primary = _confirmedFormationEvidence(preferred);

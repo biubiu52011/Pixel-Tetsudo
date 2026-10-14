@@ -1,0 +1,30 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert');
+const source=fs.readFileSync('js/data-fusion.js','utf8');
+const start=source.indexOf('  var _chainVehicleRegistry = {}');
+const end=source.indexOf('  // Realtime providers sometimes omit vehicle fields',start);
+const sandbox={Date};vm.createContext(sandbox);
+vm.runInContext(source.slice(start,end)+'\nthis.remember=_rememberChainVehicle;this.inherit=_inheritChainVehicle;',sandbox);
+const date='2026-10-14';
+const model={identityStatus:'EXACT',name:'E231系0番台',vehicleTypeStr:'E231系0番台',source:'realtime',sources:['realtime']};
+const proof={decisive:true,sourceUrl:'https://example.test/dated-observation',formationId:'basic10 / attached5',observedDate:date};
+function seed(){sandbox.remember({runningChainId:'split-service',serviceDate:date,sourceRailway:'JR-East.JobanRapid',trainNumber:'123H',vehicleIdentityStatus:'EXACT',vehicleResolution:model,vehicleFormationId:'',vehicleFormationCandidates:['basic10','attached5'],operationEvidence:[proof]});}
+function target(railway,number){return {runningChainId:'split-service',serviceDate:date,sourceRailway:railway,trainNumber:number,vehicleIdentityStatus:'UNKNOWN',vehicleFormationId:'',vehicleFormationCandidates:[],operationEvidence:[]};}
+seed();
+let p=target('odpt.Railway:JR-East.JobanRapid','123H');sandbox.inherit(p);
+assert.deepStrictEqual(Array.from(p.vehicleFormationCandidates),['basic10','attached5'],'same source segment retains dated consist through dropout');
+p=target('JR-East.NaritaAbiko','823M');sandbox.inherit(p);
+assert.equal(p.vehicleResolution.name,model.name,'model continuity survives a source segment boundary');
+assert.deepStrictEqual(Array.from(p.vehicleFormationCandidates),[],'15-car observation must not become Narita branch formation');
+assert.equal(p.operationEvidence.length,0,'branch must not receive old consist proof');
+p=target('JR-East.JobanRapid','124H');sandbox.inherit(p);
+assert.equal(p.vehicleFormationCandidates.length,0,'changed published number requires its own consist proof');
+p=target('','123H');sandbox.inherit(p);
+assert.equal(p.vehicleFormationCandidates.length,0,'missing source railway cannot prove consist continuity');
+p=target('JR-East.NaritaAbiko','823M');p.vehicleFormationId='basic10';p.vehicleFormationCandidates=['basic10'];sandbox.inherit(p);
+assert.equal(p.vehicleFormationId,'basic10','new segment own formation evidence is not overwritten');
+p=target('JR-East.JobanRapid','123H');p.serviceDate='2026-10-15';sandbox.inherit(p);
+assert.equal(p.vehicleIdentityStatus,'UNKNOWN','no prior-day identity inheritance');
+seed();sandbox.remember(Object.assign(target('JR-East.NaritaAbiko','823M'),{vehicleIdentityStatus:'EXACT',vehicleResolution:model}));
+p=target('JR-East.NaritaAbiko','823M');sandbox.inherit(p);
+assert.equal(p.vehicleFormationCandidates.length,0,'fresh model-only branch snapshot cannot rebind previous consist');
+console.log('formation segment continuity: PASS');

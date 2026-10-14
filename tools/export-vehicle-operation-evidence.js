@@ -63,6 +63,10 @@ if (inputIndex >= 0) {
   const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,"..","data","timetables","vehicle-operation-evidence.json"),"utf8"));
   snapshot.referenceRules=input.rules.map(referenceRecord).filter(eligibleReference);
   snapshot.carsets=input.carsets.map(carsetRecord);
+  if (Array.isArray(input.inventory)) {
+    const networks=[...new Set(input.inventory.map(r=>r.canonical_network_key))].sort();
+    snapshot.evidenceInventory={networkCount:networks.length,networks,rows:input.inventory};
+  }
   writeSnapshot(snapshot);
   console.log("Mapping snapshot:",snapshot.referenceRules.length,"references,",snapshot.carsets.length,"carsets");
   process.exit(0);

@@ -769,6 +769,18 @@
           var arrTime = stop.arrivalMinute;
           var idx = stop.stationIndex;
 
+          if (idx === undefined && verifiedContinuation) {
+            // A source-linked branch diverges from the displayed map. Once it
+            // departs the last mapped junction, it is outside this view. Do not
+            // pin it there until the branch's terminal clock.
+            var outsideClock = arrTime !== null ? arrTime : depTime;
+            if (outsideClock !== null && lastDepartedStop &&
+                adjustedCurrentMin > lastDepartedStop.time) {
+              foundInService = false;
+              break;
+            }
+            continue;
+          }
           if (idx === undefined || (idx < 0 && !verifiedContinuation)) continue;
 
           // v4: 站内停车判定拆分——到达（arrival）与发车（departure）分开判定：
@@ -865,6 +877,7 @@
             stationIndex: currentStationIndex,
             trainId: lineId + '_' + trainNumber,
             timetableIdentity: timetableIdentity,
+            sourceRailway: tt["odpt:railway"] || "",
             scheduledItineraryKey: run.scheduledItineraryKey || "",
             runningChainId: timetableIdentity,
             runningChainEvidence: "TIMETABLE_SEGMENT",

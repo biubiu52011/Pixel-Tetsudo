@@ -7,6 +7,12 @@
   "use strict";
 
 var CANONICAL_VEHICLES = {
+  // JR East standard Chuo Rapid model; no livery/carset/formation inference.
+  "jr-e233-0": {
+    displayName: "E233系0番台", iconName: "E233系0番台",
+    asset: "../images/列车/JR東日本/JR東日本_E233系_0番台.png",
+    aliases: ["JR東日本E233系0番台", "JR E233系0番台"]
+  },
   // Official identity: https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/chiyoda_05/index.html
   "metro-05-chiyoda-shuttle": {
     displayName:"東京メトロ05系（千代田支線）",iconName:"東京メトロ05系（千代田支線）",

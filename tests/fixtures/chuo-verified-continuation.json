@@ -1,0 +1,1122 @@
+[
+  {
+    "id": "canonical-train-timetable:168579",
+    "canonical_timetable_id": 168579,
+    "canonical_group_evidence": "verified_continuation",
+    "line_id": "ChuoRapid",
+    "service_date": "2026-10-14",
+    "calendar_type": "weekday",
+    "service_id": "odpt.Calendar:Weekday",
+    "trip_id": "canonical-train-timetable:168579",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoRapid",
+    "train_number": "1081T",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Outbound",
+    "train_type": "odpt.TrainType:JR-East.ChuoSpecialRapid",
+    "destination_station": "odpt.Station:JR-East.Chuo.Otsuki",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": null,
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "unresolved",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": "odpt.TrainTimetable:JR-East.ChuoRapid.1081T.Weekday",
+    "previous_timetable_ids": [],
+    "next_timetable_ids": [
+      "jreast.TrainTimetable:2610:train/155/155671.html:column1"
+    ],
+    "timetable_provenance": "odpt-api:v1:ChuoRapid",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tokyo",
+        "station_key": "Tokyo",
+        "arrival_time": null,
+        "departure_time": "10:32",
+        "arrival_minute": null,
+        "departure_minute": 632
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kanda",
+        "station_key": "Kanda",
+        "arrival_time": null,
+        "departure_time": "10:34",
+        "arrival_minute": null,
+        "departure_minute": 634
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Ochanomizu",
+        "station_key": "Ochanomizu",
+        "arrival_time": null,
+        "departure_time": "10:36",
+        "arrival_minute": null,
+        "departure_minute": 636
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Yotsuya",
+        "station_key": "Yotsuya",
+        "arrival_time": null,
+        "departure_time": "10:41",
+        "arrival_minute": null,
+        "departure_minute": 641
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Shinjuku",
+        "station_key": "Shinjuku",
+        "arrival_time": null,
+        "departure_time": "10:47",
+        "arrival_minute": null,
+        "departure_minute": 647
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Nakano",
+        "station_key": "Nakano",
+        "arrival_time": null,
+        "departure_time": "10:52",
+        "arrival_minute": null,
+        "departure_minute": 652
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Mitaka",
+        "station_key": "Mitaka",
+        "arrival_time": null,
+        "departure_time": "11:03",
+        "arrival_minute": null,
+        "departure_minute": 663
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kokubunji",
+        "station_key": "Kokubunji",
+        "arrival_time": null,
+        "departure_time": "11:10",
+        "arrival_minute": null,
+        "departure_minute": 670
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tachikawa",
+        "station_key": "Tachikawa",
+        "arrival_time": null,
+        "departure_time": "11:16",
+        "arrival_minute": null,
+        "departure_minute": 676
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hino",
+        "station_key": "Hino",
+        "arrival_time": null,
+        "departure_time": "11:19",
+        "arrival_minute": null,
+        "departure_minute": 679
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Toyoda",
+        "station_key": "Toyoda",
+        "arrival_time": null,
+        "departure_time": "11:22",
+        "arrival_minute": null,
+        "departure_minute": 682
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hachioji",
+        "station_key": "Hachioji",
+        "arrival_time": null,
+        "departure_time": "11:26",
+        "arrival_minute": null,
+        "departure_minute": 686
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiHachioji",
+        "station_key": "NishiHachioji",
+        "arrival_time": null,
+        "departure_time": "11:29",
+        "arrival_minute": null,
+        "departure_minute": 689
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Takao",
+        "station_key": "Takao",
+        "arrival_time": "11:33",
+        "departure_time": "11:37",
+        "arrival_minute": 693,
+        "departure_minute": 697
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Sagamiko",
+        "station_key": "Sagamiko",
+        "arrival_time": "11:46",
+        "departure_time": "11:46",
+        "arrival_minute": 706,
+        "departure_minute": 706
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Fujino",
+        "station_key": "Fujino",
+        "arrival_time": "11:50",
+        "departure_time": "11:50",
+        "arrival_minute": 710,
+        "departure_minute": 710
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Uenohara",
+        "station_key": "Uenohara",
+        "arrival_time": "11:54",
+        "departure_time": "11:54",
+        "arrival_minute": 714,
+        "departure_minute": 714
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Shiotsu",
+        "station_key": "Shiotsu",
+        "arrival_time": "11:58",
+        "departure_time": "11:58",
+        "arrival_minute": 718,
+        "departure_minute": 718
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Yanagawa",
+        "station_key": "Yanagawa",
+        "arrival_time": "12:02",
+        "departure_time": "12:03",
+        "arrival_minute": 722,
+        "departure_minute": 723
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Torisawa",
+        "station_key": "Torisawa",
+        "arrival_time": "12:06",
+        "departure_time": "12:06",
+        "arrival_minute": 726,
+        "departure_minute": 726
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Saruhashi",
+        "station_key": "Saruhashi",
+        "arrival_time": "12:09",
+        "departure_time": "12:10",
+        "arrival_minute": 729,
+        "departure_minute": 730
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Otsuki",
+        "station_key": "Otsuki",
+        "arrival_time": "12:13",
+        "departure_time": null,
+        "arrival_minute": 733,
+        "departure_minute": null
+      }
+    ]
+  },
+  {
+    "id": "canonical-train-timetable:168581",
+    "canonical_timetable_id": 168581,
+    "canonical_group_evidence": "verified_continuation",
+    "line_id": "ChuoRapid",
+    "service_date": "2026-10-14",
+    "calendar_type": "weekday",
+    "service_id": "odpt.Calendar:Weekday",
+    "trip_id": "canonical-train-timetable:168581",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoRapid",
+    "train_number": "1087T",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Outbound",
+    "train_type": "odpt.TrainType:JR-East.Rapid",
+    "destination_station": "odpt.Station:JR-East.Ome.Ome",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": null,
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "unresolved",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": "odpt.TrainTimetable:JR-East.ChuoRapid.1087T.Weekday",
+    "previous_timetable_ids": [],
+    "next_timetable_ids": [
+      "odpt.TrainTimetable:JR-East.Ome.1087T.Weekday"
+    ],
+    "timetable_provenance": "odpt-api:v1:ChuoRapid",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tokyo",
+        "station_key": "Tokyo",
+        "arrival_time": null,
+        "departure_time": "10:37",
+        "arrival_minute": null,
+        "departure_minute": 637
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kanda",
+        "station_key": "Kanda",
+        "arrival_time": null,
+        "departure_time": "10:39",
+        "arrival_minute": null,
+        "departure_minute": 639
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Ochanomizu",
+        "station_key": "Ochanomizu",
+        "arrival_time": null,
+        "departure_time": "10:42",
+        "arrival_minute": null,
+        "departure_minute": 642
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Yotsuya",
+        "station_key": "Yotsuya",
+        "arrival_time": null,
+        "departure_time": "10:46",
+        "arrival_minute": null,
+        "departure_minute": 646
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Shinjuku",
+        "station_key": "Shinjuku",
+        "arrival_time": null,
+        "departure_time": "10:52",
+        "arrival_minute": null,
+        "departure_minute": 652
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Nakano",
+        "station_key": "Nakano",
+        "arrival_time": null,
+        "departure_time": "10:57",
+        "arrival_minute": null,
+        "departure_minute": 657
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Koenji",
+        "station_key": "Koenji",
+        "arrival_time": null,
+        "departure_time": "10:59",
+        "arrival_minute": null,
+        "departure_minute": 659
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Asagaya",
+        "station_key": "Asagaya",
+        "arrival_time": null,
+        "departure_time": "11:01",
+        "arrival_minute": null,
+        "departure_minute": 661
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Ogikubo",
+        "station_key": "Ogikubo",
+        "arrival_time": null,
+        "departure_time": "11:03",
+        "arrival_minute": null,
+        "departure_minute": 663
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiOgikubo",
+        "station_key": "NishiOgikubo",
+        "arrival_time": null,
+        "departure_time": "11:05",
+        "arrival_minute": null,
+        "departure_minute": 665
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kichijoji",
+        "station_key": "Kichijoji",
+        "arrival_time": null,
+        "departure_time": "11:08",
+        "arrival_minute": null,
+        "departure_minute": 668
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Mitaka",
+        "station_key": "Mitaka",
+        "arrival_time": null,
+        "departure_time": "11:15",
+        "arrival_minute": null,
+        "departure_minute": 675
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.MusashiSakai",
+        "station_key": "MusashiSakai",
+        "arrival_time": null,
+        "departure_time": "11:17",
+        "arrival_minute": null,
+        "departure_minute": 677
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.HigashiKoganei",
+        "station_key": "HigashiKoganei",
+        "arrival_time": null,
+        "departure_time": "11:20",
+        "arrival_minute": null,
+        "departure_minute": 680
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.MusashiKoganei",
+        "station_key": "MusashiKoganei",
+        "arrival_time": null,
+        "departure_time": "11:22",
+        "arrival_minute": null,
+        "departure_minute": 682
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kokubunji",
+        "station_key": "Kokubunji",
+        "arrival_time": null,
+        "departure_time": "11:28",
+        "arrival_minute": null,
+        "departure_minute": 688
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiKokubunji",
+        "station_key": "NishiKokubunji",
+        "arrival_time": null,
+        "departure_time": "11:30",
+        "arrival_minute": null,
+        "departure_minute": 690
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kunitachi",
+        "station_key": "Kunitachi",
+        "arrival_time": null,
+        "departure_time": "11:32",
+        "arrival_minute": null,
+        "departure_minute": 692
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tachikawa",
+        "station_key": "Tachikawa",
+        "arrival_time": null,
+        "departure_time": "11:40",
+        "arrival_minute": null,
+        "departure_minute": 700
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.NishiTachikawa",
+        "station_key": "NishiTachikawa",
+        "arrival_time": null,
+        "departure_time": "11:43",
+        "arrival_minute": null,
+        "departure_minute": 703
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.HigashiNakagami",
+        "station_key": "HigashiNakagami",
+        "arrival_time": null,
+        "departure_time": "11:45",
+        "arrival_minute": null,
+        "departure_minute": 705
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Nakagami",
+        "station_key": "Nakagami",
+        "arrival_time": null,
+        "departure_time": "11:47",
+        "arrival_minute": null,
+        "departure_minute": 707
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Akishima",
+        "station_key": "Akishima",
+        "arrival_time": null,
+        "departure_time": "11:49",
+        "arrival_minute": null,
+        "departure_minute": 709
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Haijima",
+        "station_key": "Haijima",
+        "arrival_time": null,
+        "departure_time": "11:54",
+        "arrival_minute": null,
+        "departure_minute": 714
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Ushihama",
+        "station_key": "Ushihama",
+        "arrival_time": null,
+        "departure_time": "11:57",
+        "arrival_minute": null,
+        "departure_minute": 717
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Fussa",
+        "station_key": "Fussa",
+        "arrival_time": null,
+        "departure_time": "11:59",
+        "arrival_minute": null,
+        "departure_minute": 719
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Hamura",
+        "station_key": "Hamura",
+        "arrival_time": null,
+        "departure_time": "12:01",
+        "arrival_minute": null,
+        "departure_minute": 721
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Ozaku",
+        "station_key": "Ozaku",
+        "arrival_time": null,
+        "departure_time": "12:04",
+        "arrival_minute": null,
+        "departure_minute": 724
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Kabe",
+        "station_key": "Kabe",
+        "arrival_time": null,
+        "departure_time": "12:07",
+        "arrival_minute": null,
+        "departure_minute": 727
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.HigashiOme",
+        "station_key": "HigashiOme",
+        "arrival_time": null,
+        "departure_time": "12:09",
+        "arrival_minute": null,
+        "departure_minute": 729
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Ome.Ome",
+        "station_key": "Ome",
+        "arrival_time": "12:12",
+        "departure_time": null,
+        "arrival_minute": 732,
+        "departure_minute": null
+      }
+    ]
+  },
+  {
+    "id": "canonical-train-timetable:168618",
+    "canonical_timetable_id": 168618,
+    "canonical_group_evidence": "verified_continuation",
+    "line_id": "ChuoRapid",
+    "service_date": "2026-10-14",
+    "calendar_type": "weekday",
+    "service_id": "odpt.Calendar:Weekday",
+    "trip_id": "canonical-train-timetable:168618",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoRapid",
+    "train_number": "1223H",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Outbound",
+    "train_type": "odpt.TrainType:JR-East.ChuoSpecialRapid",
+    "destination_station": "odpt.Station:JR-East.Chuo.Otsuki",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": null,
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "unresolved",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": "odpt.TrainTimetable:JR-East.ChuoRapid.1223H.Weekday",
+    "previous_timetable_ids": [],
+    "next_timetable_ids": [
+      "jreast.TrainTimetable:2610:train/155/155931.html:column1"
+    ],
+    "timetable_provenance": "odpt-api:v1:ChuoRapid",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tokyo",
+        "station_key": "Tokyo",
+        "arrival_time": null,
+        "departure_time": "12:50",
+        "arrival_minute": null,
+        "departure_minute": 770
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kanda",
+        "station_key": "Kanda",
+        "arrival_time": null,
+        "departure_time": "12:52",
+        "arrival_minute": null,
+        "departure_minute": 772
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Ochanomizu",
+        "station_key": "Ochanomizu",
+        "arrival_time": null,
+        "departure_time": "12:55",
+        "arrival_minute": null,
+        "departure_minute": 775
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Yotsuya",
+        "station_key": "Yotsuya",
+        "arrival_time": null,
+        "departure_time": "12:59",
+        "arrival_minute": null,
+        "departure_minute": 779
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Shinjuku",
+        "station_key": "Shinjuku",
+        "arrival_time": null,
+        "departure_time": "13:07",
+        "arrival_minute": null,
+        "departure_minute": 787
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Nakano",
+        "station_key": "Nakano",
+        "arrival_time": null,
+        "departure_time": "13:11",
+        "arrival_minute": null,
+        "departure_minute": 791
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Mitaka",
+        "station_key": "Mitaka",
+        "arrival_time": null,
+        "departure_time": "13:21",
+        "arrival_minute": null,
+        "departure_minute": 801
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kokubunji",
+        "station_key": "Kokubunji",
+        "arrival_time": null,
+        "departure_time": "13:28",
+        "arrival_minute": null,
+        "departure_minute": 808
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tachikawa",
+        "station_key": "Tachikawa",
+        "arrival_time": null,
+        "departure_time": "13:35",
+        "arrival_minute": null,
+        "departure_minute": 815
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hino",
+        "station_key": "Hino",
+        "arrival_time": null,
+        "departure_time": "13:38",
+        "arrival_minute": null,
+        "departure_minute": 818
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Toyoda",
+        "station_key": "Toyoda",
+        "arrival_time": null,
+        "departure_time": "13:41",
+        "arrival_minute": null,
+        "departure_minute": 821
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hachioji",
+        "station_key": "Hachioji",
+        "arrival_time": null,
+        "departure_time": "13:45",
+        "arrival_minute": null,
+        "departure_minute": 825
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiHachioji",
+        "station_key": "NishiHachioji",
+        "arrival_time": null,
+        "departure_time": "13:48",
+        "arrival_minute": null,
+        "departure_minute": 828
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Takao",
+        "station_key": "Takao",
+        "arrival_time": "13:52",
+        "departure_time": "13:54",
+        "arrival_minute": 832,
+        "departure_minute": 834
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Sagamiko",
+        "station_key": "Sagamiko",
+        "arrival_time": "14:02",
+        "departure_time": "14:03",
+        "arrival_minute": 842,
+        "departure_minute": 843
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Fujino",
+        "station_key": "Fujino",
+        "arrival_time": "14:07",
+        "departure_time": "14:07",
+        "arrival_minute": 847,
+        "departure_minute": 847
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Uenohara",
+        "station_key": "Uenohara",
+        "arrival_time": "14:10",
+        "departure_time": "14:11",
+        "arrival_minute": 850,
+        "departure_minute": 851
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Shiotsu",
+        "station_key": "Shiotsu",
+        "arrival_time": "14:15",
+        "departure_time": "14:24",
+        "arrival_minute": 855,
+        "departure_minute": 864
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Yanagawa",
+        "station_key": "Yanagawa",
+        "arrival_time": "14:28",
+        "departure_time": "14:28",
+        "arrival_minute": 868,
+        "departure_minute": 868
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Torisawa",
+        "station_key": "Torisawa",
+        "arrival_time": "14:32",
+        "departure_time": "14:32",
+        "arrival_minute": 872,
+        "departure_minute": 872
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Saruhashi",
+        "station_key": "Saruhashi",
+        "arrival_time": "14:35",
+        "departure_time": "14:36",
+        "arrival_minute": 875,
+        "departure_minute": 876
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Otsuki",
+        "station_key": "Otsuki",
+        "arrival_time": "14:39",
+        "departure_time": null,
+        "arrival_minute": 879,
+        "departure_minute": null
+      }
+    ]
+  },
+  {
+    "id": "canonical-train-timetable:66570",
+    "canonical_timetable_id": 66570,
+    "canonical_group_evidence": "verified_continuation",
+    "line_id": "ChuoRapid",
+    "service_date": "2026-10-14",
+    "calendar_type": "weekday",
+    "service_id": "odpt.Calendar:Weekday",
+    "trip_id": "canonical-train-timetable:66570",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoRapid",
+    "train_number": "1280T",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Inbound",
+    "train_type": "odpt.TrainType:JR-East.ChuoSpecialRapid",
+    "destination_station": "odpt.Station:JR-East.ChuoRapid.Tokyo",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": null,
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "unresolved",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": "odpt.TrainTimetable:JR-East.ChuoRapid.1280T.Weekday",
+    "previous_timetable_ids": [
+      "jreast.TrainTimetable:2610:train/155/158591.html:column0"
+    ],
+    "next_timetable_ids": [],
+    "timetable_provenance": "odpt-api:v1:ChuoRapid",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Otsuki",
+        "station_key": "Otsuki",
+        "arrival_time": null,
+        "departure_time": "12:19",
+        "arrival_minute": null,
+        "departure_minute": 739
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Saruhashi",
+        "station_key": "Saruhashi",
+        "arrival_time": "12:23",
+        "departure_time": "12:23",
+        "arrival_minute": 743,
+        "departure_minute": 743
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Torisawa",
+        "station_key": "Torisawa",
+        "arrival_time": "12:26",
+        "departure_time": "12:27",
+        "arrival_minute": 746,
+        "departure_minute": 747
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Yanagawa",
+        "station_key": "Yanagawa",
+        "arrival_time": "12:30",
+        "departure_time": "12:30",
+        "arrival_minute": 750,
+        "departure_minute": 750
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Shiotsu",
+        "station_key": "Shiotsu",
+        "arrival_time": "12:34",
+        "departure_time": "12:34",
+        "arrival_minute": 754,
+        "departure_minute": 754
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Uenohara",
+        "station_key": "Uenohara",
+        "arrival_time": "12:38",
+        "departure_time": "12:39",
+        "arrival_minute": 758,
+        "departure_minute": 759
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Fujino",
+        "station_key": "Fujino",
+        "arrival_time": "12:42",
+        "departure_time": "12:43",
+        "arrival_minute": 762,
+        "departure_minute": 763
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Sagamiko",
+        "station_key": "Sagamiko",
+        "arrival_time": "12:46",
+        "departure_time": "12:47",
+        "arrival_minute": 766,
+        "departure_minute": 767
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Takao",
+        "station_key": "Takao",
+        "arrival_time": "12:55",
+        "departure_time": "12:56",
+        "arrival_minute": 775,
+        "departure_minute": 776
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiHachioji",
+        "station_key": "NishiHachioji",
+        "arrival_time": null,
+        "departure_time": "12:59",
+        "arrival_minute": null,
+        "departure_minute": 779
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hachioji",
+        "station_key": "Hachioji",
+        "arrival_time": null,
+        "departure_time": "13:02",
+        "arrival_minute": null,
+        "departure_minute": 782
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Toyoda",
+        "station_key": "Toyoda",
+        "arrival_time": null,
+        "departure_time": "13:07",
+        "arrival_minute": null,
+        "departure_minute": 787
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hino",
+        "station_key": "Hino",
+        "arrival_time": null,
+        "departure_time": "13:10",
+        "arrival_minute": null,
+        "departure_minute": 790
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tachikawa",
+        "station_key": "Tachikawa",
+        "arrival_time": null,
+        "departure_time": "13:13",
+        "arrival_minute": null,
+        "departure_minute": 793
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kokubunji",
+        "station_key": "Kokubunji",
+        "arrival_time": null,
+        "departure_time": "13:19",
+        "arrival_minute": null,
+        "departure_minute": 799
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Mitaka",
+        "station_key": "Mitaka",
+        "arrival_time": null,
+        "departure_time": "13:26",
+        "arrival_minute": null,
+        "departure_minute": 806
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Nakano",
+        "station_key": "Nakano",
+        "arrival_time": null,
+        "departure_time": "13:35",
+        "arrival_minute": null,
+        "departure_minute": 815
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Shinjuku",
+        "station_key": "Shinjuku",
+        "arrival_time": null,
+        "departure_time": "13:41",
+        "arrival_minute": null,
+        "departure_minute": 821
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Yotsuya",
+        "station_key": "Yotsuya",
+        "arrival_time": null,
+        "departure_time": "13:45",
+        "arrival_minute": null,
+        "departure_minute": 825
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Ochanomizu",
+        "station_key": "Ochanomizu",
+        "arrival_time": null,
+        "departure_time": "13:50",
+        "arrival_minute": null,
+        "departure_minute": 830
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kanda",
+        "station_key": "Kanda",
+        "arrival_time": null,
+        "departure_time": "13:53",
+        "arrival_minute": null,
+        "departure_minute": 833
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tokyo",
+        "station_key": "Tokyo",
+        "arrival_time": "13:55",
+        "departure_time": null,
+        "arrival_minute": 835,
+        "departure_minute": null
+      }
+    ]
+  },
+  {
+    "id": "canonical-train-timetable:169523",
+    "canonical_timetable_id": 169523,
+    "canonical_group_evidence": "verified_continuation",
+    "line_id": "ChuoRapid",
+    "service_date": "2026-10-17",
+    "calendar_type": "saturday_holiday",
+    "service_id": "odpt.Calendar:SaturdayHoliday",
+    "trip_id": "canonical-train-timetable:169523",
+    "plan_source": "sql-recurring-timetable",
+    "operator": "JR-East",
+    "network_key": "odpt.Railway:JR-East.ChuoRapid",
+    "train_number": "525T",
+    "operation_code": "",
+    "operation_owner": null,
+    "operation_owner_source_url": null,
+    "rail_direction": "odpt.RailDirection:Outbound",
+    "train_type": "odpt.TrainType:JR-East.Rapid",
+    "destination_station": "odpt.Station:JR-East.Chuo.Otsuki",
+    "vehicle_type_label": null,
+    "vehicle_type_candidates": null,
+    "vehicle_candidate_artwork_path": null,
+    "vehicle_candidate_artwork_status": null,
+    "vehicle_mapping_level": "unresolved",
+    "vehicle_evidence_source": null,
+    "vehicle_evidence_source_id": null,
+    "vehicle_evidence_url": null,
+    "vehicle_artwork_path": null,
+    "source_trip_id": "odpt.TrainTimetable:JR-East.ChuoRapid.525T.SaturdayHoliday",
+    "previous_timetable_ids": [],
+    "next_timetable_ids": [
+      "jreast.TrainTimetable:2610:train/160/160161.html:column1"
+    ],
+    "timetable_provenance": "odpt-api:v1:ChuoRapid",
+    "source_revision_date": null,
+    "timetable_validity": "undated_not_current_verified",
+    "timetable_date_verified": false,
+    "stops": [
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.MusashiKoganei",
+        "station_key": "MusashiKoganei",
+        "arrival_time": null,
+        "departure_time": "05:12",
+        "arrival_minute": null,
+        "departure_minute": 312
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kokubunji",
+        "station_key": "Kokubunji",
+        "arrival_time": null,
+        "departure_time": "05:15",
+        "arrival_minute": null,
+        "departure_minute": 315
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiKokubunji",
+        "station_key": "NishiKokubunji",
+        "arrival_time": null,
+        "departure_time": "05:17",
+        "arrival_minute": null,
+        "departure_minute": 317
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Kunitachi",
+        "station_key": "Kunitachi",
+        "arrival_time": null,
+        "departure_time": "05:19",
+        "arrival_minute": null,
+        "departure_minute": 319
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Tachikawa",
+        "station_key": "Tachikawa",
+        "arrival_time": null,
+        "departure_time": "05:23",
+        "arrival_minute": null,
+        "departure_minute": 323
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hino",
+        "station_key": "Hino",
+        "arrival_time": null,
+        "departure_time": "05:26",
+        "arrival_minute": null,
+        "departure_minute": 326
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Toyoda",
+        "station_key": "Toyoda",
+        "arrival_time": null,
+        "departure_time": "05:30",
+        "arrival_minute": null,
+        "departure_minute": 330
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Hachioji",
+        "station_key": "Hachioji",
+        "arrival_time": null,
+        "departure_time": "05:34",
+        "arrival_minute": null,
+        "departure_minute": 334
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.NishiHachioji",
+        "station_key": "NishiHachioji",
+        "arrival_time": null,
+        "departure_time": "05:37",
+        "arrival_minute": null,
+        "departure_minute": 337
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.ChuoRapid.Takao",
+        "station_key": "Takao",
+        "arrival_time": "05:41",
+        "departure_time": "05:44",
+        "arrival_minute": 341,
+        "departure_minute": 344
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Sagamiko",
+        "station_key": "Sagamiko",
+        "arrival_time": "05:52",
+        "departure_time": "05:52",
+        "arrival_minute": 352,
+        "departure_minute": 352
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Fujino",
+        "station_key": "Fujino",
+        "arrival_time": "05:56",
+        "departure_time": "05:57",
+        "arrival_minute": 356,
+        "departure_minute": 357
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Uenohara",
+        "station_key": "Uenohara",
+        "arrival_time": "06:00",
+        "departure_time": "06:00",
+        "arrival_minute": 360,
+        "departure_minute": 360
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Shiotsu",
+        "station_key": "Shiotsu",
+        "arrival_time": "06:04",
+        "departure_time": "06:04",
+        "arrival_minute": 364,
+        "departure_minute": 364
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Yanagawa",
+        "station_key": "Yanagawa",
+        "arrival_time": "06:08",
+        "departure_time": "06:09",
+        "arrival_minute": 368,
+        "departure_minute": 369
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Torisawa",
+        "station_key": "Torisawa",
+        "arrival_time": "06:12",
+        "departure_time": "06:13",
+        "arrival_minute": 372,
+        "departure_minute": 373
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Saruhashi",
+        "station_key": "Saruhashi",
+        "arrival_time": "06:16",
+        "departure_time": "06:16",
+        "arrival_minute": 376,
+        "departure_minute": 376
+      },
+      {
+        "station_urn": "odpt.Station:JR-East.Chuo.Otsuki",
+        "station_key": "Otsuki",
+        "arrival_time": "06:20",
+        "departure_time": null,
+        "arrival_minute": 380,
+        "departure_minute": null
+      }
+    ]
+  }
+]
