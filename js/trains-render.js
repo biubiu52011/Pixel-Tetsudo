@@ -1177,6 +1177,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       marker.setAttribute("role", "button");
     }
     _setTrainIconPosition(marker, px, py, p, lineId, isLoop);
+    marker._trackYBounds = loc && loc.trackYBounds || null;
     marker._displayX = px;
     marker._displayY = py;
     marker._displayLineId = lineId;
@@ -1307,6 +1308,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       }
 
       if (existingIcon) {
+        existingIcon._trackYBounds = loc.trackYBounds || null;
         // Same train and kind can change to a different certified PNG without
         // rebuilding the marker or retaining a stale SVG/PNG artwork.
         if (markerSpec.kind === "vehicle" &&
@@ -1498,7 +1500,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         var pairWidth = Math.max(rect.right, iconBox.right) - left;
         var foldWidth = 36 * Math.abs(matrix.a);
         if (pairWidth < foldWidth) left -= (foldWidth - pairWidth) / 2;
+        var railBounds = marker._trackYBounds;
+        var markerCentre = iconBox.y + iconBox.height / 2;
         labels.push({id: id, x: left, y: top,
+          minShift: railBounds ? railBounds.min * matrix.d + matrix.f - markerCentre : -Infinity,
+          maxShift: railBounds ? railBounds.max * matrix.d + matrix.f - markerCentre : Infinity,
           width: Math.max(pairWidth, foldWidth),
           height: Math.max(rect.bottom, iconBox.bottom) - top + 18 * Math.abs(matrix.d),
           foldKey: String(node.getAttribute('data-dir-sym') || '')});

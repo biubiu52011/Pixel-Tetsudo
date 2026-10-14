@@ -285,7 +285,11 @@
       key: key,
       moveDir: moveDir,
       tangent: base.tangent,
-      normal: normal
+      normal: normal,
+      trackYBounds: geometry && (geometry.isLoop || geometry.isSixShapedLoop) ? null : {
+        min: Math.min.apply(null, base.points.map(function(p){return p.y;})),
+        max: Math.max.apply(null, base.points.map(function(p){return p.y;}))
+      }
     };
   }
 
@@ -338,6 +342,8 @@
     }
     function findSlot(label, limit) {
       var candidates = [0];
+      if (isFinite(label.minShift)) candidates.push(label.minShift);
+      if (isFinite(label.maxShift)) candidates.push(label.maxShift);
       placed.forEach(function(other) {
         if (label.x < other.x + other.width + 2 && label.x + label.width + 2 > other.x) {
           candidates.push(other.y - label.height - 4 - label.y);
@@ -351,7 +357,9 @@
       candidates.sort(function(a,b) { return Math.abs(a)-Math.abs(b) || b-a; });
       for (var i=0;i<candidates.length;i++) {
         var dy=candidates[i];
-        if (Math.abs(dy)>limit) continue;
+        if (Math.abs(dy)>limit ||
+            (isFinite(label.minShift) && dy<label.minShift) ||
+            (isFinite(label.maxShift) && dy>label.maxShift)) continue;
         var box={x:label.x,y:label.y+dy,width:label.width,height:label.height};
         if (bounds && (box.y<bounds.y || box.y+box.height>bounds.y+bounds.height)) continue;
         if (!placed.some(function(other){return intersects(box,other);})) return {box:box,dy:dy};
@@ -374,9 +382,10 @@
       }
       // A train with no nearby compatible group remains individually visible.
       if (!best) best=findSlot(label,Infinity);
-      var dy=best?best.dy:0;
+      var dy=best?best.dy:Math.max(isFinite(label.minShift)?label.minShift:-Infinity,
+        Math.min(isFinite(label.maxShift)?label.maxShift:Infinity,0));
       output[label.id]={x:0,y:dy};
-      placed.push(best?best.box:label);
+      placed.push(best?best.box:{x:label.x,y:label.y+dy,width:label.width,height:label.height});
       visible.push({label:label});
     });
     return output;

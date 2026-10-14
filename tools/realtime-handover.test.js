@@ -28,3 +28,13 @@ assert(transferred.y>main[0].y&&transferred.y<main[1].y,'handover occupies first
 assert(source.includes('if (_handover) targetLine = _handover.target;'));
 assert(source.includes('segmentToIndex: _handover ? _handover.toIndex : null'));
 console.log('Takao realtime edge handover, reverse, unknown/ambiguous isolation and terminal placement: PASS');
+
+const unit={id:'terminal-train',x:60,y:80,width:40,height:45,minShift:-80,maxShift:10,foldKey:'up'};
+const barrier={x:60,y:65,width:40,height:45};
+const offsets=layout.window.TrainTrackLayout.resolveLabels([unit],[barrier],{x:0,y:0,width:200,height:500},{maxShift:72});
+assert(offsets[unit.id].y<=10,'large blank canvas below terminal is not a legal collision slot');
+assert(offsets[unit.id].y<0,'terminal obstruction moves whole unit inward');
+const crowded=Array.from({length:10},(_,i)=>({...unit,id:'end-'+i}));
+const collapsed=layout.window.TrainTrackLayout.resolveLabels(crowded,[],{x:0,y:0,width:200,height:500},{maxShift:72});
+assert(Object.values(collapsed).some(x=>x.collapsedInto),'terminal crowd folds instead of spilling below track');
+Object.values(collapsed).filter(x=>!x.collapsedInto).forEach(x=>assert(x.y<=10));

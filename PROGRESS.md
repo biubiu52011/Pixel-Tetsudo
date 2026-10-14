@@ -10,6 +10,8 @@
 - 本地原件备份recovery/takao-handover-20261014。browser runtime: NOT VERIFIED；其他六项本地修改保留。
 
 
+- 浏览器连接恢复，公开图实际复现“往三鷹”列车被整体碰撞避让推到高尾下方空白区。追加每列车实际轨道Y范围，按SVG屏幕矩阵约束图标中心可用上下槽位，轨道端点以外不作为空位；端点拥挤沿用折叠。branch使用自身points范围，环形/六字专用布局保留。补充末端障碍、空白画布与拥挤折叠回归，36 suites/4守卫PASS。track-layout/renderer 4.3.1217。
+
 ## 2026-10-14 JST — 中央快速あずさ／かいじ E353 图标（已发布，浏览器视觉验收待补）
 - 用户澄清“新宿目的地未识别”实际是缺失列车图标，随后确认影响整批あずさ／かいじ。站名未改；问题是定期特急缺少可用于实时fallback的 exact train/calendar 车型参考，车型目录也未登记E353原生PNG。
 - 使用Supabase技能，复用evidence_sources／train_vehicle_rules、既有exporter、TrainOperationEvidence／TrainVehicle。官方2026年10月八王子双方向平日／休日时刻表逐详情核验102份文档，52平日＋52休日定期あずさ／かいじ／富士回遊列车号。官方车型页 https://www.jreast.co.jp/train/express/azusa_kaiji.html 支持E353计划参考；data-misc运转日注意的临时列车排除，不因M后缀或特急等级默认车型（临时富士回遊可能E257）。
