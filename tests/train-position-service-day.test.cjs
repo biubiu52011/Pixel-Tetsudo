@@ -504,3 +504,97 @@ test('every canonical railway and declared through boundary retains a valid time
   assert.equal(new Set(live).size, live.length, 'duplicate realtime capability keys');
   for (const id of live) assert.ok(lines[id], 'realtime capability references noncanonical line: ' + id);
 });
+
+
+test('all sourced Kawagoe 2026-10 sample trips have a traceable published six-stop service, not inferred stock', () => {
+  const source = JSON.parse(fs.readFileSync(path.join(__dirname,
+    '../data/sources/jreast-kawagoe-2026-10-verified-partial.json'), 'utf8'));
+  const railway = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/core/railway_data.json'), 'utf8'));
+  assert.equal(source.line_id, 'Kawagoe');
+  assert.equal(source.full_line_coverage, false, 'a handful of verified trains is never full coverage');
+  assert.equal(source.source_revision_date, null, 'publication month is not a claimed timetable revision');
+  assert.equal(source.records.length, 5);
+  const seen = new Set();
+  for (const trip of source.records) {
+    assert.match(trip.source_trip_id, /^https:\/\/timetables\.jreast\.co\.jp\/2610\/train\//);
+    assert.ok(['odpt.Calendar:Weekday', 'odpt.Calendar:SaturdayHoliday'].includes(trip.calendar_urn));
+    const key = trip.calendar_urn + '|' + trip.train_number;
+    assert.ok(!seen.has(key), 'duplicated verified source train');
+    seen.add(key);
+    assert.equal(trip.stops.length, 6);
+    for (const [i, stop] of trip.stops.entries()) {
+      // Official ODPT station URNs use CamelCase; geometry keys use hyphens.
+      const stationAliases = { NishiKawagoe: 'Nishi-Kawagoe',
+        MusashiTakahagi: 'Musashi-Takahagi' };
+      assert.ok(railway.lines.Kawagoe.stations.includes(
+        stationAliases[stop.stationId] || stop.stationId), 'unknown Kawagoe stop: ' + stop.stationId);
+      const time = stop.arrival || stop.departure;
+      assert.match(time, /^\d{2}:\d{2}$/);
+      if (i === 5) assert.ok(stop.arrival, 'terminal stop must have arrival clock');
+      else assert.ok(stop.departure, 'intermediate sample must have published departure clock');
+    }
+    assert.ok(!('vehicle_type_label' in trip));
+  }
+});
+
+test('an explicit SQL-partial HYBRID source can load without overriding FULL realtime priority', () => {
+  const runCfg = fs.readFileSync(path.join(__dirname, '../data/core/runtime-config.js'), 'utf8');
+  const bundle = fs.readFileSync(path.join(__dirname, '../data/core/data-config-bundle.js'), 'utf8');
+  for (const src of [runCfg, bundle]) {
+    assert.match(src, /"Kawagoe": \{ mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true \}/);
+    assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
+  }
+  const sql = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(sql, /source\?\.sql_planned_fallback_enabled !== true/);
+  assert.match(sql, /sourceSampleOnly = templates\.some/);
+  assert.match(sql, /&& !sourceSampleOnly/);
+  assert.match(sql, /verified-partial-sample/);
+  const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
+  assert.match(odpt, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
+  assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
+  assert.match(fusion, /return mode !== "FULL"/);
+});
+
+
+test('only source-backed HYBRID railway opts into SQL while other live railways keep ODPT plans', () => {
+  const ids = ["ChuoRapid","Joban","JobanLocal","Kawagoe","KeihinTohoku","Keiyo","Mita","Musashino","Nambu","ShonanShinjuku","SobuRapid","Takasaki","TobuIsesaki","TobuNikko","Tokaido","Tsurumi","UtsunomiyaJR","Yamanote","Yokosuka"];
+  for (const file of ['data/core/runtime-config.js', 'data/core/data-config-bundle.js']) {
+    const src = fs.readFileSync(path.join(__dirname, '..', file), 'utf8');
+    for (const id of ids) {
+      const occurrences = src.split(/\r?\n/).filter(row => row.includes('"' + id + '": {'));
+      const hybridPolicy = occurrences.find(row => row.includes('mode: "HYBRID"'));
+      assert.ok(hybridPolicy, id + ' lost HYBRID classification in ' + file);
+      assert.equal(hybridPolicy.includes('sqlPlannedFallback: true'), id === 'Kawagoe',
+        id + ' cannot select SQL without verified source data');
+    }
+    assert.doesNotMatch(src, /mode: "FULL"[^\n]*sqlPlannedFallback: true/);
+  }
+  const migration = fs.readFileSync(path.join(__dirname,
+    '../supabase/migrations/20261014000401_enable_sourced_partial_kawagoe_plan_fallback.sql'), 'utf8');
+  assert.match(migration, /id = 'Kawagoe'/);
+  assert.doesNotMatch(migration, /'ChuoRapid'/);
+  const odpt = fs.readFileSync(path.join(__dirname, '../data/api/odpt-unified.js'), 'utf8');
+  assert.match(odpt, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
+  assert.match(odpt, /linePolicy\.sqlPlannedFallback === true/);
+  assert.match(odpt, /if \(sqlRows && sqlRows\.length\) return sqlRows;/);
+  assert.match(odpt, /tt\['@type'\] !== 'odpt:TrainTimetable'/);
+  assert.match(odpt, /tt\['odpt:trainTimetableObject'\]/);
+  const fusion = fs.readFileSync(path.join(__dirname, '../js/data-fusion.js'), 'utf8');
+  assert.match(fusion, /var needsSqlPlan = !hasLive \|\|/);
+  assert.match(fusion, /source\.sqlPlannedFallback === true\) return false;/);
+  const page = fs.readFileSync(path.join(__dirname, '../js/trains-page.js'), 'utf8');
+  assert.match(page, /function needsSqlTrainPlan\(lineId\)/);
+  assert.match(page, /if \(needsSqlTrainPlan\(id\)/);
+});
+
+test('ODPT StationTimetable is never imported as a full train itinerary for HYBRID', () => {
+  const src = fs.readFileSync(path.join(__dirname, '../supabase/functions/timetable-ingest/index.ts'), 'utf8');
+  assert.match(src, /const url = new URL\("\.\/odpt:TrainTimetable"/);
+  assert.match(src, /UPSTREAM_NOT_TRAIN_TIMETABLE/);
+  assert.match(src, /line\.sql_planned_fallback_enabled !== true/);
+  assert.doesNotMatch(src, /new URL\("\.\/odpt:StationTimetable"/);
+  const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
+  assert.match(edge, /source\?\.realtime_position_api_enabled &&/);
+  assert.match(edge, /source\?\.sql_planned_fallback_enabled !== true/);
+});

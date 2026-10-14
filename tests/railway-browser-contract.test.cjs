@@ -117,19 +117,21 @@ test('realtime official statuses update incrementally instead of waiting for eve
 });
 
 
-test('a line with an active Train API never queries Supabase timetables', () => {
+test('FULL realtime never queries SQL but documented HYBRID source may request a plan', () => {
   const api = read('data/api/odpt-unified.js');
   const fusion = read('js/data-fusion.js');
   const config = read('data/core/data-config-bundle.js');
   assert.match(api, /function hasRealtimePositionApi\(lineId\)/);
-  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
-  assert.match(api, /var sourcePromise = hasRealtimePositionApi\(lineId\)/);
-  assert.match(fusion, /if \(liveApi\) \{/);
+  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
+  assert.match(api, /coverage\.mode!=="FULL"&&coverage\.sqlPlannedFallback===true/);
+  assert.match(api, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
+  assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
+  assert.match(fusion, /_linePolicy\.sqlPlannedFallback === true/);
   assert.match(config, /"SaikyoKawagoe": true/);
   assert.match(config, /"Kawagoe": true/);
 });
 
-test('SQL train-runs cannot serve realtime lines or a vehicle image catalog', () => {
+test('SQL train-runs blocks unapproved realtime lines and vehicle-artwork requests', () => {
   const edge = read('supabase/functions/train-runs/index.ts');
   const vehicle = read('js/train-vehicle.js');
   assert.match(edge, /source\?\.realtime_position_api_enabled/);
@@ -139,13 +141,16 @@ test('SQL train-runs cannot serve realtime lines or a vehicle image catalog', ()
 });
 
 
-test('Supabase timetable importer cannot ingest an API-backed realtime railway', () => {
+test('Supabase timetable importer admits only opted-in HYBRID TrainTimetable data', () => {
   const importer = read('supabase/functions/timetable-ingest/index.ts');
   const serving = read('supabase/functions/train-runs/index.ts');
   assert.match(importer, /realtime_position_api_enabled/);
   assert.match(importer, /REALTIME_API_LINE_NOT_ELIGIBLE_FOR_SQL_TIMETABLE/);
   assert.match(importer, /line\.realtime_position_api_enabled === true/);
-  assert.match(serving, /if \(source\?\.realtime_position_api_enabled\)/);
+  assert.match(importer, /line\.sql_planned_fallback_enabled !== true/);
+  assert.match(importer, /UPSTREAM_NOT_TRAIN_TIMETABLE/);
+  assert.match(serving, /source\?\.realtime_position_api_enabled &&/);
+  assert.match(serving, /source\?\.sql_planned_fallback_enabled !== true/);
   assert.doesNotMatch(importer, /getCachedTrainRuns/);
 });
 
@@ -181,7 +186,8 @@ test('direct through railway loads its timetable evidence and shares one estimat
   assert.match(page, /RunningChainResolver\.getDirectThroughLines\(lineId\)/);
   assert.match(page, /if \(!lines\[id\]\) return/);
   assert.match(page, /_requestedLines\.indexOf\(id\) < 0/);
-  assert.match(page, /!window\.ODPTClient\.hasRealtimePositionApi\(id\)/);
+  assert.match(page, /if \(needsSqlTrainPlan\(id\)/);
+  assert.match(page, /policy\.sqlPlannedFallback === true/);
   assert.match(page, /_timetablePartners\.map\(function\(id\)/);
   assert.match(fusion, /if \(_hasOdptTimetable\(lineId\)\) \{/);
   assert.match(estimator, /scheduledItineraryKey: run\.scheduledItineraryKey/);
@@ -190,13 +196,13 @@ test('direct through railway loads its timetable evidence and shares one estimat
   assert.doesNotMatch(page, /Rinkai.*vehicleType.*=.*70-000/);
 });
 
-test('SaikyoKawagoe and Kawagoe use ODPT/JS without loading legacy manual timetables', () => {
+test('FULL Saikyo and source-opted HYBRID Kawagoe never activate stale manual rolling stock', () => {
   const source = read('data/core/runtime-config.js');
   const bundle = read('data/core/data-config-bundle.js');
   const fusion = read('js/data-fusion.js');
   const api = read('data/api/odpt-unified.js');
   for (const line of ['SaikyoKawagoe', 'Kawagoe']) {
-    const policy = new RegExp('"' + line + '":\\s*\\{\\s*mode:\\s*"(?:FULL|HYBRID)",\\s*manualTimetableEvidence:\\s*false\\s*\\}');
+    const policy = new RegExp('"' + line + '":\\s*\\{\\s*mode:\\s*"(?:FULL|HYBRID)",\\s*manualTimetableEvidence:\\s*false(?:,\\s*sqlPlannedFallback:\\s*true)?\\s*\\}');
     assert.match(source, policy);
     assert.match(bundle, policy);
     assert.match(bundle, new RegExp('"' + line + '":\\s*true'));
@@ -204,10 +210,11 @@ test('SaikyoKawagoe and Kawagoe use ODPT/JS without loading legacy manual timeta
   }
   assert.match(fusion, /if \(_manualEvidenceDisabled\(lineId\)\) return Promise\.resolve\(false\)/);
   assert.match(fusion, /if \(_manualEvidenceDisabled\(lineId\)\) \{ resolve\(false\); return; \}/);
-  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
+  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
+  assert.match(fusion, /if \(liveApi && !_sqlPartialPlan\) \{/);
 });
 
-test('live API capabilities survive config regeneration and remain SQL-bypass only', () => {
+test('live API registry remains intact; only explicit HYBRID source may bypass SQL guard', () => {
   const original = read('data/core/runtime-config.js');
   const bundled = read('data/core/data-config-bundle.js');
   const api = read('data/api/odpt-unified.js');
@@ -229,10 +236,15 @@ test('live API capabilities survive config regeneration and remain SQL-bypass on
   }
   assert.match(original, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
   assert.match(bundled, /REALTIME_POSITION_API_LINES:\s*REALTIME_POSITION_API_LINES/);
-  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)\) return Promise\.resolve\(\[\]\)/);
-  assert.match(api, /var sourcePromise = hasRealtimePositionApi\(lineId\)/);
-  assert.match(edge, /if \(source\?\.realtime_position_api_enabled\)/);
-  assert.match(importer, /if \(line\.realtime_position_api_enabled === true\)/);
+  assert.match(api, /if \(hasRealtimePositionApi\(lineId\)&&!explicitSqlPlan\) return Promise\.resolve\(\[\]\)/);
+  assert.match(api, /var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/);
+  assert.match(edge, /source\?\.sql_planned_fallback_enabled !== true/);
+  assert.match(bundled, /"Kawagoe": \{ mode: "HYBRID", manualTimetableEvidence: false, sqlPlannedFallback: true \}/);
+  // The other 18 realtime HYBRID railways have no SQL template yet.
+  // Never skip their ODPT timetable source based solely on coverage mode.
+  const extraOptIns = [...bundled.matchAll(/"([^"]+)": \{ mode: "HYBRID", sqlPlannedFallback: true \}/g)];
+  assert.equal(extraOptIns.length, 0, 'unverified SQL opt-ins would hide existing ODPT timetables');
+  assert.match(importer, /if \(line\.realtime_position_api_enabled === true &&[\s\S]*?line\.sql_planned_fallback_enabled !== true/);
 });
 
 test('runtime configuration source matches the deployed config-bundle section', () => {

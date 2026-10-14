@@ -84,7 +84,8 @@ console.log('train-run-curated-owner-bridge: PASS');
 console.log('train-run-canonical-operation-vehicle-bridge: PASS');
 console.log('train-run-SQL-fallback: 5 PASS');
 
-assert.ok(/if \(source\?\.realtime_position_api_enabled\)/.test(trainRunsReadThroughSrc) &&
+assert.ok(/source\?\.realtime_position_api_enabled &&/.test(trainRunsReadThroughSrc) &&
+  /source\?\.sql_planned_fallback_enabled !== true/.test(trainRunsReadThroughSrc) &&
   !/fetchOdptRows\(/.test(trainRunsReadThroughSrc) &&
   /const validRuns = result\.filter\(r => r\.stops\.length >= 2/.test(trainRunsReadThroughSrc) &&
   /r\.stops\.filter\(s => s\.arrival_time \|\| s\.departure_time\)\.length >= 2/.test(trainRunsReadThroughSrc) &&
@@ -92,10 +93,10 @@ assert.ok(/if \(source\?\.realtime_position_api_enabled\)/.test(trainRunsReadThr
   !/runs: complete \? result : \[\]/.test(
     trainRunsReadThroughSrc.split('async function readManualTemplateRuns')[1].split('Deno.serve')[0]),
   'SQL-only read must work independently of API capability and exclude incomplete runs without discarding verified ones');
-assert.ok(/var sourcePromise = hasRealtimePositionApi\(lineId\)/.test(odptUnifiedSrc) &&
+assert.ok(/var sourcePromise = usesSqlPlan \? getCachedTrainRuns\(lineId\)/.test(odptUnifiedSrc) &&
   /self\.getCompleteTimetable\(op, identity\.odptRailway\)/.test(odptUnifiedSrc) &&
-  /: getCachedTrainRuns\(lineId\)/.test(odptUnifiedSrc),
-  'realtime API lines must use API timetable only; non-realtime lines use SQL only');
+  /sqlPlannedFallback === true/.test(odptUnifiedSrc),
+  'ODPT is the realtime timetable default; only explicitly sourced HYBRID can choose SQL');
 assert.ok(/fallback_only=1/.test(odptUnifiedSrc) &&
   /"_sqlVehicleCandidateLabel":run\.vehicle_type_candidates\|\|""/.test(odptUnifiedSrc) &&
   /vehicleType:\(run\.vehicle_mapping_level==="dated_schedule_rule"/.test(odptUnifiedSrc) &&
@@ -130,7 +131,7 @@ console.log('train-run-vehicle-evidence-bridge: 3 PASS');
 // their existing lazy manual vehicle evidence, gated by presence of ODPT rows.
 const ensureTimetableSrc = fusion.split('  function ensureTimetable(lineId) {')[1]
   .split('  function ensureManualTimetable(lineId) {')[0];
-assert.ok(/if \(liveApi\) \{/.test(ensureTimetableSrc) &&
+assert.ok(/if \(liveApi && !_sqlPartialPlan\) \{/.test(ensureTimetableSrc) &&
   /return _hasOdptTimetable\(lineId\) \? ensureManualTimetable\(lineId\) : Promise\.resolve\(false\)/.test(ensureTimetableSrc) &&
   /if \(!rows \|\| !rows\.length\) return false/.test(ensureTimetableSrc) &&
   /\.catch\(function\(\) \{ return false; \}\)/.test(ensureTimetableSrc) &&

@@ -261,8 +261,15 @@
       var ids = window.TrainsActivePositionLineIds || window.TrainsActiveSystemLineIds || [lid];
       ids.forEach(function(id) {
         // Mark a date only after SQL succeeds; transient errors retry next minute.
-        if (date && _positionServiceDate[id] !== date &&
-            !(window.ODPTClient && window.ODPTClient.hasRealtimePositionApi && window.ODPTClient.hasRealtimePositionApi(id))) ensureTimetable(id).catch(function() {});
+        var policy = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+        var linePolicy = policy && policy.lines && policy.lines[id];
+        var hasLive = !!(window.ODPTClient && window.ODPTClient.hasRealtimePositionApi &&
+          window.ODPTClient.hasRealtimePositionApi(id));
+        var needsSqlPlan = !hasLive || !!(linePolicy && linePolicy.mode !== "FULL" &&
+          linePolicy.sqlPlannedFallback === true);
+        if (date && _positionServiceDate[id] !== date && needsSqlPlan) {
+          ensureTimetable(id).catch(function() {});
+        }
       });
       loadTrainPositions();
     }, 60000);
@@ -1923,6 +1930,11 @@
         // v4.3.489: 已由初始分批探测（ODPT_TT_PROBED）的线路不再重复请求——
         // JR 地方线 41 条 ODPT 无时刻表数据，标记后避免每次刷新都重试
         var probed = window.ODPT_TT_PROBED && window.ODPT_TT_PROBED[l.lineId];
+        // A HYBRID line's planned positions come only from SQL TrainTimetable
+        // records; never fall back to ODPT StationTimetable or a guessed trip.
+        var policies = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+        var source = policies && policies.lines && policies.lines[l.lineId];
+        if (source && source.mode !== "FULL" && source.sqlPlannedFallback === true) return false;
         return priorityOps.indexOf(l.operator) >= 0 && !_timetableLoading[l.lineId] && !probed;
       });
 
@@ -2087,13 +2099,17 @@
   }
 
   function ensureTimetable(lineId) {
-    // Realtime-API lines never query Supabase. Existing manual files may still
-    // contribute vehicle identification evidence on API-backed lines, while
-    // position estimation follows the existing realtime coverage policy.
+    // Real-time position authority remains first. A HYBRID line with an
+    // explicit SQL-plan opt-in may read *sourced* timetable gaps, but FULL
+    // coverage never consumes SQL to synthesize train positions.
     var liveApi = window.ODPTClient &&
       typeof window.ODPTClient.hasRealtimePositionApi === "function" &&
       window.ODPTClient.hasRealtimePositionApi(lineId);
-    if (liveApi) {
+    var _policyCfg = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+    var _linePolicy = _policyCfg && _policyCfg.lines && _policyCfg.lines[lineId];
+    var _sqlPartialPlan = !!(_linePolicy && _linePolicy.mode !== "FULL" &&
+      _linePolicy.sqlPlannedFallback === true);
+    if (liveApi && !_sqlPartialPlan) {
       // ODPT+JS-only lines must not consume stale manual vehicle/timetable
       // objects; train positions come from ODPT Train and models from evidence.
       if (_manualEvidenceDisabled(lineId)) return Promise.resolve(false);
@@ -2125,8 +2141,8 @@
         return Promise.resolve(true);
       }
     }
-    // No realtime API: Supabase is the sole timetable source. A DB failure
-    // does not secretly start a second, legacy JS position feed.
+    // SQL is the sole fallback for lines without Train API OR an explicitly
+    // opted-in HYBRID gap. A failure never activates legacy JS timetables.
     if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") {
       return Promise.resolve(false);
     }

@@ -1,0 +1,181 @@
+{
+  "line_id": "Kawagoe",
+  "source": "JR East official October 2026 per-train timetable",
+  "source_directory": "https://timetables.jreast.co.jp/2610/",
+  "verified_on": "2026-10-14",
+  "full_line_coverage": false,
+  "source_revision_date": null,
+  "confidence": "verified individual stop times and weekday/weekend operation, not all-day completeness",
+  "records": [
+    {
+      "train_number": "665H",
+      "calendar_urn": "odpt.Calendar:Weekday",
+      "railway_urn": "odpt.Railway:JR-East.Kawagoe",
+      "direction_urn": "odpt.RailDirection:Outbound",
+      "train_type_urn": "odpt.TrainType:JR-East.Local",
+      "source_trip_id": "https://timetables.jreast.co.jp/2610/train/030/032491.html",
+      "stops": [
+        {
+          "stationId": "Kawagoe",
+          "departure": "06:26"
+        },
+        {
+          "stationId": "NishiKawagoe",
+          "departure": "06:29"
+        },
+        {
+          "stationId": "Matoba",
+          "departure": "06:32"
+        },
+        {
+          "stationId": "Kasahata",
+          "departure": "06:36"
+        },
+        {
+          "stationId": "MusashiTakahagi",
+          "departure": "06:40"
+        },
+        {
+          "stationId": "Komagawa",
+          "arrival": "06:44"
+        }
+      ]
+    },
+    {
+      "train_number": "773H",
+      "calendar_urn": "odpt.Calendar:Weekday",
+      "railway_urn": "odpt.Railway:JR-East.Kawagoe",
+      "direction_urn": "odpt.RailDirection:Outbound",
+      "train_type_urn": "odpt.TrainType:JR-East.Local",
+      "source_trip_id": "https://timetables.jreast.co.jp/2610/train/080/081261.html",
+      "stops": [
+        {
+          "stationId": "Kawagoe",
+          "departure": "07:57"
+        },
+        {
+          "stationId": "NishiKawagoe",
+          "departure": "08:00"
+        },
+        {
+          "stationId": "Matoba",
+          "departure": "08:07"
+        },
+        {
+          "stationId": "Kasahata",
+          "departure": "08:10"
+        },
+        {
+          "stationId": "MusashiTakahagi",
+          "departure": "08:21"
+        },
+        {
+          "stationId": "Komagawa",
+          "arrival": "08:25"
+        }
+      ]
+    },
+    {
+      "train_number": "1776H",
+      "calendar_urn": "odpt.Calendar:Weekday",
+      "railway_urn": "odpt.Railway:JR-East.Kawagoe",
+      "direction_urn": "odpt.RailDirection:Inbound",
+      "train_type_urn": "odpt.TrainType:JR-East.Local",
+      "source_trip_id": "https://timetables.jreast.co.jp/2610/train/035/035291.html",
+      "stops": [
+        {
+          "stationId": "Komagawa",
+          "departure": "17:24"
+        },
+        {
+          "stationId": "MusashiTakahagi",
+          "departure": "17:28"
+        },
+        {
+          "stationId": "Kasahata",
+          "departure": "17:32"
+        },
+        {
+          "stationId": "Matoba",
+          "departure": "17:36"
+        },
+        {
+          "stationId": "NishiKawagoe",
+          "departure": "17:39"
+        },
+        {
+          "stationId": "Kawagoe",
+          "arrival": "17:43"
+        }
+      ]
+    },
+    {
+      "train_number": "663H",
+      "calendar_urn": "odpt.Calendar:SaturdayHoliday",
+      "railway_urn": "odpt.Railway:JR-East.Kawagoe",
+      "direction_urn": "odpt.RailDirection:Outbound",
+      "train_type_urn": "odpt.TrainType:JR-East.Local",
+      "source_trip_id": "https://timetables.jreast.co.jp/2610/train/025/028291.html",
+      "stops": [
+        {
+          "stationId": "Kawagoe",
+          "departure": "06:24"
+        },
+        {
+          "stationId": "NishiKawagoe",
+          "departure": "06:27"
+        },
+        {
+          "stationId": "Matoba",
+          "departure": "06:31"
+        },
+        {
+          "stationId": "Kasahata",
+          "departure": "06:34"
+        },
+        {
+          "stationId": "MusashiTakahagi",
+          "departure": "06:38"
+        },
+        {
+          "stationId": "Komagawa",
+          "arrival": "06:42"
+        }
+      ]
+    },
+    {
+      "train_number": "1178H",
+      "calendar_urn": "odpt.Calendar:SaturdayHoliday",
+      "railway_urn": "odpt.Railway:JR-East.Kawagoe",
+      "direction_urn": "odpt.RailDirection:Inbound",
+      "train_type_urn": "odpt.TrainType:JR-East.Local",
+      "source_trip_id": "https://timetables.jreast.co.jp/2610/train/080/081851.html",
+      "stops": [
+        {
+          "stationId": "Komagawa",
+          "departure": "11:34"
+        },
+        {
+          "stationId": "MusashiTakahagi",
+          "departure": "11:39"
+        },
+        {
+          "stationId": "Kasahata",
+          "departure": "11:43"
+        },
+        {
+          "stationId": "Matoba",
+          "departure": "11:46"
+        },
+        {
+          "stationId": "NishiKawagoe",
+          "departure": "11:49"
+        },
+        {
+          "stationId": "Kawagoe",
+          "arrival": "11:53"
+        }
+      ]
+    }
+  ]
+}
