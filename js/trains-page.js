@@ -73,6 +73,18 @@
     }, Math.max(50, nextExpiry - now + 50));
   }
 
+  function needsSqlTrainPlan(lineId) {
+    var api = window.ODPTClient;
+    var hasLive = !!(api && api.hasRealtimePositionApi &&
+      api.hasRealtimePositionApi(lineId));
+    var cfg = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+    var policy = cfg && cfg.lines && cfg.lines[lineId];
+    // A HYBRID Train API alone does not imply the operator publishes
+    // odpt:TrainTimetable. Its declared plan source is SQL, never a station board.
+    return !hasLive || !!(policy && policy.mode !== "FULL" &&
+      policy.sqlPlannedFallback === true);
+  }
+
   function showLineView(lineId, systemLineIds, expectedIdentity, expectedMemberIdentities) {
     if (Array.isArray(systemLineIds) && systemLineIds.length > 1) currentSystemLineIds = systemLineIds.slice();
     else if (systemLineIds === null) currentSystemLineIds = null;
@@ -115,7 +127,7 @@
           // Both directions matter: a realtime JR train can enter a
           // timetable-only through line, and a Rinkai train can enter JR.
           if (_requestedLines.indexOf(id) < 0) _requestedLines.push(id);
-          if (!window.ODPTClient.hasRealtimePositionApi(id) &&
+          if (needsSqlTrainPlan(id) &&
               _timetablePartners.indexOf(id) < 0) _timetablePartners.push(id);
         });
       }
@@ -139,8 +151,7 @@
       });
       window.TrainsActivePositionLineIds = _requestedLines.slice();
       _requestedLines.forEach(function(id) {
-        if (window.ODPTClient && window.ODPTClient.hasRealtimePositionApi &&
-            !window.ODPTClient.hasRealtimePositionApi(id) && id !== lineId &&
+        if (needsSqlTrainPlan(id) && id !== lineId &&
             _timetablePartners.indexOf(id) < 0) _timetablePartners.push(id);
       });
       var _activationPromise = Promise.resolve();
