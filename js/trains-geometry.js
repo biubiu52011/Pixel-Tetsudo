@@ -785,8 +785,9 @@
   }
   
   function _computeLineHash(line) {
-    // Simple hash based on stations and type
-    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0') + '|' + (line.isDoubleColumnLoop ? 'D' : '0');
+    // Presentation members also determine branch geometry. A refreshed
+    // membership must invalidate a cached map even if the trunk is unchanged.
+    return (line.stations || []).join('|') + '|' + (line.type || '') + '|' + (line.isSixShapedLoop ? '6' : '0') + '|' + (line.isDoubleColumnLoop ? 'D' : '0') + '|' + ((line.presentation && line.presentation.lineIds) || []).join(',');
   }
   
   function invalidateRouteGeometryCache(lineId) {

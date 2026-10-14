@@ -160,6 +160,11 @@ test('Joban combined presentation draws and places Narita trains without reparen
     assert.deepEqual(Array.from(branch,b=>b.stationId),lines.NaritaAbikoBranch.stations.slice(1));
     assert.ok(branch.every(s=>s.x>=0&&s.x<=geometry.svgW&&s.y>=0&&s.y<=geometry.svgH));
   }
+  const members=lines.Joban.presentation.lineIds;
+  lines.Joban.presentation.lineIds=['Joban'];
+  assert.ok(!context.computeRouteGeometry(lines.Joban,'Joban').branchLines.some(b=>b.id==='NaritaAbikoBranch'));
+  lines.Joban.presentation.lineIds=members;
+  assert.ok(context.computeRouteGeometry(lines.Joban,'Joban').branchLines.some(b=>b.id==='NaritaAbikoBranch'));
 });
 function segment(number, railway, firstStation, firstClock, lastStation, lastClock) {
   return {
