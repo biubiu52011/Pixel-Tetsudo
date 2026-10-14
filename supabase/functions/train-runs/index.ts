@@ -364,8 +364,12 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     if (ingestError) throw ingestError;
     omittedIncompleteRuns += Math.max(0, Number(ingest?.omitted_count) || 0);
   }
-  const complete = validRuns.length > 0 && omittedIncompleteRuns === 0;
-  const partial = validRuns.length > 0 && omittedIncompleteRuns > 0;
+  // A published sample proves only those listed journeys, not a complete
+  // daily service. Never upgrade a source-labelled sample to HIT coverage.
+  const sourceSampleOnly = templates.some((t: any) =>
+    String(t.source_path || "").startsWith("official-sampled:"));
+  const complete = validRuns.length > 0 && omittedIncompleteRuns === 0 && !sourceSampleOnly;
+  const partial = validRuns.length > 0 && (omittedIncompleteRuns > 0 || sourceSampleOnly);
   const dateVerifiedRuns = validRuns.filter(r => r.timetable_date_verified).length;
   return json({ ok: true, complete, partial,
     // These counts do not change the existing structural coverage behavior.
@@ -373,6 +377,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
     date_unverified_runs: validRuns.length - dateVerifiedRuns,
     cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
     source: "DATABASE_MANUAL_TEMPLATES", line_id: lineId, service_date: serviceDate,
+    source_coverage: sourceSampleOnly ? "verified-partial-sample" : "calendar-template",
     calendar_status: "selected", selected_calendar: selectedCalendar,
     omitted_incomplete_runs: omittedIncompleteRuns, runs: validRuns });
 }
@@ -394,10 +399,13 @@ Deno.serve(async (req: Request) => {
 
   const db = createClient(supabaseUrl, secretKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: source, error: sourceError } = await db.from("railway_lines")
-    .select("timetable_operator,realtime_position_api_enabled").eq("id", lineId).maybeSingle();
+    .select("timetable_operator,realtime_position_api_enabled,sql_planned_fallback_enabled").eq("id", lineId).maybeSingle();
   if (sourceError) return json({ ok: false, error: "DB_SOURCE_LOOKUP_FAILED" }, 500);
-  // A railway with a realtime position API cannot use database timetables.
-  if (source?.realtime_position_api_enabled) {
+  // A complete realtime position API never needs planned SQL positions.
+  // An explicit DB opt-in allows sourced partial plans only for independently
+  // verified HYBRID gaps. Runtime config independently prevents FULL fusion.
+  if (source?.realtime_position_api_enabled &&
+      source?.sql_planned_fallback_enabled !== true) {
     return json({ ok: true, complete: false, cache: "BYPASS",
       source: "REALTIME_API_LINE", line_id: lineId, service_date: serviceDate, runs: [] });
   }
