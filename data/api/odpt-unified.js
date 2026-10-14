@@ -805,11 +805,16 @@
         return !!(policy && policy.mode === "FULL");
     }
     function getCachedTrainRuns(lineId) {
-        // Supabase supplies timetables only for railways with no Train realtime API.
-        if (hasRealtimePositionApi(lineId)) return Promise.resolve([]);
-        // Timetable API capability is per railway, not per operator.
-        // Ask the server for SQL-only fallback; it bypasses API-enabled lines
-        // rather than duplicating their ODPT timetable requests.
+        // Realtime position coverage and timetable availability are distinct.
+        // An explicit non-FULL policy may admit a sourced, partial SQL plan
+        // without allowing SQL to replace the line's realtime observations.
+        var cfg=window.RuntimeConfig||{};
+        var coverage=cfg.REALTIME_POSITION_POLICY&&cfg.REALTIME_POSITION_POLICY.lines&&
+            cfg.REALTIME_POSITION_POLICY.lines[lineId];
+        var explicitSqlPlan=!!(coverage&&coverage.mode!=="FULL"&&coverage.sqlPlannedFallback===true);
+        if (hasRealtimePositionApi(lineId)&&!explicitSqlPlan) return Promise.resolve([]);
+        // Server independently checks the database's SQL plan eligibility.
+        // Unconfigured lines retain the original API-first behavior.
         var serviceDate=_serviceDateJst(), key=lineId+"|"+serviceDate, hit=_trainRunCache[key];
         if(hit && Date.now()-hit.at<30000) return Promise.resolve(hit.rows);
         if(_trainRunInflight[key]) return _trainRunInflight[key];
