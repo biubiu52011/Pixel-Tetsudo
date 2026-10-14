@@ -742,6 +742,7 @@
             "_timetableValidity":run.timetable_validity||"undated_not_current_verified",
             "_timetableDateVerified":run.timetable_date_verified===true,
             "_canonicalTrainTimetableId":run.canonical_timetable_id||null,
+            "_canonicalGroupEvidence":run.canonical_group_evidence||"source_only",
             "_sqlVehicleMappingLevel":run.vehicle_mapping_level||"unresolved",
             "_sqlVehicleCandidateLabel":run.vehicle_type_candidates||"",
             "_sqlCandidateArtworkPath":run.vehicle_candidate_artwork_path||null,

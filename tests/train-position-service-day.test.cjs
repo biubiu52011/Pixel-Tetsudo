@@ -39,10 +39,43 @@ function estimatorAt(year, month, day, hour, minute, overrides) {
     constructor(...args) { super(...(args.length ? args : [fixed.getTime()])); }
     static now() { return fixed.getTime(); }
   }
-  const window = { RuntimeConfig: { SERVICE_DAY_CALENDAR: overrides || {} } };
+  const window = { RuntimeConfig: { SERVICE_DAY_CALENDAR: overrides || {} }, ODPTClient: {
+    LINE_RAILWAY_CODE: {Joban:'JobanRapid',JobanMain:'Joban'},
+    LINE_TO_OPERATOR: {Joban:'JR-East',JobanMain:'JR-East'}
+  } };
   vm.runInNewContext(source, { window, Date: FixedDate, console: { debug() {} } });
   return window.TrainPositionEstimator;
 }
+
+test('published Joban runs continue past Toride and leave the visible map', () => {
+  const lines=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/core/railway_data.json'),'utf8')).lines;
+  const fixtures=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/joban-published-continuation.json'),'utf8'));
+  function at(number,hour,minute,verified=true) {
+    const f=fixtures.find(f=>f.number===number);
+    const tt={ '@id':'canonical:'+number,'odpt:trainNumber':number,
+      'odpt:railway':'odpt.Railway:JR-East.JobanRapid','odpt:calendar':'odpt.Calendar:Weekday',
+      'odpt:railDirection':f.direction,'odpt:destinationStation':f.destination,
+      _positionSource:'supabase-train-run',_canonicalGroupEvidence:verified?'verified_continuation':'source_only',
+      'odpt:trainTimetableObject':f.stops.map(s=>({
+        'odpt:arrivalStation':s.arrival_station_urn,'odpt:departureStation':s.departure_station_urn,
+        'odpt:arrivalTime':s.arrival_clock,'odpt:departureTime':s.departure_clock
+      })) };
+    return estimatorAt(2026,10,14,hour,minute).estimateLinePositions('Joban',lines.Joban,[tt],{},'JR-East',lines);
+  }
+  assert.equal(at('1185M',16,12).length,1);
+  assert.equal(at('1185M',16,16)[0].stationIndex,lines.Joban.stations.indexOf('Toride'));
+  assert.equal(at('1185M',16,21)[0].stationIndex,lines.Joban.stations.indexOf('Ryugasaki'));
+  assert.equal(at('1185M',16,33)[0].stationIndex,lines.Joban.stations.indexOf('Hitachino-Ushiku'));
+  assert.equal(at('1185M',16,50).length,0);
+  assert.equal(at('1187M',17,4).length,1);
+  assert.equal(at('1187M',17,12).length,0,'northbound train must not remain pinned at Tsuchiura');
+  const express=at('19M',16,30);
+  assert.equal(express.length,1);
+  assert(express[0].stationIndex>12 && express[0].stationIndex<18,'express uses timed Ueno-Mito bracket beyond Toride');
+  assert.equal(at('19M',16,50).length,0);
+  assert.equal(at('8M',11,0).length,1,'southbound express enters map from a timed bracket outside it');
+  assert.equal(at('8M',11,0,false).length,0,'unverified run cannot project outside stops');
+});
 
 test('service calendar rolls over at 04:00, including weekends', () => {
   assert.equal(estimatorAt(2026, 10, 10, 3, 59).getCurrentCalendar(), 'odpt.Calendar:Weekday');

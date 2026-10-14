@@ -1,6 +1,16 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 方向／目的地标签恢复图标正下方（本地完成，发布待验收）
+## 2026-10-14 JST — 常磐快速越过实时范围后 SQL 接续（SQL／本地完成，公开发布验收中）
+
+- 根因：JobanRapid 时刻表在取手截断；JobanMain SQL 来源缺少前后官方运行段标识。修改前 SQL 和官方原件备份 recovery/joban-continuity-20261014。
+- 逐项核对官方平日357／休日355，共712条原始停站 URN、到发时刻、方向、种别、终点完全一致，仅补 source_trip_id／previous／next；原 source_path、时刻、车型和未核验日期保留。未削弱独立来源导入保护。
+- 复用 continuity／members／stops／train-runs，共375个同 calendar/revision、列车号、方向且双向 source link 的取手接续：普通243组实际边界时刻，特急132组保留NULL通过时刻、核对真实计时站括号。原root canonical ID保留，既有导入同步函数续用刷新。
+- SQL adapter保留 canonical_group_evidence；共享estimator仅为verified_continuation使用完整来源时刻与既有canonical站序投影，按可视范围裁切，不补造中间站时刻；Ryugasakishi对齐原Ryugasaki。成田仍独立，实时位置优先，相关资源4.3.1211。
+- 1185M／1187M／19M／8M真实来源回归覆盖取手后连续、停站、北端离图、特急括号、反方向入图及未验证来源隔离。64 Node checks、31 tools suites、4 Python guards PASS（保留基线warnings）；本地浏览器确认1185M取手后SQL E531 PNG正常显示，error0。
+- 自动审批首次拒绝新增内部函数权限收紧；核对SECURITY INVOKER、RLS与无公开写权限以及既有内部函数ACL后，仅撤销本次新函数的默认公开执行权限，复审通过，未新授任何权限。其他六项本地修改保留。
+
+
+## 2026-10-14 JST — 方向／目的地标签恢复图标正下方（DONE：8517fce3已发布，公开17标签验证通过）
 
 - 用户指出方向应该在列车图标正下方。常规线路 _trainLabelY 的上／下行共用 py+21，方向箭头仍按实际运行方向；共享 resolveLabels 固定横向中心，只允许向下避让，不再横移或移到图标上方。移位时保留竖直引导，完整终点不裁切。既有大江户六形地图的专用方向走廊继续使用原入口。
 - 适用仅 trains 的共享 renderer/layout；其余六页不加载这两个模块，车型／SQL／拓扑不变。缓存资源 4.3.1210。新增真实函数上下行／未知方向锚点检查与密集标签不横移／不上移回归。

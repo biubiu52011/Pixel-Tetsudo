@@ -260,7 +260,8 @@
         // Official source station IDs and the existing Pixel Tetsudo
         // station keys differ in spelling; both refer to the same stations.
         "kokukoen": "kokukokoen",
-        "shiraitodai": "shiroitai"
+        "shiraitodai": "shiroitai",
+        "ryugasakishi": "ryugasaki"
       };
       return aliases[k] || k;
     } catch(e) { return String(key || "").toLowerCase().replace(/[-_\s]/g, ""); }
@@ -390,9 +391,37 @@
   // Compile immutable timetable fields once per line/station layout. The
   // compiled value is non-enumerable so raw ODPT rows remain clean for cache,
   // diagnostics and running-chain consumers.
-  function compileTrainRun(tt, lineId, workLine, stationIndexMap) {
+  function sourceRouteProjection(lineId, workLine, stationIndexMap, allLines) {
+    var result = {}, codes = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
+    var owners = window.ODPTClient && window.ODPTClient.LINE_TO_OPERATOR;
+    if (!allLines || !codes || !owners) return result;
+    Object.keys(allLines).forEach(function(id) {
+      var source = allLines[id];
+      if (!source || !Array.isArray(source.stations) || owners[id] !== owners[lineId]) return;
+      var anchors = [];
+      source.stations.forEach(function(key, i) {
+        var target = stationIndexMap[normalizeStationKey(key)];
+        if (target !== undefined) anchors.push([i, target]);
+      });
+      if (anchors.length < 2) return;
+      var slope = (anchors[1][1] - anchors[0][1]) / (anchors[1][0] - anchors[0][0]);
+      if (Math.abs(slope) !== 1 || !anchors.every(function(a) {
+        return a[1] === anchors[0][1] + (a[0] - anchors[0][0]) * slope;
+      })) return;
+      source.stations.forEach(function(key, i) {
+        result[owners[id] + '.' + codes[id] + '.' + normalizeStationKey(key)] =
+          anchors[0][1] + (i - anchors[0][0]) * slope;
+      });
+    });
+    return result;
+  }
+
+  function compileTrainRun(tt, lineId, workLine, stationIndexMap, projection) {
     if (!tt) return null;
-    var layoutKey = lineId + "|" + workLine.stations.join("|");
+    var verifiedContinuation = tt._positionSource === 'supabase-train-run' &&
+      tt._canonicalGroupEvidence === 'verified_continuation';
+    var layoutKey = lineId + "|" + workLine.stations.join("|") +
+      (verifiedContinuation ? JSON.stringify(projection || {}) : '');
     var cached = tt._compiledTrainRun;
     if (cached && cached.layoutKey === layoutKey) return cached;
 
@@ -412,6 +441,10 @@
       var normStationKey = normalizeStationKey(stationKey);
       var idx = stationIndexMap[normStationKey];
       if (idx === undefined) idx = stationIndexMap[stationKey];
+      if (idx === undefined && verifiedContinuation && projection) {
+        var stationParts = String(stationUrn).replace(/^odpt\.Station:/, '').split('.');
+        if (stationParts.length === 3) idx = projection[stationParts[0] + '.' + stationParts[1] + '.' + normStationKey];
+      }
       stops.push({
         raw: raw,
         stationUrn: stationUrn,
@@ -643,7 +676,7 @@
    * @param {string} operatorId - Normalized operator ID
    * @returns {Array} Estimated positions [{ stationIndex, trainId, delayMin, estimated: true }]
    */
-  function estimateLinePositions(lineId, line, timetableData, delayInfo, operatorId) {
+  function estimateLinePositions(lineId, line, timetableData, delayInfo, operatorId, allLines) {
     try {
       if (!line || !line.stations || !Array.isArray(line.stations) || line.stations.length === 0) return [];
       if (!timetableData || !Array.isArray(timetableData) || timetableData.length === 0) return [];
@@ -662,6 +695,7 @@
       var layout = getEstimatorStationLayout(lineId, line);
       var workLine = layout.workLine;
       var stationIndexMap = layout.stationIndexMap;
+      var projection = sourceRouteProjection(lineId, workLine, stationIndexMap, allLines);
 
       var positions = [];
       var processedTrainIds = {};
@@ -672,7 +706,7 @@
         if (!tt) continue;
         if (tt._serviceDate && tt._serviceDate !== serviceDate) continue;
 
-        var run = compileTrainRun(tt, lineId, workLine, stationIndexMap);
+        var run = compileTrainRun(tt, lineId, workLine, stationIndexMap, projection);
         if (!run) continue;
 
         // Filter by calendar (match any of current calendar types)
@@ -700,7 +734,9 @@
 
         // v6: 接续推定——数据最远端之后。dest 在本线站表内且更远 → 外推补充站序列；
         // 否则（跨线/缺失/数据完整）fullStops === tto，零影响。
-        var ext = buildExtrapolation(tt, tto, stationIndexMap);
+        var verifiedContinuation = tt._positionSource === 'supabase-train-run' &&
+          tt._canonicalGroupEvidence === 'verified_continuation';
+        var ext = verifiedContinuation ? null : buildExtrapolation(tt, tto, stationIndexMap);
         // Normal runs consume pre-parsed stops. Extrapolated synthetic stops are
         // appended in the same compact shape so the hot loop has one code path.
         var fullStops = run.stops.slice();
@@ -733,7 +769,7 @@
           var arrTime = stop.arrivalMinute;
           var idx = stop.stationIndex;
 
-          if (idx === undefined || idx < 0) continue;
+          if (idx === undefined || (idx < 0 && !verifiedContinuation)) continue;
 
           // v4: 站内停车判定拆分——到达（arrival）与发车（departure）分开判定：
           // 停车期间（arrTime <= now < depTime）列车就在本站，不应回退显示在上一站。
@@ -766,6 +802,21 @@
           // 尚未发车（停车中或未到达）即停——列车不会越过本站
           if (effectiveDeparture !== null && adjustedCurrentMin < effectiveDeparture) {
             break;
+          }
+        }
+
+        // Timed brackets can extend outside this map. Interpolate along the
+        // published source station order, then clip the visible position.
+        // No junction passage times or synthetic stopping times are created.
+        if (verifiedContinuation && foundInService) {
+          var coordinate = segmentToIndex === null ? currentStationIndex :
+            currentStationIndex + (segmentToIndex - currentStationIndex) * segmentProgress;
+          if (coordinate < 0 || coordinate > workLine.stations.length - 1) continue;
+          if (segmentToIndex !== null) {
+            var forward = segmentToIndex >= currentStationIndex;
+            currentStationIndex = forward ? Math.floor(coordinate) : Math.ceil(coordinate);
+            segmentToIndex = forward ? Math.ceil(coordinate) : Math.floor(coordinate);
+            segmentProgress = Math.abs(coordinate - currentStationIndex);
           }
         }
 
@@ -1023,7 +1074,7 @@
         });
         if (lineTimetable.length === 0) continue;
 
-        var positions = estimateLinePositions(lineId, line, lineTimetable, delayInfo, opId);
+        var positions = estimateLinePositions(lineId, line, lineTimetable, delayInfo, opId, allLines);
         if (positions.length > 0 && window.RunningChainResolver && typeof window.RunningChainResolver.resolveTimetableChain === "function") {
           // Seed with direct neighbours, then add their direct neighbours as
           // candidate segments only. The resolver still validates every edge

@@ -1,0 +1,694 @@
+[
+  {
+    "number": "1185M",
+    "direction": "odpt.RailDirection:Outbound",
+    "destination": [
+      "odpt.Station:JR-East.Joban.Tsuchiura"
+    ],
+    "stops": [
+      {
+        "template_id": 126532,
+        "arrival_clock": null,
+        "stop_sequence": 0,
+        "departure_clock": "15:17",
+        "arrival_station_urn": null,
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Shinagawa"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:22",
+        "stop_sequence": 1,
+        "departure_clock": "15:23",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Shimbashi",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Shimbashi"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:25",
+        "stop_sequence": 2,
+        "departure_clock": "15:26",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:31",
+        "stop_sequence": 3,
+        "departure_clock": "15:32",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:36",
+        "stop_sequence": 4,
+        "departure_clock": "15:36",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Nippori",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Nippori"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:38",
+        "stop_sequence": 5,
+        "departure_clock": "15:39",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Mikawashima",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Mikawashima"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:41",
+        "stop_sequence": 6,
+        "departure_clock": "15:42",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.MinamiSenju",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.MinamiSenju"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:44",
+        "stop_sequence": 7,
+        "departure_clock": "15:44",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.KitaSenju",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.KitaSenju"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "15:53",
+        "stop_sequence": 8,
+        "departure_clock": "15:53",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Matsudo",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Matsudo"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "16:02",
+        "stop_sequence": 9,
+        "departure_clock": "16:02",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Kashiwa",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Kashiwa"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "16:06",
+        "stop_sequence": 10,
+        "departure_clock": "16:07",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Abiko",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Abiko"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "16:09",
+        "stop_sequence": 11,
+        "departure_clock": "16:10",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Tennodai",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Tennodai"
+      },
+      {
+        "template_id": 126532,
+        "arrival_clock": "16:13",
+        "stop_sequence": 12,
+        "departure_clock": "16:13",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Toride",
+        "departure_station_urn": null
+      },
+      {
+        "template_id": 51530,
+        "arrival_clock": "16:18",
+        "stop_sequence": 1,
+        "departure_clock": "16:18",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Fujishiro",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Fujishiro"
+      },
+      {
+        "template_id": 51530,
+        "arrival_clock": "16:21",
+        "stop_sequence": 2,
+        "departure_clock": "16:22",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Ryugasakishi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Ryugasakishi"
+      },
+      {
+        "template_id": 51530,
+        "arrival_clock": "16:26",
+        "stop_sequence": 3,
+        "departure_clock": "16:27",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Ushiku",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Ushiku"
+      },
+      {
+        "template_id": 51530,
+        "arrival_clock": "16:31",
+        "stop_sequence": 4,
+        "departure_clock": "16:35",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Hitachinoushiku",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Hitachinoushiku"
+      },
+      {
+        "template_id": 51530,
+        "arrival_clock": "16:38",
+        "stop_sequence": 5,
+        "departure_clock": "16:38",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Arakawaoki",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Arakawaoki"
+      },
+      {
+        "template_id": 51530,
+        "arrival_clock": "16:44",
+        "stop_sequence": 6,
+        "departure_clock": null,
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Tsuchiura",
+        "departure_station_urn": null
+      }
+    ]
+  },
+  {
+    "number": "1187M",
+    "direction": "odpt.RailDirection:Outbound",
+    "destination": [
+      "odpt.Station:JR-East.Joban.Takahagi"
+    ],
+    "stops": [
+      {
+        "template_id": 126535,
+        "arrival_clock": null,
+        "stop_sequence": 0,
+        "departure_clock": "15:35",
+        "arrival_station_urn": null,
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Shinagawa"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "15:40",
+        "stop_sequence": 1,
+        "departure_clock": "15:40",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Shimbashi",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Shimbashi"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "15:43",
+        "stop_sequence": 2,
+        "departure_clock": "15:45",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "15:50",
+        "stop_sequence": 3,
+        "departure_clock": "15:51",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "15:54",
+        "stop_sequence": 4,
+        "departure_clock": "15:55",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Nippori",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Nippori"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "15:56",
+        "stop_sequence": 5,
+        "departure_clock": "15:57",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Mikawashima",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Mikawashima"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "15:59",
+        "stop_sequence": 6,
+        "departure_clock": "16:00",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.MinamiSenju",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.MinamiSenju"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "16:02",
+        "stop_sequence": 7,
+        "departure_clock": "16:02",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.KitaSenju",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.KitaSenju"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "16:11",
+        "stop_sequence": 8,
+        "departure_clock": "16:13",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Matsudo",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Matsudo"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "16:21",
+        "stop_sequence": 9,
+        "departure_clock": "16:22",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Kashiwa",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Kashiwa"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "16:26",
+        "stop_sequence": 10,
+        "departure_clock": "16:26",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Abiko",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Abiko"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "16:29",
+        "stop_sequence": 11,
+        "departure_clock": "16:29",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Tennodai",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Tennodai"
+      },
+      {
+        "template_id": 126535,
+        "arrival_clock": "16:33",
+        "stop_sequence": 12,
+        "departure_clock": "16:33",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Toride",
+        "departure_station_urn": null
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "16:38",
+        "stop_sequence": 1,
+        "departure_clock": "16:38",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Fujishiro",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Fujishiro"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "16:41",
+        "stop_sequence": 2,
+        "departure_clock": "16:42",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Ryugasakishi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Ryugasakishi"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "16:46",
+        "stop_sequence": 3,
+        "departure_clock": "16:47",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Ushiku",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Ushiku"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "16:50",
+        "stop_sequence": 4,
+        "departure_clock": "16:50",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Hitachinoushiku",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Hitachinoushiku"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "16:53",
+        "stop_sequence": 5,
+        "departure_clock": "16:53",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Arakawaoki",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Arakawaoki"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "16:59",
+        "stop_sequence": 6,
+        "departure_clock": "17:05",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Tsuchiura",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Tsuchiura"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:09",
+        "stop_sequence": 7,
+        "departure_clock": "17:10",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Kandatsu",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Kandatsu"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:15",
+        "stop_sequence": 8,
+        "departure_clock": "17:15",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Takahama",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Takahama"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:19",
+        "stop_sequence": 9,
+        "departure_clock": "17:19",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Ishioka",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Ishioka"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:25",
+        "stop_sequence": 10,
+        "departure_clock": "17:31",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Hatori",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Hatori"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:35",
+        "stop_sequence": 11,
+        "departure_clock": "17:36",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Iwama",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Iwama"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:41",
+        "stop_sequence": 12,
+        "departure_clock": "17:41",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Tomobe",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Tomobe"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:45",
+        "stop_sequence": 13,
+        "departure_clock": "17:45",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Uchihara",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Uchihara"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:49",
+        "stop_sequence": 14,
+        "departure_clock": "17:50",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Akatsuka",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Akatsuka"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "17:55",
+        "stop_sequence": 15,
+        "departure_clock": "17:56",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Mito",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Mito"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:01",
+        "stop_sequence": 16,
+        "departure_clock": "18:02",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Katsuta",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Katsuta"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:06",
+        "stop_sequence": 17,
+        "departure_clock": "18:06",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Sawa",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Sawa"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:10",
+        "stop_sequence": 18,
+        "departure_clock": "18:11",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Tokai",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Tokai"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:16",
+        "stop_sequence": 19,
+        "departure_clock": "18:17",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Omika",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Omika"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:21",
+        "stop_sequence": 20,
+        "departure_clock": "18:22",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.HitachiTaga",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.HitachiTaga"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:27",
+        "stop_sequence": 21,
+        "departure_clock": "18:33",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Hitachi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Hitachi"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:38",
+        "stop_sequence": 22,
+        "departure_clock": "18:38",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Ogitsu",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Ogitsu"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:42",
+        "stop_sequence": 23,
+        "departure_clock": "18:43",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Juo",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Juo"
+      },
+      {
+        "template_id": 51532,
+        "arrival_clock": "18:48",
+        "stop_sequence": 24,
+        "departure_clock": null,
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Takahagi",
+        "departure_station_urn": null
+      }
+    ]
+  },
+  {
+    "number": "19M",
+    "direction": "odpt.RailDirection:Outbound",
+    "destination": [
+      "odpt.Station:JR-East.Joban.Iwaki"
+    ],
+    "stops": [
+      {
+        "template_id": 126634,
+        "arrival_clock": null,
+        "stop_sequence": 0,
+        "departure_clock": "15:45",
+        "arrival_station_urn": null,
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Shinagawa"
+      },
+      {
+        "template_id": 126634,
+        "arrival_clock": "15:52",
+        "stop_sequence": 1,
+        "departure_clock": "15:53",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo"
+      },
+      {
+        "template_id": 126634,
+        "arrival_clock": "15:58",
+        "stop_sequence": 2,
+        "departure_clock": "16:00",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno"
+      },
+      {
+        "template_id": 126634,
+        "arrival_clock": null,
+        "stop_sequence": 3,
+        "departure_clock": null,
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Toride",
+        "departure_station_urn": null
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "17:05",
+        "stop_sequence": 1,
+        "departure_clock": "17:06",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Mito",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Mito"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "17:11",
+        "stop_sequence": 2,
+        "departure_clock": "17:12",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Katsuta",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Katsuta"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "17:21",
+        "stop_sequence": 3,
+        "departure_clock": "17:21",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Omika",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Omika"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "17:25",
+        "stop_sequence": 4,
+        "departure_clock": "17:25",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.HitachiTaga",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.HitachiTaga"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "17:29",
+        "stop_sequence": 5,
+        "departure_clock": "17:30",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Hitachi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Hitachi"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "17:45",
+        "stop_sequence": 6,
+        "departure_clock": "17:45",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Isohara",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Isohara"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "18:00",
+        "stop_sequence": 7,
+        "departure_clock": "18:00",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Izumi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Izumi"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "18:05",
+        "stop_sequence": 8,
+        "departure_clock": "18:05",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Yumoto",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Yumoto"
+      },
+      {
+        "template_id": 51570,
+        "arrival_clock": "18:11",
+        "stop_sequence": 9,
+        "departure_clock": null,
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Iwaki",
+        "departure_station_urn": null
+      }
+    ]
+  },
+  {
+    "number": "8M",
+    "direction": "odpt.RailDirection:Inbound",
+    "destination": [
+      "odpt.Station:JR-East.JobanRapid.Shinagawa"
+    ],
+    "stops": [
+      {
+        "template_id": 51830,
+        "arrival_clock": null,
+        "stop_sequence": 0,
+        "departure_clock": "09:21",
+        "arrival_station_urn": null,
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Iwaki"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "09:26",
+        "stop_sequence": 1,
+        "departure_clock": "09:27",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Yumoto",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Yumoto"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "09:31",
+        "stop_sequence": 2,
+        "departure_clock": "09:32",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Izumi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Izumi"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "09:46",
+        "stop_sequence": 3,
+        "departure_clock": "09:47",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Isohara",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Isohara"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "10:02",
+        "stop_sequence": 4,
+        "departure_clock": "10:02",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Hitachi",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Hitachi"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "10:06",
+        "stop_sequence": 5,
+        "departure_clock": "10:07",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.HitachiTaga",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.HitachiTaga"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "10:10",
+        "stop_sequence": 6,
+        "departure_clock": "10:11",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Omika",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Omika"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "10:20",
+        "stop_sequence": 7,
+        "departure_clock": "10:21",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Katsuta",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Katsuta"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": "10:26",
+        "stop_sequence": 8,
+        "departure_clock": "10:27",
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Mito",
+        "departure_station_urn": "odpt.Station:JR-East.Joban.Mito"
+      },
+      {
+        "template_id": 51830,
+        "arrival_clock": null,
+        "stop_sequence": 9,
+        "departure_clock": null,
+        "arrival_station_urn": "odpt.Station:JR-East.Joban.Toride",
+        "departure_station_urn": null
+      },
+      {
+        "template_id": 126812,
+        "arrival_clock": "11:35",
+        "stop_sequence": 1,
+        "departure_clock": "11:37",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Ueno"
+      },
+      {
+        "template_id": 126812,
+        "arrival_clock": "11:42",
+        "stop_sequence": 2,
+        "departure_clock": "11:43",
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo",
+        "departure_station_urn": "odpt.Station:JR-East.JobanRapid.Tokyo"
+      },
+      {
+        "template_id": 126812,
+        "arrival_clock": "11:51",
+        "stop_sequence": 3,
+        "departure_clock": null,
+        "arrival_station_urn": "odpt.Station:JR-East.JobanRapid.Shinagawa",
+        "departure_station_urn": null
+      }
+    ]
+  }
+]
