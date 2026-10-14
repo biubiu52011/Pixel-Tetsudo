@@ -523,7 +523,11 @@ test('all sourced Kawagoe 2026-10 sample trips have a traceable published six-st
     seen.add(key);
     assert.equal(trip.stops.length, 6);
     for (const [i, stop] of trip.stops.entries()) {
-      assert.ok(railway.lines.Kawagoe.stations.includes(stop.stationId));
+      // Official ODPT station URNs use CamelCase; geometry keys use hyphens.
+      const stationAliases = { NishiKawagoe: 'Nishi-Kawagoe',
+        MusashiTakahagi: 'Musashi-Takahagi' };
+      assert.ok(railway.lines.Kawagoe.stations.includes(
+        stationAliases[stop.stationId] || stop.stationId), 'unknown Kawagoe stop: ' + stop.stationId);
       const time = stop.arrival || stop.departure;
       assert.match(time, /^\d{2}:\d{2}$/);
       if (i === 5) assert.ok(stop.arrival, 'terminal stop must have arrival clock');
