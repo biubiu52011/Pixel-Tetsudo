@@ -45397,7 +45397,8 @@ window.RAILWAY_DATA = {
         "lineIds": [
           "ToyoRapid"
         ],
-        "operatorGroup": "TOYO_RAPID"
+        "operatorGroup": "TOYO_RAPID",
+        "icon": "../images/鉄道/東葉高速鉄道/東葉高速線.png"
       },
       "serviceBoundaries": [
         {
@@ -45410,7 +45411,8 @@ window.RAILWAY_DATA = {
             "confidence": "HIGH"
           }
         }
-      ]
+      ],
+      "image": "../images/鉄道/東葉高速鉄道/東葉高速線.png"
     },
     "SaitamaRapid": {
       "name": "埼玉高速鉄道線",
@@ -45459,7 +45461,8 @@ window.RAILWAY_DATA = {
         "lineIds": [
           "SaitamaRapid"
         ],
-        "operatorGroup": "SAITAMA_RAPID_RAILWAY"
+        "operatorGroup": "SAITAMA_RAPID_RAILWAY",
+        "icon": "../images/鉄道/埼玉高速鉄道/埼玉高速鉄道線.png"
       },
       "serviceBoundaries": [
         {
@@ -45472,7 +45475,8 @@ window.RAILWAY_DATA = {
             "confidence": "HIGH"
           }
         }
-      ]
+      ],
+      "image": "../images/鉄道/埼玉高速鉄道/埼玉高速鉄道線.png"
     }
   },
   "name_map": {

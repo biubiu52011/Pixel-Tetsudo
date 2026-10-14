@@ -1,5 +1,11 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-15 JST — 导入东叶/埼玉线路标志
+- 用户提供两张PNG原样导入images/鉄道目录，东叶800×800、埼玉320×320，与附件逐字相同，保留透明度。
+- ToyoRapid/SaitamaRapid的image与presentation.icon接入同一原始PNG；离线fallback同步，七页db-loader版本4.3.1222。卡片与换乘标记复用已有字段，无颜色、车型、SQL或拓扑改动。
+- 原件和HEAD备份recovery/line-icons-20261015。frontend smoke、图片检查、4守卫及diff check PASS。canonical/fallback仅暂存两条图标增量，原有5项本地数据修改保留。不附截图，公开验收待同步。
+
+
 ## 2026-10-15 JST — 支线独立卡片与独立线路图
 - 用户明确要求全站有独立数据的支线独立成卡片。共享DataState取消branchOf隐藏；LineCard删除父卡片嵌套支线行，旧CSS/点击入口清理。18条canonical支线在trains/realtime均恰好一张一级卡片；原branchOf/站表/运行链/SQL身份保持。
 - LinePresentationService新增唯一getMapBranchIds：只有显式组合presentation成员才纳入组合图，branchOf不再自动扩展地图。geometry、getRealtimePositions、trains-page激活范围复用该入口，普通独立父线不收集子线站点/列车，支线自己加载原位置与SQL。已明确的其他组合展示保留。
@@ -714,3 +720,5 @@
 - 环线公开验收：6b93fdd2，几何/布局/renderer三个公开JS HTTP200并逐字MATCH。实际浏览器大阪环状线已显示两列站名、无顶部居中站点，截图recovery/loop-template-20261015/osaka-after.jpg；当前深夜无列车，动态连接区间由全部区间回归验证，未声称实时列车过境视觉验收。
 
 - 直通标签上线验收：7f4cdcb7生产改动＋d4dc14d4持续检查入口。公开utils/geometry/renderer三个JS HTTP200并逐字MATCH；实际公开大阪环状线天王寺两标签在所属外侧列对齐，大崎显示直通りんかい線／直通相鉄線且无重复/截断。公开截图recovery/through-layout-20261015/osaka-public-after.jpg。Release Guards、Pages success；CI Validate和Deploy均completed（整体状态聚合当时仍in_progress）。原有6项修改保持。
+
+- 独立支线上线验收：2d8ed3bb，CI/CD、Release Guards、Pages全部success，7个公开组件/样式HTTP200并逐字MATCH。公开京急筛选已确认本线/空港/久里滨/逗子/大师5独立卡片，实际点击空港线卡片进入7站独立图；本地成田机场支线3站图亦确认。公开截图keikyu-cards-public.jpg。当前用户页面已刷新，末次实际查看为相铁本线，已确认只保留本线站点与两处支线接续入口；除纳入的北绫濑图标路径外，原有5项独立本地数据修改保留。
