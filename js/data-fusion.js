@@ -2087,13 +2087,17 @@
   }
 
   function ensureTimetable(lineId) {
-    // Realtime-API lines never query Supabase. Existing manual files may still
-    // contribute vehicle identification evidence on API-backed lines, while
-    // position estimation follows the existing realtime coverage policy.
+    // Real-time position authority remains first. A HYBRID line with an
+    // explicit SQL-plan opt-in may read *sourced* timetable gaps, but FULL
+    // coverage never consumes SQL to synthesize train positions.
     var liveApi = window.ODPTClient &&
       typeof window.ODPTClient.hasRealtimePositionApi === "function" &&
       window.ODPTClient.hasRealtimePositionApi(lineId);
-    if (liveApi) {
+    var _policyCfg = window.RuntimeConfig && window.RuntimeConfig.REALTIME_POSITION_POLICY;
+    var _linePolicy = _policyCfg && _policyCfg.lines && _policyCfg.lines[lineId];
+    var _sqlPartialPlan = !!(_linePolicy && _linePolicy.mode !== "FULL" &&
+      _linePolicy.sqlPlannedFallback === true);
+    if (liveApi && !_sqlPartialPlan) {
       // ODPT+JS-only lines must not consume stale manual vehicle/timetable
       // objects; train positions come from ODPT Train and models from evidence.
       if (_manualEvidenceDisabled(lineId)) return Promise.resolve(false);
@@ -2125,8 +2129,8 @@
         return Promise.resolve(true);
       }
     }
-    // No realtime API: Supabase is the sole timetable source. A DB failure
-    // does not secretly start a second, legacy JS position feed.
+    // SQL is the sole fallback for lines without Train API OR an explicitly
+    // opted-in HYBRID gap. A failure never activates legacy JS timetables.
     if (!window.ODPTClient || typeof window.ODPTClient.getCachedTrainRuns !== "function") {
       return Promise.resolve(false);
     }
