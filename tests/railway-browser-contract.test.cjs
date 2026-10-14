@@ -131,7 +131,7 @@ test('FULL realtime never queries SQL but documented HYBRID source may request a
   assert.match(config, /"Kawagoe": true/);
 });
 
-test('SQL train-runs cannot serve realtime lines or a vehicle image catalog', () => {
+test('SQL train-runs blocks unapproved realtime lines and vehicle-artwork requests', () => {
   const edge = read('supabase/functions/train-runs/index.ts');
   const vehicle = read('js/train-vehicle.js');
   assert.match(edge, /source\?\.realtime_position_api_enabled/);
@@ -141,12 +141,14 @@ test('SQL train-runs cannot serve realtime lines or a vehicle image catalog', ()
 });
 
 
-test('Supabase timetable importer cannot ingest an API-backed realtime railway', () => {
+test('Supabase timetable importer admits only opted-in HYBRID TrainTimetable data', () => {
   const importer = read('supabase/functions/timetable-ingest/index.ts');
   const serving = read('supabase/functions/train-runs/index.ts');
   assert.match(importer, /realtime_position_api_enabled/);
   assert.match(importer, /REALTIME_API_LINE_NOT_ELIGIBLE_FOR_SQL_TIMETABLE/);
   assert.match(importer, /line\.realtime_position_api_enabled === true/);
+  assert.match(importer, /line\.sql_planned_fallback_enabled !== true/);
+  assert.match(importer, /UPSTREAM_NOT_TRAIN_TIMETABLE/);
   assert.match(serving, /source\?\.realtime_position_api_enabled &&/);
   assert.match(serving, /source\?\.sql_planned_fallback_enabled !== true/);
   assert.doesNotMatch(importer, /getCachedTrainRuns/);
