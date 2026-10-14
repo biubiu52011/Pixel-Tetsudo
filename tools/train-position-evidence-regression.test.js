@@ -934,3 +934,36 @@ console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
     'TWR Rinkai timetable estimation must remain available');
   console.log('Saikyo ODPT+JS-only manual/SQL isolation: 8 PASS');
 }
+
+// Independent Joban presentation and collision regression: keep every source train.
+{
+  const data=JSON.parse(read('data/core/railway_data.json'));
+  const lines=data.lines || data;
+  assert.equal(lines.Joban.presentation.nameJa,'常磐線快速');
+  assert.deepEqual(lines.Joban.presentation.lineIds,['Joban']);
+  assert.equal(lines.NaritaAbikoBranch.branchOf,'Narita');
+  const ctx={window:{}};
+  vm.runInNewContext(read('js/train-track-layout.js'),ctx);
+  const api=ctx.window.TrainTrackLayout;
+  const trains=Array.from({length:12},(_,i)=>({trainId:'source-'+i,stationIndex:1,segmentToIndex:2,segmentProgress:0,railDirection:'Outbound'}));
+  const coords=[{x:150,y:20},{x:150,y:70},{x:150,y:120}];
+  const result=api.resolveAll(trains,coords,{},'Joban',{});
+  assert.equal(result.filter(Boolean).length,12);
+  for(let i=0;i<result.length;i++) for(let j=i+1;j<result.length;j++)
+    assert(Math.abs(result[i].x-result[j].x)>=15 || Math.abs(result[i].y-result[j].y)>=20,'same-station trains must not overlap');
+  const reverse=api.resolveAll(trains.slice().reverse(),coords,{},'Joban',{}).reverse();
+  assert.equal(JSON.stringify(result),JSON.stringify(reverse),'source row order must not change marker placement');
+  const labels=Array.from({length:8},(_,i)=>({id:'train-'+i,x:110,y:60,width:36,height:10}));
+  const obstacle={x:110,y:60,width:36,height:10};
+  const bounds={x:0,y:0,width:300,height:300};
+  const offsets=api.resolveLabels(labels,[obstacle],bounds);
+  const placed=labels.map(l=>({...l,x:l.x+offsets[l.id].x,y:l.y+offsets[l.id].y}));
+  function overlaps(a,b){return a.x<b.x+b.width && a.x+a.width>b.x && a.y<b.y+b.height && a.y+a.height>b.y;}
+  for(let i=0;i<placed.length;i++){
+    assert(!overlaps(placed[i],obstacle),'caption must avoid station text');
+    assert(placed[i].x>=0 && placed[i].y>=0 && placed[i].x+36<=300 && placed[i].y+10<=300);
+    for(let j=i+1;j<placed.length;j++)assert(!overlaps(placed[i],placed[j]),'complete destination labels must not overlap');
+  }
+  assert.equal(JSON.stringify(offsets),JSON.stringify(api.resolveLabels(labels.slice().reverse(),[obstacle],bounds)));
+  console.log('Independent Joban title and crowded marker/caption layout: PASS');
+}

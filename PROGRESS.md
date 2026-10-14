@@ -1,12 +1,22 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-14 JST — 页面问题汇总修复（本地完成，发布验证待完成）
+
+- 成田线保持独立，Joban presentation.lineIds 仅 Joban；常磐快速日／中／英文标题移除成田线，NaritaAbikoBranch.branchOf=Narita 保留，实际我孙子跨线班次仍按证据判断。此前融合条目已明确标为撤回。
+- 保留既有上野东京走廊语义、上野基础终点、品川延伸停站与实际目的地，以及同站交接的 running-chain 修正。
+- 复用 TrainTrackLayout：稳定标识槽位发生哈希碰撞／相邻段重合时再次避让，不改变 stationIndex、段进度或删除列车。复用 trains-render 标签更新生命周期：完整目的地避开站名、图标、其他目的地；移位标签带虚线引导；动画每帧共用一次布局，既有大江户六形专用布局保持。
+- Supabase 只读核对：Joban 相关 train_vehicle_rules 仅 chiyoda-joban-odakyu 缓行网络 1593 行；常磐快速／本线未找到可用规则或 operation observations/runtime evidence。保持未判定圆点，未从线路／号段猜测车型，未写入数据库。
+- 新增同站 12 班列车不重合、反转 SQL 行序保持布局、8 个目的地避让站名／彼此并保持边界、独立标题／支线归属回归。31 tools suites、63 node checks、4 Python guards PASS（既有 baseline warnings）。本地真实页面 13 标记／13 完整标签，标签重叠 0，无浏览器 error／横向溢出。
+- 修改前备份：recovery/local-backup-20261014-before-summary-fix；保留原有六项独立本地修改。发布仅三个标题字段、共享布局／渲染与 trains 资源 4.3.1208、回归和本记录。
+
+
 ## 2026-10-14 JST — 用户叫停：撤回成田线融合
 
 - 用户明确“有单独的成田线，不要融合”。停止该方案，撤回 34122a62／74164c7a 的组合成员与地图融合改动，恢复独立成田线及原支线归属。保留此前上野东京走廊与上野基础终点修正。
 - 发布仅撤回融合范围；其他原有本地数据修改保留。资源升至 4.3.1203 使撤回立即可加载。
 
 
-## 2026-10-14 JST — 常磐快速・成田线组合范围补齐（发布验收中）
+## 2026-10-14 JST — 常磐快速・成田线组合范围补齐（已按用户要求撤回）
 
 - 用户指出标题包含成田线但地图只绘常磐快速，先前验收漏查该范围。根因：NaritaAbikoBranch 物理 branchOf=Narita，Joban presentation.lineIds 只有 Joban；原 geometry／positions 仅依父子关系，漏掉另一个父线下的组合展示成员。
 - Joban 既有 presentation.lineIds 增加 NaritaAbikoBranch。共享 LinePresentationService.getMapBranchIds 根据 canonical 支线与显式组合成员范围统一给 geometry、train positions、activation 供给。保留 NaritaAbikoBranch.branchOf=Narita、原拓扑／运行情报／SQL source identity，不重新建表、改名或复制站表。

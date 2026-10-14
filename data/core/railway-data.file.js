@@ -16232,10 +16232,10 @@ window.RAILWAY_DATA = {
       "nameKo": "조반선（쾌속）",
       "presentation": {
         "code": "JJ",
-        "nameJa": "常磐線快速・成田線",
+        "nameJa": "常磐線快速",
         "originStation": "Ueno",
-        "nameZh": "常磐线快速・成田线",
-        "nameEn": "Joban Line (Rapid Service) / Narita Line",
+        "nameZh": "常磐线快速",
+        "nameEn": "Joban Line (Rapid Service)",
         "nameKo": "조반선（쾌속）",
         "color": "#00b261",
         "icon": "../images/鉄道/JR東日本/常磐線快速.png",

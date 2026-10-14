@@ -292,13 +292,70 @@
       return { key: trackKey(p, base.idx, base.nextIdx, lane) };
     };
     var occupancy = buildOccupancy(positions, synthetic);
-    return positions.map(function (p, i) {
+    var result = positions.map(function (p, i) {
       return resolve(p, positions, i, stationCoords, geometry, lineId, opts, occupancy);
     });
+    // Hash slots can collide, including trains on adjacent station segments.
+    // Resolve those display collisions without changing the source position.
+    var placed = [];
+    positions.map(function (p, i) { return { id: stableTrainKey(p), index: i }; })
+      .sort(function (a, b) { return a.id.localeCompare(b.id); })
+      .forEach(function (entry) {
+        var loc = result[entry.index];
+        if (!loc) return;
+        var originX = loc.x, originY = loc.y;
+        for (var attempt = 0; attempt <= positions.length * 2; attempt++) {
+          var offset = attempt === 0 ? 0 : Math.ceil(attempt / 2) * 18 * (attempt % 2 ? 1 : -1);
+          loc.x = originX + loc.normal.x * offset;
+          loc.y = originY + loc.normal.y * offset;
+          if (!placed.some(function (other) {
+            return Math.abs(other.x - loc.x) < 15 && Math.abs(other.y - loc.y) < 20;
+          })) break;
+        }
+        placed.push(loc);
+      });
+    return result;
+  }
+
+  // Screen-space caption rectangles, measured by the renderer. Pure layout
+  // keeps station text, train icons and complete destinations readable.
+  function resolveLabels(labels, obstacles, bounds) {
+    var placed = (obstacles || []).slice();
+    var output = {};
+    function intersects(a, b) {
+      return a.x < b.x + b.width + 2 && a.x + a.width + 2 > b.x &&
+        a.y < b.y + b.height + 2 && a.y + a.height + 2 > b.y;
+    }
+    labels.slice().sort(function (a, b) { return a.id.localeCompare(b.id); })
+      .forEach(function (label) {
+        var best = null;
+        var stepY = Math.max(12, label.height + 4);
+        var stepX = Math.max(18, label.width + 4);
+        // Prefer the original caption, then nearby rows, then side columns.
+        for (var ring = 0; ring <= labels.length + placed.length + 2 && !best; ring++) {
+          for (var col = -Math.min(ring, 2); col <= Math.min(ring, 2) && !best; col++) {
+            var row = ring - Math.abs(col);
+            for (var side = 0; side < (row ? 2 : 1); side++) {
+              var dx = col * stepX, dy = row * stepY * (side ? -1 : 1);
+              var box = {x: label.x + dx, y: label.y + dy, width: label.width, height: label.height};
+              if (bounds && (box.x < bounds.x || box.y < bounds.y ||
+                  box.x + box.width > bounds.x + bounds.width || box.y + box.height > bounds.y + bounds.height)) continue;
+              if (!placed.some(function (other) { return intersects(box, other); })) {
+                best = box; output[label.id] = {x: dx, y: dy}; break;
+              }
+            }
+          }
+        }
+        // A fully occupied viewport must not silently drop a destination.
+        placed.push(best || label);
+        if (!best) output[label.id] = {x: 0, y: 0};
+      });
+    return output;
   }
 
   window.TrainTrackLayout = {
     resolveAll: resolveAll,
+    resolveLabels: resolveLabels,
     loopPosToXY: loopPosToXY
   };
 })();

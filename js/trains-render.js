@@ -1421,6 +1421,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
             _icon._displayLineId = lineId;
             _setTrainIconPosition(_icon, _curX, _curY, p, lineId, isLoop);
             _moveTrainLabels(trainLayer, trainUid, _curX, _curY, p, lineId);
+            _resolveTrainLabelCollisions(trainLayer, now);
             if (_t < 1) {
               _icon._moveRaf = requestAnimationFrame(_animFrame);
             } else {
@@ -1451,6 +1452,65 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         allIcons[ii].parentNode.removeChild(allIcons[ii]);
       }
     }
+    _resolveTrainLabelCollisions(trainLayer);
+  }
+
+  function _resolveTrainLabelCollisions(trainLayer, frameTime) {
+    var svg = trainLayer && trainLayer.ownerSVGElement;
+    var layout = window.TrainTrackLayout;
+    if (!svg || !layout || !layout.resolveLabels ||
+        (svg.__geometry && svg.__geometry.isSixShapedLoop)) return;
+    if (frameTime != null && trainLayer._captionFrameTime === frameTime) return;
+    trainLayer._captionFrameTime = frameTime;
+    var matrix = svg.getScreenCTM();
+    if (!matrix || !matrix.a || !matrix.d) return;
+    var links = trainLayer.querySelectorAll('[data-train-caption-link]');
+    for (var k = 0; k < links.length; k++) links[k].parentNode.removeChild(links[k]);
+    var labels = [], groups = {}, boxes = {};
+    var nodes = trainLayer.querySelectorAll('[data-train-label-for]');
+    for (var i = 0; i < nodes.length; i++) {
+      var node = nodes[i];
+      var raw = node.getAttribute('data-label-raw-transform');
+      if (!raw) raw = node.getAttribute('transform') || 'translate(0,0)';
+      node.setAttribute('transform', raw);
+      node.setAttribute('data-label-raw-transform', raw);
+      var rect = node.getBoundingClientRect();
+      var id = node.getAttribute('data-train-label-for');
+      if (rect.width && rect.height) {
+        labels.push({id: id, x: rect.x, y: rect.y, width: rect.width, height: rect.height});
+        groups[id] = node;
+        boxes[id] = rect;
+      }
+    }
+    var obstacles = [];
+    var fixed = svg.querySelectorAll('text, [data-train-id]');
+    for (var j = 0; j < fixed.length; j++) {
+      if (fixed[j].closest('[data-train-label-for]')) continue;
+      var box = fixed[j].getBoundingClientRect();
+      if (box.width && box.height) obstacles.push({x: box.x, y: box.y, width: box.width, height: box.height});
+    }
+    var bounds = svg.getBoundingClientRect();
+    var offsets = layout.resolveLabels(labels, obstacles, bounds);
+    Object.keys(offsets).forEach(function (id) {
+      var label = groups[id], offset = offsets[id];
+      label.setAttribute('transform', 'translate(' + (offset.x / matrix.a) + ',' +
+        (offset.y / matrix.d) + ') ' + label.getAttribute('data-label-raw-transform'));
+      if (offset.x || offset.y) {
+        var rect = boxes[id];
+        var link = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        var x = rect.x + rect.width / 2, y = rect.y + rect.height / 2;
+        link.setAttribute('data-train-caption-link', id);
+        link.setAttribute('x1', String((x - matrix.e) / matrix.a));
+        link.setAttribute('y1', String((y - matrix.f) / matrix.d));
+        link.setAttribute('x2', String((x + offset.x - matrix.e) / matrix.a));
+        link.setAttribute('y2', String((y + offset.y - matrix.f) / matrix.d));
+        link.setAttribute('stroke', '#999');
+        link.setAttribute('stroke-width', '0.5');
+        link.setAttribute('stroke-dasharray', '2 2');
+        link.setAttribute('pointer-events', 'none');
+        trainLayer.insertBefore(link, trainLayer.firstChild);
+      }
+    });
   }
 
   // v4.3.454: 列车终点/方向标签——方向在上（7px #999）、终点在下（8px #666）
@@ -1804,6 +1864,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         labelGroup.insertBefore(_whitePlate, labelGroup.firstChild);
       }
       labelGroup.setAttribute("transform", "translate(" + _offsetX + ",0)");
+      labelGroup.setAttribute("data-label-raw-transform", "translate(" + _offsetX + ",0)");
       // Cache regular-label centering so per-frame sync never recreates DOM.
       labelGroup.setAttribute("data-base-offset", String(-(_bbox.x + _bbox.width / 2)));
     } catch(_e) {}
@@ -1842,6 +1903,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     } else {
       label.setAttribute('transform', 'translate(' + (px + _base) + ',0)');
     }
+    label.setAttribute('data-label-raw-transform', label.getAttribute('transform'));
   }
 
   // Keep label content synchronized with the current service segment while
