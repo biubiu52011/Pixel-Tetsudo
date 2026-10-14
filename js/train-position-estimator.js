@@ -510,6 +510,10 @@
       destinationStation: destinationStationUrn || '',
       timetableObjectId: run.timetableObjectId,
       serviceDate: serviceDate,
+      // Exact train-number references are calendar-scoped. Use this source
+      // run's published calendar, never infer it from the host machine's day.
+      calendarType: /Weekday$/.test(run.calendar || '') ? 'weekday'
+        : /(?:SaturdayHoliday|Saturday|Holiday|Sunday)$/.test(run.calendar || '') ? 'holiday' : '',
       at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
     };
     _baseOperationCtx.operationCode = String(

@@ -753,3 +753,70 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
     'Existing TWR 70-000 reference must not be replaced by JR E233');
   console.log('Saikyo JR E233 all termini / calendar / TWR-Sotetsu isolation: 11 PASS');
 }
+
+// Joban: canonical SQL references supply a planned model, never a dated carset.
+{
+  const ctx={window:{},console:{debug(){}}};
+  vm.createContext(ctx);
+  for(const file of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js'])
+    vm.runInContext(read(file),ctx,{filename:file});
+  const facts=ctx.window.TrainOperationEvidence;
+  const base={lineId:'Joban',operator:'JR-East',railway:'odpt.Railway:JR-East.JobanRapid',serviceDate:'2026-10-14',calendarType:'weekday'};
+  const cases=[['323M','E531系','JR東日本_E531系.png'],['462M','E531系','JR東日本_E531系.png'],['1165M','E531系','JR東日本_E531系.png'],['1166M','E531系','JR東日本_E531系.png'],
+    ['1186H','E231系0番台（常磐快速線・LED）','JR東日本_E231系_0番台_常磐快速線.png'],
+    ['1289H','E231系0番台（常磐快速線・LED）','JR東日本_E231系_0番台_常磐快速線.png'],
+    ['61M','E657系','JR東日本_E657系.png']];
+  for(const [number,model,png] of cases){
+    for(const mode of ['fallback','realtime-derived']){
+      const fact=facts.resolveEvidence(number,base,mode);
+      assert.strictEqual(fact.vehicleType,model,number+' '+mode);
+      assert.strictEqual(fact.evidenceRole,'timetable-reference');
+      assert.strictEqual(fact.formationId,'');
+      assert.ok(fact.sourceUrl);
+      const vehicle=ctx.window.TrainVehicle.resolve({...base,trainNumber:number,timetableVehicleType:fact.vehicleType});
+      assert.strictEqual(vehicle.identityStatus,'EXACT');
+      assert.ok(vehicle.iconPath.endsWith(png),vehicle.iconPath);
+      assert.ok(fs.existsSync(path.join(ROOT,vehicle.iconPath.replace(/^..\//,''))));
+    }
+  }
+  for(const [number] of cases){
+    assert.strictEqual(facts.resolveEvidence(number,{...base,lineId:'JobanLocal',railway:'odpt.Railway:JR-East.JobanLocal'},'fallback'),null,'rapid references must not leak to local tracks');
+    assert.strictEqual(facts.resolveEvidence(number,{...base,lineId:'UenoTokyo',railway:'odpt.Railway:JR-East.UenoTokyo'},'fallback'),null,'corridor is not a vehicle network');
+    assert.strictEqual(facts.resolveEvidence(number,{...base,serviceDate:'2026-10-13'},'fallback'),null,'before verified reference validity');
+    assert.strictEqual(facts.resolveEvidence(number,{...base,serviceDate:'2026-12-01'},'fallback'),null,'expired references must fail closed');
+  }
+  assert.strictEqual(facts.resolveEvidence('9999M',base,'fallback'),null,'unknown M number is not E531 by suffix');
+  assert.strictEqual(facts.resolveEvidence('1299H',base,'fallback'),null,'unknown H working is not E231 by suffix');
+  assert.strictEqual(facts.resolveEvidence('221M',{...base,lineId:'JobanMain',railway:'odpt.Railway:JR-East.Joban'},'fallback'),null,'northern mixed-stock service must remain unresolved');
+  const holiday=facts.resolveEvidence('1165M',{...base,serviceDate:'2026-10-17',calendarType:'holiday'},'fallback');
+  assert.strictEqual(holiday.vehicleType,'E531系');
+  const live=ctx.window.TrainVehicle.resolve({...base,trainNumber:'61M',realtimeVehicleType:'E531系',timetableVehicleType:'E657系'});
+  assert.notStrictEqual(live.name,'E657系','planned model must not override conflicting live model');
+  console.log('Joban SQL -> canonical evidence -> E231/E531/E657 PNG, validity/calendar/network isolation: PASS');
+}
+
+// SQL-only trains also need the compiled source calendar at evidence lookup.
+{
+  let day=14;
+  class FixedDate extends Date{constructor(...args){super(...(args.length?args:[Date.UTC(2026,9,day,6,40)]));}static now(){return Date.UTC(2026,9,day,6,40);}}
+  const ctx={window:{RuntimeConfig:{},ODPTClient:{LINE_RAILWAY_CODE:{Joban:'JobanRapid'}}},Date:FixedDate,Intl,console:{debug(){}}};
+  vm.createContext(ctx);
+  for(const f of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(f),ctx,{filename:f});
+  for(const [serviceDay,calendar] of [[14,'Weekday'],[17,'SaturdayHoliday']]){
+    day=serviceDay;
+    const run={'@id':'sql-only-1173M','odpt:trainNumber':'1173M','odpt:railway':'odpt.Railway:JR-East.JobanRapid',
+      'odpt:operator':'odpt.Operator:JR-East','odpt:calendar':'odpt.Calendar:'+calendar,'odpt:railDirection':'odpt.RailDirection:Outbound',
+      'odpt:trainType':'odpt.TrainType:JR-East.Local','odpt:destinationStation':['odpt.Station:JR-East.Joban.Tsuchiura'],
+      'odpt:trainTimetableObject':[{'odpt:departureStation':'odpt.Station:JR-East.JobanRapid.Toride','odpt:departureTime':'15:39'},
+      {'odpt:arrivalStation':'odpt.Station:JR-East.Joban.Fujishiro','odpt:arrivalTime':'15:44'}],
+      _positionSource:'supabase-train-run',_sqlVehicleMappingLevel:'unresolved',_serviceDate:'2026-10-'+serviceDay};
+    ctx.window.TrainPositionEstimator.registerManualTimetable('Joban',[run]);
+    const p=ctx.window.TrainPositionEstimator.estimateAllPositions({Joban:{operator:'JR-East',stations:['Toride','Fujishiro']}},{},{},null,{lineIds:['Joban']}).Joban;
+    assert.strictEqual(p.length,1);
+    assert.strictEqual(p[0].vehicleIdentityStatus,'EXACT','SQL-only '+calendar+' must resolve the reference');
+    assert.ok(p[0].vehicleIconPath.endsWith('JR東日本_E531系.png'));
+    assert.strictEqual(p[0].operationEvidence[0].evidenceRole,'timetable-reference');
+    assert.strictEqual(p[0].positionSource,'supabase-train-run');
+  }
+  console.log('SQL-only Joban source calendar -> planned model -> PNG: PASS');
+}

@@ -96,6 +96,15 @@ var CANONICAL_VEHICLES = {
     asset: "../images/列车/JR東日本/JR東日本_E531系.png",
     aliases: ["E531系"]
   },
+  // JR East published Hitachi/Tokiwa model. Standard model artwork only;
+  // a train number or planned model does not establish a special livery.
+  // https://www.jreast.co.jp/train/express/hitachi_tokiwa.html
+  "jr-east-e657-hitachi-tokiwa": {
+    displayName: "E657系",
+    iconName: "E657系",
+    asset: "../images/列车/JR東日本/JR東日本_E657系.png",
+    aliases: ["JR東日本E657系", "JR E657系"]
+  },
   "jr-east-e231-0-joban-rapid": {
     displayName: "E231系0番台",
     iconName: "E231系0番台",

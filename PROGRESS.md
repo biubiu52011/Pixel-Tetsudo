@@ -1,6 +1,17 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 页面问题汇总修复（本地完成，发布验证待完成）
+## 2026-10-14 JST — 常磐快速车辆判定补齐（SQL／本地完成，发布验证待完成）
+
+- 用户要求补齐当前 Joban 页车辆判定。复用 Supabase train_vehicle_rules／evidence_sources、既有 export-vehicle-operation-evidence.js、TrainOperationEvidence、TrainVehicle 和原生 PNG；未新增第二套车型 resolver、线路后缀默认值或运行拓扑。
+- 当前公开 JO/J 20260314 平日／休日表、确切列车号／列车种别／首都圈停站及同编组 G 组，与 JR East E231、E531、Hitachi/Tokiwa E657 官方资料交叉核对。按线路+完整列车号+calendar 写入 1,143 个 Grade-C timetable-reference：Joban 682（平日343+休日339，现有班次全部覆盖）、JobanMain 375、NaritaAbikoBranch 86。323M↔1152M／1157M、327M↔462M 为明确刊载的同编组关联，不是所有 M 号默认 E531。北段 E501/E531 混用等未核对号保留未判定。
+- 计划车型适用 2026-10-14～2026-11-30，到期必须重新核验；不声称当天实际编组、特殊涂装或未验证的时刻表日期。原 ODPT template source_revision_date=null 等状态保留，不提升为当前已核验时刻表。成田线页面／拓扑仍独立。
+- 既有 canonical exporter 的 mapping-input 更新两份快照，保留全部原 records／datedRecords／familyRules／aliases／carsets；既有 2,660 条 reference 全部保留，总数 3,803；inventory 与 SQL 增量一致。
+- 修复共享 TrainPositionEstimator 缺失 source calendarType：纯 SQL 位置也能按源 Weekday／SaturdayHoliday 解析车型参考；不根据宿主日期或线路号段猜车型。TrainVehicle 增加 E657 标准模型原生 PNG 的明确目录登记，不从列车号判特殊涂装。三种 PNG 均原生 82×98。
+- 适用页面 trains／realtime 共用车型与推算模块，相关三个资源 4.3.1209；home/history/tourism 不加载该链路，无需改运行逻辑。63 页面／服务日检查、31 tools suites、4 Python guards PASS（保留既有基线警告）。新增完整 SQL-reference→车辆→PNG、纯 SQL 推算平日／休日、跨线／过期隔离及实时车型优先回归。
+- 本地真实 Joban DOM 当前 18 个标记全部 vehicle PNG，未判定 0、浏览器 error 0。来源原件、SHA256 manifest、SQL 导入／导出与修改前备份保存在 recovery/joban-vehicle-evidence-20261014；其他六项既有本地修改保留。
+
+
+## 2026-10-14 JST — 页面问题汇总修复（DONE：发布与公开页面验证通过）
 
 - 成田线保持独立，Joban presentation.lineIds 仅 Joban；常磐快速日／中／英文标题移除成田线，NaritaAbikoBranch.branchOf=Narita 保留，实际我孙子跨线班次仍按证据判断。此前融合条目已明确标为撤回。
 - 保留既有上野东京走廊语义、上野基础终点、品川延伸停站与实际目的地，以及同站交接的 running-chain 修正。
@@ -8,6 +19,7 @@
 - Supabase 只读核对：Joban 相关 train_vehicle_rules 仅 chiyoda-joban-odakyu 缓行网络 1593 行；常磐快速／本线未找到可用规则或 operation observations/runtime evidence。保持未判定圆点，未从线路／号段猜测车型，未写入数据库。
 - 新增同站 12 班列车不重合、反转 SQL 行序保持布局、8 个目的地避让站名／彼此并保持边界、独立标题／支线归属回归。31 tools suites、63 node checks、4 Python guards PASS（既有 baseline warnings）。本地真实页面 13 标记／13 完整标签，标签重叠 0，无浏览器 error／横向溢出。
 - 修改前备份：recovery/local-backup-20261014-before-summary-fix；保留原有六项独立本地修改。发布仅三个标题字段、共享布局／渲染与 trains 资源 4.3.1208、回归和本记录。
+- 发布提交 2ea7d5e028cf142f8e4b6b9d137d585ef20aa891；CI / CD 38506660361、Release Guards 38506660586、Pages 38506659081 全 success。公开布局／渲染／canonical JSON HTTP 200 且匹配提交。公开浏览器测得 13 标记／13 标签：标记互相、标签互相、标签与站名的重叠均 0，error 0，无横向溢出；独立卡片常磐快速上野↔土浦／成田线佐仓↔松岸、UenoTokyo 卡片 0。报告 recovery/reports/2026-10-14_joban_summary_fix.md；本条发布后验收记录保留本地。
 
 
 ## 2026-10-14 JST — 用户叫停：撤回成田线融合
