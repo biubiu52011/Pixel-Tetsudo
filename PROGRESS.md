@@ -1,6 +1,12 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-14 JST — 高尾实时区间转线与末站图标归位（上线验收中）
+## 2026-10-15 JST — FULL 隐藏位置提示、其余覆盖类型统一提示
+- 用户要求 FULL 不出现 tp-est-note 元素，其余类型统一一种提示。复用 ODPTClient.usesSqlTimetable 既有覆盖策略，FULL 在创建前退出并清理旧提示；非 FULL 不依赖当前列车来源或数量，固定显示实时数据优先、未覆盖部分按时刻表推定，不显示 ODPT 时间。
+- 唯一实现位于 trains.html 的共享 trains-render，增量和重建两条路径同步。其余六页无线路图提示，仅同步共同 translations 资源版本；四语言统一文案，删除已无调用的 mixed 文案与时间格式函数。资源 4.3.1218。
+- 原件备份 recovery/train-note-20261015。45 条配置线路、未知线路、连续刷新及非 FULL→FULL 切换验证 PASS，frontend-smoke、语法、diff check 和4发布守卫 PASS（保留已有 baseline warnings）。浏览器线上验收待发布后确认。原有6项数据修改保留。
+
+
+## 2026-10-14 JST — 高尾实时区间转线与末站图标归位（已发布，公开高尾视图验收通过）
 - 用户指出高尾后列车不转线、向画布底部走。共享DataFusion仅按fromStation归属线路，忽略高尾→相模湖的实际toStation；共享布局在最后站idx==nextIdx时用同一坐标计算切向量，零长度退化，且停站偏移朝轨道端点外。
 - 复用canonical serviceBoundaries／handoverStations与真实ODPT from/to区间：只有当前线路不含toStation、同operator伙伴线路包含from/to且物理相邻、from为已声明接续站、伙伴唯一时才转线。不靠目的地推位置，未知/跳站/歧义保持原归属。高尾→相模湖进入ChuoMain index0→1；高尾→西八王子归ChuoRapid index23→22；尚在西八王子→高尾和缺toStation停站不提前转线。
 - 原trainId／sourceRailway／trainNumber不变，源from/to与实际positionLineId保留；车型继续按原证据匹配。编组缓存隔离增加实际positionLineId，防止提供者railway/号码未改时跨物理运行段继承完整编组。共享estimator同样携带positionLineId。
@@ -11,6 +17,8 @@
 
 
 - 浏览器连接恢复，公开图实际复现“往三鷹”列车被整体碰撞避让推到高尾下方空白区。追加每列车实际轨道Y范围，按SVG屏幕矩阵约束图标中心可用上下槽位，轨道端点以外不作为空位；端点拥挤沿用折叠。branch使用自身points范围，环形/六字专用布局保留。补充末端障碍、空白画布与拥挤折叠回归，36 suites/4守卫PASS。track-layout/renderer 4.3.1217。
+
+- 最终发布与浏览器验收：e6c4fa3ffce94f0a8ae65cf8ee4fcf9a2decf340实时归属/末站切向量修复＋b24d0e7eab5fafee67f05a8e1b4f6ffc446a0908轨道范围避让约束。CI/CD、Release Guards、Pages全部success；四个公开JS逐字MATCH。浏览器连接恢复，实际刷新公开ChuoRapid页并滚到高尾，已确认高尾之后空白区无列车，图标文字保持整体。截图takao-after.jpg已保存；当前实时样本未逐列车观察一次高尾到相模湖过境全过程，该边界由回归测试验证。其他六项原有修改保留。
 
 ## 2026-10-14 JST — 中央快速あずさ／かいじ E353 图标（已发布，浏览器视觉验收待补）
 - 用户澄清“新宿目的地未识别”实际是缺失列车图标，随后确认影响整批あずさ／かいじ。站名未改；问题是定期特急缺少可用于实时fallback的 exact train/calendar 车型参考，车型目录也未登记E353原生PNG。

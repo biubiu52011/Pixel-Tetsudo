@@ -503,61 +503,19 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     return (positions || []).filter(_isRealtimePositionFresh);
   }
 
-  function _formatSourceTime(value) {
-    if (!value) return "";
-    var d = new Date(value);
-    if (isNaN(d.getTime())) return "";
+  // Coverage policy, not the current mix of returned trains, owns this note.
+  // FULL creates no note; all other modes share one localized explanation.
+  function updateEstimatedNote(el, lineId) {
     try {
-      return d.toLocaleTimeString(window.currentLang || "ja", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-    } catch(e) {
-      return d.toLocaleTimeString();
-    }
-  }
-
-  // v4.3.469: 推定データ注記——いずれかの列車が時刻表推定なら表示。
-  // リアルタイム位置のみの路線には出さない。増分・全再構築の両パスから呼ばれる（冪等）。
-  // v4.3.511: 位置を容器内 appendChild から「容器正下方（外部）」に修正（insertAdjacentElement afterend）——
-  // 元実装は容器内末尾に置いており、v4.3.469 の設計意図（容器外・下方中央）と不一致だった。
-  function updateEstimatedNote(el, positions) {
-    try {
-      var _oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
-      for (var _oi = 0; _oi < _oldNotes.length; _oi++) _oldNotes[_oi].remove();
-      if (!positions || !positions.length) return;
-      var anyEst = false;
-      var anyRealtime = false;
-      var latestRealtimeAt = "";
-      var latestRealtimeMs = 0;
-      for (var _ei = 0; _ei < positions.length; _ei++) {
-        var _p = positions[_ei];
-        var _rank = _trainPositionRank(_p);
-        if (_rank === 0) {
-          anyRealtime = true;
-          if (_p.sourceUpdatedAt) {
-            var _ms = Date.parse(_p.sourceUpdatedAt);
-            if (!isNaN(_ms) && _ms > latestRealtimeMs) {
-              latestRealtimeMs = _ms;
-              latestRealtimeAt = _p.sourceUpdatedAt;
-            }
-          }
-        } else {
-          anyEst = true;
-        }
-      }
-      var parts = [];
-      if (anyRealtime && latestRealtimeAt) {
-        parts.push("ODPT " + _formatSourceTime(latestRealtimeAt));
-      }
-      if (anyEst) {
-        parts.push(anyRealtime
-          ? (t("trains.estimated_mixed_note") || "*Only supplemental non-realtime positions are estimated")
-          : (t("trains.estimated_note") || "*Data calculated from timetable"));
-      }
-      if (!parts.length) return;
+      var oldNotes = el.parentNode ? el.parentNode.querySelectorAll('.tp-est-note') : [];
+      for (var i = 0; i < oldNotes.length; i++) oldNotes[i].remove();
+      var api = window.ODPTClient;
+      if (!api || !api.usesSqlTimetable || !api.usesSqlTimetable(lineId)) return;
       var note = document.createElement("div");
       note.className = "tp-est-note";
       note.setAttribute("role", "status");
       note.setAttribute("aria-live", "polite");
-      note.textContent = parts.join(" · ");
+      note.textContent = t("trains.estimated_note") || "Live data takes priority; uncovered positions are estimated from the timetable.";
       el.insertAdjacentElement('afterend', note);
     } catch(e) { /* note is best-effort */ }
   }
@@ -611,7 +569,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         // === Incremental update: only update train layer using cached geometry ===
         updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
         updateRunningInfo(el, positions);
-        updateEstimatedNote(el, positions);
+        updateEstimatedNote(el, lineId);
         // Sync loading placeholder with the realtime page: hide it as soon as train
         // positions are available (the full-rebuild path re-inserts it when empty).
         if (positions.length > 0) {
@@ -1001,7 +959,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // Now populate train layer
       updateTrainLayer(svg, positions, stationCoords, lineId, line, geometry);
       updateRunningInfo(el, positions);
-      updateEstimatedNote(el, positions);
+      updateEstimatedNote(el, lineId);
       
     } catch(e) {
       el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
