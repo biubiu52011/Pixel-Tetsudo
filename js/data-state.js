@@ -258,6 +258,7 @@
       var lid = ids[i];
       var line = linesObj[lid];
       if (!line) continue;
+      if (((window.RuntimeConfig || {}).SERVICE_CORRIDOR_LINES || {})[lid]) continue;
       // Line Hierarchy Rule: 真支线（branchOf 非空）严禁在一级总列表独立展示，
       // 只在父线卡片/详情内展示。平级独立运营线（branchOf=null）照常平铺。
       if (!isIndependentRealtimeLine(lid, mode) &&

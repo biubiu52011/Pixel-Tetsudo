@@ -11,6 +11,7 @@
 
   function buildIndexes() {
     var lines = window.UNIFIED_LINES || {};
+    var corridors = (window.RuntimeConfig || {}).SERVICE_CORRIDOR_LINES || {};
     _boundaryMap = {}; _branchOfMap = {}; _directThrough = {};
     Object.keys(lines).forEach(function(lineId) {
       var line = lines[lineId] || {};
@@ -20,6 +21,7 @@
       _directThrough[lineId] = [];
       boundaries.forEach(function(boundary) {
         if (!boundary || !boundary.lineId || !lines[boundary.lineId]) return;
+        if (corridors[lineId] || corridors[boundary.lineId]) return;
         var joins = Array.isArray(boundary.handoverStations) ? boundary.handoverStations.filter(Boolean) : [];
         if (joins.length) {
           _boundaryMap[lineId][boundary.lineId] = joins.slice();
@@ -69,8 +71,8 @@
   }
   function _confirmedEdge(a,b,joins){
     if(!a||!b||!joins||!joins.length)return null;
-    var forward=joins.indexOf(a.lastStation)>=0&&joins.indexOf(b.firstStation)>=0;
-    var reverse=joins.indexOf(b.lastStation)>=0&&joins.indexOf(a.firstStation)>=0;
+    var forward=a.lastStation===b.firstStation&&joins.indexOf(a.lastStation)>=0;
+    var reverse=b.lastStation===a.firstStation&&joins.indexOf(b.lastStation)>=0;
     if(!forward&&!reverse)return null;
     var dt=forward&&a.lastTime!==null&&b.firstTime!==null?b.firstTime-a.lastTime:
            reverse&&b.lastTime!==null&&a.firstTime!==null?a.firstTime-b.lastTime:null;

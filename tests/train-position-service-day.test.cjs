@@ -78,6 +78,49 @@ test('explicit operator calendar override takes priority over published holidays
 
 
 const runningChainSource = fs.readFileSync(path.join(__dirname, '../js/running-chain-resolver.js'), 'utf8');
+
+test('handover endpoints must be the same station even when several stations are declared', () => {
+  const window = { UNIFIED_LINES: {
+    A: { serviceBoundaries: [{lineId:'B',handoverStations:['Ueno','Tokyo','Shinagawa']}] },
+    B: { serviceBoundaries: [{lineId:'A',handoverStations:['Ueno','Tokyo','Shinagawa']}] }
+  } };
+  vm.runInNewContext(runningChainSource, {window,console});
+  const a=segment('1161M','odpt.Railway:JR-East.JobanRapid','Shinagawa','11:35','Toride','12:34');
+  const b=segment('1159M','odpt.Railway:JR-East.UenoTokyo','Shinagawa','11:17','Ueno','11:32');
+  const result=window.RunningChainResolver.resolveTimetableChain(a,'A',[{lineId:'B',timetable:b}]);
+  assert.equal(result.evidence,'NO_CONFIRMED_BOUNDARY');
+  assert.doesNotMatch(result.runningChainId,/1159M/);
+});
+
+test('Ueno-Tokyo corridor is neither a separate line card nor a through train handover', () => {
+  const lines=JSON.parse(fs.readFileSync(path.join(__dirname,'../data/core/railway_data.json'),'utf8')).lines;
+  const context={window:{UNIFIED_LINES:lines},console};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../data/core/runtime-config.js'),'utf8'),context);
+  vm.runInNewContext(runningChainSource,context);
+  const resolver=context.window.RunningChainResolver;
+  assert.ok(!resolver.getDirectThroughLines('Joban').includes('UenoTokyo'));
+  assert.ok(resolver.getDirectThroughLines('Joban').includes('NaritaAbikoBranch'));
+  assert.equal(resolver.getDirectThroughLines('UenoTokyo').length,0);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../js/line-presentation-service.js'),'utf8'),context);
+  const cards=context.window.LinePresentationService.getPresentationOrder(lines).map(e=>e.id);
+  assert.ok(!cards.includes('UenoTokyo'));
+  assert.ok(cards.includes('Joban'));
+  const data=fs.readFileSync(path.join(__dirname,'../js/trains-data.js'),'utf8');
+  vm.runInNewContext(data.slice(data.indexOf('function _canonicalThroughLines('),data.indexOf('function _canonicalJoinStations(')),context);
+  assert.ok(!context._canonicalThroughLines('Joban').includes('UenoTokyo'));
+  assert.ok(context._canonicalThroughLines('Joban').includes('NaritaAbikoBranch'));
+  assert.ok(lines.Joban.stations.includes('Shinagawa'));
+  assert.ok(lines.Joban.stations.includes('Ueno'));
+  assert.equal(lines.Joban.presentation.originStation,'Ueno');
+  assert.ok(lines.UenoTokyo, 'corridor source and topology must be retained');
+  const names={Ueno:'上野',Shinagawa:'品川',Tsuchiura:'土浦'};
+  context.window.RailwayDB={getLineStations:id=>lines[id].stations,
+    resolveStationName:id=>names[id]||id,resolveLineName:()=>lines.Joban.name};
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../js/line-card.js'),'utf8'),context);
+  const card=context.window.LineCard.render('Joban',lines.Joban,{mode:'trains'});
+  assert.match(card,/上野↔ 土浦/);
+  assert.doesNotMatch(card,/品川↔/);
+});
 function testThroughResolver() {
   const window = {
     UNIFIED_LINES: {

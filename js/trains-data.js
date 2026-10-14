@@ -6,7 +6,11 @@ var _transferMapCache = null;
 
 function _canonicalThroughLines(lineId) {
   var line = window.UNIFIED_LINES && window.UNIFIED_LINES[lineId];
-  return line && Array.isArray(line.throughServices) ? line.throughServices.slice() : [];
+  var corridors = (window.RuntimeConfig || {}).SERVICE_CORRIDOR_LINES || {};
+  if (corridors[lineId]) return [];
+  return line && Array.isArray(line.throughServices) ? line.throughServices.filter(function(id) {
+    return !corridors[id];
+  }) : [];
 }
 
 function _canonicalJoinStations(lineId, partnerId) {

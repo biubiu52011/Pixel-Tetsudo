@@ -174,6 +174,10 @@
     Object.keys(allLines).forEach(function(lid) {
       var line = allLines[lid];
       if (!line || !line.presentation) return;
+      if (((window.RuntimeConfig || {}).SERVICE_CORRIDOR_LINES || {})[lid]) {
+        covered[lid] = true;
+        return;
+      }
       var ids = line.presentation.lineIds;
       if (!Array.isArray(ids) || ids.length === 0) return;
       if (ids[0] !== lid) return; // member record: not a sort slot
@@ -185,6 +189,7 @@
     Object.keys(allLines).forEach(function(lid) {
       var line = allLines[lid];
       if (!line || covered[lid]) return;
+      if (((window.RuntimeConfig || {}).SERVICE_CORRIDOR_LINES || {})[lid]) return;
       fallback.push({ id: lid, pres: null, line: line, orig: 100000 + fallback.length, isPresentation: false });
     });
 

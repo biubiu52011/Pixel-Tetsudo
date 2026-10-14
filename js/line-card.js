@@ -91,7 +91,8 @@
         var isLoopLine = !!(line.isDoubleColumnLoop || line.isSixShapedLoop);
         if (isLoopLine) allLoop = true;
         if (stations.length >= 2 && !isLoopLine) {
-          intervalSegments.push({ from: stations[0], to: stations[stations.length - 1] });
+          var baseOrigin = line.presentation && line.presentation.originStation;
+          intervalSegments.push({ from: baseOrigin && stations.indexOf(baseOrigin) >= 0 ? baseOrigin : stations[0], to: stations[stations.length - 1] });
         }
       }
     }
@@ -249,7 +250,9 @@
           var lang = window.currentLang || 'ja';
           var resolveName = (window.RailwayDB && window.RailwayDB.resolveStationName) ? window.RailwayDB.resolveStationName : null;
           if (resolveName) {
-            var first = resolveName(stations[0], lang) || stations[0];
+            var baseOrigin = line.presentation && line.presentation.originStation;
+            var origin = baseOrigin && stations.indexOf(baseOrigin) >= 0 ? baseOrigin : stations[0];
+            var first = resolveName(origin, lang) || origin;
             var last = resolveName(stations[stations.length - 1], lang) || stations[stations.length - 1];
             intervalText = first + '\u2194 ' + last;
           }

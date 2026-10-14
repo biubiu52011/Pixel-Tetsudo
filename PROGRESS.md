@@ -1,5 +1,24 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-14 JST — 上野东京运行走廊语义修正（发布验收中）
+
+- 用户更正：上野东京线是连接品川—上野的共用运行走廊，不是独立线路；常磐以上野为基本终点，部分班次（含特急）按实际时刻表延伸品川。
+- 复用 RuntimeConfig 的走廊角色声明、共享 LinePresentationService／DataState／LineCard、trains-data 和 RunningChainResolver：走廊不生成独立线路卡片或直通标志，不参与列车跨线路后继拼接；原 source records／站表／SQL 保留。Joban presentation.originStation=Ueno，只影响基础区间文字，保留所有品川延伸停站与特急实际目的地。
+- 修正所有线路交接条件：前段末站必须等于后段首站，不能只因两站同属 handoverStations 集合而串联。成田线等真实跨线关系与证据判断保留。
+- 测试：63 页面／服务日检查、31 tools suites、49 线路排序、运行情报隔离、4 Python guards PASS（既有 baseline warnings 保留）。新增多交接站误串复现、走廊隐藏／真实成田直通保留、常磐上野基础区间卡片检查。相关七页资源版本 4.3.1200。
+- 既有独立本地数据改动不纳入本次发布；railway_data.json／file fallback 仅发布 presentation.originStation 增量。修改前文件备份于 recovery/local-backup-20261014-before-corridor-fix。
+- 待确认：GitHub CI／Pages 及公开 Joban 页面；浏览器视觉未做系统截图确认。
+
+
+
+## 2026-10-14 JST — 公开 Joban 页面只读检查（DONE：诊断；未修复）
+
+- 用户要求检查当前浏览器 trains.html#Joban。实际 DOM／日志、只读 Supabase SQL 与现有 resolver 最小复现完成；未修改生产脚本或数据库。
+- P1：running-chain 将 Joban 1161M 与 UenoTokyo 1159M、1157M 与 1155M 错串。_confirmedEdge 仅要求末站／首站各自在 [Ueno,Tokyo,Shinagawa] 内，没有要求同一交接站；上野 11:32 → 品川 11:35 被当作 dt=3、numberChanged=true、sourceLinked=false 的连续边。
+- P2：实际目的地 DOM 边界框捕获 5 对重叠；同站圆点也重合。
+- 车型覆盖缺口：初始 20 标记均为未判定圆点，0 PNG；Joban／JobanMain／UenoTokyo 现有证据审计为 0，抽查 SQL mapping unresolved。中性降级本身符合证据规则，不是 PNG 文件损坏。
+- 页面加载／状态正常，浏览器 error／warn 为空，503×603 视口无横向溢出；未使用系统截图。报告：recovery/reports/2026-10-14_joban_browser_inspection.md。原有本地修改保持。
+
 ## 2026-10-14 JST — 本地备份、线上同步与 trains.html 公开发布（DONE）
 
 - 用户明确授权保留本地备份、与线上同步并公开对接 trains.html。24 个文件逐文件 SHA256 备份通过；原始完整 binary patch 和 manifest 保存在 recovery/local-backup-20261014-before-publish，Git stash backup-before-non-full-sql-publish-20261014 继续保留。

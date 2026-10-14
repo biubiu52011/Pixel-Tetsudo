@@ -41,6 +41,10 @@
     "SotetsuDirect": ["SotetsuShinYokohama", "Yokosuka", "SaikyoKawagoe", "ShonanShinjuku"]
   };
 
+  // Passenger service corridors retain their source records and station
+  // topology, but are not independent lines or train-to-train handovers.
+  var SERVICE_CORRIDOR_LINES = Object.freeze({ UenoTokyo: true });
+
   /**
    * 时刻表按需加载优先运营商白名单。
    * 只有白名单内的 operator 才会触发 loadMissingTimetables 补拉。
@@ -331,6 +335,7 @@
     TRUNK_EXTENSION_ALLOW: TRUNK_EXTENSION_ALLOW,
     // 直通运行
     SOURCE_RAILWAY_LINE_SCOPE: SOURCE_RAILWAY_LINE_SCOPE,
+    SERVICE_CORRIDOR_LINES: SERVICE_CORRIDOR_LINES,
     PRIORITY_OPS: PRIORITY_OPS,
     REALTIME_POSITION_POLICY: REALTIME_POSITION_POLICY,
     REALTIME_POSITION_API_LINES: REALTIME_POSITION_API_LINES,
