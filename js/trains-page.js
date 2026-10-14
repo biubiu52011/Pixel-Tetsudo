@@ -131,14 +131,9 @@
       var _positionLines = (window.RailwayDB && window.RailwayDB.getAllLines)
         ? window.RailwayDB.getAllLines() : lines;
       _positionLines = _positionLines || lines;
-      var _branches = (_positionLines[lineId] && _positionLines[lineId].branches) || [];
+      var _branches = window.LinePresentationService ? window.LinePresentationService.getMapBranchIds(lineId, _positionLines) : [];
       var _dependencies = _extensions.map(function(ext) { return ext.lid; });
-      if (!_extensions.length) {
-        _dependencies = _dependencies.concat(_branches);
-        Object.keys(_positionLines).forEach(function(id) {
-          if (_positionLines[id] && _positionLines[id].branchOf === lineId) _dependencies.push(id);
-        });
-      }
+      if (!_extensions.length) _dependencies = _dependencies.concat(_branches);
       _dependencies.forEach(function(id) {
         if (_positionLines[id] && _requestedLines.indexOf(id) < 0) _requestedLines.push(id);
       });
@@ -310,12 +305,6 @@
         });
       }
       listEl.addEventListener("click", function(e) {
-        // 支线 chip：从父线卡片进入支线详情（Line Hierarchy Rule）
-        var chip = e.target.closest(".rs-branch-chip");
-        if (chip && chip.dataset.line) {
-          window.location.hash = chip.dataset.line;
-          return;
-        }
         var card = e.target.closest(".rs-line-card");
         if (card && card.dataset.line) {
           window.location.hash = card.dataset.line;

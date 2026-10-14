@@ -1,5 +1,14 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-15 JST — 支线独立卡片与独立线路图
+- 用户明确要求全站有独立数据的支线独立成卡片。共享DataState取消branchOf隐藏；LineCard删除父卡片嵌套支线行，旧CSS/点击入口清理。18条canonical支线在trains/realtime均恰好一张一级卡片；原branchOf/站表/运行链/SQL身份保持。
+- LinePresentationService新增唯一getMapBranchIds：只有显式组合presentation成员才纳入组合图，branchOf不再自动扩展地图。geometry、getRealtimePositions、trains-page激活范围复用该入口，普通独立父线不收集子线站点/列车，支线自己加载原位置与SQL。已明确的其他组合展示保留。
+- 所有线路图接续标记支持鼠标、Enter/Space导航独立线路。canonical父子关系且唯一实际共享站补普通接续入口，只有原through事实才升级直通；不猜交接站。无共同站的关系不造连线。
+- 适用共享卡片页面realtime/trains；其余五页仅同步已有共享资源，保留页面能力声明。资源4.3.1221。原先保留的北绫濑图标路径修正现为新独立卡片所必需，一并纳入；其余5项原有数据修改保留，原件/HEAD备份recovery/independent-branches-20261015。
+- 新回归验证全部18支线两种卡片列表、18父线不展开、支线自有站点/列车、父线接续与鼠标/键盘导航；旧激活测试改为父线/支线分别激活，front-end smoke接入CI。38工具套件、64 node:test、4守卫及diff检查PASS。
+- 本地浏览器已确认京急5独立卡片、主线无支线站点；实际点击京急蒲田直通标记进入空港线7站图。截图keikyu-cards-local.jpg；公开验收待发布。
+
+
 ## 2026-10-15 JST — 全线路直通标签通用排布
 - 用户澄清主要问题为未专门修正线路的标签错位/歪斜。旧renderer把端点整排标签逐个clamp回画布，宽度超出时相互挤压；中间接续固定放到车站名称相反侧，在窄环/分支场景容易进入另一轨道。
 - 复用trains-utils／geometry／renderer唯一链路：标签以所属车站为组，上端居中堆叠，中途/下端与站名、换乘图标同列同侧对齐；组整体调边界，取消逐标签挤压与固定2条＋N截断。窄列按名称换行，前缀独立，不拆成散落标记；环线接续保持外侧标签列，非终端不强行上下指向。
@@ -703,3 +712,5 @@
 - 本次上线验收：efd8e715，CI/CD 与 Release Guards success，公开 renderer/translations HTTP200 且逐字 MATCH。实际浏览器刷新埼京线无提示，常磐快速显示统一日语提示，再切回埼京线旧提示消失。截图 recovery/train-note-20261015/full-after.jpg。
 
 - 环线公开验收：6b93fdd2，几何/布局/renderer三个公开JS HTTP200并逐字MATCH。实际浏览器大阪环状线已显示两列站名、无顶部居中站点，截图recovery/loop-template-20261015/osaka-after.jpg；当前深夜无列车，动态连接区间由全部区间回归验证，未声称实时列车过境视觉验收。
+
+- 直通标签上线验收：7f4cdcb7生产改动＋d4dc14d4持续检查入口。公开utils/geometry/renderer三个JS HTTP200并逐字MATCH；实际公开大阪环状线天王寺两标签在所属外侧列对齐，大崎显示直通りんかい線／直通相鉄線且无重复/截断。公开截图recovery/through-layout-20261015/osaka-public-after.jpg。Release Guards、Pages success；CI Validate和Deploy均completed（整体状态聚合当时仍in_progress）。原有6项修改保持。

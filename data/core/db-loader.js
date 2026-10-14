@@ -740,7 +740,7 @@ function applyData(data, i18n) {
         "ChibaMonorail1": "../images/鉄道/千葉都市モノレール/千葉都市モノレール1号線.png",
         "ChibaMonorail2": "../images/鉄道/千葉都市モノレール/千葉都市モノレール2号線.png",
         "ShonanMonorail": "../images/鉄道/湘南モノレール/湘南モノレール江の島線.png",
-        "ChiyodaBranch": "../images/列车/東京メトロ/05系_区間列車車両.png", // 4.3.457：図庫整理で北綾瀬支線.png→05系（北綾瀬）.png に改名
+        "ChiyodaBranch": "../images/鉄道/東京メトロ/北綾瀬支線.png", // 4.3.457 図庫整理時は 05系（北綾瀬）.png に改名と注記したが、該当ファイルは存在せず破図（broken image）になるため、実在する北綾瀬支線ロゴに復帰
       };
       Object.keys(LINE_IMAGE_FIXES).forEach(function(lid) {
         var line = window.UNIFIED_LINES[lid];

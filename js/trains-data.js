@@ -82,19 +82,7 @@ function getRealtimePositions(lineId) {
     return _dedupeTrainPositions(all, lineId);
   }
   var _src = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
-  var _brs = [];
-  if (_src && _src[lineId] && _src[lineId].branches) {
-    _brs = _src[lineId].branches.slice();
-  }
-  // branchOf is canonical relationship evidence. Merge it even when the parent
-  // also has a branches[] convenience list, because that list may be partial.
-  if (_src) {
-    for (var _bk in _src) {
-      if (_src[_bk] && _src[_bk].branchOf === lineId && _bk !== lineId && _brs.indexOf(_bk) < 0) {
-        _brs.push(_bk);
-      }
-    }
-  }
+  var _brs = window.LinePresentationService ? window.LinePresentationService.getMapBranchIds(lineId, _src) : [];
   if (_brs.length > 0) {
     var _all2 = positions.slice();
     for (var _bi2 = 0; _bi2 < _brs.length; _bi2++) {
@@ -385,6 +373,21 @@ function _getTransferMap(lineId) {
       color: (window.LineOperationSystemsResolveColor && window.LineOperationSystemsResolveColor(t.lineId)) || tl.color || "", type: t.type === "out" ? "out" : "in", note: t.note || "", toStation: t.toStation || ""
     });
   }
+  // An independent branch still has a station-level connection to its parent.
+  // This is a transfer entry; only canonical through evidence upgrades it below.
+  Object.keys(src).forEach(function(peerId) {
+    var peer = src[peerId];
+    if (!peer || !(peer.branchOf === lineId || own && own.branchOf === peerId)) return;
+    var shared = ownStations.filter(function(station) { return (peer.stations || []).indexOf(station) >= 0; });
+    if (shared.length !== 1) return;
+    var station = shared[0];
+    if (!map[station]) map[station] = [];
+    if (map[station].some(function(it) { return it.lineId === peerId; })) return;
+    map[station].push({lineId:peerId, name:window.RailwayDB && window.RailwayDB.resolveLineName
+      ? window.RailwayDB.resolveLineName(peerId, window.currentLang) : (peer.nameJa || peer.name || peerId),
+      image:peer.image || "", operator:peer.operator || "", color:peer.color || "", type:"in"});
+  });
+
   var throughLines = _canonicalThroughLines(lineId);
 
   // Canonical through-service handovers are display relationships in their own

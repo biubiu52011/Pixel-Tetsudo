@@ -279,23 +279,6 @@
         _chainBadgeHtml = "<span class=\"rs-chain-badge rs-chain-badge-unknown\" title=\"Unknown relation\"></span>";
       }
     }
-    // Line Hierarchy Rule: 支线（branches）在父线卡片内展示，不独立出现在一级列表
-    var branchHtml = "";
-    if (line.branches && line.branches.length > 0 && linesObj) {
-      var blang = window.currentLang || "ja";
-      var bItems = [];
-      for (var bi = 0; bi < line.branches.length; bi++) {
-        var blid = line.branches[bi];
-        var bline = linesObj[blid];
-        if (!bline) continue;
-        var bName = bline.nameJa || bline.name || blid;
-        if (window.RailwayDB && window.RailwayDB.resolveLineName) bName = window.RailwayDB.resolveLineName(blid, blang) || bName;
-        bItems.push('<span class="rs-branch-chip" data-line="' + escapeHtml(blid) + '" data-line-identity="' + escapeHtml(getLineIdentity(bline, blid)) + '" data-parent="' + escapeHtml(lineId) + '">' + escapeHtml(bName) + '</span>');
-      }
-      if (bItems.length > 0) {
-        branchHtml = '<div class="rs-branch-row">' + bItems.join("") + '</div>';
-      }
-    }
     return '<div class="rs-line-card" data-line="' + escapeHtml(lineId) + '" data-line-identity="' + escapeHtml(getLineIdentity(line, lineId)) + '" data-line-color="' + escapeHtml(lineColor) + '">' + _chainBadgeHtml
       + '<div class="rs-line-header">'
       + iconHtml
@@ -306,7 +289,6 @@
       + '</div>'
       + statusIconHtml
       + '</div>'
-      + branchHtml
       + '</div>';
   }
 

@@ -34,6 +34,23 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   return !!active;
 }
 
+  function _bindLineMapNavigation(node, lineObj) {
+    if (!node || !lineObj || !lineObj.lineId) return;
+    node.setAttribute("role", "link");
+    node.setAttribute("tabindex", "0");
+    node.setAttribute("aria-label", _throughBadgeText(lineObj));
+    if (node.style) node.style.cursor = "pointer";
+    var open = function(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      if (e && e.stopPropagation) e.stopPropagation();
+      window.location.hash = lineObj.lineId;
+    };
+    node.addEventListener("click", open);
+    node.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" || e.key === " ") open(e);
+    });
+  }
+
   function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile, maxWidth) {
     var sz = _throughChipSize(lineObj, mobile, maxWidth);
     var label = sz.label;
@@ -43,6 +60,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     chip.setAttribute("transform", "translate(" + x + "," + y + ")");
     chip.setAttribute("class", "through-chip");
     chip.setAttribute("data-through-line", lineObj.lineId || "");
+    _bindLineMapNavigation(chip, lineObj);
     layer.appendChild(chip);
     var bg = document.createElementNS(ns, "rect");
     bg.setAttribute("x", "0");
@@ -358,6 +376,9 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         var _rowCur = null;
         for (var ti2 = 0; ti2 < shown.length; ti2++) {
           var txl = shown[ti2];
+          var itemLayer = document.createElementNS(svgNS, "g");
+          _bindLineMapNavigation(itemLayer, txl);
+          staticLayer.appendChild(itemLayer);
           var row = Math.floor(ti2 / PER_ROW);
           var col = ti2 % PER_ROW;
           if (col === 0) _rowCur = ix0;
@@ -375,7 +396,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
             var tTitle = document.createElementNS(svgNS, "title");
             tTitle.textContent = _throughBadgeText(txl);
             tImg.appendChild(tTitle);
-            staticLayer.appendChild(tImg);
+            itemLayer.appendChild(tImg);
           } else {
             // v4.3.944: 单行 badge——异名/站外信息放旁边小字，不撑高线路图
             var _toName = txl.toStation ? (window.RailwayDB && window.RailwayDB.resolveStationName ? window.RailwayDB.resolveStationName(txl.toStation, window.currentLang) : txl.toStation) : "";
@@ -390,7 +411,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
             bRect.setAttribute("height", bH);
             bRect.setAttribute("rx", "2");
             bRect.setAttribute("fill", txl.color || (window.TrainsColors ? window.TrainsColors.LABEL_FALLBACK : "#8a8a8a"));
-            staticLayer.appendChild(bRect);
+            itemLayer.appendChild(bRect);
             var bTxt = document.createElementNS(svgNS, "text");
             bTxt.setAttribute("x", tix + bW / 2);
             bTxt.setAttribute("y", tiy + bH / 2 + (isMobileView ? 3.2 : 2.2));
@@ -399,7 +420,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
             bTxt.setAttribute("font-weight", "600");
             bTxt.setAttribute("fill", "#fff");
             bTxt.textContent = _lineName;
-            staticLayer.appendChild(bTxt);
+            itemLayer.appendChild(bTxt);
 
             // 异名换乘/站外步行：badge 旁边小字（右侧，不撑高）
             var _sideTxt = _toName;
@@ -411,7 +432,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
               sTxt.setAttribute("font-weight", "500");
               sTxt.setAttribute("fill", "#333");
               sTxt.textContent = _sideTxt;
-              staticLayer.appendChild(sTxt);
+              itemLayer.appendChild(sTxt);
             }
           }
           _rowCur += (txl.image ? ICON : _badgeW(txl, isMobileView)) + GAP;

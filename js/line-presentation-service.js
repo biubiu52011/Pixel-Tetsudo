@@ -272,6 +272,15 @@
     return pres ? pres.lineIds.filter(function(id) { return !!allLines[id]; }) : [];
   }
 
+  // Physical branch relationships never opt a child into the parent's map.
+  // Only an explicit combined presentation may include a branch geometry.
+  function getMapBranchIds(lineId, allLines) {
+    allLines = allLines || window.UNIFIED_LINES || {};
+    return getPresentationMembers(lineId, allLines).filter(function(id) {
+      return id !== lineId && allLines[id].branchOf === lineId;
+    });
+  }
+
   function isBranch(lineId, allLines) {
     allLines = allLines || window.UNIFIED_LINES || {};
     try {
@@ -294,6 +303,7 @@
     getPresentation: getPresentation,
     getPrimaryPresentation: getPrimaryPresentation,
     getPresentationMembers: getPresentationMembers,
+    getMapBranchIds: getMapBranchIds,
     isBranch: isBranch
   };
 })();

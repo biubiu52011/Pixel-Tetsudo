@@ -65,10 +65,6 @@
 .journey-transfer--through{background:rgba(46,125,50,0.06);border-color:rgba(46,125,50,0.25)!important;}
 .journey-transfer-text--through{color:#2e7d32;font-weight:700;}
 /* ========== Branch chips (Line Hierarchy Rule) ========== */
-.rs-branch-row{display:flex;flex-wrap:wrap;gap:4px;padding:4px 10px 8px;border-top:1px dashed rgba(0,0,0,.08)}
-.rs-branch-chip{display:inline-flex;align-items:center;padding:2px 8px;font-size:11px;line-height:1.5;color:#555;background:rgba(0,0,0,.045);border:1px solid rgba(0,0,0,.09);border-radius:10px;cursor:pointer;transition:background .15s}
-.rs-branch-chip:hover{background:rgba(0,0,0,.09)}
-.rs-branch-chip::before{content:"↳ ";opacity:.6}
 
 
 /* === Route search modes + fare + train type (4.3.445) === */

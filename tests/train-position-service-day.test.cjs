@@ -401,7 +401,7 @@ test('a failed service-date SQL load remains retryable until usable rows arrive'
   assert.equal(dates.Test, '2026-10-13');
 });
 
-test('line activation includes visible SQL branches without changing presentation membership', () => {
+test('independent branch activation does not expand parent presentation membership', () => {
   const page = fs.readFileSync(path.join(__dirname, '../js/trains-page.js'), 'utf8');
   const start = page.indexOf('      var _requestedLines = currentSystemLineIds');
   const end = page.indexOf('      _requestedLines.forEach(function(id)', start);
@@ -410,7 +410,10 @@ test('line activation includes visible SQL branches without changing presentatio
     _fusionExtensionLines() { return []; }
   };
   vm.runInNewContext(page.slice(start, end), context);
-  assert.deepEqual(Array.from(context.window.TrainsActivePositionLineIds), ['Main', 'Branch', 'OtherBranch']);
+  assert.deepEqual(Array.from(context.window.TrainsActivePositionLineIds), ['Main']);
+  context.lineId = 'Branch';
+  vm.runInNewContext(page.slice(start, end), context);
+  assert.deepEqual(Array.from(context.window.TrainsActivePositionLineIds), ['Branch']);
   assert.equal(context.currentSystemLineIds, null);
 });
 

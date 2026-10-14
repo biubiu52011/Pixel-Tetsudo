@@ -1,7 +1,8 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const db=JSON.parse(fs.readFileSync('data/core/railway_data.json','utf8'));
 class Node {
- constructor(tag){this.tagName=tag;this.attrs={};this.children=[];}
+ constructor(tag){this.tagName=tag;this.attrs={};this.children=[];this.style={};this.listeners={};}
+ addEventListener(k,f){this.listeners[k]=f;}
  setAttribute(k,v){this.attrs[k]=String(v);}getAttribute(k){return this.attrs[k];}
  appendChild(n){this.children.push(n);return n;}
 }
