@@ -33,19 +33,25 @@ class Node {
  querySelector(s){return s==='title'?this.title:null;}
  querySelectorAll(){return [];} cloneNode(){const n=new Node(this.tagName);n.textContent=this.textContent;return n;}
  dispatchEvent(){this.selected=true;}
+ set textContent(v){this.text=v;this.children=[];}get textContent(){return (this.text||'')+this.children.map(c=>c.textContent||'').join('');}
 }
-const body=new Node('body'),document={body,createElement:t=>new Node(t),addEventListener(){},removeEventListener(){}};
-const popupctx={document,window:{currentLang:'zh',innerWidth:400,innerHeight:600},MouseEvent:function(){}};
+const body=new Node('body');body.classList={add(){this.locked=true;},remove(){this.locked=false;}};
+const document={body,querySelector:()=>body.children.find(n=>!n.removed&&n.className.includes('rs-modal active')),createElement:t=>new Node(t)};
+const popupctx={document,window:{currentLang:'zh'},_resolveStationLoose:s=>s};
 vm.runInNewContext(source.slice(start,end)+'\nthis.open=_openTrainFoldList;',popupctx);
 const ids=['a','b','c'],groups={},markers={};
-ids.forEach(id=>{groups[id]=new Node('g');groups[id].textContent='成田';groups[id].setAttribute('data-dir-sym','down');markers[id]=new Node('image');markers[id].setAttribute('href','train.png');markers[id].title={textContent:'列车番号 '+id};});
+ids.forEach(id=>{groups[id]=new Node('g');markers[id]=new Node('image');markers[id].setAttribute('data-train-id',id);markers[id].setAttribute('href','train.png');markers[id].title={textContent:'SQL evidence internal model'};markers[id]._trainPosition={destinationStation:'成田',trainNumber:id,typeName:'普通',estimated:true,delayMin:2};});
 const anchor=new Node('g');anchor.getBoundingClientRect=()=>({x:100,y:120,width:34,bottom:136});
-const layer={isConnected:true};popupctx.open(layer,ids,groups,markers,anchor);
-const panel=layer._trainFoldPopover,entries=panel.children.filter(x=>x.className==='train-fold-entry');
+const layer={isConnected:true,querySelectorAll:()=>Object.values(markers)};popupctx.open(layer,ids,groups,markers,anchor);
+const panel=layer._trainFoldPopover,list=panel.children[0].children[1],entries=list.children;
+assert.equal(panel.getAttribute('aria-modal'),'true');assert(body.classList.locked);
 assert.equal(entries.length,3);
-entries.forEach(e=>{assert.equal(e.children[0].tagName,'img');assert.equal(e.children[1].textContent,'▼ 成田');});
-entries[1].listeners.click();assert(markers.b.selected);assert(panel.removed);assert.equal(layer._trainFoldPopover,null);
-popupctx.open(layer,ids,groups,markers,anchor);
-layer._trainFoldPopover.listeners.keydown({key:'Escape',stopPropagation(){}});
+entries.forEach(e=>{assert.equal(e.children[0].tagName,'img');assert(e.textContent.includes('普通 · 开往 成田'));assert(e.textContent.includes('晚点 2 分'));assert(!e.textContent.includes('SQL'));});
+markers.b._trainPosition.destinationStation='上野';delete markers.c;layer._refreshTrainFoldPopover();
+assert.equal(list.children.length,2);assert(list.textContent.includes('上野'));assert(!list.textContent.includes('internal'));
+panel.listeners.keydown({key:'Escape',stopPropagation(){}});
 assert.equal(layer._trainFoldPopover,null);assert(anchor.focused);
-console.log('paired train layout, direction isolation, folding and individual selection: PASS');
+assert(!body.classList.locked);
+popupctx.open(layer,ids,groups,markers,anchor);delete markers.a;delete markers.b;layer._refreshTrainFoldPopover();
+assert.equal(layer._trainFoldPopover,null,'departed trains cannot survive as stale popup rows');
+console.log('paired train layout, direction isolation, passenger modal and current-data refresh: PASS');

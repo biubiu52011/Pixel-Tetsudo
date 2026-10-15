@@ -1132,6 +1132,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     marker._displayX = px;
     marker._displayY = py;
     marker._displayLineId = lineId;
+    marker._trainPosition = p;
     if (loc && loc.idx != null && isFinite(Number(loc.idx))) marker._displayStationIdx = Number(loc.idx);
     if (loc && loc.nextIdx != null && isFinite(Number(loc.nextIdx))) marker._displayNextStationIdx = Number(loc.nextIdx);
     if (loc && loc.routePos != null && isFinite(Number(loc.routePos))) marker._displayRoutePos = Number(loc.routePos);
@@ -1155,10 +1156,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     
     // Multi-track / terminal stations may legitimately contain several trains.
     // Never discard official realtime rows merely because they share a station.
-    // Keep a small cap only for lower-confidence estimated rows so timetable
-    // noise cannot create an unbounded pile at one station.
-    var _ESTIMATED_STATION_MAX = 4;
-    var _estimatedCount = {};
+    // Dense valid estimates are folded by layout, never silently discarded.
     var _filtered = [];
     for (var _ep = 0; _ep < positions.length; _ep++) {
       var _epPos = positions[_ep];
@@ -1171,10 +1169,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // rows. Do not bucket missing/invalid evidence into station 0; otherwise
       // the pre-layout pile limiter itself recreates the Tokyo/first-station pile.
       if (!isFinite(_epRawIdx) || _epRawIdx < 0 || _epRawIdx >= stationCoords.length) continue;
-      var _epIdx = _epRawIdx;
-      var _stationBucket = (_epPos.fusionLineId ? (_epPos.fusionRole || "fusion") + ":" + _epPos.fusionLineId + ":" : "main:") + _epIdx;
-      _estimatedCount[_stationBucket] = (_estimatedCount[_stationBucket] || 0) + 1;
-      if (_estimatedCount[_stationBucket] <= _ESTIMATED_STATION_MAX) _filtered.push(_epPos);
+      _filtered.push(_epPos);
     }
     positions = _filtered;
     var layout = (window.TrainTrackLayout && window.TrainTrackLayout.resolveAll)
@@ -1259,6 +1254,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       }
 
       if (existingIcon) {
+        existingIcon._trainPosition = p;
         existingIcon._trackYBounds = loc.trackYBounds || null;
         // Same train and kind can change to a different certified PNG without
         // rebuilding the marker or retaining a stale SVG/PNG artwork.
@@ -1352,7 +1348,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
           if (isFinite(_targetRoutePos)) existingIcon._displayRoutePos = _targetRoutePos;
           _syncTrainLabels(trainLayer, svgNS, trainUid, _targetX, _targetY, p, lineId);
         } else {
-          var _icon = existingIcon;
+          // Each RAF owns one immutable target snapshot. Function-scoped loop
+          // variables previously made every callback move the final train.
+          (function(_icon, trainUid, p, _startX, _startY, _targetX, _targetY,
+              _targetIdx, _targetNextIdx, _targetRoutePos, _useLoopRoute,
+              _startRoutePos, _routeDiff, _loopRect, _dx, _dy, _distance) {
           // Keep movement responsive to the actual displacement. Do not stretch
           // every update to a fixed 14 seconds.
           var _animDur = Math.max(350, Math.min(3000, Math.round(_distance * 35)));
@@ -1385,11 +1385,15 @@ function _isTrainArtworkFailureActive(trainUid, p) {
               _icon._displayX = _targetX;
               _icon._displayY = _targetY;
               if (isFinite(_targetIdx)) _icon._displayStationIdx = _targetIdx;
+              if (isFinite(_targetNextIdx)) _icon._displayNextStationIdx = _targetNextIdx;
               if (isFinite(_targetRoutePos)) _icon._displayRoutePos = _targetRoutePos;
               _icon._moveRaf = 0;
             }
           }
-          existingIcon._moveRaf = requestAnimationFrame(_animFrame);
+          _icon._moveRaf = requestAnimationFrame(_animFrame);
+          })(existingIcon, trainUid, p, _startX, _startY, _targetX, _targetY,
+            _targetIdx, _targetNextIdx, _targetRoutePos, _useLoopRoute,
+            _startRoutePos, _routeDiff, _loopRect, _dx, _dy, _distance);
         }
       } else {
         existingIcon = _createTrainMarker(trainLayer, svgNS, trainUid, markerSpec, px, py, p, lineId, isLoop, color, loc);
@@ -1410,6 +1414,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       }
     }
     _resolveTrainLabelCollisions(trainLayer);
+    if (trainLayer._refreshTrainFoldPopover) trainLayer._refreshTrainFoldPopover();
   }
 
   function _resolveTrainLabelCollisions(trainLayer, frameTime) {
@@ -1418,6 +1423,22 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (!svg || !layout || !layout.resolveLabels ||
         (svg.__geometry && svg.__geometry.isSixShapedLoop)) return;
     if (frameTime != null && trainLayer._captionFrameTime === frameTime) return;
+    if (frameTime != null) {
+      // Every marker RAF runs before this frame is painted. Resolve the whole
+      // layer only after its last moving marker has updated BOTH icon and text.
+      // Resolving on the first RAF lets later markers overwrite the offsets.
+      if (trainLayer._captionPendingTime !== frameTime) {
+        trainLayer._captionPendingTime = frameTime;
+        trainLayer._captionPendingCount = 0;
+        trainLayer._captionPendingTotal = 0;
+        var moving = trainLayer.querySelectorAll('[data-train-id]');
+        for (var a = 0; a < moving.length; a++) {
+          if (moving[a]._moveRaf) trainLayer._captionPendingTotal++;
+        }
+      }
+      trainLayer._captionPendingCount++;
+      if (trainLayer._captionPendingCount < trainLayer._captionPendingTotal) return;
+    }
     trainLayer._captionFrameTime = frameTime;
     var matrix = svg.getScreenCTM();
     if (!matrix || !matrix.a || !matrix.d) return;
@@ -1518,51 +1539,70 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   }
 
   // The folded view is a display group, never a coupled consist or merged run.
-  // Each selectable entry keeps its own icon, full caption and source marker.
+  // Passenger list uses the shared service-status modal and current markers.
   function _openTrainFoldList(layer, ids, groups, markers, anchor) {
     if (layer._closeTrainFoldPopover) layer._closeTrainFoldPopover(false);
     var panel=document.createElement('div'), lang=window.currentLang||'ja';
-    panel.className='train-fold-popover';panel.setAttribute('role','dialog');
-    panel.setAttribute('aria-label',/^zh/.test(lang)?'列车列表':lang==='en'?'Trains':'列車一覧');
-    var close=document.createElement('button');close.className='train-fold-close';
-    close.textContent=/^zh/.test(lang)?'收起':lang==='en'?'Close':'閉じる';
-    function outside(e){if(!panel.contains(e.target)&&!anchor.contains(e.target))dismiss(false);}
+    var titleText=/^zh/.test(lang)?'列车列表':lang==='en'?'Trains':'列車一覧';
+    panel.className='rs-modal active train-fold-popover';panel.setAttribute('role','dialog');
+    panel.setAttribute('aria-label',titleText);panel.setAttribute('aria-modal','true');
+    var content=document.createElement('div');content.className='rs-modal-content';
+    var header=document.createElement('div');header.className='rs-modal-header';
+    var heading=document.createElement('h2');heading.className='rs-modal-title';
+    var close=document.createElement('button');close.className='rs-modal-close';close.textContent='×';
+    close.setAttribute('aria-label',/^zh/.test(lang)?'关闭':lang==='en'?'Close':'閉じる');
+    var list=document.createElement('div');list.className='rs-modal-body train-fold-list';list.setAttribute('role','list');
+    header.appendChild(heading);header.appendChild(close);content.appendChild(header);content.appendChild(list);panel.appendChild(content);
     function dismiss(focus){
-      panel.remove();document.removeEventListener('pointerdown',outside,true);
+      panel.remove();
       if(observer)observer.disconnect();
-      if(layer._trainFoldPopover===panel){layer._trainFoldPopover=null;layer._closeTrainFoldPopover=null;}
-      if(focus!==false&&anchor.isConnected)anchor.focus();
+      if(layer._trainFoldPopover===panel){layer._trainFoldPopover=null;layer._closeTrainFoldPopover=null;layer._refreshTrainFoldPopover=null;}
+      if(!document.querySelector('.rs-modal.active'))document.body.classList.remove('modal-open');
+      if(focus!==false){
+        var badges=layer.querySelectorAll('[data-train-fold-badge]');
+        if(anchor.isConnected)anchor.focus();
+        else if(badges.length)badges[0].focus();
+      }
     }
     var observer=typeof MutationObserver==='function'?new MutationObserver(function(){if(!layer.isConnected)dismiss(false);}):null;
-    close.addEventListener('click',function(){dismiss(true);});panel.appendChild(close);
-    ids.forEach(function(id){
-      var marker=markers[id], label=groups[id];
-      if(!marker||!label)return;
-      var button=document.createElement('button');button.className='train-fold-entry';
-      var href=marker.getAttribute('href')||marker.getAttribute('xlink:href');
-      if(href){var image=document.createElement('img');image.src=href;image.alt='';button.appendChild(image);}
-      else {var dot=document.createElement('span');dot.className='train-fold-neutral';button.appendChild(dot);}
-      var caption=document.createElement('span');
-      var clone=label.cloneNode(true), badges=clone.querySelectorAll('[data-train-fold-badge]');
-      for(var i=0;i<badges.length;i++)badges[i].remove();
-      var direction=label.getAttribute('data-dir-sym');
-      caption.textContent=(direction==='up'?'▲ ':direction==='down'?'▼ ':'')+clone.textContent;button.appendChild(caption);
-      var title=marker.querySelector('title'), number=document.createElement('small');
-      number.textContent=title?title.textContent:'';button.appendChild(number);
-      button.addEventListener('click',function(){
-        dismiss(false);
-        marker.dispatchEvent(new MouseEvent('click',{bubbles:true}));
+    function refresh(){
+      var current={}, nodes=layer.querySelectorAll('[data-train-id]');
+      for(var i=0;i<nodes.length;i++)current[nodes[i].getAttribute('data-train-id')]=nodes[i];
+      list.textContent='';var count=0;
+      ids.forEach(function(id){
+        var marker=current[id], p=marker&&marker._trainPosition;
+        if(!p)return;
+        count++;
+        var entry=document.createElement('div');entry.className='train-fold-entry';entry.setAttribute('role','listitem');
+        var href=marker.getAttribute('href')||marker.getAttribute('xlink:href');
+        if(href){var image=document.createElement('img');image.src=href;image.alt='';entry.appendChild(image);}
+        else {var dot=document.createElement('span');dot.className='train-fold-neutral';entry.appendChild(dot);}
+        var info=document.createElement('div'),caption=document.createElement('div');
+        var destination=_resolveStationLoose(p.destinationStation);
+        var destinationText=destination?(/^zh/.test(lang)?'开往 '+destination:destination+(lang==='en'?' bound':'行き')):'';
+        caption.textContent=[p.typeName,destinationText].filter(Boolean).join(' · ');
+        info.appendChild(caption);
+        var details=document.createElement('small'),parts=[];
+        if(p.trainNumber&&!/^(?:est_|planned-trip:|supabase:|odpt[.:])/i.test(String(p.trainNumber)))parts.push(String(p.trainNumber));
+        if(p.delayMin>0)parts.push(lang==='en'?'Delay '+p.delayMin+' min':/^zh/.test(lang)?'晚点 '+p.delayMin+' 分':'遅れ '+p.delayMin+' 分');
+        if(p.estimated)parts.push(lang==='en'?'Estimated':/^zh/.test(lang)?'推定位置':'推定位置');
+        details.textContent=parts.join(' · ');info.appendChild(details);entry.appendChild(info);list.appendChild(entry);
       });
-      panel.appendChild(button);
+      heading.textContent=titleText+' ('+count+')';
+      if(!count)dismiss(false);
+    }
+    close.addEventListener('click',function(){dismiss(true);});
+    panel.addEventListener('click',function(e){if(e.target===panel)dismiss();});
+    panel.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){e.stopPropagation();dismiss();}
+      if(e.key==='Tab'){e.preventDefault();close.focus();}
     });
-    panel.addEventListener('keydown',function(e){if(e.key==='Escape'){e.stopPropagation();dismiss();}});
     document.body.appendChild(panel);layer._trainFoldPopover=panel;layer._closeTrainFoldPopover=dismiss;
-    document.addEventListener('pointerdown',outside,true);
-    if(observer)observer.observe(document.body,{childList:true,subtree:true});
-    var rect=anchor.getBoundingClientRect();
-    panel.style.left=Math.max(8,Math.min(window.innerWidth-188,rect.x+rect.width/2-90))+'px';
-    panel.style.top=Math.max(8,Math.min(window.innerHeight-340,rect.bottom+6))+'px';
-    close.focus();
+    document.body.classList.add('modal-open');layer._refreshTrainFoldPopover=refresh;refresh();
+    if(layer._trainFoldPopover===panel){
+      if(observer)observer.observe(document.body,{childList:true,subtree:true});
+      close.focus();
+    }
   }
 
   // v4.3.454: 列车终点/方向标签——方向在上（7px #999）、终点在下（8px #666）

@@ -182,6 +182,15 @@
     };
   }
 
+  // Position precedence is narrower than physical running-chain identity.
+  // Require the original railway namespace as well as service day and direction.
+  function sourcePositionMatchKey(lineId, position) {
+    var key = scheduledMatchKey(lineId, position);
+    var railway = position && (position.sourceRailway || position.railway);
+    if (!key || !/^odpt\.Railway:[^.]+\..+/.test(railway || '')) return '';
+    return key + '|' + encodeURIComponent(railway);
+  }
+
   function init(){if(_initialized)return;buildIndexes();}
 
   window.RunningChainResolver={
@@ -191,6 +200,7 @@
     getResolutionContext:getResolutionContext,
     resolveTimetableChain:resolveTimetableChain,
     scheduledMatchKey:scheduledMatchKey,
+    sourcePositionMatchKey:sourcePositionMatchKey,
     _getIndexes:function(){return{boundaries:_boundaryMap,branchOfMap:_branchOfMap,directThrough:_directThrough};}
   };
 

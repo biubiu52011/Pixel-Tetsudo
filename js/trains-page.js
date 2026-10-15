@@ -382,6 +382,8 @@
                   + (_tp.sourceUpdatedAt || "") + ":"
                   + (_tp.sourceValidUntil || "") + ":"
                   + (_tp.positionSource || "") + ":"
+                  + (_tp.destinationStation || "") + ":"
+                  + (_tp.typeName || "") + ":" + (_tp.delayMin || 0) + ":"
                   + (_tp.serviceDate || "") + ":"
                   + (_tp.vehicleIdentityStatus || "") + ":"
                   + (_tp.vehicleType || "") + ":"

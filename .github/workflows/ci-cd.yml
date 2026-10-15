@@ -39,6 +39,11 @@ jobs:
       - name: Service-day and SQL/ODPT through-chain regression
         run: node --test tests/train-position-service-day.test.cjs
 
+      - name: Terminal bounds, position ownership and passenger train list
+        run: |
+          node tools/train-terminal-consistency.test.js
+          node tools/train-fold-layout.test.js
+
       - name: RunInfo semantic and identity tests
         run: |
           node tools/runinfo-evaluator.test.js

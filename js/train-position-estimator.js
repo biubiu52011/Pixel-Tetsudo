@@ -310,61 +310,6 @@
     } catch(e) { return 0; }
   }
 
-  // ========== Extrapolation (v6: 接续推定——数据最远端之后) ==========
-  // 用户需求（2026-09-11）：列车到达 ODPT 提供数据的最后站后，推定其接续行驶，不中途消失。
-  // 全量核查（41 线 18903 记录）实证：真截断 175 条集中在首都圈大线——
-  //   ChuoSobuLocal 76 / ShonanShinjuku 69 / SobuMain 16 / Saikyo 10 / Sotobo 4。
-  //   例：中央総武 1012Y（三鷹→西船橋 全程列车）记录只给前 7 站（三鷹→中野），dest=西船橋（站表 29 位），
-  //   列车在图内开到中野就消失——用户所见"半路没了"的元凶。
-  // 方案（经全量核查修正）：
-  //   1. dest 可映射到本线站表且 dest 索引 > 记录末站索引 → 外推到 dest（列车真实终点）
-  //   2. dest 跨线/缺失 → 不接续（列车在本线旅程 = 记录覆盖段，到段末出图/收车是正确行为）
-  //      注：跨线不外推——上越線 高崎→渋川 后列车拐入吾妻線（dest=長野原草津口），
-  //      外推到上越線末站長岡 会把列车放上它根本没走的区间（假位置）。
-  // 算法：已知段平均速度 v=(末站时刻−首站时刻)/(末站索引−首站索引) 分钟/站索引差
-  //       （按站索引差天然兼容跳站列车），后续站时刻 = 末站时刻 + v×(目标索引−末站索引)。
-  //       终点站 depTime=null（到站即收车，不"通过"）；中间外推站 depTime=arrTime（不停车通过）。
-  // 完整数据（dest 索引 <= 末站索引）→ 不外推，零影响。
-  function buildExtrapolation(tt, tto, stationIndexMap) {
-    try {
-      var destStations = tt['odpt:destinationStation'];
-      var destUrn = (destStations && destStations.length > 0) ? String(destStations[0]) : '';
-      if (!destUrn) return null;
-      var dKey = extractStationKey(destUrn);
-      var targetIdx = stationIndexMap[normalizeStationKey(dKey)];
-      if (targetIdx === undefined) targetIdx = stationIndexMap[dKey];
-      if (targetIdx === undefined || targetIdx < 0) return null; // dest 跨线/不可映射 → 不接续
-
-      // 已知段首末可映射站（索引 + 时刻）
-      var firstIdx = -1, lastIdx = -1, firstTime = null, lastTime = null;
-      for (var i = 0; i < tto.length; i++) {
-        var stop = tto[i] || {};
-        var key = extractStationKey(stop['odpt:departureStation'] || stop['odpt:arrivalStation']);
-        var idx = stationIndexMap[normalizeStationKey(key)];
-        if (idx === undefined) idx = stationIndexMap[key];
-        if (idx === undefined || idx < 0) continue;
-        var arr = parseTimeToMinutes(stop['odpt:arrivalTime']);
-        var dep = parseTimeToMinutes(stop['odpt:departureTime']);
-        var tm = (arr !== null && arr !== undefined) ? arr : dep;
-        if (firstIdx < 0) { firstIdx = idx; firstTime = tm; }
-        lastIdx = idx;
-        if (tm !== null && tm !== undefined) lastTime = tm;
-      }
-      if (firstIdx < 0 || lastIdx <= firstIdx || lastTime === null || firstTime === null) return null;
-      if (targetIdx <= lastIdx) return null; // 数据已覆盖到 dest → 不外推（完整/区间车）
-
-      var v = (lastTime - firstTime) / (lastIdx - firstIdx);
-      if (!(v > 0)) return null; // 速度异常（0/负）不外推
-
-      var stops = [];
-      for (var idx2 = lastIdx + 1; idx2 <= targetIdx; idx2++) {
-        var time = Math.round(lastTime + v * (idx2 - lastIdx));
-        stops.push({ _index: idx2, arrTime: time, depTime: (idx2 < targetIdx) ? time : null });
-      }
-      return { stops: stops, lastIdx: lastIdx, targetIdx: targetIdx };
-    } catch(e) { return null; }
-  }
-
   function getTokyoServiceDate() {
     try {
       // Railway evidence is date-scoped in Japan. Do not use odpt:calendar here:
@@ -475,6 +420,24 @@
           destinationStation = destinationStationUrn.split(".").pop();
           if (destinationStation) break;
         }
+      }
+    }
+
+    // A published terminus bounds this service even when an imported timetable
+    // accidentally retains stops belonging to a longer run. Keep all evidence
+    // on the raw row; only the positioning view ends at the unique destination.
+    // Loop segments and multiple destinations cannot use this linear bound.
+    if (!_isLoopLine && destStations.length === 1 && destinationStation) {
+      var terminalKey = normalizeStationKey(destinationStation);
+      var terminalIndex = stops.findIndex(function(stop) {
+        return normalizeStationKey(extractStationKey(stop.stationUrn)) === terminalKey;
+      });
+      if (terminalIndex >= 0) {
+        stops = stops.slice(0, terminalIndex + 1);
+        var terminal = stops[stops.length - 1];
+        terminal.arrivalMinute = terminal.arrivalMinute !== null
+          ? terminal.arrivalMinute : terminal.departureMinute;
+        terminal.departureMinute = null;
       }
     }
 
@@ -732,27 +695,11 @@
         var tto = tt["odpt:trainTimetableObject"];
         if (!tto || !Array.isArray(tto) || tto.length === 0) continue;
 
-        // v6: 接续推定——数据最远端之后。dest 在本线站表内且更远 → 外推补充站序列；
-        // 否则（跨线/缺失/数据完整）fullStops === tto，零影响。
+        // Published stops are the complete positioning authority. A destination
+        // does not provide missing passage times or permission to extrapolate.
         var verifiedContinuation = tt._positionSource === 'supabase-train-run' &&
           tt._canonicalGroupEvidence === 'verified_continuation';
-        var ext = verifiedContinuation ? null : buildExtrapolation(tt, tto, stationIndexMap);
-        // Normal runs consume pre-parsed stops. Extrapolated synthetic stops are
-        // appended in the same compact shape so the hot loop has one code path.
-        var fullStops = run.stops.slice();
-        if (ext && ext.stops) {
-          ext.stops.forEach(function(es) {
-            fullStops.push({
-              raw: es,
-              stationUrn: "",
-              stationIndex: es._index,
-              arrivalMinute: es.arrTime,
-              departureMinute: es.depTime,
-              extrapolated: true
-            });
-          });
-        }
-        var extrapolated = false;
+        var fullStops = run.stops;
 
         // Find current station based on time
         var currentStationIndex = -1;
@@ -769,15 +716,13 @@
           var arrTime = stop.arrivalMinute;
           var idx = stop.stationIndex;
 
-          if (idx === undefined && verifiedContinuation) {
-            // A source-linked branch diverges from the displayed map. Once it
-            // departs the last mapped junction, it is outside this view. Do not
-            // pin it there until the branch's terminal clock.
-            var outsideClock = arrTime !== null ? arrTime : depTime;
-            if (outsideClock !== null && lastDepartedStop &&
-                adjustedCurrentMin > lastDepartedStop.time) {
+          if (idx === undefined) {
+            // Outside the displayed route: do not keep the previous station
+            // or interpolate across an unmapped branch. A later mapped stop
+            // may establish a new visible position when its own clock is reached.
+            if (lastDepartedStop && adjustedCurrentMin > lastDepartedStop.time) {
               foundInService = false;
-              break;
+              lastDepartedStop = null;
             }
             continue;
           }
@@ -806,7 +751,6 @@
           if (effectiveArrival !== null && adjustedCurrentMin >= effectiveArrival) {
             currentStationIndex = idx;
             foundInService = true;
-            if (ext && idx > ext.lastIdx) extrapolated = true;
           }
           if (effectiveDeparture !== null && adjustedCurrentMin >= effectiveDeparture) {
             lastDepartedStop = { idx: idx, time: effectiveDeparture };
@@ -834,10 +778,8 @@
 
         // Only include trains that are currently in service (have departed at least one station)
         if (foundInService && currentStationIndex >= 0) {
-          // v7: 收车判定用「最后可解析时刻」——旧实现只读末站时刻，鹤见线等 106 条
-          // 时刻表记录末站 arrival/departure 均为空（区间车/支线车，如 1013B 末站浅野）→
-          // lastArrTime=null → `now > null+5` 永不成立 → 清晨车 13:54 还在图上（用户："推定很扯"）。
-          // 改为从末站往前找最后一个可解析时刻；整条记录无时刻则 foundInService 必然为 false（自动丢弃）。
+          // End at the last published clock, including incomplete terminal rows.
+          // No grace interval can extend a service beyond its timed evidence.
           var lastArrTime = null;
           for (var _ls = fullStops.length - 1; _ls >= 0; _ls--) {
             var _stp7 = fullStops[_ls] || {};
@@ -845,7 +787,7 @@
               ? _stp7.arrivalMinute : _stp7.departureMinute;
             if (_tm7 !== null && _tm7 !== undefined) { lastArrTime = _tm7; break; }
           }
-          if (lastArrTime !== null && adjustedCurrentMin > lastArrTime + 5) continue; // 5 min grace
+          if (lastArrTime !== null && adjustedCurrentMin > lastArrTime) continue; // No post-terminal schedule movement.
 
           processedTrainIds[timetableIdentity] = true;
           var trainClassification = classifyTrain(run.trainType, trainNumber, lineId);
@@ -900,7 +842,7 @@
             sourceRevisionDate: tt._sourceRevisionDate || null,
             segmentToIndex: segmentToIndex,
             segmentProgress: segmentProgress,
-            extrapolated: extrapolated,
+            extrapolated: false,
             trainType: tt['odpt:trainType'] || '',
             trainOwner: _trainOwner,
             assignmentOperator: _assignmentOperator,

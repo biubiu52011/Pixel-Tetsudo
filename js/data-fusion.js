@@ -1725,12 +1725,18 @@
               // with different object IDs; train number is a same-line
               // secondary guard, never a replacement for the running-chain ID.
               if (!posMap[lid]) posMap[lid] = [];
-              // Reuse the same scoped key used for chain bridging. Every
-              // line needs a unique one-to-one match before timetable data
-              // can suppress or supplement a realtime train.
-              function _sameLineNumberKey(p) { return _chainBridgeKey(lid, p); }
+              // Retain the bridge's day/number/direction scope, adding the
+              // original railway namespace when available. Identity inheritance
+              // still requires one unambiguous scheduled match.
+              function _sameLineNumberKey(p) { return _sourcePositionKey(p) || _chainBridgeKey(lid, p); }
               var _estKeyCounts = Object.create(null);
               var _liveKeyCounts = Object.create(null);
+              var _liveSourceCounts = Object.create(null);
+              function _sourcePositionKey(p) {
+                var resolver = window.RunningChainResolver;
+                return resolver && typeof resolver.sourcePositionMatchKey === 'function'
+                  ? resolver.sourcePositionMatchKey(lid, p) : '';
+              }
               _est.forEach(function(p) {
                 if (!p || !mayUseTimetableEstimate(lid,p)) return;
                 var k = _sameLineNumberKey(p);
@@ -1739,6 +1745,8 @@
               posMap[lid].forEach(function(p) {
                 var k = _sameLineNumberKey(p);
                 if (k) _liveKeyCounts[k] = (_liveKeyCounts[k] || 0) + 1;
+                var sourceKey = p && !p.estimated && _sourcePositionKey(p);
+                if (sourceKey) _liveSourceCounts[sourceKey] = (_liveSourceCounts[sourceKey] || 0) + 1;
               });
               var _haveId = Object.create(null);
               var _haveScheduledKey = Object.create(null);
@@ -1752,6 +1760,11 @@
               _est.forEach(function(p) {
                 if (!p || !mayUseTimetableEstimate(lid, p)) return;
                 var _pid = _positionIdentity(p);
+                // One current observation owns this source run's position even
+                // when SQL has conflicting variants. This does not bridge their
+                // vehicle identity or inherit ambiguous destination information.
+                var _sourceKey = _sourcePositionKey(p);
+                if (_sourceKey && _liveSourceCounts[_sourceKey] === 1) return;
                 var _noKey = _sameLineNumberKey(p);
                 var _uniqueSchedule = _noKey &&
                   _estKeyCounts[_noKey] === 1 && _liveKeyCounts[_noKey] === 1;
