@@ -250,6 +250,24 @@ async function get(table, select, order) {
       sourceUrl:source.source_url||"",evidenceRole:"timetable-reference"};
   });
   const eligibleReferenceRules = referenceRuleRecords.filter(eligibleReference);
+  // Different published revisions may overlap even when their start dates differ.
+  // Reject contradictory model assignments for the same train/calendar during
+  // export rather than allowing the browser resolver to fall back to "pending".
+  const referenceIntervals = new Map();
+  for (const row of eligibleReferenceRules) {
+    const key = [row.networkKey, row.calendarType, row.trainNumber].join("|");
+    const earlier = referenceIntervals.get(key) || [];
+    for (const other of earlier) {
+      if (row.vehicleType !== other.vehicleType &&
+          row.effectiveFrom <= (other.effectiveTo || "9999-12-31") &&
+          other.effectiveFrom <= (row.effectiveTo || "9999-12-31"))
+        throw new Error("Overlapping contradictory reference vehicles for " + key);
+    }
+    earlier.push(row);
+    referenceIntervals.set(key, earlier);
+  }
+  console.log("ChuoSobuLocal confirmed planned train/calendar references:",
+    eligibleReferenceRules.filter(r=>r.networkKey==="ChuoSobuLocal").length);
   // Guard the publication boundary: an identical line, timetable calendar,
   // train number and revision must not export two conflicting planned models.
   // Vehicle assignment remains in Supabase; this only rejects bad evidence.
