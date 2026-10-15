@@ -160,6 +160,9 @@ jobs:
       - name: Vehicle regression 21 - train vehicle icon resolution chain
         run: node tools/train-vehicle-icon-resolution.test.js
 
+      - name: Metro official current single-family fleet evidence
+        run: node tools/metro-single-fleet-evidence.test.js
+
       - name: Entity Preservation Guard
         run: |
           echo Running canonical entity preservation guard...

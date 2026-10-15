@@ -1,5 +1,12 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-15 JST — 运营时段车辆映射全网检查（REVIEW）
+- 检查223条canonical线路、210个非FULL SQL入口和4家运营商887条ODPT记录；当前111个范围/1677位置记录，父子重复不作为物理车数。保存逐号CSV及223行报告docs/reports/vehicle-mapping-audit-20261015.md，原始数据/对照/备份recovery/live-vehicle-audit-20261015。ODPT源时间09:11—09:12，接收时已过期，生产继续排除；另在源时间回放1029位置记录检查映射，未声称是当前实时。
+- 用户当前丸ノ内页面整批待判定：SQL没有现役单一车型证据且唯一目录未登记已有PNG。核对Tokyo Metro当前官方现役列表与02退役官方说明，Supabase evidence_sources402、family rules38/39补丸ノ内2000/银座1000，MarunouchiBranch证据域归属母线；有效2026-10-15至11-30，不推编组/涂装。SQL回读PASS；现有exporter新增只读connector结构导入，原37条规则/33别名及全部dated/reference/carsets事实保留。
+- TrainOperationEvidence→TrainVehicle→原生PNG链路不变；登记2原生图。相同时间/输入新增丸ノ内43、支线5、银座30图，合计78。当前273有图、1404尚缺证据。新宿回放13条已判10-300但仅有分批外观PNG，缺实体编组不能指定批次；荒川ODPT运行ID非车号，仍保留待判定。未取得全网当天编组实证，不能把未知等同错配或宣称所有既有映射正确。
+- 适用trains/realtime共用车型链，两个页面资源4.3.1225；其余5页无该车型图标链，不改。39工具套件、64 node:test、4 Python守卫、图片路径/语法与diff PASS。实际本地丸ノ内浏览器已确认A819/A9551等为2000系；不附截图。线上待发布验收，原有5项数据修改保留。
+
+
 ## 2026-10-15 JST — 纠正内部支线误拆范围
 - 用户指出鶴見/千代田/丸ノ内等未独立命名支线不应单列。撤回branchOf一刀切规则；canonical独立presentation作为正式线路展示声明，无声明的内部支线回到父卡片与父图。9内部区间：水郡、方南町、北绫濑、辰野、鹤见海芝浦/大川、成田我孙子/机场、南武浜川崎。8已有正式presentation支线保持独立，西九州新干线按JR九州官方线路名补独立presentation（https://www.jrkyushu-timetable.jp/jr-k_time/r_shinkansen2.html）。
 - LinePresentationService统一独立卡片与父图支线范围，DataState两列表同规则；几何、列车收集与激活同步。组合延伸不再提前返回而漏掉内部支线。支线几何保存junction和canonical站序索引，反向支线不再错位一站。内部交接不标成对外线路入口。源列车号/车型/SQL事实未变。

@@ -19567,6 +19567,11 @@
       "alias_scope": "evidence_domain"
     },
     {
+      "alias_key": "MarunouchiBranch",
+      "canonical_network_key": "Marunouchi",
+      "alias_scope": "evidence_domain"
+    },
+    {
       "alias_key": "Mita",
       "canonical_network_key": "meguro",
       "alias_scope": "evidence_domain"
@@ -19853,6 +19858,22 @@
       "notes": "operator ownership; model requires dated evidence"
     },
     {
+      "evidenceId": 39,
+      "networkKey": "Ginza",
+      "operator": "TokyoMetro",
+      "codePattern": "*",
+      "calendarType": "",
+      "effectiveFrom": "2026-10-15",
+      "effectiveTo": "2026-11-30",
+      "exactVehicleType": "東京メトロ1000系",
+      "vehicleCandidates": [
+        "東京メトロ1000系"
+      ],
+      "grade": "A",
+      "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
+      "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference."
+    },
+    {
       "evidenceId": 15,
       "networkKey": "kodomonokuni",
       "operator": "YokohamaMinatomiraiRailway",
@@ -19867,6 +19888,22 @@
       "grade": "B",
       "sourceUrl": "https://www.mm21railway.co.jp/info/route/kodomonokuni.html",
       "notes": "structural exact"
+    },
+    {
+      "evidenceId": 38,
+      "networkKey": "Marunouchi",
+      "operator": "TokyoMetro",
+      "codePattern": "*",
+      "calendarType": "",
+      "effectiveFrom": "2026-10-15",
+      "effectiveTo": "2026-11-30",
+      "exactVehicleType": "東京メトロ2000系",
+      "vehicleCandidates": [
+        "東京メトロ2000系"
+      ],
+      "grade": "A",
+      "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
+      "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference."
     },
     {
       "evidenceId": 16,
@@ -20254,22 +20291,25 @@
     }
   ],
   "evidenceInventory": {
-    "networkCount": 29,
+    "networkCount": 31,
     "networks": [
-      "asakusa",
       "ChibaMonorail",
-      "chiyoda-joban-odakyu",
       "ChuoMain",
       "ChuoRapid",
+      "Ginza",
+      "Joban",
+      "JobanMain",
+      "Marunouchi",
+      "NaritaAbikoBranch",
+      "Yamanote",
+      "asakusa",
+      "chiyoda-joban-odakyu",
       "hanzomon",
       "hibiya",
       "iketama",
-      "Joban",
-      "JobanMain",
       "keiyo",
       "kodomonokuni",
       "meguro",
-      "NaritaAbikoBranch",
       "odakyu-main",
       "oimachi",
       "saikyo",
@@ -20283,8 +20323,7 @@
       "tokyo-monorail",
       "toyoko-fukutoshin",
       "tozai",
-      "tsukuba-express",
-      "Yamanote"
+      "tsukuba-express"
     ],
     "rows": [
       {
@@ -20362,6 +20401,17 @@
         "exact_rows": 1185,
         "narrowed_rows": 0,
         "min_date": "2026-10-14",
+        "max_date": "2026-11-30"
+      },
+      {
+        "source_network_key": "Ginza",
+        "canonical_network_key": "Ginza",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 1,
+        "exact_rows": 1,
+        "narrowed_rows": 0,
+        "min_date": "2026-10-15",
         "max_date": "2026-11-30"
       },
       {
@@ -20462,6 +20512,17 @@
         "narrowed_rows": 0,
         "min_date": "2026-03-14",
         "max_date": null
+      },
+      {
+        "source_network_key": "Marunouchi",
+        "canonical_network_key": "Marunouchi",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 1,
+        "exact_rows": 1,
+        "narrowed_rows": 0,
+        "min_date": "2026-10-15",
+        "max_date": "2026-11-30"
       },
       {
         "source_network_key": "meguro",

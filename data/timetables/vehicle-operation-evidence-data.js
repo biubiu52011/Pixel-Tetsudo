@@ -19565,6 +19565,11 @@ window.VEHICLE_NETWORK_ALIASES = [
     "alias_scope": "evidence_domain"
   },
   {
+    "alias_key": "MarunouchiBranch",
+    "canonical_network_key": "Marunouchi",
+    "alias_scope": "evidence_domain"
+  },
+  {
     "alias_key": "Mita",
     "canonical_network_key": "meguro",
     "alias_scope": "evidence_domain"
@@ -19851,6 +19856,22 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "operator ownership; model requires dated evidence"
   },
   {
+    "evidenceId": 39,
+    "networkKey": "Ginza",
+    "operator": "TokyoMetro",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "2026-11-30",
+    "exactVehicleType": "東京メトロ1000系",
+    "vehicleCandidates": [
+      "東京メトロ1000系"
+    ],
+    "grade": "A",
+    "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
+    "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference."
+  },
+  {
     "evidenceId": 15,
     "networkKey": "kodomonokuni",
     "operator": "YokohamaMinatomiraiRailway",
@@ -19865,6 +19886,22 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "B",
     "sourceUrl": "https://www.mm21railway.co.jp/info/route/kodomonokuni.html",
     "notes": "structural exact"
+  },
+  {
+    "evidenceId": 38,
+    "networkKey": "Marunouchi",
+    "operator": "TokyoMetro",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "2026-11-30",
+    "exactVehicleType": "東京メトロ2000系",
+    "vehicleCandidates": [
+      "東京メトロ2000系"
+    ],
+    "grade": "A",
+    "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
+    "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference."
   },
   {
     "evidenceId": 16,

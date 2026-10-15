@@ -7,6 +7,16 @@
   "use strict";
 
 var CANONICAL_VEHICLES = {
+  "metro-2000": {
+    displayName:"東京メトロ2000系", iconName:"東京メトロ2000系",
+    asset:"../images/列车/東京メトロ/東京メトロ_2000系.png",
+    aliases:["東京メトロ 2000系"]
+  },
+  "metro-1000": {
+    displayName:"東京メトロ1000系", iconName:"東京メトロ1000系",
+    asset:"../images/列车/東京メトロ/東京メトロ_1000系.png",
+    aliases:["東京メトロ 1000系"]
+  },
   "jr-e353": {
     displayName:"E353系", iconName:"E353系",
     asset:"../images/列车/JR東日本/JR東日本_E353系.png",

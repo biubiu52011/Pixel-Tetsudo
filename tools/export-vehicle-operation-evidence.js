@@ -15,7 +15,8 @@ const path = require("path");
 const base = String(process.env.SUPABASE_URL || "").replace(/\/$/, "");
 const key = process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || "";
 const inputIndex = process.argv.indexOf("--mapping-input");
-if (inputIndex < 0 && (!base || !key)) {
+const structuralIndex = process.argv.indexOf("--structural-input");
+if (inputIndex < 0 && structuralIndex < 0 && (!base || !key)) {
   console.error("Missing SUPABASE_URL and SUPABASE_SECRET_KEY/SUPABASE_SERVICE_ROLE_KEY");
   process.exit(2);
 }
@@ -54,6 +55,39 @@ function writeSnapshot(json) {
   fs.writeFileSync(path.join(root,"vehicle-operation-evidence-data.js"),
     "/* Generated from canonical Supabase evidence tables. Data only; no line logic. */\n"+
     Object.entries(assignments).map(([key,rows])=>"window."+key+" = "+JSON.stringify(rows,null,2)+";\n").join(""));
+}
+// Read-only connector export of the same canonical structural tables.
+// This leaves dated observations, train references and carsets untouched.
+if (structuralIndex >= 0) {
+  const input=JSON.parse(fs.readFileSync(process.argv[structuralIndex+1],"utf8"));
+  if (!Array.isArray(input.familyRules) || !input.familyRules.length ||
+      !Array.isArray(input.networkAliases)) throw new Error("Incomplete structural export");
+  for (const r of input.familyRules) {
+    if (!r.evidenceId || !r.networkKey || !r.codePattern || !r.effectiveFrom || !r.sourceUrl ||
+        !Array.isArray(r.vehicleCandidates) ||
+        (r.exactVehicleType && r.vehicleCandidates.length && !r.vehicleCandidates.includes(r.exactVehicleType)))
+      throw new Error("Invalid structural family rule");
+  }
+  for (const r of input.networkAliases) {
+    if (!r.alias_key || !r.canonical_network_key || !["exact","evidence_domain"].includes(r.alias_scope))
+      throw new Error("Invalid structural network alias");
+  }
+  const snapshot=JSON.parse(fs.readFileSync(path.join(__dirname,"..","data","timetables","vehicle-operation-evidence.json"),"utf8"));
+  snapshot.familyRules=input.familyRules.map(r=>({evidenceId:r.evidenceId,
+    networkKey:normalizeNetworkKey(r.networkKey),operator:r.operator||"",
+    codePattern:r.codePattern||"",calendarType:r.calendarType||"",
+    effectiveFrom:r.effectiveFrom||"",effectiveTo:r.effectiveTo||"",
+    exactVehicleType:r.exactVehicleType||"",vehicleCandidates:r.vehicleCandidates,
+    grade:r.grade||"C",sourceUrl:r.sourceUrl||"",notes:r.notes||""}));
+  snapshot.networkAliases=input.networkAliases.map(r=>({alias_key:r.alias_key,
+    canonical_network_key:r.canonical_network_key,alias_scope:r.alias_scope}));
+  if (Array.isArray(input.inventory)) {
+    const networks=[...new Set(input.inventory.map(r=>r.canonical_network_key))].sort();
+    snapshot.evidenceInventory={networkCount:networks.length,networks,rows:input.inventory};
+  }
+  writeSnapshot(snapshot);
+  console.log("Structural snapshot:",snapshot.familyRules.length,"rules,",snapshot.networkAliases.length,"aliases");
+  process.exit(0);
 }
 // Read-only connector exports can update mapping tables without a server key.
 // Other evidence remains in the last canonical snapshot; never read credentials.
