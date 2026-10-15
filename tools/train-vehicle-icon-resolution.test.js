@@ -708,8 +708,8 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
 // canonical reference lookup covers dated JR runs to intermediate terminals.
 {
   const roster=JSON.parse(read('data/timetables/vehicle-operation-evidence.json')).referenceRules;
-  assert.strictEqual(roster.filter(r=>r.networkKey==='saikyo').length,826);
-  assert.strictEqual(roster.filter(r=>r.vehicleType==='E233系7000番台').length,649);
+  assert.strictEqual(roster.filter(r=>r.networkKey==='saikyo').length,1011);
+  assert.strictEqual(roster.filter(r=>r.vehicleType==='E233系7000番台').length,763);
   const ctx={window:{},console:{debug(){}}};
   vm.createContext(ctx);
   for(const p of ['data/timetables/vehicle-operation-evidence-data.js',
@@ -740,8 +740,8 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
     assert.strictEqual(vehicle.identityStatus,'EXACT',num+' '+terminal);
     assert.ok((vehicle.iconPath||'').includes('E233'),num+' '+terminal+' '+vehicle.iconPath);
   }
-  assert.strictEqual(resolve('120M','2026-10-12','holiday'),null,
-    'Shared Sotetsu/JR M-numbered trains require their own timetable evidence');
+  assert.strictEqual(resolve('120M','2026-10-12','holiday').vehicleType,'E233系7000番台',
+    'M-numbered through trains use their own exact timetable evidence');
   assert.strictEqual(resolve('9999K','2026-10-12','holiday'),null,
     'No open-ended runtime number-range guessing');
   assert.strictEqual(resolve('1004K','2026-03-13','holiday'),null,

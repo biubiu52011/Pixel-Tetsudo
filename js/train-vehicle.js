@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1239')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1240')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -620,7 +620,6 @@ var CANONICAL_VEHICLES = {
   "tobu-50000-10": { displayName: "東武50000系", iconName: "東武50000系", asset: "../images/列车/東武鉄道/東武鉄道_50000型.png", aliases: ["東武50000系(10両)","東武50000系"] },
   "tobu-50050-10": { displayName: "東武50050系", iconName: "東武50050系", asset: "../images/列车/東武鉄道/東武鉄道_50050型.png", aliases: ["東武50050系(10両)","東武50050系"] },
   "tobu-70090": { displayName: "東武70090型", iconName: "東武70090型", asset: "../images/列车/東武鉄道/東武鉄道_70090型.png", aliases: ["東武70090型","東武70090系"] },
-  "sotetsu-12000-10": { displayName: "相鉄12000系", iconName: "相鉄12000系", asset: "../images/列车/相模鉄道/相模鉄道_12000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄12000系(10両)"] },
   "sotetsu-13000-8": { displayName: "相鉄13000系", iconName: "相鉄13000系", asset: "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄13000系(8両)","相鉄13000系"] },
   "sotetsu-20000-10": { displayName: "相鉄20000系", iconName: "相鉄20000系", asset: "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄20000系(10両)"] },
   "sotetsu-21000": { displayName: "相鉄21000系", iconName: "相鉄21000系", asset: "../images/列车/相模鉄道/相模鉄道_21000系.png", aliases: ["相鉄21000系", "相鉄21000系(8両)"] },
@@ -632,10 +631,10 @@ var CANONICAL_VEHICLES = {
     aliases: ["209系500番台（京葉線）", "JR 209系500番台", "JR東日本209系500番台"]
   },
   "sotetsu-12000": {
-    displayName: "相模鉄道12000系",
-    iconName: "相模鉄道12000系",
+    displayName: "相鉄12000系",
+    iconName: "相鉄12000系",
     asset: "../images/列车/相模鉄道/相模鉄道_12000系_YOKOHAMA_NAVYBLUE.png",
-    aliases: ["相模鉄道12000系", "相鉄12000系"]
+    aliases: ["相模鉄道12000系", "相鉄12000系", "相鉄12000系(10両)"]
   },
   "odakyu-5000": {
     displayName: "小田急5000形",
@@ -1914,7 +1913,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   }
 
   window.TrainVehicle = {
-    version: '4.3.1239',
+    version: '4.3.1240',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -1924,7 +1923,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1239 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1240 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();

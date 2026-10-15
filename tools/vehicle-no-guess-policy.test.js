@@ -122,8 +122,12 @@ assert(!/function _resolveVehicleIconBase[\\s\\S]*?VEHICLE_NAME_ALIASES\[/.test(
   'vehicle icon resolver reintroduced alias fallback');
 assert(!/function _resolveVehicleIconBase[\\s\\S]*?LINE_VEHICLE_OVERRIDES\[/.test(source),
   'vehicle icon resolver reintroduced line override fallback');
-assert(icons.resolveCanonicalVehicle('相鉄12000系') === null,
-  'duplicate canonical alias must remain ambiguous instead of last-write-wins');
+assert(icons.resolveCanonicalVehicle('相鉄12000系') === icons.resolveCanonicalVehicle('相鉄12000系(10両)'),
+  '12000-series names must share one canonical identity');
+const collision={window:{},console:{debug(){}}};vm.createContext(collision);
+vm.runInContext(src.replace('var CANONICAL_VEHICLES = {', 'var CANONICAL_VEHICLES = {\n  collision: {displayName: \'相鉄12000系\', iconName: \'collision\', asset: \'collision.png\', aliases: []},'),collision);
+assert(collision.window.TrainIcons.resolveCanonicalVehicle('相鉄12000系') === null,
+  'a real duplicate alias must still fail closed');
 assert(/CANONICAL_VEHICLE_ALIAS_CONFLICTS/.test(source),
   'canonical alias collisions must be tracked explicitly');
 
