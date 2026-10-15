@@ -1586,10 +1586,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         caption.textContent=[typeText,destinationText].filter(Boolean).join(' · ');
         info.appendChild(caption);
         var details=document.createElement('small'),parts=[];
-        if(p.trainNumber&&!/^(?:est_|planned-trip:|supabase:|odpt[.:])/i.test(String(p.trainNumber)))parts.push(String(p.trainNumber));
         if(p.delayMin>0)parts.push(lang==='en'?'Delay '+p.delayMin+' min':/^zh/.test(lang)?'晚点 '+p.delayMin+' 分':'遅れ '+p.delayMin+' 分');
         if(p.estimated)parts.push(lang==='en'?'Estimated':/^zh/.test(lang)?'推定位置':'推定位置');
-        details.textContent=parts.join(' · ');info.appendChild(details);entry.appendChild(info);list.appendChild(entry);
+        if(parts.length){details.textContent=parts.join(' · ');info.appendChild(details);}
+        entry.appendChild(info);list.appendChild(entry);
       });
       heading.textContent=titleText+' ('+count+')';
       if(!count)dismiss(false);

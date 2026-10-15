@@ -46,11 +46,13 @@ const layer={isConnected:true,querySelectorAll:()=>Object.values(markers)};popup
 const panel=layer._trainFoldPopover,list=panel.children[0].children[1],entries=list.children;
 assert.equal(panel.getAttribute('aria-modal'),'true');assert(body.classList.locked);
 assert.equal(entries.length,3);
-entries.forEach(e=>{assert.equal(e.children[0].tagName,'img');assert(e.textContent.includes('普通 · 开往 成田'));assert(e.textContent.includes('晚点 2 分'));assert(!e.textContent.includes('SQL'));});
+entries.forEach(e=>{assert.equal(e.children[0].tagName,'img');assert(e.textContent.includes('普通 · 开往 成田'));assert.equal(e.children[1].children[1].textContent,'晚点 2 分 · 推定位置','passenger details exclude train numbers');assert(!e.textContent.includes('SQL'));});
 markers.b._trainPosition.destinationStation='上野';delete markers.c;layer._refreshTrainFoldPopover();
 assert.equal(list.children.length,2);assert(list.textContent.includes('上野'));assert(!list.textContent.includes('internal'));
 markers.b._trainPosition.typeName='JR-East.Rapid';markers.b._trainPosition.trainType='Rapid';layer._refreshTrainFoldPopover();
 assert(list.textContent.includes('快速 · 开往 上野'));assert(!list.textContent.includes('JR-East.Rapid'),'raw ODPT type code is not passenger information');
+markers.a._trainPosition.estimated=false;markers.a._trainPosition.delayMin=0;layer._refreshTrainFoldPopover();
+assert.equal(list.children[0].children[1].children.length,1,'no empty metadata row for an on-time live train');
 panel.listeners.keydown({key:'Escape',stopPropagation(){}});
 assert.equal(layer._trainFoldPopover,null);assert(anchor.focused);
 assert(!body.classList.locked);
