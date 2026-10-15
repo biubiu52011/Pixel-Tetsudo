@@ -56,4 +56,14 @@ assert.equal(layer._trainFoldPopover,null);assert(anchor.focused);
 assert(!body.classList.locked);
 popupctx.open(layer,ids,groups,markers,anchor);delete markers.a;delete markers.b;layer._refreshTrainFoldPopover();
 assert.equal(layer._trainFoldPopover,null,'departed trains cannot survive as stale popup rows');
+// The shared language outside-click handler must not steal modal focus.
+const language=fs.readFileSync('js/lang-init.js','utf8');
+const closeStart=language.indexOf('    function closeSwitcher('),closeEnd=language.indexOf('    function selectLanguage',closeStart);
+let expanded=false,focuses=0;
+const toggle={setAttribute(){},focus(){focuses++;}},switcher={classList:{contains:()=>expanded,remove:()=>{expanded=false;}}};
+const languageCtx={document:{getElementById:id=>id==='langSwitcher'?switcher:toggle}};
+vm.runInNewContext(language.slice(closeStart,closeEnd)+'this.close=closeSwitcher;',languageCtx);
+languageCtx.close();assert.equal(focuses,0,'an already closed language menu cannot steal dialog focus');
+expanded=true;languageCtx.close(false);assert.equal(focuses,0,'outside clicks keep focus on the clicked control');
+expanded=true;languageCtx.close();assert.equal(focuses,1,'explicit language-menu close still restores its button');
 console.log('paired train layout, direction isolation, passenger modal and current-data refresh: PASS');

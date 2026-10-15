@@ -129,12 +129,15 @@
         }
     }
 
-    function closeSwitcher() {
+    function closeSwitcher(restoreFocus) {
         var sw = document.getElementById("langSwitcher");
+        var wasExpanded = sw && sw.classList.contains("expanded");
         if (sw) sw.classList.remove("expanded");
         var btn = document.getElementById("langToggleBtn");
-        if (btn) btn.setAttribute("aria-expanded", "false");
-        btn.focus();
+        if (btn) {
+            btn.setAttribute("aria-expanded", "false");
+            if (wasExpanded && restoreFocus !== false) btn.focus();
+        }
     }
 
     function selectLanguage(lang) {
@@ -171,7 +174,7 @@
                 target.closest(".input-group") || target.closest(".suggestions")
             );
             if (!isSearchInput && !toggleBtn.contains(e.target) && !switcher.contains(e.target)) {
-                closeSwitcher();
+                closeSwitcher(false);
             }
         });
 
