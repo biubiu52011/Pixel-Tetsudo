@@ -130294,6 +130294,58 @@ window.VEHICLE_REFERENCE_RULES = [
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
     "evidenceRole": "timetable-reference"
+  },
+  {
+    "evidenceId": 8633,
+    "operator": "JR-East",
+    "networkKey": "ChuoSobuLocal",
+    "trainNumber": "5003M",
+    "vehicleType": "E353系",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-10-01",
+    "effectiveTo": "2026-11-30",
+    "grade": "C",
+    "sourceUrl": "https://timetables.jreast.co.jp/2610/train/050/054761.html",
+    "evidenceRole": "timetable-reference"
+  },
+  {
+    "evidenceId": 8634,
+    "operator": "JR-East",
+    "networkKey": "ChuoSobuLocal",
+    "trainNumber": "5003M",
+    "vehicleType": "E353系",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-10-01",
+    "effectiveTo": "2026-11-30",
+    "grade": "C",
+    "sourceUrl": "https://timetables.jreast.co.jp/2610/train/050/054762.html",
+    "evidenceRole": "timetable-reference"
+  },
+  {
+    "evidenceId": 8635,
+    "operator": "JR-East",
+    "networkKey": "ChuoSobuLocal",
+    "trainNumber": "5050M",
+    "vehicleType": "E353系",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-10-01",
+    "effectiveTo": "2026-11-30",
+    "grade": "C",
+    "sourceUrl": "https://timetables.jreast.co.jp/2610/train/060/063791.html",
+    "evidenceRole": "timetable-reference"
+  },
+  {
+    "evidenceId": 8636,
+    "operator": "JR-East",
+    "networkKey": "ChuoSobuLocal",
+    "trainNumber": "5050M",
+    "vehicleType": "E353系",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-10-01",
+    "effectiveTo": "2026-11-30",
+    "grade": "C",
+    "sourceUrl": "https://timetables.jreast.co.jp/2610/train/060/063801.html",
+    "evidenceRole": "timetable-reference"
   }
 ];
 window.VEHICLE_CARSETS = [
