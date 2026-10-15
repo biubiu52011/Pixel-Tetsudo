@@ -725,6 +725,7 @@
             })[run.calendar_type] || "",
             "_operationCode":run.operation_code||"",
             "_serviceDate":run.service_date||"",
+            "_sqlLineId":run.line_id||"",
             "trainOwner":run.operation_owner||"",
             "_scheduledTrainOwnerSource":run.operation_owner_source_url||"",
             // Keep source-provided physical through-service links as evidence,

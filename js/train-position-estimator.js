@@ -10,7 +10,7 @@
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 7;
+  var ESTIMATOR_VERSION = 8;
   var _manualTimetableRegistry = {};
   var _timetableIndexCache = { source: null, stamp: "", arrays: {}, manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;
@@ -544,6 +544,7 @@
         var tt = timetableData[t];
         if (!tt) continue;
         if (tt._serviceDate && tt._serviceDate !== serviceDate) continue;
+        if (tt._positionSource === 'supabase-train-run' && tt._sqlLineId && tt._sqlLineId !== lineId) continue;
 
         var run = compileTrainRun(tt, lineId, workLine, stationIndexMap, projection);
         if (!run) continue;
@@ -554,7 +555,8 @@
 
         // Filter by railway (if lineId matches)
         var railwayKey = run.railwayKey;
-        if (railwayKey && railwayKey !== lineId) {
+        if (railwayKey && railwayKey !== lineId &&
+            !(tt._positionSource === 'supabase-train-run' && tt._sqlLineId === lineId)) {
           // v4.3.437: 反查 LINE_RAILWAY_CODE——ODPT Kawagoe（川越-高麗川間）数据对应
           // 项目 KawagoeWest 线、SaikyoKawagoe 数据对应 Saikyo/Kawagoe 线（大宮〜川越段）
           var _rwc = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
@@ -813,6 +815,12 @@
           m.forEach(function(tt) {
             if (!tt || !tt["odpt:railway"]) return;
             try {
+              if (tt._positionSource === 'supabase-train-run' && tt._sqlLineId === lineId && allLines[lineId]) {
+                var sqlOp = _normalizeTimetableOperator(allLines[lineId].operator);
+                var sqlIndex = timetableIndex[sqlOp] = timetableIndex[sqlOp] || {};
+                (sqlIndex[lineId] = sqlIndex[lineId] || []).push(tt);
+                return;
+              }
               // A Supabase run retains its original provenance. Rewriting
               // it as a manual timetable silently changes vehicle evidence
               // policy and hides the SQL read-through source in diagnostics.
@@ -849,7 +857,7 @@
       function _lineTimetables(lid) {
         var ln = allLines[lid]; if (!ln || !ln.operator) return [];
         var oid = _normalizeTimetableOperator(ln.operator);
-        var ri = timetableIndex[oid]; if (!ri) return [];
+        var ri = timetableIndex[oid] || {};
         var keys = {}, rwc = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
         if (ri[lid]) keys[lid] = true;
         if (rwc && rwc[lid] && ri[rwc[lid]]) keys[rwc[lid]] = true;
@@ -886,20 +894,8 @@
         var TT_OP_ALIAS = { "Rinkai": "TWR", "TsukubaExpress": "MIR" };
         if (TT_OP_ALIAS[opId]) opId = TT_OP_ALIAS[opId];
 
-        // Find timetable data for this operator（v4: 按 railway 子集，非全量）
-        var rIdx = timetableIndex[opId];
-        if (!rIdx) continue;
-
-        // v4: 聚合本线子集——直接同名（railwayKey===lineId）+ LINE_RAILWAY_CODE 反查
-        // （ODPT Kawagoe=川越〜高麗川 对应项目 KawagoeWest、SaikyoKawagoe 对应 Saikyo/Kawagoe）
-        var lineTimetable = [];
-        var wantKeys = {};
-        if (rIdx[lineId]) wantKeys[lineId] = true;
-        var _rwc2 = window.ODPTClient && window.ODPTClient.LINE_RAILWAY_CODE;
-        if (_rwc2 && _rwc2[lineId] && rIdx[_rwc2[lineId]]) wantKeys[_rwc2[lineId]] = true;
-        Object.keys(wantKeys).forEach(function(rk) {
-          lineTimetable = lineTimetable.concat(rIdx[rk]);
-        });
+        // One scoped lookup serves positioning and through-chain evidence.
+        var lineTimetable = _lineTimetables(lineId);
         if (lineTimetable.length === 0) continue;
 
         var positions = estimateLinePositions(lineId, line, lineTimetable, delayInfo, opId, allLines);

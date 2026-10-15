@@ -205,8 +205,9 @@ def main():
             new_errors.append('RECOVERY-001 LIVE_BFCACHE_RESUME_MISSING %s' % rel)
     if '_realtimeRefresh();' not in odpt_src:
         new_errors.append('RECOVERY-001 ODPT_FOREGROUND_REFRESH_MISSING')
-    if 'pageshow fallback->fuseAll error' not in fusion_src:
-        new_errors.append('RECOVERY-001 FUSION_BFCACHE_FALLBACK_MISSING')
+    fusion_resume = fusion_src.split("window.addEventListener('pageshow'", 1)[-1].split('// ========== Station', 1)[0]
+    if 'try { loadTrainPositions(); }' not in fusion_resume:
+        new_errors.append('RECOVERY-001 FUSION_BFCACHE_POSITION_RECALCULATION_MISSING')
 
     # COMPONENT-001: operator filter is one shared UI primitive. Pages own only
     # their business filtering behavior; button rendering/order/availability

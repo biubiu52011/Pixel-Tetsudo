@@ -168,6 +168,8 @@ jobs:
       - name: Metro official current single-family fleet evidence
         run: node tools/metro-single-fleet-evidence.test.js
 
+      - name: Continuous live and SQL position refresh
+        run: node tools/position-refresh-continuity.test.js
       - name: Saikyo and Sotetsu JR through model references
         run: node tools/saikyo-sotetsu-vehicle.test.js
       - name: Unified vehicle pipeline and late evidence recovery

@@ -4,7 +4,7 @@
 (function() {
   "use strict";
 
-  var FUSION_VERSION = 11;
+  var FUSION_VERSION = 12;
   // v4.3.x: 实时轮询间隔 — 见 runtime-config.js REFRESH_INTERVAL
   // v4.3.x: 位置轮询间隔 — 见 runtime-config.js POSITION_INTERVAL
 
@@ -335,7 +335,7 @@
         _resumeFallbackTimer = setTimeout(function() {
           _resumeFallbackTimer = null;
           if (_lastFusionEmitAt < resumedAt) {
-            try { fuseAll(); } catch(e) { console.debug("[DataFusion] visible fallback->fuseAll error:", e.message); }
+            try { loadTrainPositions(); } catch(e) { console.debug("[DataFusion] visible fallback->positions error:", e.message); }
           }
         }, 1500);
         startFusionPolling();
@@ -353,7 +353,7 @@
     _resumeFallbackTimer = setTimeout(function() {
       _resumeFallbackTimer = null;
       if (_lastFusionEmitAt < resumedAt) {
-        try { fuseAll(); } catch(e) { console.debug("[DataFusion] pageshow fallback->fuseAll error:", e.message); }
+        try { loadTrainPositions(); } catch(e) { console.debug("[DataFusion] pageshow fallback->positions error:", e.message); }
       }
     }, 1500);
     startFusionPolling();
@@ -1764,6 +1764,13 @@
       var _minuteKey = Math.floor(Date.now() / 60000);
       var _estimationSeeds = [];
       var _seenEstimationSeed = {};
+      // Visible SQL maps and their rendered dependencies advance on EVERY poll.
+      // Rebuilding the live snapshot must not erase them between minute batches.
+      (window.TrainsActivePositionLineIds || window.TrainsActiveSystemLineIds || []).forEach(function(id) {
+        if (allLines[id] && !_seenEstimationSeed[id]) {
+          _seenEstimationSeed[id] = true; _estimationSeeds.push(id);
+        }
+      });
       Object.keys(posMap || {}).forEach(function(id) {
         if (!_seenEstimationSeed[id]) { _seenEstimationSeed[id] = true; _estimationSeeds.push(id); }
       });
