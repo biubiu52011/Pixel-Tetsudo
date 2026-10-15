@@ -1,12 +1,12 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-15 JST — 合并车辆证据与车型运行时（验证中）
+## 2026-10-15 JST — 合并车辆证据与车型运行时（DONE：已发布并验证）
 
 - 链路为ODPT／SQL列车号 → 有来源的线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG。证据与车型职责合并在唯一js/train-vehicle.js，保留window.TrainOperationEvidence注册接口，删除原独立证据脚本与页面引用。
 - resolveRealtime接收实际ODPT上下文，resolveTimetableRun接收SQL行程与日历；DataFusion和推算器只适配原始输入及投影结果，不重复判定。不修改SQL事实、车型参考或编组证据。
 - 修复canonical数据晚到或替换时提供者捕获空/旧数组，以及SQL当天UNKNOWN持续缓存的问题。数据变化刷新canonical提供者及证据版本，行程车型缓存随版本失效；重复加载不会重置注册或实车编组状态。
 - 范围trains/realtime；home仅同步已有DataFusion，其余四页无车型链。资源4.3.1239；原件/日志recovery/vehicle-pipeline-merge-20261015。保留已有Markdown整理修改，只提交本任务增量。
-- 新回归覆盖272条E353通过实时统一入口、并结号码、网络/日期隔离、显式实时优先、同一SQL行程晚到数据UNKNOWN→EXACT、撤回与重复导入。42工具套件、65项node:test、4项守卫及相同ODPT/SQL生产回放PASS；66个SQL特急60个确定、6个临时号仍无班次级证据，不猜车型。公开验证待发布。
+- 新回归覆盖272条E353通过实时统一入口、并结号码、网络/日期隔离、显式实时优先、同一SQL行程晚到数据UNKNOWN→EXACT、撤回与重复导入。42工具套件、65项node:test、4项守卫及相同ODPT/SQL生产回放PASS；66个SQL特急60个确定、6个临时号仍无班次级证据，不猜车型。实现340f6e27的CI/CD、Release Guards及Pages均success；公开3脚本/2页面HTTP200且逐字MATCH，页面无旧引用，旧独立脚本HTTP404。浏览器连接不可用，本轮不声称用户当时具体列车已现场复测。
 
 > 本文件记录任务执行与验收状态。工程约束见 [ENGINEERING](ENGINEERING.md)，技术参考见 [README](README.md)，分类报告见 [文档索引](docs/README.md)。记录中的数量、浏览器结果和发布状态仅适用于对应提交与评估时间；后续记录可以取代早期方案，但不得改写旧证据。
 
