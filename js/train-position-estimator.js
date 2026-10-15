@@ -479,6 +479,22 @@
     return cached;
   }
 
+  // A certified exact train-number/calendar model is the only public candidate.
+  // Legacy SQL timetable candidate labels are retained separately in
+  // plannedVehicleCandidates for auditing, never added back to an EXACT result.
+  function visibleVehicleCandidates(vehicle, historicalCandidates) {
+    if (vehicle && vehicle.identityStatus === 'EXACT') {
+      var confirmed = String(vehicle.name || '').trim();
+      return confirmed ? [confirmed] : [];
+    }
+    var candidates = Array.isArray(vehicle && vehicle.candidates) ? vehicle.candidates.slice() : [];
+    (Array.isArray(historicalCandidates) ? historicalCandidates : []).forEach(function(name) {
+      name = String(name || '').trim();
+      if (name && candidates.indexOf(name) < 0) candidates.push(name);
+    });
+    return candidates;
+  }
+
   function resolveTrainRunIdentity(run, tt, lineId, line, serviceDateOverride) {
     var serviceDate = serviceDateOverride || tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || getTokyoServiceDate();
     var identityKey = lineId + "|" + String(serviceDate || "").slice(0, 10);
@@ -804,11 +820,7 @@
           var _timetableVehicleInput = _runIdentity.timetableVehicleInput;
           var vehResult = _runIdentity.vehicleResult;
           var _plannedCandidates = _runIdentity.plannedVehicleCandidates || [];
-          var _resolvedCandidates = Array.isArray(vehResult.candidates) ? vehResult.candidates : [];
-          var _visibleCandidates = _resolvedCandidates.slice();
-          _plannedCandidates.forEach(function(label) {
-            if (_visibleCandidates.indexOf(label) < 0) _visibleCandidates.push(label);
-          });
+          var _visibleCandidates = visibleVehicleCandidates(vehResult, _plannedCandidates);
           // Vehicle identity status always comes from TrainVehicle; a SQL
           // historical candidate must not promote UNKNOWN to NARROWED/EXACT.
           var trainClass = vehResult.name || '';

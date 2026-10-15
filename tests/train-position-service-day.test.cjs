@@ -677,3 +677,32 @@ test('ODPT StationTimetable is never imported as a full train itinerary for HYBR
   assert.match(edge, /source\?\.realtime_position_api_enabled &&/);
   assert.match(edge, /source\?\.sql_planned_fallback_enabled !== true/);
 });
+
+test('source-confirmed train models are not reclassified as old SQL candidates', () => {
+  const begin = source.indexOf('  function visibleVehicleCandidates(');
+  const end = source.indexOf('  function resolveTrainRunIdentity(', begin);
+  assert.ok(begin >= 0 && end > begin, 'position estimator must expose one candidate merge');
+  const ctx = {};
+  vm.runInNewContext(source.slice(begin, end) + '\nthis.visible = visibleVehicleCandidates;', ctx);
+  const visible = (evidence, historical) => Array.from(ctx.visible(evidence, historical));
+  assert.deepEqual(
+    visible({identityStatus:'EXACT',name:'E353系',candidates:['E353系']}, ['E353系（あずさ・かいじ）']),
+    ['E353系'], 'official 5003M/5050M reference cannot be returned as two candidates'
+  );
+  assert.deepEqual(
+    visible({identityStatus:'EXACT',name:'東葉高速2000系',candidates:['東葉高速2000系']},
+      ['東葉高速2000系', '東京メトロ15000系']),
+    ['東葉高速2000系'], 'exact Tozai/ToyoRapid number must not inherit old line candidate list'
+  );
+  assert.deepEqual(
+    visible({identityStatus:'UNKNOWN',name:'',candidates:[]},['E231系0番台','E231系500番台']),
+    ['E231系0番台','E231系500番台'], 'unverified Chuo-Sobu stock must remain unresolved'
+  );
+  assert.deepEqual(
+    visible({identityStatus:'NARROWED',name:'',candidates:['東京メトロ15000系']},
+      ['東京メトロ15000系','東京メトロ05系']),
+    ['東京メトロ15000系','東京メトロ05系'], 'unverified through stock retains distinct candidates'
+  );
+  assert.deepEqual(visible({identityStatus:'EXACT',name:'',candidates:[]}, ['E231系0番台']), [],
+    'invalid exact evidence must not be completed from a historical candidate');
+});
