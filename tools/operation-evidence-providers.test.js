@@ -49,7 +49,7 @@ assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
  const providers=[],sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:providers},console:{debug:function(){},log:function(){},warn:function(){},error:function(){}}};
  vm.createContext(sandbox);
  vm.runInContext(fs.readFileSync("data/timetables/vehicle-operation-evidence-data.js","utf8"),sandbox);
- vm.runInContext(fs.readFileSync("data/timetables/train-operation-evidence.js","utf8"),sandbox);
+ vm.runInContext(fs.readFileSync("js/train-vehicle.js","utf8"),sandbox);
  const cp=providers.find(x=>x.id==="canonical-vehicle-operation-evidence");
  assert(cp);
  let x=cp.resolveEvidence("TMW001D",{serviceDate:"2026-04-10",lineId:"TokyoMonorail"});
@@ -78,7 +78,7 @@ assert(r&&r.operator==="Keikyu"&&!r.vehicleType);
    VEHICLE_REFERENCE_RULES:[],VEHICLE_FAMILY_RULES:[]
  },console:{debug(){}}};
  vm.createContext(sandbox);
- vm.runInContext(fs.readFileSync("data/timetables/train-operation-evidence.js","utf8"),sandbox);
+ vm.runInContext(fs.readFileSync("js/train-vehicle.js","utf8"),sandbox);
  const resolve=sandbox.window.TrainOperationEvidence.resolveEvidence;
  const ctx={lineId:"test-odpt",serviceDate:"2026-10-13",serviceTime:"11:30",operationCode:"03K"};
  let hit=resolve("1203K",ctx,"realtime-derived");
@@ -115,7 +115,7 @@ console.log("operation evidence providers: PASS");
   const sandbox={window:{TRAIN_OPERATION_EVIDENCE_PROVIDERS:[]},console:{debug(){}}};
   vm.createContext(sandbox);
   [
-    "data/timetables/train-operation-evidence.js",
+    "js/train-vehicle.js",
     "data/timetables/asakusa-operation-evidence-2026.js",
     "data/timetables/chiyoda-operation-evidence-2026.js",
     "data/timetables/meguro-operation-evidence-2026.js",

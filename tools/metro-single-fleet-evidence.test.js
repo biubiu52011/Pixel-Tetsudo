@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const s={window:{},console:{debug(){}}};vm.createContext(s);
-for(const p of ['js/train-vehicle.js','data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js'])
+for(const p of ['js/train-vehicle.js','data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js'])
  vm.runInContext(fs.readFileSync(p,'utf8'),s,{filename:p});
 const evidence=s.window.TrainOperationEvidence,vehicle=s.window.TrainVehicle;
 for(const [line,model]of [['Marunouchi','東京メトロ2000系'],['MarunouchiBranch','東京メトロ2000系'],['Ginza','東京メトロ1000系']]){

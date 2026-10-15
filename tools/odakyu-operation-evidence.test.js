@@ -1,6 +1,7 @@
 const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
 const window={};const ctx={window,console};
-for(const f of ["train-operation-evidence.js","odakyu-operation-evidence-2026.js"])vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","data/timetables",f),"utf8"),ctx);
+vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","js/train-vehicle.js"),"utf8"),ctx);
+for(const f of ["odakyu-operation-evidence-2026.js"])vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","data/timetables",f),"utf8"),ctx);
 const p=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="odakyu-operation-groups-2026");assert(p);
 let r=p.resolveEvidence("A11",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.deepStrictEqual(Array.from(r.vehicleCandidates),["小田急3000形","小田急8000形"]);assert.strictEqual(r.vehicleType,"");
 r=p.resolveEvidence("3014",{lineId:"Odawara",serviceDate:"2026-04-01"});assert.strictEqual(r.operationCode,"E11");assert.strictEqual(r.vehicleType,"");assert(r.vehicleCandidates.length>1);

@@ -171,7 +171,7 @@ test('Rinkai candidates never fabricate JR E233; dated exact carsets use same-mo
   assert.match(exact.iconPath, /東京臨海高速鉄道_70-000形\.png$/);
   assert.doesNotMatch(exact.iconPath, /E233/);
 
-  const estimator = read('js/train-position-estimator.js');
+  const estimator = read('js/train-vehicle.js');
   const fusion = read('js/data-fusion.js');
   assert.match(estimator, /_resolvedEvidence\.decisive === true/);
   assert.match(estimator, /if \(_compatible\) _timetableVehicleInput = _operationModels\[0\]/);
@@ -352,7 +352,7 @@ test('Toden historical literal car-number inputs resolve 33 car models; current 
   assert.ok(fusion.includes('/^\\d{4}$/.test(positionData.trainNumber)'),
     'legacy literal physical car number may resolve; ODPTnnnn must never be stripped');
   assert.match(fusion, /railway: railway,/);
-  assert.match(fusion, /if \(!odptVehicleType && window\.TrainOperationEvidence &&/);
+  assert.match(read('js/train-vehicle.js'), /!String\(ctx\.realtimeVehicleType\|\|''\)\.trim\(\)/);
   assert.doesNotMatch(fusion, /lid !== "Arakawa"/,
     'Arakawa train numbers must reach the same registered script resolver, without pretending trip IDs are physical car numbers');
 });

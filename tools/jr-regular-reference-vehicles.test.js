@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const s={window:{},console:{debug(){}}};vm.createContext(s);
-for(const p of ['js/train-vehicle.js','data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js'])vm.runInContext(fs.readFileSync(p,'utf8'),s,{filename:p});
+for(const p of ['js/train-vehicle.js','data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js'])vm.runInContext(fs.readFileSync(p,'utf8'),s,{filename:p});
 const db=JSON.parse(fs.readFileSync('data/timetables/vehicle-operation-evidence.json'));
 const lines=['KeihinTohoku','Yokohama','Sagami','Senseki','Tsurumi','TsurumiOkawa','TsurumiUmiShibaura'];
 const refs=db.referenceRules.filter(r=>lines.includes(r.networkKey)&&r.effectiveFrom==='2026-10-15');

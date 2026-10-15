@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const read=p=>fs.readFileSync(p,'utf8'),ctx={window:{},console:{debug(){}}};vm.createContext(ctx);
-for(const file of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(file),ctx);
+for(const file of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(file),ctx);
 const snapshot=JSON.parse(read('data/timetables/vehicle-operation-evidence.json'));
 const rules=snapshot.referenceRules.filter(r=>r.vehicleType==='E353系'&&['ChuoRapid','ChuoMain'].includes(r.networkKey));
 assert.equal(rules.length,272);
@@ -31,7 +31,7 @@ for(const row of JSON.parse(read('tests/fixtures/chuo-shinjuku-express.json'))){
  const final=row.stops.at(-1).arrival_time.split(':').map(Number),now=Date.UTC(2026,9,14,final[0]-9,final[1]-2);
  class FixedDate extends Date{constructor(...a){super(...(a.length?a:[now]));}static now(){return now;}}
  const box={window:{RuntimeConfig:{},ODPTClient:{LINE_RAILWAY_CODE:{ChuoRapid:'ChuoRapid',ChuoMain:'Chuo'},LINE_TO_OPERATOR:{ChuoRapid:'JR-East',ChuoMain:'JR-East'}}},Date:FixedDate,Intl,console:{debug(){}}};vm.createContext(box);
- for(const f of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(f),box);
+ for(const f of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(f),box);
  const src=read('data/api/odpt-unified.js'),start=src.indexOf('    function _trainRunToTimetable(run) {'),end=src.indexOf('    // One timetable identity',start);
  box._plannedTrainRunIdentity=()=>row.id;box._dbStopClock=t=>t;box.LINE_TO_OPERATOR={};box.LINE_RAILWAY_CODE={};
  vm.runInContext(src.slice(start,end),box);

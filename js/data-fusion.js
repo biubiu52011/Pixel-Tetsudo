@@ -1229,86 +1229,33 @@
             // An explicit vehicle type carried by the realtime record is train-level
             // evidence. Register it before resolving so the same train number can
             // reuse that evidence without depending on the current display line.
-            if (window.TrainVehicle && typeof window.TrainVehicle.resolve === "function") {
+            if (window.TrainVehicle && typeof window.TrainVehicle.resolveRealtime === "function") {
               try {
-                var _derivedVehicleEvidence = null;
-                // Ask the SAME registered number-to-model scripts on every
-                // line, including Arakawa. A bare ODPTnnnn is not a physical
-                // car number: without a matching sourced rule it stays UNKNOWN.
-                if (!odptVehicleType && window.TrainOperationEvidence &&
-                    typeof window.TrainOperationEvidence.resolveEvidence === "function") {
-
-                  var _evidenceStart = _perfNow();
-                  _vehicleEvidenceCalls++;
-                  _derivedVehicleEvidence = window.TrainOperationEvidence.resolveEvidence(positionData.trainNumber, {
-                    lineId: lid,
-                    railway: railwayName,
-                    operator: trainOpShort,
-                    trainOwner: odptTrainOwner,
-                    trainNumber: positionData.trainNumber,
-                    railDirection: railDirection,
-                    destinationStation: destStations,
-                    serviceDate: _snapshotServiceDate,
-                    serviceTime: _snapshotServiceTime,
-                    calendarType: _snapshotCalendarType
-                  }, "realtime-derived");
-                  _vehicleEvidenceMs += _perfNow() - _evidenceStart;
-                }
-                var _isPlannedReference = !!(_derivedVehicleEvidence &&
-                  _derivedVehicleEvidence.evidenceRole === "timetable-reference");
-                if (_derivedVehicleEvidence) {
-                  positionData.vehicleEvidenceSource = _isPlannedReference
-                    ? "planned-timetable-reference"
-                    : (_derivedVehicleEvidence.providerId || "dated-or-structural-evidence");
-                  positionData.operationEvidence = [_derivedVehicleEvidence];
-                }
-                var _evidenceVehicleInput = _derivedVehicleEvidence && _derivedVehicleEvidence.vehicleType
-                  ? _derivedVehicleEvidence.vehicleType
-                  : (_derivedVehicleEvidence && _derivedVehicleEvidence.vehicleCandidates || []).join(" / ");
-                var _derivedVehicleType = _isPlannedReference ? "" : _evidenceVehicleInput;
-                var _realtimeReferenceModel = _isPlannedReference ? _evidenceVehicleInput : "";
-                // A published reference proves a model, never a day's carset.
-                // Only a unique, dated, decisive train observation may attach
-                // formation evidence to an ODPT realtime position.
-                var _rtFormations = _derivedVehicleEvidence && _derivedVehicleEvidence.decisive &&
-                  !_isPlannedReference && _derivedVehicleEvidence.formationId
-                    ? String(_derivedVehicleEvidence.formationId).split(/\s*\/\s*|\s*,\s*|\s*\|\s*/).map(function(v) {
-                        return v.trim();
-                      }).filter(Boolean) : [];
-                _rtFormations = _rtFormations.filter(function(v,i,a){return a.indexOf(v) === i;});
-                // Adapter-supplied physical IDs have their own fields; never
-                // reinterpret a normal public train number as a car number.
-                var _sourceFormation = String(t.vehicleFormationId || t.formationId || "").trim();
-                var _sourceCar = String(t.vehicleCarNumber || t.carNumber || "").trim();
-                if (_sourceFormation) _rtFormations.push(_sourceFormation);
-                _rtFormations = _rtFormations.filter(function(v,i,a){return a.indexOf(v) === i;});
-                positionData.vehicleFormationCandidates = _rtFormations;
-                positionData.vehicleFormationId = _rtFormations.length === 1 ? _rtFormations[0] : "";
-                var _vehicleStart = _perfNow();
+                var _sourceFormation=String(t.vehicleFormationId||t.formationId||'').trim();
+                var _sourceCar=String(t.vehicleCarNumber||t.carNumber||'').trim();
+                var _vehicleStart=_perfNow();
                 _vehicleResolveCalls++;
-                var _rtVehicle = window.TrainVehicle.resolve({
-                  lineId: lid,
-                  operator: trainOpShort,
-                  trainOwner: odptTrainOwner,
-                  trainNumber: positionData.trainNumber,
-                  railway: railway,
-                  // Only legacy literal four-digit Arakawa car-number fields
-                // may identify a physical tram; ODPTnnnn is a trip ID.
-                // For other operators, use only separate source car fields.
-                realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" &&
-                  trainOpShort === "Toei" && /^\d{4}$/.test(positionData.trainNumber)
-                    ? positionData.trainNumber : _sourceCar,
-                  stationIndex: idx,
-                  trainType: rawType,
-                  destinationStation: destStations,
-                  trainId: trainId,
-                  serviceDate: _snapshotServiceDate,
-                  formationId: positionData.vehicleFormationId || "",
-                  formationCandidates: positionData.vehicleFormationCandidates || [],
-                  realtimeVehicleType: odptVehicleType,
-                  realtimeDerivedVehicleType: _derivedVehicleType,
-                  timetableVehicleType: _realtimeReferenceModel
+                if(!odptVehicleType)_vehicleEvidenceCalls++;
+                var _decision=window.TrainVehicle.resolveRealtime({
+                  lineId:lid,operator:trainOpShort,trainOwner:odptTrainOwner,
+                  trainNumber:positionData.trainNumber,railway: railway,railDirection:railDirection,
+                  stationIndex:idx,trainType:rawType,destinationStation:destStations,trainId:trainId,
+                  serviceDate:_snapshotServiceDate,serviceTime:_snapshotServiceTime,calendarType:_snapshotCalendarType,
+                  formationId:_sourceFormation,realtimeVehicleType: odptVehicleType,
+                  realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" &&
+                    trainOpShort === "Toei" && /^\d{4}$/.test(positionData.trainNumber)
+                      ? positionData.trainNumber : _sourceCar
                 });
+                var _rtVehicle=_decision.vehicleResult;
+                var _derivedVehicleType=_decision.realtimeDerivedVehicleType;
+                var _realtimeReferenceModel=_decision.realtimeReferenceModel;
+                positionData.vehicleFormationCandidates=_decision.formationCandidates;
+                positionData.vehicleFormationId=_decision.formationId;
+                if(_decision.evidence){
+                  positionData.vehicleEvidenceSource=_decision.isPlannedReference?'planned-timetable-reference':
+                    (_decision.evidence.providerId||'dated-or-structural-evidence');
+                  positionData.operationEvidence=[_decision.evidence];
+                }
                 // Preserve the two source assertions for subsequent timetable
                 // joins. A projected vehicle name is NOT itself raw evidence.
                 positionData.realtimeDerivedVehicleType = _derivedVehicleType;

@@ -84,7 +84,7 @@ def main():
     estimator_src = _read_arch('js/train-position-estimator.js')
     renderer_src = _read_arch('js/trains-render.js')
     vehicle_src = _read_arch('js/train-vehicle.js')
-    evidence_src = _read_arch('data/timetables/train-operation-evidence.js')
+    evidence_src = vehicle_src
 
 
     # RAILWAY-001: operational through-service adjacency has one runtime authority.
@@ -340,7 +340,9 @@ def main():
         new_errors.append('TRAIN-001 RETIRED_GENERIC_ASSET_DIRECTORY_STILL_PRESENT')
 
     # VEHICLE-001/002: one final vehicle authority and one canonical evidence resolver.
-    if 'TrainOperationEvidence.resolveEvidence' not in estimator_src:
+    if ('TrainVehicle.resolveTimetableRun' not in estimator_src
+            or 'TrainOperationEvidence.resolveEvidence' not in vehicle_src
+            or 'TrainVehicle.resolveRealtime' not in fusion_src):
         new_errors.append('VEHICLE-002 CANONICAL_EVIDENCE_RESOLVER_BYPASSED')
     if 'TRAIN_OPERATION_EVIDENCE_PROVIDERS' in estimator_src or 'TRAIN_OPERATION_EVIDENCE_PROVIDERS' in fusion_src:
         new_errors.append('VEHICLE-002 DIRECT_PROVIDER_TRAVERSAL_OUTSIDE_CANONICAL_RESOLVER')
@@ -350,6 +352,14 @@ def main():
         new_errors.append('VEHICLE-002 FORMATION_EVIDENCE_RELABELED_AS_TIMETABLE')
     if 'pos.vehicleResolution = chainVehicle;' not in estimator_src or "pos.vehicleSource = chainVehicle.source || 'formation-evidence';" not in estimator_src:
         new_errors.append('VEHICLE-002 FORMATION_PROVENANCE_PROJECTION_MISSING')
+
+    # The retired evidence script cannot be reintroduced beside the merged runtime.
+    if os.path.exists(os.path.join(REPO_ROOT, 'data/timetables/train-operation-evidence.js')):
+        new_errors.append('VEHICLE-002 RETIRED_EVIDENCE_SCRIPT_REINTRODUCED')
+    for page in ('pages/trains.html', 'pages/realtime.html'):
+        page_src = _read_arch(page)
+        if 'train-operation-evidence.js' in page_src or page_src.count('js/train-vehicle.js') != 1:
+            new_errors.append('VEHICLE-002 DUPLICATE_OR_LEGACY_VEHICLE_RUNTIME ' + page)
 
     # VEHICLE-003: renderer consumes resolved identity only.
     if 'TrainVehicle.resolve(_vrCtx)' in renderer_src:

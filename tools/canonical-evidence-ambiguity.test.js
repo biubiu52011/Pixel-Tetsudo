@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 const fs=require("fs"),vm=require("vm"),assert=require("assert");
-const code=fs.readFileSync("data/timetables/train-operation-evidence.js","utf8");
+const code=fs.readFileSync("js/train-vehicle.js","utf8");
 function resolve(records,ctx,aliases){
  const sandbox={window:{VEHICLE_OPERATION_EVIDENCE:records,VEHICLE_NETWORK_ALIASES:aliases||[]},console:{debug(){}}};
  vm.createContext(sandbox); vm.runInContext(code,sandbox);

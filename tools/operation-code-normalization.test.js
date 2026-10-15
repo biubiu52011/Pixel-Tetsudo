@@ -1,5 +1,5 @@
 const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
-const window={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","data/timetables/train-operation-evidence.js"),"utf8"),{window,console});
+const window={};vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","js/train-vehicle.js"),"utf8"),{window,console});
 const n=window.TrainOperationEvidence.normalizeOperationCode;
 assert.strictEqual(n("03K",{lineId:"Tozai"}),"03K");
 assert.strictEqual(n("507K",{lineId:"Tozai"}),"07K");

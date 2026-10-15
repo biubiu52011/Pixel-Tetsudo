@@ -1,6 +1,7 @@
 const fs=require("fs"),path=require("path"),assert=require("assert"),vm=require("vm");
 const root=path.join(__dirname,".."),window={};const ctx={window,console};vm.createContext(ctx);
-for(const f of ["train-operation-evidence.js","tozai-operation-evidence-2026.js","tozai-formation-evidence.js"])vm.runInContext(fs.readFileSync(path.join(root,"data/timetables",f),"utf8"),ctx);
+vm.runInNewContext(fs.readFileSync(path.join(__dirname,"..","js/train-vehicle.js"),"utf8"),ctx);
+for(const f of ["tozai-operation-evidence-2026.js","tozai-formation-evidence.js"])vm.runInContext(fs.readFileSync(path.join(root,"data/timetables",f),"utf8"),ctx);
 const own=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="tozai-operation-ownership-2026");
 const dated=window.TRAIN_OPERATION_EVIDENCE_PROVIDERS.find(x=>x.id==="tozai-dated-formations");
 assert(own&&dated,"Tozai providers missing");

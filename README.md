@@ -183,7 +183,7 @@
 | db-loader | 构建期数据加载器（data/core/db-loader.js） |
 | CSP | 内容安全策略（页面 script-src 'self' 等约束） |
 | TrainVehicle | 浏览器运行时车型身份统一入口（js/train-vehicle.js，window.TrainVehicle）；按「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」链路收敛身份并选择原生 PNG，供数据层与渲染层消费 |
-| TrainOperationEvidence | 列车运行/编成证据注册与解析中心（data/timetables/train-operation-evidence.js，window.TrainOperationEvidence）；各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册，resolveEvidence(trainNumber, 线路/服务日/日历) 解析车型 |
+| TrainOperationEvidence | 列车运行/编成证据注册与解析接口（与TrainVehicle合并于js/train-vehicle.js，window.TrainOperationEvidence）；各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册，resolveEvidence(trainNumber, 线路/服务日/日历) 解析车型 |
 | TrainIcons | js/train-vehicle.js 内提供的兼容接口，与 TrainVehicle 共用同一车型目录；独立 resolver 脚本已移除 |
 | 服务关系层 | canonical 线路内的 throughServices、serviceBoundaries、branchOf 等关系；不替代 presentation 展示分组 |
 | baseline refresh | 合法 canonical migration 后刷新 recovery/baseline/production_baseline.json 的生命周期动作，必须与 migration audit、approved removal manifest、CI guard 同步 |
@@ -319,7 +319,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | js/ | 前端模块 | 按数据/业务/展示三层组织（见 3.7）；模块职责单一，禁止跨层依赖 |
 | data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON）+ 运行时常量表 | 生成文件（*.file.js、data-config-bundle.js）禁止手工编辑；canonical 数据修改必须直接修改源文件并重跑 gen-file-data.js；改 transfer-hints/runtime-config/through-service/line-operation-systems/platform-data/line-service-relations/train-type-defs 后重跑 gen-config-bundle.js |
 | data/api/ | ODPT 客户端（odpt-unified.js）与链接（odpt-links.js） | ODPT 访问唯一入口；不得在页面或业务模块绕过 ODPTClient 直连；首页经 odpt-lazy.js 惰性加载 |
-| data/timetables/ | 手动时刻表（*-manual.js）+ 车辆运行/编成证据（train-operation-evidence.js、*-operation-evidence-2026.js、*-formation-evidence.js 等） | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理；证据文件经 TrainOperationEvidence.register 注册，供车型链路消费 |
+| data/timetables/ | 手动时刻表（*-manual.js）+ 车辆运行/编成证据（vehicle-operation-evidence-data.js、*-operation-evidence-2026.js、*-formation-evidence.js 等） | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理；证据文件经 TrainOperationEvidence.register 注册，供车型链路消费 |
 | fonts/ | 像素字体（ja/ko/zh-hans/zh-hant/latin） | 唯一字体源，禁止使用系统字体替代 |
 | images/ | 素材库，按业务主题分四个子目录；根级仅放全站图标/站点标记（pixel-tetsudo.ico、Language.png、icon-metro-station.svg、地铁站点.svg） | 见下方「图库管理规范」：四个子目录各自的用途与命名 |
 | scripts/ | 数据治理脚本（i18n 审计/对齐/提交前检查） | serve.py 为本地开发服务器（.gitignore 排除不入库）；生成脚本产出必须落 data/core 或 data/timetables |
@@ -373,9 +373,11 @@ trains 页面不再由 trains-page.js 单独承担主体职责。当前 ownershi
 
 车型身份解析架构（按现役入口核对）：统一链路为「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」——
 
+实现合并为唯一js/train-vehicle.js，保留TrainOperationEvidence注册/解析API，实时与SQL分别调用resolveRealtime／resolveTimetableRun。旧独立证据脚本移除；快照晚到或替换会更新提供者和行程车型缓存，不凭目的地推车型。
+
 ① **ODPT/SQL 列车号**：来源为 ODPT 实时 trainNumber 或 Supabase SQL train-runs（canonical 时刻表）列车号；
 ② **线路车型对应**：Supabase train_vehicle_rules 等有来源的证据经既有 exporter 生成 vehicle-operation-evidence 快照；按列车号、网络、服务日、日历和有效期匹配。已移除的 vehicle-type-map.js 不再作为现役静态映射表。
-③ **TrainOperationEvidence**：data/timetables/train-operation-evidence.js（window.TrainOperationEvidence）——各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册证据；resolveEvidence(trainNumber, {lineId, railway, serviceDate, calendarType}, 'fallback') 按列车号+线路+服务日+日历解析车型；
+③ **TrainOperationEvidence**：js/train-vehicle.js（window.TrainOperationEvidence）——各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册证据；resolveEvidence(trainNumber, {lineId, railway, serviceDate, calendarType}, 'fallback') 按列车号+线路+服务日+日历解析车型；
 ④ **TrainVehicle**：js/train-vehicle.js（window.TrainVehicle）——resolve 收敛车型身份、selectMarkerArtwork 选择原生 PNG；实时车型优先，未知保持 UNKNOWN 灰点，不猜车型；
 ⑤ **PNG**：images/列车/*.png 原生车型图标（82×98），路径经图库 inventory 校验，页面不硬编码散落路径。
 
@@ -496,7 +498,7 @@ API key 不硬编码：环境变量或 .work/serve.env（已被 .gitignore 排�
 
 基础层：db-loader.js 必须早于消费 RailwayDB/UNIFIED_LINES 的模块；data-layer.js、odpt-links.js、odpt-unified.js、local-railway-data.js、data-config-bundle.js 必须早于 DataFusion / LinePresentationService / trains 模块。data-config-bundle.js 由 gen-config-bundle.js 生成，合并顺序固定为 transfer-hints → runtime-config → through-service → line-operation-systems → platform-data → line-service-relations → train-type-defs。
 
-车型与列车位置层：train-operation-evidence.js（+ 各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register 注册证据）→ train-vehicle.js → train-position-estimator.js → trains-render.js（选 PNG 渲染）→ data-fusion.js。列车号经 TrainOperationEvidence.resolveEvidence 解析车型，TrainVehicle 统一收敛身份并选择原生 PNG；实时车型优先、未知保持 UNKNOWN，不得绕开 TrainVehicle 新建第二套用户可见车型判断。
+车型与列车位置层：ODPT／SQL列车号 → 各线路有来源的车型对应 → js/train-vehicle.js（内部TrainOperationEvidence校验证据 → TrainVehicle判定身份并选择PNG）。DataFusion通过resolveRealtime、位置推算器通过resolveTimetableRun调用合并模块；trains-render只消费结果。位置与车型身份独立，不新建第二套判断。
 
 展示与 i18n 层：translations.js、common.js、line-presentation-service.js、data-state.js、lang-init.js 在页面专属模块前加载；静态文案走 data-i18n，动态文案走 window.t(key)，线路/车站显示名走 RailwayDB/tOp。
 
@@ -1188,7 +1190,7 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 | SQL 时刻表与证据 | supabase/functions/train-runs/index.ts + tools/export-vehicle-operation-evidence.js | 按覆盖策略提供时刻表；导出有来源、日期与日历约束的车型证据 |
 | 实时融合 | js/data-fusion.js | ODPT、官方 API、manual、本地 fallback 融合 |
 | 列车位置推定 | js/train-position-estimator.js | 按时刻表、延误、站序推定列车位置 |
-| 车型身份 | js/train-vehicle.js + data/timetables/train-operation-evidence.js | 统一解析有来源的车型／车号／编成证据并选择同车型 PNG；TrainIcons 是同一脚本内的兼容接口，不是独立解析链 |
+| 车型身份 | js/train-vehicle.js（证据与车型合并入口） | 统一解析有来源的车型／车号／编成证据并选择同车型 PNG；TrainIcons 是同一脚本内的兼容接口，不是独立解析链 |
 | 线路图模块 | js/trains-config.js / trains-utils.js / trains-data.js / trains-geometry.js / train-track-layout.js / trains-render.js / trains-page.js | 按配置、工具、数据装配、几何、列车轨道布局、渲染、页面控制拆分 |
 
 服务端规则（白名单登记、key 不硬编码、安全加固不回退）见 3.9。

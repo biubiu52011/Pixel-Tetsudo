@@ -4,7 +4,7 @@ const snapshot=JSON.parse(read('data/timetables/vehicle-operation-evidence.json'
 const references=snapshot.referenceRules.filter(r=>r.networkKey==='ChuoRapid'&&r.vehicleType==='E233系0番台');
 assert.equal(references.length,1081);
 const evidenceCtx={window:{},console:{debug(){}}};vm.createContext(evidenceCtx);
-for(const p of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js'])vm.runInContext(read(p),evidenceCtx,{filename:p});
+for(const p of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js'])vm.runInContext(read(p),evidenceCtx,{filename:p});
 for(const r of references){
  const ctx={lineId:'ChuoRapid',operator:'JR-East',railway:'odpt.Railway:JR-East.ChuoRapid',serviceDate:r.calendarType==='weekday'?'2026-10-14':'2026-10-17',calendarType:r.calendarType};
  const fact=evidenceCtx.window.TrainOperationEvidence.resolveEvidence(r.trainNumber,ctx,'fallback');
@@ -26,7 +26,7 @@ function at(number,hour,minute,lineId='ChuoRapid',serviceDate='2026-10-14'){
  const fixed=Date.UTC(2026,9,Number(serviceDate.slice(-2)),hour-9,minute);
  class FixedDate extends Date{constructor(...a){super(...(a.length?a:[fixed]));}static now(){return fixed;}}
  const ctx={window:{RuntimeConfig:{},ODPTClient:{LINE_RAILWAY_CODE:{Joban:'JobanRapid',JobanMain:'Joban'},LINE_TO_OPERATOR:{ChuoRapid:'JR-East',ChuoMain:'JR-East',Ome:'JR-East',Joban:'JR-East',JobanMain:'JR-East'}}},Date:FixedDate,Intl,console:{debug(){}}};
- vm.createContext(ctx);for(const p of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(p),ctx);
+ vm.createContext(ctx);for(const p of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(p),ctx);
  const src=read('data/api/odpt-unified.js'),start=src.indexOf('    function _trainRunToTimetable(run) {'),end=src.indexOf('    // One timetable identity',start);
  ctx._plannedTrainRunIdentity=()=> 'fixture';ctx._dbStopClock=t=>t;ctx.LINE_TO_OPERATOR={};ctx.LINE_RAILWAY_CODE={};vm.runInContext(src.slice(start,end),ctx);
  const row=fixture.find(r=>r.train_number===number&&r.service_date===serviceDate),tt=ctx._trainRunToTimetable(row);

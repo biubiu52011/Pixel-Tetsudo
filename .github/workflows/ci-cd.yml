@@ -168,6 +168,9 @@ jobs:
       - name: Metro official current single-family fleet evidence
         run: node tools/metro-single-fleet-evidence.test.js
 
+      - name: Unified vehicle pipeline and late evidence recovery
+        run: node tools/train-vehicle-pipeline.test.js
+
       - name: JR regular train model references and through-service isolation
         run: node tools/jr-regular-reference-vehicles.test.js
 

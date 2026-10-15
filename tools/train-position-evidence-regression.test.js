@@ -33,26 +33,27 @@ assert(/_realtimeEvidenceWithoutPosition\s*=\s*\{\};/.test(fusion),"positionless
 assert(/Object\.keys\(_realtimeEvidenceWithoutPosition\)/.test(fusion),"positionless realtime vehicle evidence must have a consumer");
 
 const estimator=read("js/train-position-estimator.js");
-const estimatorSource=estimator;
+const vehiclePipeline=read("js/train-vehicle.js");
+const estimatorSource=estimator+vehiclePipeline; // Projection and merged vehicle admission guards.
 const fusionSource=fusion;
 assert(/vehicleResolvedUpstream:\s*vehResult\.identityStatus === 'EXACT'/.test(estimator),
   "upstream vehicle authority must represent EXACT identity, not artwork availability");
 assert(/serviceTime:\s*_snapshotServiceTime/.test(fusion) &&
-       /requireTrainNumberMatch:\s*true/.test(read("data/timetables/train-operation-evidence.js")),
+       /requireTrainNumberMatch:\s*true/.test(read("js/train-vehicle.js")),
   "ODPT live mapping must admit only dated, exact train-number formation observations");
-assert(/timetableVehicleType:\s*_realtimeReferenceModel/.test(fusion) &&
-       /positionData\.vehicleFormationCandidates = _rtFormations/.test(fusion),
+assert(/window\.TrainVehicle\.resolveRealtime\(/.test(fusion) &&
+       /positionData\.vehicleFormationCandidates=_decision\.formationCandidates/.test(fusion),
   "ODPT train vehicle reference and dated formation must share the canonical resolver");
 assert(/_snapshotJstNow\.getUTCHours\(\)/.test(fusion) &&
        /_serviceDayNow\.getUTCDate\(\)/.test(fusion),
   "ODPT train evidence date must use JST rather than client device timezone");
-assert(/verifiedTimetableArtworkPath:\s*_plannedSqlVehicle/.test(estimator) &&
-       /tt\._sqlVehicleMappingLevel === 'dated_schedule_rule'/.test(estimator),
+assert(/verifiedTimetableArtworkPath:\s*_plannedSqlVehicle/.test(vehiclePipeline) &&
+       /tt\._sqlVehicleMappingLevel === 'dated_schedule_rule'/.test(vehiclePipeline),
   'source-dated SQL artwork must reach the one vehicle resolver');
 for(const rel of ['pages/trains.html','pages/realtime.html']){
  const html=read(rel);
  for(const file of ['odpt-unified.js','train-vehicle.js','vehicle-operation-evidence-data.js',
-                    'train-operation-evidence.js','train-position-estimator.js','data-fusion.js']){
+                    'train-position-estimator.js','data-fusion.js']){
   const pinnedVersion = ['train-position-estimator.js','data-fusion.js'].includes(file)
     ? '4.3.1192' : '4.3.1180';
   const escapedFile = file.replace(/\./g, '\\.');
@@ -437,16 +438,16 @@ assert(estimatorSource.includes('vehicleIdentityStatus: vehResult.identityStatus
   'estimated trains must expose vehicle identity resolution state');
 
 
-assert(estimatorSource.includes('_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator'),
+assert(vehiclePipeline.includes('_resolvedEvidence && _resolvedEvidence.decisive && _resolvedEvidence.operator'),
   'only decisive canonical evidence may establish assignment operator');
-assert(estimatorSource.includes('timetableEvidence: _assignmentMatches'),
+assert(vehiclePipeline.includes('timetableEvidence: _assignmentMatches'),
   'dated timetable evidence must reach the central vehicle authority');
-assert(estimatorSource.includes('normalizeOperationCode(trainNumber, _baseOperationCtx)'),
+assert(vehiclePipeline.includes('normalizeOperationCode(trainNumber, _baseOperationCtx)'),
   'operation-code normalization must occur before the canonical resolver');
-assert(/at:\s*\(function\(\)\{ var d=new Date\(Date\.now\(\)\+9\*60\*60\*1000\)/.test(estimatorSource),
+assert(/at:\s*\(function\(\)\{ var d=new Date\(Date\.now\(\)\+9\*60\*60\*1000\)/.test(vehiclePipeline),
   'segmented operation evidence must receive JST service time, not UTC');
 
-const operationEvidenceSource = fs.readFileSync('data/timetables/train-operation-evidence.js','utf8');
+const operationEvidenceSource = fs.readFileSync('js/train-vehicle.js','utf8');
 assert(operationEvidenceSource.includes('if (timed.length !== 1) return null;'),
   'segmented operation evidence must remain unresolved when service time hits zero or multiple segments');
 assert(operationEvidenceSource.includes('if (hasTimedSegments)'),
@@ -477,9 +478,9 @@ assert(operationEvidenceSource.includes('provenance:"canonical operation family 
   'ownership-only family rules must remain model-free constraints');
 
 
-assert(estimatorSource.includes('_resolvedEvidence && _resolvedEvidence.vehicleType'),
+assert(vehiclePipeline.includes('_resolvedEvidence && _resolvedEvidence.vehicleType'),
   'operation model evidence must come from the canonical resolver');
-assert(estimatorSource.includes("timetableEvidence: _assignmentMatches"),
+assert(vehiclePipeline.includes("timetableEvidence: _assignmentMatches"),
   'dated operation evidence provenance must remain attached to timetable resolution');
 
 const trainVehicleSource = fs.readFileSync('js/train-vehicle.js','utf8');
@@ -504,7 +505,7 @@ assert(estimatorSource.includes("vehicleFormationId: _assignmentFormationIds.len
   'formation identity must be exposed only when decisive providers agree on one formation');
 assert(estimatorSource.includes("vehicleFormationCandidates: _assignmentFormationIds.slice()"),
   'formation candidate set must remain visible when formation identity is ambiguous');
-assert(estimatorSource.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
+assert(vehiclePipeline.includes("split(/\\s*\\/\\s*|\\s*,\\s*|\\s*\\|\\s*/)"),
   'multi-formation evidence must be split into candidates instead of treated as one formation');
 
 
@@ -538,7 +539,9 @@ assert(fusionSource.includes('var trainId = _realtimeSourceIdentity(t, top, rail
   'realtime source-object identity and service number must remain separate with railway-scoped fallbacks');
 assert(!fusionSource.includes('var trainId = t["odpt:trainNumber"] || t["odpt:train"] || "";'),
   'ODPT train number must not replace the source train object identity');
-assert(fusionSource.includes('TrainOperationEvidence.resolveEvidence(positionData.trainNumber, {'),
+assert(fusionSource.includes('TrainVehicle.resolveRealtime({') &&
+       fusionSource.includes('trainNumber:positionData.trainNumber') &&
+       vehiclePipeline.includes("resolveEvidence(ctx.trainNumber,ctx,'realtime-derived')"),
   'realtime-derived vehicle evidence must be keyed by canonical train number, never the source train id');
 assert(!fusionSource.includes('TrainOperationEvidence.resolveEvidence(trainId, {'),
   'source train id must not be reused as a train-number evidence key');
@@ -765,7 +768,7 @@ console.log("carset evidence propagation and display regression: PASS");
 
 // SQL-origin vehicle labels must enter the ONE upstream identity resolver.
 // Candidate lists such as E233 / 70-000 must not be assigned a PNG by guesswork.
-assert(estimatorSource.includes('var _declaredVehicleInput = String(tt.vehicleType ||'),
+assert(vehiclePipeline.includes('var _declaredVehicleInput = String(tt.vehicleType ||'),
   "SQL vehicle_type_label must reach the existing timetable vehicle evidence resolver");
 const selectedVehicleSource=read("js/train-vehicle.js");
 assert(!selectedVehicleSource.includes("共通_形式未確認.png") &&
@@ -784,8 +787,8 @@ assert(edgeSource.includes('if (lineId === "SaikyoKawagoe" && selectedCalendar)'
        edgeSource.includes('vehicle_mapping_level: scheduleLevel') &&
        edgeSource.includes('const conflict = !!(ruleType && verifiedBoundaryType && ruleType !== verifiedBoundaryType)'),
   "boundary model projection must require exactly one compatible scheduled counterpart");
-assert(estimatorSource.includes('_declaredModels.length === 1 && _operationModels.length > 1') &&
-       estimatorSource.includes('_operationModels.indexOf(_declaredModels[0]) >= 0'),
+assert(vehiclePipeline.includes('_declaredModels.length === 1 && _operationModels.length > 1') &&
+       vehiclePipeline.includes('_operationModels.indexOf(_declaredModels[0]) >= 0'),
   "exact scheduled model only narrows compatible operation candidate sets");
 console.log("Rinkai/Osaki exact vehicle evidence regression: PASS");
 

@@ -11,7 +11,7 @@ const sandbox = {window:{}, console:{debug(){},log(){},warn(){},error(){}}};
 sandbox.self=sandbox.window;
 vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(root,'data/timetables/vehicle-operation-evidence-data.js'),'utf8'),sandbox);
-vm.runInContext(fs.readFileSync(path.join(root,'data/timetables/train-operation-evidence.js'),'utf8'),sandbox);
+vm.runInContext(fs.readFileSync(path.join(root,'js/train-vehicle.js'),'utf8'),sandbox);
 vm.runInContext(fs.readFileSync(path.join(root,'js/train-position-estimator.js'),'utf8'),sandbox);
 vm.runInContext(src,sandbox,{filename:file});
 const icons=sandbox.window.TrainIcons;

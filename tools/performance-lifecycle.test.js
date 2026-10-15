@@ -117,7 +117,7 @@ console.log('train-run-date-verification-metadata: 2 PASS');
 
 
 
-const trainPositionEstimatorSrc = fs.readFileSync('js/train-position-estimator.js','utf8');
+const trainPositionEstimatorSrc = fs.readFileSync('js/train-vehicle.js','utf8');
 assert.ok(/"_operationCode":run\.operation_code\|\|""/.test(odptUnifiedSrc),
   'Supabase TrainRun must preserve canonical operation_code into runtime input');
 assert.ok(/tt\['_operationCode'\] \|\| tt\['operationCode'\] \|\| tt\['operation_code'\]/.test(trainPositionEstimatorSrc),

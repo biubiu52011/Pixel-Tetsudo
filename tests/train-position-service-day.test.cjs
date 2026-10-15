@@ -541,7 +541,7 @@ test('unknown calendar is never silently reinterpreted as no train or a verified
 
 test('planned timetable candidates retain their source grade without becoming asserted rolling stock', () => {
   const src = fs.readFileSync(path.join(__dirname, '../js/train-position-estimator.js'), 'utf8');
-  assert.match(src, /_sqlSourceCandidates = tt\._positionSource === 'supabase-train-run'/);
+  assert.match(fs.readFileSync(path.join(__dirname, '../js/train-vehicle.js'), 'utf8'), /_sqlSourceCandidates = tt\._positionSource === 'supabase-train-run'/);
   assert.match(src, /plannedVehicleCandidates: _plannedCandidates\.slice\(\)/);
   assert.match(src, /vehicleIdentityStatus: vehResult\.identityStatus \|\| 'UNKNOWN'/);
   assert.match(src, /vehicleIconPath: vehResult\.iconPath \|\| ''/);

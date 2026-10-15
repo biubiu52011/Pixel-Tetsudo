@@ -44,7 +44,7 @@ function read(rel) { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); }
 {
   const ctx={window:{},console:{debug(){}}};
   vm.createContext(ctx);
-  for(const p of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js'])
+  for(const p of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js'])
     vm.runInContext(read(p),ctx,{filename:p});
   const rows=ctx.window.VEHICLE_REFERENCE_RULES;
   for(const network of ['saikyo','odakyu-main','chiyoda-joban-odakyu']) {
@@ -86,7 +86,7 @@ const context = {
 context.self = context.window;
 vm.createContext(context);
 [
-  'data/timetables/train-operation-evidence.js',
+  'js/train-vehicle.js',
   'js/train-vehicle.js'
 ].forEach(rel => vm.runInContext(read(rel), context, { filename: rel }));
 
@@ -273,7 +273,7 @@ realCtx.self = realCtx.window;
 vm.createContext(realCtx);
 [
   'data/timetables/vehicle-operation-evidence-data.js',
-  'data/timetables/train-operation-evidence.js',
+  'js/train-vehicle.js',
   'js/train-vehicle.js'
 ].forEach(rel => vm.runInContext(read(rel), realCtx, { filename: rel }));
 
@@ -659,7 +659,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   const refCtx={console:{debug(){}},window:{}};
   vm.createContext(refCtx);
   vm.runInContext(read('data/timetables/vehicle-operation-evidence-data.js'),refCtx);
-  vm.runInContext(read('data/timetables/train-operation-evidence.js'),refCtx);
+  vm.runInContext(read('js/train-vehicle.js'),refCtx);
   vm.runInContext(read('js/train-vehicle.js'),refCtx);
   const facts=refCtx.window.TrainOperationEvidence;
   function resolve(n,day,cal,line='SaikyoKawagoe') {
@@ -695,7 +695,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
     'Explicit live model should work without a conflicting fallback');
   assert.ok(realtimeE233.iconPath.includes('E233'),realtimeE233.iconPath);
   const fusion=read('js/data-fusion.js');
-  assert.ok(fusion.includes('if (!odptVehicleType && window.TrainOperationEvidence'),
+  assert.ok(read('js/train-vehicle.js').includes("!String(ctx.realtimeVehicleType||'').trim()"),
     'Only absent API model can invoke planned reference lookup');
   assert.ok(fusion.includes('getCurrentCalendars()'),
     'Realtime vehicles must use the same published railway service calendar');
@@ -713,7 +713,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   const ctx={window:{},console:{debug(){}}};
   vm.createContext(ctx);
   for(const p of ['data/timetables/vehicle-operation-evidence-data.js',
-    'data/timetables/train-operation-evidence.js','js/train-vehicle.js']){
+    'js/train-vehicle.js','js/train-vehicle.js']){
     vm.runInContext(read(p),ctx,{filename:p});
   }
   const resolve=(n,day,cal,line='SaikyoKawagoe')=>
@@ -758,7 +758,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
 {
   const ctx={window:{},console:{debug(){}}};
   vm.createContext(ctx);
-  for(const file of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js'])
+  for(const file of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js'])
     vm.runInContext(read(file),ctx,{filename:file});
   const facts=ctx.window.TrainOperationEvidence;
   const base={lineId:'Joban',operator:'JR-East',railway:'odpt.Railway:JR-East.JobanRapid',serviceDate:'2026-10-14',calendarType:'weekday'};
@@ -801,7 +801,7 @@ console.log('single internal PNG resolver, no second mapping hop: PASS');
   class FixedDate extends Date{constructor(...args){super(...(args.length?args:[Date.UTC(2026,9,day,6,40)]));}static now(){return Date.UTC(2026,9,day,6,40);}}
   const ctx={window:{RuntimeConfig:{},ODPTClient:{LINE_RAILWAY_CODE:{Joban:'JobanRapid'}}},Date:FixedDate,Intl,console:{debug(){}}};
   vm.createContext(ctx);
-  for(const f of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(f),ctx,{filename:f});
+  for(const f of ['data/timetables/vehicle-operation-evidence-data.js','js/train-vehicle.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(f),ctx,{filename:f});
   for(const [serviceDay,calendar] of [[14,'Weekday'],[17,'SaturdayHoliday']]){
     day=serviceDay;
     const run={'@id':'sql-only-1173M','odpt:trainNumber':'1173M','odpt:railway':'odpt.Railway:JR-East.JobanRapid',
