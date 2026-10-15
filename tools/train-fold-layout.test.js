@@ -37,7 +37,7 @@ class Node {
 }
 const body=new Node('body');body.classList={add(){this.locked=true;},remove(){this.locked=false;}};
 const document={body,querySelector:()=>body.children.find(n=>!n.removed&&n.className.includes('rs-modal active')),createElement:t=>new Node(t)};
-const popupctx={document,window:{currentLang:'zh'},_resolveStationLoose:s=>s};
+const popupctx={document,window:{currentLang:'zh',TRAIN_TYPE_NAMES:{Rapid:{zh:'快速',ja:'快速'}}},_resolveStationLoose:s=>s};
 vm.runInNewContext(source.slice(start,end)+'\nthis.open=_openTrainFoldList;',popupctx);
 const ids=['a','b','c'],groups={},markers={};
 ids.forEach(id=>{groups[id]=new Node('g');markers[id]=new Node('image');markers[id].setAttribute('data-train-id',id);markers[id].setAttribute('href','train.png');markers[id].title={textContent:'SQL evidence internal model'};markers[id]._trainPosition={destinationStation:'成田',trainNumber:id,typeName:'普通',estimated:true,delayMin:2};});
@@ -49,6 +49,8 @@ assert.equal(entries.length,3);
 entries.forEach(e=>{assert.equal(e.children[0].tagName,'img');assert(e.textContent.includes('普通 · 开往 成田'));assert(e.textContent.includes('晚点 2 分'));assert(!e.textContent.includes('SQL'));});
 markers.b._trainPosition.destinationStation='上野';delete markers.c;layer._refreshTrainFoldPopover();
 assert.equal(list.children.length,2);assert(list.textContent.includes('上野'));assert(!list.textContent.includes('internal'));
+markers.b._trainPosition.typeName='JR-East.Rapid';markers.b._trainPosition.trainType='Rapid';layer._refreshTrainFoldPopover();
+assert(list.textContent.includes('快速 · 开往 上野'));assert(!list.textContent.includes('JR-East.Rapid'),'raw ODPT type code is not passenger information');
 panel.listeners.keydown({key:'Escape',stopPropagation(){}});
 assert.equal(layer._trainFoldPopover,null);assert(anchor.focused);
 assert(!body.classList.locked);

@@ -1580,7 +1580,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         var info=document.createElement('div'),caption=document.createElement('div');
         var destination=_resolveStationLoose(p.destinationStation);
         var destinationText=destination?(/^zh/.test(lang)?'开往 '+destination:destination+(lang==='en'?' bound':'行き')):'';
-        caption.textContent=[p.typeName,destinationText].filter(Boolean).join(' · ');
+        var typeDef=(window.TRAIN_TYPE_NAMES||{})[p.trainType];
+        var typeText=typeDef?(typeDef[lang]||typeDef.ja):'';
+        if(!typeText&&p.typeName&&!/^(?:odpt[.:]|[A-Za-z0-9-]+\.)/.test(p.typeName))typeText=p.typeName;
+        caption.textContent=[typeText,destinationText].filter(Boolean).join(' · ');
         info.appendChild(caption);
         var details=document.createElement('small'),parts=[];
         if(p.trainNumber&&!/^(?:est_|planned-trip:|supabase:|odpt[.:])/i.test(String(p.trainNumber)))parts.push(String(p.trainNumber));
