@@ -19620,6 +19620,11 @@ window.VEHICLE_NETWORK_ALIASES = [
     "alias_scope": "evidence_domain"
   },
   {
+    "alias_key": "SotetsuJRDirect",
+    "canonical_network_key": "saikyo",
+    "alias_scope": "evidence_domain"
+  },
+  {
     "alias_key": "SotetsuMain",
     "canonical_network_key": "sotetsu",
     "alias_scope": "evidence_domain"
@@ -19688,11 +19693,6 @@ window.VEHICLE_NETWORK_ALIASES = [
     "alias_key": "TsukubaExpress",
     "canonical_network_key": "tsukuba-express",
     "alias_scope": "exact"
-  },
-  {
-    "alias_key": "SotetsuJRDirect",
-    "canonical_network_key": "saikyo",
-    "alias_scope": "evidence_domain"
   }
 ];
 window.VEHICLE_FAMILY_RULES = [

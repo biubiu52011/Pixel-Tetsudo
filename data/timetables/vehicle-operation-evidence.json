@@ -19622,6 +19622,11 @@
       "alias_scope": "evidence_domain"
     },
     {
+      "alias_key": "SotetsuJRDirect",
+      "canonical_network_key": "saikyo",
+      "alias_scope": "evidence_domain"
+    },
+    {
       "alias_key": "SotetsuMain",
       "canonical_network_key": "sotetsu",
       "alias_scope": "evidence_domain"
@@ -19690,11 +19695,6 @@
       "alias_key": "TsukubaExpress",
       "canonical_network_key": "tsukuba-express",
       "alias_scope": "exact"
-    },
-    {
-      "alias_key": "SotetsuJRDirect",
-      "canonical_network_key": "saikyo",
-      "alias_scope": "evidence_domain"
     }
   ],
   "familyRules": [
@@ -20687,8 +20687,8 @@
         "canonical_network_key": "saikyo",
         "alias_scope": "exact",
         "evidence_kind": "train_rule",
-        "evidence_rows": 826,
-        "exact_rows": 826,
+        "evidence_rows": 1011,
+        "exact_rows": 1011,
         "narrowed_rows": 0,
         "min_date": "2026-03-14",
         "max_date": null
