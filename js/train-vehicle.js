@@ -7,6 +7,31 @@
   "use strict";
 
 var CANONICAL_VEHICLES = {
+  "jr-e233-1000": {
+    displayName:"E233系1000番台", iconName:"E233系1000番台",
+    asset:"../images/列车/JR東日本/JR東日本_E233系_1000番台.png",
+    aliases:["JR東日本E233系1000番台","JR E233系1000番台"]
+  },
+  "jr-e233-6000": {
+    displayName:"E233系6000番台", iconName:"E233系6000番台",
+    asset:"../images/列车/JR東日本/JR東日本_E233系_6000番台.png",
+    aliases:["JR東日本E233系6000番台","JR E233系6000番台"]
+  },
+  "jr-e131-500": {
+    displayName:"E131系500番台", iconName:"E131系500番台",
+    asset:"../images/列车/JR東日本/JR東日本_E131系_500番台.png",
+    aliases:["JR東日本E131系500番台","JR E131系500番台"]
+  },
+  "jr-e131-800": {
+    displayName:"E131系800番台", iconName:"E131系800番台",
+    asset:"../images/列车/JR東日本/JR東日本_E131系_800番台.png",
+    aliases:["JR東日本E131系800番台","JR E131系800番台"]
+  },
+  "jr-e131-1000": {
+    displayName:"E131系1000番台", iconName:"E131系1000番台",
+    asset:"../images/列车/JR東日本/JR東日本_E131系_1000番台.png",
+    aliases:["JR東日本E131系1000番台","JR E131系1000番台"]
+  },
   "metro-2000": {
     displayName:"東京メトロ2000系", iconName:"東京メトロ2000系",
     asset:"../images/列车/東京メトロ/東京メトロ_2000系.png",
