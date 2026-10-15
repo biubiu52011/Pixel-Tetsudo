@@ -2,7 +2,7 @@
 
 ## 2026-10-15 JST — 乘客堆叠列表去除列车号
 - 用户指出普通乘客不需要编号，移除trains.html共用堆叠弹窗列车号，保留图标、种别、目的地、晚点及推定提示；正点实时列车不生成空的次要信息行。只改变呈现，原始trainNumber与运行匹配数据保留。其他六页无此列表，不修改。
-- renderer资源4.3.1230；原件备份recovery/passenger-list-no-number-20261015。复用既有乘客列表回归，检查无编号与无空行。发布验收待同步。
+- Commit: f9dc2617。renderer资源4.3.1230；原件备份recovery/passenger-list-no-number-20261015。既有乘客列表无编号/无空行回归、语法及diff检查PASS；CI/CD、Release Guards与Pages部署success，公开renderer HTTP200且逐字MATCH，已同步上线。原有五项本地数据修改保留。
 
 ## 2026-10-15 JST — 终点边界、位置图层一致性与乘客列车列表（DONE：已发布并公开验收）
 - Commit: 0723994c。CI/CD、Release Guards与Pages部署success，六个公开JS/CSS逐字MATCH；公开京浜东北真实折叠组已打开，包含1012B/978C及正确大宫/南浦和目的地；49个marker含3实时，没有同号重复。验收发现实时typeName仍是JR-East.Rapid，11b5bd40复用TRAIN_TYPE_NAMES修正种别显示，renderer资源补至4.3.1228。另实际DOM发现语言菜单outside-click无论是否打开都focus语言按钮，破坏弹窗焦点；共用lang-init修正为仅已打开且显式关闭时归还焦点，outside-click不抢焦点，七页同步4.3.1229并补回归。
