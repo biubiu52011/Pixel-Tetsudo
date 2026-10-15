@@ -34,9 +34,7 @@
     C.renderInto(ctx, quickInfo, body);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() { C.start(renderArticle); });
-  } else {
-    C.start(renderArticle);
-  }
+  // Scripts run at end of <body>: DOM is fully parsed, so start immediately
+  // (loading feedback appears before data bundles finish).
+  C.start(renderArticle);
 })();

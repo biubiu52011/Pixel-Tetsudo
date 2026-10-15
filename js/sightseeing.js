@@ -44,7 +44,8 @@
       match: ['food', 'restaurant', 'cafe', 'sweets', 'drink', 'bar', 'bakery', 'local_specialty', 'family']
     },
     { key: 'shopping', label: 'tourism.group_shopping',
-      match: ['shopping', 'shop', 'hotel', 'mall']
+      // 4.3.1242: 百货商场算景点——购物筛选只含普通店铺（shopping/shop/hotel），mall 随景点归"全部"
+      match: ['shopping', 'shop', 'hotel']
     },
     { key: 'nature', label: 'tourism.group_nature',
       match: ['nature', 'park']
@@ -102,6 +103,8 @@
     }
     var tags = (spot && spot.tags) || [];
     if (tags.indexOf('event') >= 0) return 'event';
+    // 4.3.1242: 百货商场优先归景点（用户规则：百货商场算景点）
+    if (tags.indexOf('mall') >= 0) return 'spot';
     if (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0 || tags.indexOf('play') >= 0) return 'shop';
     return 'spot';
   }

@@ -1329,12 +1329,10 @@ function load() {
     loadDelayInfo: function() { return window.RTCache.loadDelayInfo(); }
   };
 
-  // Auto-load on DOM ready, deferring one tick to let synchronous scripts finish.
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() { setTimeout(load, 0); });
-  } else {
-    setTimeout(load, 0);
-  }
+  // Kick off data loading immediately: bundles are dynamic <script>/fetch and
+  // do not need the DOM, so download+parse runs in parallel with the remaining
+  // synchronous scripts and the page reaches full data sooner.
+  setTimeout(load, 0);
 
   // ========== Unhandled Promise Rejection Listener ==========
   // Catches any ODPT fetch or async errors that escape internal catch blocks

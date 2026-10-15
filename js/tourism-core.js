@@ -1,5 +1,5 @@
 /*
- * Tourism Detail Core (4.3.802) - 三类型详情页公共底座
+ * Tourism Detail Core (4.3.1245) - 三类型详情页公共底座
  * 由 tourism-event.js / tourism-spot.js / tourism-shop.js 共享：
  *   - 数据加载流程（DataLoader / 轮询兜底）
  *   - 条目查找 / 距离·出站指引计算（跨站最优出口融合口径 4.3.621）
@@ -36,7 +36,8 @@
     allSpots: [],
     currentStationKey: null,
     scopedSpots: [],
-    lang: window.currentLang || 'ja'
+    lang: window.currentLang || 'ja',
+    currentSpot: null
   };
 
   function t(key) {
@@ -150,12 +151,14 @@
 
   // 条目三类型判定（活动/店铺/景点）——列表路由与详情渲染共用
   // 4.3.817: 玩乐·体验（play）归店铺口径（用户指示：吃喝玩乐都算店，百货商店按景点）
+  // 4.3.1242: mall 标签优先归景点（用户规则：百货商场算景点；与 tourism-type.js 单一真源口径一致）
   function getSpotType(spot) {
     if (window.TourismType && window.TourismType.getSpotType) {
       return window.TourismType.getSpotType(spot);
     }
     var tags = (spot && spot.tags) || [];
     if (tags.indexOf('event') >= 0) return 'event';
+    if (tags.indexOf('mall') >= 0) return 'spot';
     if (tags.indexOf('food') >= 0 || tags.indexOf('shopping') >= 0 || tags.indexOf('play') >= 0) return 'shop';
     return 'spot';
   }
@@ -216,7 +219,7 @@
     var mapLng = coord[1] || 139.80;
     var dist = computeDistance(spot, stationKey);
     var imageHtml = spot.image
-      ? '<div class="article-hero-img"><img src="' + escapeHtml(spot.image) + '" alt="' + escapeHtml(spotName) + '"></div>'
+      ? '<div class="article-hero-img"><img src="' + escapeHtml(spot.image) + '" alt="' + escapeHtml(spotName) + '" data-gallery="' + escapeHtml(spot.name || '') + '" data-gallery-idx="0"></div>'
       : '';
     var tagsHtml = '';
     for (var i = 0; i < tags.length; i++) {
@@ -315,6 +318,7 @@
   // 通用数据加载流程：加载完成后调用类型 JS 提供的 renderArticle
   function start(renderArticle) {
     mountDetailBackButton();
+    bindGallery();
     state.lang = window.currentLang || 'ja';
     translateUI();
     var ct = document.getElementById('articleContainer');
@@ -348,11 +352,13 @@
         targetSpot = state.scopedSpots[spotIndex] || state.scopedSpots[0];
       }
       if (targetSpot) {
+        state.currentSpot = targetSpot;
         state.currentSpotIndex = state.scopedSpots.indexOf(targetSpot);
         if (state.currentSpotIndex < 0) state.currentSpotIndex = 0;
         renderArticle(targetSpot, stationKey);
       } else if (state.allSpots.length > 0) {
         state.currentSpotIndex = 0;
+        state.currentSpot = state.allSpots[0];
         renderArticle(state.allSpots[0], stationKey);
       }
 
@@ -399,14 +405,67 @@
   }
 
   // MapLibre + MapTiler vector（语言跟随）→ Leaflet 兜底
+  // 4.3.1245: 地图库改为按需动态加载，详情页首屏不再同步解析 ~1.5MB 地图库
+  var _tdMapLibsLoading = false;
+  var _tdMapLibsCallbacks = [];
+  function _tdLoadScript(src, cb) {
+    var s = document.createElement('script');
+    s.src = src;
+    s.onload = cb;
+    s.onerror = cb;
+    document.head.appendChild(s);
+  }
+  function _tdInjectCss(href) {
+    if (document.querySelector('link[href="' + href + '"]')) return;
+    var l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = href;
+    document.head.appendChild(l);
+  }
+  function _tdEnsureMapLibs(cb) {
+    if (window.maplibregl && window.MAPTILER_STREETS_V2_JSON) { cb(); return; }
+    if (typeof L !== 'undefined') { cb(); return; }
+    if (_tdMapLibsLoading) { _tdMapLibsCallbacks.push(cb); return; }
+    _tdMapLibsLoading = true;
+    _tdMapLibsCallbacks.push(cb);
+    function settle() {
+      _tdMapLibsLoading = false;
+      var cbs = _tdMapLibsCallbacks;
+      _tdMapLibsCallbacks = [];
+      for (var i = 0; i < cbs.length; i++) cbs[i]();
+    }
+    // 1) MapLibre 链（raf-polyfill → maplibre-gl → streets-v2.style）
+    _tdLoadScript('../js/maplibre/raf-polyfill.js?v=4.3.840', function () {
+      _tdLoadScript('../js/maplibre/maplibre-gl.js?v=4.3.840', function () {
+        if (window.maplibregl) {
+          _tdLoadScript('../js/maplibre/streets-v2.style.js?v=4.3.840', function () {
+            _tdInjectCss('../js/maplibre/maplibre-gl.css?v=4.3.840');
+            settle();
+          });
+        } else {
+          // 2) Leaflet 兜底
+          _tdLoadScript('../js/leaflet/leaflet.min.js?v=4.3.840', function () {
+            _tdInjectCss('../css/leaflet/leaflet.css?v=4.3.840');
+            settle();
+          });
+        }
+      });
+    });
+  }
   function initMap(lat, lng, name) {
     var mapEl = document.getElementById("tourismMap");
     if (!mapEl) return;
-    if (window.maplibregl && window.MAPTILER_STREETS_V2_JSON) {
-      _initMapMaplibre(mapEl, lat, lng, name);
-    } else {
-      _initMapLeaflet(mapEl, lat, lng, name);
+    function tryInit() {
+      if (window.maplibregl && window.MAPTILER_STREETS_V2_JSON) {
+        _initMapMaplibre(mapEl, lat, lng, name);
+      } else if (typeof L !== 'undefined') {
+        _initMapLeaflet(mapEl, lat, lng, name);
+      } else {
+        mapEl.innerHTML = '<div class="map-error">' + escapeHtml(t('detail.unavailable')) + '</div>';
+      }
     }
+    if (window.maplibregl || typeof L !== 'undefined') { tryInit(); return; }
+    _tdEnsureMapLibs(tryInit);
   }
 
   function _initMapMaplibre(mapEl, lat, lng, name) {
@@ -493,6 +552,166 @@
     setTimeout(function () { map.invalidateSize(); }, 120);
   }
 
+  // ============================================
+  // 图集查看器（Gallery Viewer）4.3.1244 —— 三类型详情页共用
+  // 不再是"单纯弹一张图"：多图切换 + 计数 + 缩略图 + 名称/类型徽章 + 图片来源
+  // 交互：左右箭头 / 缩略图 / 键盘(←→Esc) / 触摸滑动；点击背景关闭
+  // ============================================
+  var galleryState = { items: [], index: 0, overlay: null };
+
+  function galleryIsOpen() {
+    return !!galleryState.overlay && galleryState.overlay.classList.contains('is-open');
+  }
+
+  function galleryClose() {
+    if (!galleryState.overlay) return;
+    galleryState.overlay.classList.remove('is-open');
+    document.body.classList.remove('tgl-lock');
+  }
+
+  function galleryRender() {
+    var ov = galleryState.overlay;
+    if (!ov) return;
+    var items = galleryState.items;
+    var idx = galleryState.index;
+    var it = items[idx];
+    if (!it) return;
+    var img = ov.querySelector('.tgl-img');
+    img.src = it.src;
+    img.alt = it.label || '';
+    var badgeEl = ov.querySelector('.tgl-badge');
+    badgeEl.textContent = it.badge || '';
+    badgeEl.className = 'tgl-badge' + (it.badgeClass ? ' ' + it.badgeClass : '');
+    ov.querySelector('.tgl-name').textContent = it.name || '';
+    ov.querySelector('.tgl-caption').textContent = it.label || '';
+    ov.querySelector('.tgl-price').textContent = it.price || '';
+    ov.querySelector('.tgl-count').textContent = (idx + 1) + ' / ' + items.length;
+    var srcEl = ov.querySelector('.tgl-source');
+    srcEl.textContent = it.source ? (t('detail.image_source') + ': ' + it.source) : '';
+    var thumbs = ov.querySelector('.tgl-thumbs');
+    thumbs.innerHTML = '';
+    for (var i = 0; i < items.length; i++) {
+      (function (i) {
+        var th = document.createElement('button');
+        th.type = 'button';
+        th.className = 'tgl-thumb' + (i === idx ? ' is-active' : '');
+        th.setAttribute('aria-label', String(i + 1));
+        var im = document.createElement('img');
+        im.src = items[i].src;
+        im.alt = items[i].label || '';
+        im.loading = 'lazy';
+        th.appendChild(im);
+        th.addEventListener('click', function (e) { e.stopPropagation(); galleryState.index = i; galleryRender(); });
+        thumbs.appendChild(th);
+      })(i);
+    }
+  }
+
+  function galleryStep(d) {
+    var n = galleryState.items.length;
+    if (n === 0) return;
+    galleryState.index = (galleryState.index + d + n) % n;
+    galleryRender();
+  }
+
+  function galleryEnsureOverlay() {
+    if (galleryState.overlay) return galleryState.overlay;
+    var ov = document.createElement('div');
+    ov.className = 'tgl-overlay';
+    ov.setAttribute('role', 'dialog');
+    ov.setAttribute('aria-modal', 'true');
+    ov.innerHTML =
+      '<div class="tgl-head">'
+      + '<div class="tgl-title"><span class="tgl-badge"></span><span class="tgl-name"></span></div>'
+      + '<button type="button" class="tgl-close" aria-label="' + escapeHtml(t('detail.close')) + '">&times;</button>'
+      + '</div>'
+      + '<div class="tgl-stage">'
+      + '<button type="button" class="tgl-nav tgl-nav--prev" aria-label="' + escapeHtml(t('detail.prev')) + '">&lsaquo;</button>'
+      + '<figure class="tgl-fig"><img class="tgl-img" alt=""><figcaption class="tgl-caption"></figcaption><div class="tgl-price"></div></figure>'
+      + '<button type="button" class="tgl-nav tgl-nav--next" aria-label="' + escapeHtml(t('detail.next')) + '">&rsaquo;</button>'
+      + '</div>'
+      + '<div class="tgl-foot">'
+      + '<span class="tgl-count"></span>'
+      + '<div class="tgl-thumbs"></div>'
+      + '<span class="tgl-source"></span>'
+      + '</div>';
+    document.body.appendChild(ov);
+    galleryState.overlay = ov;
+    ov.querySelector('.tgl-close').addEventListener('click', galleryClose);
+    ov.querySelector('.tgl-nav--prev').addEventListener('click', function (e) { e.stopPropagation(); galleryStep(-1); });
+    ov.querySelector('.tgl-nav--next').addEventListener('click', function (e) { e.stopPropagation(); galleryStep(1); });
+    ov.addEventListener('click', function (e) { if (e.target === ov) galleryClose(); });
+    document.addEventListener('keydown', function (e) {
+      if (!galleryIsOpen()) return;
+      if (e.key === 'Escape' || e.key === 'Esc') { galleryClose(); return; }
+      if (e.key === 'ArrowLeft') { galleryStep(-1); return; }
+      if (e.key === 'ArrowRight') { galleryStep(1); }
+    });
+    var tx = null;
+    ov.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+    ov.addEventListener('touchend', function (e) {
+      if (tx === null) return;
+      var dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 48) galleryStep(dx > 0 ? -1 : 1);
+      tx = null;
+    }, { passive: true });
+    return ov;
+  }
+
+  function galleryOpen(items, index) {
+    if (!items || items.length === 0) return;
+    galleryState.items = items;
+    galleryState.index = Math.max(0, Math.min(index || 0, items.length - 1));
+    var ov = galleryEnsureOverlay();
+    galleryRender();
+    ov.classList.add('is-open');
+    document.body.classList.add('tgl-lock');
+  }
+
+  // 从 spot 组装图集：主图(index 0) + 菜单图（图注/来源/徽章随图切换）
+  function galleryItemsForSpot(spot) {
+    var items = [];
+    var name = getSpotName(spot);
+    var type = getSpotType(spot);
+    var badge = t('detail.type_' + type);
+    var badgeClass = 'type-badge--' + type;
+    if (spot.image) {
+      var feeText = (spot.fee_i18n && spot.fee_i18n[state.lang]) || spot.fee || '';
+      items.push({ src: spot.image, label: name, name: name, badge: badge, badgeClass: badgeClass, source: spot.imageSource || '', price: feeText });
+    }
+    var menu = spot.menu || [];
+    for (var i = 0; i < menu.length; i++) {
+      if (menu[i] && menu[i].img) {
+        var itemText = (spot.menu_i18n && spot.menu_i18n[i] && spot.menu_i18n[i][state.lang]) || menu[i].item || '';
+        items.push({ src: menu[i].img, label: itemText, name: name, badge: badge, badgeClass: badgeClass, source: spot.imageSource || '', price: menu[i].price || '' });
+      }
+    }
+    return items;
+  }
+
+  function galleryOpenForSpot(spot, index) {
+    if (!spot) return;
+    galleryOpen(galleryItemsForSpot(spot), index || 0);
+  }
+
+  // 全局委托：点击任何 [data-gallery] 打开该条目图集（hero / 照片按钮 / 菜单图共用）
+  var galleryBound = false;
+  function bindGallery() {
+    if (galleryBound) return;
+    galleryBound = true;
+    document.addEventListener('click', function (e) {
+      var el = (e.target && e.target.closest) ? e.target.closest('[data-gallery]') : null;
+      if (!el) return;
+      e.preventDefault();
+      var nameAttr = el.getAttribute('data-gallery') || '';
+      var spot = nameAttr ? findSpotByName(nameAttr) : null;
+      if (!spot) spot = state.currentSpot;
+      if (!spot) return;
+      var idx = parseInt(el.getAttribute('data-gallery-idx') || '0', 10) || 0;
+      galleryOpenForSpot(spot, idx);
+    });
+  }
+
   window.TourismDetailCore = {
     state: state,
     t: t,
@@ -510,6 +729,8 @@
     renderInto: renderInto,
     buildTipsHtml: buildTipsHtml,
     start: start,
-    initMap: initMap
+    initMap: initMap,
+    bindGallery: bindGallery,
+    galleryOpenForSpot: galleryOpenForSpot
   };
 })();

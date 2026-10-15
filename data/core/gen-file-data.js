@@ -15,8 +15,11 @@ const pairs = [
 
 for (const [json, js, varName] of pairs) {
   const raw = fs.readFileSync(path.join(dir, json), 'utf8');
+  // Compact the bundle (single-line JSON) so the app loads and parses it faster.
+  // The canonical JSON source files stay pretty-printed for readability.
+  const compact = JSON.stringify(JSON.parse(raw));
   // Escape "</script" sequences so the bundle cannot close the script tag early.
-  const safe = raw.replace(/<\/script/gi, '<\\/script');
+  const safe = compact.replace(/<\/script/gi, '<\\/script');
   fs.writeFileSync(path.join(dir, js), varName + ' = ' + safe + ';\n');
   console.log('wrote', js, '(', (safe.length / 1024).toFixed(0), 'KB )');
 }

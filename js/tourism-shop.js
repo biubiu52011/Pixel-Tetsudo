@@ -12,18 +12,19 @@
   if (!C) { console.error('[TourismDetailShop] Core missing'); return; }
 
   // 人均标签：含价格(円/前後/〜/～)才叫"人均"；無料/実費占位类店铺用通用"费用"
+  // 4.3.1242: 与 spot/event 页口径对齐（此前无条件显示"人均"）
   function feeLabelFor(spotFee) {
-    return C.t('detail.info_fee_per_person');
+    return /[円前後〜～]/.test(spotFee) ? C.t('detail.info_fee_per_person') : C.t('detail.info_fee');
   }
 
   // ① 顶部图集：有图 → 大图可点开全屏；无图 → 类型渐变占位
   function buildHero(ctx) {
     var photoTag = '';
     if (ctx.spot.image) {
-      photoTag = '<button class="dp-photo-tag" data-lightbox="' + C.escapeHtml(ctx.spot.image) + '">' + C.t('detail.photos') + '</button>';
+      photoTag = '<button class="dp-photo-tag" data-gallery="' + C.escapeHtml(ctx.spot.name || '') + '" data-gallery-idx="0">' + C.t('detail.photos') + '</button>';
     }
     var img = ctx.spot.image
-      ? '<img class="dp-hero-img" src="' + C.escapeHtml(ctx.spot.image) + '" alt="' + C.escapeHtml(ctx.spotName) + '" data-lightbox="' + C.escapeHtml(ctx.spot.image) + '">'
+      ? '<img class="dp-hero-img" src="' + C.escapeHtml(ctx.spot.image) + '" alt="' + C.escapeHtml(ctx.spotName) + '" data-gallery="' + C.escapeHtml(ctx.spot.name || '') + '" data-gallery-idx="0">'
       : '';
     return '<div class="dp-hero ' + ctx.heroClass + '">' + img + '<div class="dp-hero-shade"></div>' + photoTag + '</div>';
   }
@@ -78,7 +79,7 @@
       var itemText = (spot.menu_i18n && spot.menu_i18n[mi] && spot.menu_i18n[mi][C.state.lang])
           || it.item || C.t('detail.i18n_missing');
         var thumb = it.img
-          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it.img) + '" alt="' + C.escapeHtml(itemText) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it.img) + '">' 
+          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it.img) + '" alt="' + C.escapeHtml(itemText) + '" loading="lazy" data-gallery="' + C.escapeHtml(spot.name || '') + '" data-gallery-idx="' + (mi + 1) + '">' 
           : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';
         html += '<div class="dp-dish"><div class="dp-dish-thumb">' + thumb + '</div>'
           + '<div class="dp-dish-name">' + C.escapeHtml(itemText) + '</div></div>';
@@ -96,7 +97,7 @@
       var itemText2 = (spot.menu_i18n && spot.menu_i18n[mi2] && spot.menu_i18n[mi2][C.state.lang])
           || it2.item || C.t('detail.i18n_missing');
         var thumb2 = it2.img
-          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it2.img) + '" alt="' + C.escapeHtml(itemText2) + '" loading="lazy" data-lightbox="' + C.escapeHtml(it2.img) + '">' 
+          ? '<img class="dp-dish-img" src="' + C.escapeHtml(it2.img) + '" alt="' + C.escapeHtml(itemText2) + '" loading="lazy" data-gallery="' + C.escapeHtml(spot.name || '') + '" data-gallery-idx="' + (mi2 + 1) + '">' 
           : '<span class="dp-dish-badge">' + C.escapeHtml(badgeChar) + '</span>';
         html += '<div class="dp-dish"><div class="dp-dish-thumb">' + thumb2 + '</div>'
           + '<div class="dp-dish-name">' + C.escapeHtml(itemText2) + '</div>'
@@ -132,41 +133,13 @@
     var container = document.getElementById('articleContainer');
     if (!container) return;
     container.innerHTML = '<div class="article-content article-content--shop">' + html + '</div>';
-    bindLightbox();
     bindMenuModal();
     setTimeout(function () { C.initMap(ctx.mapLat, ctx.mapLng, ctx.spotName); }, 50);
     var pageTitle = ctx.spotName + ' | ' + (ctx.dist.stationName || '') + ' | PIXEL TETSUDO';
     document.title = pageTitle;
   }
 
-  // 图片灯箱（点评式点击放大，语言切换重渲染时复用同一 overlay）
-  function bindLightbox() {
-    var overlay = document.querySelector('.dp-lightbox');
-    if (!overlay) {
-      overlay = document.createElement('div');
-      overlay.className = 'dp-lightbox';
-      overlay.innerHTML = '<button class="dp-lightbox-close" aria-label="' + C.escapeHtml(C.t('detail.close')) + '">&times;</button><img class="dp-lightbox-img" alt="">';
-      overlay.style.display = 'none';
-      document.body.appendChild(overlay);
-      var imgEl = overlay.querySelector('.dp-lightbox-img');
-      var closeBtn = overlay.querySelector('.dp-lightbox-close');
-      function open(src) { if (!src) return; imgEl.src = src; overlay.style.display = 'flex'; }
-      function close() { overlay.style.display = 'none'; imgEl.src = ''; }
-      overlay.addEventListener('click', function (e) { if (e.target === overlay || e.target === closeBtn) close(); });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
-    }
-    var triggers = document.querySelectorAll('[data-lightbox]');
-    for (var i = 0; i < triggers.length; i++) {
-      triggers[i].addEventListener('click', function (e) {
-        e.preventDefault();
-        var imgEl = overlay.querySelector('.dp-lightbox-img');
-        var src = this.getAttribute('data-lightbox');
-        if (!src) return;
-        imgEl.src = src;
-        overlay.style.display = 'flex';
-      });
-    }
-  }
+  // 4.3.1243: 图片点击放大已统一走 core 的图集查看器（bindGallery），单图灯箱移除
 
 
   // 菜单全屏模态（查看全部）
@@ -187,9 +160,9 @@
     }
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { var open = document.querySelector('.dp-menu-modal.is-open'); if (open) { open.classList.remove('is-open'); document.body.style.overflow=''; } } });
   }
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { C.start(renderShopPage); });
-  } else {
-    C.start(renderShopPage);
-  }
+  // 图集查看器全局委托（一次绑定，hero/菜单图通用）
+  if (C.bindGallery) C.bindGallery();
+  // Scripts run at end of <body>: DOM is fully parsed, so start immediately
+  // (loading feedback appears before data bundles finish).
+  C.start(renderShopPage);
 })();
