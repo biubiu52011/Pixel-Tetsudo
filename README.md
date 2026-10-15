@@ -2,146 +2,137 @@
 
 > 面向日本全国，提供铁路路线检索・运行状况・观光景点信息的像素风 Web 应用；目前仅完成东部地区线路（ja/zh/ko/en 四语言，离线优先）。
 
-> 本文件为项目唯一的开发技术文档（综合版，代码对照修订稿），由 DEVELOPMENT.md 全量整理后更名为 README.md，同时作为仓库首页文档。完整结构与章节导航见下方目录。
+> 本文件是项目首页与综合技术参考，由 DEVELOPMENT.md 整理更名而来。工程约束见 [ENGINEERING.md](ENGINEERING.md)，最新执行与验收状态见 [PROGRESS.md](PROGRESS.md)。
+
+## 文档导航
+
+| 需要了解的内容 | 阅读入口 |
+| --- | --- |
+| 项目、架构、运行与维护 | 本文档下方目录 |
+| 工程约束、修改边界与协作要求 | [ENGINEERING.md](ENGINEERING.md) |
+| 最新进度、验收结果与遗留问题 | [PROGRESS.md](PROGRESS.md) |
+| 专项报告、历史日志与恢复资料 | [文档索引](docs/README.md) |
 
 ## 目录
 
-> **文档结构**：第 1-13 章——项目概要、架构、规范、前端设计、数据层、接口、部署、测试、风险、开发规则、架构基线、线路服务关系层。
-> **阅读建议**：新人按 1→2→3→5.4 顺序读（是什么→怎么画）；改代码前必读第 11 章硬规则、第 12 章架构基线与发布门。
+目录列出实际存在的二、三级标题；细节与历史示例保留在对应章节内。
 
-  - [1. 文档总述](#1-文档总述)
-    - [1.1 文档目的与阅读对象](#11-文档目的与阅读对象)
-    - [1.2 版本修订记录](#12-版本修订记录)
-    - [1.3 术语与缩写](#13-术语与缩写)
-    - [1.4 参考资料](#14-参考资料)
-  - [2. 项目概述](#2-项目概述)
-    - [2.1 业务背景](#21-业务背景)
-    - [2.2 用户角色](#22-用户角色)
-    - [2.3 功能清单](#23-功能清单)
-    - [2.4 核心业务流程](#24-核心业务流程)
-  - [3. 系统架构设计](#3-系统架构设计)
-    - [3.1 整体架构](#31-整体架构)
-    - [3.2 技术栈](#32-技术栈)
-    - [3.3 环境划分](#33-环境划分)
-    - [3.4 外部依赖](#34-外部依赖)
-    - [3.5 目录结构](#35-目录结构)
-    - [3.6 页面结构](#36-页面结构)
-    - [3.7 前端分层](#37-前端分层)
-    - [3.8 数据通道](#38-数据通道)
-    - [3.9 本地开发服务器与代理（serve.py）](#39-本地开发服务器与代理servepy)
-    - [3.10 页面结构规则](#310-页面结构规则)
-  - [4. 全局统一格式与开发规范](#4-全局统一格式与开发规范)
-    - [4.1 目录文件命名规范](#41-目录文件命名规范)
-    - [4.2 代码命名、注释统一规范](#42-代码命名注释统一规范)
-    - [4.3 页面、路由命名规范](#43-页面路由命名规范)
-    - [4.4 多语言文案格式规范](#44-多语言文案格式规范)
-    - [4.5 铁道数据录入统一规范](#45-铁道数据录入统一规范线路--车站--颜色--排序)
-    - [4.6 UI 视觉统一规范](#46-ui-视觉统一规范字体--间距--配色--svg-绘制规则)
-    - [4.7 接口命名、参数格式统一规范](#47-接口命名参数格式统一规范)
-  - [5. 前端设计](#5-前端设计)
-    - [5.1 项目目录结构](#51-项目目录结构)
-    - [5.2 全站路由清单](#52-全站路由清单)
-    - [5.3 多语言实现方案](#53-多语言实现方案)
-    - [5.4 线路图设计规定（SVG 渲染标准）](#54-线路图设计规定svg-渲染标准)
-      - [5.4.1 基础前置规则（所有画法通用）](#541-基础前置规则所有画法通用)
-        - [5.4.1.1 画布基准](#5411-画布基准)
-        - [5.4.1.2 尺寸速查表](#5412-尺寸速查表移动端--桌面端最终值)
-        - [5.4.1.3 GEOM 令牌](#5413-geom-设计令牌)
-        - [5.4.1.4 字体体系](#5414-字体体系字体族字号刻度字重颜色)
-        - [5.4.1.5 站间距](#5415-站间距换乘-chip-高度自适应所有画法共用)
-        - [5.4.1.6 站名自适应](#5416-站名自适应clamp)
-        - [5.4.1.7 触控](#5417-触控与间距移动端)
-        - [5.4.1.8 数据来源](#5418-数据来源)
-        - [5.4.1.9 车站节点](#5419-车站节点圆点规格与站名偏移)
-        - [5.4.1.10 站名锚点](#54110-站名文本与锚点通用规则)
-        - [5.4.1.11 换乘 chip](#54111-换乘图标-chip规格与对齐)
-        - [5.4.1.12 线路主线](#54112-线路主线线宽与透明度)
-        - [5.4.1.13 直通标记](#54113-直通标记箭头与留白)
-        - [5.4.1.14 列车标签](#54114-列车标签方向端点站名)
-      - [5.4.2 环线布局](#542-环线布局画法专属)
-      - [5.4.3 支线布局](#543-支线布局画法专属)
-      - [5.4.4 线路与线宽](#544-线路与线宽画法专属主线通用)
-      - [5.4.5 图标体系](#545-图标体系卡片侧)
-      - [5.4.6 现状不统一项](#546-现状不统一项待统一)
-    - [5.5 全局公共组件](#55-全局公共组件设计)
-    - [5.6 响应式适配](#56-响应式适配规范)
-    - [5.7 静态资源管理](#57-静态资源管理规范)
-    - [5.8 本地存储](#58-本地存储方案)
-  - [6. 数据层（本地底库 + ODPT 实时）](#6-数据层本地底库--odpt-实时)
-    - [6.1 系统模块划分](#61-系统模块划分)
-    - [6.2 访问控制（serve.py 安全）](#62-后台权限模型)
-    - [6.3 数据文件体系](#63-数据文件体系)
-    - [6.4 ODPT 实时对接 & 双库联动](#64-odpt-实时数据对接--双库联动策略)
-    - [6.5 核心业务规则](#65-核心业务规则)
-  - [7. ODPT 接口与数据通道](#7-odpt-接口与数据通道)
-    - [7.1 请求/响应格式](#71-全局请求--响应统一格式)
-    - [7.2 错误码规范](#72-全局错误码规范)
-    - [7.3 前台业务接口](#73-前台业务接口读取本地线路库景点观光路线)
-    - [7.4 ODPT 实时封装接口](#74-odpt-实时数据封装接口实时运行时刻表与本地线路库匹配)
-    - [7.5 后台管理接口（无）](#75-后台管理接口无数据维护见-63)
-    - [7.6 系统数据字典](#76-系统数据字典)
-  - [8. 部署与运维](#8-部署与运维)
-    - [8.1 本地开发服务器（serve.py）](#81-本地开发服务器servepy)
-    - [8.2 CI/CD 构建部署](#82-cicd-构建部署流程)
-    - [8.3 环境变量配置](#83-环境变量配置清单)
-    - [8.4 静态资源/CDN 部署](#84-静态资源svgcdn-部署规范)
-    - [8.5 日志、监控](#85-日志监控规则)
-    - [8.6 数据文件备份](#86-数据文件备份策略本地线路库重点备份)
-    - [8.7 降级容灾](#87-降级容灾方案odpt-失效优先走本地库)
-  - [9. 测试规范](#9-测试规范)
-    - [9.1 核心测试场景](#91-核心测试场景)
-    - [9.2 数据一致性测试](#92-数据一致性测试本地库-vs-odpt)
-    - [9.3 兼容性、性能测试](#93-兼容性性能测试标准)
-  - [10. 风险说明 & FAQ](#10-风险说明--常见-faq)
-    - [10.1 已知风险点](#101-项目已知风险点)
-    - [10.2 常见问题](#102-开发--部署--数据维护常见问题)
-  - [11. 开发规则（Hard Rules）](#11-开发规则hard-rules)
-  - [12. 架构基线（Architecture Baselines）](#12-架构基线architecture-baselines)
-    - [线路层级规则](#线路层级规则line-hierarchy-rule硬规则)
-    - [系统优先变更规则](#系统优先变更规则system-first-change-rule硬规则)
-    - [变更前 / 结构性变更后](#变更前)
-    - [规则 9 - 全系统消费方保全](#规则-9---全系统消费方保全rule-9--whole-system-consumer-preservation硬规则)
-    - [变更前问卷](#变更前问卷动代码前必须回答全部)
-    - [迁移规则](#迁移规则)
-    - [删除规则](#删除规则)
-    - [禁止并行实现规则](#禁止并行实现规则)
-    - [任务提示词规则](#任务提示词规则)
-    - [新功能开发流程](#新功能开发流程)
-    - [功能准入 / 系统影响评审](#功能准入--系统影响评审强制)
-    - [准入问卷](#准入问卷动代码前必须回答全部)
-    - [A 换 B 退化检查](#a-换-b-退化检查关键)
-    - [决策树](#决策树)
-    - [能力归属检查](#能力归属检查所有功能开发强制)
-    - [逻辑挪用规则](#逻辑挪用规则)
-    - [架构基线](#架构基线architecture-baselines)
-    - [规范数据冻结规则](#规范数据冻结规则canonical-data-freeze-rule)
-    - [显示身份规则](#显示身份规则display-identity-rule)
-    - [三层数据架构规则](#三层数据架构规则three-layer-data-architecture-rule)
-    - [无孤儿迁移规则](#无孤儿迁移规则no-orphan-generating-migration-rule)
-    - [只读优先规则](#只读优先规则read-only-first-rule)
-    - [模块核心规则](#模块核心规则module-main-heart-rule)
-    - [发布门规则](#发布门规则release-gate-rule)
-    - [运行契约](#运行契约runtime-contract)
-  - [13. 线路服务关系层设计](#13-线路服务关系层设计line-to-line-service-relation-layer)
-    - [13.1 问题陈述](#131-问题陈述)
-    - [13.2 关系类型定义](#132-关系类型定义)
-    - [13.3 数据模型](#133-数据模型-line-service-relationsjs)
-    - [13.4 当前 main 已登记关系概览](#134-当前-main-已登记关系概览)
-    - [13.5 架构集成规则](#135-架构集成规则)
-    - [13.6 文件结构](#136-文件结构)
-    - [13.7 风险评估](#137-风险评估)
-    - [13.8 后续阶段计划](#138-后续阶段计划)
-    - [13.9 结论](#139-结论)
+- [1. 文档总述](#1-文档总述)
+  - [1.1 文档目的与阅读对象](#11-文档目的与阅读对象)
+  - [1.2 版本修订记录](#12-版本修订记录)
+  - [1.3 术语与缩写](#13-术语与缩写)
+  - [1.4 参考资料](#14-参考资料)
+- [2. 项目概述](#2-项目概述)
+  - [2.1 业务背景](#21-业务背景)
+  - [2.2 用户角色](#22-用户角色)
+  - [2.3 功能清单](#23-功能清单)
+  - [2.4 核心业务流程](#24-核心业务流程)
+- [3. 系统架构设计](#3-系统架构设计)
+  - [3.1 整体架构](#31-整体架构)
+  - [3.2 技术栈](#32-技术栈)
+  - [3.3 环境划分](#33-环境划分)
+  - [3.4 外部依赖](#34-外部依赖)
+  - [3.5 目录结构](#35-目录结构)
+  - [3.6 页面结构](#36-页面结构)
+  - [3.7 前端分层](#37-前端分层)
+  - [3.8 数据通道](#38-数据通道)
+  - [3.9 本地开发服务器与代理（serve.py）](#39-本地开发服务器与代理servepy)
+  - [3.10 页面结构规则](#310-页面结构规则)
+- [4. 全局统一格式与开发规范](#4-全局统一格式与开发规范)
+  - [4.1 目录文件命名规范](#41-目录文件命名规范)
+  - [4.2 代码命名、注释统一规范](#42-代码命名注释统一规范)
+  - [4.3 页面、路由命名规范](#43-页面路由命名规范)
+  - [4.4 多语言文案格式规范](#44-多语言文案格式规范)
+  - [4.5 铁道数据录入统一规范（线路 / 车站 / 颜色 / 排序）](#45-铁道数据录入统一规范线路--车站--颜色--排序)
+  - [4.6 UI 视觉统一规范（字体、间距、配色、SVG 绘制规则）](#46-ui-视觉统一规范字体间距配色svg-绘制规则)
+  - [4.7 接口命名、参数格式统一规范](#47-接口命名参数格式统一规范)
+- [5. 前端设计](#5-前端设计)
+  - [5.1 项目目录结构](#51-项目目录结构)
+  - [5.2 全站路由清单](#52-全站路由清单)
+  - [5.3 多语言实现方案](#53-多语言实现方案)
+  - [5.4 线路图设计规定（SVG 渲染标准）](#54-线路图设计规定svg-渲染标准)
+  - [5.5 全局公共组件设计](#55-全局公共组件设计)
+  - [5.6 响应式适配规范](#56-响应式适配规范)
+  - [5.7 静态资源管理规范](#57-静态资源管理规范)
+  - [5.8 本地存储方案](#58-本地存储方案)
+- [6. 数据层（本地底库、ODPT 实时与 SQL 证据）](#6-数据层本地底库odpt-实时与-sql-证据)
+  - [6.1 系统模块划分](#61-系统模块划分)
+  - [6.2 访问控制（serve.py 安全）](#62-访问控制servepy-安全)
+  - [6.3 数据文件体系](#63-数据文件体系)
+  - [6.4 ODPT 实时数据对接 & 双库联动策略](#64-odpt-实时数据对接--双库联动策略)
+  - [6.5 核心业务规则](#65-核心业务规则)
+- [7. ODPT 接口与数据通道](#7-odpt-接口与数据通道)
+  - [7.1 全局请求 / 响应统一格式](#71-全局请求--响应统一格式)
+  - [7.2 全局错误码规范](#72-全局错误码规范)
+  - [7.3 前台业务接口（读取本地线路库、景点、观光路线）](#73-前台业务接口读取本地线路库景点观光路线)
+  - [7.4 ODPT 实时数据封装接口（实时运行/时刻表，与本地线路库匹配）](#74-odpt-实时数据封装接口实时运行时刻表与本地线路库匹配)
+  - [7.5 后台管理接口（无，数据维护见 6.3）](#75-后台管理接口无数据维护见-63)
+  - [7.6 系统数据字典](#76-系统数据字典)
+- [8. 部署与运维](#8-部署与运维)
+  - [8.1 本地开发服务器（serve.py）](#81-本地开发服务器servepy)
+  - [8.2 CI/CD 构建部署流程](#82-cicd-构建部署流程)
+  - [8.3 环境变量配置清单](#83-环境变量配置清单)
+  - [8.4 静态资源、SVG、CDN 部署规范](#84-静态资源svgcdn-部署规范)
+  - [8.5 日志、监控规则](#85-日志监控规则)
+  - [8.6 数据文件备份策略（本地线路库重点备份）](#86-数据文件备份策略本地线路库重点备份)
+  - [8.7 降级容灾方案（ODPT 失效优先走本地库）](#87-降级容灾方案odpt-失效优先走本地库)
+- [9. 测试规范](#9-测试规范)
+  - [9.1 核心测试场景](#91-核心测试场景)
+  - [9.2 数据一致性测试（本地库 vs ODPT）](#92-数据一致性测试本地库-vs-odpt)
+  - [9.3 兼容性、性能测试标准](#93-兼容性性能测试标准)
+- [10. 风险说明 & 常见 FAQ](#10-风险说明--常见-faq)
+  - [10.1 开发 / 部署 / 数据维护常见问题](#101-开发--部署--数据维护常见问题)
+- [11. 开发规则（Hard Rules）](#11-开发规则hard-rules)
+  - [11.1 线路层级规则（Line Hierarchy Rule，硬规则）](#111-线路层级规则line-hierarchy-rule硬规则)
+  - [11.2 系统优先变更规则（System-First Change Rule，硬规则）](#112-系统优先变更规则system-first-change-rule硬规则)
+  - [11.5 关键原则](#115-关键原则)
+  - [11.6 规则 9 - 全系统消费方保全（Rule 9 - Whole-System Consumer Preservation，硬规则）](#116-规则-9---全系统消费方保全rule-9---whole-system-consumer-preservation硬规则)
+  - [11.7 变更前问卷（动代码前必须回答全部）](#117-变更前问卷动代码前必须回答全部)
+  - [11.8 迁移规则](#118-迁移规则)
+  - [11.9 删除规则](#119-删除规则)
+  - [11.10 禁止并行实现规则](#1110-禁止并行实现规则)
+  - [11.11 任务提示词规则](#1111-任务提示词规则)
+  - [11.12 新功能开发流程](#1112-新功能开发流程)
+  - [11.13 功能准入 / 系统影响评审（强制）](#1113-功能准入--系统影响评审强制)
+  - [11.14 准入问卷（动代码前必须回答全部）](#1114-准入问卷动代码前必须回答全部)
+  - [11.15 A 换 B 退化检查（关键）](#1115-a-换-b-退化检查关键)
+  - [11.16 决策树](#1116-决策树)
+  - [11.17 能力归属检查（所有功能开发强制）](#1117-能力归属检查所有功能开发强制)
+  - [11.18 能力归属图](#1118-能力归属图)
+  - [11.19 逻辑挪用规则](#1119-逻辑挪用规则)
+  - [11.20 反模式：B 借用 A 的逻辑却不回馈](#1120-反模式b-借用-a-的逻辑却不回馈)
+- [12. 架构基线（Architecture Baselines）](#12-架构基线architecture-baselines)
+  - [12.1 架构基线（Architecture Baselines）](#121-架构基线architecture-baselines)
+  - [12.2 数据不变规则・显示同一性・其他硬规则](#122-数据不变规则显示同一性其他硬规则)
+  - [12.3 Canonical Data 修改规则](#123-canonical-data-修改规则)
+  - [12.4 显示身份规则（Display Identity Rule）](#124-显示身份规则display-identity-rule)
+  - [12.5 三层数据架构规则（Three-Layer Data Architecture Rule）](#125-三层数据架构规则three-layer-data-architecture-rule)
+  - [12.6 无孤儿迁移规则（No Orphan-Generating Migration Rule）](#126-无孤儿迁移规则no-orphan-generating-migration-rule)
+  - [12.7 只读优先规则（Read-Only First Rule）](#127-只读优先规则read-only-first-rule)
+  - [12.8 模块核心规则（Module Main-Heart Rule）](#128-模块核心规则module-main-heart-rule)
+  - [12.9 发布门规则（Release Gate Rule）](#129-发布门规则release-gate-rule)
+  - [12.10 运行契约（Runtime Contract）](#1210-运行契约runtime-contract)
+- [13. 线路服务关系层设计（Line-to-Line Service Relation Layer）](#13-线路服务关系层设计line-to-line-service-relation-layer)
+  - [13.1 问题陈述](#131-问题陈述)
+  - [13.2 关系类型定义](#132-关系类型定义)
+  - [13.3 数据模型与历史接口](#133-数据模型与历史接口)
+  - [13.4 历史关系登记示例（迁移前）](#134-历史关系登记示例迁移前)
+  - [13.5 架构集成规则](#135-架构集成规则)
+  - [13.6 文件结构](#136-文件结构)
+  - [13.7 风险评估](#137-风险评估)
+  - [13.8 后续阶段计划](#138-后续阶段计划)
+  - [13.9 结论](#139-结论)
+- [附录 B 基本信息（README，参考）](#附录-b-基本信息readme参考)
 
 ## 1. 文档总述
 
 ### 1.1 文档目的与阅读对象
 
-文档目的：本文件（README.md）是像素铁道项目唯一的开发技术文档（综合版），统一定义网站结构、前端架构、数据通道、车型身份解析、开发规则、项目运行信息与变更记录；本 RC-7 版本以 GitHub main / 本地 main 当前代码为事实来源完成代码对照修订，数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」，逐日开发日志迁移至 PROGRESS.md 按日期管理（1.2 仅保留版本索引）；RC-6 完成 DEVELOPMENT.md 整理更名为 README.md。
+文档目的：README 是项目与实现的综合参考；ENGINEERING 维护长期工程约束；PROGRESS 维护执行记录与验收状态；专项报告保存特定日期、版本和样本的证据。RC-8 整理文档入口、目录与已移除模块引用，保留原有技术细节和版本记录。
 
 来源：本文档由 AGENTS.md、LINE-DIAGRAM-SPEC.md、4.3.31_design.md、README.md 等多份开发文档整理合并而成。
 
-阅读对象：参与本项目的 AI agent 与开发者。文档中的硬规则对 AI agent 生效，优先级高于任何任务级指令。
+阅读对象：参与本项目的 AI agent 与开发者。文档中的硬规则是仓库工程约定；具体任务以用户明确指令和适用的上级指令为准。发现文档与代码不一致时先核实，再同步修正，不能用历史记录覆盖当前事实。
 
 文档维护约定：
 
@@ -163,6 +154,7 @@
 
 | 版本 | 日期 | 更新人 | 修订内容 |
 | --- | --- | --- | --- |
+| RC-8 | 2026-10-15 | Codex | 文档职责与分类导航统一；目录按实际标题校正；修正 SQL、已移除模块及历史恢复状态的过时说明。详见 [进度记录](PROGRESS.md)。 |
 | RC-7 | 2026-10-15 | 用户／开发会话 | **文档结构更新**：数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」（3.7/2.4/3.10.3/5.4.5/术语表/目录/数据字典同步）；修订记录（日志）迁移至 PROGRESS.md 按日期管理，本表仅保留版本索引。 |
 | RC-6 | 2026-10-15 | 用户／开发会话 | **文档更名与整理**：DEVELOPMENT.md 全量整理后更名为 README.md（保留全部开发细节，作为仓库首页文档）；同步登记 2026-10-14～10-15 开发进展（v4.3.1216~4.3.1230，各条目 Commit 见 PROGRESS.md 对应日期）。 |
 | RC-5 | 2026-09-27 | 用户／开发会话 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freeze、recovery/baseline、migration audit、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
@@ -183,7 +175,7 @@
 | 术语/缩写 | 说明 |
 | --- | --- |
 | ODPT | Open Data for Public Transportation（公共交通开放数据）——实时位置/时刻表/运行情报数据源 |
-| LOS | Line Operation Systems——线路运行系统（data/core/line-operation-systems.js） |
+| LOS | Line Operation Systems——展示分组概念；现役元数据位于 canonical line.presentation，由 LinePresentationService 消费 |
 | Freeze | 数据冻结——railway_data.json 等冻结数据，修改需 Freeze 例外 |
 | RC | Release Candidate——候选发布版本 |
 | manual 时刻表 | ODPT 无数据的线路由人工整理的时刻表（data/timetables/*-manual.js） |
@@ -192,14 +184,14 @@
 | CSP | 内容安全策略（页面 script-src 'self' 等约束） |
 | TrainVehicle | 浏览器运行时车型身份统一入口（js/train-vehicle.js，window.TrainVehicle）；按「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」链路收敛身份并选择原生 PNG，供数据层与渲染层消费 |
 | TrainOperationEvidence | 列车运行/编成证据注册与解析中心（data/timetables/train-operation-evidence.js，window.TrainOperationEvidence）；各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册，resolveEvidence(trainNumber, 线路/服务日/日历) 解析车型 |
-| TrainVehicleResolver | 自包含车型解析器（js/train-vehicle-resolver.js，window.TrainVehicleResolver / Node module）；由生成脚本合成，供 CLI、审计或独立环境使用 |
-| LineServiceRelations | 线路服务关系层（data/core/line-service-relations.js）；登记 THROUGH_SERVICE / PHYSICAL_CONNECT / BRANCH_OF / ALIAS_OF / UNKNOWN 等关系，不替代 LOS |
+| TrainIcons | js/train-vehicle.js 内提供的兼容接口，与 TrainVehicle 共用同一车型目录；独立 resolver 脚本已移除 |
+| 服务关系层 | canonical 线路内的 throughServices、serviceBoundaries、branchOf 等关系；不替代 presentation 展示分组 |
 | baseline refresh | 合法 canonical migration 后刷新 recovery/baseline/production_baseline.json 的生命周期动作，必须与 migration audit、approved removal manifest、CI guard 同步 |
 | GEOM | 线路图几何设计令牌（5.4.1.13 节） |
 | BFS | 广度优先搜索——路径搜索实现（js/route-search.js） |
 | 线路系统（Line） | 铁路基础设施/线路实体——一条线路 = 一个物理线路定义（railway_data.json lines），可包含多个运行系统；与运行系统（LOS）是两个维度 |
 | 运行系统（LOS） | Line Operation System——按运营/向导看板组织的运行系统（如快速/各站停车/中距离可以是同一线路的多个运行系统；多条线路也可以共享一个运行系统） |
-| 直通（THROUGH_SERVICE） | 列车跨线运行——直通关系登记在服务关系层（line-service-relations.js THROUGH_SERVICE）；直通列车按车号规则识别车籍 |
+| 直通（THROUGH_SERVICE） | 列车跨线运行；服务边界来自 canonical 关系，物理列车接续由运行链证据核验，不能只凭相同列车号推断 |
 | 并行区间 | 两条线路在部分区间并行（各自停靠不同车站，或一条各停一条快速）——并行不等于直通，换乘标记只标注实际共用站 |
 | 线路分断 | 线路因新线开通/废线等原因物理分断为多段后，“完整线路称呼”可能消失——按各自运营主体建卡，不保留虚构整线 |
 | 共有区间 | 两线共同经过的车站区间——共有站作为两线共有处理，只登记一次换乘 |
@@ -235,7 +227,7 @@ ODPT API：来源站点 www.odpt.org；https://api-challenge.odpt.org / https://
 | --- | --- | --- | --- |
 | 1 | 路线搜索 | 起终点路径搜索（BFS）+ 各段时刻推算 + 票价估算 | home.html / route-search.js / route-timetable.js / fare-estimator.js |
 | 2 | 线路图 | 全线路像素风线路图（站名、换乘、支线、六形环布局） | trains.html / trains-config.js / trains-data.js / trains-geometry.js / train-track-layout.js / trains-render.js / trains-page.js |
-| 3 | 列车实时位置 | ODPT 实时位置优先，无实时线路按时刻表+延误推定补缺；车型身份经 TrainVehicle / TrainVehicleResolver 统一收敛 | trains.html / data-fusion.js / train-position-estimator.js / train-vehicle.js / train-vehicle-resolver.js / train-icons.js |
+| 3 | 列车实时位置 | ODPT 实时位置优先，无实时线路按时刻表+延误推定补缺；车型身份经 TrainVehicle 统一收敛 | trains.html / data-fusion.js / train-position-estimator.js / train-vehicle.js |
 | 4 | 运行情报 | 各线运行状态（正常/延误/中断/通知）与线路详情弹窗（显示 ODPT 原文全文） | realtime.html / realtime-view.js / delay-translator.js |
 | 5 | 观光推荐与详情 | 按位置推荐景点；景点/活动/店铺三类详情页（信息、地图、距离） | home.html / sightseeing.js / tourism-*.js / tourism-proximity.js |
 | 6 | 搜索历史 | 本地保存最近搜索记录 | history.html / history.js |
@@ -259,7 +251,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 
 点击线路卡弹出详情（realtime-view.js + delay-translator.js 翻译，运行情报显示 ODPT 原文全文）
 
-打开 trains.html：页面先加载 db-loader / ODPT / data-config-bundle / DataFusion / i18n / LinePresentationService，再加载 trains-config → trains-utils → trains-data → trains-geometry → train-track-layout → trains-render → trains-page。列车位置实时优先；无实时线路由 train-position-estimator.js 按时刻表推定补缺；车型身份按「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」链路解析（TrainVehicle 收敛身份并选择原生 PNG），TrainIcons/TrainVehicleResolver 仅作图标兜底，不得把 unknown 伪装成确定车型。
+打开 trains.html：页面先加载 db-loader / ODPT / data-config-bundle / DataFusion / i18n / LinePresentationService，再加载 trains-config → trains-utils → trains-data → trains-geometry → train-track-layout → trains-render → trains-page。列车位置实时优先；无实时线路由 train-position-estimator.js 按时刻表推定补缺；车型身份按「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」链路解析（TrainVehicle 收敛身份并选择原生 PNG），TrainIcons 是 js/train-vehicle.js 内的兼容接口；已移除的独立 resolver／icons 脚本不再加载。
 
 流程 C：观光
 
@@ -303,7 +295,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 
 | 环境 | 说明 |
 | --- | --- |
-| 本地运行 | python serve.py → http://127.0.0.1:8017（唯一运行方式，替代 python -m http.server 8017） |
+| 本地运行 | python scripts/serve.py → http://127.0.0.1:8017（唯一运行方式，替代 python -m http.server 8017） |
 | 构建期 | node data/core/gen-file-data.js（数据文件变更后重跑） |
 | 数据源 | ODPT 挑战版 api-challenge.odpt.org（开发）与正式版 api.odpt.org（运行）；API key 经环境变量注入，不硬编码 |
 
@@ -327,7 +319,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | js/ | 前端模块 | 按数据/业务/展示三层组织（见 3.7）；模块职责单一，禁止跨层依赖 |
 | data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON）+ 运行时常量表 | 生成文件（*.file.js、data-config-bundle.js）禁止手工编辑；canonical 数据修改必须直接修改源文件并重跑 gen-file-data.js；改 transfer-hints/runtime-config/through-service/line-operation-systems/platform-data/line-service-relations/train-type-defs 后重跑 gen-config-bundle.js |
 | data/api/ | ODPT 客户端（odpt-unified.js）与链接（odpt-links.js） | ODPT 访问唯一入口；不得在页面或业务模块绕过 ODPTClient 直连；首页经 odpt-lazy.js 惰性加载 |
-| data/timetables/ | 手动时刻表（*-manual.js）+ vehicle-type-map.js + 车辆运行/编成证据（train-operation-evidence.js、*-operation-evidence-2026.js、*-formation-evidence.js 等） | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理；证据文件经 TrainOperationEvidence.register 注册，供车型链路消费 |
+| data/timetables/ | 手动时刻表（*-manual.js）+ 车辆运行/编成证据（train-operation-evidence.js、*-operation-evidence-2026.js、*-formation-evidence.js 等） | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理；证据文件经 TrainOperationEvidence.register 注册，供车型链路消费 |
 | fonts/ | 像素字体（ja/ko/zh-hans/zh-hant/latin） | 唯一字体源，禁止使用系统字体替代 |
 | images/ | 素材库，按业务主题分四个子目录；根级仅放全站图标/站点标记（pixel-tetsudo.ico、Language.png、icon-metro-station.svg、地铁站点.svg） | 见下方「图库管理规范」：四个子目录各自的用途与命名 |
 | scripts/ | 数据治理脚本（i18n 审计/对齐/提交前检查） | serve.py 为本地开发服务器（.gitignore 排除不入库）；生成脚本产出必须落 data/core 或 data/timetables |
@@ -343,7 +335,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 
 | 子目录 | 用途 | 命名规范 | 被谁引用 |
 | --- | --- | --- | --- |
-| images/列车/<運営者>/ | 列车形态/涂装图标（按型番系） | 型番系/形 + 涂装样式括弧，如 E231系（山手線）.png | train-icons.js / LINE_ICONS、operResolvedIcon |
+| images/列车/<運営者>/ | 列车形态/涂装图标（按型番系） | 型番系/形 + 涂装样式括弧，如 E231系（山手線）.png | train-vehicle.js 的统一图片选择接口 |
 | images/鉄道/<運営者>/ | 线路/运营者 logo（按线路名） | 与线路名一致，如 JR東日本/京浜東北線.png | railway_data.json 的 line.image、LOS ResolveIcon |
 | images/観光地/ | 景点/活动/店铺主图 | 与条目显示名一致，如 北千住丸井.jpg | tourism_data.json 的 image 字段（../images/観光地/...） |
 | images/料理/<店ID>_<序号>_<菜名>.jpg | 餐饮多图 | <店slug>_<序号>_<菜名>.jpg，如 sakusa-juraku_0_omurice.jpg | 店铺详情页按店 ID 前缀加载 |
@@ -372,26 +364,28 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 
 | 层级 | 当前主要模块 | 职责边界 |
 | --- | --- | --- |
-| 数据层 | db-loader.js、data-layer.js、data-state.js、odpt-unified.js、data-fusion.js、train-position-estimator.js、train-vehicle.js、train-vehicle-resolver.js、station-resolver.js、running-chain-resolver.js、local-railway-data.js | 加载规范数据、缓存运行时数据、统一 ODPT/官方 API/manual 时刻表、推定列车位置、收敛车型身份 |
+| 数据层 | db-loader.js、data-layer.js、data-state.js、odpt-unified.js、data-fusion.js、train-position-estimator.js、train-vehicle.js、station-resolver.js、running-chain-resolver.js、local-railway-data.js | 加载规范数据、缓存运行时数据、统一 ODPT/官方 API/manual 时刻表、推定列车位置、收敛车型身份 |
 | 业务层 | route-search.js、route-timetable.js、fare-estimator.js、line-presentation-service.js、delay-translator.js、tourism-*.js、history.js | 路线搜索、时刻/票价推算、线路展示排序、运行情报翻译与业务状态组织 |
 | 展示层 | search-ui.js、realtime-view.js、trains-config.js、trains-utils.js、trains-data.js、trains-geometry.js、train-track-layout.js、trains-render.js、trains-page.js、tourism-ui.js | DOM/SVG 渲染、筛选、交互控制、线路图几何和列车标签显示 |
 | i18n 横切 | translations.js、lang-init.js、common.js、sync_i18n_pages.js、audit_i18n_consistency.js | 四语言词表、语言切换、静态 data-i18n 与动态 window.t(key) |
 
 trains 页面不再由 trains-page.js 单独承担主体职责。当前 ownership 为：trains-config.js 管设计令牌与常量；trains-utils.js 管通用工具；trains-data.js 管线路/列车视图数据装配；trains-geometry.js 管节点/支线/环线几何；train-track-layout.js 管列车轨道偏移与同轨错位；trains-render.js 管 SVG/DOM 绘制；trains-page.js 只做页面装配、事件绑定与加载流程协调。
 
-车型身份解析架构（v4.3.1236 数据架构）：统一链路为「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」——
+车型身份解析架构（按现役入口核对）：统一链路为「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」——
 
 ① **ODPT/SQL 列车号**：来源为 ODPT 实时 trainNumber 或 Supabase SQL train-runs（canonical 时刻表）列车号；
-② **线路车型对应**：data/timetables/vehicle-type-map.js 静态查表 + Supabase train_vehicle_rules 逐号/日历参考（Grade-C timetable-reference，须在有效期内）；
+② **线路车型对应**：Supabase train_vehicle_rules 等有来源的证据经既有 exporter 生成 vehicle-operation-evidence 快照；按列车号、网络、服务日、日历和有效期匹配。已移除的 vehicle-type-map.js 不再作为现役静态映射表。
 ③ **TrainOperationEvidence**：data/timetables/train-operation-evidence.js（window.TrainOperationEvidence）——各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册证据；resolveEvidence(trainNumber, {lineId, railway, serviceDate, calendarType}, 'fallback') 按列车号+线路+服务日+日历解析车型；
 ④ **TrainVehicle**：js/train-vehicle.js（window.TrainVehicle）——resolve 收敛车型身份、selectMarkerArtwork 选择原生 PNG；实时车型优先，未知保持 UNKNOWN 灰点，不猜车型；
 ⑤ **PNG**：images/列车/*.png 原生车型图标（82×98），路径经图库 inventory 校验，页面不硬编码散落路径。
 
-TrainIcons/TrainVehicleResolver 仅作图标兜底与独立解析，不得成为第二套用户可见车型身份规范。unknown input 必须保持不确定性；只有链路证据明确时才可显示确定车型名。
+以上是列车号参考路径。来源直接提供的车型、车辆号或编成号也进入同一 TrainVehicle 解析器，按车籍、服务日和有效证据核验；不必先把车辆号当作列车号。列车位置与图片身份各有证据边界，不能用车型或目的地补造缺失位置。
+
+TrainIcons 是 js/train-vehicle.js 内的兼容接口；已移除的独立 resolver／icons 脚本不再加载。unknown input 必须保持不确定性；只有链路证据明确时才可显示确定车型名。
 
 ODPT 唯一入口：所有 ODPT 请求必须经 data/api/odpt-unified.js 暴露的 ODPTClient；首页首屏走 odpt-lazy.js 惰性模式。业务模块不得自行拼 ODPT URL 或绕过统一错误处理。
 
-LineServiceRelations 与 LOS 分工：LOS（line-operation-systems.js）是显示分组/系统卡权威；LineServiceRelations（line-service-relations.js）是线路间服务关系权威；railway_data.json/stationLines 是身份与物理拓扑。三者不得互相替代。
+服务关系与展示分组分工：railway_data.json 的 throughServices / serviceBoundaries 表达服务关系，presentation 表达显示分组；stationLines / lineStationOrder 表达物理拓扑与站序。展示分组不能用来推断物理直通。
 
 CSP 约束：script-src 'self'；connect-src 仅 self + ODPT 白名单（api-challenge.odpt.org / api.odpt.org）及已登记外部服务；img-src/ frame-src 按页面 meta 白名单执行。新增外部连接、图片源或 iframe 必须先登记到页面 CSP 与文档。
 
@@ -536,7 +530,7 @@ JS 模块：js/*.js 小写 kebab-case（data-fusion.js、route-search.js、touri
 
 CSS：全局 style.css + lang-bar.css；页面专属按页命名（trains.css、realtime.css、tourism-*.css）
 
-数据：源 JSON 小写下划线（railway_data.json、station_i18n.json、tourism_data.json）；构建产物 *.file.js；manual 时刻表 <RailwayId>-manual.js（vehicle-type-map.js 同目录）
+数据：源 JSON 小写下划线（railway_data.json、station_i18n.json、tourism_data.json）；构建产物 *.file.js；manual 时刻表 <RailwayId>-manual.js（证据快照位于同一目录）
 
 图片：images/ 按业务主题分子目录，文件名全库唯一；列车子目录按型番系/形 + 涂装样式括弧命名
 
@@ -693,9 +687,10 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 
 本节为全部画法共有的元素与规则（统一前置基线）：直线、环线（标准环）、异常环（六形环）、支线都必须先满足本节，再按各画法小节（5.4.2 环线布局 / 5.4.3 支线布局 / 5.4.4 线路与线宽）给出的处理方式与规格执行；本节未覆盖或与画法专属参数冲突时，以画法专属小节为准。
 
-
 #### 5.4.1.1 画布基准
+
 #### 5.4.1.2 尺寸速查表（移动端 / 桌面端最终值）
+
 > 所有尺寸为 viewBox 逻辑坐标。SVG 通过 `width=100%` + viewBox 按比例拉伸到容器宽，移动端屏幕越宽实际像素越大，但 viewBox 内相对密度恒定。
 
 **环线（scale6 = 移动 1.5 / 桌面 1.6）**：
@@ -732,6 +727,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | 行高 ROW_H | 18 |
 
 #### 5.4.1.3 GEOM 设计令牌
+
 | 令牌 | 值 | 含义 |
 | --- | --- | --- |
 | BRANCH_COL_W | 96 | 支线列宽（站名 16px 最长 6 字 + 换乘 chip 余量） |
@@ -744,6 +740,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 • 数据来源：站序、站名、换乘、坐标一律来自 data/core 冻结数据（railway_data.json 等），画法只做渲染，不派生业务数据。
 
 #### 5.4.1.4 字体体系（字体族/字号刻度/字重颜色）
+
 | 项 | 值 | 来源 |
 | --- | --- | --- |
 | 主字体 | 'Fusion Pixel'（像素字体） | style.css @font-face |
@@ -779,6 +776,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 • 顶部/底部留白：topP=18、botP=16（有直通标签时 +26）。
 
 #### 5.4.1.5 站间距（换乘 chip 高度自适应，所有画法共用）
+
 **公式**：站间距 sp = **换乘图标的高 + 一点空隙**（不再按站数分档；chip 底部不与相邻站圆点/站名重叠）。移动/桌面统一。
 
 | 项 | 值 | 说明 |
@@ -800,6 +798,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 • 站名自适应：超宽时缩小字号（shrink, never clip），下限 10px；可用宽度由 data-clamp-avail 计算。
 
 #### 5.4.1.6 站名自适应（clamp）
+
 站名超宽时缩小字号（shrink, never clip），下限 10px（确保窄环/窄列站名完整放下）。
 
 可用宽度由 data-clamp-avail 计算。clamp 规则（双列画法通用）：左列 tx−4、右列 svgW−2−tx；junction（岔路居右）走 max(40, floor(junctionX+loopRectW−7−4−tx))；尾段居左走 tx−4（tx=避让后右缘）。
@@ -807,6 +806,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 • 触控目标（移动端）：下限 44×44px（iOS HIG / MD3）；列表项下限 48px 高。
 
 #### 5.4.1.7 触控与间距（移动端）
+
 | 项 | 值 |
 | --- | --- |
 | 触控目标下限 | 44×44px（iOS HIG / MD3） |
@@ -816,6 +816,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 • 缩放系数：线路图整体移动端 1.5、桌面端 1.6（所有画法统一）；站名/标记内 _sc6 移动端 1.5、桌面端 1.3（所有画法）。
 
 #### 5.4.1.8 数据来源
+
 • 外部数据源：ODPT 公共交通开放数据（www.odpt.org）——实时位置、时刻表、运行情报。
 
 • API 端点：https://api-challenge.odpt.org（挑战版/开发）、https://api.odpt.org（正式版/运行）。
@@ -849,6 +850,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 • 数据来源：站序/站名/换乘/坐标一律来自 data/core 冻结数据，画法只做渲染，不派生业务数据。
 
 #### 5.4.1.9 车站节点（圆点规格与站名偏移）
+
 • 车站节点：统一由 _renderStationNode 渲染——普通站 r=7（fill=线色、stroke=#fff、线宽 2）；换乘站 junction r=12（fill=#fff、stroke=线色、线宽 2.5）。
 
 | 元素 | 半径 | fill | stroke | 线宽 | 来源 |
@@ -859,6 +861,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 站名偏移随圆点联动：普通站水平 10 / 换乘站水平 14（均 ≥ r+2）；top 普通 y-10 / 换乘 y-14；bottom 普通 y+15 / 换乘 y+19；换乘 chip 下移（ty+11 junction / ty+7 普通）。验证：相邻站、环线双列、异常环（六形环）与 tail 列等各画法典型场景均无冲突（异常环窄列站名空间最紧处 -2px 亦通过）。
 
 #### 5.4.1.10 站名文本与锚点（通用规则）
+
 左右侧站名与圆点同行、垂直居中（dominant-baseline: central，ty=圆心）
 
 | side | tx | ty | anchor |
@@ -870,6 +873,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | right（默认） | x+14/x+10 | y（central） | start |
 
 #### 5.4.1.11 换乘图标 chip（规格与对齐）
+
 | 项 | 移动 | 桌面 | 来源 |
 | --- | --- | --- | --- |
 | 图标尺寸 ICON | 16 | 16 | 969 |
@@ -884,6 +888,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 换乘 chip 顶部：ty+14（换乘站）/ty+9（普通站），避让圆点底缘 +2px。
 
 #### 5.4.1.12 线路主线（线宽与透明度）
+
 所有线路元素统一规格（各画法的衍生结构线见画法专属小节）：
 
 | 元素 | 线宽 | 透明度 | 说明 |
@@ -891,6 +896,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 | 所有线路元素 | 5 | 0.6 | 环线/直线/支线/直通 统一规格 |
 
 #### 5.4.1.13 直通标记（箭头与留白）
+
 直通标记样式（boxed label，v4.3.832 统一 Streamline Core Solid SVG 图标）：
 
 | 元素 | 值 | 说明 |
@@ -914,13 +920,14 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 N 从 0 开始。**端部与中部的排列轴不得混用**：up/down 为横排，middle 为侧方纵排；端部标签不得改成纵向堆叠，中部标签不得横跨相邻两站的线路区间。
 
 #### 5.4.1.14 列车图标与标签
+
 列车图标（车型图片）：
 
 | 元素 | 值 | 说明 |
 | --- | --- | --- |
 | 尺寸 | 14 × 18 | viewBox 单位 |
 | 位置 | 居中在站圆点（x-7, y-9） | 与站圆点同心 |
-| 来源 | images/列车/<運営者>/<型番系>.png | train-icons.js LINE_ICONS 映射 |
+| 来源 | images/列车/<運営者>/<型番系>.png | train-vehicle.js 的 canonical 车型目录 |
 | estimated | .estimated class | 推定位置（非实时） |
 
 列车标签（方向端点站名）：
@@ -934,6 +941,7 @@ N 从 0 开始。**端部与中部的排列轴不得混用**：up/down 为横排
 | 环线 | 只显示内回/外回文字，不加箭头 | |
 
 #### 5.4.1.15 多列车重叠处理（同站多趟车）
+
 同一站有 ≥2 趟列车时，按方向分组水平偏移，避免图标重叠：
 
 | 线路类型 | 方向分组 | 偏移规则 |
@@ -948,7 +956,6 @@ N 从 0 开始。**端部与中部的排列轴不得混用**：up/down 为横排
 **3 趟以上并列**：
 - 同方向 ≥2 趟：水平均分（间距 18/20px），最多 3 趟并排（第 4 趟起换行/缩放，当前未实现）
 - 跨方向同站：先按方向分组偏移（Inbound/Outbound 或 Inner/Outer），组内再水平均分
-
 
 • 字体：全局唯一 Fusion Pixel（SVG 站名/支线名显式声明 “Fusion Pixel”, “Courier New”, monospace），回退 Courier New/monospace。
 
@@ -1095,13 +1102,15 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 
 图标体系分为“线路/运营商图标”和“列车车型图标”两类，不得混用。
 
-线路图卡片侧仍使用固定图标框、fallback 图标框与线路徽章规则；图标资源统一放在 images/列车、images/鉄道 等既有目录，路径由 TrainIcons/TrainVehicleResolver 返回，页面不得硬编码散落路径。
+线路图卡片侧仍使用固定图标框、fallback 图标框与线路徽章规则；图标资源统一放在 images/列车、images/鉄道 等既有目录，车型图片由 TrainVehicle 的统一选择接口返回，线路徽章由既有 presentation／线路元数据提供，页面不得硬编码散落路径。
 
-车型身份解析必须走统一链路：ODPT/SQL 列车号 → 线路车型对应（vehicle-type-map.js + Supabase train_vehicle_rules）→ TrainOperationEvidence（resolveEvidence 按列车号/线路/服务日/日历解析）→ TrainVehicle（收敛身份 + selectMarkerArtwork 选原生 PNG）→ PNG。实时车型优先、有据才升、未知保持 UNKNOWN；图标兜底不得冒充确定车型事实。
+车型身份解析必须走统一链路：ODPT/SQL 列车号 → 线路车型对应（Supabase train_vehicle_rules 等来源证据）→ TrainOperationEvidence（resolveEvidence 按列车号/线路/服务日/日历解析）→ TrainVehicle（收敛身份 + selectMarkerArtwork 选原生 PNG）→ PNG。实时车型优先、有据才升、未知保持 UNKNOWN；图标兜底不得冒充确定车型事实。
 
-E235系山手線作为 ultimate fallback 仍存在于当前 main 的 TrainIcons/TrainVehicleResolver 中；它只能作为图标兜底，不得在非 Yamanote 场景冒充确定车型名。若后续修复该 fallback，应同步更新对应当前规范与测试。
+未确认车型或图片加载失败时保留中性标记，不以 E235 系或其他车型的图片兜底。只有同一车型身份与适用编成证据明确时才投影到对应原生 PNG。
 
 #### 5.4.6 现状不统一项（待统一）
+
+> 本表是早期源码检查产生的待办线索，行号及数值可能随代码演进变化。实施前须对照现役共享模块复核，最新修复情况见 PROGRESS；不直接照旧行号补丁。
 
 | # | 问题 | 位置 | 建议 |
 | --- | --- | --- | --- |
@@ -1161,9 +1170,9 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 
 收藏（预留约定）：当前版本暂无收藏功能；如引入，沿用同一套机制——key 统一 pixel_tetsudo_* 前缀、JSON 数组、写入 try/catch 容错（localStorage 满/禁用时降级为内存态并 console.warn）、上限裁剪；收藏对象复用线路/车站/观光条目的规范 ID，不存渲染态 DOM
 
-## 6. 数据层（本地底库 + ODPT 实时）
+## 6. 数据层（本地底库、ODPT 实时与 SQL 证据）
 
-> 本项目无传统业务后端（无应用服务器、无 SQL 数据库、无后台管理界面）。"数据层"指 本地 JSON/JS 底库（静态基线）+ ODPT 实时通道（主源）+ serve.py（本地开发服务器/代理），以下按此如实描述。
+> 前端由静态文件提供；canonical 拓扑保存在仓库，实时位置由 ODPT／官方 API 提供，非完整实时覆盖范围通过现有 Supabase `train-runs` Edge Function 获取 SQL 时刻表，车型证据经既有导出脚本生成浏览器快照。本地 `scripts/serve.py` 负责开发服务与白名单代理；它不替代线上数据库或 Edge Function。
 
 ### 6.1 系统模块划分
 
@@ -1175,17 +1184,18 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 | 运行系统展示元数据（LOS 已吸收） | railway_data.json 每条 line.presentation | 运行系统显示分组、系统名、颜色、系统卡排序（lineIds / code / order / operatorGroup）；原 data/core/line-operation-systems.js 已并入 canonical line records，不再单独加载 |
 | 服务关系层 | （已并入 railway_data.json 的 throughServices / serviceBoundaries） | 线路间直通/服务边界；原 data/core/line-service-relations.js 与 through-service.js 已删除，关系数据在 canonical 记录内表达 |
 | ODPT 客户端 | data/api/odpt-unified.js + odpt-links.js | 实时/时刻表/运行情报统一入口 |
-| 手动时刻表库 | data/timetables/*-manual.js + vehicle-type-map.js | ODPT 无数据线路补全；vehicle-type-map 为线路车型对应静态表 |
+| 手动时刻表库 | data/timetables/*-manual.js | 既有兼容时刻表；不可覆盖当前实时或 SQL 来源，不据此恢复整线车型默认值 |
+| SQL 时刻表与证据 | supabase/functions/train-runs/index.ts + tools/export-vehicle-operation-evidence.js | 按覆盖策略提供时刻表；导出有来源、日期与日历约束的车型证据 |
 | 实时融合 | js/data-fusion.js | ODPT、官方 API、manual、本地 fallback 融合 |
 | 列车位置推定 | js/train-position-estimator.js | 按时刻表、延误、站序推定列车位置 |
-| 车型身份 | js/train-vehicle.js / js/train-vehicle-resolver.js / js/train-icons.js + data/timetables/train-operation-evidence.js | TrainVehicle 统一用户可见车型身份（按 ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG 链路）；resolver/TrainIcons 提供独立解析与图标兜底 |
+| 车型身份 | js/train-vehicle.js + data/timetables/train-operation-evidence.js | 统一解析有来源的车型／车号／编成证据并选择同车型 PNG；TrainIcons 是同一脚本内的兼容接口，不是独立解析链 |
 | 线路图模块 | js/trains-config.js / trains-utils.js / trains-data.js / trains-geometry.js / train-track-layout.js / trains-render.js / trains-page.js | 按配置、工具、数据装配、几何、列车轨道布局、渲染、页面控制拆分 |
 
 服务端规则（白名单登记、key 不硬编码、安全加固不回退）见 3.9。
 
 ### 6.2 访问控制（serve.py 安全）
 
-本项目无后台管理界面、无账号体系、无传统权限模型，不适用 RBAC/ACL。实际访问控制如下：
+本站未提供乘客账号与后台管理界面。本节说明本地开发服务的访问控制；Supabase 与 Edge Function 的服务端权限配置应在其现有实现与维护流程中核对，不能据此视为无需访问控制。
 
 | 控制面 | 机制 |
 | --- | --- |
@@ -1198,7 +1208,7 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 
 ### 6.3 数据文件体系
 
-数据以 JSON/JS 文件 形式存放于仓库（无 SQL 数据库），由构建脚本生成浏览器可加载的 *.file.js 产物。
+canonical 数据以 JSON/JS 形式保存在仓库，由构建脚本生成浏览器可加载的 *.file.js。运行时 SQL 时刻表与车辆证据由 Supabase 管理，不复制为第二套 canonical 拓扑。
 
 #### 6.3.1 本地铁道线路基础数据库（核心静态底库）
 
@@ -1325,7 +1335,7 @@ CSP：connect-src 仅 self + ODPT/MapTiler 白名单；新端点必须先登记
 
 ### 7.5 后台管理接口（无，数据维护见 6.3）
 
-本项目无后台管理界面、无账号体系，因此无后台管理接口。数据维护通过直接编辑数据文件（见 6.3）+ 构建脚本重新生成完成；访问控制见 6.2。
+本项目无后台管理界面、无账号体系，因此无后台管理接口。canonical 数据通过修改源文件与重新生成维护；SQL 时刻表、车辆规则与来源证据通过现有 Supabase 流程维护，浏览器快照由既有 exporter 生成。访问控制见 6.2。
 
 ### 7.6 系统数据字典
 
@@ -1355,15 +1365,15 @@ CSP：connect-src 仅 self + ODPT/MapTiler 白名单；新端点必须先登记
 
 ### 8.1 本地开发服务器（serve.py）
 
-本项目为纯静态站点 + 本地开发服务器，无独立服务器、无数据库服务器：
+前端使用静态托管；实时 API、Supabase 数据库与 Edge Function 提供运行时数据，本地开发服务独立于这些线上依赖：
 
 生产：GitHub Pages 静态托管（biubiu52011.github.io/Pixel-Tetsudo）
 
 本地开发：scripts/serve.py（仅绑定 127.0.0.1:8017，外部不可达）
 
-数据以仓库内 JSON/JS 文件形式存在，无运行时数据库进程
+canonical 数据保存在仓库；浏览器通过统一客户端访问线上时刻表与证据，不在本地启动数据库进程。
 
-资源要求：纯静态文件（HTML/CSS/JS/图片/字体），无构建期外的计算资源需求
+资源要求：前端为 HTML/CSS/JS/图片/字体；运行时网络请求和 Edge Function 依赖各自服务的可用性。
 
 **本地启动**：
 
@@ -1453,7 +1463,7 @@ ODPT 不可用 / 限流 / 403：
 
 构建产物：node --check 全部 JS + 重跑 node data/core/gen-file-data.js 后 bundle 一致性
 
-本地实测：python serve.py（127.0.0.1:8017）启动后浏览器访问全部页面
+本地实测：python scripts/serve.py（127.0.0.1:8017）启动后浏览器访问全部页面
 
 双档布局：桌面 + 移动（约 410px 容器）实测，无溢出、无文字穿线、无 JS error（见 4.6）
 
@@ -1469,7 +1479,7 @@ ODPT API 全量对比矫正（JR 东全量对比矫正、ODPT railway ID 映射�
 
 直通一致性：tt_join_check BFS 多跳判定（接续站缺失修复闭环）
 
-车型核验：vehicle-type-map.js 候选条目经官方/有力信息源核验（“核验有据才升、不确定保持候选”）
+车型核验：既有证据快照及车辆规则须有可追溯来源、适用日期与身份范围；核验有据才升，不确定保持候选。
 
 多语言：站名/文本 ja/zh/ko/en 四语覆盖检查（站名搜索多语言验证）
 
@@ -1792,9 +1802,9 @@ B 需要 X→ B 从 A 的内部复制/重写 X→ B 正常工作了→ A 从未�
 
 • data/core/station_i18n.json：车站多语言文本（ja/zh/ko/en），与线路库同源。
 
-• data/core/line-operation-systems.js：LOS 运行系统卡、系统显示分组。
+• data/core/railway_data.json 内的 line.presentation：运行系统卡、系统显示分组。
 
-• data/core/line-service-relations.js：线路服务关系层。它不是 railway_data.json 的替代品，但属于架构基线的一部分，更新后必须重跑 data-config-bundle。
+• data/core/railway_data.json 内的 throughServices / serviceBoundaries / branchOf：服务关系与边界；不恢复旧独立关系文件，修改后按现有生成流程验证。
 
 Canonical 修改流程（SOP）：①确认任务修改边界与 canonical owner；②直接修改源文件，不修改生成产物；③按影响范围重跑 node data/core/gen-file-data.js 和/或 node data/core/gen-config-bundle.js；④运行相关 syntax / canonical / architecture / i18n / relation / UI guards；⑤确认 git diff 仅包含任务范围内的源文件与必要生成产物后提交。Git history 是恢复机制，不创建 _old/_bak/_new/fix2/fix3 等安全副本。
 
@@ -1891,7 +1901,7 @@ RailwayDB.resolveLineName / resolveStationName / tOp 是唯一允许的显示名
 
 file:// 协议会阻断 fetch（CORS），因此双击打开页面无法工作。项目必须通过 HTTP 服务：
 
-python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 python -m http.server 8017），然后打开 http://localhost:8017/pages/home.html
+python scripts/serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 python -m http.server 8017），然后打开 http://localhost:8017/pages/home.html
 
 官方源代理：ODPT 未提供运行状况的线路（小田急 3 线/百合海鸥号）由 data/api/official-railway.js（window.OfficialRailway）经本地代理抓取官方 API——小田急 d6oynijiy33tb.cloudfront.net（x-api-key 公开 key）、百合海鸥号 cms-2.yurikamome.co.jp/api/operation/（无 key）。两个官方 API 均无 CORS 头，浏览器必须经 serve.py 的 /api-proxy/ 白名单端点转发（防 SSRF）。DataFusion 融合优先级：official（按 line.id）> ODPT > localStatus > fallback。
 
@@ -1901,7 +1911,7 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 ## 13. 线路服务关系层设计（Line-to-Line Service Relation Layer）
 
-> 状态：当前 main 已实现 data/core/line-service-relations.js，并由 data-config-bundle.js 加载。本章不再只是只读设计产物，而是当前架构契约。
+> 本章保留服务关系层的设计语义。现役事实源已并入 railway_data.json 的 throughServices / serviceBoundaries / branchOf；旧 line-service-relations.js 与 LOS 独立文件不再加载。迁移前接口和登记示例仅用于理解历史，不能据此恢复旧线路 ID 或第二套事实表。
 
 ### 13.1 问题陈述
 
@@ -1909,7 +1919,7 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 第 2 层：物理拓扑（stationLines + lineStationOrder）。
 
-第 3 层：服务关系（line-service-relations.js）。
+第 3 层：服务关系（canonical 线路内的 throughServices / serviceBoundaries / branchOf）。
 
 第 4 层：运行系统（LineOperationSystems / LOS）。
 
@@ -1930,9 +1940,9 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 
 关键原则：SHARED_STATION >= 1 不蕴含 THROUGH_SERVICE，仅可作为 PHYSICAL_CONNECT 证据；0 共用站也不能凭想象创建直通，必须标 LOW/UNKNOWN 并说明缺口。
 
-### 13.3 数据模型 line-service-relations.js
+### 13.3 数据模型与历史接口
 
-当前文件：data/core/line-service-relations.js。
+现役数据位于 data/core/railway_data.json。以下字段表保留迁移前关系模型供参考，不能作为待新建文件的结构要求。
 
 当前条目结构：
 
@@ -1945,9 +1955,11 @@ python serve.py（本地静态服务器 + /api-proxy/ 官方 API 代理替代 py
 | evidence.source | 关系来源，如 LOS、stationLines、branchOf、人工核验 |
 | evidence.confidence | HIGH / MEDIUM / LOW / UNKNOWN |
 
-文件同时挂载 window.LineServiceRelations，并提供 getRelatedLines(lineId)、isThroughService(a,b)、getServiceChains()。这些 API 是服务关系查询入口，不得在页面中重新扫描 LOS 来猜关系。
+迁移前曾提供 window.LineServiceRelations 及 getRelatedLines / isThroughService / getServiceChains 接口。现役展示消费 LinePresentationService，列车接续消费 RunningChainResolver 与 canonical 服务边界；不得恢复旧接口作为另一套事实来源。
 
-### 13.4 当前 main 已登记关系概览
+### 13.4 历史关系登记示例（迁移前）
+
+下表保留旧设计记录，其中 Saikyo / KawagoeWest 等 ID 已迁移，置信度也仅对应当时检查；不能当作当前线路清单或当前有效的直通证明。
 
 | 关系 | 类型 | 置信度 | 备注 |
 | --- | --- | --- | --- |
@@ -1970,7 +1982,7 @@ data-config-bundle.js 必须在 line-presentation-service.js 之前加载，使�
 
 LinePresentationService 以 line.presentation 为显示权威（原 LOS 已并入 canonical line records）：系统卡聚合、颜色、图标、系统卡排序均读 presentation；默认排序按 4.5 LINE LIST DISPLAY ORDER 规则。Relations（throughServices / serviceBoundaries）不应改变线路身份，也不应直接修改 railway_data.json。
 
-DataState / Realtime / Trains 如需展示直通链、相关线路或支线关系，必须消费 LineServiceRelations API，而不是在渲染层临时推断。
+DataState / Realtime / Trains 的显示分组与支线范围复用 LinePresentationService；物理运行链复用 RunningChainResolver 与 canonical 服务边界，不在渲染层临时推断直通。
 
 ### 13.6 文件结构
 
@@ -1988,15 +2000,17 @@ js/trains-data.js / trains-render.js / trains-page.js（消费展示结果，不
 | --- | --- | --- |
 | LOS 与 Relations 语义混淆 | 高 | 文档与代码中固定分工：LOS=显示，Relations=服务 |
 | stationLines 数据缺口导致 LOW 关系长期存在 | 中 | confidence/evidence 必填；不得把 LOW 当 HIGH 消费 |
-| line-service-relations.js 进入 bundle 后加载顺序回归 | 中 | 3.10.3 与 12.10 固定 bundle 顺序，并由页面脚本链遵守 |
+| canonical 服务关系与展示服务加载顺序回归 | 中 | 遵守现有 bundle 与页面脚本加载契约，并运行对应测试 |
 | handoverStations 空值或旧值 | 低 | 作为已知数据质量问题处理，走 Freeze/Relation 修订流程 |
 
 ### 13.8 后续阶段计划
 
+以下为关系治理方向，不代表当前正在执行的任务；实际工作项和完成状态以 PROGRESS 为准。
+
 | 阶段 | 内容 | 是否修改数据 |
 | --- | --- | --- |
 | 1 | 对现有 Relations 做 evidence/空 handoverStations 清理 | 是，关系层 |
-| 2 | 将 Realtime/Trains 需要的直通链展示统一接 LineServiceRelations API | 是，JS |
+| 2 | 持续检查展示与运行链是否复用现役 LinePresentationService / RunningChainResolver，避免页面自行推断 | 是，JS |
 | 3 | 对 LOW/UNKNOWN 关系补官方证据或保持未知 | 视证据而定 |
 | 4 | stationLines 数据质量修复 | 是，canonical 数据，需 Freeze 例外 |
 

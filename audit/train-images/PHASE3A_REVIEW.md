@@ -1,5 +1,7 @@
 # Phase 3A Review Gate
 
+> 历史记录：保留当时的方案与验收结论，不代表现役实现或当前线上状态。 最新进度见 [PROGRESS](../../PROGRESS.md)；分类入口见 [文档索引](../../docs/README.md)。
+
 checked_at: 2026-09-27T00:00:00+09:00
 scope: review only. No production changes were made during this gate.
 

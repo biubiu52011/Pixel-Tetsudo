@@ -1,11 +1,22 @@
 # Pixel Tetsudo 工程进度
 
+> 本文件记录任务执行与验收状态。工程约束见 [ENGINEERING](ENGINEERING.md)，技术参考见 [README](README.md)，分类报告见 [文档索引](docs/README.md)。记录中的数量、浏览器结果和发布状态仅适用于对应提交与评估时间；后续记录可以取代早期方案，但不得改写旧证据。
+
+## 2026-10-15 JST — Markdown 文档整理（DONE：本地文档校验完成）
+
+- 执行者：Codex；范围：README、ENGINEERING、PROGRESS、分类索引及既有报告导航。
+- 明确文档职责，按真实标题修复目录；纠正“无 SQL 数据库”、已移除车型／关系脚本仍作为现役入口等矛盾说明；核对本地启动路径。
+- 增加分类索引，历史报告注明范围；恢复资料中的旧 60 线路基线只作历史记录。保留原有修订表、样本数字、原始验收结论与全部章节。
+- 验证：17 份文档、172 个内部链接检查通过；14 份原跟踪文档均有索引，11 份历史报告非空正文与代码围栏逐项保留；diff 检查通过。仅改 Markdown，不修改产品脚本、数据或样式，不触发浏览器功能验收。
+- 提交范围：本轮 Markdown 整理及三个分类入口；仅声明文档校验完成，不声明运行时重新验证或重新部署。
+
 ## 文档版本历史（README 修订记录迁移，按日期）
 
 > 自 RC-7（2026-10-15）起，README 1.2 详细修订内容迁移至本文件统一按日期管理；README 仅保留版本索引。
 
 | 日期 JST | 版本 | 修订内容（详细） |
 |---|---|---|
+| 2026-10-15 | RC-8 | 文档分类导航、真实标题目录和历史范围标注；校正 Supabase／SQL、移除模块与恢复基线说明；只改 Markdown，未更改运行时事实或重新执行浏览器验收。 |
 | 2026-10-15 | RC-7 | **文档结构更新**：数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」（README 3.7/2.4/3.10.3/5.4.5/术语表/目录/数据字典同步）；修订记录（日志）迁移至本文件按日期管理，README 1.2 仅保留版本索引。 |
 | 2026-10-15 | RC-6 | **文档更名与整理**：DEVELOPMENT.md 全量整理后更名为 README.md（保留全部开发细节，作为仓库首页文档）；同步登记 2026-10-14～10-15 开发进展：高尾实时区间转线与末站图标归位（v4.3.1216/1217）、FULL 隐藏位置提示（v4.3.1218）、普通环线统一双排模板（v4.3.1219）、全线路直通标签通用排布（v4.3.1220）、支线独立卡片与独立线路图（v4.3.1221）、导入东叶/埼玉线路标志（v4.3.1222）、纠正内部支线误拆范围（v4.3.1224）、运营时段车辆映射全网检查（v4.3.1225）、车辆映射第二批 JR 定期车型参考（v4.3.1226）、终到边界/位置图层一致性/乘客列车列表（v4.3.1227-1229）、乘客堆叠列表去除列车号（v4.3.1230）。各条目 Commit：e6c4fa3f/b24d0e7e、4ebaf383、d984ce5c、0723994c、f9dc2617 等。 |
 | 2026-09-27 | RC-5 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freeze、recovery/baseline、canonical migration audit、approved removal manifest、baseline refresh 生命周期、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
@@ -18,10 +29,12 @@
 | 2026-09-11 | v1.0 | 由 AGENTS.md、LINE-DIAGRAM-SPEC.md、4.3.31_design.md、README.md 等多份开发文档整理合并形成综合版；完整原文收录于附录 A-B。 |
 
 ## 2026-10-15 JST — 乘客堆叠列表去除列车号
+
 - 用户指出普通乘客不需要编号，移除trains.html共用堆叠弹窗列车号，保留图标、种别、目的地、晚点及推定提示；正点实时列车不生成空的次要信息行。只改变呈现，原始trainNumber与运行匹配数据保留。其他六页无此列表，不修改。
 - Commit: f9dc2617。renderer资源4.3.1230；原件备份recovery/passenger-list-no-number-20261015。既有乘客列表无编号/无空行回归、语法及diff检查PASS；CI/CD、Release Guards与Pages部署success，公开renderer HTTP200且逐字MATCH，已同步上线。原有五项本地数据修改保留。
 
 ## 2026-10-15 JST — 终点边界、位置图层一致性与乘客列车列表（DONE：已发布并公开验收）
+
 - Commit: 0723994c。CI/CD、Release Guards与Pages部署success，六个公开JS/CSS逐字MATCH；公开京浜东北真实折叠组已打开，包含1012B/978C及正确大宫/南浦和目的地；49个marker含3实时，没有同号重复。验收发现实时typeName仍是JR-East.Rapid，11b5bd40复用TRAIN_TYPE_NAMES修正种别显示，renderer资源补至4.3.1228。另实际DOM发现语言菜单outside-click无论是否打开都focus语言按钮，破坏弹窗焦点；共用lang-init修正为仅已打开且显式关闭时归还焦点，outside-click不抢焦点，七页同步4.3.1229并补回归。
 - 最终实现e6aab94c的CI/CD、Release Guards及Pages均success，七个公开JS/CSS全部HTTP200并逐字MATCH。公开浏览器840K/875C真实组显示“普通 · 大船行き”及车号/晚点，无内部种别码/车型诊断；400px共享弹窗，焦点在关闭按钮，Escape后返回展开按钮。最后补丁及回归已发布，不附截图。
 - 用户发现终到后仍演算、越入不可能区间及两个图层独立移动。共享estimator现在以明确单一目的地截断线性行程，终到时钟后结束推定，移除旧5分钟滞留及平均速度补造后续站时刻。未映射支线不能跨过主线插值；有实际时刻的后续本站到达可重新入图。环线不按单段目的地截断，既有有来源的常磐/中央跨线时刻接续保留。不用车型或目的地生成缺失位置，不改源SQL或车辆证据。
@@ -32,6 +45,7 @@
 - 共享位置引擎适用trains/realtime，home仅同步已有data-fusion引用，其余4页不含这些资源；位置/CSS4.3.1227、renderer4.3.1228、七页lang-init4.3.1229。原件/复现/日志保存在上述recovery目录，原有5项本地数据修改保留。运行时边界修复不声称源数据库所有目的地/车辆事实已逐条纠正。
 
 ## 2026-10-15 JST — 车辆映射第二批：JR定期车型参考（DONE：本批已公开验证，剩余缺口保留）
+
 - Commit: d984ce5c。Validate、Release Guards及CI Pages部署success；公开车型脚本与证据快照逐字MATCH，5个PNG及报告均HTTP200。公开浏览器947A/822A为1000、840K/947K/808K为6000，PASS；本地鹤见908/912B/907为E131-1000。
 - 继续处理未判定清单。Supabase既有train_vehicle_rules新增2916条逐号/平日休日计划参考：京浜东北本系984（E233-1000）、源previous/next明确接横滨且同日历目标模板存在277（E233-6000）、横滨622、相模242（E131-500）、仙石普通359（E131-800）、鹤见主326/大川24/海芝浦82（E131-1000）。均Grade-C timetable-reference，有效10-15至11-30，不声称实际编组、涂装或当日时刻有效性。SQL插入事务/回读/分组计数PASS。
 - 特别保留两处隔离：京浜东北同一源railway含横滨直通K号，不整线指定1000；516K平日与532K休日无已核验接续引用不插入。仙石模板混有仙石东北直通快速，本批只纳入原模板明确E131-800的普通列车。没有新增后缀车型运行时逻辑或修改位置/直通事实。
@@ -40,29 +54,29 @@
 - 40工具套件、64 node:test、4 Python守卫、diff检查PASS。新增逐条2916参考双模式、PNG、有效期、未知号/日历/网络隔离回归并接CI。备份/SQL/同输入结果recovery/vehicle-mapping-batch2-20261015。原有五项本地数据修改保留。
 - 观察到根岸站出现只见线换乘，疑似同名站关系混淆，已登记待另查；本批只改车型证据，未借此改canonical拓扑。
 
-
 ## 2026-10-15 JST — 运营时段车辆映射全网检查（DONE：检查与有依据修正已发布，缺口见清单）
+
 - Commit: 4ebaf383（实现/报告）；CI/CD、Release Guards、证据同步success，现有独立legacy Pages run cancelled而CI的Pages部署success。公开JS/证据逐字MATCH，两PNG和报告HTTP200；公开浏览器A817/A9551等已显示2000系，银座本地A917/B937显示1000系。
 - 检查223条canonical线路、210个非FULL SQL入口和4家运营商887条ODPT记录；当前111个范围/1677位置记录，父子重复不作为物理车数。保存逐号CSV及223行报告docs/reports/vehicle-mapping-audit-20261015.md，原始数据/对照/备份recovery/live-vehicle-audit-20261015。ODPT源时间09:11—09:12，接收时已过期，生产继续排除；另在源时间回放1029位置记录检查映射，未声称是当前实时。
 - 用户当前丸ノ内页面整批待判定：SQL没有现役单一车型证据且唯一目录未登记已有PNG。核对Tokyo Metro当前官方现役列表与02退役官方说明，Supabase evidence_sources402、family rules38/39补丸ノ内2000/银座1000，MarunouchiBranch证据域归属母线；有效2026-10-15至11-30，不推编组/涂装。SQL回读PASS；现有exporter新增只读connector结构导入，原37条规则/33别名及全部dated/reference/carsets事实保留。
 - TrainOperationEvidence→TrainVehicle→原生PNG链路不变；登记2原生图。相同时间/输入新增丸ノ内43、支线5、银座30图，合计78。当前273有图、1404尚缺证据。新宿回放13条已判10-300但仅有分批外观PNG，缺实体编组不能指定批次；荒川ODPT运行ID非车号，仍保留待判定。未取得全网当天编组实证，不能把未知等同错配或宣称所有既有映射正确。
 - 适用trains/realtime共用车型链，两个页面资源4.3.1225；其余5页无该车型图标链，不改。39工具套件、64 node:test、4 Python守卫、图片路径/语法与diff PASS。实际本地丸ノ内浏览器已确认A819/A9551等为2000系；不附截图。线上待发布验收，原有5项数据修改保留。
 
-
 ## 2026-10-15 JST — 纠正内部支线误拆范围
+
 - 用户指出鶴見/千代田/丸ノ内等未独立命名支线不应单列。撤回branchOf一刀切规则；canonical独立presentation作为正式线路展示声明，无声明的内部支线回到父卡片与父图。9内部区间：水郡、方南町、北绫濑、辰野、鹤见海芝浦/大川、成田我孙子/机场、南武浜川崎。8已有正式presentation支线保持独立，西九州新干线按JR九州官方线路名补独立presentation（https://www.jrkyushu-timetable.jp/jr-k_time/r_shinkansen2.html）。
 - LinePresentationService统一独立卡片与父图支线范围，DataState两列表同规则；几何、列车收集与激活同步。组合延伸不再提前返回而漏掉内部支线。支线几何保存junction和canonical站序索引，反向支线不再错位一站。内部交接不标成对外线路入口。源列车号/车型/SQL事实未变。
 - 恢复合图时发现方南町旧站表误含大江户线西新宿五丁目、漏掉两站。按Tokyo Metro官方页（https://www.tokyometro.jp/station/line_marunouchi/index.html）改为中野坂上→中野新桥→中野富士见町→方南町，复用既有canonical别名ID，补站名、顺序/关系索引；删除旧错误区间时长，未猜时刻或坐标。
 - 38工具套件、64 node:test、4守卫PASS。实际本地丸ノ内父图确认官方4站。适用realtime/trains共享卡片，其余页同步已有公共资源；资源4.3.1224。原件recovery/branch-scope-correction-20261015，canonical/fallback仅暂存相关修正，原有5项数据修改保留。不附截图。
 
-
 ## 2026-10-15 JST — 导入东叶/埼玉线路标志
+
 - 用户提供两张PNG原样导入images/鉄道目录，东叶800×800、埼玉320×320，与附件逐字相同，保留透明度。
 - ToyoRapid/SaitamaRapid的image与presentation.icon接入同一原始PNG；离线fallback同步，七页db-loader版本4.3.1222。卡片与换乘标记复用已有字段，无颜色、车型、SQL或拓扑改动。
 - 原件和HEAD备份recovery/line-icons-20261015。frontend smoke、图片检查、4守卫及diff check PASS。canonical/fallback仅暂存两条图标增量，原有5项本地数据修改保留。不附截图，公开验收待同步。
 
-
 ## 2026-10-15 JST — 支线独立卡片与独立线路图
+
 - 用户明确要求全站有独立数据的支线独立成卡片。共享DataState取消branchOf隐藏；LineCard删除父卡片嵌套支线行，旧CSS/点击入口清理。18条canonical支线在trains/realtime均恰好一张一级卡片；原branchOf/站表/运行链/SQL身份保持。
 - LinePresentationService新增唯一getMapBranchIds：只有显式组合presentation成员才纳入组合图，branchOf不再自动扩展地图。geometry、getRealtimePositions、trains-page激活范围复用该入口，普通独立父线不收集子线站点/列车，支线自己加载原位置与SQL。已明确的其他组合展示保留。
 - 所有线路图接续标记支持鼠标、Enter/Space导航独立线路。canonical父子关系且唯一实际共享站补普通接续入口，只有原through事实才升级直通；不猜交接站。无共同站的关系不造连线。
@@ -70,29 +84,29 @@
 - 新回归验证全部18支线两种卡片列表、18父线不展开、支线自有站点/列车、父线接续与鼠标/键盘导航；旧激活测试改为父线/支线分别激活，front-end smoke接入CI。38工具套件、64 node:test、4守卫及diff检查PASS。
 - 本地浏览器已确认京急5独立卡片、主线无支线站点；实际点击京急蒲田直通标记进入空港线7站图。截图keikyu-cards-local.jpg；公开验收待发布。
 
-
 ## 2026-10-15 JST — 全线路直通标签通用排布
+
 - 用户澄清主要问题为未专门修正线路的标签错位/歪斜。旧renderer把端点整排标签逐个clamp回画布，宽度超出时相互挤压；中间接续固定放到车站名称相反侧，在窄环/分支场景容易进入另一轨道。
 - 复用trains-utils／geometry／renderer唯一链路：标签以所属车站为组，上端居中堆叠，中途/下端与站名、换乘图标同列同侧对齐；组整体调边界，取消逐标签挤压与固定2条＋N截断。窄列按名称换行，前缀独立，不拆成散落标记；环线接续保持外侧标签列，非终端不强行上下指向。
 - 统一标签实际尺寸供几何站距、首尾留白和renderer绘制使用，删除旧固定行数算法。沿用已有线路名称中的旅客简称（如大和路線、スカイツリーライン），内部括号说明保留在完整标题；重复直通字样去重，不另建线路映射表。
 - 功能适用trains.html所有直线/环线/支线共享站点绘制；其余六页无该线路图组件，不改无关资源。源码拓扑、直通事实、SQL、车辆判定未改。三个共享资源4.3.1220，原有6项本地数据修改保留；原件备份recovery/through-layout-20261015。
 - 新测试运行真实canonical线路＋shared renderer，280个移动/桌面标签矩形检查边界、组内不重叠、环线外侧归属和前缀去重PASS。37工具套件、64 node:test、4发布守卫与diff检查PASS。本地浏览器已验收大崎双接续与大阪环线天王寺双接续，窄屏390×844实际预览通过，临时viewport已恢复；公开验收待发布。
 
-
 ## 2026-10-15 JST — 普通环线统一双排模板
+
 - 用户指出环线未统一。trains-geometry旧路径仅山手启用写死30站双排，大阪环状线仍沿周长排站。删除普通环线旧分支，所有闭环按真实站数分两列，支持19/30等奇偶站数；使用共同换乘图标间距与原窄环尺寸，保留山手田端顶右/品川右底朝向和canonical stationIndex。
 - 大江户线原闭环双列＋光丘开尾结构保留，无站表/SQL/运行链更改。统一功能适用trains.html线路图；其他六页无该图，不改无关显示。
 - 双排站点保存闭环周长坐标和画面朝向，复用TrainTrackLayout和renderer沿闭环插值；上下连接区间不斜穿空白，动画方向兼容山手倒序排布。几何/布局/renderer资源4.3.1219，图标与文本整体排布保持。
 - 原件备份recovery/loop-template-20261015。新增真实大阪19站/山手30站移动与桌面布局、左右列站数、全部canonical索引、站间距与每段中点在闭环轨道验证。36工具测试与4发布守卫PASS；上线浏览器验收待完成。原有六项本地数据修改保留。
 
-
 ## 2026-10-15 JST — FULL 隐藏位置提示、其余覆盖类型统一提示
+
 - 用户要求 FULL 不出现 tp-est-note 元素，其余类型统一一种提示。复用 ODPTClient.usesSqlTimetable 既有覆盖策略，FULL 在创建前退出并清理旧提示；非 FULL 不依赖当前列车来源或数量，固定显示实时数据优先、未覆盖部分按时刻表推定，不显示 ODPT 时间。
 - 唯一实现位于 trains.html 的共享 trains-render，增量和重建两条路径同步。其余六页无线路图提示，仅同步共同 translations 资源版本；四语言统一文案，删除已无调用的 mixed 文案与时间格式函数。资源 4.3.1218。
 - 原件备份 recovery/train-note-20261015。45 条配置线路、未知线路、连续刷新及非 FULL→FULL 切换验证 PASS，frontend-smoke、语法、diff check 和4发布守卫 PASS（保留已有 baseline warnings）。浏览器线上验收待发布后确认。原有6项数据修改保留。
 
-
 ## 2026-10-14 JST — 高尾实时区间转线与末站图标归位（已发布，公开高尾视图验收通过）
+
 - 用户指出高尾后列车不转线、向画布底部走。共享DataFusion仅按fromStation归属线路，忽略高尾→相模湖的实际toStation；共享布局在最后站idx==nextIdx时用同一坐标计算切向量，零长度退化，且停站偏移朝轨道端点外。
 - 复用canonical serviceBoundaries／handoverStations与真实ODPT from/to区间：只有当前线路不含toStation、同operator伙伴线路包含from/to且物理相邻、from为已声明接续站、伙伴唯一时才转线。不靠目的地推位置，未知/跳站/歧义保持原归属。高尾→相模湖进入ChuoMain index0→1；高尾→西八王子归ChuoRapid index23→22；尚在西八王子→高尾和缺toStation停站不提前转线。
 - 原trainId／sourceRailway／trainNumber不变，源from/to与实际positionLineId保留；车型继续按原证据匹配。编组缓存隔离增加实际positionLineId，防止提供者railway/号码未改时跨物理运行段继承完整编组。共享estimator同样携带positionLineId。
@@ -101,12 +115,12 @@
 - 36 tools suites与4守卫PASS。新增真实canonical高尾双向边界、缺失/未知/非相邻/歧义/无边界隔离、末站坐标/主线第一段放置回归；旧Chuo SQL高尾离图、E353、E233、Joban、折叠、Six以及物理运行段编组隔离回归保留。
 - 本地原件备份recovery/takao-handover-20261014。browser runtime: NOT VERIFIED；其他六项本地修改保留。
 
-
 - 浏览器连接恢复，公开图实际复现“往三鷹”列车被整体碰撞避让推到高尾下方空白区。追加每列车实际轨道Y范围，按SVG屏幕矩阵约束图标中心可用上下槽位，轨道端点以外不作为空位；端点拥挤沿用折叠。branch使用自身points范围，环形/六字专用布局保留。补充末端障碍、空白画布与拥挤折叠回归，36 suites/4守卫PASS。track-layout/renderer 4.3.1217。
 
 - 最终发布与浏览器验收：e6c4fa3ffce94f0a8ae65cf8ee4fcf9a2decf340实时归属/末站切向量修复＋b24d0e7eab5fafee67f05a8e1b4f6ffc446a0908轨道范围避让约束。CI/CD、Release Guards、Pages全部success；四个公开JS逐字MATCH。浏览器连接恢复，实际刷新公开ChuoRapid页并滚到高尾，已确认高尾之后空白区无列车，图标文字保持整体。截图takao-after.jpg已保存；当前实时样本未逐列车观察一次高尾到相模湖过境全过程，该边界由回归测试验证。其他六项原有修改保留。
 
 ## 2026-10-14 JST — 中央快速あずさ／かいじ E353 图标（已发布，浏览器视觉验收待补）
+
 - 用户澄清“新宿目的地未识别”实际是缺失列车图标，随后确认影响整批あずさ／かいじ。站名未改；问题是定期特急缺少可用于实时fallback的 exact train/calendar 车型参考，车型目录也未登记E353原生PNG。
 - 使用Supabase技能，复用evidence_sources／train_vehicle_rules、既有exporter、TrainOperationEvidence／TrainVehicle。官方2026年10月八王子双方向平日／休日时刻表逐详情核验102份文档，52平日＋52休日定期あずさ／かいじ／富士回遊列车号。官方车型页 https://www.jreast.co.jp/train/express/azusa_kaiji.html 支持E353计划参考；data-misc运转日注意的临时列车排除，不因M后缀或特急等级默认车型（临时富士回遊可能E257）。
 - 为ChuoRapid实时源与ChuoMain SQL源分别写入104条，合计208条Grade-C timetable-reference，生效2026-10-14至2026-11-30。不声称当天车辆号、辆数、连挂或编组身份。首个事务因旧唯一键不含calendar而回滚，改为与已有规则相同的NULL service_name，列车名称保留在逐号核验清单/原官方页面；后续插入与SQL计数核验成功，无schema/权限/函数更改。
@@ -114,17 +128,16 @@
 - 35 tools suites与4发布守卫PASS。新回归覆盖全部208参考→E353→native PNG、未知/临时号、到期、同号常磐18M仍为原车型、实时车型优先，以及真实新宿终到18M／3120M SQL行→estimator→图标。旧E233回归保持1081独立车型范围。
 - 备份与官方文档：recovery/chuo-destination-20261014；browser runtime: NOT VERIFIED（浏览器工具持续超时）。其他六项本地修改保留。
 
-
 - 上线验收：fd90b8a06a40d23cb59eb3783164f9598c2ededc。CI Validate、Deploy to GitHub Pages及Release Guards均success。公开vehicle/evidence JS逐字MATCH；trains/realtime HTML由发布流程改成build=本提交SHA，确认实际加载新版本（因此不与源码v参数逐字相同）。公开E353 PNG HTTP200、82×98。额外自动pages build任务仍排队，实际CI发布已成功。browser runtime: NOT VERIFIED；未声称视觉PASS。
 
 ## 2026-10-14 JST — 列车整体上下排布与密集折叠（已发布，浏览器视觉验收待补）
+
 - 目标：中央快速、常磐快速及共享普通线路图取消横向拥挤槽位；保留实际方向轨道，图标与完整方向文字紧贴、同量上下位移。常磐本线同样适用。大江户六字环形既有专用布局保留。
 - 路径：trains.html → TrainTrackLayout.resolveAll／resolveLabels → trains-render。realtime.html不加载线路图renderer，未修改其无关资源；其他页面无此列车位置图。
 - 普通线路底层保留源位置锚点，联合图标／文字矩形就近寻找上下空隙；默认位移最多72屏幕像素。局部同方向密集组放不下时折叠为＋N，不跨方向合并，不改运行链或真实列车数据。不同方向/无邻近组继续独立显示。
 - 点击／键盘展开显示可滚动列表，每项图标在上、完整方向在下，并可选择原列车详情。列表支持关闭、Escape、点击外部、切线清理；原始每列车marker与caption保留。
 - 修改共享js/train-track-layout.js、js/trains-render.js、css/trains.css，trains.html资源4.3.1214；tests新增train-fold-layout并修订旧横向槽位断言为原位置锚点。34 tools suites和4守卫PASS，覆盖ChuoRapid／Joban／JobanMain的同站15车、倒序刷新、有限位移、全部身份保留、方向隔离和逐车选择；既有图标文字6px间距/重复帧回归PASS。
 - 浏览器工具超时，browser runtime: NOT VERIFIED。本地原件备份recovery/train-layout-20261014。未涉及SQL车型与时刻表更改。
-
 
 - 发布验收：9e873810f96f979e3c90d6dfe090cd77a28c6aa9排布提交＋49bc017930fbdb1533944a1609df6b0f9d955bef动画折叠按钮响应修复；CI/CD、Release Guards、Pages均success。公开layout、renderer、CSS、trains.html四项200并逐字匹配本地；浏览器工具超时，browser runtime: NOT VERIFIED。原有六项本地修改保留。
 
@@ -140,8 +153,6 @@
 - 自动审批拒绝了广泛共享函数替换／重命名（包含原函数删除逻辑）；改用仅限已核验班次的数据修复与窄证据 CHECK，均通过审批，不替换共享函数。浏览器工具持续超时，未声称实际公开DOM／视觉验收。
 - 前轮超时后延迟写入的重复测试块已核实、备份并清除；其他六项原本地修改完整保留。
 
-
-
 - 用户补充分割／併合运行：车型接续不证明编组不变。共享 DataFusion 的编组缓存和候选合并现要求相同 sourceRailway＋published trainNumber，未知或不同运行段不继承整组 carset／证据；本段独立证据保留，车型跨实时覆盖边界仍接续。estimator保留源railway供此校验。新增formation-segment-continuity实际函数回归覆盖同段丢帧、常磐→成田段、改号、未知来源、独立证据和跨日隔离。这里只修编组证据安全边界；尚无逐列车split/join组成关系，未把多候选车型或多个编组ID画成连挂列车。盛冈与大月官方资料已核对，不能将所有成田直通一概固定为减5辆。
 
 - 发布验收：实现提交aca17169415cc52cd7b2f0964fd44c17a3fa33d4；自动证据同步2142a0a53eba7f22aa6fbc80f48c7ae694ff0c4a已快进到本地，验证仅排序变化、所有事实保留。33 tools suites与4守卫PASS；CI/CD、Release Guards、证据同步、最终Pages部署success。四个公开运行脚本200并与本地逐字MATCH。browser runtime: NOT VERIFIED（浏览器工具持续超时）；未声称完成逐列车分割併合组成展示。
@@ -153,8 +164,6 @@
 - 31 tools suites、64 Node checks及4 Python guards通过；实际renderer回归验证图标文字相同位移、间距固定、重复刷新不累计，另测最近上方槽位和源顺序稳定。浏览器工具本轮连接超时，未声称实际页面测量。
 - 修改前备份 recovery/local-backup-20261014-before-compact-train-caption；六项独立修改保留。
 
-
-
 ## 2026-10-14 JST — 常磐快速越过实时范围后 SQL 接续（DONE：5df7c18f已发布并验收）
 
 - 根因：JobanRapid 时刻表在取手截断；JobanMain SQL 来源缺少前后官方运行段标识。修改前 SQL 和官方原件备份 recovery/joban-continuity-20261014。
@@ -164,14 +173,12 @@
 - 1185M／1187M／19M／8M真实来源回归覆盖取手后连续、停站、北端离图、特急括号、反方向入图及未验证来源隔离。64 Node checks、31 tools suites、4 Python guards PASS（保留基线warnings）；本地浏览器确认1185M取手后SQL E531 PNG正常显示，error0。
 - 自动审批首次拒绝新增内部函数权限收紧；核对SECURITY INVOKER、RLS与无公开写权限以及既有内部函数ACL后，仅撤销本次新函数的默认公开执行权限，复审通过，未新授任何权限。其他六项本地修改保留。
 
-
 ## 2026-10-14 JST — 方向／目的地标签恢复图标正下方（DONE：8517fce3已发布，公开17标签验证通过）
 
 - 用户指出方向应该在列车图标正下方。常规线路 _trainLabelY 的上／下行共用 py+21，方向箭头仍按实际运行方向；共享 resolveLabels 固定横向中心，只允许向下避让，不再横移或移到图标上方。移位时保留竖直引导，完整终点不裁切。既有大江户六形地图的专用方向走廊继续使用原入口。
 - 适用仅 trains 的共享 renderer/layout；其余六页不加载这两个模块，车型／SQL／拓扑不变。缓存资源 4.3.1210。新增真实函数上下行／未知方向锚点检查与密集标签不横移／不上移回归。
 - 本地 Joban DOM 13 标签全部位于所属 PNG 下方；横向中心最大误差0.000041px、最小间隙5.59px，标签互相重叠0、error0。密集站点仅向下延后标签，并用竖线保持归属。
 - 修改前备份 recovery/local-backup-20261014-before-caption-anchor；原六项独立修改保留。
-
 
 ## 2026-10-14 JST — 常磐快速车辆判定补齐（DONE：SQL／公开页面验证通过）
 
@@ -184,7 +191,6 @@
 - 本地真实 Joban DOM 当前 18 个标记全部 vehicle PNG，未判定 0、浏览器 error 0。来源原件、SHA256 manifest、SQL 导入／导出与修改前备份保存在 recovery/joban-vehicle-evidence-20261014；其他六项既有本地修改保留。
 - 发布 d04a33ebd6502e9446f4a69bc4c4b3bafd4e8e74；CI / CD 38521567650、Release Guards 38521567540、Pages 38521566583 全 success。三个公开脚本 HTTP 200 并逐字匹配提交。公开浏览器当前 18 标记全部 PNG，车型为 E231常磐快速／E531／E657，未判定 0、标签重叠 0、error 0、无横向溢出；加载 build=d04a33eb。SQL 对照再核对：Weekday343/343、SaturdayHoliday339/339。报告 recovery/reports/2026-10-14_joban_vehicle_completion.md；发布后验收记录保留本地。
 
-
 ## 2026-10-14 JST — 页面问题汇总修复（DONE：发布与公开页面验证通过）
 
 - 成田线保持独立，Joban presentation.lineIds 仅 Joban；常磐快速日／中／英文标题移除成田线，NaritaAbikoBranch.branchOf=Narita 保留，实际我孙子跨线班次仍按证据判断。此前融合条目已明确标为撤回。
@@ -195,12 +201,10 @@
 - 修改前备份：recovery/local-backup-20261014-before-summary-fix；保留原有六项独立本地修改。发布仅三个标题字段、共享布局／渲染与 trains 资源 4.3.1208、回归和本记录。
 - 发布提交 2ea7d5e028cf142f8e4b6b9d137d585ef20aa891；CI / CD 38506660361、Release Guards 38506660586、Pages 38506659081 全 success。公开布局／渲染／canonical JSON HTTP 200 且匹配提交。公开浏览器测得 13 标记／13 标签：标记互相、标签互相、标签与站名的重叠均 0，error 0，无横向溢出；独立卡片常磐快速上野↔土浦／成田线佐仓↔松岸、UenoTokyo 卡片 0。报告 recovery/reports/2026-10-14_joban_summary_fix.md；本条发布后验收记录保留本地。
 
-
 ## 2026-10-14 JST — 用户叫停：撤回成田线融合
 
 - 用户明确“有单独的成田线，不要融合”。停止该方案，撤回 34122a62／74164c7a 的组合成员与地图融合改动，恢复独立成田线及原支线归属。保留此前上野东京走廊与上野基础终点修正。
 - 发布仅撤回融合范围；其他原有本地数据修改保留。资源升至 4.3.1203 使撤回立即可加载。
-
 
 ## 2026-10-14 JST — 常磐快速・成田线组合范围补齐（已按用户要求撤回）
 
@@ -210,8 +214,6 @@
 - Supabase 原有平日 80／SaturdayHoliday 80 班次；本次只读核对，未修改 SQL。新增真实数据结构回归同时验证成员范围、双页面分支、物理归属、支线列车、移动／桌面九站坐标与画布边界。
 - 验证：31 tools suites、64 页面／服务日检查、4 Python guards PASS（既有 baseline warnings 保留）。相关资源版本 4.3.1201。原有其他本地修改保留，数据发布仅含 presentation.lineIds 增量。
 - 下一步：同步上线并实际检查公开 Joban 地图的支线站点和支线列车；此前截图／视觉声明不代替这次验收。
-
-
 
 ## 2026-10-14 JST — 上野东京运行走廊语义修正（DONE）
 
@@ -223,8 +225,6 @@
 - 最终发布 HEAD：5e18ad0a0b4158b537f8c78000ce99ee54914210（生产增量 ea75bbb3／4505d6f7；测试调用参数修正 5e18ad0a）。CI / CD 38504289194、Release Guards 38504289184、Pages 38504288765 均 success。
 - 公开浏览器 DOM：常磐卡片为 上野↔土浦，UenoTokyo 独立卡片数 0；地图保留 品川／上野，直通上野东京文本 0，列车标记中 UenoTokyo 误串 ID 0。按真实班次停站及 destination 保留品川始发／终到，包括特急。未做系统截图或宣称人工视觉验收。
 - 发布完成后的验收记录保存在本地；原有六项独立修改保持，JSON／file fallback 仅向线上增加 originStation 字段。
-
-
 
 ## 2026-10-14 JST — 公开 Joban 页面只读检查（DONE：诊断；未修复）
 
@@ -244,8 +244,6 @@
 - 真实浏览器 DOM 验收通过：公开 trains.html 山手线显示 planned-trip 1000G／929G 等 SQL 班次及原生 E235系0番台 PNG；埼京线显示 odpt.Train／urn:ucode 实时标记，接口为 REALTIME_API_LINE BYPASS；没有浏览器 error 日志。未使用系统截图或声明人工视觉验收。
 - 原有六个独立本地修改逐文件 SHA256 与备份一致；备份、binary patch 和 Git stash 均保留。发布验收材料存放在 recovery/local-backup-20261014-before-publish。
 
-
-
 ## 2026-10-14 JST — 非 FULL 线路统一 SQL 时刻表（数据库完成；前端本地验证完成）
 
 - Workstream：non-full-sql-timetables；执行者 Codex；Commit SHA：未提交。用户明确要求 ODPT／SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG 检查，非 FULL 统一 Supabase SQL。本次要求优先于此前“所有实时 API 线路禁止 SQL”的记录。
@@ -255,7 +253,6 @@
 - 验证：31 tools suites、50 node:test checks、4 Python guards、JS syntax、diff check PASS；83 canonical artworks、78 refs、466 locked PNG、0 missing native PNG。保留既有工程 baseline warnings。七页相关资源版本升至 4.3.1198，原有未提交改动保留。
 - 修改：data/api/odpt-unified.js、runtime-config.js／data-config-bundle.js、js/data-fusion.js／trains-page.js、两个既有 Supabase function 源文件、两个既有测试、七页资源版本及本进度记录。完整执行与验证记录：recovery/reports/2026-10-14_non_full_sql_timetables.md。
 - 发布边界：数据库 SQL 已执行；前端未提交／推送／发布，browser runtime: NOT VERIFIED。未部署或降级现有 train-runs v142／timetable-ingest v7，它们已经支持 SQL eligibility；本地改动保持较旧工作区接口，不整文件覆盖线上新功能。
-
 
 ## 2026-10-13 JST — SQL 已核验车辆 PNG 路径断链修复（REVIEW）
 
@@ -269,7 +266,6 @@
 - CI 修复记录：`e21bfab7` 曾在 Train Position Evidence 回归测试失败（模拟 SVG 节点遗漏标准 `setAttributeNS`，非生产 JavaScript 运行时缺失）；已针对 test fixture 修复，`839be1a8` Validate 与 Release Guards 成功，最终 Pages 以 Actions 验收结果为准。
 - 后续：若用户所指为其它具体线路仍不显示，按该线路的 `vehicleIdentityStatus`、`vehicleIconPath`、浏览器 SVG image/error 与 ODPT 源记录排查；线型参考图片本身不能证明某一具体班次使用该车，禁止批量填充猜测车型。
 
-
 ## 2026-10-13 JST — GitHub × Supabase 结构体检整改（PARTIAL）
 
 - 范围：只修复已确认且不改变线路事实/身份/RLS 的问题。没有批量删除手动时刻表、迁移 pg_net、覆盖已验证车型或复活第二套位置推定。
@@ -281,7 +277,6 @@
 - 尚未自动处理（需要前置条件）：`timetable-ingest` 仍有从公开仓库解码 ODPT key 的兼容路径。现有工具不能查看或设置 Edge secrets，也不能替上游轮换凭据；在确认 `ODPT_CONSUMER_KEY` / `ODPT_CHALLENGE_CONSUMER_KEY` 已配置前删除 fallback 会使导入中断。需要先配置新服务端凭据，再移除公开回退并做真实导入验收。
 - 保留（不属于安全一键修复）：45 张 RLS enabled/no policy 表默认拒绝访问；`pg_net` 扩展 `extrelocatable=false`，禁止直接 `ALTER EXTENSION SET SCHEMA`；历史未使用索引/源时刻表缺少现行有效证据，继续保留待测，不做无凭据猜测。
 - 最低验证：迁移文件与数据库版本一致；索引存在；性能告警下降；GitHub CI / CD & Release Guards 成功；Supabase Edge v70 源码一致。尚需浏览器生产 HTTP 与真实接口返回的最终验证。
-
 
 ## 2026-10-13 JST — realtime 分支梳理与增量落地（REVIEW）
 
@@ -321,13 +316,6 @@
 > 本文件是智能体之间的**唯一共享进度账本**。开始工作前先读 `ENGINEERING.md` 和本文件；完成/阻塞/交接后必须更新本文件。
 >
 > 最后人工整理：2026-10-07 JST
-
-
-
-
-
-
-
 
 ## 2026-10-13 JST — train icon deployment verified complete
 
@@ -684,7 +672,6 @@
 - Risks / blockers: 尚未执行 SiteShell 迁移；OperatorFilterBar 当前轮 CI 最终状态需复核。
 - Next: 先完成 UI-002 P0 回归检查，再开始 UI-001 SiteShell contract。
 
-
 ### 2026-10-07 13:xx JST — UI-002 P0 readiness — agent
 
 - Status: REVIEW
@@ -696,7 +683,6 @@
 - Validation: source inspection complete；最新 Actions 已启动，最终结果待确认。
 - Risks / blockers: Actions 未完成前 UI-002 仍为 REVIEW；SiteShell 暂不应标记 IN_PROGRESS。
 - Next: 等待/确认最新三条 Actions 全绿后，将 UI-002 标记 DONE，再启动 UI-001A SiteShell contract。
-
 
 ### 2026-10-07 15:23 JST — UI readiness final check — agent
 
@@ -710,7 +696,6 @@
 - Risks / blockers: 无 P0 blocker。HTML 中手工 asset version 不一致属于后续 SiteShell/asset 收敛范围，不阻塞 UI-001A。
 - Next: UI-001A 定义 SiteShell DOM/API contract，并添加防双链路 architecture guard，再开始逐页迁移。
 
-
 ### 2026-10-07 — UI-001A SiteShell contract — agent
 
 - Status: REVIEW
@@ -723,7 +708,6 @@
 - Risks / blockers: `lang-init.js` 会把 language wrapper 移到 body，SiteShell 保持原 ID/class 以兼容；不能把各页 CSP/head 能力统一。
 - Next: Actions 通过后开始 UI-001B~E，迁移页面并删除旧重复 Shell markup；每批迁移后验证 i18n/mobile/nav。
 
-
 ### 2026-10-07 — UI-001B~F SiteShell migration — agent
 
 - Status: REVIEW
@@ -734,7 +718,6 @@
 - Validation: 每页 SiteShell=1、三个 mount 各=1、旧 Header/Nav/Footer=0；source CSS inspection complete；Actions 待最新 HEAD 最终确认。
 - Risks / blockers: browser runtime 尚未在用户的 mobile Chrome 实机确认，故保持 REVIEW。
 - Next: 确认 Actions；实机/生产检查语言切换、sticky nav、active tab、footer；通过后 UI-001 DONE，进入 UI-003 LineCard。
-
 
 ### 2026-10-07 — UI-001 CSP production recovery — agent
 

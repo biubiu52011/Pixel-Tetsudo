@@ -1,5 +1,7 @@
 # 5. 变更日志
 
+> 历史记录：保留当时的方案与验收结论，不代表现役实现或当前线上状态。 最新进度见 [PROGRESS](../PROGRESS.md)；分类入口见 [文档索引](../docs/README.md)。
+
 > **使用说明**：
 > - 变更日志按主题分节（5.1 / 5.2），条目按「版本号（日期，主题）」组织。
 > - 项目开发存在**并发会话**，同一版本号可能出现多次（对应不同主题），判断先后一律以「日期 + 标题」为准；重复条目已加〔并发会话〕标注。
@@ -10,6 +12,7 @@
 ## 5.1 4.3.841（数据冻结・临海线站点坐标订正）
 
 ## 4.3.841（2026-09-18，临海线站点坐标订正・Freeze 例外）
+
 **问题**：用户报告"临海线站点缺少坐标"。对照 TWR 官方 GTFS（项目根目录 twr-gtfs.zip 的 stops.txt，仅读取）核验临海线（Rinkai）8 站——3 站坐标错误/缺失：第 3 站被误登记为幽灵站 Tokyo-Showa-Center（i18n=东京昭和纪念馆，坐标误为东京站 35.68111111,139.76666667，偏移约 5km）、新木场（35.6606,139.8253）偏移约 1.6km、东云（35.6378,139.7978）偏移约 570m；另 Tokyo-Teleport 站 i18n 名称被误写为百合海鸥线 テレコムセンター。
 **修复（Freeze 例外）**：
 - Rinkai 第 3 站改键为国际展示场 KokusaiTenjijo（官方 35.63457,139.79163）：lines.Rinkai.stations[2] / stationLines / lineStationOrder.Rinkai 同步；幽灵站 Tokyo-Showa-Center 与连字符孤儿实体 Kokusai-Tenjijo 在 stations / station_i18n / tourism station_exits 三处清除（name_map 与别名表的罗马字别名保留）
@@ -20,8 +23,8 @@
 **验证**：临海线 8 站坐标全部与官方 GTFS 一致、Rinkai 链路（stations/stationLines/lineStationOrder）一致、Tokyo-Showa-Center / Kokusai-Tenjijo 残留 0、3 JSON 解析 OK、node --check 3 bundle OK、name_map 别名保留。数据层验证完成；页面显示由用户人工确认。
 **遗留**：Kokusai-Tenjijo-Seimon 仍为 i18n-only 引用（无站实体，历史遗留，与本次无关）。
 
-
 ## 4.3.842（2026-09-18，realtime 数据加载速度优化）
+
 **问题**：
 - realtime 页首屏后延误状态缺失——emitUpdate 先通知订阅者后写 window.DATA_FUSION，订阅回调经 DATA_FUSION||_lastFusedData 读到首屏空融合的 truthy 旧值，Priority 1 判空失败回退 DataLayer 基线，延误需等 15s REFRESH_INTERVAL 二次融合才上屏（期间全部显示 normal）
 - realtime 页触发 ODPT 全量加载：91 个时刻表请求 + 8 个位置请求 + 15 个延误请求（共约 110），伴随 429 限流与 loadTrainPositions 的 STATION_ALIAS_BY_RAILWAY 运行时错误

@@ -1,5 +1,7 @@
 # Pixel Tetsudo — SQL 时刻表迁移归档检查点
 
+> 历史记录：保留当时的方案与验收结论，不代表现役实现或当前线上状态。 最新进度见 [PROGRESS](../PROGRESS.md)；分类入口见 [文档索引](../docs/README.md)。
+
 **记录日期：** 2026-10-10（日本时间）  
 **GitHub 仓库：** `biubiu52011/Pixel-Tetsudo`，迁移验收基线提交 `cda875d556245db75306a3148d7ce9c3fc961573`  
 **Supabase 项目：** `pnupwfmgbtxqhpzsrhfn`（像素铁道）  
