@@ -1,13 +1,13 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-15 JST — 线路位置刷新与SQL线路接入（本地已验证，待公开发布）
+## 2026-10-15 JST — 线路位置刷新与SQL线路接入（DONE：已发布并验证）
 
 - 补齐SQL适配器_sqlLineId：保留正式line_id并按其建立推算索引，源railway URN仍原样保留作来源。位置和运行链候选共用_lineTimetables，删除重复的旧别名查找。SQL不得跨明确归属线路使用。
 - 当前线路及图中依赖每次位置重建均同步重算；旧逻辑只以实时列车线路为种子，SQL图会在同分钟轮询中被清空。前台/BFCache兜底改为loadTrainPositions，避免fuseAll只重发旧位置。缓存版本FUSION12、ESTIMATOR8，相关三页资源4.3.1241。
 - SQL 210条源身份核查中19条旧代码匹配有缺口：Daishi_Keikyu、Daishi_Tobu、KeioSagami、KeioShin、KeioZoo、KeiseiChihara、KeiseiOshiage、Nikkoku、SaitamaRapid、Seibu_Sayama、SeibuEn、SobuMain、SotetsuJRDirect、SotetsuShin-Yokohama、Tobu_Kameido、TobuUtsunomiya、TokyoMonorail、TokyuDenEn、Yurakucho_Seibu；显式SQL线路归属统一接入。此为身份入口核查，不代表210条时刻表均已核实当前运营完整性。
 - 新测试覆盖210条源身份和同页30秒/分钟/一小时推进、终到退出、旧实时过期、前台恢复。实际相铁JR SQL样本20:24为146M/139M，20:25位置推进并新增148M，21:24为274M/143M；旧实时全部过期。浏览器连接超时，尚未现场定位用户原先所见列车。
 - 全量当前SQL只读采集210条均有数据，181条当前有位置；一小时回放无完全相同班次/坐标输出，零读取错误。JR-East/Tobu/Keio/Toei原始源均有当前时间戳；少量过期行由现有有效期过滤。实际ensureTimetable入口21:21输出143M为SQL位置、274M为实时位置。
-- 44工具套件、65项node:test、4项守卫、映射检查全部PASS。范围trains/realtime及home现有共享融合/ODPT脚本；其余四页无列车位置逻辑无需改动。原件、SQL只读回读、原始样本和日志recovery/position-refresh-audit-20261015，无数据库写入。用户补充多数线路似固定时段循环，现有证据排除本次采集源统一回放；用户原浏览器画面仍无法连接现场验收，不把回放结果冒充原现场复测。
+- 44工具套件、65项node:test、4项守卫、映射检查全部PASS。实现ed3a514d的CI/CD、Release Guards和Pages均success；公开3个位置脚本HTTP200且逐字匹配，home/realtime/trains均引用4.3.1241资源。已打开的浏览器需整页刷新加载新脚本，hash切线不热替换。范围trains/realtime及home现有共享融合/ODPT脚本；其余四页无列车位置逻辑无需改动。原件、SQL只读回读、原始样本和日志recovery/position-refresh-audit-20261015，无数据库写入。用户补充多数线路似固定时段循环，现有证据排除本次采集源统一回放；用户原浏览器画面仍无法连接现场验收，不把回放结果冒充原现场复测。
 
 
 ## 2026-10-15 JST — 埼京／相铁JR直通车型缺失（DONE：SQL同步及公开发布验证）
