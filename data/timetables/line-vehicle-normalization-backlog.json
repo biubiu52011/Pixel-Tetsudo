@@ -1,6 +1,17 @@
 {
   "version": "4.3.1074",
   "policy": "line-by-line vehicle identity normalization; through and non-through services share one evidence engine",
+  "manualIdentityAudit": {
+    "checkedOn": "2026-10-11",
+    "lineIds": ["TokyuDenEn", "TokyuToyoko", "TokyuMeguro"],
+    "localRows": 3174,
+    "publishedPages": 115,
+    "publishedRows": 3639,
+    "uniqueVerifiedMatches": 480,
+    "criteria": "same line, calendar, direction, service type and destination; at least two non-estimated station-event clocks; no conflicting clocks",
+    "officialStopClockAudit": {"lineId": "TokyuMeguro", "direction": "Outbound", "weekday": 263, "holiday": 217, "verified": 480, "remainingInbound": 454, "checkedOn": "2026-10-11", "stationAliases": {"日吉（神奈川県）": "日吉", "海老名（小田急・相鉄）": "海老名", "大和（神奈川県）": "大和"}, "source": "https://transfer.navitime.biz/tokyu/pc/diagram/TrainDiagram?rrCd=00000791&stCd=00008684&updown=1"},
+    "next": "Meguro outbound now uses official stop clocks and published train numbers; verify 454 inbound trips and remaining Toyoko/Den-en-toshi identities; daily formations remain date-scoped"
+  },
   "statusLegend": {
     "STRUCTURAL_EXACT": "single current vehicle family",
     "OPERATION_REQUIRED": "multiple families; operation evidence required",
@@ -15,7 +26,8 @@
       "providers": [
         "chokopy-toyoko-20260314"
       ],
-      "next": "expand dated formation coverage"
+      "publishedTrainOperationMappings": {"weekday": 738, "holiday": 664, "effectiveFrom": "2026-03-14"},
+      "next": "match synthetic local timetable IDs to verified published train identities; expand service-date formation coverage"
     },
     {
       "lineId": "TokyuMeguro",
@@ -24,7 +36,9 @@
       "providers": [
         "chokopy-meguro-20260314"
       ],
-      "next": "expand dated formation coverage"
+      "publishedTrainOperationMappings": {"weekday": 532, "holiday": 438, "effectiveFrom": "2026-03-14"},
+      "verifiedTimetableIdentities": {"direction": "Outbound", "weekday": 263, "holiday": 217, "sqlAndLocal": true, "remainingInbound": 454},
+      "next": "verify inbound timetable identities against official full stop clocks; expand service-date formation coverage without borrowing historical formations"
     },
     {
       "lineId": "TokyuDenEn",
@@ -34,7 +48,8 @@
         "chokopy-denentoshi-20260314",
         "loo-ool-hanzomon-dated-formations"
       ],
-      "next": "expand Tokyu dated formations"
+      "publishedTrainOperationMappings": {"weekday": 698, "holiday": 569, "effectiveFrom": "2026-03-14"},
+      "next": "match synthetic local timetable IDs to verified published train identities; expand Tokyu service-date formations"
     },
     {
       "lineId": "TokyuSetagaya",
@@ -58,6 +73,7 @@
       "lineId": "TokyuIkegami",
       "through": false,
       "status": "DATED_FORMATION_REQUIRED",
+      "publishedTrainOperationMappings": {"networkKey": "iketama", "weekday": 833, "holiday": 687, "effectiveFrom": "2026-03-14", "scope": "shared Ikegami/Tamagawa working pool"},
       "candidates": [
         "東急1000系",
         "東急7000系"
@@ -68,6 +84,7 @@
       "lineId": "TokyuTamagawa",
       "through": false,
       "status": "DATED_FORMATION_REQUIRED",
+      "publishedTrainOperationMappings": {"networkKey": "iketama", "weekday": 833, "holiday": 687, "effectiveFrom": "2026-03-14", "scope": "shared Ikegami/Tamagawa working pool"},
       "candidates": [
         "東急1000系",
         "東急7000系"
@@ -78,6 +95,7 @@
       "lineId": "TokyuOimachi",
       "through": false,
       "status": "ACTIVE_PROVIDER",
+      "publishedTrainOperationMappings": {"weekday": 523, "holiday": 412, "effectiveFrom": "2026-03-14"},
       "candidates": [
         "東急6020系",
         "東急9000系",
@@ -88,6 +106,40 @@
       "providers": [
         "tokyu-oimachi-dated-formations"
       ]
+    },
+    {
+      "lineId": "Chiyoda",
+      "through": true,
+      "status": "ACTIVE_PROVIDER",
+      "publishedTrainOperationMappings": {"networkKey": "chiyoda-joban-odakyu", "weekday": 882, "holiday": 711, "weekdayEffectiveFrom": "2026-03-16", "holidayEffectiveFrom": "2026-03-14", "scope": "241 numeric Odakyu segments moved to their physical network; 20 cross-source conflicts remain pending, not new usable Chiyoda services"},
+      "publishedSuffixAudit": {"checkedOn": "2026-10-11", "suffix": "S2", "addedWeekday": 38, "addedHoliday": 39, "scope": "published working and period model only; no daily formation assignment"},
+      "publishedFirstTripAudit": {"checkedOn": "2026-10-11", "suffix": "S1", "addedWeekday": 37, "addedHoliday": 38, "scope": "published working and period model only; existing northbound SQL branch trips now have explicit model rules"},
+      "next": "expand dated formation evidence and verified reverse-direction branch timetable coverage; keep conflicting weekday A1617S unresolved; 96S uses the official three-car branch 05-series identity despite the source table's mainline model typo"
+    },
+    {
+      "lineId": "Odawara",
+      "through": true,
+      "status": "ACTIVE_PROVIDER",
+      "providers": ["canonical-dated-vehicle-evidence"],
+      "publishedTrainOperationMappings": {"networkKey": "odakyu-main", "weekday": 207, "holiday": 182},
+      "publishedNumericScopeAudit": {
+        "checkedOn": "2026-10-11",
+        "movedWeekday": 144,
+        "movedHoliday": 97,
+        "scope": "existing source-verified numeric S/K through segments and period model rules moved from Chiyoda to Odakyu; no new records or daily formations",
+        "sources": ["https://yozakura-room.net/oerunyo/oerunyo2026-metro-w/", "https://yozakura-room.net/oerunyo/oerunyo2026-metro-h/", "https://w.atwiki.jp/oerunyo2025/pages/19.html", "https://w.atwiki.jp/oerunyo2025/pages/20.html"],
+        "unresolved": [{"calendarType":"weekday","trainNumber":"4063","existingOperation":"C21","publishedOperation":"15S"},{"calendarType":"weekday","trainNumber":"6025","existingOperation":"C15","publishedOperation":"21S"},{"calendarType":"weekday","trainNumber":"6027","existingOperation":"C23","publishedOperation":"33S"},{"calendarType":"weekday","trainNumber":"4008","existingOperation":"C15","publishedOperation":"37S"},{"calendarType":"weekday","trainNumber":"2209","existingOperation":"C15","publishedOperation":"37S"},{"calendarType":"weekday","trainNumber":"9213","existingOperation":"C17","publishedOperation":"45S"},{"calendarType":"weekday","trainNumber":"9172","existingOperation":"C12","publishedOperation":"45S"},{"calendarType":"weekday","trainNumber":"6028","existingOperation":"C17","publishedOperation":"45S"},{"calendarType":"weekday","trainNumber":"6515","existingOperation":"C22","publishedOperation":"53S"},{"calendarType":"weekday","trainNumber":"4318","existingOperation":"C22","publishedOperation":"53S"},{"calendarType":"weekday","trainNumber":"6033","existingOperation":"C14","publishedOperation":"55S"},{"calendarType":"weekday","trainNumber":"2210","existingOperation":"C14","publishedOperation":"55S"},{"calendarType":"weekday","trainNumber":"2017","existingOperation":"C14","publishedOperation":"55S"},{"calendarType":"weekday","trainNumber":"6035","existingOperation":"C17","publishedOperation":"57S"},{"calendarType":"weekday","trainNumber":"2204","existingOperation":"C17","publishedOperation":"13K"},{"calendarType":"weekday","trainNumber":"6026","existingOperation":"C23","publishedOperation":"19K"},{"calendarType":"weekday","trainNumber":"4049","existingOperation":"C23","publishedOperation":"19K"},{"calendarType":"weekday","trainNumber":"2028","existingOperation":"C14","publishedOperation":"27K"},{"calendarType":"weekday","trainNumber":"2213","existingOperation":"C14","publishedOperation":"27K"},{"calendarType":"holiday","trainNumber":"2032","existingOperation":"C22","publishedOperation":"03K"}]
+      },
+      "next": "resolve the 20 conflicting published assignments before changing existing C workings; expand service-date formation evidence"
+    },
+    {
+      "lineId": "OdakyuTama",
+      "through": true,
+      "status": "OPERATION_REQUIRED",
+      "networkKey": "odakyu-main",
+      "exactNetworkAliases": ["OdakyuTama", "odpt.Railway:Odakyu.Tama"],
+      "sqlTimetableIdentityGap": {"checkedOn": "2026-10-11", "weekday": 309, "holiday": 283, "publishedNumericIds": 0},
+      "next": "replace synthetic local timetable counters only after source-verified station-clock matching; evidence-domain aliases do not make these rows vehicle-confirmed"
     }
   ]
 }

@@ -28181,4 +28181,5 @@ window.RAILWAY_I18N = {
   "ko": "도요카쓰타다이",
   "en": "Toyo-katsutadai"
  }
-};
+}
+;

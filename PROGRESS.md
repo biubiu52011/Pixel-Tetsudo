@@ -1,5 +1,22 @@
 # Pixel Tetsudo 工程进度
 
+## 文档版本历史（README 修订记录迁移，按日期）
+
+> 自 RC-7（2026-10-15）起，README 1.2 详细修订内容迁移至本文件统一按日期管理；README 仅保留版本索引。
+
+| 日期 JST | 版本 | 修订内容（详细） |
+|---|---|---|
+| 2026-10-15 | RC-7 | **文档结构更新**：数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」（README 3.7/2.4/3.10.3/5.4.5/术语表/目录/数据字典同步）；修订记录（日志）迁移至本文件按日期管理，README 1.2 仅保留版本索引。 |
+| 2026-10-15 | RC-6 | **文档更名与整理**：DEVELOPMENT.md 全量整理后更名为 README.md（保留全部开发细节，作为仓库首页文档）；同步登记 2026-10-14～10-15 开发进展：高尾实时区间转线与末站图标归位（v4.3.1216/1217）、FULL 隐藏位置提示（v4.3.1218）、普通环线统一双排模板（v4.3.1219）、全线路直通标签通用排布（v4.3.1220）、支线独立卡片与独立线路图（v4.3.1221）、导入东叶/埼玉线路标志（v4.3.1222）、纠正内部支线误拆范围（v4.3.1224）、运营时段车辆映射全网检查（v4.3.1225）、车辆映射第二批 JR 定期车型参考（v4.3.1226）、终到边界/位置图层一致性/乘客列车列表（v4.3.1227-1229）、乘客堆叠列表去除列车号（v4.3.1230）。各条目 Commit：e6c4fa3f/b24d0e7e、4ebaf383、d984ce5c、0723994c、f9dc2617 等。 |
+| 2026-09-27 | RC-5 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freeze、recovery/baseline、canonical migration audit、approved removal manifest、baseline refresh 生命周期、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
+| 2026-09-21 | RC-4.3 | **Freeze 例外**：清理第一类真坐标错误 16 组。①删孤儿 8 个：Imaichi/Aizu-Minamiwa/Waga/Narushima-Yonezawa/Douzawa/Juni/Kommata/Takine；②Jatenda 合并到 Hebita（仙石东北线同站）；③Ariake-8oh 改名陸中有明（八户线），删重复条目，坐标修正（东京有明→岩手）；④修 7 个站坐标：Higashi-Shizugawa/Higashi-Ishinomaki/Aizu-Oshio/Osawa-Yamagata/Ono/Nakagawa（相邻站插值）；⑤Aizu-Oshio.ja 会津塩→会津大塩；⑥Atago-2 从东北本线删除（东北本线无爱宕站）；⑦Kunai 合并到 Miyauchi（信越本线宫内站）。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0。 |
+| 2026-09-21 | RC-4.2 | **Freeze 例外**：清理同站双 ID 拼写冗余 19 组（ODPT 实证对齐）。A 类单边引用删孤儿 10 个：Shinbashi/Nihonbashi/Ginza-hitchome/Minami-Nagase/Nagase-Otakanomori/Aizuwakamatsu/Ashizawa/Rikuzen-Koizumi/Kaimen/Echigo-Sudara；B 类双方引用合并 9 组：Hongo-Sanchome/Shin-Maruko/Motosumiyoshi/Tamagawa-Josui/Tama-Dobutsukoen/Nishi-Tokorozawa/Tenku-Bashi/Shimo-takaido/Tennozu Isle（按 ODPT 驼峰/连字符规范对齐）；name_map 同步改指。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0（1953 条不变）。 |
+| 2026-09-21 | RC-4.1 | **Freeze 例外**：清理坐标偏移的孤儿车站 ID。删 stations[Makuhari-Hong/Makuta/Minami-No/Hacchobori]（4 个均无线路引用、坐标与被引用变体差数百米至 7.5km）；name_map 改指：馬来田→Uma_Kita、八丁堀→Hatchobori；删 station_i18n 孤儿条目 Makuhari-Hong/Makuta/Minami-No/Hacchobori/Makuhari-Hongo；修 Hatchobori.en 误写 Hacchobori。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0（1953 条不变）。 |
+| 2026-09-18 | RC-4 | 与确认稿 RC-3 对齐：第 11 章硬规则编号补回（系统优先变更「变更前」/ 无孤儿迁移 / 发布门）、附录 A 结论编号补回；移除 5.2 误混入的根入口路由行（该文件已删除，入口统一 pages/home.html）。 |
+| 2026-09-17 | RC-3 | 可读性优化：目录置顶（全文锚点）；多份开发文档整理合并（线路图设计规定并入正文 5.4，设计文档与 README 保留为附录 A/B）；设计文档全文中译；6.5 节重复内容清理；错别字修正。 |
+| 2026-09-17 | RC-2 | 结构优化（章节重组、CRLF→LF、重复版本号标注〔并发会话〕）；语言统一为中文；新增第 3 章“系统架构设计”（含 3.10 页面结构规则，原第 0 章并入）；第 6 章按“系统模块划分 / 后台权限模型 / 数据库设计 / ODPT 实时数据对接 & 双库联动策略 / 核心业务规则”重组；第 7 章按 7.1-7.6 重排（全局格式 / 错误码 / 前台业务接口 / ODPT 封装 / 后台管理接口 / 数据字典）；新增第 8-10 章（部署与运维 / 测试规范 / 风险说明 & FAQ）；取消“用户指示”笔录形态，变更日志统一为标准条目。 |
+| 2026-09-11 | v1.0 | 由 AGENTS.md、LINE-DIAGRAM-SPEC.md、4.3.31_design.md、README.md 等多份开发文档整理合并形成综合版；完整原文收录于附录 A-B。 |
+
 ## 2026-10-15 JST — 乘客堆叠列表去除列车号
 - 用户指出普通乘客不需要编号，移除trains.html共用堆叠弹窗列车号，保留图标、种别、目的地、晚点及推定提示；正点实时列车不生成空的次要信息行。只改变呈现，原始trainNumber与运行匹配数据保留。其他六页无此列表，不修改。
 - Commit: f9dc2617。renderer资源4.3.1230；原件备份recovery/passenger-list-no-number-20261015。既有乘客列表无编号/无空行回归、语法及diff检查PASS；CI/CD、Release Guards与Pages部署success，公开renderer HTTP200且逐字MATCH，已同步上线。原有五项本地数据修改保留。

@@ -3,9 +3,9 @@ const read=p=>fs.readFileSync(p,'utf8'),ctx={window:{},console:{debug(){}}};vm.c
 for(const file of ['data/timetables/vehicle-operation-evidence-data.js','data/timetables/train-operation-evidence.js','js/train-vehicle.js','js/train-position-estimator.js'])vm.runInContext(read(file),ctx);
 const snapshot=JSON.parse(read('data/timetables/vehicle-operation-evidence.json'));
 const rules=snapshot.referenceRules.filter(r=>r.vehicleType==='E353系'&&['ChuoRapid','ChuoMain'].includes(r.networkKey));
-assert.equal(rules.length,208);
+assert.equal(rules.length,272);
 for(const r of rules){
- const c={lineId:r.networkKey,operator:'JR-East',railway:'odpt.Railway:JR-East.'+r.networkKey,serviceDate:r.calendarType==='weekday'?'2026-10-14':'2026-10-17',calendarType:r.calendarType};
+ const c={lineId:r.networkKey,operator:'JR-East',railway:'odpt.Railway:JR-East.'+r.networkKey,serviceDate:r.calendarType==='weekday'?'2026-10-15':'2026-10-17',calendarType:r.calendarType};
  const fact=ctx.window.TrainOperationEvidence.resolveEvidence(r.trainNumber,c,'fallback');
  assert.equal(fact.vehicleType,'E353系');assert.equal(fact.evidenceRole,'timetable-reference');assert.equal(fact.formationId,'');
  const v=ctx.window.TrainVehicle.resolve({...c,trainNumber:r.trainNumber,timetableVehicleType:fact.vehicleType});
@@ -19,7 +19,12 @@ assert.equal(ctx.window.TrainOperationEvidence.resolveEvidence('18M',{...base,se
 const live=ctx.window.TrainVehicle.resolve({...base,trainNumber:'18M',realtimeVehicleType:'E233系0番台',timetableVehicleType:'E353系'});
 assert.notEqual(live.name,'E353系','planned reference does not override conflicting observed model');
 const png=fs.readFileSync('images/列车/JR東日本/JR東日本_E353系.png');assert(png.readUInt32BE(16)>0&&png.readUInt32BE(20)>0);
-console.log('208 scoped E353 references to native PNG, expiry, unknown/temp isolation and realtime priority: PASS');
+for(const lineId of ['ChuoRapid','ChuoMain'])for(const calendarType of ['weekday','holiday'])for(const trainNumber of ['3107M','3111M','3115M','3132M','3136M','3148M','44M','5003M','2103M','2107M','2111M','2115M','2132M','2136M','2144M','2148M']){
+ const fact=ctx.window.TrainOperationEvidence.resolveEvidence(trainNumber,{...base,lineId,calendarType,serviceDate:calendarType==='weekday'?'2026-10-15':'2026-10-17'},'fallback');
+ assert.equal(fact?.vehicleType,'E353系','coupled-service pages retain both published numbers');
+ assert.equal(fact.formationId,'','a model reference cannot claim the coupled physical formations');
+}
+console.log('272 scoped E353 references to native PNG, coupled service numbers, expiry, unknown/temp isolation and realtime priority: PASS');
 
 const lines=JSON.parse(read('data/core/railway_data.json')).lines;
 for(const row of JSON.parse(read('tests/fixtures/chuo-shinjuku-express.json'))){

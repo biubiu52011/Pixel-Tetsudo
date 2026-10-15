@@ -110,10 +110,14 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     txt.setAttribute("fill", lc);
     txt.setAttribute("font-weight", "700");
     txt.setAttribute("dominant-baseline", "central");
+    // v4.3.1238: 文本块垂直中心 = chip 中心 h/2（与箭头 _ay=h/2 同一中线），消除文本/箭头高低错位
+    var _nLines = sz.lines.length;
+    var _firstY = h / 2 - (_nLines - 1) * (sz.fontSize + 2) / 2;
     sz.lines.forEach(function(line, i) {
       var span = document.createElementNS(ns, "tspan");
       span.setAttribute("x", sz.textX);
-      span.setAttribute("y", 4 + sz.fontSize / 2 + i * (sz.fontSize + 2));
+      span.setAttribute("dominant-baseline", "central");
+      span.setAttribute("y", _firstY + i * (sz.fontSize + 2));
       span.textContent = line;
       txt.appendChild(span);
     });
@@ -377,7 +381,6 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         for (var ti2 = 0; ti2 < shown.length; ti2++) {
           var txl = shown[ti2];
           var itemLayer = document.createElementNS(svgNS, "g");
-          _bindLineMapNavigation(itemLayer, txl);
           staticLayer.appendChild(itemLayer);
           var row = Math.floor(ti2 / PER_ROW);
           var col = ti2 % PER_ROW;
@@ -1208,7 +1211,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     }
     _adjacentGaps.sort(function(a,b){ return a-b; });
     var _medianStationGap = _adjacentGaps.length ? _adjacentGaps[Math.floor(_adjacentGaps.length / 2)] : 40;
-    var _snapDistance = Math.max(80, _medianStationGap * 2.5);
+    // Allow smooth travel for up to ~4 station gaps so a resumed page (long
+    // polling gap, several stations advanced) eases into place instead of
+    // teleporting. Larger displacements (line switch / source reset) still snap.
+    var _snapDistance = Math.max(140, _medianStationGap * 4);
 
     var updatedIds = {};
     var markerById = {};
@@ -1351,9 +1357,12 @@ function _isTrainArtworkFailureActive(trainUid, p) {
             _indexContinuous = _sameSegment || _advancedSegment;
           }
         }
-        // Snap threshold is line geometry, not per-train state. It is computed
-        // once for this render pass and shared by every marker.
-        var _shouldSnap = !_hasDisplayPos || !_sameLine || !_indexContinuous || !isFinite(_distance) || _distance > _snapDistance;
+        // Snap only for fresh markers, line switches, or genuinely large
+        // jumps. Index continuity no longer forces a hard snap: periodic
+        // updates that skip one or two stations (long gap between polls)
+        // should still animate smoothly instead of teleporting — this is the
+        // "假移动动画" (fake movement) complaint: every update visibly snapped.
+        var _shouldSnap = !_hasDisplayPos || !_sameLine || !isFinite(_distance) || _distance > _snapDistance;
 
         if (_shouldSnap || _distance <= 0.5) {
           _setTrainIconPosition(existingIcon, _targetX, _targetY, p, lineId, isLoop);
@@ -1538,6 +1547,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       var action=/^zh/.test(lang)?'展开列车':lang==='en'?'Show trains':'列車を展開';
       badge.setAttribute('aria-label',action+' ('+ids.length+')');
       badge.style.cursor='pointer';
+      badge.style.outline='none'; /* no default focus ring on click */
       var plate=document.createElementNS(ns,'rect');
       plate.setAttribute('x',cx-17);plate.setAttribute('y',y);
       plate.setAttribute('width',34);plate.setAttribute('height',16);

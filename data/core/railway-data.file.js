@@ -18399,6 +18399,12 @@ window.RAILWAY_DATA = {
           "note": ""
         },
         {
+          "station": "Kita-Senju",
+          "lineId": "Chiyoda",
+          "type": "in",
+          "note": ""
+        },
+        {
           "station": "Matsudo",
           "lineId": "Joban",
           "type": "in",

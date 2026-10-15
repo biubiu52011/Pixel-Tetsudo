@@ -304,8 +304,10 @@
   /** ODPT_TT_PROBED TTL（毫秒，24h） */
   var ODPT_TT_PROBED_TTL = 86400000;
 
-  /** 实时数据轮询间隔（毫秒，ODPTClient 后台刷新） */
-  var ODPT_REALTIME_INTERVAL = 30000;
+  /** 实时数据轮询间隔（毫秒，ODPTClient 后台刷新）
+   *  v4.3.1236: 30s → 15s——30s 内列车位移远超 snap 动画阈值，全部 snap 直写
+   *  造成"假移动/跳变"；15s 使普通-特急（≤130km/h）位移落入动画区间。 */
+  var ODPT_REALTIME_INTERVAL = 15000;
 
   /** DataLayer 内存缓存条目上限 */
   var DATA_LAYER_MAX_CACHE_SIZE = 50;

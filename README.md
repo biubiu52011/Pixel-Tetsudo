@@ -1,4 +1,8 @@
-# Pixel-Tetsudo（像素铁道）— 项目总文档（综合版，代码对照修订稿 RC-5）
+# Pixel-Tetsudo（像素铁道）
+
+> 面向日本全国，提供铁路路线检索・运行状况・观光景点信息的像素风 Web 应用；目前仅完成东部地区线路（ja/zh/ko/en 四语言，离线优先）。
+
+> 本文件为项目唯一的开发技术文档（综合版，代码对照修订稿），由 DEVELOPMENT.md 全量整理后更名为 README.md，同时作为仓库首页文档。完整结构与章节导航见下方目录。
 
 ## 目录
 
@@ -133,7 +137,7 @@
 
 ### 1.1 文档目的与阅读对象
 
-文档目的：本文件是像素铁道项目唯一的开发技术文档（综合版），统一定义网站结构、前端架构、数据通道、车型身份解析、开发规则、项目运行信息与变更记录；本 RC-5 版本以 GitHub main / 本地 main 当前代码为事实来源完成代码对照修订。
+文档目的：本文件（README.md）是像素铁道项目唯一的开发技术文档（综合版），统一定义网站结构、前端架构、数据通道、车型身份解析、开发规则、项目运行信息与变更记录；本 RC-7 版本以 GitHub main / 本地 main 当前代码为事实来源完成代码对照修订，数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」，逐日开发日志迁移至 PROGRESS.md 按日期管理（1.2 仅保留版本索引）；RC-6 完成 DEVELOPMENT.md 整理更名为 README.md。
 
 来源：本文档由 AGENTS.md、LINE-DIAGRAM-SPEC.md、4.3.31_design.md、README.md 等多份开发文档整理合并而成。
 
@@ -142,6 +146,8 @@
 文档维护约定：
 
 新增/修改规则：直接修改对应章节，并在归档变更日志登记条目与日期。
+
+逐日开发日志（按日期管理）：统一记录于 `PROGRESS.md`（自 RC-7 起 README 1.2 不再内嵌详细修订内容，仅保留版本索引）。
 
 归档变更日志（archive/DEVELOPMENT-CHANGELOG-*.md）：条目格式为 ## 版本号（日期，主题），正文按「问题 → 修复 → 验证 → 遗留」组织。
 
@@ -157,16 +163,20 @@
 
 | 版本 | 日期 | 更新人 | 修订内容 |
 | --- | --- | --- | --- |
-| RC-5 | 2026-09-27 | 用户／开发会话 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freeze、recovery/baseline、canonical migration audit、approved removal manifest、baseline refresh 生命周期、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
-| RC-4.3 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理第一类真坐标错误 16 组。①删孤儿 8 个：Imaichi/Aizu-Minamiwa/Waga/Narushima-Yonezawa/Douzawa/Juni/Kommata/Takine；②Jatenda 合并到 Hebita（仙石东北线同站）；③Ariake-8oh 改名陸中有明（八户线），删重复条目，坐标修正（东京有明→岩手）；④修 7 个站坐标：Higashi-Shizugawa/Higashi-Ishinomaki/Aizu-Oshio/Osawa-Yamagata/Ono/Nakagawa（相邻站插值）；⑤Aizu-Oshio.ja 会津塩→会津大塩；⑥Atago-2 从东北本线删除（东北本线无爱宕站）；⑦Kunai 合并到 Miyauchi（信越本线宫内站）。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0 |
-| RC-4.2 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理同站双 ID 拼写冗余 19 组（ODPT 实证对齐）。A 类单边引用删孤儿 10 个：Shinbashi/Nihonbashi/Ginza-hitchome/Minami-Nagase/Nagase-Otakanomori/Aizuwakamatsu/Ashizawa/Rikuzen-Koizumi/Kaimen/Echigo-Sudara；B 类双方引用合并 9 组：Hongo-Sanchome/Shin-Maruko/Motosumiyoshi/Tamagawa-Josui/Tama-Dobutsukoen/Nishi-Tokorozawa/Tenku-Bashi/Shimo-takaido/Tennozu Isle（按 ODPT 驼峰/连字符规范对齐）；name_map 同步改指。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0（1953 条不变） |
-| RC-4.1 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理坐标偏移的孤儿车站 ID。删 stations[Makuhari-Hong/Makuta/Minami-No/Hacchobori]（4 个均无线路引用、坐标与被引用变体差数百米至 7.5km）；name_map 改指：馬来田→Uma_Kita、八丁堀→Hatchobori；删 station_i18n 孤儿条目 Makuhari-Hong/Makuta/Minami-No/Hacchobori/Makuhari-Hongo；修 Hatchobori.en 误写 Hacchobori。重跑 gen-file-data.js；verify_transfer_pairs.js 退出码 0（1953 条不变） |
-| RC-4 | 2026-09-18 | 用户／开发会话 | 与确认稿 RC-3 对齐：第 11 章硬规则编号补回（系统优先变更「变更前」/ 无孤儿迁移 / 发布门）、附录 A 结论编号补回；移除 5.2 误混入的根入口路由行（该文件已删除，入口统一 pages/home.html） |
-| RC-3 | 2026-09-17 | 用户／开发会话 | 可读性优化：目录置顶（全文锚点）；多份开发文档整理合并（线路图设计规定并入正文 5.4，设计文档与 README 保留为附录 A/B）；设计文档全文中译；6.5 节重复内容清理；错别字修正 |
-| RC-2 | 2026-09-17 | 用户／开发会话 | 结构优化（章节重组、CRLF→LF、重复版本号标注〔并发会话〕）；语言统一为中文；新增第 3 章“系统架构设计”（含 3.10 页面结构规则，原第 0 章并入）；第 6 章按“系统模块划分 / 后台权限模型 / 数据库设计 / ODPT 实时数据对接 & 双库联动策略 / 核心业务规则”重组；第 7 章按 7.1-7.6 重排（全局格式 / 错误码 / 前台业务接口 / ODPT 封装 / 后台管理接口 / 数据字典）；新增第 8-10 章（部署与运维 / 测试规范 / 风险说明 & FAQ）；取消“用户指示”笔录形态，变更日志统一为标准条目 |
-| v1.0 | 2026-09-11 | 用户／开发会话 | 由 AGENTS.md、LINE-DIAGRAM-SPEC.md、4.3.31_design.md、README.md 等多份开发文档整理合并形成综合版；完整原文收录于附录 A-B。 |
+| RC-7 | 2026-10-15 | 用户／开发会话 | **文档结构更新**：数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」（3.7/2.4/3.10.3/5.4.5/术语表/目录/数据字典同步）；修订记录（日志）迁移至 PROGRESS.md 按日期管理，本表仅保留版本索引。 |
+| RC-6 | 2026-10-15 | 用户／开发会话 | **文档更名与整理**：DEVELOPMENT.md 全量整理后更名为 README.md（保留全部开发细节，作为仓库首页文档）；同步登记 2026-10-14～10-15 开发进展（v4.3.1216~4.3.1230，各条目 Commit 见 PROGRESS.md 对应日期）。 |
+| RC-5 | 2026-09-27 | 用户／开发会话 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freeze、recovery/baseline、migration audit、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
+| RC-4.3 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理第一类真坐标错误 16 组（删孤儿 8、合并/改名、坐标修正 7、i18n 修正）；重跑 gen-file-data.js。 |
+| RC-4.2 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理同站双 ID 拼写冗余 19 组（ODPT 实证对齐，删孤儿 10/合并 9）；name_map 同步改指；重跑 gen-file-data.js。 |
+| RC-4.1 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理坐标偏移的孤儿车站 ID 4 个 + name_map/i18n 改指；重跑 gen-file-data.js。 |
+| RC-4 | 2026-09-18 | 用户／开发会话 | 与确认稿 RC-3 对齐：第 11 章硬规则编号补回、附录 A 结论编号补回；移除 5.2 误混入的根入口路由行。 |
+| RC-3 | 2026-09-17 | 用户／开发会话 | 可读性优化：目录置顶（全文锚点）；多份开发文档整理合并（线路图设计规定并入正文 5.4，设计文档与 README 保留为附录 A/B）；设计文档全文中译；6.5 节重复内容清理；错别字修正。 |
+| RC-2 | 2026-09-17 | 用户／开发会话 | 结构优化（章节重组、CRLF→LF、重复版本号标注〔并发会话〕）；语言统一为中文；新增第 3 章“系统架构设计”；第 6/7 章重组；新增第 8-10 章；变更日志统一为标准条目。 |
+| v1.0 | 2026-09-11 | 用户／开发会话 | 由 AGENTS.md、LINE-DIAGRAM-SPEC.md、4.3.31_design.md、README.md 等多份开发文档整理合并形成综合版。 |
 
-> 文档状态：维护中 ｜ 最近修订：RC-5（代码对照修订稿）
+> 文档状态：维护中 ｜ 最近修订：RC-7（数据架构新链路 + 日志迁移 PROGRESS.md）
+>
+> **日志管理**：逐日详细开发日志（按日期组织）见 `PROGRESS.md`；本表仅保留版本索引，不再内嵌详细修订内容。
 
 ### 1.3 术语与缩写
 
@@ -180,7 +190,8 @@
 | i18n | 国际化（本项目 4 语言：ja/zh/ko/en） |
 | db-loader | 构建期数据加载器（data/core/db-loader.js） |
 | CSP | 内容安全策略（页面 script-src 'self' 等约束） |
-| TrainVehicle | 浏览器运行时车型身份统一入口（js/train-vehicle.js，window.TrainVehicle）；聚合 S0-S4 证据，供数据层与渲染层消费 |
+| TrainVehicle | 浏览器运行时车型身份统一入口（js/train-vehicle.js，window.TrainVehicle）；按「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」链路收敛身份并选择原生 PNG，供数据层与渲染层消费 |
+| TrainOperationEvidence | 列车运行/编成证据注册与解析中心（data/timetables/train-operation-evidence.js，window.TrainOperationEvidence）；各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册，resolveEvidence(trainNumber, 线路/服务日/日历) 解析车型 |
 | TrainVehicleResolver | 自包含车型解析器（js/train-vehicle-resolver.js，window.TrainVehicleResolver / Node module）；由生成脚本合成，供 CLI、审计或独立环境使用 |
 | LineServiceRelations | 线路服务关系层（data/core/line-service-relations.js）；登记 THROUGH_SERVICE / PHYSICAL_CONNECT / BRANCH_OF / ALIAS_OF / UNKNOWN 等关系，不替代 LOS |
 | baseline refresh | 合法 canonical migration 后刷新 recovery/baseline/production_baseline.json 的生命周期动作，必须与 migration audit、approved removal manifest、CI guard 同步 |
@@ -248,7 +259,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 
 点击线路卡弹出详情（realtime-view.js + delay-translator.js 翻译，运行情报显示 ODPT 原文全文）
 
-打开 trains.html：页面先加载 db-loader / ODPT / data-config-bundle / DataFusion / i18n / LinePresentationService，再加载 trains-config → trains-utils → trains-data → trains-geometry → train-track-layout → trains-render → trains-page。列车位置实时优先；无实时线路由 train-position-estimator.js 按时刻表推定补缺；车型身份由 TrainVehicle 聚合 S0-S4 证据，图标由 TrainIcons/TrainVehicleResolver 兜底但不得把 unknown 伪装成确定车型。
+打开 trains.html：页面先加载 db-loader / ODPT / data-config-bundle / DataFusion / i18n / LinePresentationService，再加载 trains-config → trains-utils → trains-data → trains-geometry → train-track-layout → trains-render → trains-page。列车位置实时优先；无实时线路由 train-position-estimator.js 按时刻表推定补缺；车型身份按「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」链路解析（TrainVehicle 收敛身份并选择原生 PNG），TrainIcons/TrainVehicleResolver 仅作图标兜底，不得把 unknown 伪装成确定车型。
 
 流程 C：观光
 
@@ -316,7 +327,7 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | js/ | 前端模块 | 按数据/业务/展示三层组织（见 3.7）；模块职责单一，禁止跨层依赖 |
 | data/core/ | 构建期生成数据 + 加载器（db-loader.js、*.file.js、源 JSON）+ 运行时常量表 | 生成文件（*.file.js、data-config-bundle.js）禁止手工编辑；canonical 数据修改必须直接修改源文件并重跑 gen-file-data.js；改 transfer-hints/runtime-config/through-service/line-operation-systems/platform-data/line-service-relations/train-type-defs 后重跑 gen-config-bundle.js |
 | data/api/ | ODPT 客户端（odpt-unified.js）与链接（odpt-links.js） | ODPT 访问唯一入口；不得在页面或业务模块绕过 ODPTClient 直连；首页经 odpt-lazy.js 惰性加载 |
-| data/timetables/ | 手动时刻表（*-manual.js）+ vehicle-type-map.js | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理 |
+| data/timetables/ | 手动时刻表（*-manual.js）+ vehicle-type-map.js + 车辆运行/编成证据（train-operation-evidence.js、*-operation-evidence-2026.js、*-formation-evidence.js 等） | 命名 <RailwayId>-manual.js；仅 ODPT 无数据的线路允许手工整理；证据文件经 TrainOperationEvidence.register 注册，供车型链路消费 |
 | fonts/ | 像素字体（ja/ko/zh-hans/zh-hant/latin） | 唯一字体源，禁止使用系统字体替代 |
 | images/ | 素材库，按业务主题分四个子目录；根级仅放全站图标/站点标记（pixel-tetsudo.ico、Language.png、icon-metro-station.svg、地铁站点.svg） | 见下方「图库管理规范」：四个子目录各自的用途与命名 |
 | scripts/ | 数据治理脚本（i18n 审计/对齐/提交前检查） | serve.py 为本地开发服务器（.gitignore 排除不入库）；生成脚本产出必须落 data/core 或 data/timetables |
@@ -368,7 +379,15 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 
 trains 页面不再由 trains-page.js 单独承担主体职责。当前 ownership 为：trains-config.js 管设计令牌与常量；trains-utils.js 管通用工具；trains-data.js 管线路/列车视图数据装配；trains-geometry.js 管节点/支线/环线几何；train-track-layout.js 管列车轨道偏移与同轨错位；trains-render.js 管 SVG/DOM 绘制；trains-page.js 只做页面装配、事件绑定与加载流程协调。
 
-车型身份解析架构：浏览器运行时以 window.TrainVehicle 为统一入口，按 S0 manual 内嵌 vehicleType、S1 ODPT 实时 vehicleType、S2 车号候选累积、S3 VehicleTypeMap、S4 图标规则的顺序聚合证据。TrainIcons/TrainVehicleResolver 可提供图标与独立解析能力，但不得成为第二套用户可见车型身份规范。unknown input 必须保持不确定性；只有 S0-S4 有证据时才可显示确定车型名。
+车型身份解析架构（v4.3.1236 数据架构）：统一链路为「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」——
+
+① **ODPT/SQL 列车号**：来源为 ODPT 实时 trainNumber 或 Supabase SQL train-runs（canonical 时刻表）列车号；
+② **线路车型对应**：data/timetables/vehicle-type-map.js 静态查表 + Supabase train_vehicle_rules 逐号/日历参考（Grade-C timetable-reference，须在有效期内）；
+③ **TrainOperationEvidence**：data/timetables/train-operation-evidence.js（window.TrainOperationEvidence）——各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册证据；resolveEvidence(trainNumber, {lineId, railway, serviceDate, calendarType}, 'fallback') 按列车号+线路+服务日+日历解析车型；
+④ **TrainVehicle**：js/train-vehicle.js（window.TrainVehicle）——resolve 收敛车型身份、selectMarkerArtwork 选择原生 PNG；实时车型优先，未知保持 UNKNOWN 灰点，不猜车型；
+⑤ **PNG**：images/列车/*.png 原生车型图标（82×98），路径经图库 inventory 校验，页面不硬编码散落路径。
+
+TrainIcons/TrainVehicleResolver 仅作图标兜底与独立解析，不得成为第二套用户可见车型身份规范。unknown input 必须保持不确定性；只有链路证据明确时才可显示确定车型名。
 
 ODPT 唯一入口：所有 ODPT 请求必须经 data/api/odpt-unified.js 暴露的 ODPTClient；首页首屏走 odpt-lazy.js 惰性模式。业务模块不得自行拼 ODPT URL 或绕过统一错误处理。
 
@@ -483,7 +502,7 @@ API key 不硬编码：环境变量或 .work/serve.env（已被 .gitignore 排�
 
 基础层：db-loader.js 必须早于消费 RailwayDB/UNIFIED_LINES 的模块；data-layer.js、odpt-links.js、odpt-unified.js、local-railway-data.js、data-config-bundle.js 必须早于 DataFusion / LinePresentationService / trains 模块。data-config-bundle.js 由 gen-config-bundle.js 生成，合并顺序固定为 transfer-hints → runtime-config → through-service → line-operation-systems → platform-data → line-service-relations → train-type-defs。
 
-车型与列车位置层：vehicle-type-map.js → train-vehicle.js → train-position-estimator.js → train-icons.js → data-fusion.js。TrainVehicle 是车型身份统一入口；TrainIcons/TrainVehicleResolver 用于图标与独立解析，不得绕开 TrainVehicle 新建第二套用户可见车型判断。
+车型与列车位置层：train-operation-evidence.js（+ 各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register 注册证据）→ train-vehicle.js → train-position-estimator.js → trains-render.js（选 PNG 渲染）→ data-fusion.js。列车号经 TrainOperationEvidence.resolveEvidence 解析车型，TrainVehicle 统一收敛身份并选择原生 PNG；实时车型优先、未知保持 UNKNOWN，不得绕开 TrainVehicle 新建第二套用户可见车型判断。
 
 展示与 i18n 层：translations.js、common.js、line-presentation-service.js、data-state.js、lang-init.js 在页面专属模块前加载；静态文案走 data-i18n，动态文案走 window.t(key)，线路/车站显示名走 RailwayDB/tOp。
 
@@ -1078,7 +1097,7 @@ junction 的 left 站（站名居右）走窄空间 clamp（到右列圆点前�
 
 线路图卡片侧仍使用固定图标框、fallback 图标框与线路徽章规则；图标资源统一放在 images/列车、images/鉄道 等既有目录，路径由 TrainIcons/TrainVehicleResolver 返回，页面不得硬编码散落路径。
 
-车型身份解析必须走统一证据链：S0 manual 内嵌 vehicleType；S1 ODPT 实时 vehicleType；S2 车号候选累积表；S3 VehicleTypeMap 静态查表；S4 TrainIcons 图标规则。S4 是低置信度视觉兜底，不等同于确定车型事实。
+车型身份解析必须走统一链路：ODPT/SQL 列车号 → 线路车型对应（vehicle-type-map.js + Supabase train_vehicle_rules）→ TrainOperationEvidence（resolveEvidence 按列车号/线路/服务日/日历解析）→ TrainVehicle（收敛身份 + selectMarkerArtwork 选原生 PNG）→ PNG。实时车型优先、有据才升、未知保持 UNKNOWN；图标兜底不得冒充确定车型事实。
 
 E235系山手線作为 ultimate fallback 仍存在于当前 main 的 TrainIcons/TrainVehicleResolver 中；它只能作为图标兜底，不得在非 Yamanote 场景冒充确定车型名。若后续修复该 fallback，应同步更新对应当前规范与测试。
 
@@ -1156,10 +1175,10 @@ CSP：script-src 'self'、style-src 'self'、connect-src 仅 self + ODPT/MapTile
 | 运行系统展示元数据（LOS 已吸收） | railway_data.json 每条 line.presentation | 运行系统显示分组、系统名、颜色、系统卡排序（lineIds / code / order / operatorGroup）；原 data/core/line-operation-systems.js 已并入 canonical line records，不再单独加载 |
 | 服务关系层 | （已并入 railway_data.json 的 throughServices / serviceBoundaries） | 线路间直通/服务边界；原 data/core/line-service-relations.js 与 through-service.js 已删除，关系数据在 canonical 记录内表达 |
 | ODPT 客户端 | data/api/odpt-unified.js + odpt-links.js | 实时/时刻表/运行情报统一入口 |
-| 手动时刻表库 | data/timetables/*-manual.js + vehicle-type-map.js | ODPT 无数据线路补全；vehicle-type-map 为车型 S3 证据 |
+| 手动时刻表库 | data/timetables/*-manual.js + vehicle-type-map.js | ODPT 无数据线路补全；vehicle-type-map 为线路车型对应静态表 |
 | 实时融合 | js/data-fusion.js | ODPT、官方 API、manual、本地 fallback 融合 |
 | 列车位置推定 | js/train-position-estimator.js | 按时刻表、延误、站序推定列车位置 |
-| 车型身份 | js/train-vehicle.js / js/train-vehicle-resolver.js / js/train-icons.js | TrainVehicle 统一用户可见车型身份；resolver/TrainIcons 提供独立解析与图标兜底 |
+| 车型身份 | js/train-vehicle.js / js/train-vehicle-resolver.js / js/train-icons.js + data/timetables/train-operation-evidence.js | TrainVehicle 统一用户可见车型身份（按 ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG 链路）；resolver/TrainIcons 提供独立解析与图标兜底 |
 | 线路图模块 | js/trains-config.js / trains-utils.js / trains-data.js / trains-geometry.js / train-track-layout.js / trains-render.js / trains-page.js | 按配置、工具、数据装配、几何、列车轨道布局、渲染、页面控制拆分 |
 
 服务端规则（白名单登记、key 不硬编码、安全加固不回退）见 3.9。

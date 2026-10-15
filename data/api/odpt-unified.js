@@ -1598,7 +1598,7 @@
     // 立即渲染，再后台拉新数据覆盖——stale-while-revalidate。
     // 注意：RTCache 的 positions/delayInfo 两键被 data-fusion 融合后数据占用（lineId 级），
     // 这里用独立 raw 键（operator 级原始数据），互不覆盖。
-    var RAW_REALTIME_FRESH_MS = 30000;  // 缓存新鲜窗口（与 30s 轮询同周期）
+    var RAW_REALTIME_FRESH_MS = 15000;  // 缓存新鲜窗口（与 15s 轮询同周期；v4.3.1236 30s→15s）
     var FUSION_READY_WAIT_MS = 15000;
     var _fusionWaiters = {};
 
