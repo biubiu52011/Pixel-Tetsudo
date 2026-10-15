@@ -1,6 +1,7 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-15 JST — 运营时段车辆映射全网检查（REVIEW）
+## 2026-10-15 JST — 运营时段车辆映射全网检查（DONE：检查与有依据修正已发布，缺口见清单）
+- Commit: 4ebaf383（实现/报告）；CI/CD、Release Guards、证据同步success，现有独立legacy Pages run cancelled而CI的Pages部署success。公开JS/证据逐字MATCH，两PNG和报告HTTP200；公开浏览器A817/A9551等已显示2000系，银座本地A917/B937显示1000系。
 - 检查223条canonical线路、210个非FULL SQL入口和4家运营商887条ODPT记录；当前111个范围/1677位置记录，父子重复不作为物理车数。保存逐号CSV及223行报告docs/reports/vehicle-mapping-audit-20261015.md，原始数据/对照/备份recovery/live-vehicle-audit-20261015。ODPT源时间09:11—09:12，接收时已过期，生产继续排除；另在源时间回放1029位置记录检查映射，未声称是当前实时。
 - 用户当前丸ノ内页面整批待判定：SQL没有现役单一车型证据且唯一目录未登记已有PNG。核对Tokyo Metro当前官方现役列表与02退役官方说明，Supabase evidence_sources402、family rules38/39补丸ノ内2000/银座1000，MarunouchiBranch证据域归属母线；有效2026-10-15至11-30，不推编组/涂装。SQL回读PASS；现有exporter新增只读connector结构导入，原37条规则/33别名及全部dated/reference/carsets事实保留。
 - TrainOperationEvidence→TrainVehicle→原生PNG链路不变；登记2原生图。相同时间/输入新增丸ノ内43、支线5、银座30图，合计78。当前273有图、1404尚缺证据。新宿回放13条已判10-300但仅有分批外观PNG，缺实体编组不能指定批次；荒川ODPT运行ID非车号，仍保留待判定。未取得全网当天编组实证，不能把未知等同错配或宣称所有既有映射正确。
