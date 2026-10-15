@@ -1050,6 +1050,23 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       tip.push(/^zh/.test(lang) ? "实时数据未提供车辆编号／车型" :
         (lang === "en" ? "Vehicle ID/model not supplied by live data" :
           "リアルタイムデータに車号・形式なし"));
+    } else if (p && p.vehicleIdentityStatus === "NARROWED" &&
+               Array.isArray(p.vehicleCandidates) && p.vehicleCandidates.filter(Boolean).length > 1) {
+      // Train-level evidence can narrow the model without proving one variant.
+      // Preserve every candidate in the tooltip; never promote one into a PNG.
+      var models = p.vehicleCandidates.map(function(v) { return String(v || "").trim(); }).filter(Boolean);
+      tip.push(/^zh/.test(lang) ? "车型候选（尚未确认）：" + models.join("／") :
+        (lang === "en" ? "Vehicle candidates (unconfirmed): " + models.join(" / ") :
+        (lang === "ko" ? "차량 형식 후보(미확정): " + models.join(" / ") :
+          "車両形式候補（未確定）：" + models.join("／"))));
+    } else if (p && p.vehicleIdentityStatus === "UNKNOWN" &&
+               p.estimated === true && p.positionSource === "supabase-train-run") {
+      // A position estimated from SQL does not establish which physical carset
+      // operates that train; distinguish missing evidence from a rendering error.
+      tip.push(/^zh/.test(lang) ? "时刻表未提供可核验的车型" :
+        (lang === "en" ? "No verified train-specific vehicle model in timetable" :
+        (lang === "ko" ? "시간표에 확인된 열차별 차량 형식 정보 없음" :
+          "時刻表に列車別の確認済み車両形式なし")));
     } else tip.push(/^zh/.test(lang) ? "车型未判定" :
       (lang === "en" ? "Vehicle type unknown" : "車両形式未判定"));
     if (lineId === "Oedo" && _isOedoTailTrain(lineId, p) && p && p.destinationStation) {

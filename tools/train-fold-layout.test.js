@@ -68,4 +68,31 @@ vm.runInNewContext(language.slice(closeStart,closeEnd)+'this.close=closeSwitcher
 languageCtx.close();assert.equal(focuses,0,'an already closed language menu cannot steal dialog focus');
 expanded=true;languageCtx.close(false);assert.equal(focuses,0,'outside clicks keep focus on the clicked control');
 expanded=true;languageCtx.close();assert.equal(focuses,1,'explicit language-menu close still restores its button');
+// Chuo-Sobu timetable positions must not silently become a guessed model/icon.
+const titleStart=source.indexOf('  function _trainMarkerTitle(p, lineId) {');
+const titleEnd=source.indexOf('  // SVG image title attributes',titleStart);
+assert(titleStart>=0&&titleEnd>titleStart,'marker tooltip function exists');
+const tooltipCtx={window:{currentLang:'zh',TRAIN_TYPE_NAMES:{}}};
+vm.runInNewContext(source.slice(titleStart,titleEnd)+'\nthis.markerTitle=_trainMarkerTitle;',tooltipCtx);
+const missing=tooltipCtx.markerTitle({
+  trainNumber:'721B',estimated:true,positionSource:'supabase-train-run',
+  vehicleIdentityStatus:'UNKNOWN',vehicleIdentityReason:'no-vehicle-evidence'
+},'ChuoSobuLocal');
+assert(missing.includes('时刻表未提供可核验的车型'),'missing evidence is described, not invented');
+assert(!missing.includes('E231')&&!missing.includes('E235'),'unknown train stays model-agnostic');
+const narrowed=tooltipCtx.markerTitle({
+  trainNumber:'805B',vehicleIdentityStatus:'NARROWED',
+  vehicleCandidates:['E231系0番台','E231系500番台']
+},'ChuoSobuLocal');
+assert(narrowed.includes('车型候选（尚未确认）')&&narrowed.includes('E231系0番台')&&narrowed.includes('E231系500番台'),
+  'narrowed status retains all candidates, not an arbitrary concrete identity');
+const exact=tooltipCtx.markerTitle({
+  trainNumber:'805B',vehicleIdentityStatus:'EXACT',vehicleType:'E231系500番台'
+},'ChuoSobuLocal');
+assert(exact.includes('E231系500番台')&&!exact.includes('候选'),'sourced exact identity remains unchanged');
+tooltipCtx.window.currentLang='ja';
+assert(tooltipCtx.markerTitle({estimated:true,positionSource:'supabase-train-run',
+  vehicleIdentityStatus:'UNKNOWN'},'ChuoSobuLocal').includes('確認済み車両形式なし'),
+  'Japanese text also distinguishes missing evidence');
+
 console.log('paired train layout, direction isolation, passenger modal and current-data refresh: PASS');
