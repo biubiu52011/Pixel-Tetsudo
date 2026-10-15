@@ -250,6 +250,17 @@ async function get(table, select, order) {
       sourceUrl:source.source_url||"",evidenceRole:"timetable-reference"};
   });
   const eligibleReferenceRules = referenceRuleRecords.filter(eligibleReference);
+  // Guard the publication boundary: an identical line, timetable calendar,
+  // train number and revision must not export two conflicting planned models.
+  // Vehicle assignment remains in Supabase; this only rejects bad evidence.
+  const referenceIdentityByTrain = new Map();
+  for (const ref of eligibleReferenceRules) {
+    const key = [ref.networkKey, ref.calendarType, ref.trainNumber, ref.effectiveFrom].join("|");
+    const known = referenceIdentityByTrain.get(key);
+    if (known && known !== ref.vehicleType)
+      throw new Error("Conflicting planned vehicle reference " + key + ": " + known + " / " + ref.vehicleType);
+    referenceIdentityByTrain.set(key, ref.vehicleType);
+  }
   const inventoryNetworks = [...new Set(inventory.map(r=>r.canonical_network_key))];
   if (!inventoryNetworks.length) throw new Error("Canonical vehicle evidence inventory is empty");
   const verifiedAliases=networkAliases.filter(r =>
