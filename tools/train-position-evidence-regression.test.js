@@ -342,7 +342,7 @@ assert(/_displayNextStationIdx/.test(renderer),
 assert(/var _sameSegment = _targetIdx === _previousIdx && _targetNextIdx === _previousNextIdx;/.test(renderer) &&
        /var _advancedSegment = _targetIdx === _previousNextIdx;/.test(renderer),
   "cross-poll animation must require same-segment or adjacent-segment continuity");
-assert(/var _adjacentGaps = \[\];[\s\S]{0,900}var _snapDistance = Math\.max\(80, _medianStationGap \* 2\.5\);/.test(renderer),
+assert(/var _adjacentGaps = \[\];[\s\S]{0,900}var _snapDistance = Math\.max\(140, _medianStationGap \* 4\);/.test(renderer),
   "snap distance must be derived once from line geometry per render pass");
 assert(!/var _adjacent = \[\];[\s\S]{0,700}var _medianGap/.test(renderer),
   "each train marker must not rescan the full station geometry for its snap threshold");
