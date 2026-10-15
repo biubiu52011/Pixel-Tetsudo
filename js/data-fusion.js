@@ -4,7 +4,7 @@
 (function() {
   "use strict";
 
-  var FUSION_VERSION = 12;
+  var FUSION_VERSION = 13;
   // v4.3.x: 实时轮询间隔 — 见 runtime-config.js REFRESH_INTERVAL
   // v4.3.x: 位置轮询间隔 — 见 runtime-config.js POSITION_INTERVAL
 
@@ -71,6 +71,7 @@
     if (!p) return p;
     var r = resolution || null;
     p.vehicleResolution = r;
+    p.vehiclePlan = r && r.vehiclePlan || null;
     p.trainClass = r && r.identityStatus === "EXACT" ? (r.name || "") : "";
     p.vehicleType = r && r.identityStatus === "EXACT" ? (r.vehicleTypeStr || r.name || "") : "";
     p.vehicleSource = r ? (r.source || "") : "";
@@ -1414,7 +1415,14 @@
                   if (!_live || _live.positionSource !== 'realtime-api') return;
                   var _scheduleModel = window.TrainPositionEstimator.matchRealtimeVehicleEvidence(
                     _liveLineId,_live,allLines);
-                  if (!_scheduleModel || !_scheduleModel.model) return;
+                  if (!_scheduleModel) return;
+                  if (!_scheduleModel.model) {
+                    if (_live.vehicleIdentityStatus !== 'EXACT' && !_live.vehicleEvidenceConflict &&
+                        !_live.realtimeVehicleType && _scheduleModel.vehiclePlan) {
+                      _live.vehiclePlan = _scheduleModel.vehiclePlan;
+                    }
+                    return;
+                  }
                   var _mergedVehicle = window.TrainVehicle.resolve({
                     lineId:_liveLineId,
                     operator:_live.trainOperator || '',
@@ -1878,7 +1886,8 @@
                 a.positionSource !== b.positionSource || a.estimated !== b.estimated ||
                 a.sourceUpdatedAt !== b.sourceUpdatedAt || a.sourceValidUntil !== b.sourceValidUntil ||
                 a.delayMin !== b.delayMin || a.destinationStation !== b.destinationStation ||
-                a.vehicleIconPath !== b.vehicleIconPath) { _positionDirty[id] = true; break; }
+                a.vehicleIconPath !== b.vehicleIconPath ||
+                JSON.stringify(a.vehiclePlan || null) !== JSON.stringify(b.vehiclePlan || null)) { _positionDirty[id] = true; break; }
           }
         });
         fuseDirty(Object.keys(_positionDirty));

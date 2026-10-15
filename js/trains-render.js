@@ -1047,6 +1047,14 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     }
     if (p && p.vehicleType) tip.push(p.vehicleType);
     else if (p && p.trainClass) tip.push(p.trainClass);
+    else if (p && p.vehiclePlan && Array.isArray(p.vehiclePlan.models) && p.vehiclePlan.models.length) {
+      var planModels = p.vehiclePlan.models.join(" / ");
+      var candidatePlan = p.vehiclePlan.models.length > 1;
+      tip.push(/^zh/.test(lang) ? (candidatePlan ? "计划候选车型（图示为代表）：" : "计划车型：") + planModels :
+        (lang === "en" ? (candidatePlan ? "Planned vehicle candidates (representative icon): " : "Planned vehicle: ") + planModels :
+        (lang === "ko" ? (candidatePlan ? "계획 차량 후보(대표 아이콘): " : "계획 차량: ") + planModels :
+          (candidatePlan ? "計画形式候補（代表表示）：" : "計画形式：") + planModels)));
+    }
     else if (p && p.vehicleEvidenceGap === "odpt-trip-id-without-car-number") {
       // Distinguish missing *vehicle evidence* from a failed image request.
       // Do not display the internal ODPTnnnn trip ID as a physical car number.

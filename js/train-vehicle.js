@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1240')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1242')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -401,6 +401,8 @@
       else if (isReference) referenceHit = rec;
       else runHits.push(rec);
     }
+
+    if(mode==='planned')return referenceHit||familyHit;
 
     // Realtime never treats a bare working number as a physical carset proof.
     // Canonical dated providers above require the exact public train number,
@@ -922,6 +924,170 @@ function resolveToeiOwnerSingleFleet(ctx) {
     return "都営10-300形";
   return null;
 }
+
+// Exact catalogue additions reuse existing named assets; they do not assign trains.
+Object.assign(CANONICAL_VEHICLES,{
+  "jr-e231-500-plan": {
+    "displayName": "E231系500番台",
+    "asset": null
+  },
+  "jr-e231-0-chuo-sobu": {
+    "displayName": "E231系0番台（中央・総武線各駅停車）",
+    "asset": "../images/列车/JR東日本/JR東日本_E231系_0番台_中央・総武線各駅停車.png"
+  },
+  "metro-08": {
+    "displayName": "東京メトロ08系",
+    "iconName": "東京メトロ08系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_08系.png",
+    "aliases": []
+  },
+  "metro-8000": {
+    "displayName": "東京メトロ8000系",
+    "iconName": "東京メトロ8000系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_8000系.png",
+    "aliases": []
+  },
+  "metro-9000": {
+    "displayName": "東京メトロ9000系",
+    "iconName": "東京メトロ9000系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_9000系.png",
+    "aliases": []
+  },
+  "metro-10000": {
+    "displayName": "東京メトロ10000系",
+    "iconName": "東京メトロ10000系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_10000系.png",
+    "aliases": []
+  },
+  "metro-13000": {
+    "displayName": "東京メトロ13000系",
+    "iconName": "東京メトロ13000系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_13000系.png",
+    "aliases": []
+  },
+  "metro-17000": {
+    "displayName": "東京メトロ17000系",
+    "iconName": "東京メトロ17000系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_17000系.png",
+    "aliases": []
+  },
+  "metro-18000": {
+    "displayName": "東京メトロ18000系",
+    "iconName": "東京メトロ18000系",
+    "asset": "../images/列车/東京メトロ/東京メトロ_18000系.png",
+    "aliases": []
+  },
+  "keio-7000": {
+    "displayName": "京王7000系",
+    "iconName": "京王7000系",
+    "asset": "../images/列车/京王電鉄/京王電鉄_7000系.png",
+    "aliases": []
+  },
+  "keio-8000": {
+    "displayName": "京王8000系",
+    "iconName": "京王8000系",
+    "asset": "../images/列车/京王電鉄/京王電鉄_8000系.png",
+    "aliases": []
+  },
+  "keio-9000": {
+    "displayName": "京王9000系",
+    "iconName": "京王9000系",
+    "asset": "../images/列车/京王電鉄/京王電鉄_9000系.png",
+    "aliases": []
+  },
+  "tx-TX-1000": {
+    "displayName": "TX-1000系",
+    "iconName": "TX-1000系",
+    "asset": "../images/列车/首都圏新都市鉄道/首都圏新都市鉄道_TX-1000系.png",
+    "aliases": []
+  },
+  "tx-TX-2000": {
+    "displayName": "TX-2000系",
+    "iconName": "TX-2000系",
+    "asset": "../images/列车/首都圏新都市鉄道/首都圏新都市鉄道_TX-2000系.png",
+    "aliases": []
+  },
+  "tx-TX-3000": {
+    "displayName": "TX-3000系",
+    "iconName": "TX-3000系",
+    "asset": "../images/列车/首都圏新都市鉄道/首都圏新都市鉄道_TX-3000系.png",
+    "aliases": []
+  },
+  "keikyu-2100": {
+    "displayName": "京急2100形",
+    "iconName": "京急2100形",
+    "asset": "../images/列车/京浜急行電鉄/京浜急行電鉄_2100形.png",
+    "aliases": []
+  },
+  "tokyu-5050": {
+    "displayName": "東急5050系",
+    "iconName": "東急5050系",
+    "asset": "../images/列车/東急電鉄/東急電鉄_5050系.png",
+    "aliases": []
+  },
+  "tokyu-3020": {
+    "displayName": "東急3020系",
+    "iconName": "東急3020系",
+    "asset": "../images/列车/東急電鉄/東急電鉄_3020系.png",
+    "aliases": []
+  },
+  "odakyu-1000": {
+    "displayName": "小田急1000形",
+    "iconName": "小田急1000形",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_1000形_標準色.png",
+    "aliases": []
+  },
+  "odakyu-2000": {
+    "displayName": "小田急2000形",
+    "iconName": "小田急2000形",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_2000形_標準色.png",
+    "aliases": []
+  },
+  "odakyu-3000": {
+    "displayName": "小田急3000形",
+    "iconName": "小田急3000形",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_3000形_標準色.png",
+    "aliases": []
+  },
+  "odakyu-60000": {
+    "displayName": "小田急60000形",
+    "iconName": "小田急60000形",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_60000形_MSE.png",
+    "aliases": []
+  },
+  "odakyu-70000": {
+    "displayName": "小田急70000形",
+    "iconName": "小田急70000形",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_70000形_GSE.png",
+    "aliases": []
+  },
+  "seibu-20000": {
+    "displayName": "西武20000系",
+    "iconName": "西武20000系",
+    "asset": "../images/列车/西武鉄道/西武鉄道_20000系_標準塗装.png",
+    "aliases": []
+  },
+  "seibu-30000": {
+    "displayName": "西武30000系",
+    "iconName": "西武30000系",
+    "asset": "../images/列车/西武鉄道/西武鉄道_30000系_スマイルトレイン.png",
+    "aliases": []
+  },
+  "seibu-9000": {
+    "displayName": "西武9000系",
+    "iconName": "西武9000系",
+    "asset": "../images/列车/西武鉄道/西武鉄道_9000系.png",
+    "aliases": []
+  },
+  "seibu-001": {
+    "displayName": "西武001系",
+    "iconName": "西武001系",
+    "asset": "../images/列车/西武鉄道/西武鉄道_001系_Laview.png",
+    "aliases": [
+      "001系（Laview）"
+    ]
+  }
+});
 
 var CANONICAL_VEHICLE_ALIAS_INDEX = {};
 var CANONICAL_VEHICLE_ALIAS_CONFLICTS = {};
@@ -1638,12 +1804,70 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     };
   }
 
+
+  // A timetable plan is independent of a dated physical vehicle assignment.
+  // Expand source abbreviations, retain ALL candidates, and use the first
+  // drawable candidate as a stable representative, never as a daily assignment.
+  var _issuedVehiclePlans = new WeakSet();
+  var _planOwnerLabels = {
+    'JR-East':'JR東日本', 'JR-West':'JR西日本', 'JR-Kyushu':'JR九州',
+    'JR-Central':'JR東海', 'JR-Hokkaido':'JR北海道',
+    'TokyoMetro':'東京メトロ', 'Toei':'都営', 'Tokyu':'東急', 'TOKYU':'東急',
+    'Tobu':'東武', 'Odakyu':'小田急', 'Seibu':'西武', 'Keio':'京王',
+    'Keikyu':'京急', 'Keisei':'京成', 'Sotetsu':'相鉄',
+    'YokohamaMunicipal':'横浜市営', 'TWR':'東京臨海高速鉄道',
+    'Rinkai':'東京臨海高速鉄道', 'TokyoMonorail':'東京モノレール',
+    'TamaMonorail':'多摩モノレール', 'Yurikamome':'ゆりかもめ',
+    'ToyoRapid':'東葉高速', 'SaitamaRailway':'埼玉高速鉄道'
+  };
+  function resolveTimetableVehiclePlan(input, ctx) {
+    ctx=ctx||{};
+    var raw=String(input||'').split(/\s*\/\s*/).map(function(v){return v.trim();}).filter(Boolean);
+    if(!raw.length)return null;
+    var owner=_planOwnerLabels[normOp(ctx.operator)]||'';
+    var labels=Object.keys(_planOwnerLabels).map(function(k){return _planOwnerLabels[k];})
+      .filter(function(v,i,a){return a.indexOf(v)===i;}).sort(function(a,b){return b.length-a.length;});
+    var candidates=raw.map(function(name){
+      var declared=labels.find(function(label){return name.indexOf(label)===0;});
+      if(declared)owner=declared;
+      var canonical=owner ? resolveCanonicalVehicle(owner+name) : null;
+      if(!canonical) {
+        var direct=resolveCanonicalVehicle(name);
+        var assetOwner=direct&&direct.asset?direct.asset.split('/')[3]:'';
+        var expected={'JR東日本':'JR東日本','JR東海':'JR東海','JR西日本':'JR西日本',
+          '京急':'京浜急行電鉄','京成':'京成電鉄','京王':'京王電鉄','小田急':'小田急電鉄',
+          '東急':'東急電鉄','東武':'東武鉄道','西武':'西武鉄道','相鉄':'相模鉄道',
+          '都営':'都営地下鉄','東京メトロ':'東京メトロ'}[owner]||owner;
+        // Unqualified labels cannot borrow another owner\u0027s stock.
+        if(direct && (declared || (!owner && !ctx.operator) || assetOwner===expected || /^TX-/.test(name)))canonical=direct;
+      }
+      if(ctx.lineId==='ChuoSobuLocal' && name==='E231系0番台')
+        canonical=resolveCanonicalVehicle('E231系0番台（中央・総武線各駅停車）');
+      return {label:canonical?canonical.displayName:name,canonical:canonical};
+    }).filter(function(v,i,a){return a.findIndex(function(x){return x.label===v.label;})===i;});
+    var first=candidates[0], icon='';
+    // Illustrate a retained planned candidate without asserting a daily assignment.
+    candidates.some(function(candidate) {
+      var asset=candidate.canonical&&resolveVehicleArtwork(candidate.canonical.displayName,ctx.serviceDate);
+      if(!asset)return false;
+      first=candidate;icon=asset;return true;
+    });
+    var plan={status:candidates.length===1?'PLANNED_MODEL':'PLANNED_CANDIDATES',
+      models:candidates.map(function(v){return v.label;}),
+      representativeModel:first?first.label:'',iconPath:icon,
+      source:ctx.source||'sql-timetable-plan',evidenceRole:'timetable-plan',
+      sourceUrl:ctx.sourceUrl||'',formationId:''};
+    _issuedVehiclePlans.add(plan);
+    return plan;
+  }
+
   function resolveTimetableRun(run, tt, lineId, line, serviceDateOverride) {
     var serviceDate = serviceDateOverride || tt['_serviceDate'] || tt['serviceDate'] || tt['operatingDate'] || '';
     var identityKey = lineId + "|" + String(serviceDate || "").slice(0, 10);
     var evidenceRevision = window.TrainOperationEvidence.getRevision();
+    var planInputKey=String(tt._sqlVehicleCandidateLabel||'')+'|'+String(tt.vehicleType||'');
     if (run.identity && run.identity.key === identityKey &&
-        run.identity.evidenceRevision === evidenceRevision) return run.identity;
+        run.identity.evidenceRevision === evidenceRevision && run.identity.planInputKey === planInputKey) return run.identity;
 
     var trainNumber = run.trainNumber;
     var destinationStationUrn = run.destinationStationUrn;
@@ -1773,7 +1997,14 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       trainId: run.timetableIdentity
     };
     var vehResult = resolve(vehCtx);
+    if(vehResult.identityStatus!=='EXACT'){
+      var plannedEvidence=window.TrainOperationEvidence.resolveEvidence(trainNumber,_baseOperationCtx,'planned');
+      var familyPlan=plannedEvidence&&(plannedEvidence.vehicleType||(plannedEvidence.vehicleCandidates||[]).join(' / '));
+      var planInput=_sqlSourceCandidates.length?_sqlSourceCandidates.join(' / '):(_declaredVehicleInput||familyPlan||'');
+      vehResult.vehiclePlan=resolveTimetableVehiclePlan(planInput,{lineId:lineId,operator:line.operator,serviceDate:serviceDate,source:_sqlSourceCandidates.length?'sql-timetable-plan':'operation-family-plan',sourceUrl:tt._timetableProvenance||(plannedEvidence&&plannedEvidence.sourceUrl)||''});
+    }
     run.identity = {
+      planInputKey:planInputKey,
       key: identityKey,
       evidenceRevision: evidenceRevision,
       trainOwner: _trainOwner,
@@ -1806,7 +2037,13 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       formationId:formations.length===1?formations[0]:'',formationCandidates:formations,
       realtimeDerivedVehicleType:planned?'':input,timetableVehicleType:planned?input:''
     });
-    return {vehicleResult:resolve(adapted),evidence:evidence,isPlannedReference:planned,
+    var result=resolve(adapted);
+    if(result.identityStatus!=='EXACT'&&!ctx.realtimeVehicleType){
+      var planEvidence=window.TrainOperationEvidence.resolveEvidence(ctx.trainNumber,ctx,'planned');
+      var modelPlan=planEvidence&&(planEvidence.vehicleType||(planEvidence.vehicleCandidates||[]).join(' / '));
+      result.vehiclePlan=resolveTimetableVehiclePlan(modelPlan,{operator:ctx.operator,serviceDate:ctx.serviceDate,source:'operation-family-plan',sourceUrl:planEvidence&&planEvidence.sourceUrl});
+    }
+    return {vehicleResult:result,evidence:evidence,isPlannedReference:planned,
       realtimeDerivedVehicleType:adapted.realtimeDerivedVehicleType,
       realtimeReferenceModel:adapted.timetableVehicleType,
       formationId:adapted.formationId,formationCandidates:formations};
@@ -1906,14 +2143,19 @@ function _canonicalVehicleIconPath(name, serviceDate) {
         (!p.vehicleFormationCandidates || !p.vehicleFormationCandidates.length)) {
       iconSrc = resolveVehicleArtwork(p.vehicleType) || "";
     }
+    var vehiclePlan=p&&p.vehiclePlan;
+    var plannedMarker=false;
+    if(!iconSrc&&!(p&&p.vehicleResolvedUpstream===true)&&vehiclePlan&&_issuedVehiclePlans.has(vehiclePlan)){
+      iconSrc=vehiclePlan.iconPath||'';plannedMarker=!!iconSrc;
+    }
     if (artworkFailed === true || !isGalleryPng(iconSrc)) {
       return { kind: "unresolved", iconSrc: "" };
     }
-    return { kind: "vehicle", iconSrc: iconSrc };
+    return { kind: "vehicle", iconSrc: iconSrc, planned: plannedMarker };
   }
 
   window.TrainVehicle = {
-    version: '4.3.1240',
+    version: '4.3.1242',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -1923,7 +2165,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1240 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1242 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();

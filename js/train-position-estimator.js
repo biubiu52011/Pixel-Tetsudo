@@ -10,7 +10,7 @@
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 8;
+  var ESTIMATOR_VERSION = 9;
   var _manualTimetableRegistry = {};
   var _timetableIndexCache = { source: null, stamp: "", arrays: {}, manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;
@@ -744,6 +744,7 @@
             trainClass: trainClass,
             vehicleType: _vehicleType,
             vehicleIconPath: vehResult.iconPath || '',
+            vehiclePlan: vehResult.vehiclePlan || null,
             vehicleSource: vehResult.source || '',
             vehicleConfidence: vehResult.confidence || 'none',
             vehicleResolution: vehResult,
@@ -1042,6 +1043,11 @@
       // Official ODPT schedules often have no vehicle field; an identical
       // itinerary imported from a sourced manual/SQL timetable can supply it.
       // Missing evidence is not a contradictory second model assertion.
+      if (vehicle && vehicle.vehiclePlan) {
+        var previousPlan = found[signature].vehiclePlan;
+        if (previousPlan && JSON.stringify(previousPlan.models) !== JSON.stringify(vehicle.vehiclePlan.models)) return null;
+        found[signature].vehiclePlan = vehicle.vehiclePlan;
+      }
       if (model) {
         if (found[signature].model && found[signature].model !== model) return null;
         found[signature].model = model;
@@ -1061,9 +1067,9 @@
     var signatures = Object.keys(found);
     if (signatures.length !== 1) return null;
     var matched = found[signatures[0]];
-    // If timetable data gives only a route/schedule, preserve the unmatched
-    // live model; a timetable without a model is not a new vehicle assertion.
-    return matched.model ? matched : null;
+    // A uniquely joined timetable can supply a plan without asserting the
+    // current physical assignment. Both still pass the same itinerary guards.
+    return matched.model || matched.vehiclePlan ? matched : null;
   }
 
   // ========== Public API ==========

@@ -386,6 +386,7 @@
                   + (_tp.typeName || "") + ":" + (_tp.delayMin || 0) + ":"
                   + (_tp.serviceDate || "") + ":"
                   + (_tp.vehicleIdentityStatus || "") + ":"
+                  + JSON.stringify(_tp.vehiclePlan || null) + ":"
                   + (_tp.vehicleType || "") + ":"
                   + (_tp.vehicleFormationId || "") + ":"
                   + (Array.isArray(_tp.vehicleFormationCandidates) ? _tp.vehicleFormationCandidates.join("/") : "") + ":"
