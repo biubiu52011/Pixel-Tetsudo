@@ -438,7 +438,7 @@
     _tdLoadScript('../js/maplibre/raf-polyfill.js?v=4.3.840', function () {
       _tdLoadScript('../js/maplibre/maplibre-gl.js?v=4.3.840', function () {
         if (window.maplibregl) {
-          _tdLoadScript('../js/maplibre/streets-v2.style.js?v=4.3.840', function () {
+          _tdLoadScript('../js/maplibre/streets-v2.style.js?v=4.3.841', function () {
             _tdInjectCss('../js/maplibre/maplibre-gl.css?v=4.3.840');
             settle();
           });
