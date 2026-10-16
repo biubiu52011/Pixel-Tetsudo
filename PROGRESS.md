@@ -860,3 +860,12 @@ Merged concurrent through-label centering/prefix changes and migrated the existi
 - 覆盖东武晴空塔线等六条线路、四语言、普通与 TH-LINER、未知种别和环线方向；保留图标文字整体布局。
 - trains-render 缓存版本 4.3.1252。
 - 完整 57 项验证通过，图标与文字紧贴及上下避让回归通过。
+
+## 2026-10-16 京叶／武藏野计划车型与直通标签（JST，agent）
+
+- Workstream: KEIYO-PLAN；状态 IN_PROGRESS。沿用 TrainVehicle／TrainOperationEvidence 和 Supabase canonical family rules，补5条计划约束；本线 A/Y、83/85 分割、武藏野 E、房总特急 M 分离。
+- 旧参考把京叶线 E 列车统一写成 E233-5000、武藏野统一写成无图 E231-900，SQL 模板车型为空；新计划规则保留全部候选，不冒充当天编组。
+- 登记武藏野 E231-0 和 E257-500 已有原生图；红色京叶 E233-1000／武藏野209精确图缺口保留为空，不借用蓝色或红色异线图片。
+- canonical Keiyo→Musashino 边界保留西船桥源边界，补市川盐滨／南船桥两处主图接续点；未增加虚构站、线路或并行拓扑。来源 https://www.jreast.co.jp/chiba/news/pdf/pre1608_netrains.pdf 、 https://timetables.jreast.co.jp/timetable/list1500.html 。苏我内外房接续回归同时保留。
+- 新测试1663条参考时刻表与实时同入口、上下行偶数号码归一化、分割运用与实际车型优先通过；完整发布检查待运行。SQL migration20261016093118，备份 recovery/keiyo-plans-20261016/。browser runtime: NOT VERIFIED。
+- 验证更新：完整58项全部通过；京叶／武藏野1663条参考班次无缺图，284个直通标签边界与不重叠检查通过。canonical file/compact生成物与db-loader缓存版本同步。SQL模板保留京叶1068／武藏野536行及现有10777列车参考。浏览器再次连接超时，browser runtime: NOT VERIFIED。

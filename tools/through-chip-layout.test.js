@@ -16,6 +16,10 @@ for(const mobile of [true,false]){
  for(const f of ['data/core/runtime-config.js','js/trains-config.js','js/trains-utils.js','js/trains-data.js','js/through-chip.js','js/trains-geometry.js','js/trains-render.js'])
   vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
  ctx.GEOM=ctx.window.GEOM;
+ const keiyo=ctx._getTransferMap("Keiyo");
+ for(const station of ["Ichikawa-Shiohama","Minami-Funabashi"])assert((keiyo[station]||[]).some(x=>x.lineId==="Musashino"&&x.through),station+" Musashino through label");
+ for(const peer of ["Sotobo","Uchibo"])assert((keiyo.Soga||[]).some(x=>x.lineId===peer&&x.through),"Soga "+peer);
+ assert(!keiyo["Nishi-Funabashi"],"off-canvas source boundary is not a fabricated mainline station");
  for(const [id,line]of Object.entries(db.lines)){
   if(!(line.serviceBoundaries||[]).length)continue;
   const map=ctx._getTransferMap(id),g=ctx.computeRouteGeometry(line,id),layer=new Node('g');

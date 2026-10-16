@@ -67,6 +67,16 @@
       var mn=raw.match(/^(?:A|B)?[0-9]*([0-9]{2})([KSMTGEHN])(?:[1-5]|[AB])?$/);
       if(mn) return mn[1]+mn[2];
     }
+    // Keiyo/Musashino hour+working numbers preserve the final two digits and A/Y/E family.
+    if (/Keiyo|Musashino/.test([ctx.lineId,ctx.railway].join('|'))) {
+      var km=raw.match(/^([0-9]{1,2})?([0-9]{2})([AYE])$/);
+      if(km) {
+        // Keiyo even/up train numbers share the following odd working (00Y -> 01Y).
+        var working=parseInt(km[2],10);
+        if(ctx.lineId==='Keiyo' && /[AY]/.test(km[3]) && working%2===0)working++;
+        return String(working).padStart(2,'0')+km[3];
+      }
+    }
     // Explicit working-number forms are lossless and safe across through networks.
     // Examples: 03K, 50T, 02S, 91G, A1291G, B691G.
     var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([KSMTGE])$/);
@@ -798,6 +808,10 @@ var CANONICAL_VEHICLES = {
     asset: "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
     aliases: ["209系2000番台 / 2100番台"]
   },
+  "jr-east-e233-1000-keiyo": {"displayName":"E233系1000番台（京葉線）","iconName":"E233系1000番台（京葉線）","asset":null,"aliases":["E233系1000番台（京葉線）"]},
+  "jr-east-e231-0-musashino": {"displayName":"E231系0番台（武蔵野線）","iconName":"E231系0番台（武蔵野線）","asset":"../images/列车/JR東日本/JR東日本_E231系_0番台.png","aliases":["E231系0番台（武蔵野線）"]},
+  "jr-east-209-500-musashino": {"displayName":"209系500番台（武蔵野線）","iconName":"209系500番台（武蔵野線）","asset":null,"aliases":["209系500番台（武蔵野線）"]},
+  "jr-east-e257-500-boso": {displayName:"E257系500番台",iconName:"E257系500番台",asset:"../images/列车/JR東日本/JR東日本_E257系_500番台.png",aliases:["E257系500番台","E257系500番台（わかしお・さざなみ）"]},
   "jr-east-e233-5000-keiyo": {
     displayName: "E233系5000番台",
     iconName: "E233系5000番台",
@@ -2419,7 +2433,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1248 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1254 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();

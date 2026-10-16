@@ -16465,10 +16465,13 @@
         {
           "lineId": "Musashino",
           "handoverStations": [
-            "Nishi-Funabashi"
+            "Nishi-Funabashi",
+            "Ichikawa-Shiohama",
+            "Minami-Funabashi"
           ],
           "evidence": {
-            "source": "ThroughService direct relation; Musashino joins Keiyo operation at Nishi-Funabashi",
+            "source": "JR East route map and published Keiyo/Musashino station timetables: Nishi-Funabashi connects to Keiyo at Ichikawa-Shiohama and Minami-Funabashi; retain source timetable Nishi-Funabashi boundary.",
+            "sourceUrl": "https://www.jreast.co.jp/chiba/news/pdf/pre1608_netrains.pdf",
             "confidence": "HIGH"
           }
         }
