@@ -182,6 +182,8 @@ jobs:
         run: node tools/metro-working-plans.test.js
       - name: Mita Namboku planned working families
         run: node tools/mita-namboku-working-plans.test.js
+      - name: All subway planned vehicle coverage
+        run: node tools/subway-planned-vehicles.test.js
       - name: Planned vehicle candidates and live timetable continuity
         run: node tools/planned-vehicle-inference.test.js
       - name: Unified vehicle pipeline and late evidence recovery

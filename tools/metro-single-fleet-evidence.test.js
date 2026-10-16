@@ -11,7 +11,7 @@ for(const [line,model]of [['Marunouchi','東京メトロ2000系'],['MarunouchiBr
   const v=vehicle.resolve({timetableVehicleType:e.vehicleType,serviceDate:'2026-10-15'});
   assert.equal(v.identityStatus,'EXACT');assert.equal(v.name,model);
   assert(fs.existsSync(v.iconPath.replace(/^\.\.\//,'')));
-  assert.equal(evidence.resolveEvidence('A849',{lineId:line,serviceDate:'2026-12-01'},mode),null);
+  assert.equal(evidence.resolveEvidence('A849',{lineId:line,serviceDate:'2026-12-01'},mode).vehicleType,model,'recurring fleet remains valid until superseded');
   assert.equal(evidence.resolveEvidence('A849',{lineId:line,serviceDate:'2026-10-14'},mode),null);
  }
 }
@@ -21,7 +21,11 @@ for(const line of ['NotMarunouchi','MarunouchiFake','Hanzomon','Namboku']){
 }
 const b=JSON.parse(fs.readFileSync('data/timetables/vehicle-operation-evidence.json'));
 for(const r of b.familyRules.filter(r=>['Marunouchi','Ginza'].includes(r.networkKey))){
- assert.equal(r.grade,'A');assert.equal(r.effectiveFrom,'2026-10-15');assert.equal(r.effectiveTo,'2026-11-30');
+ assert.equal(r.grade,'A');assert.equal(r.effectiveFrom,'2026-10-15');assert.equal(r.effectiveTo,'');
  assert(r.sourceUrl.startsWith('https://www.tokyometro.jp/'));
 }
+const current=s.window.VEHICLE_FAMILY_RULES;
+s.window.VEHICLE_FAMILY_RULES=current.map(r=>r.networkKey==='Ginza'?{...r,effectiveTo:'2026-11-30'}:r);
+assert.equal(evidence.resolveEvidence('A849',{lineId:'Ginza',serviceDate:'2026-12-01'},'fallback'),null,'a sourced explicit expiry still applies');
+s.window.VEHICLE_FAMILY_RULES=current;
 console.log('Metro current single-family model, branch alias, PNG, dates and scope: PASS');
