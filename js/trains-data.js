@@ -287,54 +287,7 @@ function _fusionBaseIdx(lineId, fusionLineId) {
 }
 
 function _throughDirForStation(lineId, stationId, throughLineId) {
-  var thrIds = _canonicalThroughLines(lineId);
-  if (!thrIds.length) return null;
-  var src2 = (window.RailwayDB && window.RailwayDB.getAllLines) ? window.RailwayDB.getAllLines() : getLinesData();
-  var own2 = src2[lineId];
-  var sts2 = (own2 && own2.stations) ? own2.stations : [];
-  var idx2 = sts2.indexOf(stationId);
-  if (idx2 < 0) return null;
-  var targetIds = throughLineId ? [throughLineId] : thrIds;
-  for (var ti = 0; ti < targetIds.length; ti++) {
-    var targetId = targetIds[ti];
-    var tl = src2[targetId];
-    if (!tl || !tl.stations) continue;
-    // The canonical handover station is authoritative.  Do not require the
-    // partner's station array to duplicate the boundary station: line entities
-    // may model the two sides independently, especially in reverse view.
-    var joins = _canonicalJoinStations(lineId, targetId);
-    var anchors = joins;
-    var isCanonicalJoin = Array.isArray(joins) && joins.indexOf(stationId) >= 0;
-    var isDisplayAnchor = Array.isArray(anchors) && anchors.indexOf(stationId) >= 0;
-    if (!isCanonicalJoin && !isDisplayAnchor && tl.stations.indexOf(stationId) < 0) continue;
-    if (idx2 === 0) return "up";
-    if (idx2 === sts2.length - 1) return "down";
-    // Display anchors are UI mouths of a connector.  Their direction must be
-    // derived from the connector's outside direction, not from whether the
-    // station happens to be the first/last item in the anchor array.  For an
-    // interior anchor, compare its position with the partner handover/nearest
-    // shared corridor: the label belongs outside the station sequence.
-    // Layout direction is determined by the station's position on this line,
-    // never by display-anchor array order. Only the first/last station can be
-    // endpoint up/down; every interior through junction is middle (side lane).
-    if (isCanonicalJoin || isDisplayAnchor) return "middle";
-    var allAfterOnThrough = true;
-    var afterCount = 0;
-    for (var ai = idx2 + 1; ai < sts2.length; ai++) {
-      if (tl.stations.indexOf(sts2[ai]) < 0) { allAfterOnThrough = false; break; }
-      afterCount++;
-    }
-    if (allAfterOnThrough && afterCount >= 2) return "down";
-    var allBeforeOnThrough = true;
-    var beforeCount = 0;
-    for (var bi = 0; bi < idx2; bi++) {
-      if (tl.stations.indexOf(sts2[bi]) < 0) { allBeforeOnThrough = false; break; }
-      beforeCount++;
-    }
-    if (allBeforeOnThrough && beforeCount >= 2) return "up";
-    return "middle";
-  }
-  return null;
+  return window.ThroughChip ? window.ThroughChip.dirForStation(lineId, stationId, throughLineId) : null;
 }
 
 function _getTransferMap(lineId) {
