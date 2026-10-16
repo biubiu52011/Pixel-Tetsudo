@@ -1827,15 +1827,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (!labelText) return;
     // Keep full InnerLoop/OuterLoop and actual Oedo open-tail directions.
     // Position labels into reserved rail corridors instead of truncating.
-    // All lines share the passenger caption: known service type + destination/direction.
-    // Missing or unmapped types remain absent rather than becoming a guessed Local.
-    if (p.trainType) {
-      var _tdefs = window.TRAIN_TYPE_NAMES || {};
-      var _td = _tdefs[p.trainType];
-      // v4.3.963: 种别名表查不到时不露罗马字——直接跳过，只显示行先
-      var _tname = _td ? (_td[lang] || _td.ja) : '';
-      if (_tname && _tname !== 'unknown') labelText = _tname + ' ' + labelText;
-    }
+    // All on-map captions show only the destination or loop direction.
     // v4.3.933: 环线只显示内环/外环文字，不加箭头；普通线路用 SVG path 画三角 + 终点站名
     // （▲▼ 字符在 SVG text 里不显示——字体不支持，改用 path 画）
     var dirSym = '';

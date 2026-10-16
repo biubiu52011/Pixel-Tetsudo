@@ -97,7 +97,7 @@ assert(tooltipCtx.markerTitle({estimated:true,positionSource:'supabase-train-run
 
 console.log('paired train layout, direction isolation, passenger modal and current-data refresh: PASS');
 
- // All source operators use the same on-map type + direction rule.
+// All source operators omit service types from on-map direction captions.
 {
  const ctx={window:{currentLang:'ja'}};
  vm.runInNewContext(fs.readFileSync('data/core/train-type-defs.js','utf8'),ctx);
@@ -118,18 +118,18 @@ console.log('paired train layout, direction isolation, passenger modal and curre
  }
  for(const lang of ['ja','zh','en','ko']){
   ctx.window.currentLang=lang;
-  for(const line of ['Hibiya','TokyuToyoko','ChuoRapid','Yurakucho','Mita']){
+  for(const line of ['Hibiya','TobuSkytree','TokyuToyoko','ChuoRapid','Yurakucho','Mita']){
    const type='odpt.TrainType:TokyoMetro.Local';
    assert(defs[type],'actual provider Local definition exists');
-   assert.equal(caption(line,type),(defs[type][lang]||defs[type].ja)+' 北千住',line+'/'+lang);
+   assert.equal(caption(line,type),'北千住',line+'/'+lang);
   }
  }
  ctx.window.currentLang='ja';
  const special=Object.keys(defs).find(k=>/TH-LINER/i.test(k));
  assert(special,'TH-LINER definition exists');
- assert.equal(caption('Hibiya',special),defs[special].ja+' 北千住');
+ assert.equal(caption('Hibiya',special),'北千住');
  assert.equal(caption('Hibiya',null),'北千住');
  assert.equal(caption('Hibiya','odpt.TrainType:Unmapped'),'北千住');
- assert.equal(caption('Yamanote','odpt.TrainType:TokyoMetro.Local','InnerLoop'),defs['odpt.TrainType:TokyoMetro.Local'].ja+' 内回り');
- console.log('Uniform train type/direction captions across lines and languages: PASS');
+ assert.equal(caption('Yamanote','odpt.TrainType:TokyoMetro.Local','InnerLoop'),'内回り');
+ console.log('Direction-only train captions across lines, service types and languages: PASS');
 }
