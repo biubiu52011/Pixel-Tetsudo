@@ -20921,8 +20921,8 @@
         "canonical_network_key": "odakyu-main",
         "alias_scope": "exact",
         "evidence_kind": "train_rule",
-        "evidence_rows": 241,
-        "exact_rows": 241,
+        "evidence_rows": 2367,
+        "exact_rows": 2367,
         "narrowed_rows": 0,
         "min_date": "2026-03-14",
         "max_date": null
