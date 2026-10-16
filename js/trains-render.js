@@ -384,8 +384,8 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       var aboveH = _throughChipHeight(upward, isMobileView, chipWidth);
       drawGroup(upward, o.x, o.y - 18 - aboveH, "middle", chipWidth);
       var belowY = Math.max(ty + 12, iy0 + rows * (ICON + GAP) + 4);
-      var sideWidth = anchor === "end" ? tx - 2 : anchor === "start" ? svgW - 2 - tx : chipWidth;
-      drawGroup(below, tx, belowY, anchor, Math.min(chipWidth, sideWidth));
+      // v4.3.1248: 下端/中途直通标签以站点圆点为中心（与上端一致，手册：直通标签与站点圆点为中心点）
+      drawGroup(below, o.x, belowY, "middle", chipWidth);
 
     }
   }
