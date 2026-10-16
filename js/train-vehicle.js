@@ -67,6 +67,11 @@
       var mn=raw.match(/^(?:A|B)?[0-9]*([0-9]{2})([KSMTGEHN])(?:[1-5]|[AB])?$/);
       if(mn) return mn[1]+mn[2];
     }
+    // The same published hour+working encoding continues on connecting lines.
+    if (/SaitamaRapid|TokyuMeguro|TokyuShinYokohama|TokyuToyoko|MinatoMirai|TokyuDenEn/.test([ctx.lineId,ctx.railway].join('|'))) {
+      var through=raw.match(/^(?:A|B)?[0-9]*([0-9]{2})([KSMTGHN])(?:[1-5]|[AB])?$/);
+      if(through)return through[1]+through[2];
+    }
     // Keiyo/Musashino hour+working numbers preserve the final two digits and A/Y/E family.
     if (/Keiyo|Musashino/.test([ctx.lineId,ctx.railway].join('|'))) {
       var km=raw.match(/^([0-9]{1,2})?([0-9]{2})([AYE])$/);
@@ -79,7 +84,7 @@
     }
     // Explicit working-number forms are lossless and safe across through networks.
     // Examples: 03K, 50T, 02S, 91G, A1291G, B691G.
-    var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([KSMTGE])$/);
+    var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([A-Z])$/);
     if (explicit) {
       var digits = explicit[1];
       // A1291G/B691G encode the working number in the final two digits.
@@ -808,6 +813,89 @@ var CANONICAL_VEHICLES = {
     asset: "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
     aliases: ["209系2000番台 / 2100番台"]
   },
+  "planned-stock-library-0": {"displayName":"E233系8000番台","iconName":"E233系8000番台","asset":"../images/列车/JR東日本/JR東日本_E233系_8000番台.png","aliases":["JR東日本E233系8000番台","JR E233系8000番台"]},
+  "planned-stock-library-1": {"displayName":"E235系1000番台","iconName":"E235系1000番台","asset":"../images/列车/JR東日本/JR東日本_E235系_1000番台.png","aliases":["JR東日本E235系1000番台","JR E235系1000番台"]},
+  "planned-stock-library-2": {"displayName":"E259系","iconName":"E259系","asset":"../images/列车/JR東日本/JR東日本_E259系.png","aliases":["E259系（成田エクスプレス）","E259系（しおさい）","JR東日本E259系","JR E259系"]},
+  "planned-stock-library-3": {"displayName":"E257系5500番台","iconName":"E257系5500番台","asset":"../images/列车/JR東日本/JR東日本_E257系_5500番台.png","aliases":["JR東日本E257系5500番台","JR E257系5500番台"]},
+  "planned-stock-library-4": {"displayName":"E129系","iconName":"E129系","asset":"../images/列车/JR東日本/JR東日本_E129系.png","aliases":["JR東日本E129系","JR E129系"]},
+  "planned-stock-library-5": {"displayName":"E127系0番台（南武支線）","iconName":"E127系0番台（南武支線）","asset":"../images/列车/JR東日本/JR東日本_E127系_0番台_南武支線.png","aliases":["JR東日本E127系0番台（南武支線）","JR E127系0番台（南武支線）"]},
+  "planned-stock-library-6": {"displayName":"E127系0番台（新潟地区）","iconName":"E127系0番台（新潟地区）","asset":"../images/列车/JR東日本/JR東日本_E127系_0番台_新潟色.png","aliases":["JR東日本E127系0番台（新潟地区）","JR E127系0番台（新潟地区）"]},
+  "planned-stock-library-7": {"displayName":"211系（長野地区）","iconName":"211系（長野地区）","asset":"../images/列车/JR東日本/JR東日本_211系_長野色.png","aliases":["JR東日本211系（長野地区）","JR 211系（長野地区）"]},
+  "planned-stock-library-8": {"displayName":"701系5000番台","iconName":"701系5000番台","asset":"../images/列车/JR東日本/JR東日本_701系_5000番台.png","aliases":["JR東日本701系5000番台","JR 701系5000番台"]},
+  "planned-stock-library-9": {"displayName":"701系5500番台","iconName":"701系5500番台","asset":"../images/列车/JR東日本/JR東日本_701系_5500番台.png","aliases":["JR東日本701系5500番台","JR 701系5500番台"]},
+  "planned-stock-library-10": {"displayName":"キハ110系","iconName":"キハ110系","asset":"../images/列车/JR東日本/JR東日本_キハ110系.png","aliases":["JR東日本キハ110系","JR キハ110系"]},
+  "planned-stock-library-11": {"displayName":"キハE130系0番台","iconName":"キハE130系0番台","asset":"../images/列车/JR東日本/JR東日本_キハE130系0番台.png","aliases":["JR東日本キハE130系0番台","JR キハE130系0番台"]},
+  "planned-stock-library-12": {"displayName":"キハE130形100番台","iconName":"キハE130形100番台","asset":"../images/列车/JR東日本/JR東日本_キハE130系100番台.png","aliases":["キハE130系100番台","JR東日本キハE130形100番台","JR キハE130形100番台"]},
+  "planned-stock-library-13": {"displayName":"キハE130形500番台","iconName":"キハE130形500番台","asset":"../images/列车/JR東日本/JR東日本_キハE130系500番台.png","aliases":["キハE130系500番台","JR東日本キハE130形500番台","JR キハE130形500番台"]},
+  "planned-stock-library-14": {"displayName":"HB-E210系","iconName":"HB-E210系","asset":"../images/列车/JR東日本/JR東日本_HB-E210系.png","aliases":["JR東日本HB-E210系","JR HB-E210系"]},
+  "planned-stock-library-15": {"displayName":"HB-E220系","iconName":"HB-E220系","asset":"../images/列车/JR東日本/JR東日本_HB-E220系.png","aliases":["JR東日本HB-E220系","JR HB-E220系"]},
+  "planned-stock-library-16": {"displayName":"GV-E400系","iconName":"GV-E400系","asset":"../images/列车/JR東日本/JR東日本_GV-E400系.png","aliases":["JR東日本GV-E400系","JR GV-E400系"]},
+  "planned-stock-library-17": {"displayName":"EV-E301系","iconName":"EV-E301系","asset":"../images/列车/JR東日本/JR東日本_EV-E301系.png","aliases":["EV-E301系（ACCUM）","JR東日本EV-E301系","JR EV-E301系"]},
+  "planned-stock-library-18": {"displayName":"EV-E801系","iconName":"EV-E801系","asset":"../images/列车/JR東日本/JR東日本_EV-E801系.png","aliases":["EV-E801系（ACCUM）","JR東日本EV-E801系","JR EV-E801系"]},
+  "planned-stock-library-19": {"displayName":"E5系","iconName":"E5系","asset":"../images/列车/JR東日本/JR東日本_E5系.png","aliases":["JR東日本E5系","JR E5系"]},
+  "planned-stock-library-20": {"displayName":"E6系","iconName":"E6系","asset":"../images/列车/JR東日本/JR東日本_E6系.png","aliases":["JR東日本E6系","JR E6系"]},
+  "planned-stock-library-21": {"displayName":"E7系","iconName":"E7系","asset":"../images/列车/JR東日本/JR東日本_E7系.png","aliases":["JR東日本E7系","JR E7系"]},
+  "planned-stock-library-22": {"displayName":"E8系","iconName":"E8系","asset":"../images/列车/JR東日本/JR東日本_E8系.png","aliases":["JR東日本E8系","JR E8系"]},
+  "planned-stock-library-23": {"displayName":"H5系","iconName":"H5系","asset":"../images/列车/JR北海道/JR北海道_H5系.png","aliases":[]},
+  "planned-stock-library-24": {"displayName":"N700系（JR東海）","iconName":"N700系（JR東海）","asset":null,"plannedAsset":"../images/列车/JR東海/JR東海_N700系.png","aliases":["JR東海N700系"]},
+  "planned-stock-library-25": {"displayName":"N700系（JR西日本）","iconName":"N700系（JR西日本）","asset":null,"plannedAsset":"../images/列车/JR西日本/JR西日本_N700系.png","aliases":["JR西日本N700系"]},
+  "planned-stock-library-26": {"displayName":"N700系7000番台（JR西日本）","iconName":"N700系7000番台（JR西日本）","asset":"../images/列车/JR西日本/JR西日本_N700系_7000番台.png","aliases":["JR西日本N700系7000番台"]},
+  "planned-stock-library-27": {"displayName":"500系（JR西日本）","iconName":"500系（JR西日本）","asset":"../images/列车/JR西日本/JR西日本_500系.png","aliases":["JR西日本500系"]},
+  "planned-stock-library-28": {"displayName":"800系（JR九州）","iconName":"800系（JR九州）","asset":"../images/列车/JR九州/JR九州_800系.png","aliases":["JR九州800系"]},
+  "planned-stock-library-29": {"displayName":"千葉都市モノレール0形","iconName":"千葉都市モノレール0形","asset":"../images/列车/千葉都市モノレール/千葉都市モノレール_0形.png","aliases":[]},
+  "planned-stock-library-30": {"displayName":"千葉都市モノレール1000形","iconName":"千葉都市モノレール1000形","asset":"../images/列车/千葉都市モノレール/千葉都市モノレール_1000形.png","aliases":[]},
+  "planned-stock-library-31": {"displayName":"ゆりかもめ7300系","iconName":"ゆりかもめ7300系","asset":"../images/列车/ゆりかもめ/ゆりかもめ_7300系.png","aliases":["7300系","7300系（7000系は全廃）"]},
+  "planned-stock-library-32": {"displayName":"ゆりかもめ7500系","iconName":"ゆりかもめ7500系","asset":"../images/列车/ゆりかもめ/ゆりかもめ_7500系.png","aliases":["7500系","7500系（7000系は全廃）"]},
+  "planned-stock-library-33": {"displayName":"横浜市営3000N形","iconName":"横浜市営3000N形","asset":"../images/列车/横浜市交通局/横浜市交通局_3000N形.png","aliases":["横浜市営地下鉄3000N形"]},
+  "planned-stock-library-34": {"displayName":"横浜市営3000R形","iconName":"横浜市営3000R形","asset":"../images/列车/横浜市交通局/横浜市交通局_3000R形.png","aliases":["横浜市営地下鉄3000R形"]},
+  "planned-stock-library-35": {"displayName":"横浜市営3000S形","iconName":"横浜市営3000S形","asset":"../images/列车/横浜市交通局/横浜市交通局_3000S形.png","aliases":["横浜市営地下鉄3000S形"]},
+  "planned-stock-library-36": {"displayName":"横浜市営3000V形","iconName":"横浜市営3000V形","asset":"../images/列车/横浜市交通局/横浜市交通局_3000V形.png","aliases":["横浜市営地下鉄3000V形"]},
+  "planned-stock-library-37": {"displayName":"横浜市営4000形","iconName":"横浜市営4000形","asset":"../images/列车/横浜市交通局/横浜市交通局_4000形.png","aliases":["横浜市営地下鉄4000形"]},
+  "planned-stock-library-38": {"displayName":"横浜市営3000形","iconName":"横浜市営3000形","asset":null,"plannedAsset":"../images/列车/横浜市交通局/横浜市交通局_3000V形.png","aliases":[]},
+  "planned-stock-library-39": {"displayName":"横浜市営10000形","iconName":"横浜市営10000形","asset":null,"plannedAsset":"../images/列车/横浜市交通局/横浜市交通局_10000形_2次車.png","aliases":["横浜市営地下鉄10000形"]},
+  "planned-stock-library-40": {"displayName":"東京モノレール10000形","iconName":"東京モノレール10000形","asset":"../images/列车/東京モノレール/東京モノレール_10000形.png","aliases":[]},
+  "planned-stock-library-41": {"displayName":"東京モノレール2000形","iconName":"東京モノレール2000形","asset":"../images/列车/東京モノレール/東京モノレール_2000形.png","aliases":[]},
+  "planned-stock-library-42": {"displayName":"東京モノレール1000形","iconName":"東京モノレール1000形","asset":null,"plannedAsset":"../images/列车/東京モノレール/東京モノレール_1000形_1003編成.png","aliases":[]},
+  "planned-stock-library-43": {"displayName":"湘南モノレール5000系","iconName":"湘南モノレール5000系","asset":null,"plannedAsset":"../images/列车/湘南モノレール/湘南モノレール_5000系_5601編成_レッド.png","aliases":[]},
+  "planned-stock-library-44": {"displayName":"埼玉新都市交通2000系","iconName":"埼玉新都市交通2000系","asset":null,"plannedAsset":"../images/列车/埼玉新都市交通/埼玉新都市交通_2000系_01編成_レッドパープル.png","aliases":[]},
+  "planned-stock-library-45": {"displayName":"埼玉新都市交通2020系","iconName":"埼玉新都市交通2020系","asset":null,"plannedAsset":"../images/列车/埼玉新都市交通/埼玉新都市交通_2020系_21編成_グリーンクリスタル.png","aliases":[]},
+  "planned-stock-library-46": {"displayName":"多摩モノレール1000系","iconName":"多摩モノレール1000系","asset":"../images/列车/多摩都市モノレール/多摩都市モノレール_1000系_標準塗装.png","aliases":["多摩都市モノレール1000系"]},
+  "planned-stock-library-47": {"displayName":"都営300形（日暮里・舎人ライナー）","iconName":"都営300形（日暮里・舎人ライナー）","asset":"../images/列车/都営地下鉄/都営地下鉄_300形.png","aliases":["都営300形"]},
+  "planned-stock-library-48": {"displayName":"都営320形（日暮里・舎人ライナー）","iconName":"都営320形（日暮里・舎人ライナー）","asset":"../images/列车/都営地下鉄/都営地下鉄_320形.png","aliases":["都営320形"]},
+  "planned-stock-library-49": {"displayName":"都営330形（日暮里・舎人ライナー）","iconName":"都営330形（日暮里・舎人ライナー）","asset":"../images/列车/都営地下鉄/都営地下鉄_330形.png","aliases":["都営330形"]},
+  "planned-stock-library-50": {"displayName":"都電7700形","iconName":"都電7700形","asset":null,"plannedAsset":"../images/列车/都営地下鉄/都営地下鉄_7700形_みどり.png","aliases":["都営7700形"]},
+  "planned-stock-library-51": {"displayName":"都電8800形","iconName":"都電8800形","asset":null,"plannedAsset":"../images/列车/都営地下鉄/都営地下鉄_8800形_ローズレッド.png","aliases":["都営8800形"]},
+  "planned-stock-library-52": {"displayName":"都電8900形","iconName":"都電8900形","asset":null,"plannedAsset":"../images/列车/都営地下鉄/都営地下鉄_8900形_イエロー.png","aliases":["都営8900形"]},
+  "planned-stock-library-53": {"displayName":"都電9000形","iconName":"都電9000形","asset":null,"plannedAsset":"../images/列车/都営地下鉄/都営地下鉄_9000形_9001号車_赤色.png","aliases":["都営9000形"]},
+  "planned-stock-library-54": {"displayName":"京王1000系","iconName":"京王1000系","asset":null,"plannedAsset":"../images/列车/京王電鉄/京王電鉄_1000系.png","aliases":[]},
+  "planned-stock-library-55": {"displayName":"横浜高速鉄道Y000系","iconName":"横浜高速鉄道Y000系","asset":"../images/列车/東急電鉄/東急電鉄_Y000系_通常塗装.png","aliases":["Y000系","東急Y000系"]},
+  "planned-stock-library-56": {"displayName":"東急300系","iconName":"東急300系","asset":null,"plannedAsset":"../images/列车/東急電鉄/東急電鉄_300系_304編成_アップルグリーン.png","aliases":[]},
+  "planned-stock-library-57": {"displayName":"相鉄8000系","iconName":"相鉄8000系","asset":null,"plannedAsset":"../images/列车/相模鉄道/相模鉄道_8000系_YOKOHAMA_NAVYBLUE.png","aliases":[]},
+  "planned-stock-library-58": {"displayName":"相鉄9000系","iconName":"相鉄9000系","asset":null,"plannedAsset":"../images/列车/相模鉄道/相模鉄道_9000系_YOKOHAMA_NAVYBLUE.png","aliases":[]},
+  "planned-stock-library-59": {"displayName":"相鉄10000系","iconName":"相鉄10000系","asset":null,"plannedAsset":"../images/列车/相模鉄道/相模鉄道_10000系_YOKOHAMA_NAVYBLUE.png","aliases":[]},
+  "planned-stock-library-60": {"displayName":"相鉄11000系","iconName":"相鉄11000系","asset":null,"plannedAsset":"../images/列车/相模鉄道/相模鉄道_11000系_相鉄グループカラー.png","aliases":[]},
+  "planned-stock-library-61": {"displayName":"東武8000系","iconName":"東武8000系","asset":"../images/列车/東武鉄道/東武鉄道_8000型.png","aliases":["東武8000型"]},
+  "planned-stock-library-62": {"displayName":"東武10000系","iconName":"東武10000系","asset":null,"plannedAsset":"../images/列车/東武鉄道/東武鉄道_10000型_未更新車.png","aliases":["東武10000型"]},
+  "planned-stock-library-63": {"displayName":"東武10030系","iconName":"東武10030系","asset":null,"plannedAsset":"../images/列车/東武鉄道/東武鉄道_10030型_未更新車.png","aliases":["東武10030型"]},
+  "planned-stock-library-64": {"displayName":"東武20400型","iconName":"東武20400型","asset":"../images/列车/東武鉄道/東武鉄道_20400型.png","aliases":["東武20400系"]},
+  "planned-stock-library-65": {"displayName":"京成AE形","iconName":"京成AE形","asset":"../images/列车/京成電鉄/京成電鉄_AE形.png","aliases":["京成AE形（スカイライナー）"]},
+  "remaining-fleet-extra-0": {"displayName":"西武2000系","iconName":"西武2000系","asset":"../images/列车/西武鉄道/西武鉄道_2000系_黄色塗装.png","aliases":["西武新2000系（2000系）"]},
+  "remaining-fleet-extra-1": {"displayName":"西武101系","iconName":"西武101系","asset":null,"plannedAsset":"../images/列车/西武鉄道/西武鉄道_101系.png","aliases":["西武新101系（ワンマン専用塗装）","西武新101系（ワンマン）"]},
+  "remaining-fleet-extra-2": {"displayName":"西武4000系","iconName":"西武4000系","asset":"../images/列车/西武鉄道/西武鉄道_4000系_赤白塗装.png","aliases":[]},
+  "remaining-fleet-extra-3": {"displayName":"西武10000系","iconName":"西武10000系","asset":"../images/列车/西武鉄道/西武鉄道_10000系_ニューレッドアロー.png","aliases":["西武10000系（レッドアロー）"]},
+  "remaining-fleet-extra-4": {"displayName":"西武8500系","iconName":"西武8500系","asset":"../images/列车/西武鉄道/西武鉄道_8500系_レオライナー.png","aliases":["西武8500系（レオライナー、新型導入中）"]},
+  "remaining-fleet-extra-5": {"displayName":"西武7000系","iconName":"西武7000系","asset":"../images/列车/西武鉄道/西武鉄道_7000系_サステナ車両.png","aliases":["西武7000系（2026年ワンマン化）"]},
+  "remaining-fleet-extra-6": {"displayName":"西武L00系","iconName":"西武L00系","asset":null,"plannedAsset":"../images/列车/西武鉄道/西武鉄道_L00系_れおけい.png","aliases":[]},
+  "remaining-fleet-extra-7": {"displayName":"東武50090系","iconName":"東武50090系","asset":"../images/列车/東武鉄道/東武鉄道_50090型.png","aliases":["東武50090系（TJライナー専用）","東武50090型"]},
+  "remaining-fleet-extra-8": {"displayName":"東武N100系","iconName":"東武N100系","asset":"../images/列车/東武鉄道/東武鉄道_N100系_SPACIA_X.png","aliases":["東武N100系（スペーシアX）"]},
+  "remaining-fleet-extra-9": {"displayName":"東武100系","iconName":"東武100系","asset":null,"plannedAsset":"../images/列车/東武鉄道/東武鉄道_100系_原色.png","aliases":["東武100系（スペーシア）","東武100系（きぬ）"]},
+  "remaining-fleet-extra-10": {"displayName":"東武500系","iconName":"東武500系","asset":"../images/列车/東武鉄道/東武鉄道_500系_リバティ.png","aliases":["東武500系（リバティ）","東武500系（リバティりょうもう）"]},
+  "remaining-fleet-extra-11": {"displayName":"東武200型","iconName":"東武200型","asset":null,"plannedAsset":"../images/列车/東武鉄道/東武鉄道_200型_りょうもう_赤.png","aliases":["東武200型（りょうもう）","東武200系"]},
+  "remaining-fleet-extra-12": {"displayName":"東武250型","iconName":"東武250型","asset":"../images/列车/東武鉄道/東武鉄道_200型_250番台.png","aliases":["東武250系","東武250系（両毛）"]},
+  "remaining-fleet-extra-13": {"displayName":"東武80000系","iconName":"東武80000系","asset":"../images/列车/東武鉄道/東武鉄道_80000系.png","aliases":[]},
+  "remaining-fleet-extra-14": {"displayName":"小田急30000形","iconName":"小田急30000形","asset":null,"plannedAsset":"../images/列车/小田急電鉄/小田急電鉄_30000形_EXEα.png","aliases":["小田急30000形 EXEα"]},
+  "remaining-fleet-extra-15": {"displayName":"E721系","iconName":"E721系","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_E721系_仙台地区.png","aliases":[]},
+  "remaining-fleet-extra-16": {"displayName":"E653系（いなほ）","iconName":"E653系（いなほ）","asset":"../images/列车/JR東日本/JR東日本_E653系（いなほ）.png","aliases":["JR東日本E653系（いなほ）"]},
   "jr-east-e233-1000-keiyo": {"displayName":"E233系1000番台（京葉線）","iconName":"E233系1000番台（京葉線）","asset":null,"aliases":["E233系1000番台（京葉線）"]},
   "jr-east-e231-0-musashino": {"displayName":"E231系0番台（武蔵野線）","iconName":"E231系0番台（武蔵野線）","asset":"../images/列车/JR東日本/JR東日本_E231系_0番台.png","aliases":["E231系0番台（武蔵野線）"]},
   "jr-east-209-500-musashino": {"displayName":"209系500番台（武蔵野線）","iconName":"209系500番台（武蔵野線）","asset":null,"aliases":["209系500番台（武蔵野線）"]},
@@ -1341,8 +1429,11 @@ Object.assign(CANONICAL_VEHICLES,{
 
 var CANONICAL_VEHICLE_ALIAS_INDEX = {};
 var CANONICAL_VEHICLE_ALIAS_CONFLICTS = {};
+function _canonicalVehicleAliasKey(value) {
+  return String(value || "").replace(/（/g, "(").replace(/）/g, ")").trim();
+}
 function _registerCanonicalVehicleAlias(alias, rec) {
-  var key = String(alias || "").trim();
+  var key = _canonicalVehicleAliasKey(alias);
   if (!key || CANONICAL_VEHICLE_ALIAS_CONFLICTS[key]) return;
   var existing = CANONICAL_VEHICLE_ALIAS_INDEX[key];
   if (existing && existing.id !== rec.id) {
@@ -1369,7 +1460,7 @@ Object.keys(CANONICAL_VEHICLES).forEach(function(id) {
 });
 
 function resolveCanonicalVehicle(name) {
-  var n = String(name || "").trim();
+  var n = _canonicalVehicleAliasKey(name);
   if (!n || CANONICAL_VEHICLE_ALIAS_CONFLICTS[n]) return null;
   return CANONICAL_VEHICLE_ALIAS_INDEX[n] || null;
 }
@@ -2069,6 +2160,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     'YokohamaMunicipal':'横浜市営', 'TWR':'東京臨海高速鉄道',
     'Rinkai':'東京臨海高速鉄道', 'TokyoMonorail':'東京モノレール',
     'TamaMonorail':'多摩モノレール', 'Yurikamome':'ゆりかもめ',
+    'ChibaUrbanMonorail':'千葉都市モノレール', 'ShonanMonorail':'湘南モノレール', 'SaitamaNewUrbanTransit':'埼玉新都市交通',
     'ToyoRapid':'東葉高速', 'SaitamaRailway':'埼玉高速鉄道', 'Hokuso':'北総', 'ChibaNewtown':'千葉ニュータウン'
   };
   function resolveTimetableVehiclePlan(input, ctx) {
@@ -2433,7 +2525,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1254 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1255 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
