@@ -20680,6 +20680,137 @@
       }
     },
     {
+      "evidenceId": 95,
+      "networkKey": "Keiyo",
+      "operator": "JR-East",
+      "codePattern": "PLAN:KEIYO-MAIN",
+      "calendarType": "",
+      "effectiveFrom": "2026-03-14",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E233系5000番台",
+        "E233系1000番台（京葉線）",
+        "209系500番台（京葉線）"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://loo-ool.com/rail/B/80/",
+      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
+      "planScope": {
+        "lineIds": [
+          "Keiyo"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "Local",
+          "Rapid"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "01Y-82Y",
+          "84Y",
+          "86Y-99Y",
+          "01A-82A",
+          "84A",
+          "86A-99A"
+        ]
+      }
+    },
+    {
+      "evidenceId": 96,
+      "networkKey": "Keiyo",
+      "operator": "JR-East",
+      "codePattern": "PLAN:KEIYO-SPLIT",
+      "calendarType": "",
+      "effectiveFrom": "2026-03-14",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E233系5000番台"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://loo-ool.com/rail/B/80/",
+      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
+      "planScope": {
+        "lineIds": [
+          "Keiyo"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "Local",
+          "Rapid"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "83Y",
+          "85Y",
+          "83A",
+          "85A"
+        ]
+      }
+    },
+    {
+      "evidenceId": 97,
+      "networkKey": "Keiyo",
+      "operator": "JR-East",
+      "codePattern": "PLAN:MUSASHINO-E",
+      "calendarType": "",
+      "effectiveFrom": "2026-03-14",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E231系0番台（武蔵野線）",
+        "E231系900番台",
+        "209系500番台（武蔵野線）"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://loo-ool.com/rail/M/80/",
+      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
+      "planScope": {
+        "lineIds": [
+          "Keiyo"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "Local",
+          "Rapid"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "*E"
+        ]
+      }
+    },
+    {
+      "evidenceId": 99,
+      "networkKey": "Keiyo",
+      "operator": "JR-East",
+      "codePattern": "PLAN:BOSO-EXPRESS",
+      "calendarType": "",
+      "effectiveFrom": "2026-03-14",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E257系500番台"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://www.jreast.co.jp/press/2025/chiba/20251212_c01.pdf",
+      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
+      "planScope": {
+        "lineIds": [
+          "Keiyo"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "LimitedExpress"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "*M"
+        ]
+      }
+    },
+    {
       "evidenceId": 15,
       "networkKey": "kodomonokuni",
       "operator": "YokohamaMinatomiraiRailway",
@@ -20861,6 +20992,38 @@
         "overridePlan": true,
         "operationPatterns": [
           "30G-44G"
+        ]
+      }
+    },
+    {
+      "evidenceId": 98,
+      "networkKey": "Musashino",
+      "operator": "JR-East",
+      "codePattern": "PLAN:MUSASHINO-E",
+      "calendarType": "",
+      "effectiveFrom": "2026-03-14",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E231系0番台（武蔵野線）",
+        "E231系900番台",
+        "209系500番台（武蔵野線）"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://loo-ool.com/rail/M/80/",
+      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
+      "planScope": {
+        "lineIds": [
+          "Musashino"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "Local",
+          "Rapid"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "*E"
         ]
       }
     },
@@ -21825,173 +21988,10 @@
           "51M-59M"
         ]
       }
-    },
-    {
-      "evidenceId": 99,
-      "networkKey": "Keiyo",
-      "operator": "JR-East",
-      "codePattern": "PLAN:BOSO-EXPRESS",
-      "calendarType": "",
-      "effectiveFrom": "2026-03-14",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E257系500番台"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://www.jreast.co.jp/press/2025/chiba/20251212_c01.pdf",
-      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
-      "planScope": {
-        "lineIds": [
-          "Keiyo"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "LimitedExpress"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "*M"
-        ]
-      }
-    },
-    {
-      "evidenceId": 95,
-      "networkKey": "Keiyo",
-      "operator": "JR-East",
-      "codePattern": "PLAN:KEIYO-MAIN",
-      "calendarType": "",
-      "effectiveFrom": "2026-03-14",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E233系5000番台",
-        "E233系1000番台（京葉線）",
-        "209系500番台（京葉線）"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://loo-ool.com/rail/B/80/",
-      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
-      "planScope": {
-        "lineIds": [
-          "Keiyo"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "Local",
-          "Rapid"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "01Y-82Y",
-          "84Y",
-          "86Y-99Y",
-          "01A-82A",
-          "84A",
-          "86A-99A"
-        ]
-      }
-    },
-    {
-      "evidenceId": 96,
-      "networkKey": "Keiyo",
-      "operator": "JR-East",
-      "codePattern": "PLAN:KEIYO-SPLIT",
-      "calendarType": "",
-      "effectiveFrom": "2026-03-14",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E233系5000番台"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://loo-ool.com/rail/B/80/",
-      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
-      "planScope": {
-        "lineIds": [
-          "Keiyo"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "Local",
-          "Rapid"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "83Y",
-          "85Y",
-          "83A",
-          "85A"
-        ]
-      }
-    },
-    {
-      "evidenceId": 97,
-      "networkKey": "Keiyo",
-      "operator": "JR-East",
-      "codePattern": "PLAN:MUSASHINO-E",
-      "calendarType": "",
-      "effectiveFrom": "2026-03-14",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E231系0番台（武蔵野線）",
-        "E231系900番台",
-        "209系500番台（武蔵野線）"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://loo-ool.com/rail/M/80/",
-      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
-      "planScope": {
-        "lineIds": [
-          "Keiyo"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "Local",
-          "Rapid"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "*E"
-        ]
-      }
-    },
-    {
-      "evidenceId": 98,
-      "networkKey": "Musashino",
-      "operator": "JR-East",
-      "codePattern": "PLAN:MUSASHINO-E",
-      "calendarType": "",
-      "effectiveFrom": "2026-03-14",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E231系0番台（武蔵野線）",
-        "E231系900番台",
-        "209系500番台（武蔵野線）"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://loo-ool.com/rail/M/80/",
-      "notes": "Planned recurring vehicle family only; no daily formation. Keiyo A/Y differ from Musashino E; split workings83/85 require E233-5000. Published B/80 fleet includes E2331000 red-livery103; do not substitute blue KeihinTohoku artwork. Missing exact candidate artwork stays null; first drawable planned representative retains every candidate. Fleet cross-check: https://media.jreast.co.jp/articles/1725",
-      "planScope": {
-        "lineIds": [
-          "Musashino"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "Local",
-          "Rapid"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "*E"
-        ]
-      }
     }
   ],
   "evidenceInventory": {
-    "networkCount": 49,
+    "networkCount": 51,
     "networks": [
       "asakusa",
       "Asakusa",
@@ -22011,9 +22011,11 @@
       "JobanMain",
       "KeihinTohoku",
       "keiyo",
+      "Keiyo",
       "kodomonokuni",
       "Marunouchi",
       "meguro",
+      "Musashino",
       "NaritaAbikoBranch",
       "odakyu-main",
       "Oedo",
@@ -22298,6 +22300,17 @@
         "max_date": "2026-04-14"
       },
       {
+        "source_network_key": "Keiyo",
+        "canonical_network_key": "Keiyo",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 4,
+        "exact_rows": 0,
+        "narrowed_rows": 4,
+        "min_date": "2026-03-14",
+        "max_date": null
+      },
+      {
         "source_network_key": "kodomonokuni",
         "canonical_network_key": "kodomonokuni",
         "alias_scope": "exact",
@@ -22362,6 +22375,17 @@
         "narrowed_rows": 0,
         "min_date": "2026-04-16",
         "max_date": "2026-04-16"
+      },
+      {
+        "source_network_key": "Musashino",
+        "canonical_network_key": "Musashino",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 1,
+        "exact_rows": 0,
+        "narrowed_rows": 1,
+        "min_date": "2026-03-14",
+        "max_date": null
       },
       {
         "source_network_key": "NaritaAbikoBranch",
