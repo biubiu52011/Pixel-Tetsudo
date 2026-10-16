@@ -28,3 +28,15 @@ assert.equal(c.getRealtimePositions('Fukutoshin')[0].destinationStation,'ShinKib
 const page=fs.readFileSync('js/trains-page.js','utf8');
 assert(page.includes('_dependencies.concat(window.SharedTrackPairs.getSharedLines(lineId))'));
 console.log('Shared physical section, split boundary, fractional projection, retained service/model, symmetric map merge, dedupe and active peer loading PASS');
+
+for(const [own,peer]of [['Mita','Namboku'],['Namboku','Mita']]){
+ raw[own]=[{trainId:own+'-own',stationIndex:0,destinationStation:'OwnDestination'}];
+ raw[peer]=[{trainId:peer+'-shared',stationIndex:1,segmentToIndex:2,segmentProgress:.5,destinationStation:'PeerDestination'},
+ {trainId:peer+'-outside',stationIndex:3,destinationStation:'Outside'}];
+ const combined=c.getRealtimePositions(own);assert.equal(combined.length,2,own+' shared pair');
+ assert.equal(combined.find(p=>p.trainId===peer+'-shared').destinationStation,'PeerDestination');
+ assert(!api.projectPosition(own,peer,{stationIndex:2,segmentToIndex:3,segmentProgress:.01}),'exit after Shirokane');
+ assert(api.projectPosition(own,peer,{stationIndex:3,segmentToIndex:2,segmentProgress:1}),'arrival at Shirokane enters shared tracks');
+ assert(api.getSharedLines(own).includes(peer));
+}
+console.log('Mita/Namboku: both map directions, Meguro--Shirokane shared positions, split clipping and retained destinations PASS');

@@ -20890,6 +20890,193 @@ window.VEHICLE_FAMILY_RULES = [
         "51M-59M"
       ]
     }
+  },
+  {
+    "evidenceId": 61,
+    "networkKey": "Mita",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:MN-TOKYU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Mita"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 62,
+    "networkKey": "Mita",
+    "operator": "Toei",
+    "codePattern": "PLAN:MN-TOEI",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営6300形",
+      "都営6500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Mita"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "20T-89T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 63,
+    "networkKey": "Mita",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:MN-SOTETSU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄21000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Mita"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30G-44G"
+      ]
+    }
+  },
+  {
+    "evidenceId": 64,
+    "networkKey": "Namboku",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:MN-TOKYU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Namboku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 65,
+    "networkKey": "Namboku",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:MN-METRO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ9000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Namboku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30S-70S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 66,
+    "networkKey": "Namboku",
+    "operator": "SaitamaRailway",
+    "codePattern": "PLAN:MN-SAITAMA",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "埼玉高速2000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Namboku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "80M-96M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 67,
+    "networkKey": "Namboku",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:MN-SOTETSU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄21000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Planned working-family constraint; preserve candidate ambiguity and no daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Namboku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30G-44G"
+      ]
+    }
   }
 ];
 window.VEHICLE_REFERENCE_RULES = [

@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1246')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1247')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -61,6 +61,12 @@
     // Metro SQL timetable identifiers may append a segment occurrence (B526K2).
     // Restrict removal to this network and preserve the owner/working suffix.
     if(/Yurakucho|Fukutoshin/.test([ctx.lineId,ctx.railway].join('|')) && /^[AB]\d{3,4}[KSMTG][12]$/.test(raw)) raw=raw.slice(0,-1);
+    // Mita uses hour+working without the Metro A/B prefix. Metro source
+    // identifiers may also append a segment occurrence after the owner letter.
+    if(/Mita|Namboku/.test([ctx.lineId,ctx.railway].join('|'))){
+      var mn=raw.match(/^(?:A|B)?[0-9]*([0-9]{2})([KSMTG])(?:[12])?$/);
+      if(mn) return mn[1]+mn[2];
+    }
     // Explicit working-number forms are lossless and safe across through networks.
     // Examples: 03K, 50T, 02S, 91G, A1291G, B691G.
     var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([KSMTGE])$/);
@@ -298,7 +304,7 @@
           if (r.effectiveFrom && d<r.effectiveFrom) return false;
           if (r.effectiveTo && d>r.effectiveTo) return false;
           if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;
-          if (r.planScope && r.planScope.planOnly) return familyPlanScopeMatches(r.planScope,ctx,op);
+          if (r.planScope && r.planScope.planOnly) return familyPlanScopeMatches(r.planScope,ctx,normalizeOperationCode(trainNumber,ctx)||op);
           return r.codePattern === "*" ? true : (!!op && familyPatternMatches(r.codePattern,op));
         });
         if (!matches.length) return null;
@@ -1155,6 +1161,8 @@ Object.assign(CANONICAL_VEHICLES,{
     "asset": "../images/列车/東急電鉄/東急電鉄_5050系.png",
     "aliases": []
   },
+  "tokyu-3000-plan": {displayName:"東急3000系",iconName:"東急3000系",asset:null,plannedAsset:"../images/列车/東急電鉄/東急電鉄_3000系_リニューアル車.png",aliases:[]},
+  "saitama-2000": {displayName:"埼玉高速2000系",iconName:"埼玉高速2000系",asset:"../images/列车/埼玉高速鉄道/埼玉高速鉄道_2000系.png",aliases:["埼玉高速鉄道2000系"]},
   "tokyu-3020": {
     "displayName": "東急3020系",
     "iconName": "東急3020系",
@@ -2298,7 +2306,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   }
 
   window.TrainVehicle = {
-    version: '4.3.1246',
+    version: '4.3.1247',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -2308,7 +2316,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1246 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1247 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
