@@ -21195,6 +21195,58 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 253,
+    "networkKey": "Ikebukuro",
+    "operator": "Seibu",
+    "codePattern": "PLAN:LAVIEW",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武001系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/001/",
+    "notes": "Official Seibu scheduled Limited Express is 001 Laview. Legacy label 40000 Laview is incorrect; 40000 S-TRAIN remains a separate train type. Planned family, not daily observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Ikebukuro"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 255,
+    "networkKey": "Ikebukuro",
+    "operator": "Seibu",
+    "codePattern": "PLAN:STRAIN",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/40000/",
+    "notes": "Official Seibu S-TRAIN uses 40000 dual-seat stock, separate from 001 Laview. Planned model; no observed carset.",
+    "planScope": {
+      "lineIds": [
+        "Ikebukuro"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "S-TRAIN"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
     "evidenceId": 211,
     "networkKey": "JobanLocal",
     "operator": "JR-East",
@@ -24043,6 +24095,58 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 254,
+    "networkKey": "SeibuChichibu",
+    "operator": "Seibu",
+    "codePattern": "PLAN:LAVIEW",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武001系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/001/",
+    "notes": "Official Seibu scheduled Limited Express is 001 Laview. Legacy label 40000 Laview is incorrect; 40000 S-TRAIN remains a separate train type. Planned family, not daily observed formation.",
+    "planScope": {
+      "lineIds": [
+        "SeibuChichibu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 256,
+    "networkKey": "SeibuChichibu",
+    "operator": "Seibu",
+    "codePattern": "PLAN:STRAIN",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/40000/",
+    "notes": "Official Seibu S-TRAIN uses 40000 dual-seat stock, separate from 001 Laview. Planned model; no observed carset.",
+    "planScope": {
+      "lineIds": [
+        "SeibuChichibu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "S-TRAIN"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
     "evidenceId": 120,
     "networkKey": "SensekiTohoku",
     "operator": "JR-East",
@@ -26757,110 +26861,6 @@ window.VEHICLE_FAMILY_RULES = [
         "SectionSemiExpress",
         "CommuterExpress",
         "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 253,
-    "networkKey": "Ikebukuro",
-    "operator": "Seibu",
-    "codePattern": "PLAN:LAVIEW",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武001系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/001/",
-    "notes": "Official Seibu scheduled Limited Express is 001 Laview. Legacy label 40000 Laview is incorrect; 40000 S-TRAIN remains a separate train type. Planned family, not daily observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Ikebukuro"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 254,
-    "networkKey": "SeibuChichibu",
-    "operator": "Seibu",
-    "codePattern": "PLAN:LAVIEW",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武001系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/001/",
-    "notes": "Official Seibu scheduled Limited Express is 001 Laview. Legacy label 40000 Laview is incorrect; 40000 S-TRAIN remains a separate train type. Planned family, not daily observed formation.",
-    "planScope": {
-      "lineIds": [
-        "SeibuChichibu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 255,
-    "networkKey": "Ikebukuro",
-    "operator": "Seibu",
-    "codePattern": "PLAN:STRAIN",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/40000/",
-    "notes": "Official Seibu S-TRAIN uses 40000 dual-seat stock, separate from 001 Laview. Planned model; no observed carset.",
-    "planScope": {
-      "lineIds": [
-        "Ikebukuro"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "S-TRAIN"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 256,
-    "networkKey": "SeibuChichibu",
-    "operator": "Seibu",
-    "codePattern": "PLAN:STRAIN",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.seiburailway.jp/railway/encyclopedia/40000/",
-    "notes": "Official Seibu S-TRAIN uses 40000 dual-seat stock, separate from 001 Laview. Planned model; no observed carset.",
-    "planScope": {
-      "lineIds": [
-        "SeibuChichibu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "S-TRAIN"
       ],
       "overridePlan": true
     }
