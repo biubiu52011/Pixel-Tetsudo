@@ -1,0 +1,2 @@
+-- These are recurring candidate plans, not daily observed assignments. The official fleet sources provide no November 30 expiry. Keep them current until explicitly replaced or retired.
+update public.operation_family_rules f set effective_to=null where f.plan_scope->>'planOnly'='true' and f.effective_from='2026-10-15'::date and f.effective_to='2026-11-30'::date and f.source_id in (select id from public.evidence_sources where source_key in ('odakyu-current-plan-fleet-20261016','rinkai-jr-qualified-plan-20261016'));

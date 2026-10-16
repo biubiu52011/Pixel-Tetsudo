@@ -10,7 +10,7 @@
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 9;
+  var ESTIMATOR_VERSION = 10;
   var _manualTimetableRegistry = {};
   var _timetableIndexCache = { source: null, stamp: "", arrays: {}, manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;

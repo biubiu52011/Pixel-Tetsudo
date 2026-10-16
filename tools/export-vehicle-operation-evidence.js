@@ -78,7 +78,7 @@ if (structuralIndex >= 0) {
     codePattern:r.codePattern||"",calendarType:r.calendarType||"",
     effectiveFrom:r.effectiveFrom||"",effectiveTo:r.effectiveTo||"",
     exactVehicleType:r.exactVehicleType||"",vehicleCandidates:r.vehicleCandidates,
-    grade:r.grade||"C",sourceUrl:r.sourceUrl||"",notes:r.notes||""}));
+    grade:r.grade||"C",sourceUrl:r.sourceUrl||"",notes:r.notes||"",...(r.planScope&&Object.keys(r.planScope).length?{planScope:r.planScope}:{})}));
   snapshot.networkAliases=input.networkAliases.map(r=>({alias_key:r.alias_key,
     canonical_network_key:r.canonical_network_key,alias_scope:r.alias_scope}));
   if (Array.isArray(input.inventory)) {
@@ -150,7 +150,7 @@ async function get(table, select, order) {
       "id,source_url,evidence_grade",
       "id.asc"),
     get("operation_family_rules",
-      "id,network_key,operator,code_pattern,calendar_type,effective_from,effective_to,exact_vehicle_type,vehicle_candidates,source_id,notes",
+      "id,network_key,operator,code_pattern,calendar_type,effective_from,effective_to,exact_vehicle_type,vehicle_candidates,source_id,notes,plan_scope",
       "network_key.asc,id.asc"),
     // Use the existing SQL evidence-domain aliases, not a second in-browser
     // per-operator lookup. These keys resolve documented source spellings only.
@@ -234,7 +234,7 @@ async function get(table, select, order) {
       effectiveFrom:r.effective_from||"",effectiveTo:r.effective_to||"",
       exactVehicleType:r.exact_vehicle_type||"",
       vehicleCandidates:Array.isArray(r.vehicle_candidates)?r.vehicle_candidates:[],
-      grade:s.evidence_grade||"C",sourceUrl:s.source_url||"",notes:r.notes||""};
+      grade:s.evidence_grade||"C",sourceUrl:s.source_url||"",notes:r.notes||"",...(r.plan_scope&&Object.keys(r.plan_scope).length?{planScope:r.plan_scope}:{})};
   });
   familyRuleRecords.forEach(function(r){
     if (!r.networkKey || !r.codePattern || !r.effectiveFrom || !r.sourceUrl) throw new Error("Incomplete operation family rule "+r.evidenceId);

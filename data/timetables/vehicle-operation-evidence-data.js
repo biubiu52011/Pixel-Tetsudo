@@ -20291,6 +20291,283 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "A",
     "sourceUrl": "https://www.jreast.co.jp/press/2019/20200122_ho01.pdf",
     "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
+  },
+  {
+    "evidenceId": 40,
+    "networkKey": "TsukubaExpress",
+    "operator": "TsukubaExpress",
+    "codePattern": "PLAN:AC-SECTION",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "TX-2000系",
+      "TX-3000系"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.mir.co.jp/feature/about_tx/",
+    "notes": "Full known itinerary including origin, destination and intermediate stops. TX-1000 is DC-only Akihabara-Moriya; AC itineraries permit TX-2000/3000 planned candidates, never a daily carset.",
+    "planScope": {
+      "lineIds": [
+        "TsukubaExpress"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "anyStationNames": [
+        "Miraidaira",
+        "Midorino",
+        "Banpaku-Kinen-Kouen",
+        "BampakuKinenKoen",
+        "Kenkyu-Gaku",
+        "KenkyuGakuen",
+        "Tsukuba"
+      ]
+    }
+  },
+  {
+    "evidenceId": 41,
+    "networkKey": "Odawara",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:LOCAL-INTERNAL",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急1000形",
+      "小田急2000形",
+      "小田急3000形",
+      "小田急4000形",
+      "小田急5000形",
+      "小田急8000形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.odakyu.jp/company/railroad/train/",
+    "notes": "Ordinary internal-route planned fleet; not a dated formation or paint assignment.",
+    "planScope": {
+      "lineIds": [
+        "Odawara"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local"
+      ],
+      "allStationOperators": [
+        "Odakyu"
+      ]
+    }
+  },
+  {
+    "evidenceId": 42,
+    "networkKey": "Odawara",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:EXPRESS-INTERNAL",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急1000形",
+      "小田急3000形",
+      "小田急4000形",
+      "小田急5000形",
+      "小田急8000形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.odakyu.jp/company/railroad/train/",
+    "notes": "Main-line express-family planned candidates; do not promote the 8-car-only 2000 family into these workings. Operation-specific plans retain priority.",
+    "planScope": {
+      "lineIds": [
+        "Odawara"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Express",
+        "RapidExpress",
+        "SemiExpress",
+        "CommuterSemiExpress",
+        "CommuterExpress"
+      ],
+      "allStationOperators": [
+        "Odakyu"
+      ]
+    }
+  },
+  {
+    "evidenceId": 43,
+    "networkKey": "Odawara",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:CHIYODA-THROUGH",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急4000形",
+      "東京メトロ16000系",
+      "JR東日本E233系2000番台"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.odakyu.jp/company/railroad/train/",
+    "notes": "Chiyoda/Joban through-capable planned families only; requires foreign-section evidence in known itinerary or declared destination.",
+    "planScope": {
+      "lineIds": [
+        "Odawara"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Express",
+        "RapidExpress",
+        "SemiExpress",
+        "CommuterSemiExpress",
+        "CommuterExpress"
+      ],
+      "allStationOperators": [
+        "Odakyu",
+        "TokyoMetro",
+        "JR-East"
+      ],
+      "anyStationOperators": [
+        "TokyoMetro",
+        "JR-East"
+      ]
+    }
+  },
+  {
+    "evidenceId": 44,
+    "networkKey": "Odawara",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:ROMANCECAR-INTERNAL",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急60000形",
+      "小田急70000形",
+      "小田急30000形（EXE）",
+      "小田急30000形（EXEα）"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.odakyu.jp/company/railroad/train/",
+    "notes": "Romancecar planned fleet candidates. No substitution of commuter types, no statement of actual daily model.",
+    "planScope": {
+      "lineIds": [
+        "Odawara"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "allStationOperators": [
+        "Odakyu",
+        "OdakyuHakone"
+      ]
+    }
+  },
+  {
+    "evidenceId": 45,
+    "networkKey": "Odawara",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:ROMANCECAR-METRO",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急60000形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.odakyu.jp/company/railroad/train/",
+    "notes": "Metro Romancecar plan is MSE; restrict using full known route, including southbound origin.",
+    "planScope": {
+      "lineIds": [
+        "Odawara"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "allStationOperators": [
+        "Odakyu",
+        "OdakyuHakone",
+        "TokyoMetro"
+      ],
+      "anyStationOperators": [
+        "TokyoMetro"
+      ]
+    }
+  },
+  {
+    "evidenceId": 46,
+    "networkKey": "Odawara",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:ROMANCECAR-GOTEMBA",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急60000形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.odakyu.jp/company/railroad/train/",
+    "notes": "Fujisan/Gotemba planned MSE; AC/DC technical and through route distinction, no actual formation.",
+    "planScope": {
+      "lineIds": [
+        "Odawara"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "allStationOperators": [
+        "Odakyu",
+        "OdakyuHakone",
+        "JR-Central"
+      ],
+      "anyStationOperators": [
+        "JR-Central"
+      ]
+    }
+  },
+  {
+    "evidenceId": 47,
+    "networkKey": "Rinkai",
+    "operator": "JR-East",
+    "codePattern": "PLAN:DECLARED-JR-THROUGH",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "JR東日本E233系7000番台"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://shared.steamstatic.com/store_item_assets/steam/apps/2111630/manuals/ec7c864e3742342718716110cccc7be92801d722/JR_EAST_TrainSimulator_Instruction_Manual_JP.pdf",
+    "notes": "Do not invent a fleet fallback: only qualify an existing E233-7000 timetable candidate on a known Rinkai/JR itinerary.",
+    "planScope": {
+      "lineIds": [
+        "Rinkai"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid"
+      ],
+      "overridePlan": true,
+      "candidateLabelsAny": [
+        "E233系7000番台",
+        "JR東日本E233系7000番台"
+      ],
+      "allStationOperators": [
+        "TWR",
+        "JR-East"
+      ]
+    }
   }
 ];
 window.VEHICLE_REFERENCE_RULES = [

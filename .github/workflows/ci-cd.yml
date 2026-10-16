@@ -172,6 +172,8 @@ jobs:
         run: node tools/position-refresh-continuity.test.js
       - name: Saikyo and Sotetsu JR through model references
         run: node tools/saikyo-sotetsu-vehicle.test.js
+      - name: Scoped planned fleet and full itinerary constraints
+        run: node tools/scoped-planned-vehicle-rules.test.js
       - name: Planned vehicle candidates and live timetable continuity
         run: node tools/planned-vehicle-inference.test.js
       - name: Unified vehicle pipeline and late evidence recovery

@@ -4,7 +4,7 @@
 (function() {
   "use strict";
 
-  var FUSION_VERSION = 13;
+  var FUSION_VERSION = 14;
   // v4.3.x: 实时轮询间隔 — 见 runtime-config.js REFRESH_INTERVAL
   // v4.3.x: 位置轮询间隔 — 见 runtime-config.js POSITION_INTERVAL
 
@@ -1241,6 +1241,7 @@
                   lineId:lid,operator:trainOpShort,trainOwner:odptTrainOwner,
                   trainNumber:positionData.trainNumber,railway: railway,railDirection:railDirection,
                   stationIndex:idx,trainType:rawType,destinationStation:destStations,trainId:trainId,
+                  fromStation:fromId,toStation:t["odpt:toStation"]||"",
                   serviceDate:_snapshotServiceDate,serviceTime:_snapshotServiceTime,calendarType:_snapshotCalendarType,
                   formationId:_sourceFormation,realtimeVehicleType: odptVehicleType,
                   realtimeCarNumber: lid === "Arakawa" && railway === "odpt.Railway:Toei.Arakawa" &&

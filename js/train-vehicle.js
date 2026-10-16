@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1242')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1243')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -41,6 +41,7 @@
       observedDate: observedDate,
       providerId: provider.id,
       evidenceRole: rec.evidenceRole || '',
+      planOverride: rec.planOverride === true,
       // A/C run-level evidence may decide a dated assignment. B is structural
       // constraint only. D is a lead and must never decide identity by itself.
       decisive: (grade === 'A' || grade === 'C') && !!observedDate && !!sourceUrl
@@ -252,6 +253,30 @@
     return pattern.toUpperCase()===operationCode;
   }
 
+  // Planned rules constrain the known itinerary. They never identify a
+  // physical carset, and cannot enter the dated/actual evidence path.
+  function familyPlanScopeMatches(scope, ctx) {
+    if (!scope || scope.planOnly!==true || !ctx._plannedEvidenceMode) return false;
+    var allowedKeys=['planOnly','overridePlan','lineIds','trainTypes','allStationOperators','anyStationOperators','anyStationNames','candidateLabelsAny'];
+    if (Object.keys(scope).some(function(k){return allowedKeys.indexOf(k)<0;})) return false;
+    var arrayKeys=allowedKeys.filter(function(k){return k!=="planOnly"&&k!=="overridePlan";});
+    if (arrayKeys.some(function(k){return scope[k]!==undefined&&(!Array.isArray(scope[k])||!scope[k].length||scope[k].some(function(v){return typeof v!=="string"||!v;}));})) return false;
+    if (scope.overridePlan!==undefined&&typeof scope.overridePlan!=="boolean") return false;
+    if (scope.lineIds && scope.lineIds.indexOf(ctx.lineId)<0) return false;
+    var type=String(ctx.trainType||'').split(/[:.]/).pop();
+    if (scope.trainTypes && (!type || scope.trainTypes.indexOf(type)<0)) return false;
+    var labels=String(ctx.plannedCandidateLabel||'').split(/\s*\/\s*/);
+    if (scope.candidateLabelsAny && !scope.candidateLabelsAny.some(function(v){return labels.indexOf(v)>=0;})) return false;
+    var stations=[].concat(ctx.itineraryStations||[],ctx.originStation||[],ctx.destinationStation||[],ctx.fromStation||[],ctx.toStation||[])
+      .filter(Boolean).map(function(v){return String(v);});
+    function stationOp(v){var m=v.match(/^(?:odpt\.Station:)?([^.:]+)\.[^.]+\./);return m?m[1]:'';}
+    if (scope.allStationOperators && (!stations.length || stations.some(function(v){return scope.allStationOperators.indexOf(stationOp(v))<0;}))) return false;
+    if (scope.anyStationOperators && !stations.some(function(v){return scope.anyStationOperators.indexOf(stationOp(v))>=0;})) return false;
+    function name(v){return v.split(/[:.]/).pop().replace(/[^a-z0-9]/gi,'').toLowerCase();}
+    if (scope.anyStationNames && !stations.some(function(v){return scope.anyStationNames.some(function(n){return name(n)===name(v);});})) return false;
+    return true;
+  }
+
   function registerCanonicalFamilyRuleProvider() {
     var rules=window.VEHICLE_FAMILY_RULES||[];
     if (!Array.isArray(rules)||!rules.length) return false;
@@ -267,9 +292,15 @@
           if (r.effectiveFrom && d<r.effectiveFrom) return false;
           if (r.effectiveTo && d>r.effectiveTo) return false;
           if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;
+          if (r.planScope && r.planScope.planOnly) return familyPlanScopeMatches(r.planScope,ctx);
           return r.codePattern === "*" ? true : (!!op && familyPatternMatches(r.codePattern,op));
         });
         if (!matches.length) return null;
+        // A published operation-specific constraint is narrower than a fleet plan.
+        var operationMatches=matches.filter(function(r){return !(r.planScope&&r.planScope.planOnly) && r.codePattern!=="*" && (r.exactVehicleType||(r.vehicleCandidates||[]).length);});
+        if (operationMatches.length) matches=operationMatches;
+        var plannedOnly=matches.every(function(r){return r.planScope&&r.planScope.planOnly;});
+        var overridePlan=plannedOnly&&matches.some(function(r){return r.planScope.overridePlan===true;});
         var exact={}; var candidates={}; var operators={};
         matches.forEach(function(r){
           if (r.operator) operators[r.operator]=true;
@@ -281,14 +312,16 @@
           var hit=exact[exactKeys[0]];
           return {operator:operatorKeys.length===1?operatorKeys[0]:"",vehicleType:exactKeys[0],
             vehicleCandidates:[exactKeys[0]],operationCode:op,grade:hit.grade||"B",sourceUrl:hit.sourceUrl||"",
-            provenance:"canonical operation family exact rule",observedDate:d};
+            evidenceRole:plannedOnly?"timetable-plan":"",planOverride:overridePlan,
+            provenance:"canonical operation family exact rule",observedDate:plannedOnly?"":d};
         }
         if (exactKeys.length>1) return null;
         if (candidateKeys.length) {
           var hit2=matches.find(function(r){return (r.vehicleCandidates||[]).length;})||matches[0];
           return {operator:operatorKeys.length===1?operatorKeys[0]:"",vehicleType:"",
             vehicleCandidates:candidateKeys,operationCode:op,grade:hit2.grade||"B",sourceUrl:hit2.sourceUrl||"",
-            provenance:"canonical operation family narrowed rule",observedDate:d};
+            evidenceRole:plannedOnly?"timetable-plan":"",planOverride:overridePlan,
+            provenance:"canonical operation family narrowed rule",observedDate:plannedOnly?"":d};
         }
         // Ownership-only rules may constrain operator but never invent a model.
         var own=matches[0];
@@ -377,6 +410,7 @@
     // Keep one arbitration path; do not bypass it in DataFusion or the renderer.
     var inputCtx = ctx || {};
     var providerCtx = Object.assign({}, inputCtx, {
+      _plannedEvidenceMode: mode === "planned",
       operationCode: inputCtx.operationCode ||
         normalizeOperationCode(trainNumber, inputCtx)
     });
@@ -926,6 +960,42 @@ function resolveToeiOwnerSingleFleet(ctx) {
 }
 
 // Exact catalogue additions reuse existing named assets; they do not assign trains.
+Object.assign(CANONICAL_VEHICLES,{
+  "jr-209-2000-boso": {
+    "displayName": "209系2000番台",
+    "iconName": "209系2000番台",
+    "asset": null,
+    "plannedAsset": "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
+    "aliases": [
+      "JR東日本209系2000番台"
+    ]
+  },
+  "jr-209-2100-boso": {
+    "displayName": "209系2100番台",
+    "iconName": "209系2100番台",
+    "asset": null,
+    "plannedAsset": "../images/列车/JR東日本/JR東日本_209系_2000・2100番台_房総地区.png",
+    "aliases": [
+      "JR東日本209系2100番台"
+    ]
+  },
+  "odakyu-30000-EXE": {
+    "displayName": "小田急30000形（EXE）",
+    "iconName": "小田急30000形（EXE）",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_30000形_EXE.png",
+    "aliases": [
+      "小田急30000形(EXE)"
+    ]
+  },
+  "odakyu-30000-EXEα": {
+    "displayName": "小田急30000形（EXEα）",
+    "iconName": "小田急30000形（EXEα）",
+    "asset": "../images/列车/小田急電鉄/小田急電鉄_30000形_EXEα.png",
+    "aliases": [
+      "小田急30000形(EXEα)"
+    ]
+  }
+});
 Object.assign(CANONICAL_VEHICLES,{
   "jr-e231-500-plan": {
     "displayName": "E231系500番台",
@@ -1827,7 +1897,12 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     var owner=_planOwnerLabels[normOp(ctx.operator)]||'';
     var labels=Object.keys(_planOwnerLabels).map(function(k){return _planOwnerLabels[k];})
       .filter(function(v,i,a){return a.indexOf(v)===i;}).sort(function(a,b){return b.length-a.length;});
+    var series='';
     var candidates=raw.map(function(name){
+      name=name.replace(/\(/g,'（').replace(/\)/g,'）');
+      if (/^\d+番[台代]/.test(name) && series) name=series+name;
+      var seriesMatch=name.match(/((?:[A-Z-]+|キハ)?\d+系)/);
+      if(seriesMatch)series=seriesMatch[1];
       var declared=labels.find(function(label){return name.indexOf(label)===0;});
       if(declared)owner=declared;
       var canonical=owner ? resolveCanonicalVehicle(owner+name) : null;
@@ -1848,7 +1923,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     var first=candidates[0], icon='';
     // Illustrate a retained planned candidate without asserting a daily assignment.
     candidates.some(function(candidate) {
-      var asset=candidate.canonical&&resolveVehicleArtwork(candidate.canonical.displayName,ctx.serviceDate);
+      var asset=candidate.canonical&&(resolveVehicleArtwork(candidate.canonical.displayName,ctx.serviceDate)||candidate.canonical.plannedAsset||"");
       if(!asset)return false;
       first=candidate;icon=asset;return true;
     });
@@ -1893,6 +1968,11 @@ function _canonicalVehicleIconPath(name, serviceDate) {
       serviceDate: serviceDate,
       // Exact train-number references are calendar-scoped. Use this source
       // run's published calendar, never infer it from the host machine's day.
+      trainType: tt['odpt:trainType'] || run.trainType || '',
+      plannedCandidateLabel: tt._sqlVehicleCandidateLabel || '',
+      itineraryStations: (tt['odpt:trainTimetableObject']||[]).reduce(function(a,stop){
+        return a.concat(stop['odpt:arrivalStation']||[],stop['odpt:departureStation']||[]);
+      },[]).concat(tt['odpt:originStation']||[],tt['odpt:destinationStation']||[]),
       calendarType: /Weekday$/.test(run.calendar || '') ? 'weekday'
         : /(?:SaturdayHoliday|Saturday|Holiday|Sunday)$/.test(run.calendar || '') ? 'holiday' : '',
       at: (function(){ var d=new Date(Date.now()+9*60*60*1000); return d.toISOString().slice(11,16); })()
@@ -2000,8 +2080,10 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     if(vehResult.identityStatus!=='EXACT'){
       var plannedEvidence=window.TrainOperationEvidence.resolveEvidence(trainNumber,_baseOperationCtx,'planned');
       var familyPlan=plannedEvidence&&(plannedEvidence.vehicleType||(plannedEvidence.vehicleCandidates||[]).join(' / '));
-      var planInput=_sqlSourceCandidates.length?_sqlSourceCandidates.join(' / '):(_declaredVehicleInput||familyPlan||'');
-      vehResult.vehiclePlan=resolveTimetableVehiclePlan(planInput,{lineId:lineId,operator:line.operator,serviceDate:serviceDate,source:_sqlSourceCandidates.length?'sql-timetable-plan':'operation-family-plan',sourceUrl:tt._timetableProvenance||(plannedEvidence&&plannedEvidence.sourceUrl)||''});
+      var familyOverride=plannedEvidence&&plannedEvidence.planOverride;
+      var planInput=familyOverride?familyPlan:(_sqlSourceCandidates.length?_sqlSourceCandidates.join(' / '):(_declaredVehicleInput||familyPlan||''));
+      var usesFamily=!!familyPlan&&(familyOverride||(!_sqlSourceCandidates.length&&!_declaredVehicleInput));
+      vehResult.vehiclePlan=resolveTimetableVehiclePlan(planInput,{lineId:lineId,operator:usesFamily&&plannedEvidence.operator||line.operator,serviceDate:serviceDate,source:usesFamily?'operation-family-plan':'sql-timetable-plan',sourceUrl:usesFamily?plannedEvidence.sourceUrl:(tt._timetableProvenance||'')});
     }
     run.identity = {
       planInputKey:planInputKey,
@@ -2041,7 +2123,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     if(result.identityStatus!=='EXACT'&&!ctx.realtimeVehicleType){
       var planEvidence=window.TrainOperationEvidence.resolveEvidence(ctx.trainNumber,ctx,'planned');
       var modelPlan=planEvidence&&(planEvidence.vehicleType||(planEvidence.vehicleCandidates||[]).join(' / '));
-      result.vehiclePlan=resolveTimetableVehiclePlan(modelPlan,{operator:ctx.operator,serviceDate:ctx.serviceDate,source:'operation-family-plan',sourceUrl:planEvidence&&planEvidence.sourceUrl});
+      result.vehiclePlan=resolveTimetableVehiclePlan(modelPlan,{lineId:ctx.lineId,operator:planEvidence&&planEvidence.operator||ctx.operator,serviceDate:ctx.serviceDate,source:'operation-family-plan',sourceUrl:planEvidence&&planEvidence.sourceUrl});
     }
     return {vehicleResult:result,evidence:evidence,isPlannedReference:planned,
       realtimeDerivedVehicleType:adapted.realtimeDerivedVehicleType,
@@ -2155,7 +2237,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   }
 
   window.TrainVehicle = {
-    version: '4.3.1242',
+    version: '4.3.1243',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -2165,7 +2247,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1242 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1243 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
