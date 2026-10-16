@@ -19861,6 +19861,220 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "operator ownership; model requires dated evidence"
   },
   {
+    "evidenceId": 49,
+    "networkKey": "Fukutoshin",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:MF-METRO-8",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ17000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned METRO-8 owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01S-19S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 51,
+    "networkKey": "Fukutoshin",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:MF-METRO-10",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ10000系",
+      "東京メトロ17000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned METRO-10 owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "21S-99S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 53,
+    "networkKey": "Fukutoshin",
+    "operator": "Seibu",
+    "codePattern": "PLAN:MF-SEIBU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武6000系",
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned SEIBU owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01M-38M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 54,
+    "networkKey": "Fukutoshin",
+    "operator": "Seibu",
+    "codePattern": "PLAN:MF-SEIBU-STRAIN",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned SEIBU-STRAIN owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "71M-75M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 56,
+    "networkKey": "Fukutoshin",
+    "operator": "Tobu",
+    "codePattern": "PLAN:MF-TOBU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武50070系",
+      "東武9000系",
+      "東武9050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned TOBU owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01T-23T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 57,
+    "networkKey": "Fukutoshin",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:MF-TOKYU-8",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5050系",
+      "東急5000系",
+      "横浜高速Y500系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned TOKYU-8 owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01K-35K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 58,
+    "networkKey": "Fukutoshin",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:MF-TOKYU-10",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned TOKYU-10 owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "51K-65K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 59,
+    "networkKey": "Fukutoshin",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:MF-SOTETSU-10",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned SOTETSU-10 owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Fukutoshin"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "91G-95G"
+      ]
+    }
+  },
+  {
     "evidenceId": 39,
     "networkKey": "Ginza",
     "operator": "TokyoMetro",
@@ -20570,32 +20784,6 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
   },
   {
-    "evidenceId": 49,
-    "networkKey": "Fukutoshin",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:MF-METRO-8",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ17000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned METRO-8 owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01S-19S"
-      ]
-    }
-  },
-  {
     "evidenceId": 50,
     "networkKey": "Yurakucho",
     "operator": "TokyoMetro",
@@ -20614,33 +20802,6 @@ window.VEHICLE_FAMILY_RULES = [
     "planScope": {
       "lineIds": [
         "Yurakucho"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "21S-99S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 51,
-    "networkKey": "Fukutoshin",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:MF-METRO-10",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ10000系",
-      "東京メトロ17000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned METRO-10 owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
       ],
       "planOnly": true,
       "overridePlan": true,
@@ -20677,59 +20838,6 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 53,
-    "networkKey": "Fukutoshin",
-    "operator": "Seibu",
-    "codePattern": "PLAN:MF-SEIBU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武6000系",
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned SEIBU owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01M-38M"
-      ]
-    }
-  },
-  {
-    "evidenceId": 54,
-    "networkKey": "Fukutoshin",
-    "operator": "Seibu",
-    "codePattern": "PLAN:MF-SEIBU-STRAIN",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned SEIBU-STRAIN owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "71M-75M"
-      ]
-    }
-  },
-  {
     "evidenceId": 55,
     "networkKey": "Yurakucho",
     "operator": "Tobu",
@@ -20754,114 +20862,6 @@ window.VEHICLE_FAMILY_RULES = [
       "overridePlan": true,
       "operationPatterns": [
         "01T-23T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 56,
-    "networkKey": "Fukutoshin",
-    "operator": "Tobu",
-    "codePattern": "PLAN:MF-TOBU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武50070系",
-      "東武9000系",
-      "東武9050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned TOBU owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01T-23T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 57,
-    "networkKey": "Fukutoshin",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:MF-TOKYU-8",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5050系",
-      "東急5000系",
-      "横浜高速Y500系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned TOKYU-8 owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01K-35K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 58,
-    "networkKey": "Fukutoshin",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:MF-TOKYU-10",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned TOKYU-10 owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "51K-65K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 59,
-    "networkKey": "Fukutoshin",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:MF-SOTETSU-10",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned SOTETSU-10 owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Fukutoshin"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "91G-95G"
       ]
     }
   },
