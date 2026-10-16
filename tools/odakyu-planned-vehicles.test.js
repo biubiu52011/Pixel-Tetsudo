@@ -25,6 +25,8 @@ const gse=decide('0709','LimitedExpress','SaturdayHoliday','','2026-10-17');
 assert(gse.name==='小田急70000形'||gse.vehiclePlan.models.includes('小田急70000形'));
 assert(decide('0003','LimitedExpress').vehiclePlan.models.length>1,'variable-day triangle cannot become a fixed model');
 const ctx={lineId:'Odawara',operator:'Odakyu',calendarType:'weekday',serviceDate:'2026-10-16'};
+assert.equal(ev.resolveEvidence('7004',ctx,'planned').observedDate,'','planned lookup does not manufacture a daily observation');
+assert.equal(ev.resolveEvidence('7004',ctx,'planned').decisive,false,'planned lookup is not dated physical proof');
 assert.equal(ev.resolveEvidence('0709',ctx,'planned'),null,'holiday-only fixed GSE must not leak to weekday');
 assert.equal(ev.resolveEvidence('2',ctx,'planned'),null,'preserve published leading zeroes');
 assert.equal(ev.resolveEvidence('7004',{...ctx,serviceDate:'2026-03-15'},'planned'),null,'weekday plan only starts at published weekday revision');

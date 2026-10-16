@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1244')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1245')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -369,7 +369,7 @@
         return {
           operator: hit.operator || "", vehicleType: Object.keys(models)[0],
           grade: hit.grade || "C", sourceUrl: hit.sourceUrl || "",
-          observedDate: day, evidenceRole: "timetable-reference",
+          observedDate: ctx._plannedEvidenceMode ? "" : day, evidenceRole: "timetable-reference",
           provenance: "published timetable reference model (not live carset)"
         };
       }
@@ -2242,7 +2242,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   }
 
   window.TrainVehicle = {
-    version: '4.3.1244',
+    version: '4.3.1245',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -2252,7 +2252,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1244 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1245 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
