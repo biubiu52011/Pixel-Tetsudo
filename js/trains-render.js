@@ -392,9 +392,9 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         var mH = _throughChipHeight(middle, isMobileView, chipWidth);
         var _dotR = isJunction ? 9 : 7;
         if (geometry.isLoop) { mX = tx; mAlign = anchor === "middle" ? "middle" : anchor; mY = belowY; }
-        else if (anchor === "end") { mX = o.x + _dotR + 8; mAlign = "start"; mY = o.y - mH / 2; }
-        else if (anchor === "start") { mX = o.x - _dotR - 8; mAlign = "end"; mY = o.y - mH / 2; }
-        else { mX = o.x; mAlign = "middle"; mY = o.y - mH / 2; }
+        else if (anchor === "end") { mX = o.x + _dotR + 14; mAlign = "start"; mY = o.y - mH / 2; }
+        else if (anchor === "start") { mX = o.x - _dotR - 14; mAlign = "end"; mY = o.y - mH / 2; }
+        else { mX = o.x + _dotR + 14; mAlign = "start"; mY = o.y - mH / 2; }
         drawGroup(middle, mX, mY, mAlign, chipWidth);
       }
       if (down.length) {
