@@ -66,6 +66,19 @@ function getLinesData() {
 
 function getRealtimePositions(lineId) {
   var positions = _getBasePositions(lineId);
+  // This map reads raw positions. Project peer services through the same
+  // physical-section authority used by DataFusion and geometry.
+  if(window.SharedTrackPairs && window.SharedTrackPairs.projectPosition){
+    positions=positions.slice();
+    var known={};positions.forEach(function(p){var id=p.runningChainId||p.trainId;if(id)known[id]=true;});
+    window.SharedTrackPairs.getSharedLines(lineId).forEach(function(peer){
+      _getBasePositions(peer).forEach(function(p){
+        var id=p.runningChainId||p.trainId;if(id&&known[id])return;
+        var projected=window.SharedTrackPairs.projectPosition(lineId,peer,p);
+        if(projected){positions.push(projected);if(id)known[id]=true;}
+      });
+    });
+  }
   var ext = _fusionExtensionLines(lineId);
   if (ext && ext.length > 0) {
     var all = positions.slice();
@@ -359,7 +372,7 @@ function _getTransferMap(lineId) {
     if (_activeSystemIds.indexOf(lineId) >= 0 && _activeSystemIds.indexOf(t.lineId) >= 0) continue;
     // v4.3.943: 共线区间不画换乘标记 + v4.3.960: 自动判断共线线
     if (window.SharedTrackPairs && window.SharedTrackPairs.isSharedStation) {
-      if (window.SharedTrackPairs.isSharedStation(lineId, t.station)) continue;
+      if (window.SharedTrackPairs.isSharedStation(lineId, t.station, t.lineId)) continue;
     }
     var tl = src[t.lineId];
     if (!tl) continue;

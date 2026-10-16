@@ -1,47 +1,49 @@
 /* trains-geometry.js: 列车页几何计算（全局） */
 
-  /**
-   * Find shared (parallel track) sections with other lines.
-   * Industry standard (Tokyo Metro official map): shared sections are drawn as
-   * twin parallel lines in each line's own colour.
-   */
-  // 真正線路共用（同一軌道を複数路線が運行）——站点重合 ≠ 共线。
-  // 只有以下线对才画并行双线（industry-standard 線路共用区間）:
-  //   Yurakucho x Fukutoshin : 和光市-池袋（氷川台・小竹向原含む全9駅、公式駅順、2026-09-07 データ修正）
-  //   Namboku x Mita        : 目黒-白金高輪
-  var _SHARED_TRACK_PAIRS = {
-    'Yurakucho': ['Fukutoshin'],
-    'Fukutoshin': ['Yurakucho'],
-    'Namboku': ['Mita'],
-    'Mita': ['Namboku']
-  };
+  // Physical track sharing, not station-name overlap. Official Tokyo Metro:
+  // https://www.tokyometro.jp/corporate/enterprise/passenger_rail/transportation/lines/index.html
+  // Fukutoshin uses Yurakucho tracks Wakoshi--Kotake (8.3 km).
+  var _SHARED_TRACK_SECTIONS = [
+    {lines:['Yurakucho','Fukutoshin'],from:'Wakoshi',to:'Kotake-Mukaihara'},
+    {lines:['Namboku','Mita'],from:'Meguro',to:'Shirokane-Takanawa'}
+  ];
+  function _sharedLinesData() {
+    return window.RailwayDB && window.RailwayDB.getAllLines ? window.RailwayDB.getAllLines() :
+      window.DataLayer && window.DataLayer.getAllLines ? window.DataLayer.getAllLines() : {};
+  }
+  function _sharedSections(lineId, partner, allLines) {
+    var all=allLines||_sharedLinesData(), own=(all[lineId]||{}).stations||[];
+    return _SHARED_TRACK_SECTIONS.filter(function(s){
+      return s.lines.indexOf(lineId)>=0 && (!partner||s.lines.indexOf(partner)>=0&&partner!==lineId);
+    }).map(function(s){
+      var peer=s.lines.filter(function(id){return id!==lineId;})[0];
+      var other=(all[peer]||{}).stations||[], a=own.indexOf(s.from), b=own.indexOf(s.to);
+      if(a<0||b<0||other.indexOf(s.from)<0||other.indexOf(s.to)<0)return null;
+      var ids=own.slice(Math.min(a,b),Math.max(a,b)+1);
+      if(ids.some(function(id){return other.indexOf(id)<0;}))return null;
+      return {partner:peer,start:Math.min(a,b),end:Math.max(a,b),stations:ids};
+    }).filter(Boolean);
+  }
   function _findSharedSegments(line, allLines) {
-    var lineId = line.id || line.lineId || line.name;
-    var stLines = {};
-    var lids = Object.keys(allLines);
-    for (var li = 0; li < lids.length; li++) {
-      var ll = allLines[lids[li]];
-      if (!ll || !ll.stations) continue;
-      for (var si = 0; si < ll.stations.length; si++) {
-        (stLines[ll.stations[si]] = stLines[ll.stations[si]] || []).push(lids[li]);
-      }
-    }
-    var stations = line.stations || [];
-    var segs = [], cur = null;
-    for (var i = 0; i < stations.length - 1; i++) {
-      var la = stLines[stations[i]] || [], lb = stLines[stations[i + 1]] || [];
-      var allowed = _SHARED_TRACK_PAIRS[lineId] || [];
-      var shared = null;
-      for (var k = 0; k < la.length; k++) {
-        if (la[k] !== lineId && allowed.indexOf(la[k]) >= 0 && lb.indexOf(la[k]) >= 0) { shared = la[k]; break; }
-      }
-      if (shared) {
-        if (cur && cur.partner === shared && cur.end === i) { cur.end = i + 1; }
-        else { if (cur) segs.push(cur); cur = { partner: shared, start: i, end: i + 1 }; }
-      } else { if (cur) { segs.push(cur); cur = null; } }
-    }
-    if (cur) segs.push(cur);
-    return segs;
+    return _sharedSections(line.id||line.lineId||line.name,null,allLines);
+  }
+  function _projectSharedPosition(lineId, sourceId, p, allLines) {
+    var all=allLines||_sharedLinesData(), own=(all[lineId]||{}).stations||[];
+    var source=(all[sourceId]||{}).stations||[];
+    var from=Number(p.stationIndex), to=p.segmentToIndex==null?from:Number(p.segmentToIndex);
+    var progress=p.segmentProgress==null?0:Number(p.segmentProgress);
+    if(!Number.isFinite(from)||!Number.isFinite(to)||!Number.isFinite(progress)||progress<0||progress>1)return null;
+    var coordinate=from+(to-from)*progress, lo=Math.floor(coordinate), hi=Math.ceil(coordinate);
+    if(!_sharedSections(lineId,sourceId,all).some(function(s){
+      return s.stations.indexOf(source[lo])>=0&&s.stations.indexOf(source[hi])>=0;
+    }))return null;
+    var a=own.indexOf(source[lo]), b=own.indexOf(source[hi]);
+    if(a<0||b<0||lo!==hi&&Math.abs(b-a)!==1)return null;
+    var at=a+(b-a)*(coordinate-lo), forward=to>=from;
+    var base=forward?Math.floor(at):Math.ceil(at), target=forward?Math.ceil(at):Math.floor(at);
+    return Object.assign({},p,{stationIndex:base,segmentToIndex:target===base?null:target,
+      segmentProgress:Math.abs(at-base),stationId:own[base],
+      sharedFromLineId:sourceId,fusionRole:'shared-track'});
   }
 
   // v4.3.520: 支线 junction 站解析——支线站表中第一个出现在主干站表的站。
@@ -835,19 +837,9 @@
 
   // v4.3.960: 暴露共线线路配置表——其他模块自动获取共线线
   window.SharedTrackPairs = {
-    getSharedLines: function(lineId) {
-      return _SHARED_TRACK_PAIRS[lineId] || [];
+    getSharedLines:function(lineId){return _sharedSections(lineId).map(function(s){return s.partner;});},
+    isSharedStation:function(lineId,stationId,partner){
+      return _sharedSections(lineId,partner).some(function(s){return s.stations.indexOf(stationId)>=0;});
     },
-    isSharedStation: function(lineId, stationId) {
-      var partners = _SHARED_TRACK_PAIRS[lineId] || [];
-      if (!partners.length) return false;
-      var allLines = (window.DataLayer && window.DataLayer.getAllLines) ? window.DataLayer.getAllLines() : {};
-      var ownStations = (allLines[lineId] && allLines[lineId].stations) || [];
-      if (ownStations.indexOf(stationId) < 0) return false;
-      for (var i = 0; i < partners.length; i++) {
-        var pStations = (allLines[partners[i]] && allLines[partners[i]].stations) || [];
-        if (pStations.indexOf(stationId) >= 0) return true;
-      }
-      return false;
-    }
+    projectPosition:_projectSharedPosition
   };

@@ -134,6 +134,7 @@
       var _branches = window.LinePresentationService ? window.LinePresentationService.getMapBranchIds(lineId, _positionLines) : [];
       var _dependencies = _extensions.map(function(ext) { return ext.lid; });
       _dependencies = _dependencies.concat(_branches);
+      if(window.SharedTrackPairs) _dependencies = _dependencies.concat(window.SharedTrackPairs.getSharedLines(lineId));
       _dependencies.forEach(function(id) {
         if (_positionLines[id] && _requestedLines.indexOf(id) < 0) _requestedLines.push(id);
       });

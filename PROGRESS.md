@@ -827,3 +827,7 @@
 - 独立支线上线验收：2d8ed3bb，CI/CD、Release Guards、Pages全部success，7个公开组件/样式HTTP200并逐字MATCH。公开京急筛选已确认本线/空港/久里滨/逗子/大师5独立卡片，实际点击空港线卡片进入7站独立图；本地成田机场支线3站图亦确认。公开截图keikyu-cards-public.jpg。当前用户页面已刷新，末次实际查看为相铁本线，已确认只保留本线站点与两处支线接续入口；除纳入的北绫濑图标路径外，原有5项独立本地数据修改保留。
 
 - 图标公开验收：dd25bfe0，CI/CD、Release Guards、Pages全部success。公开canonical两条线路的image/presentation.icon已更新，两张原始PNG HTTP200且逐字与附件MATCH。原有5项数据修改保留，未输出截图。
+
+## 2026-10-16 Metro shared tracks / planned models
+
+Reuse SharedTrackPairs, DataFusion and TrainVehicle. Explicit physical sections replace name overlap; map raw-position consumer and on-demand shared-peer loading use that owner. Parallel Y/F tracks south of Kotake remain independent. Planned models stay in Supabase canonical evidence; no daily formation claims or new renderer. Supabase migrations 20261016045735 / 20261016050609: 12 planned working rules; source timetable counts remain Y843/F993. Added7 named PNG catalogue entries and full-width Sotetsu alias. SQL and realtime inputs share working constraints, including B526K2 source segment suffix; ordinary families and S-TRAIN are separate. All1836 weekday/holiday rows have planned models and existing PNG paths. All55 verification entries pass (49 tool suites,65 node:test cases,4 Python guards,mapping guard). Browser local Y view confirmed F services to Motomachi and original ShinKiba services together. F browser switch timed out; symmetric merge and split clipping verified by regression. Backups: recovery/metro-shared-tracks-20261016/.

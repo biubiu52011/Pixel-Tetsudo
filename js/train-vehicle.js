@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1245')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1246')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -58,6 +58,9 @@
       var tz = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?\d*(\d{2})([KST])(?:R)?$/);
       if (tz) return tz[1] + tz[2];
     }
+    // Metro SQL timetable identifiers may append a segment occurrence (B526K2).
+    // Restrict removal to this network and preserve the owner/working suffix.
+    if(/Yurakucho|Fukutoshin/.test([ctx.lineId,ctx.railway].join('|')) && /^[AB]\d{3,4}[KSMTG][12]$/.test(raw)) raw=raw.slice(0,-1);
     // Explicit working-number forms are lossless and safe across through networks.
     // Examples: 03K, 50T, 02S, 91G, A1291G, B691G.
     var explicit = raw.match(/(?:^|[^0-9A-Z])(?:A|B)?(\d{1,4})([KSMTGE])$/);
@@ -255,14 +258,17 @@
 
   // Planned rules constrain the known itinerary. They never identify a
   // physical carset, and cannot enter the dated/actual evidence path.
-  function familyPlanScopeMatches(scope, ctx) {
+  function familyPlanScopeMatches(scope, ctx, operationCode) {
     if (!scope || scope.planOnly!==true || !ctx._plannedEvidenceMode) return false;
-    var allowedKeys=['planOnly','overridePlan','lineIds','trainTypes','allStationOperators','anyStationOperators','anyStationNames','candidateLabelsAny'];
+    var allowedKeys=['operationPatterns','planOnly','overridePlan','lineIds','trainTypes','allStationOperators','anyStationOperators','anyStationNames','candidateLabelsAny'];
     if (Object.keys(scope).some(function(k){return allowedKeys.indexOf(k)<0;})) return false;
     var arrayKeys=allowedKeys.filter(function(k){return k!=="planOnly"&&k!=="overridePlan";});
     if (arrayKeys.some(function(k){return scope[k]!==undefined&&(!Array.isArray(scope[k])||!scope[k].length||scope[k].some(function(v){return typeof v!=="string"||!v;}));})) return false;
     if (scope.overridePlan!==undefined&&typeof scope.overridePlan!=="boolean") return false;
     if (scope.lineIds && scope.lineIds.indexOf(ctx.lineId)<0) return false;
+    if(scope.operationPatterns && !scope.operationPatterns.some(function(pattern){
+      return familyPatternMatches(pattern,operationCode||normalizeOperationCode(ctx.trainNumber,ctx));
+    })) return false;
     var type=String(ctx.trainType||'').split(/[:.]/).pop();
     if (scope.trainTypes && (!type || scope.trainTypes.indexOf(type)<0)) return false;
     var labels=String(ctx.plannedCandidateLabel||'').split(/\s*\/\s*/);
@@ -292,7 +298,7 @@
           if (r.effectiveFrom && d<r.effectiveFrom) return false;
           if (r.effectiveTo && d>r.effectiveTo) return false;
           if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;
-          if (r.planScope && r.planScope.planOnly) return familyPlanScopeMatches(r.planScope,ctx);
+          if (r.planScope && r.planScope.planOnly) return familyPlanScopeMatches(r.planScope,ctx,op);
           return r.codePattern === "*" ? true : (!!op && familyPatternMatches(r.codePattern,op));
         });
         if (!matches.length) return null;
@@ -661,7 +667,7 @@ var CANONICAL_VEHICLES = {
   "tobu-50050-10": { displayName: "東武50050系", iconName: "東武50050系", asset: "../images/列车/東武鉄道/東武鉄道_50050型.png", aliases: ["東武50050系(10両)","東武50050系"] },
   "tobu-70090": { displayName: "東武70090型", iconName: "東武70090型", asset: "../images/列车/東武鉄道/東武鉄道_70090型.png", aliases: ["東武70090型","東武70090系"] },
   "sotetsu-13000-8": { displayName: "相鉄13000系", iconName: "相鉄13000系", asset: "../images/列车/相模鉄道/相模鉄道_13000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄13000系(8両)","相鉄13000系"] },
-  "sotetsu-20000-10": { displayName: "相鉄20000系", iconName: "相鉄20000系", asset: "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄20000系(10両)"] },
+  "sotetsu-20000-10": { displayName: "相鉄20000系", iconName: "相鉄20000系", asset: "../images/列车/相模鉄道/相模鉄道_20000系_YOKOHAMA_NAVYBLUE.png", aliases: ["相鉄20000系(10両)","相鉄20000系（10両）"] },
   "sotetsu-21000": { displayName: "相鉄21000系", iconName: "相鉄21000系", asset: "../images/列车/相模鉄道/相模鉄道_21000系.png", aliases: ["相鉄21000系", "相鉄21000系(8両)"] },
 
   "jr-east-209-500-keiyo": {
@@ -1092,6 +1098,56 @@ Object.assign(CANONICAL_VEHICLES,{
     "iconName": "京急2100形",
     "asset": "../images/列车/京浜急行電鉄/京浜急行電鉄_2100形.png",
     "aliases": []
+  },
+  "tokyu-5000": {
+    "displayName": "東急5000系",
+    "iconName": "東急5000系",
+    "asset": "../images/列车/東急電鉄/東急電鉄_5000系_従来デザイン.png",
+    "aliases": []
+  },
+  "yokohama-y500": {
+    "displayName": "横浜高速Y500系",
+    "iconName": "横浜高速Y500系",
+    "asset": "../images/列车/横浜高速鉄道/横浜高速鉄道_Y500系.png",
+    "aliases": [
+      "横浜高速鉄道Y500系"
+    ]
+  },
+  "seibu-6000-fukutoshin": {
+    "displayName": "西武6000系",
+    "iconName": "西武6000系",
+    "asset": "../images/列车/西武鉄道/西武鉄道_6000系_副都心線対応車.png",
+    "aliases": []
+  },
+  "seibu-40000": {
+    "displayName": "西武40000系",
+    "iconName": "西武40000系",
+    "asset": "../images/列车/西武鉄道/西武鉄道_40000系_青帯.png",
+    "aliases": []
+  },
+  "tobu-50070": {
+    "displayName": "東武50070系",
+    "iconName": "東武50070系",
+    "asset": "../images/列车/東武鉄道/東武鉄道_50070型.png",
+    "aliases": [
+      "東武50070型"
+    ]
+  },
+  "tobu-9000": {
+    "displayName": "東武9000系",
+    "iconName": "東武9000系",
+    "asset": "../images/列车/東武鉄道/東武鉄道_9000型.png",
+    "aliases": [
+      "東武9000型"
+    ]
+  },
+  "tobu-9050": {
+    "displayName": "東武9050系",
+    "iconName": "東武9050系",
+    "asset": "../images/列车/東武鉄道/東武鉄道_9050型.png",
+    "aliases": [
+      "東武9050型"
+    ]
   },
   "tokyu-5050": {
     "displayName": "東急5050系",
@@ -2242,7 +2298,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   }
 
   window.TrainVehicle = {
-    version: '4.3.1245',
+    version: '4.3.1246',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -2252,7 +2308,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1245 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1246 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();

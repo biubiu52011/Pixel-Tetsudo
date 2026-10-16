@@ -671,14 +671,11 @@
         _spPositions.forEach(function(p) {
           var _pid = _positionIdentity(p);
           if (_pid && _existingIds[_pid]) return;
-          var _stName = (p.stationId || '').split('.').pop();
-          if (!window.SharedTrackPairs || !window.SharedTrackPairs.isSharedStation ||
-              !window.SharedTrackPairs.isSharedStation(lineId, _stName)) return;
-          var _spIdx = (_ownStationIndex.has(_stName) ? _ownStationIndex.get(_stName) : -1);
-          if (_spIdx >= 0) {
-            var _copy = Object.assign({}, p, { stationIndex: _spIdx, fusionLineId: _spLine });
+          var _copy = window.SharedTrackPairs.projectPosition
+            ? window.SharedTrackPairs.projectPosition(lineId,_spLine,p) : null;
+          if(_copy){
             _rtPositions.push(_copy);
-            if (_pid) _existingIds[_pid] = true;
+            if(_pid) _existingIds[_pid]=true;
           }
         });
       }
