@@ -13,7 +13,7 @@ for(const mobile of [true,false]){
    resolveStationName:id=>db.name_map[id]?.ja||id}},document:{createElementNS:(_ns,tag)=>new Node(tag)}};
  ctx.window.t=()=> '直通';
  vm.createContext(ctx);
- for(const f of ['data/core/runtime-config.js','js/trains-config.js','js/trains-utils.js','js/trains-data.js','js/trains-geometry.js','js/trains-render.js'])
+ for(const f of ['data/core/runtime-config.js','js/trains-config.js','js/trains-utils.js','js/trains-data.js','js/through-chip.js','js/trains-geometry.js','js/trains-render.js'])
   vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
  ctx.GEOM=ctx.window.GEOM;
  for(const [id,line]of Object.entries(db.lines)){

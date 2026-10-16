@@ -5,7 +5,7 @@ const ctx={window:{UNIFIED_LINES:db.lines,currentLang:'ja',innerWidth:390,addEve
  document:{addEventListener:()=>{},getElementById:()=>null,querySelectorAll:()=>[]},console};
 ctx.window.t=k=>k;ctx.window.tOp=x=>x;
 vm.createContext(ctx);
-for(const f of ['data/core/runtime-config.js','js/line-presentation-service.js','js/line-card.js','js/data-state.js','js/trains-config.js','js/trains-utils.js','js/trains-data.js','js/trains-geometry.js','js/trains-render.js'])
+for(const f of ['data/core/runtime-config.js','js/line-presentation-service.js','js/line-card.js','js/data-state.js','js/trains-config.js','js/trains-utils.js','js/trains-data.js','js/through-chip.js','js/trains-geometry.js','js/trains-render.js'])
  vm.runInContext(fs.readFileSync(f,'utf8'),ctx);
 ctx.GEOM=ctx.window.GEOM;
 const branches=Object.entries(db.lines).filter(([id,l])=>l.branchOf);
@@ -36,10 +36,10 @@ for(const [id,l]of branches){
 assert(!ctx.computeRouteGeometry(db.lines.KyushuShinkansen,'KyushuShinkansen').branchLines.some(b=>b.id==='NishiKyushuShinkansen'));
 assert.deepEqual(Array.from(db.lines.MarunouchiBranch.stations),['Nakano-Sakaue','Nakano-Shimbashi','Nakano-fujimicho','Honancho']);
 assert(!db.stationLines['Nishi-Shinjuku-Gochome'].includes('MarunouchiBranch'));
-const node={attrs:{},style:{},handlers:{},setAttribute(k,v){this.attrs[k]=v;},addEventListener(k,f){this.handlers[k]=f;}};
-ctx.window.location={hash:''};
-ctx._bindLineMapNavigation(node,{lineId:'KeikyuAirport',name:'空港線'});
-node.handlers.click({});assert.equal(ctx.window.location.hash,'KeikyuAirport');
+function svgNode(){return {attrs:{},children:[],style:{},handlers:{},setAttribute(k,v){this.attrs[k]=v;},appendChild(n){this.children.push(n);},addEventListener(k,f){this.handlers[k]=f;}};}
+ctx.document.createElementNS=svgNode;const layer=svgNode();ctx.window.location={hash:''};
+ctx.window.ThroughChip.render(layer,'svg',0,0,{lineId:'KeikyuAirport',name:'空港線'},16,false,148);
+const node=layer.children[0];node.handlers.click({});assert.equal(ctx.window.location.hash,'KeikyuAirport');
 ctx.window.location.hash='';node.handlers.keydown({key:'Enter'});assert.equal(ctx.window.location.hash,'KeikyuAirport');
 assert.equal(node.attrs.role,'link');
 console.log('Branch presentation scope: 9 internal branches in parent, 9 official lines independent, canonical indices and navigation: PASS');
