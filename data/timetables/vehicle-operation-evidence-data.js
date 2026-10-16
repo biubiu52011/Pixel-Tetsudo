@@ -19755,6 +19755,296 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "operator ownership"
   },
   {
+    "evidenceId": 87,
+    "networkKey": "Asakusa",
+    "operator": "Toei",
+    "codePattern": "PLAN:SUB-TOEI",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営5500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring Asakusa TOEI qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Asakusa"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 88,
+    "networkKey": "Asakusa",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:SUB-KEIKYU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急600形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring Asakusa KEIKYU qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Asakusa"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*H"
+      ]
+    }
+  },
+  {
+    "evidenceId": 89,
+    "networkKey": "Asakusa",
+    "operator": "Keisei",
+    "codePattern": "PLAN:SUB-KEISEI",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3000形",
+      "京成3700形",
+      "京成3400形",
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring Asakusa KEISEI qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Asakusa"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "RapidLimitedExpress",
+        "AirportRapidLimitedExpress",
+        "Express",
+        "LimitedExpress",
+        "CommuterLimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 90,
+    "networkKey": "Asakusa",
+    "operator": "Keisei",
+    "codePattern": "PLAN:SUB-KEISEI-ACCESS",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring Asakusa KEISEI-ACCESS qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Asakusa"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AccessExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 91,
+    "networkKey": "Asakusa",
+    "operator": "Hokuso",
+    "codePattern": "PLAN:SUB-HOKUSO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "北総7300形",
+      "北総7500形",
+      "北総7800形",
+      "千葉ニュータウン9100形",
+      "千葉ニュータウン9200形",
+      "千葉ニュータウン9800形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring Asakusa HOKUSO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Asakusa"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*N"
+      ]
+    }
+  },
+  {
+    "evidenceId": 74,
+    "networkKey": "Chiyoda",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO-THROUGH",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ16000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring Chiyoda METRO-THROUGH qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Chiyoda"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01S-95S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 75,
+    "networkKey": "Chiyoda",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO-SHUTTLE",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ05系（千代田支線）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring Chiyoda METRO-SHUTTLE qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Chiyoda"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "96S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 76,
+    "networkKey": "Chiyoda",
+    "operator": "JR-East",
+    "codePattern": "PLAN:SUB-JR",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E233系2000番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring Chiyoda JR qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Chiyoda"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 77,
+    "networkKey": "Chiyoda",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:SUB-ODAKYU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急4000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring Chiyoda ODAKYU qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Chiyoda"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Express",
+        "SemiExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*E"
+      ]
+    }
+  },
+  {
+    "evidenceId": 78,
+    "networkKey": "Chiyoda",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:SUB-MSE",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急60000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring Chiyoda MSE qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Chiyoda"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*E"
+      ]
+    }
+  },
+  {
     "evidenceId": 4,
     "networkKey": "chiyoda-joban-odakyu",
     "operator": "JR-East",
@@ -19817,6 +20107,144 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "B",
     "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/chiyoda_05/index.html",
     "notes": "3-car Ayase-KitaAyase branch; do not select the 10-car Tozai 05-series artwork."
+  },
+  {
+    "evidenceId": 79,
+    "networkKey": "ChiyodaBranch",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO-THROUGH",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ16000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring ChiyodaBranch METRO-THROUGH qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "ChiyodaBranch"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01S-95S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 80,
+    "networkKey": "ChiyodaBranch",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO-SHUTTLE",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ05系（千代田支線）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring ChiyodaBranch METRO-SHUTTLE qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "ChiyodaBranch"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "96S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 81,
+    "networkKey": "ChiyodaBranch",
+    "operator": "JR-East",
+    "codePattern": "PLAN:SUB-JR",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E233系2000番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring ChiyodaBranch JR qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "ChiyodaBranch"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 82,
+    "networkKey": "ChiyodaBranch",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:SUB-ODAKYU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急4000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring ChiyodaBranch ODAKYU qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "ChiyodaBranch"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Express",
+        "SemiExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*E"
+      ]
+    }
+  },
+  {
+    "evidenceId": 83,
+    "networkKey": "ChiyodaBranch",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:SUB-MSE",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急60000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring ChiyodaBranch MSE qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "ChiyodaBranch"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*E"
+      ]
+    }
   },
   {
     "evidenceId": 1,
@@ -20075,6 +20503,181 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 39,
+    "networkKey": "Ginza",
+    "operator": "TokyoMetro",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "東京メトロ1000系",
+    "vehicleCandidates": [
+      "東京メトロ1000系"
+    ],
+    "grade": "A",
+    "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
+    "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference. Recurring single-family fleet remains valid until superseded; remove artificial audit expiry."
+  },
+  {
+    "evidenceId": 84,
+    "networkKey": "Hanzomon",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ18000系",
+      "東京メトロ08系",
+      "東京メトロ8000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
+    "notes": "Recurring Hanzomon METRO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Hanzomon"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 85,
+    "networkKey": "Hanzomon",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:SUB-TOKYU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急2020系",
+      "東急5000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
+    "notes": "Recurring Hanzomon TOKYU qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Hanzomon"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 86,
+    "networkKey": "Hanzomon",
+    "operator": "Tobu",
+    "codePattern": "PLAN:SUB-TOBU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武50050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
+    "notes": "Recurring Hanzomon TOBU qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Hanzomon"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 68,
+    "networkKey": "Hibiya",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ13000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MH/",
+    "notes": "Recurring Hibiya METRO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Hibiya"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 69,
+    "networkKey": "Hibiya",
+    "operator": "Tobu",
+    "codePattern": "PLAN:SUB-TOBU-LOCAL",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武70000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MH/",
+    "notes": "Recurring Hibiya TOBU-LOCAL qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Hibiya"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01T-39T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 70,
+    "networkKey": "Hibiya",
+    "operator": "Tobu",
+    "codePattern": "PLAN:SUB-TH-LINER",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武70090型"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MH/",
+    "notes": "Recurring Hibiya TH-LINER qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Hibiya"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "41T-49T"
+      ]
+    }
+  },
+  {
     "evidenceId": 15,
     "networkKey": "kodomonokuni",
     "operator": "YokohamaMinatomiraiRailway",
@@ -20089,6 +20692,22 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "B",
     "sourceUrl": "https://www.mm21railway.co.jp/info/route/kodomonokuni.html",
     "notes": "structural exact"
+  },
+  {
+    "evidenceId": 38,
+    "networkKey": "Marunouchi",
+    "operator": "TokyoMetro",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-15",
+    "effectiveTo": "",
+    "exactVehicleType": "東京メトロ2000系",
+    "vehicleCandidates": [
+      "東京メトロ2000系"
+    ],
+    "grade": "A",
+    "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
+    "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference. Recurring single-family fleet remains valid until superseded; remove artificial audit expiry."
   },
   {
     "evidenceId": 16,
@@ -20644,6 +21263,33 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 94,
+    "networkKey": "Oedo",
+    "operator": "Toei",
+    "codePattern": "PLAN:SUB-TOEI",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営12-600形",
+      "都営12-000形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.kotsu.metro.tokyo.jp/about/service/subway.html",
+    "notes": "Recurring Oedo TOEI qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Oedo"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
     "evidenceId": 47,
     "networkKey": "Rinkai",
     "operator": "JR-East",
@@ -20694,6 +21340,58 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "B",
     "sourceUrl": "https://www.tokyu.co.jp/railway/data/train_info/setagaya.html",
     "notes": "structural exact"
+  },
+  {
+    "evidenceId": 92,
+    "networkKey": "Shinjuku",
+    "operator": "Toei",
+    "codePattern": "PLAN:SUB-TOEI",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営10-300形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
+    "notes": "Recurring Shinjuku TOEI qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Shinjuku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 93,
+    "networkKey": "Shinjuku",
+    "operator": "Keio",
+    "codePattern": "PLAN:SUB-KEIO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京王9000系（9030系）"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
+    "notes": "Recurring Shinjuku KEIO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Shinjuku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
   },
   {
     "evidenceId": 21,
@@ -20890,6 +21588,86 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "multi-model family"
   },
   {
+    "evidenceId": 71,
+    "networkKey": "Tozai",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ15000系",
+      "東京メトロ07系",
+      "東京メトロ05系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring Tozai METRO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Tozai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 72,
+    "networkKey": "Tozai",
+    "operator": "JR-East",
+    "codePattern": "PLAN:SUB-JR",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E231系800番台（東西線直通）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring Tozai JR qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Tozai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 73,
+    "networkKey": "Tozai",
+    "operator": "ToyoRapid",
+    "codePattern": "PLAN:SUB-TOYO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東葉高速2000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring Tozai TOYO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Tozai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
     "evidenceId": 40,
     "networkKey": "TsukubaExpress",
     "operator": "TsukubaExpress",
@@ -21044,784 +21822,6 @@ window.VEHICLE_FAMILY_RULES = [
       "operationPatterns": [
         "51M-59M"
       ]
-    }
-  },
-  {
-    "evidenceId": 38,
-    "networkKey": "Marunouchi",
-    "operator": "TokyoMetro",
-    "codePattern": "*",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-15",
-    "effectiveTo": "",
-    "exactVehicleType": "東京メトロ2000系",
-    "vehicleCandidates": [
-      "東京メトロ2000系"
-    ],
-    "grade": "A",
-    "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
-    "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference. Recurring single-family fleet remains valid until superseded; remove artificial audit expiry."
-  },
-  {
-    "evidenceId": 39,
-    "networkKey": "Ginza",
-    "operator": "TokyoMetro",
-    "codePattern": "*",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-15",
-    "effectiveTo": "",
-    "exactVehicleType": "東京メトロ1000系",
-    "vehicleCandidates": [
-      "東京メトロ1000系"
-    ],
-    "grade": "A",
-    "sourceUrl": "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/cars/working/index.html",
-    "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference. Recurring single-family fleet remains valid until superseded; remove artificial audit expiry."
-  },
-  {
-    "evidenceId": 68,
-    "networkKey": "Hibiya",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ13000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MH/",
-    "notes": "Recurring Hibiya METRO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Hibiya"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 69,
-    "networkKey": "Hibiya",
-    "operator": "Tobu",
-    "codePattern": "PLAN:SUB-TOBU-LOCAL",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武70000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MH/",
-    "notes": "Recurring Hibiya TOBU-LOCAL qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Hibiya"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01T-39T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 70,
-    "networkKey": "Hibiya",
-    "operator": "Tobu",
-    "codePattern": "PLAN:SUB-TH-LINER",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武70090型"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MH/",
-    "notes": "Recurring Hibiya TH-LINER qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Hibiya"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "41T-49T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 71,
-    "networkKey": "Tozai",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ15000系",
-      "東京メトロ07系",
-      "東京メトロ05系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring Tozai METRO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Tozai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 72,
-    "networkKey": "Tozai",
-    "operator": "JR-East",
-    "codePattern": "PLAN:SUB-JR",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E231系800番台（東西線直通）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring Tozai JR qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Tozai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 73,
-    "networkKey": "Tozai",
-    "operator": "ToyoRapid",
-    "codePattern": "PLAN:SUB-TOYO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東葉高速2000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring Tozai TOYO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Tozai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 74,
-    "networkKey": "Chiyoda",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO-THROUGH",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ16000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring Chiyoda METRO-THROUGH qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Chiyoda"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01S-95S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 75,
-    "networkKey": "Chiyoda",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO-SHUTTLE",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ05系（千代田支線）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring Chiyoda METRO-SHUTTLE qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Chiyoda"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "96S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 76,
-    "networkKey": "Chiyoda",
-    "operator": "JR-East",
-    "codePattern": "PLAN:SUB-JR",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E233系2000番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring Chiyoda JR qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Chiyoda"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 77,
-    "networkKey": "Chiyoda",
-    "operator": "Odakyu",
-    "codePattern": "PLAN:SUB-ODAKYU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "小田急4000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring Chiyoda ODAKYU qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Chiyoda"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Express",
-        "SemiExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*E"
-      ]
-    }
-  },
-  {
-    "evidenceId": 78,
-    "networkKey": "Chiyoda",
-    "operator": "Odakyu",
-    "codePattern": "PLAN:SUB-MSE",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "小田急60000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring Chiyoda MSE qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Chiyoda"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*E"
-      ]
-    }
-  },
-  {
-    "evidenceId": 79,
-    "networkKey": "ChiyodaBranch",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO-THROUGH",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ16000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring ChiyodaBranch METRO-THROUGH qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "ChiyodaBranch"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01S-95S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 80,
-    "networkKey": "ChiyodaBranch",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO-SHUTTLE",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ05系（千代田支線）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring ChiyodaBranch METRO-SHUTTLE qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "ChiyodaBranch"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "96S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 81,
-    "networkKey": "ChiyodaBranch",
-    "operator": "JR-East",
-    "codePattern": "PLAN:SUB-JR",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E233系2000番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring ChiyodaBranch JR qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "ChiyodaBranch"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 82,
-    "networkKey": "ChiyodaBranch",
-    "operator": "Odakyu",
-    "codePattern": "PLAN:SUB-ODAKYU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "小田急4000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring ChiyodaBranch ODAKYU qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "ChiyodaBranch"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Express",
-        "SemiExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*E"
-      ]
-    }
-  },
-  {
-    "evidenceId": 83,
-    "networkKey": "ChiyodaBranch",
-    "operator": "Odakyu",
-    "codePattern": "PLAN:SUB-MSE",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "小田急60000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring ChiyodaBranch MSE qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "ChiyodaBranch"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*E"
-      ]
-    }
-  },
-  {
-    "evidenceId": 84,
-    "networkKey": "Hanzomon",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ18000系",
-      "東京メトロ08系",
-      "東京メトロ8000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
-    "notes": "Recurring Hanzomon METRO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Hanzomon"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 85,
-    "networkKey": "Hanzomon",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:SUB-TOKYU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急2020系",
-      "東急5000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
-    "notes": "Recurring Hanzomon TOKYU qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Hanzomon"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 86,
-    "networkKey": "Hanzomon",
-    "operator": "Tobu",
-    "codePattern": "PLAN:SUB-TOBU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武50050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
-    "notes": "Recurring Hanzomon TOBU qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Hanzomon"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 87,
-    "networkKey": "Asakusa",
-    "operator": "Toei",
-    "codePattern": "PLAN:SUB-TOEI",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営5500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring Asakusa TOEI qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Asakusa"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 88,
-    "networkKey": "Asakusa",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:SUB-KEIKYU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急600形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring Asakusa KEIKYU qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Asakusa"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*H"
-      ]
-    }
-  },
-  {
-    "evidenceId": 89,
-    "networkKey": "Asakusa",
-    "operator": "Keisei",
-    "codePattern": "PLAN:SUB-KEISEI",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3000形",
-      "京成3700形",
-      "京成3400形",
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring Asakusa KEISEI qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Asakusa"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "RapidLimitedExpress",
-        "AirportRapidLimitedExpress",
-        "Express",
-        "LimitedExpress",
-        "CommuterLimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 90,
-    "networkKey": "Asakusa",
-    "operator": "Keisei",
-    "codePattern": "PLAN:SUB-KEISEI-ACCESS",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring Asakusa KEISEI-ACCESS qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Asakusa"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AccessExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 91,
-    "networkKey": "Asakusa",
-    "operator": "Hokuso",
-    "codePattern": "PLAN:SUB-HOKUSO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "北総7300形",
-      "北総7500形",
-      "北総7800形",
-      "千葉ニュータウン9100形",
-      "千葉ニュータウン9200形",
-      "千葉ニュータウン9800形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring Asakusa HOKUSO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Asakusa"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*N"
-      ]
-    }
-  },
-  {
-    "evidenceId": 92,
-    "networkKey": "Shinjuku",
-    "operator": "Toei",
-    "codePattern": "PLAN:SUB-TOEI",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営10-300形"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
-    "notes": "Recurring Shinjuku TOEI qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Shinjuku"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 93,
-    "networkKey": "Shinjuku",
-    "operator": "Keio",
-    "codePattern": "PLAN:SUB-KEIO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京王9000系（9030系）"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
-    "notes": "Recurring Shinjuku KEIO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Shinjuku"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 94,
-    "networkKey": "Oedo",
-    "operator": "Toei",
-    "codePattern": "PLAN:SUB-TOEI",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営12-600形",
-      "都営12-000形"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.kotsu.metro.tokyo.jp/about/service/subway.html",
-    "notes": "Recurring Oedo TOEI qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Oedo"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local"
-      ],
-      "overridePlan": true
     }
   }
 ];
