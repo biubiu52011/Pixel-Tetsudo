@@ -897,6 +897,7 @@ var CANONICAL_VEHICLES = {
   "remaining-fleet-extra-14": {"displayName":"小田急30000形","iconName":"小田急30000形","asset":null,"plannedAsset":"../images/列车/小田急電鉄/小田急電鉄_30000形_EXEα.png","aliases":["小田急30000形 EXEα"]},
   "remaining-fleet-extra-15": {"displayName":"E721系","iconName":"E721系","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_E721系_仙台地区.png","aliases":[]},
   "remaining-fleet-extra-16": {"displayName":"E653系（いなほ）","iconName":"E653系（いなほ）","asset":"../images/列车/JR東日本/JR東日本_E653系（いなほ）.png","aliases":["JR東日本E653系（いなほ）"]},
+  "jr-east-e131-nagano-planned": {"displayName":"E131系（長野地区）","iconName":"E131系（長野地区）","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_E131系_長野地区.png","aliases":["JR東日本E131系（長野地区）"]},
   "jr-east-e233-1000-keiyo": {"displayName":"E233系1000番台（京葉線）","iconName":"E233系1000番台（京葉線）","asset":null,"aliases":["E233系1000番台（京葉線）"]},
   "jr-east-e231-0-musashino": {"displayName":"E231系0番台（武蔵野線）","iconName":"E231系0番台（武蔵野線）","asset":"../images/列车/JR東日本/JR東日本_E231系_0番台.png","aliases":["E231系0番台（武蔵野線）"]},
   "jr-east-209-500-musashino": {"displayName":"209系500番台（武蔵野線）","iconName":"209系500番台（武蔵野線）","asset":null,"aliases":["209系500番台（武蔵野線）"]},
@@ -2528,7 +2529,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1256 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1257 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
