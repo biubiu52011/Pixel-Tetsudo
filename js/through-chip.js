@@ -114,10 +114,10 @@
   }
 
   // 尺寸：测量 + 窄屏换行 + 箭头槽/文字起点。
+  // v4.3.1247: 标签直接显示线路短名（"直通"前缀冗余——箭头已表达直通语义，且窄屏时避免独占换行层）。
   function _chipSize(lineObj, mobile, maxWidth) {
     var nm = _shortName(lineObj, mobile);
-    var throughLbl = (window.t ? window.t("train.through") : "直通").trim();
-    var label = throughLbl + (/^[A-Za-z]/.test(throughLbl) ? " " : "") + nm;
+    var label = nm;
     var fontSize = mobile ? 11 : 9;
     var narrow = maxWidth && maxWidth < 100;
     var arrowSlot = narrow ? 8 : (mobile ? 12 : 11), gap = narrow ? 4 : (mobile ? 10 : 8);
@@ -126,8 +126,8 @@
     var overhead = padX + arrowSlot + gap + padEnd;
     var available = maxW - overhead;
     var wrapped = _measureWidth(label, fontSize) > available;
-    var lines = wrapped ? [throughLbl] : [], current = "";
-    Array.from(wrapped ? nm : label).forEach(function(ch) {
+    var lines = [], current = "";
+    Array.from(nm).forEach(function(ch) {
       if (current && _measureWidth(current + ch, fontSize) > available) {
         lines.push(current.trim()); current = "";
       }
