@@ -19697,6 +19697,98 @@ window.VEHICLE_NETWORK_ALIASES = [
 ];
 window.VEHICLE_FAMILY_RULES = [
   {
+    "evidenceId": 111,
+    "networkKey": "Agatsuma",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-11",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E257系5500番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/multi/zh-CHS/traininformation/kusatsu_shima/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Agatsuma"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 147,
+    "networkKey": "AkitaShinkansen",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-47",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E6系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "AkitaShinkansen"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Shinkansen"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 137,
+    "networkKey": "Arakawa",
+    "operator": "Toei",
+    "codePattern": "PLAN:REMAIN-37",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都電7700形",
+      "都電8500形",
+      "都電8800形",
+      "都電8900形",
+      "都電9000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.kotsu.metro.tokyo.jp/about/koukai/vehicle_outline/model_diagram/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Arakawa"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
     "evidenceId": 7,
     "networkKey": "asakusa",
     "operator": "Toei",
@@ -19904,6 +19996,80 @@ window.VEHICLE_FAMILY_RULES = [
       "operationPatterns": [
         "*N"
       ]
+    }
+  },
+  {
+    "evidenceId": 128,
+    "networkKey": "ChibaMonorail1",
+    "operator": "ChibaUrbanMonorail",
+    "codePattern": "PLAN:REMAIN-28",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "千葉都市モノレール0形",
+      "千葉都市モノレール1000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://chiba-monorail.co.jp/index.php/about-monorail/sharyou/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ChibaMonorail1"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 129,
+    "networkKey": "ChibaMonorail2",
+    "operator": "ChibaUrbanMonorail",
+    "codePattern": "PLAN:REMAIN-29",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "千葉都市モノレール0形",
+      "千葉都市モノレール1000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://chiba-monorail.co.jp/index.php/about-monorail/sharyou/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ChibaMonorail2"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
     }
   },
   {
@@ -20247,6 +20413,165 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 205,
+    "networkKey": "ChuoSobuLocal",
+    "operator": "JR-East",
+    "codePattern": "PLAN:THROUGH-Tozai-72",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E231系800番台（東西線直通）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 72 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ChuoSobuLocal"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 206,
+    "networkKey": "ChuoSobuLocal",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Tozai-71",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ15000系",
+      "東京メトロ07系",
+      "東京メトロ05系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 71 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ChuoSobuLocal"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 207,
+    "networkKey": "ChuoSobuLocal",
+    "operator": "ToyoRapid",
+    "codePattern": "PLAN:THROUGH-Tozai-73",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東葉高速2000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 73 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ChuoSobuLocal"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 238,
+    "networkKey": "ChuoSobuLocal",
+    "operator": "JR-East",
+    "codePattern": "PLAN:OWN-ChuoSobuLocal",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E231系500番台",
+      "E231系0番台（中央・総武線各駅停車）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/train/local/e231.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ChuoSobuLocal"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 243,
+    "networkKey": "Daishi_Keikyu",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:OWN-Daishi_Keikyu",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Daishi_Keikyu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
     "evidenceId": 1,
     "networkKey": "denentoshi-hanzomon",
     "operator": "TOKYU",
@@ -20287,6 +20612,42 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "C",
     "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
     "notes": "operator ownership; model requires dated evidence"
+  },
+  {
+    "evidenceId": 116,
+    "networkKey": "Echigo",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-16",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E129系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/train/local/e129.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Echigo"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
   },
   {
     "evidenceId": 49,
@@ -20519,6 +20880,108 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "Official current single-family passenger fleet, model identity only; explicit realtime vehicle remains authoritative, no carset/paint inference. Recurring single-family fleet remains valid until superseded; remove artificial audit expiry."
   },
   {
+    "evidenceId": 124,
+    "networkKey": "Hachinohe",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-24",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "キハE130形500番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Hachinohe"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 161,
+    "networkKey": "HakataMinami",
+    "operator": "JR-West",
+    "codePattern": "PLAN:REMAIN-61",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "JR西日本N700系7000番台",
+      "JR西日本500系",
+      "JR西日本700系7000番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jr-odekake.net/train/500/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "HakataMinami"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Shinkansen",
+        "LimitedExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 117,
+    "networkKey": "Hakushin",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-17",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E129系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/train/local/e129.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Hakushin"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
     "evidenceId": 84,
     "networkKey": "Hanzomon",
     "operator": "TokyoMetro",
@@ -20678,6 +21141,1246 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 149,
+    "networkKey": "HokkaidoShinkansen",
+    "operator": "JR-Hokkaido",
+    "codePattern": "PLAN:REMAIN-49",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "H5系",
+      "E5系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "HokkaidoShinkansen"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Shinkansen"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 150,
+    "networkKey": "HokurikuShinkansen",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-50",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E7系",
+      "W7系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "HokurikuShinkansen"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Shinkansen"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 211,
+    "networkKey": "JobanLocal",
+    "operator": "JR-East",
+    "codePattern": "PLAN:THROUGH-Chiyoda-76",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E233系2000番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 76 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JobanLocal"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 212,
+    "networkKey": "JobanLocal",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Chiyoda-74",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ16000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 74 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JobanLocal"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01S-95S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 213,
+    "networkKey": "JobanLocal",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:THROUGH-Chiyoda-78",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急60000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 78 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JobanLocal"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*E"
+      ]
+    }
+  },
+  {
+    "evidenceId": 214,
+    "networkKey": "JobanLocal",
+    "operator": "Odakyu",
+    "codePattern": "PLAN:THROUGH-Chiyoda-77",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "小田急4000形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MC/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 77 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JobanLocal"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Express",
+        "SemiExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*E"
+      ]
+    }
+  },
+  {
+    "evidenceId": 114,
+    "networkKey": "JobanMain",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-14",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E531系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/train/local/e531.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JobanMain"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 115,
+    "networkKey": "JobanMain",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-15",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E657系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/train/express/hitachi_tokiwa.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JobanMain"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 112,
+    "networkKey": "Joetsu",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-12",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E257系5500番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/multi/zh-CHS/traininformation/kusatsu_shima/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Joetsu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 151,
+    "networkKey": "JoetsuShinkansen",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-51",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E7系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "JoetsuShinkansen"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Shinkansen"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 118,
+    "networkKey": "Karasuyama",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-18",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "EV-E301系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/train/local/ev_e301.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Karasuyama"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 220,
+    "networkKey": "Keikyu",
+    "operator": "Hokuso",
+    "codePattern": "PLAN:THROUGH-Asakusa-91",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "北総7300形",
+      "北総7500形",
+      "北総7800形",
+      "千葉ニュータウン9100形",
+      "千葉ニュータウン9200形",
+      "千葉ニュータウン9800形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*N"
+      ]
+    }
+  },
+  {
+    "evidenceId": 221,
+    "networkKey": "Keikyu",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:THROUGH-Asakusa-88",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急600形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*H"
+      ]
+    }
+  },
+  {
+    "evidenceId": 222,
+    "networkKey": "Keikyu",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-89",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3000形",
+      "京成3700形",
+      "京成3400形",
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "RapidLimitedExpress",
+        "AirportRapidLimitedExpress",
+        "Express",
+        "LimitedExpress",
+        "CommuterLimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 223,
+    "networkKey": "Keikyu",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-90",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AccessExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 224,
+    "networkKey": "Keikyu",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Asakusa-87",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営5500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 239,
+    "networkKey": "Keikyu",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:OWN-Keikyu",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形",
+      "京急600形",
+      "京急2100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 250,
+    "networkKey": "Keikyu",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:AIRPORT-NATIVE",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形",
+      "京急600形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Planned native Keikyu airport/access fleet. 2100 excluded; working-code through rules remain more specific. Not observed daily formation.",
+    "planScope": {
+      "lineIds": [
+        "Keikyu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AirportRapidLimitedExpress",
+        "AccessExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 225,
+    "networkKey": "KeikyuAirport",
+    "operator": "Hokuso",
+    "codePattern": "PLAN:THROUGH-Asakusa-91",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "北総7300形",
+      "北総7500形",
+      "北総7800形",
+      "千葉ニュータウン9100形",
+      "千葉ニュータウン9200形",
+      "千葉ニュータウン9800形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*N"
+      ]
+    }
+  },
+  {
+    "evidenceId": 226,
+    "networkKey": "KeikyuAirport",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:THROUGH-Asakusa-88",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急600形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*H"
+      ]
+    }
+  },
+  {
+    "evidenceId": 227,
+    "networkKey": "KeikyuAirport",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-89",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3000形",
+      "京成3700形",
+      "京成3400形",
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "RapidLimitedExpress",
+        "AirportRapidLimitedExpress",
+        "Express",
+        "LimitedExpress",
+        "CommuterLimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 228,
+    "networkKey": "KeikyuAirport",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-90",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AccessExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 229,
+    "networkKey": "KeikyuAirport",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Asakusa-87",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営5500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 240,
+    "networkKey": "KeikyuAirport",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:OWN-KeikyuAirport",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形",
+      "京急600形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 251,
+    "networkKey": "KeikyuAirport",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:AIRPORT-NATIVE",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形",
+      "京急600形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Planned native Keikyu airport/access fleet. 2100 excluded; working-code through rules remain more specific. Not observed daily formation.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuAirport"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AirportRapidLimitedExpress",
+        "AccessExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 230,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Hokuso",
+    "codePattern": "PLAN:THROUGH-Asakusa-91",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "北総7300形",
+      "北総7500形",
+      "北総7800形",
+      "千葉ニュータウン9100形",
+      "千葉ニュータウン9200形",
+      "千葉ニュータウン9800形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*N"
+      ]
+    }
+  },
+  {
+    "evidenceId": 231,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:THROUGH-Asakusa-88",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急600形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*H"
+      ]
+    }
+  },
+  {
+    "evidenceId": 232,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-89",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3000形",
+      "京成3700形",
+      "京成3400形",
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "RapidLimitedExpress",
+        "AirportRapidLimitedExpress",
+        "Express",
+        "LimitedExpress",
+        "CommuterLimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 233,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-90",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AccessExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 234,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Asakusa-87",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営5500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 241,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:OWN-KeikyuKurihama",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形",
+      "京急600形",
+      "京急2100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 252,
+    "networkKey": "KeikyuKurihama",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:AIRPORT-NATIVE",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形",
+      "京急600形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Planned native Keikyu airport/access fleet. 2100 excluded; working-code through rules remain more specific. Not observed daily formation.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuKurihama"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AirportRapidLimitedExpress",
+        "AccessExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 242,
+    "networkKey": "KeikyuZushi",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:OWN-KeikyuZushi",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeikyuZushi"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 138,
+    "networkKey": "KeioInokashira",
+    "operator": "Keio",
+    "codePattern": "PLAN:REMAIN-38",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京王1000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeioInokashira"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 145,
+    "networkKey": "Keisei",
+    "operator": "Keisei",
+    "codePattern": "PLAN:REMAIN-45",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成AE形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keisei.co.jp/keisei/keisei_museum/pictbook/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Keisei"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Skyliner",
+        "MorningLiner",
+        "EveningLiner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 215,
+    "networkKey": "KeiseiOshiage",
+    "operator": "Hokuso",
+    "codePattern": "PLAN:THROUGH-Asakusa-91",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "北総7300形",
+      "北総7500形",
+      "北総7800形",
+      "千葉ニュータウン9100形",
+      "千葉ニュータウン9200形",
+      "千葉ニュータウン9800形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeiseiOshiage"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*N"
+      ]
+    }
+  },
+  {
+    "evidenceId": 216,
+    "networkKey": "KeiseiOshiage",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:THROUGH-Asakusa-88",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急600形",
+      "京急1500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeiseiOshiage"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*H"
+      ]
+    }
+  },
+  {
+    "evidenceId": 217,
+    "networkKey": "KeiseiOshiage",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-89",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3000形",
+      "京成3700形",
+      "京成3400形",
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeiseiOshiage"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "RapidLimitedExpress",
+        "AirportRapidLimitedExpress",
+        "Express",
+        "LimitedExpress",
+        "CommuterLimitedExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 218,
+    "networkKey": "KeiseiOshiage",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-90",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeiseiOshiage"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AccessExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 219,
+    "networkKey": "KeiseiOshiage",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Asakusa-87",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営5500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KeiseiOshiage"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
     "evidenceId": 95,
     "networkKey": "Keiyo",
     "operator": "JR-East",
@@ -20825,6 +22528,73 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "structural exact"
   },
   {
+    "evidenceId": 123,
+    "networkKey": "Kururi",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-23",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "キハE130形100番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Kururi"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 160,
+    "networkKey": "KyushuShinkansen",
+    "operator": "JR-Kyushu",
+    "codePattern": "PLAN:REMAIN-60",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "JR西日本N700系7000番台",
+      "JR九州N700系8000番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jrkyushu.co.jp/railway/ticket/rule/tokudai_baggage/index.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "KyushuShinkansen"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Shinkansen"
+      ],
+      "overridePlan": true,
+      "candidateLabelsAny": [
+        "さくら",
+        "みずほ"
+      ]
+    }
+  },
+  {
     "evidenceId": 38,
     "networkKey": "Marunouchi",
     "operator": "TokyoMetro",
@@ -20911,6 +22681,269 @@ window.VEHICLE_FAMILY_RULES = [
     "grade": "C",
     "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
     "notes": "published operation set"
+  },
+  {
+    "evidenceId": 188,
+    "networkKey": "MinatoMirai",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-51",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ10000系",
+      "東京メトロ17000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 51 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "21S-99S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 189,
+    "networkKey": "MinatoMirai",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-49",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ17000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 49 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01S-19S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 190,
+    "networkKey": "MinatoMirai",
+    "operator": "Seibu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-53",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武6000系",
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 53 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01M-38M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 191,
+    "networkKey": "MinatoMirai",
+    "operator": "Seibu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-54",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 54 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "71M-75M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 192,
+    "networkKey": "MinatoMirai",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-59",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 59 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "91G-95G"
+      ]
+    }
+  },
+  {
+    "evidenceId": 193,
+    "networkKey": "MinatoMirai",
+    "operator": "Tobu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-56",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武50070系",
+      "東武9000系",
+      "東武9050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 56 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01T-23T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 194,
+    "networkKey": "MinatoMirai",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-58",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 58 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "51K-65K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 195,
+    "networkKey": "MinatoMirai",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-57",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5050系",
+      "東急5000系",
+      "横浜高速Y500系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 57 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01K-35K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 245,
+    "networkKey": "MinatoMirai",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:OWN-Minatomirai",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ10000系",
+      "東京メトロ17000系",
+      "西武6000系",
+      "西武40000系",
+      "相鉄20000系(10両)",
+      "東武50070系",
+      "東武9000系",
+      "東武9050系",
+      "東急5050系",
+      "東急5000系",
+      "横浜高速Y500系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.tokyu.co.jp/railway/trains/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "MinatoMirai"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
+    }
   },
   {
     "evidenceId": 61,
@@ -21129,6 +23162,264 @@ window.VEHICLE_FAMILY_RULES = [
       "operationPatterns": [
         "30G-44G"
       ]
+    }
+  },
+  {
+    "evidenceId": 100,
+    "networkKey": "Nambu",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-0",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E233系8000番台",
+      "E233系8500番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://media.jreast.co.jp/articles/1712",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Nambu"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 101,
+    "networkKey": "NambuBranch",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-1",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E127系0番台（南武支線）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://media.jreast.co.jp/articles/1712",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "NambuBranch"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 146,
+    "networkKey": "NaritaSkyAccess",
+    "operator": "Keisei",
+    "codePattern": "PLAN:REMAIN-46",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成AE形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.keisei.co.jp/keisei/keisei_museum/pictbook/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "NaritaSkyAccess"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Skyliner",
+        "MorningLiner",
+        "EveningLiner"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 235,
+    "networkKey": "NaritaSkyAccess",
+    "operator": "Keikyu",
+    "codePattern": "PLAN:THROUGH-Asakusa-88",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京急1000形",
+      "京急600形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "NaritaSkyAccess"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*H"
+      ]
+    }
+  },
+  {
+    "evidenceId": 236,
+    "networkKey": "NaritaSkyAccess",
+    "operator": "Keisei",
+    "codePattern": "PLAN:THROUGH-Asakusa-90",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京成3100形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "NaritaSkyAccess"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "AccessExpress"
+      ],
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 237,
+    "networkKey": "NaritaSkyAccess",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Asakusa-87",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営5500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MA/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "NaritaSkyAccess"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 133,
+    "networkKey": "NewShuttle",
+    "operator": "SaitamaNewUrbanTransit",
+    "codePattern": "PLAN:REMAIN-33",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "埼玉新都市交通2000系",
+      "埼玉新都市交通2020系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://new-shuttle.jp/newshuttle_atraction/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "NewShuttle"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 136,
+    "networkKey": "Nippori_Toneri",
+    "operator": "Toei",
+    "codePattern": "PLAN:REMAIN-36",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営330形（日暮里・舎人ライナー）",
+      "都営320形（日暮里・舎人ライナー）",
+      "都営300形（日暮里・舎人ライナー）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.kotsu.metro.tokyo.jp/about/service/nippori_toneri.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Nippori_Toneri"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid",
+        "SpecialRapid",
+        "Express",
+        "SemiExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "CommuterExpress",
+        "CommuterSemiExpress"
+      ],
+      "overridePlan": true
     }
   },
   {
@@ -21453,2745 +23744,6 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 47,
-    "networkKey": "Rinkai",
-    "operator": "JR-East",
-    "codePattern": "PLAN:DECLARED-JR-THROUGH",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-15",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "JR東日本E233系7000番台"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://shared.steamstatic.com/store_item_assets/steam/apps/2111630/manuals/ec7c864e3742342718716110cccc7be92801d722/JR_EAST_TrainSimulator_Instruction_Manual_JP.pdf",
-    "notes": "Do not invent a fleet fallback: only qualify an existing E233-7000 timetable candidate on a known Rinkai/JR itinerary.",
-    "planScope": {
-      "lineIds": [
-        "Rinkai"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid"
-      ],
-      "overridePlan": true,
-      "candidateLabelsAny": [
-        "E233系7000番台",
-        "JR東日本E233系7000番台"
-      ],
-      "allStationOperators": [
-        "TWR",
-        "JR-East"
-      ]
-    }
-  },
-  {
-    "evidenceId": 14,
-    "networkKey": "setagaya",
-    "operator": "TOKYU",
-    "codePattern": "*",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "東急300系",
-    "vehicleCandidates": [
-      "東急300系"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.tokyu.co.jp/railway/data/train_info/setagaya.html",
-    "notes": "structural exact"
-  },
-  {
-    "evidenceId": 92,
-    "networkKey": "Shinjuku",
-    "operator": "Toei",
-    "codePattern": "PLAN:SUB-TOEI",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営10-300形"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
-    "notes": "Recurring Shinjuku TOEI qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Shinjuku"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 93,
-    "networkKey": "Shinjuku",
-    "operator": "Keio",
-    "codePattern": "PLAN:SUB-KEIO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京王9000系（9030系）"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
-    "notes": "Recurring Shinjuku KEIO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Shinjuku"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 21,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TOKYU",
-    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,051,052,053,054,055,056,057,058,059,060,061,062,063,064,065",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 22,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TokyoMetro",
-    "codePattern": "701,702,703,704,705,707,709,711,713,715,717,719,723,725,729,731,733,741,745,747,753,763,767,771,775,777,779,781,785,787,789,791",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 23,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Seibu",
-    "codePattern": "102,104,106,110,114,118,120,122,124,128,130,134",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 24,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Tobu",
-    "codePattern": "803,805,813,819,821,823",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 25,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Sotetsu",
-    "codePattern": "991,992,993,994,995",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "相鉄20000系(10両)",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 26,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TOKYU",
-    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,051,052,053,054,055,056,057,058,059,060,061,062,063,064",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 27,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TokyoMetro",
-    "codePattern": "701,702,703,704,705,707,709,711,713,717,719,723,725,729,731,733,739,743,745,747,749,753,755,757,761,767,773,775,785,787,789,791",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 28,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Seibu",
-    "codePattern": "102,106,108,110,112,114,124,128,130,171,172,173,174,175",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 29,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Tobu",
-    "codePattern": "803,805,811,813,817,819",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 30,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Sotetsu",
-    "codePattern": "991,992,994",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "相鉄20000系(10両)",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 11,
-    "networkKey": "tozai",
-    "operator": "JR-East",
-    "codePattern": "03K,05K,07K,09K,11K",
-    "calendarType": "",
-    "effectiveFrom": "2026-04-16",
-    "effectiveTo": "",
-    "exactVehicleType": "JR E231系800番台(10両)",
-    "vehicleCandidates": [
-      "JR E231系800番台(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "model exact"
-  },
-  {
-    "evidenceId": 12,
-    "networkKey": "tozai",
-    "operator": "ToyoRapid",
-    "codePattern": "50T-68T even",
-    "calendarType": "",
-    "effectiveFrom": "2026-04-16",
-    "effectiveTo": "",
-    "exactVehicleType": "東葉高速2000系(10両)",
-    "vehicleCandidates": [
-      "東葉高速2000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "model exact"
-  },
-  {
-    "evidenceId": 13,
-    "networkKey": "tozai",
-    "operator": "TokyoMetro",
-    "codePattern": "S published set",
-    "calendarType": "",
-    "effectiveFrom": "2026-04-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ05系(10両)",
-      "東京メトロ07系(10両)",
-      "東京メトロ15000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "multi-model family"
-  },
-  {
-    "evidenceId": 71,
-    "networkKey": "Tozai",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:SUB-METRO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ15000系",
-      "東京メトロ07系",
-      "東京メトロ05系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring Tozai METRO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Tozai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 72,
-    "networkKey": "Tozai",
-    "operator": "JR-East",
-    "codePattern": "PLAN:SUB-JR",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E231系800番台（東西線直通）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring Tozai JR qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Tozai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 73,
-    "networkKey": "Tozai",
-    "operator": "ToyoRapid",
-    "codePattern": "PLAN:SUB-TOYO",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東葉高速2000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring Tozai TOYO qualified model plan; not actual observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Tozai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 40,
-    "networkKey": "TsukubaExpress",
-    "operator": "TsukubaExpress",
-    "codePattern": "PLAN:AC-SECTION",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "TX-2000系",
-      "TX-3000系"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.mir.co.jp/feature/about_tx/",
-    "notes": "Full known itinerary including origin, destination and intermediate stops. TX-1000 is DC-only Akihabara-Moriya; AC itineraries permit TX-2000/3000 planned candidates, never a daily carset.",
-    "planScope": {
-      "lineIds": [
-        "TsukubaExpress"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "anyStationNames": [
-        "Miraidaira",
-        "Midorino",
-        "Banpaku-Kinen-Kouen",
-        "BampakuKinenKoen",
-        "Kenkyu-Gaku",
-        "KenkyuGakuen",
-        "Tsukuba"
-      ]
-    }
-  },
-  {
-    "evidenceId": 36,
-    "networkKey": "Yamanote",
-    "operator": "JR-East",
-    "codePattern": "*",
-    "calendarType": "",
-    "effectiveFrom": "2020-01-21",
-    "effectiveTo": "",
-    "exactVehicleType": "E235系0番台（山手線）",
-    "vehicleCandidates": [
-      "E235系0番台（山手線）"
-    ],
-    "grade": "A",
-    "sourceUrl": "https://www.jreast.co.jp/press/2019/20200122_ho01.pdf",
-    "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
-  },
-  {
-    "evidenceId": 50,
-    "networkKey": "Yurakucho",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:MF-METRO-10",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ10000系",
-      "東京メトロ17000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned METRO-10 owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Yurakucho"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "21S-99S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 52,
-    "networkKey": "Yurakucho",
-    "operator": "Seibu",
-    "codePattern": "PLAN:MF-SEIBU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武6000系",
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned SEIBU owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Yurakucho"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01M-38M"
-      ]
-    }
-  },
-  {
-    "evidenceId": 55,
-    "networkKey": "Yurakucho",
-    "operator": "Tobu",
-    "codePattern": "PLAN:MF-TOBU",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武50070系",
-      "東武9000系",
-      "東武9050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Planned TOBU owner/working family; recurring candidates, not observed formation.",
-    "planScope": {
-      "lineIds": [
-        "Yurakucho"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01T-23T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 60,
-    "networkKey": "Yurakucho",
-    "operator": "Seibu",
-    "codePattern": "PLAN:MF-SEIBU-STRAIN",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring weekday S-TRAIN working51-59M; retain40000 model plan without identifying a daily carset.",
-    "planScope": {
-      "lineIds": [
-        "Yurakucho"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "51M-59M"
-      ]
-    }
-  },
-  {
-    "evidenceId": 111,
-    "networkKey": "Agatsuma",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-11",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E257系5500番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/multi/zh-CHS/traininformation/kusatsu_shima/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Agatsuma"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 147,
-    "networkKey": "AkitaShinkansen",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-47",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E6系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "AkitaShinkansen"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Shinkansen"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 137,
-    "networkKey": "Arakawa",
-    "operator": "Toei",
-    "codePattern": "PLAN:REMAIN-37",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都電7700形",
-      "都電8500形",
-      "都電8800形",
-      "都電8900形",
-      "都電9000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.kotsu.metro.tokyo.jp/about/koukai/vehicle_outline/model_diagram/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Arakawa"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 128,
-    "networkKey": "ChibaMonorail1",
-    "operator": "ChibaUrbanMonorail",
-    "codePattern": "PLAN:REMAIN-28",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "千葉都市モノレール0形",
-      "千葉都市モノレール1000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://chiba-monorail.co.jp/index.php/about-monorail/sharyou/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "ChibaMonorail1"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 129,
-    "networkKey": "ChibaMonorail2",
-    "operator": "ChibaUrbanMonorail",
-    "codePattern": "PLAN:REMAIN-29",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "千葉都市モノレール0形",
-      "千葉都市モノレール1000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://chiba-monorail.co.jp/index.php/about-monorail/sharyou/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "ChibaMonorail2"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 238,
-    "networkKey": "ChuoSobuLocal",
-    "operator": "JR-East",
-    "codePattern": "PLAN:OWN-ChuoSobuLocal",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E231系500番台",
-      "E231系0番台（中央・総武線各駅停車）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/train/local/e231.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "ChuoSobuLocal"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 206,
-    "networkKey": "ChuoSobuLocal",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Tozai-71",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ15000系",
-      "東京メトロ07系",
-      "東京メトロ05系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 71 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "ChuoSobuLocal"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 205,
-    "networkKey": "ChuoSobuLocal",
-    "operator": "JR-East",
-    "codePattern": "PLAN:THROUGH-Tozai-72",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E231系800番台（東西線直通）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 72 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "ChuoSobuLocal"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 207,
-    "networkKey": "ChuoSobuLocal",
-    "operator": "ToyoRapid",
-    "codePattern": "PLAN:THROUGH-Tozai-73",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東葉高速2000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 73 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "ChuoSobuLocal"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 243,
-    "networkKey": "Daishi_Keikyu",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:OWN-Daishi_Keikyu",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Daishi_Keikyu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 116,
-    "networkKey": "Echigo",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-16",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E129系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/train/local/e129.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Echigo"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 124,
-    "networkKey": "Hachinohe",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-24",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "キハE130形500番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Hachinohe"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 161,
-    "networkKey": "HakataMinami",
-    "operator": "JR-West",
-    "codePattern": "PLAN:REMAIN-61",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "JR西日本N700系7000番台",
-      "JR西日本500系",
-      "JR西日本700系7000番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jr-odekake.net/train/500/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "HakataMinami"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Shinkansen",
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 117,
-    "networkKey": "Hakushin",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-17",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E129系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/train/local/e129.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Hakushin"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 149,
-    "networkKey": "HokkaidoShinkansen",
-    "operator": "JR-Hokkaido",
-    "codePattern": "PLAN:REMAIN-49",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "H5系",
-      "E5系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "HokkaidoShinkansen"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Shinkansen"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 150,
-    "networkKey": "HokurikuShinkansen",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-50",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E7系",
-      "W7系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "HokurikuShinkansen"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Shinkansen"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 212,
-    "networkKey": "JobanLocal",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Chiyoda-74",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ16000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 74 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JobanLocal"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01S-95S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 211,
-    "networkKey": "JobanLocal",
-    "operator": "JR-East",
-    "codePattern": "PLAN:THROUGH-Chiyoda-76",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E233系2000番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 76 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JobanLocal"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 214,
-    "networkKey": "JobanLocal",
-    "operator": "Odakyu",
-    "codePattern": "PLAN:THROUGH-Chiyoda-77",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "小田急4000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 77 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JobanLocal"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Express",
-        "SemiExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*E"
-      ]
-    }
-  },
-  {
-    "evidenceId": 213,
-    "networkKey": "JobanLocal",
-    "operator": "Odakyu",
-    "codePattern": "PLAN:THROUGH-Chiyoda-78",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "小田急60000形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MC/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 78 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JobanLocal"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*E"
-      ]
-    }
-  },
-  {
-    "evidenceId": 114,
-    "networkKey": "JobanMain",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-14",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E531系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/train/local/e531.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JobanMain"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 115,
-    "networkKey": "JobanMain",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-15",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E657系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/train/express/hitachi_tokiwa.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JobanMain"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 112,
-    "networkKey": "Joetsu",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-12",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E257系5500番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/multi/zh-CHS/traininformation/kusatsu_shima/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Joetsu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 151,
-    "networkKey": "JoetsuShinkansen",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-51",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E7系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "JoetsuShinkansen"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Shinkansen"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 118,
-    "networkKey": "Karasuyama",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-18",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "EV-E301系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/train/local/ev_e301.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Karasuyama"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 239,
-    "networkKey": "Keikyu",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:OWN-Keikyu",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形",
-      "京急600形",
-      "京急2100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 224,
-    "networkKey": "Keikyu",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Asakusa-87",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営5500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 221,
-    "networkKey": "Keikyu",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:THROUGH-Asakusa-88",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急600形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*H"
-      ]
-    }
-  },
-  {
-    "evidenceId": 222,
-    "networkKey": "Keikyu",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-89",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3000形",
-      "京成3700形",
-      "京成3400形",
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "RapidLimitedExpress",
-        "AirportRapidLimitedExpress",
-        "Express",
-        "LimitedExpress",
-        "CommuterLimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 223,
-    "networkKey": "Keikyu",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-90",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AccessExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 220,
-    "networkKey": "Keikyu",
-    "operator": "Hokuso",
-    "codePattern": "PLAN:THROUGH-Asakusa-91",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "北総7300形",
-      "北総7500形",
-      "北総7800形",
-      "千葉ニュータウン9100形",
-      "千葉ニュータウン9200形",
-      "千葉ニュータウン9800形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*N"
-      ]
-    }
-  },
-  {
-    "evidenceId": 240,
-    "networkKey": "KeikyuAirport",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:OWN-KeikyuAirport",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形",
-      "京急600形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 229,
-    "networkKey": "KeikyuAirport",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Asakusa-87",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営5500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 226,
-    "networkKey": "KeikyuAirport",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:THROUGH-Asakusa-88",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急600形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*H"
-      ]
-    }
-  },
-  {
-    "evidenceId": 227,
-    "networkKey": "KeikyuAirport",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-89",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3000形",
-      "京成3700形",
-      "京成3400形",
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "RapidLimitedExpress",
-        "AirportRapidLimitedExpress",
-        "Express",
-        "LimitedExpress",
-        "CommuterLimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 228,
-    "networkKey": "KeikyuAirport",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-90",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AccessExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 225,
-    "networkKey": "KeikyuAirport",
-    "operator": "Hokuso",
-    "codePattern": "PLAN:THROUGH-Asakusa-91",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "北総7300形",
-      "北総7500形",
-      "北総7800形",
-      "千葉ニュータウン9100形",
-      "千葉ニュータウン9200形",
-      "千葉ニュータウン9800形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*N"
-      ]
-    }
-  },
-  {
-    "evidenceId": 241,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:OWN-KeikyuKurihama",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形",
-      "京急600形",
-      "京急2100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 234,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Asakusa-87",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営5500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 231,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:THROUGH-Asakusa-88",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急600形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*H"
-      ]
-    }
-  },
-  {
-    "evidenceId": 232,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-89",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3000形",
-      "京成3700形",
-      "京成3400形",
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "RapidLimitedExpress",
-        "AirportRapidLimitedExpress",
-        "Express",
-        "LimitedExpress",
-        "CommuterLimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 233,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-90",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AccessExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 230,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Hokuso",
-    "codePattern": "PLAN:THROUGH-Asakusa-91",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "北総7300形",
-      "北総7500形",
-      "北総7800形",
-      "千葉ニュータウン9100形",
-      "千葉ニュータウン9200形",
-      "千葉ニュータウン9800形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*N"
-      ]
-    }
-  },
-  {
-    "evidenceId": 242,
-    "networkKey": "KeikyuZushi",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:OWN-KeikyuZushi",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuZushi"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 138,
-    "networkKey": "KeioInokashira",
-    "operator": "Keio",
-    "codePattern": "PLAN:REMAIN-38",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京王1000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeioInokashira"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 145,
-    "networkKey": "Keisei",
-    "operator": "Keisei",
-    "codePattern": "PLAN:REMAIN-45",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成AE形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keisei.co.jp/keisei/keisei_museum/pictbook/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Keisei"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Skyliner",
-        "MorningLiner",
-        "EveningLiner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 219,
-    "networkKey": "KeiseiOshiage",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Asakusa-87",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営5500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeiseiOshiage"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 216,
-    "networkKey": "KeiseiOshiage",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:THROUGH-Asakusa-88",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急600形",
-      "京急1500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeiseiOshiage"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*H"
-      ]
-    }
-  },
-  {
-    "evidenceId": 217,
-    "networkKey": "KeiseiOshiage",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-89",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3000形",
-      "京成3700形",
-      "京成3400形",
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 89 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeiseiOshiage"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "RapidLimitedExpress",
-        "AirportRapidLimitedExpress",
-        "Express",
-        "LimitedExpress",
-        "CommuterLimitedExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 218,
-    "networkKey": "KeiseiOshiage",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-90",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeiseiOshiage"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AccessExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 215,
-    "networkKey": "KeiseiOshiage",
-    "operator": "Hokuso",
-    "codePattern": "PLAN:THROUGH-Asakusa-91",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "北総7300形",
-      "北総7500形",
-      "北総7800形",
-      "千葉ニュータウン9100形",
-      "千葉ニュータウン9200形",
-      "千葉ニュータウン9800形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 91 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KeiseiOshiage"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*N"
-      ]
-    }
-  },
-  {
-    "evidenceId": 123,
-    "networkKey": "Kururi",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-23",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "キハE130形100番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/railway/train/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Kururi"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 160,
-    "networkKey": "KyushuShinkansen",
-    "operator": "JR-Kyushu",
-    "codePattern": "PLAN:REMAIN-60",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "JR西日本N700系7000番台",
-      "JR九州N700系8000番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jrkyushu.co.jp/railway/ticket/rule/tokudai_baggage/index.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "KyushuShinkansen"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Shinkansen"
-      ],
-      "overridePlan": true,
-      "candidateLabelsAny": [
-        "さくら",
-        "みずほ"
-      ]
-    }
-  },
-  {
-    "evidenceId": 245,
-    "networkKey": "MinatoMirai",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:OWN-Minatomirai",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ10000系",
-      "東京メトロ17000系",
-      "西武6000系",
-      "西武40000系",
-      "相鉄20000系(10両)",
-      "東武50070系",
-      "東武9000系",
-      "東武9050系",
-      "東急5050系",
-      "東急5000系",
-      "横浜高速Y500系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.tokyu.co.jp/railway/trains/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 189,
-    "networkKey": "MinatoMirai",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-49",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ17000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 49 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01S-19S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 188,
-    "networkKey": "MinatoMirai",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-51",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ10000系",
-      "東京メトロ17000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 51 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "21S-99S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 190,
-    "networkKey": "MinatoMirai",
-    "operator": "Seibu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-53",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武6000系",
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 53 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01M-38M"
-      ]
-    }
-  },
-  {
-    "evidenceId": 191,
-    "networkKey": "MinatoMirai",
-    "operator": "Seibu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-54",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "西武40000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 54 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "71M-75M"
-      ]
-    }
-  },
-  {
-    "evidenceId": 193,
-    "networkKey": "MinatoMirai",
-    "operator": "Tobu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-56",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武50070系",
-      "東武9000系",
-      "東武9050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 56 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01T-23T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 195,
-    "networkKey": "MinatoMirai",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-57",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5050系",
-      "東急5000系",
-      "横浜高速Y500系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 57 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "01K-35K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 194,
-    "networkKey": "MinatoMirai",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-58",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 58 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "51K-65K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 192,
-    "networkKey": "MinatoMirai",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-59",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 59 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "MinatoMirai"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "91G-95G"
-      ]
-    }
-  },
-  {
-    "evidenceId": 100,
-    "networkKey": "Nambu",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-0",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E233系8000番台",
-      "E233系8500番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://media.jreast.co.jp/articles/1712",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Nambu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 101,
-    "networkKey": "NambuBranch",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-1",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E127系0番台（南武支線）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://media.jreast.co.jp/articles/1712",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "NambuBranch"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 146,
-    "networkKey": "NaritaSkyAccess",
-    "operator": "Keisei",
-    "codePattern": "PLAN:REMAIN-46",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成AE形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keisei.co.jp/keisei/keisei_museum/pictbook/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "NaritaSkyAccess"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Skyliner",
-        "MorningLiner",
-        "EveningLiner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 237,
-    "networkKey": "NaritaSkyAccess",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Asakusa-87",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営5500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 87 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "NaritaSkyAccess"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 235,
-    "networkKey": "NaritaSkyAccess",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:THROUGH-Asakusa-88",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急600形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 88 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "NaritaSkyAccess"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*H"
-      ]
-    }
-  },
-  {
-    "evidenceId": 236,
-    "networkKey": "NaritaSkyAccess",
-    "operator": "Keisei",
-    "codePattern": "PLAN:THROUGH-Asakusa-90",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京成3100形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MA/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 90 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "NaritaSkyAccess"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AccessExpress"
-      ],
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 133,
-    "networkKey": "NewShuttle",
-    "operator": "SaitamaNewUrbanTransit",
-    "codePattern": "PLAN:REMAIN-33",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "埼玉新都市交通2000系",
-      "埼玉新都市交通2020系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://new-shuttle.jp/newshuttle_atraction/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "NewShuttle"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 136,
-    "networkKey": "Nippori_Toneri",
-    "operator": "Toei",
-    "codePattern": "PLAN:REMAIN-36",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営330形（日暮里・舎人ライナー）",
-      "都営320形（日暮里・舎人ライナー）",
-      "都営300形（日暮里・舎人ライナー）"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.kotsu.metro.tokyo.jp/about/service/nippori_toneri.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Nippori_Toneri"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "CommuterRapid",
-        "SpecialRapid",
-        "Express",
-        "SemiExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "CommuterExpress",
-        "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
     "evidenceId": 119,
     "networkKey": "Oga",
     "operator": "JR-East",
@@ -24228,30 +23780,38 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 169,
-    "networkKey": "SaitamaRapid",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Namboku-64",
+    "evidenceId": 47,
+    "networkKey": "Rinkai",
+    "operator": "JR-East",
+    "codePattern": "PLAN:DECLARED-JR-THROUGH",
     "calendarType": "",
-    "effectiveFrom": "2026-10-16",
+    "effectiveFrom": "2026-10-15",
     "effectiveTo": "",
     "exactVehicleType": "",
     "vehicleCandidates": [
-      "東急5080系",
-      "東急3020系",
-      "東急3000系"
+      "JR東日本E233系7000番台"
     ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 64 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "grade": "B",
+    "sourceUrl": "https://shared.steamstatic.com/store_item_assets/steam/apps/2111630/manuals/ec7c864e3742342718716110cccc7be92801d722/JR_EAST_TrainSimulator_Instruction_Manual_JP.pdf",
+    "notes": "Do not invent a fleet fallback: only qualify an existing E233-7000 timetable candidate on a known Rinkai/JR itinerary.",
     "planScope": {
       "lineIds": [
-        "SaitamaRapid"
+        "Rinkai"
       ],
       "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "CommuterRapid"
+      ],
       "overridePlan": true,
-      "operationPatterns": [
-        "00K-48K"
+      "candidateLabelsAny": [
+        "E233系7000番台",
+        "JR東日本E233系7000番台"
+      ],
+      "allStationOperators": [
+        "TWR",
+        "JR-East"
       ]
     }
   },
@@ -24330,6 +23890,34 @@ window.VEHICLE_FAMILY_RULES = [
       "overridePlan": true,
       "operationPatterns": [
         "30G-44G"
+      ]
+    }
+  },
+  {
+    "evidenceId": 169,
+    "networkKey": "SaitamaRapid",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Namboku-64",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 64 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "SaitamaRapid"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
       ]
     }
   },
@@ -24488,6 +24076,74 @@ window.VEHICLE_FAMILY_RULES = [
         "CommuterSemiExpress"
       ],
       "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 14,
+    "networkKey": "setagaya",
+    "operator": "TOKYU",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "東急300系",
+    "vehicleCandidates": [
+      "東急300系"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.tokyu.co.jp/railway/data/train_info/setagaya.html",
+    "notes": "structural exact"
+  },
+  {
+    "evidenceId": 92,
+    "networkKey": "Shinjuku",
+    "operator": "Toei",
+    "codePattern": "PLAN:SUB-TOEI",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営10-300形"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
+    "notes": "Recurring Shinjuku TOEI qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Shinjuku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 93,
+    "networkKey": "Shinjuku",
+    "operator": "Keio",
+    "codePattern": "PLAN:SUB-KEIO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "京王9000系（9030系）"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.keio.co.jp/keiofan/museum/exist/",
+    "notes": "Recurring Shinjuku KEIO qualified model plan; not actual observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Shinjuku"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
     }
   },
   {
@@ -24788,32 +24444,6 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 113,
-    "networkKey": "Takasaki",
-    "operator": "JR-East",
-    "codePattern": "PLAN:REMAIN-13",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "E257系5500番台"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.jreast.co.jp/multi/zh-CHS/traininformation/kusatsu_shima/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "Takasaki"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "LimitedExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
     "evidenceId": 109,
     "networkKey": "Takasaki",
     "operator": "JR-East",
@@ -24846,6 +24476,32 @@ window.VEHICLE_FAMILY_RULES = [
         "SectionSemiExpress",
         "CommuterExpress",
         "CommuterSemiExpress"
+      ],
+      "overridePlan": true
+    }
+  },
+  {
+    "evidenceId": 113,
+    "networkKey": "Takasaki",
+    "operator": "JR-East",
+    "codePattern": "PLAN:REMAIN-13",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E257系5500番台"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.jreast.co.jp/multi/zh-CHS/traininformation/kusatsu_shima/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "Takasaki"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "LimitedExpress"
       ],
       "overridePlan": true
     }
@@ -25182,6 +24838,87 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 208,
+    "networkKey": "TokyuDenEn",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Hanzomon-84",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ18000系",
+      "東京メトロ08系",
+      "東京メトロ8000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 84 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuDenEn"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 209,
+    "networkKey": "TokyuDenEn",
+    "operator": "Tobu",
+    "codePattern": "PLAN:THROUGH-Hanzomon-86",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武50050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 86 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuDenEn"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 210,
+    "networkKey": "TokyuDenEn",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Hanzomon-85",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急2020系",
+      "東急5000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 85 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuDenEn"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*K"
+      ]
+    }
+  },
+  {
     "evidenceId": 247,
     "networkKey": "TokyuDenEn",
     "operator": "Tokyu",
@@ -25226,87 +24963,6 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 208,
-    "networkKey": "TokyuDenEn",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Hanzomon-84",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ18000系",
-      "東京メトロ08系",
-      "東京メトロ8000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 84 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuDenEn"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 210,
-    "networkKey": "TokyuDenEn",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Hanzomon-85",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急2020系",
-      "東急5000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 85 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuDenEn"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 209,
-    "networkKey": "TokyuDenEn",
-    "operator": "Tobu",
-    "codePattern": "PLAN:THROUGH-Hanzomon-86",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東武50050系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo/tables/dt_20260314.html",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 86 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuDenEn"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "*T"
-      ]
-    }
-  },
-  {
     "evidenceId": 140,
     "networkKey": "TokyuKodomonokuni",
     "operator": "Tokyu",
@@ -25340,161 +24996,6 @@ window.VEHICLE_FAMILY_RULES = [
         "CommuterSemiExpress"
       ],
       "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 246,
-    "networkKey": "TokyuMeguro",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:OWN-TokyuMeguro",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄21000系",
-      "都営6300形",
-      "都営6500形",
-      "東急5080系",
-      "東急3020系",
-      "東急3000系",
-      "東京メトロ9000系",
-      "埼玉高速2000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.tokyu.co.jp/railway/trains/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuMeguro"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 176,
-    "networkKey": "TokyuMeguro",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Mita-61",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5080系",
-      "東急3020系",
-      "東急3000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 61 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuMeguro"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "00K-48K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 175,
-    "networkKey": "TokyuMeguro",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Mita-62",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営6300形",
-      "都営6500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 62 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuMeguro"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "20T-89T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 174,
-    "networkKey": "TokyuMeguro",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:THROUGH-Mita-63",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄21000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 63 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuMeguro"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "30G-44G"
-      ]
-    }
-  },
-  {
-    "evidenceId": 165,
-    "networkKey": "TokyuMeguro",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Namboku-64",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5080系",
-      "東急3020系",
-      "東急3000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 64 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuMeguro"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "00K-48K"
-      ]
     }
   },
   {
@@ -25573,6 +25074,161 @@ window.VEHICLE_FAMILY_RULES = [
       "operationPatterns": [
         "30G-44G"
       ]
+    }
+  },
+  {
+    "evidenceId": 165,
+    "networkKey": "TokyuMeguro",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Namboku-64",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 64 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuMeguro"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 174,
+    "networkKey": "TokyuMeguro",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:THROUGH-Mita-63",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄21000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 63 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuMeguro"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30G-44G"
+      ]
+    }
+  },
+  {
+    "evidenceId": 175,
+    "networkKey": "TokyuMeguro",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Mita-62",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営6300形",
+      "都営6500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 62 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuMeguro"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "20T-89T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 176,
+    "networkKey": "TokyuMeguro",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Mita-61",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 61 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuMeguro"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 246,
+    "networkKey": "TokyuMeguro",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:OWN-TokyuMeguro",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄21000系",
+      "都営6300形",
+      "都営6500形",
+      "東急5080系",
+      "東急3020系",
+      "東急3000系",
+      "東京メトロ9000系",
+      "埼玉高速2000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.tokyu.co.jp/railway/trains/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuMeguro"
+      ],
+      "planOnly": true,
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner"
+      ],
+      "overridePlan": true
     }
   },
   {
@@ -25667,6 +25323,193 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 170,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Namboku-65",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ9000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 65 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30S-70S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 171,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "SaitamaRailway",
+    "codePattern": "PLAN:THROUGH-Namboku-66",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "埼玉高速2000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 66 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "80M-96M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 172,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:THROUGH-Namboku-67",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄21000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 67 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30G-44G"
+      ]
+    }
+  },
+  {
+    "evidenceId": 173,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Namboku-64",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 64 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 177,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:THROUGH-Mita-63",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄21000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 63 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "30G-44G"
+      ]
+    }
+  },
+  {
+    "evidenceId": 178,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "Toei",
+    "codePattern": "PLAN:THROUGH-Mita-62",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "都営6300形",
+      "都営6500形"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 62 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "20T-89T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 179,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Mita-61",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5080系",
+      "東急3020系",
+      "東急3000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 61 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "00K-48K"
+      ]
+    }
+  },
+  {
     "evidenceId": 196,
     "networkKey": "TokyuShinYokohama",
     "operator": "TokyoMetro",
@@ -25747,6 +25590,32 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 199,
+    "networkKey": "TokyuShinYokohama",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-59",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 59 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuShinYokohama"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "91G-95G"
+      ]
+    }
+  },
+  {
     "evidenceId": 200,
     "networkKey": "TokyuShinYokohama",
     "operator": "Tobu",
@@ -25801,266 +25670,30 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 199,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-59",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 59 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "91G-95G"
-      ]
-    }
-  },
-  {
-    "evidenceId": 179,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Mita-61",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5080系",
-      "東急3020系",
-      "東急3000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 61 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "00K-48K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 178,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "Toei",
-    "codePattern": "PLAN:THROUGH-Mita-62",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "都営6300形",
-      "都営6500形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 62 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "20T-89T"
-      ]
-    }
-  },
-  {
-    "evidenceId": 177,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:THROUGH-Mita-63",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄21000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 63 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "30G-44G"
-      ]
-    }
-  },
-  {
-    "evidenceId": 173,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Namboku-64",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東急5080系",
-      "東急3020系",
-      "東急3000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 64 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "00K-48K"
-      ]
-    }
-  },
-  {
-    "evidenceId": 170,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Namboku-65",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ9000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 65 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "30S-70S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 171,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "SaitamaRailway",
-    "codePattern": "PLAN:THROUGH-Namboku-66",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "埼玉高速2000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 66 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "80M-96M"
-      ]
-    }
-  },
-  {
-    "evidenceId": 172,
-    "networkKey": "TokyuShinYokohama",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:THROUGH-Namboku-67",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "相鉄21000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Meguro/2026-03-14/weekday",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 67 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuShinYokohama"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "30G-44G"
-      ]
-    }
-  },
-  {
-    "evidenceId": 244,
+    "evidenceId": 180,
     "networkKey": "TokyuToyoko",
-    "operator": "Tokyu",
-    "codePattern": "PLAN:OWN-TokyuToyoko",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-51",
     "calendarType": "",
     "effectiveFrom": "2026-10-16",
     "effectiveTo": "",
     "exactVehicleType": "",
     "vehicleCandidates": [
       "東京メトロ10000系",
-      "東京メトロ17000系",
-      "西武6000系",
-      "西武40000系",
-      "相鉄20000系(10両)",
-      "東武50070系",
-      "東武9000系",
-      "東武9050系",
-      "東急5050系",
-      "東急5000系",
-      "横浜高速Y500系"
+      "東京メトロ17000系"
     ],
     "grade": "C",
-    "sourceUrl": "https://www.tokyu.co.jp/railway/trains/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 51 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
     "planScope": {
       "lineIds": [
         "TokyuToyoko"
       ],
       "planOnly": true,
-      "trainTypes": [
-        "Local",
-        "Rapid",
-        "Express",
-        "SemiExpress",
-        "CommuterRapid",
-        "CommuterExpress",
-        "RapidExpress",
-        "SectionExpress",
-        "SectionSemiExpress",
-        "LimitedExpress",
-        "RapidLimitedExpress",
-        "AirportExpress",
-        "AirportRapid",
-        "F-Liner",
-        "CommuterLimitedExpress"
-      ],
-      "overridePlan": true
+      "overridePlan": true,
+      "operationPatterns": [
+        "21S-99S"
+      ]
     }
   },
   {
@@ -26086,33 +25719,6 @@ window.VEHICLE_FAMILY_RULES = [
       "overridePlan": true,
       "operationPatterns": [
         "01S-19S"
-      ]
-    }
-  },
-  {
-    "evidenceId": 180,
-    "networkKey": "TokyuToyoko",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-51",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ10000系",
-      "東京メトロ17000系"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 51 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
-    "planScope": {
-      "lineIds": [
-        "TokyuToyoko"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "21S-99S"
       ]
     }
   },
@@ -26170,6 +25776,32 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 184,
+    "networkKey": "TokyuToyoko",
+    "operator": "Sotetsu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-59",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 59 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuToyoko"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "91G-95G"
+      ]
+    }
+  },
+  {
     "evidenceId": 185,
     "networkKey": "TokyuToyoko",
     "operator": "Tobu",
@@ -26194,6 +25826,32 @@ window.VEHICLE_FAMILY_RULES = [
       "overridePlan": true,
       "operationPatterns": [
         "01T-23T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 186,
+    "networkKey": "TokyuToyoko",
+    "operator": "Tokyu",
+    "codePattern": "PLAN:THROUGH-Fukutoshin-58",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東急5050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 58 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "TokyuToyoko"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "51K-65K"
       ]
     }
   },
@@ -26226,54 +25884,276 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 186,
+    "evidenceId": 244,
     "networkKey": "TokyuToyoko",
     "operator": "Tokyu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-58",
+    "codePattern": "PLAN:OWN-TokyuToyoko",
     "calendarType": "",
     "effectiveFrom": "2026-10-16",
     "effectiveTo": "",
     "exactVehicleType": "",
     "vehicleCandidates": [
-      "東急5050系"
+      "東京メトロ10000系",
+      "東京メトロ17000系",
+      "西武6000系",
+      "西武40000系",
+      "相鉄20000系(10両)",
+      "東武50070系",
+      "東武9000系",
+      "東武9050系",
+      "東急5050系",
+      "東急5000系",
+      "横浜高速Y500系"
     ],
     "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 58 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "sourceUrl": "https://www.tokyu.co.jp/railway/trains/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Published fleet scoped to line and passenger service type. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
     "planScope": {
       "lineIds": [
         "TokyuToyoko"
       ],
       "planOnly": true,
-      "overridePlan": true,
-      "operationPatterns": [
-        "51K-65K"
-      ]
+      "trainTypes": [
+        "Local",
+        "Rapid",
+        "Express",
+        "SemiExpress",
+        "CommuterRapid",
+        "CommuterExpress",
+        "RapidExpress",
+        "SectionExpress",
+        "SectionSemiExpress",
+        "LimitedExpress",
+        "RapidLimitedExpress",
+        "AirportExpress",
+        "AirportRapid",
+        "F-Liner",
+        "CommuterLimitedExpress"
+      ],
+      "overridePlan": true
     }
   },
   {
-    "evidenceId": 184,
-    "networkKey": "TokyuToyoko",
-    "operator": "Sotetsu",
-    "codePattern": "PLAN:THROUGH-Fukutoshin-59",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
+    "evidenceId": 21,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TOKYU",
+    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,051,052,053,054,055,056,057,058,059,060,061,062,063,064,065",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
     "effectiveTo": "",
     "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 22,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TokyoMetro",
+    "codePattern": "701,702,703,704,705,707,709,711,713,715,717,719,723,725,729,731,733,741,745,747,753,763,767,771,775,777,779,781,785,787,789,791",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 23,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Seibu",
+    "codePattern": "102,104,106,110,114,118,120,122,124,128,130,134",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 24,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Tobu",
+    "codePattern": "803,805,813,819,821,823",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 25,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Sotetsu",
+    "codePattern": "991,992,993,994,995",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "相鉄20000系(10両)",
     "vehicleCandidates": [
       "相鉄20000系(10両)"
     ],
     "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 59 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 26,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TOKYU",
+    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,051,052,053,054,055,056,057,058,059,060,061,062,063,064",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 27,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TokyoMetro",
+    "codePattern": "701,702,703,704,705,707,709,711,713,717,719,723,725,729,731,733,739,743,745,747,749,753,755,757,761,767,773,775,785,787,789,791",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 28,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Seibu",
+    "codePattern": "102,106,108,110,112,114,124,128,130,171,172,173,174,175",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 29,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Tobu",
+    "codePattern": "803,805,811,813,817,819",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 30,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Sotetsu",
+    "codePattern": "991,992,994",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "相鉄20000系(10両)",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 202,
+    "networkKey": "ToyoRapid",
+    "operator": "JR-East",
+    "codePattern": "PLAN:THROUGH-Tozai-72",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "E231系800番台（東西線直通）"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 72 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
     "planScope": {
       "lineIds": [
-        "TokyuToyoko"
+        "ToyoRapid"
       ],
       "planOnly": true,
       "overridePlan": true,
       "operationPatterns": [
-        "91G-95G"
+        "*K"
+      ]
+    }
+  },
+  {
+    "evidenceId": 203,
+    "networkKey": "ToyoRapid",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:THROUGH-Tozai-71",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ15000系",
+      "東京メトロ07系",
+      "東京メトロ05系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 71 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ToyoRapid"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 204,
+    "networkKey": "ToyoRapid",
+    "operator": "ToyoRapid",
+    "codePattern": "PLAN:THROUGH-Tozai-73",
+    "calendarType": "",
+    "effectiveFrom": "2026-10-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東葉高速2000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 73 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "planScope": {
+      "lineIds": [
+        "ToyoRapid"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "*T"
       ]
     }
   },
@@ -26321,12 +26201,62 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 203,
-    "networkKey": "ToyoRapid",
-    "operator": "TokyoMetro",
-    "codePattern": "PLAN:THROUGH-Tozai-71",
+    "evidenceId": 11,
+    "networkKey": "tozai",
+    "operator": "JR-East",
+    "codePattern": "03K,05K,07K,09K,11K",
     "calendarType": "",
-    "effectiveFrom": "2026-10-16",
+    "effectiveFrom": "2026-04-16",
+    "effectiveTo": "",
+    "exactVehicleType": "JR E231系800番台(10両)",
+    "vehicleCandidates": [
+      "JR E231系800番台(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "model exact"
+  },
+  {
+    "evidenceId": 12,
+    "networkKey": "tozai",
+    "operator": "ToyoRapid",
+    "codePattern": "50T-68T even",
+    "calendarType": "",
+    "effectiveFrom": "2026-04-16",
+    "effectiveTo": "",
+    "exactVehicleType": "東葉高速2000系(10両)",
+    "vehicleCandidates": [
+      "東葉高速2000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "model exact"
+  },
+  {
+    "evidenceId": 13,
+    "networkKey": "tozai",
+    "operator": "TokyoMetro",
+    "codePattern": "S published set",
+    "calendarType": "",
+    "effectiveFrom": "2026-04-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ05系(10両)",
+      "東京メトロ07系(10両)",
+      "東京メトロ15000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "multi-model family"
+  },
+  {
+    "evidenceId": 71,
+    "networkKey": "Tozai",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:SUB-METRO",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
     "effectiveTo": "",
     "exactVehicleType": "",
     "vehicleCandidates": [
@@ -26336,10 +26266,10 @@ window.VEHICLE_FAMILY_RULES = [
     ],
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 71 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "notes": "Recurring Tozai METRO qualified model plan; not actual observed formation.",
     "planScope": {
       "lineIds": [
-        "ToyoRapid"
+        "Tozai"
       ],
       "planOnly": true,
       "overridePlan": true,
@@ -26349,12 +26279,12 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 202,
-    "networkKey": "ToyoRapid",
+    "evidenceId": 72,
+    "networkKey": "Tozai",
     "operator": "JR-East",
-    "codePattern": "PLAN:THROUGH-Tozai-72",
+    "codePattern": "PLAN:SUB-JR",
     "calendarType": "",
-    "effectiveFrom": "2026-10-16",
+    "effectiveFrom": "2026-03-14",
     "effectiveTo": "",
     "exactVehicleType": "",
     "vehicleCandidates": [
@@ -26362,10 +26292,10 @@ window.VEHICLE_FAMILY_RULES = [
     ],
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 72 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "notes": "Recurring Tozai JR qualified model plan; not actual observed formation.",
     "planScope": {
       "lineIds": [
-        "ToyoRapid"
+        "Tozai"
       ],
       "planOnly": true,
       "overridePlan": true,
@@ -26375,12 +26305,12 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
-    "evidenceId": 204,
-    "networkKey": "ToyoRapid",
+    "evidenceId": 73,
+    "networkKey": "Tozai",
     "operator": "ToyoRapid",
-    "codePattern": "PLAN:THROUGH-Tozai-73",
+    "codePattern": "PLAN:SUB-TOYO",
     "calendarType": "",
-    "effectiveFrom": "2026-10-16",
+    "effectiveFrom": "2026-03-14",
     "effectiveTo": "",
     "exactVehicleType": "",
     "vehicleCandidates": [
@@ -26388,15 +26318,48 @@ window.VEHICLE_FAMILY_RULES = [
     ],
     "grade": "C",
     "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "Recurring planned vehicle family, not daily observed carset or exact livery. Reuses canonical operation family rule 73 on its documented connecting line. Missing exact candidate artwork remains null; native PNGs only. All candidates retained. Source constraints in plan_scope.",
+    "notes": "Recurring Tozai TOYO qualified model plan; not actual observed formation.",
     "planScope": {
       "lineIds": [
-        "ToyoRapid"
+        "Tozai"
       ],
       "planOnly": true,
       "overridePlan": true,
       "operationPatterns": [
         "*T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 40,
+    "networkKey": "TsukubaExpress",
+    "operator": "TsukubaExpress",
+    "codePattern": "PLAN:AC-SECTION",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "TX-2000系",
+      "TX-3000系"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.mir.co.jp/feature/about_tx/",
+    "notes": "Full known itinerary including origin, destination and intermediate stops. TX-1000 is DC-only Akihabara-Moriya; AC itineraries permit TX-2000/3000 planned candidates, never a daily carset.",
+    "planScope": {
+      "lineIds": [
+        "TsukubaExpress"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "anyStationNames": [
+        "Miraidaira",
+        "Midorino",
+        "Banpaku-Kinen-Kouen",
+        "BampakuKinenKoen",
+        "Kenkyu-Gaku",
+        "KenkyuGakuen",
+        "Tsukuba"
       ]
     }
   },
@@ -26498,6 +26461,22 @@ window.VEHICLE_FAMILY_RULES = [
       ],
       "overridePlan": true
     }
+  },
+  {
+    "evidenceId": 36,
+    "networkKey": "Yamanote",
+    "operator": "JR-East",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2020-01-21",
+    "effectiveTo": "",
+    "exactVehicleType": "E235系0番台（山手線）",
+    "vehicleCandidates": [
+      "E235系0番台（山手線）"
+    ],
+    "grade": "A",
+    "sourceUrl": "https://www.jreast.co.jp/press/2019/20200122_ho01.pdf",
+    "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
   },
   {
     "evidenceId": 130,
@@ -26638,6 +26617,114 @@ window.VEHICLE_FAMILY_RULES = [
     }
   },
   {
+    "evidenceId": 50,
+    "networkKey": "Yurakucho",
+    "operator": "TokyoMetro",
+    "codePattern": "PLAN:MF-METRO-10",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ10000系",
+      "東京メトロ17000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned METRO-10 owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Yurakucho"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "21S-99S"
+      ]
+    }
+  },
+  {
+    "evidenceId": 52,
+    "networkKey": "Yurakucho",
+    "operator": "Seibu",
+    "codePattern": "PLAN:MF-SEIBU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武6000系",
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned SEIBU owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Yurakucho"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01M-38M"
+      ]
+    }
+  },
+  {
+    "evidenceId": 55,
+    "networkKey": "Yurakucho",
+    "operator": "Tobu",
+    "codePattern": "PLAN:MF-TOBU",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東武50070系",
+      "東武9000系",
+      "東武9050系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Planned TOBU owner/working family; recurring candidates, not observed formation.",
+    "planScope": {
+      "lineIds": [
+        "Yurakucho"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "01T-23T"
+      ]
+    }
+  },
+  {
+    "evidenceId": 60,
+    "networkKey": "Yurakucho",
+    "operator": "Seibu",
+    "codePattern": "PLAN:MF-SEIBU-STRAIN",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "西武40000系"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MF/32/",
+    "notes": "Recurring weekday S-TRAIN working51-59M; retain40000 model plan without identifying a daily carset.",
+    "planScope": {
+      "lineIds": [
+        "Yurakucho"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "operationPatterns": [
+        "51M-59M"
+      ]
+    }
+  },
+  {
     "evidenceId": 127,
     "networkKey": "Yurikamome",
     "operator": "Yurikamome",
@@ -26670,93 +26757,6 @@ window.VEHICLE_FAMILY_RULES = [
         "SectionSemiExpress",
         "CommuterExpress",
         "CommuterSemiExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 250,
-    "networkKey": "Keikyu",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:AIRPORT-NATIVE",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形",
-      "京急600形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Planned native Keikyu airport/access fleet. 2100 excluded; working-code through rules remain more specific. Not observed daily formation.",
-    "planScope": {
-      "lineIds": [
-        "Keikyu"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AirportRapidLimitedExpress",
-        "AccessExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 251,
-    "networkKey": "KeikyuAirport",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:AIRPORT-NATIVE",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形",
-      "京急600形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Planned native Keikyu airport/access fleet. 2100 excluded; working-code through rules remain more specific. Not observed daily formation.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuAirport"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AirportRapidLimitedExpress",
-        "AccessExpress"
-      ],
-      "overridePlan": true
-    }
-  },
-  {
-    "evidenceId": 252,
-    "networkKey": "KeikyuKurihama",
-    "operator": "Keikyu",
-    "codePattern": "PLAN:AIRPORT-NATIVE",
-    "calendarType": "",
-    "effectiveFrom": "2026-10-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "京急1000形",
-      "京急1500形",
-      "京急600形"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.keikyu.co.jp/ride/train/",
-    "notes": "Planned native Keikyu airport/access fleet. 2100 excluded; working-code through rules remain more specific. Not observed daily formation.",
-    "planScope": {
-      "lineIds": [
-        "KeikyuKurihama"
-      ],
-      "planOnly": true,
-      "trainTypes": [
-        "AirportRapidLimitedExpress",
-        "AccessExpress"
       ],
       "overridePlan": true
     }
