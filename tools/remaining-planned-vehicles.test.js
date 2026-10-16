@@ -21,7 +21,7 @@ function resolve(line, type = 'Local', number = 'PLAN001', label = '') {
 function artwork(v) { return v.iconPath || v.vehiclePlan?.iconPath; }
 function models(v) { return Array.from(v.vehiclePlan?.models || [v.name]); }
 const cases = [
- ['Nambu', 'Local'], ['NambuBranch', 'Local'], ['Yokosuka', 'Local'],
+ ['Ikebukuro', 'S-TRAIN'], ['SeibuChichibu', 'S-TRAIN'], ['Ikebukuro', 'LimitedExpress'], ['SeibuChichibu', 'LimitedExpress'], ['Nambu', 'Local'], ['NambuBranch', 'Local'], ['Yokosuka', 'Local'],
  ['SobuRapid', 'LimitedExpress'], ['Tokaido', 'Local'], ['Agatsuma', 'LimitedExpress'],
  ['JobanMain', 'Local'], ['JobanMain', 'LimitedExpress'], ['Echigo', 'Local'],
  ['Karasuyama', 'Local'], ['Oga', 'Local'], ['SensekiTohoku', 'Local'],
@@ -45,6 +45,9 @@ for (const [line, type] of cases) {
   assert(fs.existsSync(artwork(v).slice(3)), line + ' native PNG exists');
   assert(v.vehiclePlan, line + ' must stay planned rather than daily observed');
 }
+assert.deepEqual(models(resolve('SeibuChichibu', 'LimitedExpress', 'SCO047', '40000系（Laview）')), ['西武001系']);
+assert.deepEqual(models(resolve('SeibuChichibu', 'S-TRAIN', 'SCI106', '40000系（Laview）')), ['西武40000系']);
+assert(artwork(resolve('TobuSkytree', 'TH-LINER', 'A4643T', '東武70090系（THライナー専用・日比谷線直通）')));
 assert(models(resolve('Nambu')).includes('E233系8500番台'), 'retain candidates with missing exact PNG');
 assert(!models(resolve('Tokaido')).includes('E233系1000番台'), 'Keihin-Tohoku stock is not Tokaido stock');
 assert.deepEqual(models(resolve('YamagataShinkansen', 'Shinkansen')), ['E8系'], 'retired E3 must not persist');
