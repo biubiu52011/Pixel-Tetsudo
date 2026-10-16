@@ -1,6 +1,6 @@
 # Pixel Tetsudo 工程进度
 
-## 2026-10-16 JST — 小田急按列车号补充车型计划（REVIEW：已公开，最终资源与计划观察语义复核）
+## 2026-10-16 JST — 小田急按列车号补充车型计划（DONE：本轮补充已同步并公开验证）
 
 - Workstream: odakyu-train-plans-20261016；执行者Codex。补充既有计划时刻表的车型依据，不重建时刻表，不查询当天实际编成。Supabase现有train_vehicle_rules追加2,126组列车号/日历计划，经唯一TrainOperationEvidence → TrainVehicle → PNG入口消费。
 - 来源：小田急官方2026-03-14改正的平日/土休日上下行Romancecar PDF，159组固定车型标记；夜桜の部屋2026普通车运用表，1,967组普通车计划。普通车平日来源标记2026-03-16、土休日2026-03-14。MSE/GSE固定标记按车型补充；97组EXE符号保留EXE/EXEα两候选；官方▲可变运行日班次未强定车型。A/B运用保留多车型候选，1000/4000固定计划仍不是当天编成证明。来源署名/URL/等级/生效日保留，不人为设截止日期。
@@ -9,7 +9,7 @@
 - 固定2026-10-16 12:10 JST，同一1,041条实际SQL时刻表回放：47个位置/47个图标保持，原按种别统一候选的44列中21列细化为各自运用/官方车型计划；其余23列仍为宽泛候选。原有3列JR/Metro计划保持，位置/班次未改。这是回放验证，不冒充浏览器现场。
 - 新增odakyu-planned-vehicles回归：同Local的7004→3000/8000、6505→2000/1000不同代表PNG，EXE双候选、MSE、休日GSE、▲不强定、前导零、日历/改正日期/线路、冲突拒绝、技术区间与实时优先。47工具套件、65项node:test、4守卫及映射检查通过（53个入口）。browser runtime: NOT VERIFIED。
 - 修改范围：trains/realtime车型链、home已有Fusion引用及唯一证据快照；其余四页无车型计划消费无需改动。新增离线来源提取工具、回归和SQL迁移；原件、PDF、来源表、SQL备份/回读及回放日志在recovery/odakyu-train-plans-20261016。保留主工作区其他文档及未公开旅游提交，不重置/强推。
-- 发布实现d08856d6，自动快照b29a5bc6；CI/CD、Release Guards和Sync canonical vehicle evidence均success。4个公开JS HTTP200且逐字匹配，线上证据10,777条（新增2,126）；7004/6505/0002/0401M按公开代码解析正确。浏览器连接超时，未现场验收。最终补强planned模式无观察日期语义，资源4.3.1245待完成部署核对。
+- 发布实现d08856d6，自动快照b29a5bc6；CI/CD、Release Guards和Sync canonical vehicle evidence均success。4个公开JS HTTP200且逐字匹配，线上证据10,777条（新增2,126）；7004/6505/0002/0401M按公开代码解析正确。浏览器连接超时，未现场验收。最终补强planned模式无观察日期语义，资源4.3.1245的最终实现e0e8d48e已公开；CI/CD、Release Guards及Pages均success，4核心JS HTTP200逐字匹配，页面引用该构建。公开planned查询observedDate为空、decisive=false。
 - 遗留：自由运用及官方▲班次仍需更细的有来源计划；候选代表图不等于确定车型。其他线路车型计划缺口不在本轮完成声明内。
 
 
