@@ -221,23 +221,7 @@
     return null;
   }
 
-  // 点击/键盘跳转到直通线路。
-  function _bindNav(node, lineObj) {
-    if (!node || !lineObj || !lineObj.lineId) return;
-    node.setAttribute("role", "link");
-    node.setAttribute("tabindex", "0");
-    node.setAttribute("aria-label", _badgeText(lineObj));
-    if (node.style) node.style.cursor = "pointer";
-    var open = function(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      if (e && e.stopPropagation) e.stopPropagation();
-      window.location.hash = lineObj.lineId;
-    };
-    node.addEventListener("click", open);
-    node.addEventListener("keydown", function(e) {
-      if (e.key === "Enter" || e.key === " ") open(e);
-    });
-  }
+  // v4.3.1251: 直通标签为纯展示（不再绑定跳转链接）。
 
   // SVG 渲染：背景 + 方向箭头（up/down/middle）+ 居中文本块 + title。
   // 返回消耗宽度 w（供流式布局推进）。
@@ -250,7 +234,6 @@
     chip.setAttribute("transform", "translate(" + x + "," + y + ")");
     chip.setAttribute("class", "through-chip");
     chip.setAttribute("data-through-line", lineObj.lineId || "");
-    _bindNav(chip, lineObj);
     layer.appendChild(chip);
     var bg = document.createElementNS(ns, "rect");
     bg.setAttribute("x", "0");
