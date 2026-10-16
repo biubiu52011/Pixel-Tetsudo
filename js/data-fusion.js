@@ -4,7 +4,7 @@
 (function() {
   "use strict";
 
-  var FUSION_VERSION = 14;
+  var FUSION_VERSION = 15;
   // v4.3.x: 实时轮询间隔 — 见 runtime-config.js REFRESH_INTERVAL
   // v4.3.x: 位置轮询间隔 — 见 runtime-config.js POSITION_INTERVAL
 

@@ -3,7 +3,7 @@
  * for existing sourced line-provider registrations. It is not a second script.
  */
 (function(){
-  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1243')return;
+  if(window.TrainVehicle&&window.TrainVehicle.version==='4.3.1244')return;
 /*
  * Pixel Tetsudo - Train operation evidence registry
  * v4.3.1101
@@ -436,7 +436,11 @@
       else runHits.push(rec);
     }
 
-    if(mode==='planned')return referenceHit||familyHit;
+    if(mode==='planned') {
+      // A route compatibility exclusion still constrains a train-number plan.
+      // Otherwise use its published working before a broad fleet allowance.
+      return familyHit && familyHit.planOverride ? familyHit : (referenceHit || familyHit);
+    }
 
     // Realtime never treats a bare working number as a physical carset proof.
     // Canonical dated providers above require the exact public train number,
@@ -2080,7 +2084,8 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     if(vehResult.identityStatus!=='EXACT'){
       var plannedEvidence=window.TrainOperationEvidence.resolveEvidence(trainNumber,_baseOperationCtx,'planned');
       var familyPlan=plannedEvidence&&(plannedEvidence.vehicleType||(plannedEvidence.vehicleCandidates||[]).join(' / '));
-      var familyOverride=plannedEvidence&&plannedEvidence.planOverride;
+      var familyOverride=plannedEvidence&&(plannedEvidence.planOverride || plannedEvidence.evidenceRole==='timetable-reference' ||
+        (!!plannedEvidence.operationCode && plannedEvidence.evidenceRole!=='timetable-plan'));
       var planInput=familyOverride?familyPlan:(_sqlSourceCandidates.length?_sqlSourceCandidates.join(' / '):(_declaredVehicleInput||familyPlan||''));
       var usesFamily=!!familyPlan&&(familyOverride||(!_sqlSourceCandidates.length&&!_declaredVehicleInput));
       vehResult.vehiclePlan=resolveTimetableVehiclePlan(planInput,{lineId:lineId,operator:usesFamily&&plannedEvidence.operator||line.operator,serviceDate:serviceDate,source:usesFamily?'operation-family-plan':'sql-timetable-plan',sourceUrl:usesFamily?plannedEvidence.sourceUrl:(tt._timetableProvenance||'')});
@@ -2237,7 +2242,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   }
 
   window.TrainVehicle = {
-    version: '4.3.1243',
+    version: '4.3.1244',
     resolveRealtime: resolveRealtime,
     resolveTimetableRun: resolveTimetableRun,
     resolve: resolve,
@@ -2247,7 +2252,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1243 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1244 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
