@@ -388,12 +388,13 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       var belowY = Math.max(ty + 12, iy0 + rows * (ICON + GAP) + 4);
       // v4.3.1249: 下端标签居中于站点圆点；直线中间标签与站名对侧（站名左→标签右、站名右→标签左）；环线中间保持外侧列。
       if (middle.length) {
-        var mX, mAlign;
-        if (geometry.isLoop) { mX = tx; mAlign = anchor === "middle" ? "middle" : anchor; }
-        else if (anchor === "end") { mX = tx + 10; mAlign = "start"; }
-        else if (anchor === "start") { mX = tx - 10; mAlign = "end"; }
-        else { mX = o.x; mAlign = "middle"; }
-        drawGroup(middle, mX, belowY, mAlign, chipWidth);
+        var mX, mAlign, mY;
+        var mH = _throughChipHeight(middle, isMobileView, chipWidth);
+        if (geometry.isLoop) { mX = tx; mAlign = anchor === "middle" ? "middle" : anchor; mY = belowY; }
+        else if (anchor === "end") { mX = tx + 10; mAlign = "start"; mY = o.y - mH / 2; }
+        else if (anchor === "start") { mX = tx - 10; mAlign = "end"; mY = o.y - mH / 2; }
+        else { mX = o.x; mAlign = "middle"; mY = o.y - mH / 2; }
+        drawGroup(middle, mX, mY, mAlign, chipWidth);
       }
       if (down.length) {
         drawGroup(down, o.x, belowY, "middle", chipWidth);
