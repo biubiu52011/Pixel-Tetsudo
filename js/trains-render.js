@@ -34,99 +34,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
   return !!active;
 }
 
-  function _bindLineMapNavigation(node, lineObj) {
-    if (!node || !lineObj || !lineObj.lineId) return;
-    node.setAttribute("role", "link");
-    node.setAttribute("tabindex", "0");
-    node.setAttribute("aria-label", _throughBadgeText(lineObj));
-    if (node.style) node.style.cursor = "pointer";
-    var open = function(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      if (e && e.stopPropagation) e.stopPropagation();
-      window.location.hash = lineObj.lineId;
-    };
-    node.addEventListener("click", open);
-    node.addEventListener("keydown", function(e) {
-      if (e.key === "Enter" || e.key === " ") open(e);
-    });
+  // 直通标签：实现已收敛至 js/through-chip.js（window.ThroughChip），以下为转发壳
+  function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile, maxWidth) {
+    return window.ThroughChip ? window.ThroughChip.render(layer, ns, x, y, lineObj, iconSize, mobile, maxWidth) : 0;
   }
 
-  function _renderThroughChip(layer, ns, x, y, lineObj, iconSize, mobile, maxWidth) {
-    var sz = _throughChipSize(lineObj, mobile, maxWidth);
-    var label = sz.label;
-    var w = sz.w, h = sz.h;
-    var lc = lineObj.color || "#555";
-    var chip = document.createElementNS(ns, "g");
-    chip.setAttribute("transform", "translate(" + x + "," + y + ")");
-    chip.setAttribute("class", "through-chip");
-    chip.setAttribute("data-through-line", lineObj.lineId || "");
-    _bindLineMapNavigation(chip, lineObj);
-    layer.appendChild(chip);
-    var bg = document.createElementNS(ns, "rect");
-    bg.setAttribute("x", "0");
-    bg.setAttribute("y", "0");
-    bg.setAttribute("width", w);
-    bg.setAttribute("height", h);
-    bg.setAttribute("rx", "3");
-    bg.setAttribute("fill", _hexToRgba(lc, 0.16));
-    bg.setAttribute("stroke", lc);
-    bg.setAttribute("stroke-width", "1");
-    chip.appendChild(bg);
-    if (lineObj.title) {
-      var bgTitle = document.createElementNS(ns, "title");
-      bgTitle.textContent = lineObj.title;
-      bg.appendChild(bgTitle);
-    }
-    // v4.3.948: 直通标签箭头——up=▲朝上 / down=▼朝下 / middle=→朝右（与列车方向标签统一尺寸）
-    var dir = lineObj.dir || "middle";
-    var arr = document.createElementNS(ns, "path");
-    arr.setAttribute("fill", lc);
-    arr.setAttribute("stroke", lc);
-    arr.setAttribute("stroke-width", mobile ? "3.5" : "3");
-    arr.setAttribute("stroke-linejoin", "round");
-    var _ax = sz.arrowX || 8;
-    var _ay = h / 2;
-    var _d;
-    if (dir === "up") {
-      // up=▲ 尖朝上
-      _d = "M" + (_ax - 3.5) + " " + (_ay + 2.5) + " L " + _ax + " " + (_ay - 2.5) + " L " + (_ax + 3.5) + " " + (_ay + 2.5) + " Z";
-    } else if (dir === "down") {
-      // down=▼ 尖朝下
-      _d = "M" + (_ax - 3.5) + " " + (_ay - 2.5) + " L " + _ax + " " + (_ay + 2.5) + " L " + (_ax + 3.5) + " " + (_ay - 2.5) + " Z";
-    } else {
-      // middle labels point away from the station: left-side chips use ←, right-side chips use →.
-      if (lineObj._throughSide === "left") {
-        _d = "M" + (_ax + 3) + "," + (_ay - 2.5) + " L" + (_ax - 3) + "," + _ay + " L" + (_ax + 3) + "," + (_ay + 2.5) + " Z";
-      } else {
-        _d = "M" + (_ax - 3) + "," + (_ay - 2.5) + " L" + (_ax + 3) + "," + _ay + " L" + (_ax - 3) + "," + (_ay + 2.5) + " Z";
-      }
-    }
-    arr.setAttribute("d", _d);
-    chip.appendChild(arr);
-    var txt = document.createElementNS(ns, "text");
-    txt.setAttribute("x", sz.textX || 14);
-    txt.setAttribute("y", h / 2);
-    txt.setAttribute("font-size", sz.fontSize || (mobile ? 11 : 9));
-    txt.setAttribute("fill", lc);
-    txt.setAttribute("font-weight", "700");
-    txt.setAttribute("dominant-baseline", "central");
-    // v4.3.1238: 文本块垂直中心 = chip 中心 h/2（与箭头 _ay=h/2 同一中线），消除文本/箭头高低错位
-    var _nLines = sz.lines.length;
-    var _firstY = h / 2 - (_nLines - 1) * (sz.fontSize + 2) / 2;
-    sz.lines.forEach(function(line, i) {
-      var span = document.createElementNS(ns, "tspan");
-      span.setAttribute("x", sz.textX);
-      span.setAttribute("dominant-baseline", "central");
-      span.setAttribute("y", _firstY + i * (sz.fontSize + 2));
-      span.textContent = line;
-      txt.appendChild(span);
-    });
-    chip.appendChild(txt);
-    var title = document.createElementNS(ns, "title");
-    title.textContent = lineObj.title || _throughBadgeText(lineObj);
-    chip.appendChild(title);
-    return w; // consumed width (for flow layout advance)
-  }
   
   /**
    * Compute route geometry for a line - single source of truth for all station coordinates.

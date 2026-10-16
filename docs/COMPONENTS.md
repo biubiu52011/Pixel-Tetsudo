@@ -42,7 +42,7 @@
 | 组件 | 位置 | 说明 |
 |---|---|---|
 | 观光分类 | `js/tourism-type.js` | event / shop / spot 路由的唯一入口；百货商场→景点等硬规则只在此处。 |
-| 直通方向数据 | `js/trains-data.js::_throughDirForStation` | 直通标签方向数据源（端点 up/down、中间接续 middle）；**职责仅为直通标签渲染（4.1）供数**，不承担独立业务判定。 |
+| 直通方向数据 | `js/through-chip.js::dirForStation`（window.ThroughChip） | 直通标签方向数据源（端点 up/down、中间接续 middle）；**职责仅为直通标签渲染（4.1）供数**，不承担独立业务判定。trains-data.js 同名函数为转发壳。 |
 | 运行链解析 | `js/running-chain-resolver.js` | Running-Chain ↔ canonical entity 解析（每线路 ResolutionContext）。 |
 | 站名解析 | `js/station-resolver.js` | 多语言站名 ↔ station_id 双向解析（`window.StationResolver`）。 |
 | 车型判定 | `js/train-vehicle.js` | 车辆类型**单一决策路径**：S0 内嵌字段 > S1 ODPT 实时 > S2 车号累积表。 |
@@ -63,22 +63,27 @@
 
 > 以下组件的共同模式：**样式统一，参数变化**。任何页面/模块需要同类视觉时，复用组件传参，不复制样式或另写渲染。
 
-### 4.1 直通标签 through-chip（统一样式：方向/文本参数化）
+### 4.1 直通标签 ThroughChip（统一样式：方向/文本参数化，v4.3.1246 组件化）
 
-- **入口**：`js/trains-utils.js::_throughChipSize`（尺寸/文本换行/基线补偿）、`_throughChipHeight`（几何预留）、`_layoutThroughChipGroup`（分组布局）、`_normalizeThroughChipList`（归一化）；`js/trains-render.js::_renderThroughChip`（SVG 渲染）。
-- **参数化**：
-  - 文本：`直通`（i18n `train.through`）+ 线路名（`_throughShortName` 去"直通"字样/括号），窄屏换行（`throughLbl` 独立行）。
-  - 方向：up/down（端点）→ ▲/▼；middle（中间接续）→ ←/→（`_throughSide` 由分组对齐决定）。
-  - 形态：mobile 11px / desktop 9px；像素字体基线补偿 `textBaselineOffset = fontSize * 0.59`（v4.3.1240，箭头与文本共中线）。
-- **数据源**：`js/trains-data.js::_throughDirForStation`。
+- **入口**：`js/through-chip.js`（`window.ThroughChip`）——唯一实现源。
+  - `size(lineObj, mobile, maxWidth)`：尺寸/窄屏换行（文本块垂直中心 = chip 中心 h/2，与箭头同中线）
+  - `height(items, mobile, maxWidth, dir)`：堆叠高度（几何预留与渲染共用同一计算）
+  - `layoutGroup(items, mobile, maxWidth, x, y, align, bounds)`：组内放置 + 边界钳制
+  - `normalize(items)`：归一化去重排序（up/down/middle）
+  - `dirForStation(lineId, stationId, throughLineId)`：方向数据（端点 up/down、中间接续 middle）
+  - `render(layer, ns, x, y, lineObj, iconSize, mobile, maxWidth)`：SVG 渲染（背景+方向箭头+居中文本块+跳转绑定），返回消耗宽度
+  - `badgeText(lineObj)` / `shortName(lineObj, mobile)` / `measureWidth(label, fontSize)`：辅助
+- **参数化**：文本 = `直通`（i18n `train.through`）+ 线路短名；方向 up/down/middle → ▲/▼/←→（`_throughSide` 由分组对齐决定）；形态 mobile 11px / desktop 9px。
+- **兼容壳**：`trains-utils.js` / `trains-render.js` 保留同名转发函数（`_throughChipSize` 等，geometry 等既有调用不破坏）；**新代码直接走 `window.ThroughChip`，不调用转发壳**。
 - **用途**：列车图多条直通线路复用同一渲染器；新直通场景直接传 `lineObj`（含 lineId/color/name）即可。
 
-### 4.2 换乘提示 journey-transfer（统一样式：数量/直通参数化）
+### 4.2 换乘提示 TransferBadge（统一样式：数量/线路/直通参数化，v4.3.1246 组件化）
 
-- **入口**：`js/search-ui.js`——换乘计数徽章（L341 `journey-transfers`）、换乘/直通徽章（L381-395 `journey-transfer` + `--through` 变体 + hint）、直通降级（L476-484：ODPT 无贯通车次时去直通样式避免误导）。
-- **参数化**：换乘次数（`transfers > 0` 计数）、线路名/车站名（escapeHtml）、提示语（`journey-transfer-hint`，来自 1. `transfer-hints.js`）、是否直通（`seg.through`）。
+- **入口**：`js/transfer-badge.js`（`window.TransferBadge.build(segs, idx, lang, lineBadgeFn)`）——换乘段徽章 HTML 构建唯一实现源。
+- **参数化**：换乘次数（`transfers > 0` 计数徽章在 search-ui 调用侧）、线路徽章（`lineBadgeFn` 注入）、车站名（escapeHtml）、提示语（`journey-transfer-hint`，来自 1. `transfer-hints.js`）、是否直通（`seg.through` → `--through` 变体 + 直通图标）、上下车番线（`PlatformResolver`）。
 - **样式**：CSS 类 `journey-transfer` / `journey-transfer--through` / `journey-transfer-text--through` / `journey-transfer-hint`。
-- **用途**：路径搜索结果的换乘/直通提示；新结果形态复用同一徽章构建逻辑。
+- **用途**：路径搜索结果的换乘/直通提示；**新结果形态复用 `window.TransferBadge.build`，不另写徽章拼接**。
+- **直通降级**（ODPT 无贯通车次时去直通样式避免误导）仍在 `js/search-ui.js` 调用侧处理。
 
 ### 4.3 图集查看器 Gallery Viewer（三类型详情页共用，v4.3.1244）
 
@@ -99,7 +104,7 @@
 | 几何常量 | `js/trains-config.js` | `TrainsConfig.GEOM`（分支列宽/主列宽/移动端宽度等）。 |
 | 几何计算 | `js/trains-geometry.js` | 坐标/并行双线（共享轨道区段判定，如 Yurakucho×Fukutoshin 和光市-池袋、Namboku×Mita 目黒-白金高輪）。 |
 | SVG 渲染 | `js/trains-render.js` | 线路/站点/直通标签渲染；**列车图新增视觉元素优先复用其渲染骨架**。 |
-| 测量/布局工具 | `js/trains-utils.js` | SVG 文本宽度测量（缓存）、基线偏移、标签尺寸（4.1）。 |
+| 测量/布局工具 | `js/through-chip.js`（组件内私有） | SVG 文本宽度测量（缓存）、标签尺寸/布局（4.1 已收敛；`trains-utils.js` 仅转发）。 |
 | 列车图标 | `js/train-icons.js` | 车型图标绘制。 |
 | 位置→坐标 | `js/train-track-layout.js` | 列车位置 → 显示坐标（方向车道/间距）。 |
 | 线路展示 | `js/line-presentation-service.js` | 线路展示服务（配色/图标解析）。 |
@@ -146,4 +151,4 @@
 
 1. **`data/core/through-service.js`**：职责已收敛为**仅向直通标签渲染提供数据**（不是独立业务模块）；仅出现在 Linux workspace 副本，主项目未同步——确认后并入 1. 数据层（直通数据源）。
 2. **重复实现排查**：各页面若有独立实现的"徽章/弹窗/提示条"，应收敛到 4.2 / 4.3 / 4.4 组件并删除重复样式。
-3. 直通标签修复（v4.3.1240 基线补偿）已落地未推送——推送前复核本文档 4.1 条目与代码一致。
+3. ~~直通标签基线补偿（v4.3.1240）~~：补偿为坐标系混比误判，已完整回退；直通标签已组件化（4.1，v4.3.1246），158 标签全量核验方向自洽（Keiyo/OsakaHigashi 边界站缺站数据待补，影响有限）。
