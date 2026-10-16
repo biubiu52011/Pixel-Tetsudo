@@ -833,3 +833,55 @@
   .detail-back-btn { font-size: 14px; padding: 12px 22px; }
   .article-section { padding: 24px 20px; }
 }
+
+/* ============================================
+   图集查看器 Gallery Viewer（4.3.1244）——三类型详情页共用
+   ============================================ */
+.tgl-lock { overflow: hidden; }
+.tgl-overlay {
+  position: fixed; inset: 0; z-index: 12000;
+  background: rgba(0, 0, 0, 0.94);
+  display: none; flex-direction: column;
+  color: #fff;
+}
+.tgl-overlay.is-open { display: flex; }
+.tgl-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 10px; gap: 12px; flex-shrink: 0;
+}
+.tgl-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.tgl-badge {
+  font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 999px;
+  background: var(--green, #0f9d58); color: #fff; white-space: nowrap; flex-shrink: 0;
+}
+.tgl-name { font-size: 15px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tgl-close { background: none; border: none; color: #fff; font-size: 30px; line-height: 1; cursor: pointer; padding: 0 6px; flex-shrink: 0; }
+.tgl-stage {
+  flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+  gap: 12px; padding: 0 16px;
+}
+.tgl-nav {
+  background: rgba(255, 255, 255, 0.12); border: none; color: #fff;
+  font-size: 40px; width: 52px; height: 72px; border-radius: 12px;
+  cursor: pointer; line-height: 1; flex-shrink: 0;
+}
+.tgl-nav:hover { background: rgba(255, 255, 255, 0.24); }
+.tgl-fig { margin: 0; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; max-width: calc(100% - 140px); }
+.tgl-img { max-width: 100%; max-height: 62vh; border-radius: 8px; object-fit: contain; }
+.tgl-caption { font-size: 13px; color: #e5e5e5; text-align: center; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tgl-price { font-size: 15px; font-weight: 600; color: #ffd166; text-align: center; }
+.tgl-price:empty { display: none; }
+.tgl-foot { padding: 6px 20px 16px; display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.tgl-count { font-size: 12px; color: #bbb; text-align: center; }
+.tgl-thumbs { display: flex; gap: 8px; justify-content: center; overflow-x: auto; padding: 2px 0; }
+.tgl-thumb { background: none; border: 2px solid transparent; border-radius: 8px; padding: 0; cursor: pointer; width: 56px; height: 42px; flex-shrink: 0; overflow: hidden; }
+.tgl-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tgl-thumb.is-active { border-color: var(--green, #0f9d58); }
+.tgl-source { font-size: 12px; color: #999; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 640px) {
+  .tgl-stage { gap: 6px; padding: 0 8px; }
+  .tgl-nav { width: 40px; height: 56px; font-size: 32px; }
+  .tgl-fig { max-width: calc(100% - 96px); }
+  .tgl-img { max-height: 55vh; }
+  .tgl-name { font-size: 14px; }
+}

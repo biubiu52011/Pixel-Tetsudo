@@ -23,6 +23,10 @@
 
   function normalizeType(value) {
     value = String(value || "").trim().toLowerCase();
+    // 4.3.1242: 百货商场/购物中心显式口径 → 景点（用户规则：百货商场算景点）
+    if (value === "mall" || value === "department" || value === "department_store"
+      || value === "shopping_mall" || value === "shopping_mall_store"
+      || value === "shopping-center" || value === "shopping_center") return "spot";
     if (value === "sight" || value === "sights" || value === "landmark") return "spot";
     if (value === "store" || value === "restaurant" || value === "gourmet") return "shop";
     return VALID_TYPES[value] ? value : "";
@@ -35,6 +39,8 @@
 
     var tags = spot.tags || [];
     if (tags.indexOf("event") >= 0) return "event";
+    // 4.3.1242: 百货商场优先归景点——mall 标签优先级高于店铺标签（用户规则）
+    if (tags.indexOf("mall") >= 0) return "spot";
     for (var i = 0; i < tags.length; i++) {
       if (SHOP_TAGS[tags[i]]) return "shop";
     }

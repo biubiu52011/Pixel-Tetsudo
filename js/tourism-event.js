@@ -160,11 +160,7 @@
   }
 
   bindCalendarDownload();
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function() { bindCalendarDownload(); C.start(renderArticle); });
-  } else {
-    bindCalendarDownload();
-    C.start(renderArticle);
-  }
+  // Scripts run at end of <body>: DOM is fully parsed, so start immediately
+  // (loading feedback appears before data bundles finish).
+  C.start(renderArticle);
 })();
