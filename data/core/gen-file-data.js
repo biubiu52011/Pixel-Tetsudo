@@ -22,4 +22,9 @@ for (const [json, js, varName] of pairs) {
   const safe = compact.replace(/<\/script/gi, '<\\/script');
   fs.writeFileSync(path.join(dir, js), varName + ' = ' + safe + ';\n');
   console.log('wrote', js, '(', (safe.length / 1024).toFixed(0), 'KB )');
+  // Also emit a compact .json twin for the http(s) branch (db-loader fetches
+  // these instead of the pretty sources, cutting parse time on GitHub Pages).
+  const compactJson = json.replace(/\.json$/, '.compact.json');
+  fs.writeFileSync(path.join(dir, compactJson), compact + '\n');
+  console.log('wrote', compactJson, '(', (compact.length / 1024).toFixed(0), 'KB )');
 }
