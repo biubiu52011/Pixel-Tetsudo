@@ -35,8 +35,8 @@ for(const mobile of [true,false]){
     assert(b.x>=1&&b.x+b.w<=g.svgW-1,id+' horizontal bounds');
     assert(b.y>=0&&b.y+b.h<=g.svgH,id+' vertical bounds at '+p.stationId);
     if(g.isLoop){
-     if(p.side==='left')assert(b.x+b.w<p.x,id+' left label must stay outside rail');
-     if(p.side==='right')assert(b.x>p.x,id+' right label must stay outside rail');
+     const expected=Math.max(1,Math.min(g.svgW-1-b.w,p.x-b.w/2));
+     assert(Math.abs(b.x-expected)<1,id+' label centered on station with viewport clamp');
     }
    }
    for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++){
@@ -47,8 +47,8 @@ for(const mobile of [true,false]){
   }
  }
  const narrow=ctx._throughChipSize({name:'阪和線'},mobile,69);
- assert(narrow.lines.join('')==='直通阪和線','complete name retained');
+ assert(narrow.lines.join('')==='阪和線','complete name retained');
  const connector=ctx._throughChipSize({name:'相鉄線直通（JR接続区間）'},mobile,148);
- assert.equal((connector.label.match(/直通/g)||[]).length,1);
+ assert.equal((connector.label.match(/直通/g)||[]).length,0);
 }
-console.log('All canonical station-owned through labels: '+checked+' boxes, bounds, outer loop rails, no overlap: PASS');
+console.log('All canonical station-owned through labels: '+checked+' boxes, bounds, station-center anchors, no overlap: PASS');
