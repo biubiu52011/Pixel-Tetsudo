@@ -368,11 +368,13 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       // Through labels stay in their station's name/transfer column.
       var thruList = _normalizeThroughChipList(txLines.filter(function(it) { return it && it.through; }));
       var chipWidth = geometry.throughChipMaxWidth || (isMobileView ? 148 : 124);
-      var upward = [], below = [];
+      var upward = [], middle = [], down = [];
       thruList.forEach(function(it) {
         var display = Object.assign({}, it);
         if (geometry.isLoop) display.dir = "middle";
-        (display.dir === "up" ? upward : below).push(display);
+        if (display.dir === "up") upward.push(display);
+        else if (display.dir === "middle") middle.push(display);
+        else down.push(display);
       });
       var bounds = {minX:2, maxX:svgW-2};
       var drawGroup = function(items, x, y, align, width) {
@@ -384,8 +386,18 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       var aboveH = _throughChipHeight(upward, isMobileView, chipWidth);
       drawGroup(upward, o.x, o.y - 18 - aboveH, "middle", chipWidth);
       var belowY = Math.max(ty + 12, iy0 + rows * (ICON + GAP) + 4);
-      // v4.3.1248: 下端/中途直通标签以站点圆点为中心（与上端一致，手册：直通标签与站点圆点为中心点）
-      drawGroup(below, o.x, belowY, "middle", chipWidth);
+      // v4.3.1249: 下端标签居中于站点圆点；直线中间标签与站名对侧（站名左→标签右、站名右→标签左）；环线中间保持外侧列。
+      if (middle.length) {
+        var mX, mAlign;
+        if (geometry.isLoop) { mX = tx; mAlign = anchor === "middle" ? "middle" : anchor; }
+        else if (anchor === "end") { mX = tx + 10; mAlign = "start"; }
+        else if (anchor === "start") { mX = tx - 10; mAlign = "end"; }
+        else { mX = o.x; mAlign = "middle"; }
+        drawGroup(middle, mX, belowY, mAlign, chipWidth);
+      }
+      if (down.length) {
+        drawGroup(down, o.x, belowY, "middle", chipWidth);
+      }
 
     }
   }
