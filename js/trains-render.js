@@ -1627,12 +1627,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     Outer: { ja: "外回り", zh: "外环", en: "Outer", ko: "외선" }
   };
 
-  // v4.3.962: 线路级显示特例表——把光丘段/北绫濑/东急种别等分散的 if 特例收进一张表
+  // v4.3.962: 线路级显示特例表——把光丘段/北绫濑等分散的 if 特例收进一张表
   // 字段含义：
   //   tailTrain: { startIdx, endIdx, destRegex } —— 同一线路开放尾段识别（Oedo 光丘段）
   //   tailDir:   { upDest, downDest }          —— 同线开放尾段方向判定（up=往光丘, down=往都厅前）
   //   branchStation: { regex, dir }              —— 支线站名特判（Chiyoda KitaAyase → down）
-  //   showTrainType: true                   —— 显示列车等级种别名（东急线）
   //   dirAxis: { dirName: ±1 }             —— 方位词→站表方向映射（v4.3.962b：原 DIR_AXIS_MAP 收口）
   var LINE_DISPLAY_OVERRIDES = {
     // 大江户线光丘段：站表 [1..10] 为光丘段，枢纽 [0]=Tochomae
@@ -1644,9 +1643,6 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     Chiyoda: {
       branchStation: { regex: /^KitaAyase$/i, dir: 'down' }
     },
-    // 东急线：显示列车等级种别名（TRAIN_TYPE_NAMES）
-    Tokyu: { showTrainType: true } // 前缀匹配——所有 lineId 以 'Tokyu' 开头的线路
-    ,
     // ---- v4.3.962b: 方位词→站表方向映射（原 DIR_AXIS_MAP 收口，判定依据 2026-09-10 ODPT 实时样本）----
     // +1 = 该方位词的列车沿站表正向行驶 → ▼；-1 = 反向 → ▲
     KeihinTohoku:   { dirAxis: { Northbound: -1, Southbound: +1 } },
@@ -1661,14 +1657,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     Arakawa:        { dirAxis: { Northbound: +1, Southbound: -1 } }
   };
   function _getLineOverride(lineId) {
-    if (!LINE_DISPLAY_OVERRIDES[lineId]) {
-      // 前缀匹配（如 Tokyu → TokyuToyoko/TokyuMeguro 等）
-      for (var k in LINE_DISPLAY_OVERRIDES) {
-        if (lineId.indexOf(k) === 0 && LINE_DISPLAY_OVERRIDES[k].showTrainType) return LINE_DISPLAY_OVERRIDES[k];
-      }
-      return null;
-    }
-    return LINE_DISPLAY_OVERRIDES[lineId];
+    return LINE_DISPLAY_OVERRIDES[lineId] || null;
   }
 
   function _isLoopDirName(dirName) {
@@ -1838,10 +1827,9 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     if (!labelText) return;
     // Keep full InnerLoop/OuterLoop and actual Oedo open-tail directions.
     // Position labels into reserved rail corridors instead of truncating.
-    // v4.3.53x: 东急线列车等级（种别）显示——ODPT trainType → 种别名（TRAIN_TYPE_NAMES），
-    // 标签格式：方向箭头 + 种别名 + 终点站（例：▼ 特急 元町・中華街）
-    var _ovShow = _getLineOverride(lineId);
-    if (_ovShow && _ovShow.showTrainType && p.trainType) {
+    // All lines share the passenger caption: known service type + destination/direction.
+    // Missing or unmapped types remain absent rather than becoming a guessed Local.
+    if (p.trainType) {
       var _tdefs = window.TRAIN_TYPE_NAMES || {};
       var _td = _tdefs[p.trainType];
       // v4.3.963: 种别名表查不到时不露罗马字——直接跳过，只显示行先

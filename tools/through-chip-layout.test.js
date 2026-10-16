@@ -35,8 +35,11 @@ for(const mobile of [true,false]){
     assert(b.x>=1&&b.x+b.w<=g.svgW-1,id+' horizontal bounds');
     assert(b.y>=0&&b.y+b.h<=g.svgH,id+' vertical bounds at '+p.stationId);
     if(g.isLoop){
-     const expected=Math.max(1,Math.min(g.svgW-1-b.w,p.x-b.w/2));
-     assert(Math.abs(b.x-expected)<1,id+' label centered on station with viewport clamp');
+     const label=stationLayer.children.find(n=>n.tagName==='text');
+     const tx=+label.attrs.x,anchor=label.attrs['text-anchor'];
+     const natural=anchor==='end'?tx-b.w:anchor==='start'?tx:tx-b.w/2;
+     const expected=Math.max(2,Math.min(g.svgW-2-b.w,natural));
+     assert(Math.abs(b.x-expected)<1,id+' loop label follows station-name column with viewport clamp');
     }
    }
    for(let i=0;i<boxes.length;i++)for(let j=i+1;j<boxes.length;j++){

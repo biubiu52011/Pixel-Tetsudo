@@ -96,3 +96,40 @@ assert(tooltipCtx.markerTitle({estimated:true,positionSource:'supabase-train-run
   'Japanese text also distinguishes missing evidence');
 
 console.log('paired train layout, direction isolation, passenger modal and current-data refresh: PASS');
+
+ // All source operators use the same on-map type + direction rule.
+{
+ const ctx={window:{currentLang:'ja'}};
+ vm.runInNewContext(fs.readFileSync('data/core/train-type-defs.js','utf8'),ctx);
+ const defs=ctx.window.TRAIN_TYPE_NAMES;
+ const labelStart=source.indexOf('  function appendTrainLabels(');
+ const labelEnd=source.indexOf('  // Move an already-created train label',labelStart);
+ Object.assign(ctx,{document:{createElementNS:(_,tag)=>new Node(tag)},
+ _trainMoveDir:()=> 'down',_isLoopDirName:d=>d==='InnerLoop',
+ _isOedoTailTrain:()=>false,LOOP_DIR_NAMES:{InnerLoop:{ja:'内回り',zh:'内环',en:'Inner',ko:'내선'}},
+ _trainDestText:s=>s,_resolveStationLoose:s=>s,
+ _sixTrainDirectionLane:()=>null,_trainLabelY:(_,y)=>y+21,
+ _trainLabelSignature:()=>'',_isMobileView:()=>false});
+ vm.runInNewContext(source.slice(labelStart,labelEnd)+';this.caption=appendTrainLabels;',ctx);
+ function caption(line,type,dir='Outbound'){
+  const layer=new Node('g');
+  ctx.caption(layer,'svg','train',80,100,{railDirection:dir,destinationStation:'北千住',trainType:type},line);
+  return layer.textContent;
+ }
+ for(const lang of ['ja','zh','en','ko']){
+  ctx.window.currentLang=lang;
+  for(const line of ['Hibiya','TokyuToyoko','ChuoRapid','Yurakucho','Mita']){
+   const type='odpt.TrainType:TokyoMetro.Local';
+   assert(defs[type],'actual provider Local definition exists');
+   assert.equal(caption(line,type),(defs[type][lang]||defs[type].ja)+' 北千住',line+'/'+lang);
+  }
+ }
+ ctx.window.currentLang='ja';
+ const special=Object.keys(defs).find(k=>/TH-LINER/i.test(k));
+ assert(special,'TH-LINER definition exists');
+ assert.equal(caption('Hibiya',special),defs[special].ja+' 北千住');
+ assert.equal(caption('Hibiya',null),'北千住');
+ assert.equal(caption('Hibiya','odpt.TrainType:Unmapped'),'北千住');
+ assert.equal(caption('Yamanote','odpt.TrainType:TokyoMetro.Local','InnerLoop'),defs['odpt.TrainType:TokyoMetro.Local'].ja+' 内回り');
+ console.log('Uniform train type/direction captions across lines and languages: PASS');
+}

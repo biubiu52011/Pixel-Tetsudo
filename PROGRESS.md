@@ -846,3 +846,10 @@ Use existing TrainVehicle operationPatterns and Supabase family evidence; no sec
 Subway audit completed: 15 Metro/Toei subway datasets (including two internal branches),13624 timetable rows have drawable models. Added27 planned working/type constraints; family total93 and existing10777 train references retained. Fixed TH-LINER aliases, owner parsing including H/N and numeric occurrences, MSE18 services versus4000, removed legacy Chiyoda page provider. Generic Toei bodies retain null exact artwork with separate planned representative; no invented carset/generation. Removed arbitrary Nov30 expiry for official single-fleet rules while testing explicit expiry. Full57 verification entries pass. SQL migration20261016085156. Deployment pending.
 
 Merged concurrent through-label centering/prefix changes and migrated the existing280-box layout regression to those documented component rules; bounds/overlap coverage retained. Final57 verification entries pass.
+
+## 2026-10-16 列车种别与方向标签统一
+
+- 移除仅东急显示种别的线路开关；所有已识别种别统一显示「种别＋目的地／环线方向」，缺失或未知种别不猜为普通。
+- 保留图标与文字整体上下避让及折叠；沿用最新环线中途直通外侧列布局，并修正对应旧断言。
+- train-fold-layout 增加五条线路、四语言、TH-LINER、未知种别和环线方向回归。完整 57 项验证通过。
+- trains-render 缓存版本 4.3.1251；浏览器连接超时，实页视觉复核未完成。
