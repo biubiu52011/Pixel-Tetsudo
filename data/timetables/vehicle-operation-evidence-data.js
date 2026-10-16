@@ -20067,265 +20067,6 @@ window.VEHICLE_FAMILY_RULES = [
     "notes": "Provider range rule"
   },
   {
-    "evidenceId": 14,
-    "networkKey": "setagaya",
-    "operator": "TOKYU",
-    "codePattern": "*",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "東急300系",
-    "vehicleCandidates": [
-      "東急300系"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.tokyu.co.jp/railway/data/train_info/setagaya.html",
-    "notes": "structural exact"
-  },
-  {
-    "evidenceId": 21,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TOKYU",
-    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,051,052,053,054,055,056,057,058,059,060,061,062,063,064,065",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 22,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TokyoMetro",
-    "codePattern": "701,702,703,704,705,707,709,711,713,715,717,719,723,725,729,731,733,741,745,747,753,763,767,771,775,777,779,781,785,787,789,791",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 23,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Seibu",
-    "codePattern": "102,104,106,110,114,118,120,122,124,128,130,134",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 24,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Tobu",
-    "codePattern": "803,805,813,819,821,823",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 25,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Sotetsu",
-    "codePattern": "991,992,993,994,995",
-    "calendarType": "weekday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "相鉄20000系(10両)",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 26,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TOKYU",
-    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,051,052,053,054,055,056,057,058,059,060,061,062,063,064",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 27,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "TokyoMetro",
-    "codePattern": "701,702,703,704,705,707,709,711,713,717,719,723,725,729,731,733,739,743,745,747,749,753,755,757,761,767,773,775,785,787,789,791",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 28,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Seibu",
-    "codePattern": "102,106,108,110,112,114,124,128,130,171,172,173,174,175",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 29,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Tobu",
-    "codePattern": "803,805,811,813,817,819",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 30,
-    "networkKey": "toyoko-fukutoshin",
-    "operator": "Sotetsu",
-    "codePattern": "991,992,994",
-    "calendarType": "holiday",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "相鉄20000系(10両)",
-    "vehicleCandidates": [
-      "相鉄20000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
-    "notes": "published operation set"
-  },
-  {
-    "evidenceId": 11,
-    "networkKey": "tozai",
-    "operator": "JR-East",
-    "codePattern": "03K,05K,07K,09K,11K",
-    "calendarType": "",
-    "effectiveFrom": "2026-04-16",
-    "effectiveTo": "",
-    "exactVehicleType": "JR E231系800番台(10両)",
-    "vehicleCandidates": [
-      "JR E231系800番台(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "model exact"
-  },
-  {
-    "evidenceId": 12,
-    "networkKey": "tozai",
-    "operator": "ToyoRapid",
-    "codePattern": "50T-68T even",
-    "calendarType": "",
-    "effectiveFrom": "2026-04-16",
-    "effectiveTo": "",
-    "exactVehicleType": "東葉高速2000系(10両)",
-    "vehicleCandidates": [
-      "東葉高速2000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "model exact"
-  },
-  {
-    "evidenceId": 13,
-    "networkKey": "tozai",
-    "operator": "TokyoMetro",
-    "codePattern": "S published set",
-    "calendarType": "",
-    "effectiveFrom": "2026-04-16",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "東京メトロ05系(10両)",
-      "東京メトロ07系(10両)",
-      "東京メトロ15000系(10両)"
-    ],
-    "grade": "C",
-    "sourceUrl": "https://loo-ool.com/rail/MT/",
-    "notes": "multi-model family"
-  },
-  {
-    "evidenceId": 36,
-    "networkKey": "Yamanote",
-    "operator": "JR-East",
-    "codePattern": "*",
-    "calendarType": "",
-    "effectiveFrom": "2020-01-21",
-    "effectiveTo": "",
-    "exactVehicleType": "E235系0番台（山手線）",
-    "vehicleCandidates": [
-      "E235系0番台（山手線）"
-    ],
-    "grade": "A",
-    "sourceUrl": "https://www.jreast.co.jp/press/2019/20200122_ho01.pdf",
-    "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
-  },
-  {
-    "evidenceId": 40,
-    "networkKey": "TsukubaExpress",
-    "operator": "TsukubaExpress",
-    "codePattern": "PLAN:AC-SECTION",
-    "calendarType": "",
-    "effectiveFrom": "2026-03-14",
-    "effectiveTo": "",
-    "exactVehicleType": "",
-    "vehicleCandidates": [
-      "TX-2000系",
-      "TX-3000系"
-    ],
-    "grade": "B",
-    "sourceUrl": "https://www.mir.co.jp/feature/about_tx/",
-    "notes": "Full known itinerary including origin, destination and intermediate stops. TX-1000 is DC-only Akihabara-Moriya; AC itineraries permit TX-2000/3000 planned candidates, never a daily carset.",
-    "planScope": {
-      "lineIds": [
-        "TsukubaExpress"
-      ],
-      "planOnly": true,
-      "overridePlan": true,
-      "anyStationNames": [
-        "Miraidaira",
-        "Midorino",
-        "Banpaku-Kinen-Kouen",
-        "BampakuKinenKoen",
-        "Kenkyu-Gaku",
-        "KenkyuGakuen",
-        "Tsukuba"
-      ]
-    }
-  },
-  {
     "evidenceId": 41,
     "networkKey": "Odawara",
     "operator": "Odakyu",
@@ -20568,6 +20309,265 @@ window.VEHICLE_FAMILY_RULES = [
         "JR-East"
       ]
     }
+  },
+  {
+    "evidenceId": 14,
+    "networkKey": "setagaya",
+    "operator": "TOKYU",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "東急300系",
+    "vehicleCandidates": [
+      "東急300系"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.tokyu.co.jp/railway/data/train_info/setagaya.html",
+    "notes": "structural exact"
+  },
+  {
+    "evidenceId": 21,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TOKYU",
+    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,025,026,027,028,029,030,031,051,052,053,054,055,056,057,058,059,060,061,062,063,064,065",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 22,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TokyoMetro",
+    "codePattern": "701,702,703,704,705,707,709,711,713,715,717,719,723,725,729,731,733,741,745,747,753,763,767,771,775,777,779,781,785,787,789,791",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 23,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Seibu",
+    "codePattern": "102,104,106,110,114,118,120,122,124,128,130,134",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 24,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Tobu",
+    "codePattern": "803,805,813,819,821,823",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 25,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Sotetsu",
+    "codePattern": "991,992,993,994,995",
+    "calendarType": "weekday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "相鉄20000系(10両)",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 26,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TOKYU",
+    "codePattern": "001,002,003,004,005,006,007,008,009,010,011,012,013,014,015,016,017,018,019,020,021,022,023,024,051,052,053,054,055,056,057,058,059,060,061,062,063,064",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 27,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "TokyoMetro",
+    "codePattern": "701,702,703,704,705,707,709,711,713,717,719,723,725,729,731,733,739,743,745,747,749,753,755,757,761,767,773,775,785,787,789,791",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 28,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Seibu",
+    "codePattern": "102,106,108,110,112,114,124,128,130,171,172,173,174,175",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 29,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Tobu",
+    "codePattern": "803,805,811,813,817,819",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 30,
+    "networkKey": "toyoko-fukutoshin",
+    "operator": "Sotetsu",
+    "codePattern": "991,992,994",
+    "calendarType": "holiday",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "相鉄20000系(10両)",
+    "vehicleCandidates": [
+      "相鉄20000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://www.train.chokopy.net/unyo-search/Toyoko/2026-03-14/weekday",
+    "notes": "published operation set"
+  },
+  {
+    "evidenceId": 11,
+    "networkKey": "tozai",
+    "operator": "JR-East",
+    "codePattern": "03K,05K,07K,09K,11K",
+    "calendarType": "",
+    "effectiveFrom": "2026-04-16",
+    "effectiveTo": "",
+    "exactVehicleType": "JR E231系800番台(10両)",
+    "vehicleCandidates": [
+      "JR E231系800番台(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "model exact"
+  },
+  {
+    "evidenceId": 12,
+    "networkKey": "tozai",
+    "operator": "ToyoRapid",
+    "codePattern": "50T-68T even",
+    "calendarType": "",
+    "effectiveFrom": "2026-04-16",
+    "effectiveTo": "",
+    "exactVehicleType": "東葉高速2000系(10両)",
+    "vehicleCandidates": [
+      "東葉高速2000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "model exact"
+  },
+  {
+    "evidenceId": 13,
+    "networkKey": "tozai",
+    "operator": "TokyoMetro",
+    "codePattern": "S published set",
+    "calendarType": "",
+    "effectiveFrom": "2026-04-16",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "東京メトロ05系(10両)",
+      "東京メトロ07系(10両)",
+      "東京メトロ15000系(10両)"
+    ],
+    "grade": "C",
+    "sourceUrl": "https://loo-ool.com/rail/MT/",
+    "notes": "multi-model family"
+  },
+  {
+    "evidenceId": 40,
+    "networkKey": "TsukubaExpress",
+    "operator": "TsukubaExpress",
+    "codePattern": "PLAN:AC-SECTION",
+    "calendarType": "",
+    "effectiveFrom": "2026-03-14",
+    "effectiveTo": "",
+    "exactVehicleType": "",
+    "vehicleCandidates": [
+      "TX-2000系",
+      "TX-3000系"
+    ],
+    "grade": "B",
+    "sourceUrl": "https://www.mir.co.jp/feature/about_tx/",
+    "notes": "Full known itinerary including origin, destination and intermediate stops. TX-1000 is DC-only Akihabara-Moriya; AC itineraries permit TX-2000/3000 planned candidates, never a daily carset.",
+    "planScope": {
+      "lineIds": [
+        "TsukubaExpress"
+      ],
+      "planOnly": true,
+      "overridePlan": true,
+      "anyStationNames": [
+        "Miraidaira",
+        "Midorino",
+        "Banpaku-Kinen-Kouen",
+        "BampakuKinenKoen",
+        "Kenkyu-Gaku",
+        "KenkyuGakuen",
+        "Tsukuba"
+      ]
+    }
+  },
+  {
+    "evidenceId": 36,
+    "networkKey": "Yamanote",
+    "operator": "JR-East",
+    "codePattern": "*",
+    "calendarType": "",
+    "effectiveFrom": "2020-01-21",
+    "effectiveTo": "",
+    "exactVehicleType": "E235系0番台（山手線）",
+    "vehicleCandidates": [
+      "E235系0番台（山手線）"
+    ],
+    "grade": "A",
+    "sourceUrl": "https://www.jreast.co.jp/press/2019/20200122_ho01.pdf",
+    "notes": "Yamanote E235-0 fleet-only operation rule after the last E231-500 revenue service on Jan 20 2020; JR East verified full replacement in Jan 2020."
   }
 ];
 window.VEHICLE_REFERENCE_RULES = [
