@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "baseSha": "78accf090da05dc4c7c51c5a378c2f0441f9ea8f",
+  "changes": [
+    {
+      "path": ".github/workflows/ci-cd.yml",
+      "beforeSha256": "19e734a87eb6cc6faa82504d26d0ef19ef3ac039a9f24aa08aad4e8e812a89d1",
+      "afterSha256": "4aa91e0a99c992a59a396a681731a0e6f9a37b66b895a179542c9031b5d4b05f",
+      "reason": "Preserve existing behavior while migrating runtime lifecycle and the sole publication gate; the report describes this file transition.",
+      "migration": "Review the integrated PR and retire the replaced owner or deployment path together; do not merge earlier slices independently.",
+      "validation": "Run all existing Validate and Release Guards plus fixed HAR browser, immutable release corruption tests and the deployment contract.",
+      "design": "docs/reports/runtime-pipeline-audit.md",
+      "tests": [
+        "tools/deployment-gate.test.js",
+        "tools/release-bundle.test.js",
+        "tools/contract-change-guard.test.js",
+        "tools/runtime-request-contract.test.js",
+        "tools/runtime-change-contract.test.js",
+        "tests/train-position-service-day.test.cjs"
+      ]
+    },
+    {
+      "path": ".github/workflows/pages.yml",
+      "beforeSha256": "915c899da859ed86d05222ad531327d76dc2afb576c79f41bcebc650143a8086",
+      "afterSha256": null,
+      "reason": "Preserve existing behavior while migrating runtime lifecycle and the sole publication gate; the report describes this file transition.",
+      "migration": "Review the integrated PR and retire the replaced owner or deployment path together; do not merge earlier slices independently.",
+      "validation": "Run all existing Validate and Release Guards plus fixed HAR browser, immutable release corruption tests and the deployment contract.",
+      "design": "docs/reports/runtime-pipeline-audit.md",
+      "tests": [
+        "tools/deployment-gate.test.js",
+        "tools/release-bundle.test.js",
+        "tools/contract-change-guard.test.js",
+        "tools/runtime-request-contract.test.js",
+        "tools/runtime-change-contract.test.js",
+        "tests/train-position-service-day.test.cjs"
+      ]
+    },
+    {
+      "path": ".github/workflows/release-guards.yml",
+      "beforeSha256": "0885f09e9a7c78c7df16179463ae6df93c81d9bdb3324fe23c2517a7d956c0cb",
+      "afterSha256": "994f5fbca9561ea1ba3656e602e42f12d77591f4213578be9465b348c93dd549",
+      "reason": "Preserve existing behavior while migrating runtime lifecycle and the sole publication gate; the report describes this file transition.",
+      "migration": "Review the integrated PR and retire the replaced owner or deployment path together; do not merge earlier slices independently.",
+      "validation": "Run all existing Validate and Release Guards plus fixed HAR browser, immutable release corruption tests and the deployment contract.",
+      "design": "docs/reports/runtime-pipeline-audit.md",
+      "tests": [
+        "tools/deployment-gate.test.js",
+        "tools/release-bundle.test.js",
+        "tools/contract-change-guard.test.js",
+        "tools/runtime-request-contract.test.js",
+        "tools/runtime-change-contract.test.js",
+        "tests/train-position-service-day.test.cjs"
+      ]
+    },
+    {
+      "path": ".github/workflows/sync-vehicle-evidence.yml",
+      "beforeSha256": "2f1f5379f22bceb40e93bf391945485874f05d05e9512627304155aa48852eef",
+      "afterSha256": "f38f624f150c34bd0bd403272f3dd5aed1ed4a9f7d3e1d2a2adde4b398d3b30e",
+      "reason": "Preserve existing behavior while migrating runtime lifecycle and the sole publication gate; the report describes this file transition.",
+      "migration": "Review the integrated PR and retire the replaced owner or deployment path together; do not merge earlier slices independently.",
+      "validation": "Run all existing Validate and Release Guards plus fixed HAR browser, immutable release corruption tests and the deployment contract.",
+      "design": "docs/reports/runtime-pipeline-audit.md",
+      "tests": [
+        "tools/deployment-gate.test.js",
+        "tools/release-bundle.test.js",
+        "tools/contract-change-guard.test.js",
+        "tools/runtime-request-contract.test.js",
+        "tools/runtime-change-contract.test.js",
+        "tests/train-position-service-day.test.cjs"
+      ]
+    },
+    {
+      "path": "ENGINEERING.md",
+      "beforeSha256": "9ced7c32536e2b8a98243a9a64cedcea757f73ead356bdc7fabadb18664dd649",
+      "afterSha256": "3df01cdf91a6d0162304d8c66cf97a88843a1d75cb583e23deac925299f7a9ad",
+      "reason": "Preserve existing behavior while migrating runtime lifecycle and the sole publication gate; the report describes this file transition.",
+      "migration": "Review the integrated PR and retire the replaced owner or deployment path together; do not merge earlier slices independently.",
+      "validation": "Run all existing Validate and Release Guards plus fixed HAR browser, immutable release corruption tests and the deployment contract.",
+      "design": "docs/reports/runtime-pipeline-audit.md",
+      "tests": [
+        "tools/deployment-gate.test.js",
+        "tools/release-bundle.test.js",
+        "tools/contract-change-guard.test.js",
+        "tools/runtime-request-contract.test.js",
+        "tools/runtime-change-contract.test.js",
+        "tests/train-position-service-day.test.cjs"
+      ]
+    },
+    {
+      "path": "tests/train-position-service-day.test.cjs",
+      "beforeSha256": "19d5adccc861d83c7ec7a5fc7bb3abd4765a40e866a19bf61c7a0d8d34ec4f3a",
+      "afterSha256": "87d8ec4e674b323ff1b168209868c17afd2c387aad056c2e7740e9d98f12cbd5",
+      "reason": "Preserve existing behavior while migrating runtime lifecycle and the sole publication gate; the report describes this file transition.",
+      "migration": "Review the integrated PR and retire the replaced owner or deployment path together; do not merge earlier slices independently.",
+      "validation": "Run all existing Validate and Release Guards plus fixed HAR browser, immutable release corruption tests and the deployment contract.",
+      "design": "docs/reports/runtime-pipeline-audit.md",
+      "tests": [
+        "tools/deployment-gate.test.js",
+        "tools/release-bundle.test.js",
+        "tools/contract-change-guard.test.js",
+        "tools/runtime-request-contract.test.js",
+        "tools/runtime-change-contract.test.js",
+        "tests/train-position-service-day.test.cjs"
+      ]
+    }
+  ]
+}

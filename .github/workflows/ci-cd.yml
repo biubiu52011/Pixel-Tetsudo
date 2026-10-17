@@ -6,11 +6,14 @@ on:
   pull_request:
     branches: [main, "codex/runtime-*"]
   workflow_dispatch:
+    inputs:
+      rollback_run_id:
+        description: 'Optional retained production-verified CI run ID to restore'
+        required: false
+        type: string
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 # Cancel superseded PR validation only. A production publication must finish
 # before the next main workflow enters the single Pages environment.
@@ -53,6 +56,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Contract integrity against the protected base
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || '' }}
+        run: node tools/run-contract-guard.cjs
+      - name: Release identity and contract guard regression
+        run: |
+          node tools/release-bundle.test.js
+          node tools/contract-change-guard.test.js
       - name: Deployment gate contract
         run: node tools/deployment-gate.test.js
 
@@ -273,75 +286,204 @@ jobs:
             echo "No inline styles found"
           fi
 
+  build:
+    name: Build verified release
+    needs: [validate, release-guards, browser-replay]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      previous_run_id: ${{ steps.previous.outputs.run_id }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Find previous verified release
+        id: previous
+        if: github.ref == 'refs/heads/main'
+        run: node tools/release-history.cjs select
+      - name: Validate requested rollback
+        if: inputs.rollback_run_id
+        env:
+          ROLLBACK_RUN_ID: ${{ inputs.rollback_run_id }}
+        run: |
+          test "$GITHUB_REF" = refs/heads/main
+          node tools/release-history.cjs select "$ROLLBACK_RUN_ID"
+      - name: Download verified rollback artifact
+        if: inputs.rollback_run_id
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: .work/restore
+          run-id: ${{ inputs.rollback_run_id }}
+          github-token: ${{ github.token }}
+      - name: Restore exact previous bytes
+        if: inputs.rollback_run_id
+        run: |
+          mkdir _site
+          tar -xf .work/restore/artifact.tar -C _site
+          node tools/release-history.cjs check-bundle _site
+      - name: Build immutable release once
+        if: ${{ !inputs.rollback_run_id }}
+        env:
+          BUILD_SHA: ${{ github.sha }}
+        run: node tools/release-bundle.cjs build
+      - name: Check complete release inventory
+        run: node tools/release-bundle.cjs check _site
+      - name: Exercise the staged production bundle
+        run: |
+          python -m http.server 8790 --bind 127.0.0.1 --directory _site > /tmp/pixel-release-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl --fail --silent http://127.0.0.1:8790/release-manifest.json > /dev/null && break
+            sleep 1
+          done
+          node tools/run-browser-replay.cjs --production http://127.0.0.1:8790/
+      - name: Keep staged bundle acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: staged-release-verification
+          path: .work/production-browser
+      - name: Retain canonical release artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+          retention-days: 90
+
   deploy:
     name: Deploy to GitHub Pages
-    needs: [validate, release-guards, browser-replay]
+    needs: [validate, release-guards, browser-replay, build]
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     concurrency:
       group: pages
       cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Publish the validated artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
 
-      - name: Stamp deployment cache version
-        env:
-          BUILD_SHA: ${{ github.sha }}
+  verify-production:
+    name: Verify production release
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: .work/release-artifact
+      - name: Recover expected immutable release
         run: |
-          python - <<'PY'
-          import os, pathlib, re
-          build = os.environ["BUILD_SHA"]
-          for path in pathlib.Path("pages").glob("*.html"):
-              text = path.read_text(encoding="utf-8")
-              # Do not let a previously visited document become the long-lived source of truth.
-              if 'http-equiv="Cache-Control"' not in text:
-                  text = re.sub(
-                      r'(<head[^>]*>)',
-                      r'\1\n<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">\n'
-                      r'<meta http-equiv="Pragma" content="no-cache">\n'
-                      r'<meta http-equiv="Expires" content="0">',
-                      text,
-                      count=1,
-                      flags=re.I,
-                  )
-              # Every deployment gets unique core JS/CSS URLs. Existing hand-maintained ?v=
-              # values are replaced only in the deploy artifact, never in source files.
-              text = re.sub(
-                  r'((?:src|href)="(?:\.\./)?(?:js|css|data)/[^"?]+)(?:\?[^"]*)?(")',
-                  lambda m: f'{m.group(1)}?build={build}{m.group(2)}',
-                  text,
-                  flags=re.I,
-              )
-              # Navigation also carries the build id, so a cached old sibling HTML cannot win.
-              text = re.sub(
-                  r'(href="(?:home|realtime|trains|history|tourism-event|tourism-shop|tourism-spot)\.html)(?:\?[^"]*)?(")',
-                  lambda m: f'{m.group(1)}?build={build}{m.group(2)}',
-                  text,
-                  flags=re.I,
-              )
-              path.write_text(text, encoding="utf-8")
-          PY
-
-      - name: Verify deployment cache stamp
+          mkdir _site
+          tar -xf .work/release-artifact/artifact.tar -C _site
+      - name: Verify production SHA and resource hashes
         env:
-          BUILD_SHA: ${{ github.sha }}
-        run: |
-          grep -q 'http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"' pages/realtime.html
-          grep -q "?build=$BUILD_SHA" pages/realtime.html
-          grep -q "?build=$BUILD_SHA" pages/trains.html
+          RELEASE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: node tools/release-bundle.cjs verify _site "$RELEASE_URL" .work/release-verification.json
+      - name: Verify production navigation and mounted UI
+        env:
+          RELEASE_URL: ${{ needs.deploy.outputs.page_url }}
+        run: node tools/run-browser-replay.cjs --production "$RELEASE_URL"
+      - name: Retain release acceptance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-release-verification
+          retention-days: 90
+          path: |
+            _site/release-manifest.json
+            .work/release-verification.json
+            .work/production-browser
 
-      - name: Upload artifact
+  rollback:
+    name: Restore previous verified release
+    needs: [build, deploy, verify-production]
+    if: always() && github.ref == 'refs/heads/main' && (needs.deploy.result == 'failure' || (needs.deploy.result == 'success' && needs.verify-production.result == 'failure'))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment: github-pages
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Require an actual verified rollback target
+        env:
+          PREVIOUS_RUN_ID: ${{ needs.build.outputs.previous_run_id }}
+        run: |
+          echo '::error::Production acceptance failed. Restoring the previous verified artifact.'
+          if [ -z "$PREVIOUS_RUN_ID" ]; then
+            echo '::error::No retained verified release exists yet. Automatic rollback is unavailable; production requires maintainer attention.'
+            exit 1
+          fi
+          node tools/release-history.cjs select "$PREVIOUS_RUN_ID"
+      - uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          run-id: ${{ needs.build.outputs.previous_run_id }}
+          github-token: ${{ github.token }}
+          path: .work/rollback-artifact
+      - name: Check rollback bytes and provenance
+        run: |
+          mkdir _site
+          tar -xf .work/rollback-artifact/artifact.tar -C _site
+          node tools/release-history.cjs check-bundle _site
+      - uses: actions/configure-pages@v5
+      - name: Repackage unchanged verified bytes for Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
-
-      - name: Deploy to GitHub Pages
+          path: _site
+          name: rollback-pages
+          retention-days: 90
+      - name: Publish verified rollback
+        id: restored
         uses: actions/deploy-pages@v4
-        id: deployment
+        with:
+          artifact_name: rollback-pages
+      - name: Verify restored production release
+        env:
+          RELEASE_URL: ${{ steps.restored.outputs.page_url }}
+        run: |
+          node tools/release-bundle.cjs verify _site "$RELEASE_URL" .work/rollback-verification.json
+          node tools/run-browser-replay.cjs --production "$RELEASE_URL"
+      - name: Retain rollback evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-rollback-verification
+          retention-days: 90
+          path: |
+            _site/release-manifest.json
+            .work/rollback-verification.json
+            .work/production-browser

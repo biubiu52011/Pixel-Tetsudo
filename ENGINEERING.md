@@ -286,7 +286,7 @@ Controller 不应重新实现 Header、Nav、Footer、FilterBar、通用 Card、
 - 旧源时间不能覆盖较新同身份记录。完成时间不是源版本；删除/确认空响应仍有意义。
 - Fusion 的 positions 事件携带逐线路 position/display/metadata 三类变化。元数据续期仍提交快照、刷新过期检查，不得仅因 sourceUpdatedAt/sourceValidUntil 改变而重启 SVG 动画。新增消费者复用此契约。
 - 新网络调用或重复定时任务须先搜索已有 owner，在本节登记用途/范围/周期/停止条件并交付请求数量、错误重试、跨日/乱序、身份与变化回归。runtime-architecture-guard 对生产 js/data 的网络调用及 setInterval 清单做精确校验；不允许仅重写清单绕过审查。静态清单不是完整语义证明，递归 setTimeout 和新调度封装也必须审查。
-- 完成迁移时删除旧路；PR 不得删除测试或放宽断言来隐藏退化。可复用 Release Guards 与 Validate 同时成功才允许唯一 CI/CD 发布；生产发布不中途取消。回滚通过 revert PR 后走同一门禁。
+- 完成迁移时删除旧路；PR 不得删除测试或放宽断言来隐藏退化。可复用 Release Guards 与 Validate 同时成功才允许唯一 CI/CD 发布；生产发布不中途取消。回滚恢复已通过生产验收的保留产物并重新验证（详见第14节）。
 
 ### 13.1 既有定时任务登记
 
@@ -301,3 +301,13 @@ Controller 不应重新实现 Header、Nav、Footer、FilterBar、通用 Card、
 | tourism-core | 旧加载器就绪探测 | 50毫秒 | 数据就绪或200次检查；现役DataLoader路径不启动 |
 
 分钟批处理只运行有已注册/已加载时刻表的线路，不能为无计划线路展开全网空算。DataFusion.getPerformanceSamples、TrainsPage.getPerformanceSamples、ODPTClient.getRequestMetrics 均为有界只读诊断入口。HAR 只能提供网络基线；实际计算和 SVG 耗时必须用浏览器采样，真实网络采样不冒充固定输入的前后对比。
+
+## 14. PR、发布与契约变更
+
+main 必须走 PR，四项检查 Validate、release-guards / release-guards、Fixed HAR browser replay、Build verified release 全部通过且分支保持最新；人工审批人数为0。管理员同样受保护，禁止强推和删除，处理完讨论再合并。智能体不得自行合并未获授权的改造。
+
+Pages 只接受 CI/CD 的已验证 _site 产物。构建清单记录源 SHA、源构建 run、逐文件 SHA256 与 contentId；发布不重新构建。正式验收核对线上清单、关键资源字节以及首页/情报/列车页和返回交互。失败恢复保留的生产验收成功产物，并重新验收；手动恢复使用 main 的 CI/CD workflow_dispatch.rollback_run_id，禁止任意分支产物。第一版尚无合格历史产物时必须明确报错，不能宣称已具备实测生产回滚基线。
+
+Actions 创建 PR/审批保持禁用。定时证据同步只能推送唯一候选分支、显式派发 CI 并输出比较链接；不得直接推 main 或自动合并。
+
+修改已有测试、工作流、架构守卫或本规范时，必须提交 .github/contract-changes/*.json，精确匹配基线/结果内容哈希，并引用设计、迁移和可执行回归证据。检查优先运行受保护基线的检查器。不得删除测试或放宽阈值掩盖错误。清单仅强制变更可见、证据齐全，不证明解释真实或测试语义正确；仓库内工作流仍可被修改，PR 审查必须核对守卫自身和断言变化，不能把自动检查称为防篡改系统。0人强制审批不授权智能体绕过用户的审查与合并要求。

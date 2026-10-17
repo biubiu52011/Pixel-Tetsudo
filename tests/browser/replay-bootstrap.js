@@ -1,5 +1,12 @@
 // Test-only bootstrap: all remote fetches resolve from captured public data.
 (() => {
+  window.__replayPerformance={longTasks:[],frameTimes:[]};
+  if(window.PerformanceObserver&&PerformanceObserver.supportedEntryTypes.includes('longtask'))new PerformanceObserver(list=>{
+    for(const entry of list.getEntries())window.__replayPerformance.longTasks.push(entry.duration);
+  }).observe({type:'longtask',buffered:true});
+  let lastFrame;
+  function frame(now){if(lastFrame!==undefined)window.__replayPerformance.frameTimes.push(now-lastFrame);lastFrame=now;if(window.__replayPerformance.frameTimes.length<600)requestAnimationFrame(frame);}
+  requestAnimationFrame(frame);
   const nativeFetch=window.fetch.bind(window),NativeDate=Date,start=performance.now();
   const scenario=new URL(location.href).searchParams.get('case')||'SaikyoKawagoe';
   const ready=nativeFetch('/__replay-data?case='+encodeURIComponent(scenario)).then(r=>r.json()).then(f=>{

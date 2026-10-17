@@ -1003,3 +1003,7 @@ Status REVIEW pending public release. Imported44user-updatedPNGs(11JR-Kyushu/33J
 
 
 Release verification — LINE-ICON-SYNC DONE:3a4e3ed03c60bc7e1d0e224bb67d836c8e26712c. CI/CD39022945061,ReleaseGuards39022945097,Pages39022944571 allSUCCESS. Public44PNG URLs HTTP200/SHA256equaluserinput;18canonicalimagepaths and7HTMLbuildtokens matchrelease. BrowserOsakaLoopcard uses近畿_O.png andcomplete/naturalWidth confirmsloaded;othernewKabe/Kosei/Kakogawaicons visuallyobserved. Lazyoffscreenimages checkedafterviewportentry;originalall-linesfilterrestored. Primarytargetedfiles/renamemanifest/releasereceipt synced. RemainingunrelatedTokyuShinYokohamamissingimageunchanged. Verification recorded without newruntime/SQL/recovery files.
+
+## 2026-10-17 JST — RELEASE-PIPELINE-INTEGRATION
+
+Status REVIEW. Integrates runtime phases #36–39 with immutable build/manifest, all-gate deploy dependencies, staged + production browser acceptance, verified-artifact rollback and exact-hash contract-change disclosure. Evidence sync now creates candidate branch, dispatches CI and outputs manual PR link; Actions PR creation remains disabled per user. main requires PR + all checks with0 mandatory approvals. No merge or production deploy in this task; actual GitHub CI/config readback pending below. First managed release needs its first successful production acceptance before historical verified rollback is available.

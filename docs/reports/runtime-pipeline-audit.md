@@ -79,3 +79,17 @@ main的7dbb7d1b已处理计划时钟/禁止重放；bb9ae03d将SQL TTL调整为6
 Chromium固定HAR真实计时：埼京SVG18/位置54.9ms，中央本线15.6/177.2ms，吾妻8.8/43.6ms，常磐各停19.7/69.7ms。4类场景的身份唯一、元数据无重绘、覆盖保全和请求扇出预算均通过；browser-replay-metrics产物保留4份JSON及PNG。
 
 本地最终50个CI Node入口、65项node:test、4个Python守卫通过，历史警告未删除。审查入口：[阶段01](https://github.com/biubiu52011/Pixel-Tetsudo/pull/36)、[阶段02](https://github.com/biubiu52011/Pixel-Tetsudo/pull/37)、[阶段03](https://github.com/biubiu52011/Pixel-Tetsudo/pull/38)、[阶段04](https://github.com/biubiu52011/Pixel-Tetsudo/pull/39)。
+
+## CI/CD 集成与契约迁移设计
+
+本阶段以最终集成 PR 对 main 运行所有门禁；#36–39保留为分阶段审查切片，避免要求完整新检查后，早期切片缺少后续构建检查而无法单独合并。此次不合并或部署 main。
+
+发布图：Validate + reusable Release Guards + 固定 HAR 浏览器 → Build verified release（仅跟踪的发布目录、完整哈希、staged 浏览器）→ 唯一 Pages 发布 → 线上字节与交互验收。正常发布只构建一次；PR 也生成相同结构的产物但不部署。失败自动选择保留的 main 成功发布和成功 Verify production release，恢复原始字节和源 SHA；没有历史基线则明确失败并要求维护者处理。手动恢复同样验证来源，不能将绿色功能分支冒充生产基线。产物保留90天，过期不算有效回滚目标。
+
+契约变更理由：ci-cd.yml 将独立绿色结果改为显式依赖并交付不可变发布清单和验收；release-guards.yml 改为被唯一入口调用；删除 pages.yml 关闭手动旁路；sync-vehicle-evidence.yml 从直接写main迁移到候选分支和显式CI；ENGINEERING.md 增加数据生命周期与PR发布规范；service-day旧测试的VM片段加载新提取的变化分类函数，保留原有位置与有效期断言。新增部署契约、请求/变化/HAR回放回归均为增强，未为实现删测或放宽原预算。精确文件前后哈希见 .github/contract-changes/runtime-release-integration.json。
+
+帧耗时门禁使用真实 requestAnimationFrame 间隔（至少20帧，p95≤50ms）和 PerformanceObserver 长任务（单任务≤2000ms），与已有SVG≤500ms、位置处理≤2000ms共同阻断可复现退化；CI保存原始JSON/截图，环境抖动应调查而非直接放宽阈值。
+
+仓库配置另外核验：main PR/4项检查/strict/管理员保护/0审批；Pages build_type=workflow；旧手动工作流禁用；部署环境只允许main；Actions PR创建审批保持false。实际读回结果与CI链接记录于PROGRESS。设置与代码分别验收；代码未合并时旧main工作流不会自动获得新门禁。
+
+契约检查的威胁边界：内容哈希声明、基线检查器和回归测试使变更可审查，无法自动判断解释真假，仓库内CI本身也不是不可修改的外部策略。仍需人工核对最终PR，不能把“绿色”解释为架构语义的绝对证明。
