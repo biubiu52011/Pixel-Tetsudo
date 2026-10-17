@@ -1,5 +1,15 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-17 JST — 数据链路阶段 01：五份 HAR 基线与发布门禁（REVIEW）
+
+- Workstream: runtime-pipeline-audit；执行者 Codex；隔离工作目录基于 origin/main 78accf09，保留主工作区全部未提交内容。
+- 五份 HAR 已从 Downloads 读取；只提交脱敏汇总及 SHA256，不提交含密钥/请求头的 HAR。107/108/89/792/5 个请求；realtime 样本有 1 次同 URL 请求重叠，其余样本为 0。不能把所有轮询都归为重复请求。
+- CI/CD 成为唯一 Pages 发布者；Release Guards 变为可复用必经作业；PR 按 ref 隔离并发，发布串行且不在中途取消；手动重发仅允许 main 并重新验证。删除旧手动绕过入口。回滚通过 revert PR，经同一验证和发布链。
+- 本地 deployment-gate、6 个发布检查、4 个 Python 守卫全部通过（历史警告保留）；GitHub CI 待 PR。browser runtime: NOT VERIFIED。
+- 修改：.github/workflows、tools/deployment-gate.test.js、tools/audit-request-har.cjs、tests/fixtures/guards/request-har-baseline.json、docs/reports/runtime-pipeline-audit.md。Commit SHA：见本阶段 PR。
+- 遗留：网络基线不能证明脚本/渲染性能；下一阶段请求共享、失败语义、响应归属及版本；尚未宣称整体重构完成。
+
+
 ## 2026-10-16 JST — 小田急按列车号补充车型计划（DONE：本轮补充已同步并公开验证）
 
 - Workstream: odakyu-train-plans-20261016；执行者Codex。补充既有计划时刻表的车型依据，不重建时刻表，不查询当天实际编成。Supabase现有train_vehicle_rules追加2,126组列车号/日历计划，经唯一TrainOperationEvidence → TrainVehicle → PNG入口消费。
