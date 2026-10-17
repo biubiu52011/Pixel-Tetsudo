@@ -157,7 +157,7 @@
 | RC-8 | 2026-10-15 | Codex | 文档职责与分类导航统一；目录按实际标题校正；修正 SQL、已移除模块及历史恢复状态的过时说明。详见 [进度记录](PROGRESS.md)。 |
 | RC-7 | 2026-10-15 | 用户／开发会话 | **文档结构更新**：数据架构统一为新链路「ODPT/SQL 列车号 → 线路车型对应 → TrainOperationEvidence → TrainVehicle → PNG」（3.7/2.4/3.10.3/5.4.5/术语表/目录/数据字典同步）；修订记录（日志）迁移至 PROGRESS.md 按日期管理，本表仅保留版本索引。 |
 | RC-6 | 2026-10-15 | 用户／开发会话 | **文档更名与整理**：DEVELOPMENT.md 全量整理后更名为 README.md（保留全部开发细节，作为仓库首页文档）；同步登记 2026-10-14～10-15 开发进展（v4.3.1216~4.3.1230，各条目 Commit 见 PROGRESS.md 对应日期）。 |
-| RC-5 | 2026-09-27 | 用户／开发会话 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freeze、recovery/baseline、migration audit、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
+| RC-5 | 2026-09-27 | 用户／开发会话 | **代码对照修订**：以当前 main 为事实来源，修正 trains 模块拆分、车型身份解析、line-service-relations/LOS、ODPT 唯一入口、i18n、CSP、CI/CD、canonical data freezebaseline、migration audit、release gate 与已知债务记录；修复章节编号/目录漂移与重复版本号。 |
 | RC-4.3 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理第一类真坐标错误 16 组（删孤儿 8、合并/改名、坐标修正 7、i18n 修正）；重跑 gen-file-data.js。 |
 | RC-4.2 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理同站双 ID 拼写冗余 19 组（ODPT 实证对齐，删孤儿 10/合并 9）；name_map 同步改指；重跑 gen-file-data.js。 |
 | RC-4.1 | 2026-09-21 | 用户／开发会话 | **Freeze 例外**：清理坐标偏移的孤儿车站 ID 4 个 + name_map/i18n 改指；重跑 gen-file-data.js。 |
@@ -186,7 +186,7 @@
 | TrainOperationEvidence | 列车运行/编成证据注册与解析接口（与TrainVehicle合并于js/train-vehicle.js，window.TrainOperationEvidence）；各线路 *-operation-evidence-2026.js / *-formation-evidence.js 经 register(provider) 注册，resolveEvidence(trainNumber, 线路/服务日/日历) 解析车型 |
 | TrainIcons | js/train-vehicle.js 内提供的兼容接口，与 TrainVehicle 共用同一车型目录；独立 resolver 脚本已移除 |
 | 服务关系层 | canonical 线路内的 throughServices、serviceBoundaries、branchOf 等关系；不替代 presentation 展示分组 |
-| baseline refresh | 合法 canonical migration 后刷新 recovery/baseline/production_baseline.json 的生命周期动作，必须与 migration audit、approved removal manifest、CI guard 同步 |
+| baseline refresh | 合法 canonical migration 后刷新 tests/fixtures/guards/production_baseline.json 的生命周期动作，必须与 migration audit、approved removal manifest、CI guard 同步 |
 | GEOM | 线路图几何设计令牌（5.4.1.13 节） |
 | BFS | 广度优先搜索——路径搜索实现（js/route-search.js） |
 | 线路系统（Line） | 铁路基础设施/线路实体——一条线路 = 一个物理线路定义（railway_data.json lines），可包含多个运行系统；与运行系统（LOS）是两个维度 |
@@ -324,9 +324,9 @@ search-ui.js 渲染结果；点击线路可跳转 trains.html 查看该线实时
 | images/ | 素材库，按业务主题分四个子目录；根级仅放全站图标/站点标记（pixel-tetsudo.ico、Language.png、icon-metro-station.svg、地铁站点.svg） | 见下方「图库管理规范」：四个子目录各自的用途与命名 |
 | scripts/ | 数据治理脚本（i18n 审计/对齐/提交前检查） | serve.py 为本地开发服务器（.gitignore 排除不入库）；生成脚本产出必须落 data/core 或 data/timetables |
 | archive/ | 已废弃脚本存档 | 只读存档，禁止再被页面引用 |
-| recovery/ | 数据修复现场与基线 | baseline/production_baseline.json、home_ui_baseline.json、canonical_migration_audit_*.json、approved_removal_manifest.json 为 CI guard 依赖必须入库；其余修复现场用完归档或清理 |
+| tests/fixtures/guards/ | CI 固定测试输入 | production/home UI 基线、approved removal manifest、架构 inventory；不能依赖本地备份 |
 | work/.work/ | 本地工作区（工具脚本、serve.env） | 仅本地使用，禁止被页面引用；敏感文件必须 .gitignore |
-| .github/ | CI/CD 工作流（GitHub Actions） | push/PR 到 main 触发 validate（guard 检查）+ 自动部署 GitHub Pages；guard 脚本依赖 recovery/baseline/ |
+| .github/ | CI/CD 工作流（GitHub Actions） | push/PR 到 main 触发 validate（guard 检查）+ 自动部署 GitHub Pages；guard 脚本依赖 tests/fixtures/guards/ |
 | node_modules/ | 工具依赖 | 禁止在其中放置项目文件或临时文件（.tmp_* 等应立即清理） |
 
 #### 3.5.1 图库管理规范（images/）
@@ -524,7 +524,7 @@ trains.html 当前脚本尾链：trains-config.js → trains-utils.js → trains
 
 ### 4.1 目录文件命名规范
 
-目录：全部小写（data/、css/、js/、pages/、scripts/、fonts/、images/、archive/、recovery/、work/、.work/；.github/ 为 CI/CD 配置目录）
+目录：全部小写（data/、css/、js/、pages/、scripts/、fonts/、images/、archive/、work/、.work/；.github/ 为 CI/CD 配置目录）
 
 页面：pages/*.html 小写 kebab-case（home.html、trains.html、realtime.html、tourism-spot.html、history.html）
 
@@ -536,7 +536,7 @@ CSS：全局 style.css + lang-bar.css；页面专属按页命名（trains.css、
 
 图片：images/ 按业务主题分子目录，文件名全库唯一；列车子目录按型番系/形 + 涂装样式括弧命名
 
-禁止：文件名含中文/空格/大写（历史遗留例外须登记）；archive/ 只读，recovery/ 用后即清
+禁止：文件名含中文/空格/大写（历史遗留例外须登记）；archive/ 只读；本地临时资料仅放 .work/，不得作为生产或 CI 输入
 
 ### 4.2 代码命名、注释统一规范
 
@@ -648,7 +648,7 @@ ODPT 封装：统一经 ODPTClient，参数为运营者代码（operator）；�
 ├── fonts/  images/         # 像素字体 / 素材
 ├── scripts/                # 数据治理脚本（i18n 审计/对齐/提交前检查）
 ├── .github/               # CI/CD 工作流（validate + 自动部署）
-└── archive/  recovery/  work/  .work/   # 存档 / 修复 / 本地工作区
+└── archive/  work/  .work/   # 历史文档 / 本地临时资料与备份
 ```
 
 ### 5.2 全站路由清单
@@ -1395,7 +1395,7 @@ python scripts/serve.py
 | --- | --- | --- |
 | .github/workflows/ci-cd.yml | push / pull_request 到 main/master，手动触发 | validate + GitHub Pages deploy |
 | brace_balance_check.py | validate | 检查括号/结构平衡 |
-| ci_guard_check.py | validate | Canonical Entity Preservation Guard：对比 recovery/baseline/production_baseline.json、railway_data.json、approved_removal_manifest.json，阻止实体意外丢失 |
+| ci_guard_check.py | validate | Canonical Entity Preservation Guard：对比 tests/fixtures/guards/production_baseline.json、railway_data.json、approved_removal_manifest.json，阻止实体意外丢失 |
 | arch_guard_check.py | validate | Architecture Integrity Guard：检查 UNIFIED_LINES 新增未分类引用、localhost/file://、禁用旧文件 |
 | home_ui_guard_check.py | validate | Home UI Integrity Guard：保护 pages/home.html 模块结构、i18n key 与 home_ui_baseline |
 | pages.yml | push / 手动触发 | 独立 GitHub Pages 部署工作流 |
@@ -1404,7 +1404,7 @@ CI/CD 规则：
 
 1. validate 失败不得部署或打版本标签。
 2. canonical 数据变更必须通过 ci_guard_check.py；合法删除必须先进入 approved_removal_manifest.json。
-3. 架构迁移若新增 UNIFIED_LINES 消费点，必须更新 recovery/reports/unified_lines_3.3_inventory.json 或等价审计结果，不能留下未分类引用。
+3. 架构迁移若新增 UNIFIED_LINES 消费点，必须更新 tests/fixtures/guards/unified_lines_3.3_inventory.json 或等价审计结果，不能留下未分类引用。
 4. 页面不得引入 localhost/127.0.0.1/file:// 依赖；inline style 目前为 warning，但新增页面仍应遵守 CSP。
 5. GitHub Pages 部署只发布仓库静态文件，不执行后端构建；生成产物必须已提交。
 

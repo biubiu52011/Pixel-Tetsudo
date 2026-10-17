@@ -110,6 +110,14 @@ Controller 不应重新实现 Header、Nav、Footer、FilterBar、通用 Card、
 4. CI architecture guard 应验证“新路径存在 + 旧路径不能重新出现”。
 5. 临时兼容 wrapper 允许短期存在，但必须在 `PROGRESS.md` 登记清理任务。
 
+### 临时资料与备份的归属
+
+- 不再创建 recovery 目录或按任务日期复制执行器；架构守卫拒绝重新生成该目录。
+- 运行时代码仍在既有 js/data 所有者中改造；可复用检查维护在既有 tools/tests 与 CI 入口，不把临时脚本当成发布步骤。
+- CI 固定输入存放 tests/fixtures/guards，变更路径不得重写基线数据来绕过检查。
+- 本地样本、日志及一次性导出使用被忽略的 .work；备份采用主工作区 .work/backups 的去重归档，归档不参与生产加载。
+- 当前车型说明只维护 docs/train-vehicle-plans.md；过期任务报告先归档保留，再从现役文档入口移除。
+
 ## 6. HTML / CSS / JS 统一原则
 
 ### HTML

@@ -9,9 +9,9 @@ if hasattr(sys.stderr, 'reconfigure'):
 
 SCRIPT_FILE = os.path.abspath(__file__)
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(SCRIPT_FILE)))
-BASELINE_PATH = os.path.join(REPO_ROOT, 'recovery', 'baseline', 'production_baseline.json')
+BASELINE_PATH = os.path.join(REPO_ROOT, 'tests', 'fixtures', 'guards', 'production_baseline.json')
 CANONICAL_PATH = os.path.join(REPO_ROOT, 'data', 'core', 'railway_data.json')
-MANIFEST_PATH = os.path.join(REPO_ROOT, 'recovery', 'baseline', 'approved_removal_manifest.json')
+MANIFEST_PATH = os.path.join(REPO_ROOT, 'tests', 'fixtures', 'guards', 'approved_removal_manifest.json')
 
 def sha256_file(path):
     with open(path, 'rb') as f:

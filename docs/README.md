@@ -1,6 +1,6 @@
 # 文档索引
 
-整理日期：2026-10-15（JST）。本页导航到已纳入版本管理的文档；不把历史报告的数量或验收结果当作当前运行状态。
+整理日期：2026-10-17（JST）。本页导航到已纳入版本管理的文档；不把历史报告的数量或验收结果当作当前运行状态。
 
 先读项目 [README](../README.md)，修改前读 [ENGINEERING](../ENGINEERING.md) 与 [最新进度](../PROGRESS.md)。
 
@@ -16,6 +16,13 @@
 - [Pixel-Tetsudo（像素铁道）](../README.md) — `README.md`
 - [Pixel Tetsudo 全站统一工程](../ENGINEERING.md) — `ENGINEERING.md`
 - [Pixel Tetsudo 工程进度](../PROGRESS.md) — `PROGRESS.md`
+
+## 现役车型与验证入口
+
+- [列车计划车型与图标](train-vehicle-plans.md) — 唯一现役车型说明，替代分散日期报告。
+- [共享组件](COMPONENTS.md)
+- [CI 固定夹具](../tests/fixtures/guards/) — 基线与架构清单，原值保留。
+- 本地去重备份位于主工作区 .work/backups/recovery-archive.zip；不发布，不参与运行。
 
 ## 专项报告
 
@@ -36,12 +43,9 @@
 - [DEVELOPMENT Changelog - 2026-09-27](../archive/DEVELOPMENT-CHANGELOG-2026-09-27.md) — `archive/DEVELOPMENT-CHANGELOG-2026-09-27.md`
 - [Pixel Tetsudo — SQL 时刻表迁移归档检查点](../archive/TIMETABLE-SQL-MIGRATION-CHECKPOINT-2026-10-10.md) — `archive/TIMETABLE-SQL-MIGRATION-CHECKPOINT-2026-10-10.md`
 
-## 恢复资料
+## 数据恢复历史
 
-- [Recovery Workspace](../recovery/README.md) — `recovery/README.md`
-- [2026-10-14 JST — 非 FULL SQL 时刻表及车型证据链](../recovery/reports/2026-10-14_non_full_sql_timetables.md) — `recovery/reports/2026-10-14_non_full_sql_timetables.md`
-
-## 分类入口
-
+- [Canonical 数据恢复历史](reports/canonical-recovery-history.md)
+- [非 FULL SQL 时刻表历史验收](reports/non-full-sql-timetables.md)
+- [Canonical 迁移审计记录](reports/canonical-migration-audit.json)
 - [历史归档索引](../archive/README.md)
-- [恢复资料说明](../recovery/README.md)

@@ -2,7 +2,7 @@
 import json, hashlib, os, sys, re
 
 REPO_ROOT = os.getcwd()
-BL = os.path.join(REPO_ROOT, 'recovery', 'baseline', 'home_ui_baseline.json')
+BL = os.path.join(REPO_ROOT, 'tests', 'fixtures', 'guards', 'home_ui_baseline.json')
 CP = os.path.join(REPO_ROOT, 'data', 'core', 'railway_data.json')
 TP = os.path.join(REPO_ROOT, 'data', 'core', 'translations.js')
 
@@ -17,7 +17,7 @@ def sha256_file(p):
 def find_home_files():
     result = []
     for root, dn, _ in os.walk(REPO_ROOT):
-        dn[:] = [d for d in dn if d not in ('.git','node_modules','__pycache__','recovery')]
+        dn[:] = [d for d in dn if d not in ('.git','node_modules','__pycache__','.work','work')]
         try:
             if 'home.html' in os.listdir(root):
                 hp = os.path.join(root, 'home.html')

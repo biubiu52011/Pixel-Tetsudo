@@ -2,9 +2,12 @@
 import json, os, re, sys
 
 REPO_ROOT = os.getcwd()
-INVENTORY_PATH = os.path.join(REPO_ROOT, 'recovery', 'reports', 'unified_lines_3.3_inventory.json')
+INVENTORY_PATH = os.path.join(REPO_ROOT, 'tests', 'fixtures', 'guards', 'unified_lines_3.3_inventory.json')
 
 def main():
+    if os.path.exists(os.path.join(REPO_ROOT, "recovery")):
+        print("ERROR: legacy recovery directory must not be recreated; use .work for temporary local artifacts")
+        sys.exit(1)
     if not os.path.exists(INVENTORY_PATH):
         print('ERROR: Inventory not found:', INVENTORY_PATH)
         sys.exit(1)
@@ -21,7 +24,7 @@ def main():
     print('  IGNORE (comments/docs): %d' % ign)
     print()
     # Check for new unclassified findings
-    SKIP = {'recovery', '.git', 'node_modules', '__pycache__', 'data/core'}
+    SKIP = {'.git', 'node_modules', '__pycache__', 'data/core'}
     SCAN = [os.path.join(REPO_ROOT, 'js'), os.path.join(REPO_ROOT, 'pages')]
     known = {(x['file'].replace('\\', '/'), x['line']) for x in inv['findings']}
     # Line numbers drift as files evolve. Keep a content signature as a secondary

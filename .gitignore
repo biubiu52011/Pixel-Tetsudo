@@ -39,15 +39,8 @@ images/*/_files.txt
 # VSCode
 .vscode/
 
-# Recovery archive
-# CI guard 依赖文件必须进版本库（否则 GitHub Actions checkout 后 guard 无法运行）
-recovery/*
-!recovery/baseline/
-!recovery/baseline/*.json
-!recovery/reports/
-recovery/reports/*
-!recovery/reports/unified_lines_3.3_inventory.json
-
+# Retired temporary recovery tree; CI fixtures now live under tests/fixtures/guards
+/recovery/
 
 # serve logs
 serve.err
