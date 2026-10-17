@@ -1,16 +1,16 @@
 /*
  * Pixel Tetsudo - Train Position Estimator
- * 基于时刻表+延误信息推算没有实时位置的线路的列车位置
+ * 按当前 JST 时钟推算计划时刻表位置；实际延误位置由 ODPT Train 提供
  *
  * Provider: TrainPositionEstimator
  * Consumer: DataFusion.loadTrainPositions()
- * Input: ODPT TrainTimetable data + delayInfo + line stations + current time
+ * Input: ODPT / SQL TrainTimetable data + line stations + current wall time
  * Output: estimated positions [{ stationIndex, trainId, delayMin, estimated: true }]
  */
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 11;
+  var ESTIMATOR_VERSION = 12;
   var _manualTimetableRegistry = {};
   var _timetableIndexCache = { source: null, stamp: "", arrays: {}, manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;
@@ -227,7 +227,8 @@
       var now = new Date(Date.now() + 9 * 60 * 60 * 1000);
       var h = now.getUTCHours();
       // ODPT TrainTimetable times and live position evidence share JST.
-      return (h < 4 ? h + 24 : h) * 60 + now.getUTCMinutes();
+      return (h < 4 ? h + 24 : h) * 60 + now.getUTCMinutes() +
+        now.getUTCSeconds() / 60 + now.getUTCMilliseconds() / 60000;
     } catch(e) { return 0; }
   }
 
@@ -276,38 +277,6 @@
       var dotParts = parts[1].split(".");
       return dotParts[dotParts.length - 1] || "";
     } catch(e) { return ""; }
-  }
-
-  // ========== Delay lookup ==========
-  // v4.3.386: compatible with full-record array (worst delay of the operator)
-  function getDelayForOperator(operatorId, delayInfo) {
-    try {
-      if (!delayInfo) return 0;
-      var info = delayInfo[operatorId];
-      if (!info) return 0;
-      if (Array.isArray(info)) {
-        var worst = 0;
-        for (var i = 0; i < info.length; i++) {
-          var rec = info[i] || {};
-          var st = String(rec["odpt:trainInformationStatus"] || "").split(".").pop();
-          var t = String(rec["odpt:trainInformationText"] || "");
-          // v4: ①status URN 解析 bug——原 split(":") 得 "JR-East.Suspension"，永远匹配不上
-          //    "Suspension"（延误 status 全靠文本兜底）；改 split(".") 取末段。
-          //    ②中断文本按 4.3.425 语义收紧：仅"運転を見合わせ/運転を中止/全線運休"判中断，
-          //    "6本の列車を運休"（部分運休）不判全线中断
-          if (st === "Suspension" || t.indexOf("全線運休") >= 0 || t.indexOf("運転を見合わせ") >= 0 || t.indexOf("運転を中止") >= 0 || t.toLowerCase().indexOf("suspended") >= 0) return 60;
-          // v4: 修正日文拼写（運延→遅延、運れ→遅れ）与延误数字正则（d+→\d+）——
-          // 原写法 d 是字面量，"10分遅延" 永远匹配不到，任何延误都回退默认 15 分钟
-          if (st === "Delay" || st === "遅延" || t.indexOf("遅延") >= 0 || t.indexOf("遅れ") >= 0 || t.toLowerCase().indexOf("delay") >= 0) {
-            var tm = t.match(/(\d+)\s*(分|min)/i);
-            worst = Math.max(worst, tm ? (parseInt(tm[1], 10) || 15) : 15);
-          }
-        }
-        return worst;
-      }
-      if (info.status === "normal" || info.status === "no_data") return 0;
-      return info.maxDelay || info.delay || 0;
-    } catch(e) { return 0; }
   }
 
   function getTokyoServiceDate() {
@@ -507,7 +476,7 @@
   }
 
   /**
-   * Estimate train positions for a single line based on timetable + delay
+   * Estimate planned positions for a single line from timetable and wall time
    * @param {string} lineId - Line ID (e.g. "Namboku")
    * @param {object} line - Line object with stations array
    * @param {Array} timetableData - Array of TrainTimetable objects for this line's operator
@@ -522,12 +491,12 @@
 
       var currentCalendars = getCurrentCalendars();
       var currentMin = getCurrentMinutes();
-      var delayMin = getDelayForOperator(operatorId, delayInfo);
-      // v5: 延误方向修正——列车实际到站 = 时刻表时刻 + 延误，故「当前时刻 − 延误」才等于
-      // 列车在时刻表上的等效位置：now >= T + delay ⟺ now − delay >= T。
-      // 原实现 currentMin + delayMin 把列车当「提前」delay 分钟——A 10:24 / B 10:36、
-      // 当前 10:40、延误 27 分时列车实际 10:51 才到 A，原逻辑却推定它已过 B（方向完全相反）。
-      var adjustedCurrentMin = currentMin - delayMin;
+      // SQL/ODPT timetables describe planned clocks. An operator/line status
+      // does not measure this train's delay: applying a worst-case text-derived
+      // 15/60 minutes rewinds every service whenever an alert changes.
+      // Actual ODPT Train positions and their measured delays remain in fusion.
+      var delayMin = 0;
+      var adjustedCurrentMin = currentMin;
 
       // v4.3.6xx: 反转线路——站表顺序和ODPT站序相反时，反转站表数组
       // 这样后面的所有计算逻辑都不用改，结果自动正确
@@ -623,7 +592,7 @@
             foundInService = true;
             segmentToIndex = idx;
             var _segDur = Math.max(1, effectiveArrival - lastDepartedStop.time);
-            segmentProgress = Math.max(0, Math.min(0.95, (adjustedCurrentMin - lastDepartedStop.time) / _segDur));
+            segmentProgress = Math.max(0, Math.min(1, (adjustedCurrentMin - lastDepartedStop.time) / _segDur));
             break;
           }
           if (effectiveArrival !== null && adjustedCurrentMin >= effectiveArrival) {

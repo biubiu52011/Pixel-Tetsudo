@@ -41,6 +41,7 @@ load('js/data-fusion.js');
 function advance(at){clock=Date.parse(at);w.DataFusion.loadTrainPositions();return w.DataFusion.getRealtimePositions('SotetsuJRDirect');}
 const a=advance('2026-10-15T12:01:00+09:00');assert.equal(a[0]?.trainNumber,'early');
 const b=advance('2026-10-15T12:01:30+09:00');assert.equal(b[0]?.trainNumber,'early','same-minute realtime poll must keep active SQL service');
+assert(b[0].segmentProgress>a[0].segmentProgress,'seconds advance position within one minute');
 const d=advance('2026-10-15T12:02:00+09:00');assert(d[0].segmentProgress>a[0].segmentProgress,'clock advances coordinates');
 assert.equal(advance('2026-10-15T12:11:00+09:00').length,0,'terminal service leaves the map');
 assert.equal(advance('2026-10-15T13:01:00+09:00')[0]?.trainNumber,'later','one hour later is a new run');
@@ -48,3 +49,14 @@ assert.equal(w.DataFusion.getRealtimePositions('SaikyoKawagoe').length,0,'expire
 clock=Date.parse('2026-10-15T13:11:00+09:00');events.visibilitychange();const resume=timers.filter(t=>t.ms===1500).at(-1);assert(resume);resume.f();
 assert.equal(w.DataFusion.getRealtimePositions('SotetsuJRDirect').length,0,'foreground fallback recalculates after terminal');
 console.log('SQL position identities: '+sources.length+' lines; same-tab 30s/minute/hour progression, terminus removal, realtime expiry and foreground recovery PASS');
+
+// Drive the production local timer: every tick derives fresh wall-clock state;
+// a hidden document must not advance or launch timetable work.
+const fusionSource=read('js/data-fusion.js'),pollStart=fusionSource.indexOf('  function startFusionPolling()'),pollEnd=fusionSource.indexOf('  function stopFusionPolling()',pollStart);
+const intervals=[];let ticks=0;
+const polling={window:{location:{pathname:'/pages/trains.html',hash:'#Test'},TrainPositionEstimator:{getCurrentServiceDate:()=> '2026-10-15'}},document:{hidden:false},_cacheTimer:null,_positionTimer:null,_refreshIntervalMs:30000,_positionServiceDate:{},setInterval(f,ms){intervals.push({f,ms});return intervals.length;},loadTrainPositions(){ticks++;},saveToCache(){}};
+vm.runInNewContext(fusionSource.slice(pollStart,pollEnd)+'startFusionPolling();',polling);
+const positionTick=intervals.find(x=>x.ms===15000);assert(positionTick);
+positionTick.f();assert.equal(ticks,1);
+polling.document.hidden=true;positionTick.f();assert.equal(ticks,1);
+console.log('local position timer and background suspension PASS');

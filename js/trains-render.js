@@ -1263,19 +1263,22 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         var _startRoutePos = Number(existingIcon._displayRoutePos);
         var _useLoopRoute = !!(_loopRect && isFinite(_targetRoutePos) && isFinite(_startRoutePos));
         var _routeDiff = 0;
+        var _loopCorrection = false;
         if (_useLoopRoute) {
           var _perimeter = Number(_loopRect.perimeter) || 0;
           _routeDiff = _targetRoutePos - _startRoutePos;
           if (_perimeter > 0) {
             var _loopDirName = String(p && p.railDirection || "").split(/[:.]/).pop();
             var _orderSign = _loopRect.stationOrderSign || 1;
+            // Poll corrections must never turn a small backward adjustment
+            // into a complete lap. Take the nearest wrapped target, then snap
+            // if it contradicts the train's direction. A genuine last/first
+            // station crossing still has a short, correctly signed delta.
+            _routeDiff = ((_routeDiff + _perimeter / 2) % _perimeter + _perimeter) % _perimeter - _perimeter / 2;
             if (/^(InnerLoop|Inner)$/.test(_loopDirName)) {
-              // InnerLoop decreases canonical station order; the drawing may be reversed.
-              while (_routeDiff * _orderSign > 0) _routeDiff -= _perimeter * _orderSign;
+              _loopCorrection = _routeDiff * _orderSign > 0;
             } else if (/^(OuterLoop|Outer)$/.test(_loopDirName)) {
-              while (_routeDiff * _orderSign < 0) _routeDiff += _perimeter * _orderSign;
-            } else if (Math.abs(_routeDiff) > _perimeter / 2) {
-              _routeDiff += _routeDiff > 0 ? -_perimeter : _perimeter;
+              _loopCorrection = _routeDiff * _orderSign < 0;
             }
           }
         }
@@ -1301,12 +1304,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
             _indexContinuous = _sameSegment || _advancedSegment;
           }
         }
-        // Snap only for fresh markers, line switches, or genuinely large
-        // jumps. Index continuity no longer forces a hard snap: periodic
-        // updates that skip one or two stations (long gap between polls)
-        // should still animate smoothly instead of teleporting — this is the
-        // "假移动动画" (fake movement) complaint: every update visibly snapped.
-        var _shouldSnap = !_hasDisplayPos || !_sameLine || !isFinite(_distance) || _distance > _snapDistance;
+        // Smooth only a continuous update. Resumes, corrections and skipped
+        // segments jump to current evidence rather than reenact past travel.
+        var _shouldSnap = !_hasDisplayPos || !_sameLine || !_indexContinuous ||
+          _loopCorrection || !isFinite(_distance) || _distance > _snapDistance;
 
         if (_shouldSnap || _distance <= 0.5) {
           _setTrainIconPosition(existingIcon, _targetX, _targetY, p, lineId, isLoop);

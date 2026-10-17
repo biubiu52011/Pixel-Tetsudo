@@ -292,7 +292,8 @@
   function startFusionPolling() {
     if (_cacheTimer) return;
     // SQL-only lines have no Train API poll to advance their minute clock.
-    // Reuse the existing position timer and stop it with the visibility lifecycle.
+    // Reuse the existing timer; recompute from wall time, never replay a path.
+    // This local tick does not poll SQL or ODPT more frequently.
     if (!_positionTimer) _positionTimer = setInterval(function() {
       if (document.hidden || (window.location.pathname || "").indexOf("trains.html") < 0) return;
       var lid = (window.location.hash || "").replace(/^#/, "");
@@ -309,7 +310,7 @@
         }
       });
       loadTrainPositions();
-    }, 60000);
+    }, 15000);
 
     // Fusion is source-driven: ODPT updates and manual timetable completion
     // use dirty fusion; initialization and explicit refreshes retain fuseAll().

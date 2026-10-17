@@ -18,6 +18,13 @@ assert.equal(at(overrun,10,11).length,0,'destination arrival ends the positionin
 assert.equal(at(overrun,10,25).length,0,'later imported stops cannot extend the advertised run');
 assert.equal(overrun['odpt:trainTimetableObject'].length,4,'source evidence is not mutated');
 assert.equal(at(JSON.parse(JSON.stringify(overrun)),10,25,{type:'loop'}).length,1,'a loop segment is not a linear terminal service');
+// Company-wide disruption text is not a measured delay of this scheduled run.
+// It must not rewind another railway, or replay a completed run after recovery.
+const unrelatedDelay={'JR-East':[{'odpt:railway':'odpt.Railway:JR-East.Other','odpt:trainInformationStatus':'Delay','odpt:trainInformationText':'30分遅延'}]};
+assert.equal(at(overrun,10,5,{},unrelatedDelay)[0]?.stationIndex,0,'another railway cannot rewind scheduled departure');
+assert.equal(at(overrun,10,25,{},unrelatedDelay).length,0,'operator alert cannot resurrect a terminated trip');
+const unspecifiedDelay={'JR-East':[{'odpt:railway':'odpt.Railway:JR-East.Test','odpt:trainInformationStatus':'Delay','odpt:trainInformationText':'遅れが出ています'}]};
+assert.equal(at(overrun,10,5,{},unspecifiedDelay)[0]?.segmentProgress,.5,'status text cannot invent a 15 minute delay');
 const reverse=timetable('C',[stop('D',null,'10:00'),stop('C','10:10','10:11'),stop('B','10:20',null)]);
 assert.equal(at(reverse,10,11).length,0,'terminal bound also applies in reverse direction');
 const truncated=timetable('D',[stop('A',null,'10:00'),stop('B','10:10',null)]);
@@ -74,3 +81,22 @@ assert.equal(gate.resolve(layer,100),true,'last marker lays out the complete fra
 assert.equal(gate.resolve(layer,100),undefined,'one layout pass per complete frame');
 assert.equal(gate.resolve(layer,200),true,'remaining single animation continues to get layout');
 console.log('terminal bounds, no fabricated extension, scoped live precedence and simultaneous marker/caption animation: PASS');
+
+// Execute the renderer's actual loop target block, including seam crossings.
+const loopStart=render.indexOf('        var _routeDiff = 0;'),loopEnd=render.indexOf('        var _dx =',loopStart);
+function loopDelta(from,to,dir,sign=1){
+ const scope={_useLoopRoute:true,_loopRect:{perimeter:1000,stationOrderSign:sign},_targetRoutePos:to,_startRoutePos:from,p:{railDirection:dir}};
+ vm.runInNewContext(render.slice(loopStart,loopEnd),scope);
+ return scope;
+}
+assert.equal(loopDelta(100,99,'OuterLoop')._loopCorrection,true,'backward correction cannot replay a lap');
+assert.equal(loopDelta(900,901,'InnerLoop')._loopCorrection,true);
+assert.equal(loopDelta(990,10,'OuterLoop')._routeDiff,20,'outer seam remains continuous');
+assert.equal(loopDelta(10,990,'InnerLoop')._routeDiff,-20,'inner seam remains continuous');
+assert.equal(loopDelta(990,10,'InnerLoop',-1)._loopCorrection,false,'reversed drawing respects canonical direction');
+assert.equal(loopDelta(100,100,'OuterLoop')._routeDiff,0,'identical snapshot is stationary');
+const snapStart=render.indexOf('        var _shouldSnap ='),snapEnd=render.indexOf('\n\n        if (_shouldSnap',snapStart);
+const jump={_hasDisplayPos:true,_sameLine:true,_indexContinuous:false,_loopCorrection:false,_distance:30,_snapDistance:200};
+vm.runInNewContext(render.slice(snapStart,snapEnd),jump);
+assert.equal(jump._shouldSnap,true,'missing segments do not animate a replay after resume');
+console.log('loop corrections, source seam and resume no-replay PASS');
