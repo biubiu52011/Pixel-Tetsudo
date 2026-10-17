@@ -383,22 +383,32 @@ function _isTrainArtworkFailureActive(trainUid, p) {
           _renderThroughChip(staticLayer, svgNS, p.x, p.y, p.item, ICON, isMobileView, width);
         });
       };
-      var aboveH = _throughChipHeight(upward, isMobileView, chipWidth);
-      drawGroup(upward, o.x, o.y - 18 - aboveH, "middle", chipWidth);
       var belowY = Math.max(ty + 12, iy0 + rows * (ICON + GAP) + 4);
-      // v4.3.1249: 下端标签居中于站点圆点；直线中间标签与站名对侧（站名左→标签右、站名右→标签左）；环线中间保持外侧列。
+      // v4.3.1255: 端头（线首/线末 dir=up/down）与中间站统一锚定圆点外缘+14、
+      // 垂直居中圆点——不再竖直堆在站名上方/下方，所有直通标签与站点保持水平对齐；
+      // 环线中间保持外侧列。
+      var _dotR = isJunction ? 9 : 7;
+      var _sidePlace = function(h) {
+        if (geometry.isLoop) return null;
+        if (anchor === "end") return {x: o.x + _dotR + 14, align: "start", y: o.y - h / 2};
+        if (anchor === "start") return {x: o.x - _dotR - 14, align: "end", y: o.y - h / 2};
+        return {x: o.x + _dotR + 14, align: "start", y: o.y - h / 2};
+      };
+      if (upward.length) {
+        var upH = _throughChipHeight(upward, isMobileView, chipWidth);
+        var upP = _sidePlace(upH);
+        if (upP) drawGroup(upward, upP.x, upP.y, upP.align, chipWidth);
+      }
       if (middle.length) {
-        var mX, mAlign, mY;
         var mH = _throughChipHeight(middle, isMobileView, chipWidth);
-        var _dotR = isJunction ? 9 : 7;
-        if (geometry.isLoop) { mX = tx; mAlign = anchor === "middle" ? "middle" : anchor; mY = belowY; }
-        else if (anchor === "end") { mX = o.x + _dotR + 14; mAlign = "start"; mY = o.y - mH / 2; }
-        else if (anchor === "start") { mX = o.x - _dotR - 14; mAlign = "end"; mY = o.y - mH / 2; }
-        else { mX = o.x + _dotR + 14; mAlign = "start"; mY = o.y - mH / 2; }
-        drawGroup(middle, mX, mY, mAlign, chipWidth);
+        var mP = _sidePlace(mH);
+        if (mP) drawGroup(middle, mP.x, mP.y, mP.align, chipWidth);
+        else drawGroup(middle, tx, belowY, anchor === "middle" ? "middle" : anchor, chipWidth);
       }
       if (down.length) {
-        drawGroup(down, o.x, belowY, "middle", chipWidth);
+        var dH = _throughChipHeight(down, isMobileView, chipWidth);
+        var dP = _sidePlace(dH);
+        if (dP) drawGroup(down, dP.x, dP.y, dP.align, chipWidth);
       }
 
     }
