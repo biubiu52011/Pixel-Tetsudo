@@ -40544,7 +40544,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "loop",
-      "image": "../images/鉄道/JR西日本/Shinkansen_jrw.png",
+      "image": "../images/鉄道/JR西日本/近畿_O.png",
       "durationTotalMin": 60,
       "branchOf": null,
       "stations": [
@@ -41194,7 +41194,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_R.png",
       "durationTotalMin": 105,
       "branchOf": null,
       "stations": [
@@ -41313,7 +41313,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_D.png",
       "durationTotalMin": 80,
       "branchOf": null,
       "stations": [
@@ -41414,7 +41414,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_B.png",
       "durationTotalMin": 105,
       "branchOf": null,
       "stations": [
@@ -41874,7 +41874,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_G.png",
       "durationTotalMin": 84,
       "branchOf": null,
       "stations": [
@@ -41952,7 +41952,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_F.png",
       "durationTotalMin": 42,
       "branchOf": null,
       "stations": [
@@ -42035,7 +42035,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_J.png",
       "durationTotalMin": 85,
       "branchOf": null,
       "stations": [
@@ -42105,7 +42105,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_K.png",
       "durationTotalMin": 175,
       "branchOf": null,
       "stations": [
@@ -42211,7 +42211,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_I.png",
       "durationTotalMin": 100,
       "branchOf": null,
       "stations": [
@@ -42281,7 +42281,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_H.png",
       "durationTotalMin": 69,
       "branchOf": null,
       "stations": [
@@ -42376,7 +42376,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_A.png",
       "durationTotalMin": 96,
       "branchOf": null,
       "stations": [
@@ -43592,7 +43592,7 @@
       "operator": "JR-Kyushu",
       "region": "Kyushu Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR九州/九州_JC.png",
       "durationTotalMin": 25,
       "branchOf": null,
       "stations": [
@@ -43860,7 +43860,7 @@
       "operator": "JR-Kyushu",
       "region": "Kyushu Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR九州/九州_JD.png",
       "durationTotalMin": 30,
       "branchOf": null,
       "stations": [
@@ -44194,7 +44194,7 @@
       "operator": "JR-West",
       "region": "Kansai Area",
       "type": "local",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/近畿_L.png",
       "durationTotalMin": 30,
       "stations": [
         "Ayabe",
@@ -44233,7 +44233,7 @@
       "operator": "JR-West",
       "region": "Chugoku Area",
       "type": "local",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/広島_Y.png",
       "durationTotalMin": 70,
       "stations": [
         "Mihara",
@@ -44340,7 +44340,7 @@
       "operator": "JR-West",
       "region": "Chugoku Area",
       "type": "local",
-      "image": "",
+      "image": "../images/鉄道/JR西日本/広島_B.png",
       "durationTotalMin": 25,
       "stations": [
         "Yokokawa",
@@ -44720,7 +44720,7 @@
       "operator": "JR-Kyushu",
       "region": "Kyushu Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR九州/九州_JJ.png",
       "durationTotalMin": 15,
       "branchOf": null,
       "stations": [
@@ -44991,7 +44991,7 @@
       "operator": "JR-Kyushu",
       "region": "Kyushu Area",
       "type": "straight",
-      "image": "",
+      "image": "../images/鉄道/JR九州/九州_JK.png",
       "durationTotalMin": 60,
       "branchOf": null,
       "stations": [
