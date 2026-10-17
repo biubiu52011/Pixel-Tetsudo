@@ -15,16 +15,22 @@ permissions:
 # Only the newest Pages deployment matters. Consecutive pushes must not race
 # each other for the single github-pages environment.
 concurrency:
-  group: "pages"
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  release-guards:
+    uses: ./.github/workflows/release-guards.yml
+
   validate:
     name: Validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Deployment gate contract
+        run: node tools/deployment-gate.test.js
+
       - name: Check Brace Balance
         run: python .github/workflows/brace_balance_check.py
 
@@ -231,9 +237,12 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: validate
-    if: github.event_name == 'push'
+    needs: [validate, release-guards]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
