@@ -21511,6 +21511,201 @@
       }
     },
     {
+      "evidenceId": 260,
+      "networkKey": "Ito",
+      "operator": "JR-East",
+      "codePattern": "PLAN:ITO-JR-LOCAL",
+      "calendarType": "",
+      "effectiveFrom": "2026-10-16",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E231系1000番台",
+        "E233系3000番台"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://www.jreast.co.jp/train/local/e233.html",
+      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
+      "planScope": {
+        "lineIds": [
+          "Ito"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "Local"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "1556E",
+          "1560E",
+          "1585E",
+          "1589E",
+          "1593E",
+          "1597E",
+          "1621M",
+          "1622M",
+          "1623M",
+          "1624M",
+          "1626M",
+          "1629M",
+          "1634M",
+          "1653M",
+          "1656E",
+          "1658M",
+          "1661M",
+          "1663M",
+          "1664M",
+          "1666M",
+          "1667M",
+          "1669M",
+          "1670E",
+          "1670M",
+          "1671M",
+          "1672M",
+          "1673M",
+          "1674M",
+          "1675M",
+          "1676M",
+          "1677M",
+          "1678M",
+          "1883E",
+          "1932E",
+          "1936E",
+          "1941E"
+        ]
+      }
+    },
+    {
+      "evidenceId": 261,
+      "networkKey": "Ito",
+      "operator": "JR-East",
+      "codePattern": "PLAN:ITO-IZUKYU-LOCAL",
+      "calendarType": "",
+      "effectiveFrom": "2026-10-16",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "伊豆急行8000系",
+        "伊豆急行3000系",
+        "伊豆急行2100系"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://www.izukyu.co.jp/train/train.php",
+      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
+      "planScope": {
+        "lineIds": [
+          "Ito"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "Local"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "5625M",
+          "5627M",
+          "5628M",
+          "5630M",
+          "5631M",
+          "5632M",
+          "5633M",
+          "5635M",
+          "5636M",
+          "5637M",
+          "5638M",
+          "5639M",
+          "5640M",
+          "5641M",
+          "5642M",
+          "5643M",
+          "5644M",
+          "5645M",
+          "5646M",
+          "5647M",
+          "5648M",
+          "5649M",
+          "5650M",
+          "5651M",
+          "5652M",
+          "5654M",
+          "5655M",
+          "5656M",
+          "5657M",
+          "5659M",
+          "5660M",
+          "5662M",
+          "5665M",
+          "5668M"
+        ]
+      }
+    },
+    {
+      "evidenceId": 262,
+      "networkKey": "Ito",
+      "operator": "JR-East",
+      "codePattern": "PLAN:ITO-ODORIKO",
+      "calendarType": "",
+      "effectiveFrom": "2026-10-16",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E257系2000番台"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://www.jreast.co.jp/train/express/odoriko.html",
+      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
+      "planScope": {
+        "lineIds": [
+          "Ito"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "LimitedExpress"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "3021M",
+          "3022M",
+          "3024M",
+          "3025M",
+          "3026M",
+          "3029M",
+          "3030M",
+          "3031M"
+        ]
+      }
+    },
+    {
+      "evidenceId": 263,
+      "networkKey": "Ito",
+      "operator": "JR-East",
+      "codePattern": "PLAN:ITO-SAPHIR",
+      "calendarType": "",
+      "effectiveFrom": "2026-10-16",
+      "effectiveTo": "",
+      "exactVehicleType": "",
+      "vehicleCandidates": [
+        "E261系"
+      ],
+      "grade": "C",
+      "sourceUrl": "https://www.jreast.co.jp/saphir/",
+      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
+      "planScope": {
+        "lineIds": [
+          "Ito"
+        ],
+        "planOnly": true,
+        "trainTypes": [
+          "LimitedExpress"
+        ],
+        "overridePlan": true,
+        "operationPatterns": [
+          "3001M",
+          "3002M"
+        ]
+      }
+    },
+    {
       "evidenceId": 211,
       "networkKey": "JobanLocal",
       "operator": "JR-East",
@@ -27128,205 +27323,10 @@
         ],
         "overridePlan": true
       }
-    },
-    {
-      "evidenceId": 260,
-      "networkKey": "Ito",
-      "operator": "JR-East",
-      "codePattern": "PLAN:ITO-JR-LOCAL",
-      "calendarType": "",
-      "effectiveFrom": "2026-10-16",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E231系1000番台",
-        "E233系3000番台"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://www.jreast.co.jp/train/local/e233.html",
-      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
-      "planScope": {
-        "lineIds": [
-          "Ito"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "Local"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "1556E",
-          "1560E",
-          "1585E",
-          "1589E",
-          "1593E",
-          "1597E",
-          "1621M",
-          "1622M",
-          "1623M",
-          "1624M",
-          "1626M",
-          "1629M",
-          "1634M",
-          "1653M",
-          "1656E",
-          "1658M",
-          "1661M",
-          "1663M",
-          "1664M",
-          "1666M",
-          "1667M",
-          "1669M",
-          "1670E",
-          "1670M",
-          "1671M",
-          "1672M",
-          "1673M",
-          "1674M",
-          "1675M",
-          "1676M",
-          "1677M",
-          "1678M",
-          "1883E",
-          "1932E",
-          "1936E",
-          "1941E"
-        ]
-      }
-    },
-    {
-      "evidenceId": 261,
-      "networkKey": "Ito",
-      "operator": "JR-East",
-      "codePattern": "PLAN:ITO-IZUKYU-LOCAL",
-      "calendarType": "",
-      "effectiveFrom": "2026-10-16",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "伊豆急行8000系",
-        "伊豆急行3000系",
-        "伊豆急行2100系"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://www.izukyu.co.jp/train/train.php",
-      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
-      "planScope": {
-        "lineIds": [
-          "Ito"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "Local"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "5625M",
-          "5627M",
-          "5628M",
-          "5630M",
-          "5631M",
-          "5632M",
-          "5633M",
-          "5635M",
-          "5636M",
-          "5637M",
-          "5638M",
-          "5639M",
-          "5640M",
-          "5641M",
-          "5642M",
-          "5643M",
-          "5644M",
-          "5645M",
-          "5646M",
-          "5647M",
-          "5648M",
-          "5649M",
-          "5650M",
-          "5651M",
-          "5652M",
-          "5654M",
-          "5655M",
-          "5656M",
-          "5657M",
-          "5659M",
-          "5660M",
-          "5662M",
-          "5665M",
-          "5668M"
-        ]
-      }
-    },
-    {
-      "evidenceId": 262,
-      "networkKey": "Ito",
-      "operator": "JR-East",
-      "codePattern": "PLAN:ITO-ODORIKO",
-      "calendarType": "",
-      "effectiveFrom": "2026-10-16",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E257系2000番台"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://www.jreast.co.jp/train/express/odoriko.html",
-      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
-      "planScope": {
-        "lineIds": [
-          "Ito"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "LimitedExpress"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "3021M",
-          "3022M",
-          "3024M",
-          "3025M",
-          "3026M",
-          "3029M",
-          "3030M",
-          "3031M"
-        ]
-      }
-    },
-    {
-      "evidenceId": 263,
-      "networkKey": "Ito",
-      "operator": "JR-East",
-      "codePattern": "PLAN:ITO-SAPHIR",
-      "calendarType": "",
-      "effectiveFrom": "2026-10-16",
-      "effectiveTo": "",
-      "exactVehicleType": "",
-      "vehicleCandidates": [
-        "E261系"
-      ],
-      "grade": "C",
-      "sourceUrl": "https://www.jreast.co.jp/saphir/",
-      "notes": "Published recurring Ito working fleet, exact regular-number whitelist. Corrects legacy E233-1000 and E257-1500 mixed labels; Saphir is separate. Grade C plan only, not daily carset or livery proof. 3000/2100 candidates retained without borrowing other artwork. Official train numbers: https://timetables.jreast.co.jp/2610/timetable-v/101d1p.html and 101u1p.html.",
-      "planScope": {
-        "lineIds": [
-          "Ito"
-        ],
-        "planOnly": true,
-        "trainTypes": [
-          "LimitedExpress"
-        ],
-        "overridePlan": true,
-        "operationPatterns": [
-          "3001M",
-          "3002M"
-        ]
-      }
     }
   ],
   "evidenceInventory": {
-    "networkCount": 106,
+    "networkCount": 107,
     "networks": [
       "Agatsuma",
       "AkitaShinkansen",
@@ -27353,6 +27353,7 @@
       "HokkaidoShinkansen",
       "HokurikuShinkansen",
       "iketama",
+      "Ito",
       "Joban",
       "JobanMain",
       "Joetsu",
@@ -27820,6 +27821,17 @@
         "narrowed_rows": 0,
         "min_date": "2026-09-08",
         "max_date": "2026-09-27"
+      },
+      {
+        "source_network_key": "Ito",
+        "canonical_network_key": "Ito",
+        "alias_scope": "exact",
+        "evidence_kind": "operation_family_rule",
+        "evidence_rows": 4,
+        "exact_rows": 0,
+        "narrowed_rows": 4,
+        "min_date": "2026-10-16",
+        "max_date": null
       },
       {
         "source_network_key": "Joban",
