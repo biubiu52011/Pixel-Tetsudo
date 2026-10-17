@@ -38,8 +38,14 @@ async function main() {
             (id==='trains'?'document.querySelector("#trainsMapContainer svg")':id==='realtime'?'document.querySelector("#realtimeStatusContainer .rs-line-card")':'document.querySelector("#searchContainer")')+' ? "ready" : ""',returnByValue:true});
           if(value.result?.value==='ready'){
             if(id==='trains'){
-              const back=await page.call('Runtime.evaluate',{expression:'document.getElementById("trainsBackBtn").click(); document.getElementById("trainsDetailView").classList.contains("hidden")',returnByValue:true});
-              if(!back.result?.value)throw new Error('Production back interaction did not restore the overview');
+              await page.call('Runtime.evaluate',{expression:'document.getElementById("trainsBackBtn").click()'});
+              let restored=false;
+              for(let step=0;step<50;step++){
+                const back=await page.call('Runtime.evaluate',{expression:'!location.hash && document.getElementById("trainsDetailView").classList.contains("hidden") && !document.getElementById("trainsLineListContent").classList.contains("hidden")',returnByValue:true});
+                if(back.result?.value){restored=true;break;}
+                await delay(100);
+              }
+              if(!restored)throw new Error('Production back interaction did not restore the overview');
             }
             result=JSON.stringify({id,url,criticalInteraction:'passed'});state='data-replay-state="passed"';break;
           }
