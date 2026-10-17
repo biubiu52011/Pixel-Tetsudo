@@ -1,0 +1,170 @@
+[
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoMain",
+    "index": 0,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoMain|ChuoMain|1551M|odpt.RailDirection%3AOutbound|odpt.Station%3AJR-East.Chuo.Kami-Suwa|05%3A40|odpt.Station%3AJR-East.Chuo.Matsumoto|odpt.Station%3AJR-East.Chuo.Matsumoto",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoMain",
+    "index": 160,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoMain|ChuoMain|553M|odpt.RailDirection%3AOutbound|odpt.Station%3AJR-East.Chuo.Takao|22%3A07|odpt.Station%3AJR-East.Chuo.Kofu|odpt.Station%3AJR-East.Chuo.Kofu",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoMain",
+    "index": 319,
+    "result": {
+      "runningChainId": "rc:planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoMain|ChuoMain|1550M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Chuo.Shiojiri|23%3A26|odpt.Station%3AJR-East.Chuo.Kami-Suwa|odpt.Station%3AJR-East.Chuo.Kami-Suwa~planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.Shinonoi|Shinonoi|1550M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Shinonoi|22%3A04|odpt.Station%3AJR-East.Shiojiri|odpt.Station%3AJR-East.Shiojiri",
+      "evidence": "CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER",
+      "timeGapMin": 0,
+      "segmentCount": 2
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoRapid",
+    "index": 0,
+    "result": {
+      "runningChainId": "rc:planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoMain|ChuoMain|1454M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Chuo.Otsuki|09%3A26|odpt.Station%3AJR-East.Chuo.Takao|odpt.Station%3AJR-East.Chuo.Takao~planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoRapid|ChuoRapid|1002H|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.ChuoRapid.Takao|10%3A18|odpt.Station%3AJR-East.ChuoRapid.Tokyo|odpt.Station%3AJR-East.ChuoRapid.Tokyo",
+      "evidence": "CONFIRMED_UNIQUE_BOUNDARY+TRAIN_NUMBER_CHANGED",
+      "timeGapMin": 16,
+      "segmentCount": 2
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoRapid",
+    "index": 253,
+    "result": {
+      "runningChainId": "canonical-sql-trip:2026-10-17:26700",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoRapid",
+    "index": 505,
+    "result": {
+      "runningChainId": "canonical-sql-trip:2026-10-17:169646",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "Shinonoi",
+    "index": 0,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.Shinonoi|Shinonoi|1551M|odpt.RailDirection%3AOutbound|odpt.Station%3AJR-East.Shiojiri|05%3A59|odpt.Station%3AJR-East.Matsumoto|odpt.Station%3AJR-East.Matsumoto",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "Shinonoi",
+    "index": 71,
+    "result": {
+      "runningChainId": "rc:planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoMain|ChuoMain|148M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Chuo.Shiojiri|06%3A10|odpt.Station%3AJR-East.Chuo.Tatsuno|odpt.Station%3AJR-East.Chuo.Okaya~planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.Shinonoi|Shinonoi|148M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Matsumoto|05%3A52|odpt.Station%3AJR-East.Shiojiri|odpt.Station%3AJR-East.Shiojiri",
+      "evidence": "CONFIRMED_SEGMENT_GRAPH+TRAIN_NUMBER",
+      "timeGapMin": 0,
+      "segmentCount": 2
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "Shinonoi",
+    "index": 141,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.Shinonoi|Shinonoi|1240M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Shinonoi|23%3A08|odpt.Station%3AJR-East.Matsumoto|odpt.Station%3AJR-East.Matsumoto",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoTatsuno",
+    "index": 0,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoTatsuno|ChuoTatsuno|1551M|odpt.RailDirection%3AOutbound|odpt.Station%3AJR-East.Okaya|05%3A48|odpt.Station%3AJR-East.Shiojiri|odpt.Station%3AJR-East.Shiojiri",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoTatsuno",
+    "index": 63,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoTatsuno|ChuoTatsuno|169M|odpt.RailDirection%3AOutbound|odpt.Station%3AJR-East.Okaya|22%3A44|odpt.Station%3AJR-East.Tatsuno|odpt.Station%3AJR-East.Tatsuno",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "ChuoMain",
+    "id": "ChuoTatsuno",
+    "index": 125,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.ChuoTatsuno|ChuoTatsuno|1550M|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.Shiojiri|23%3A25|odpt.Station%3AJR-East.Okaya|odpt.Station%3AJR-East.Okaya",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "JobanLocal",
+    "id": "JobanLocal",
+    "index": 0,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.JobanLocal|JobanLocal|1001K|odpt.RailDirection%3AOutbound|odpt.Station%3AJR-East.JobanLocal.Ayase|11%3A40|odpt.Station%3AJR-East.JobanLocal.Abiko|odpt.Station%3AJR-East.JobanLocal.Abiko",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "JobanLocal",
+    "id": "JobanLocal",
+    "index": 121,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.JobanLocal|JobanLocal|2012S|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.JobanLocal.Abiko|20%3A19|odpt.Station%3ATokyoMetro.Chiyoda.YoyogiUehara|odpt.Station%3AJR-East.JobanLocal.Ayase",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "JobanLocal",
+    "id": "JobanLocal",
+    "index": 242,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|JR-East|odpt.Railway%3AJR-East.JobanLocal|JobanLocal|944E|odpt.RailDirection%3AInbound|odpt.Station%3AJR-East.JobanLocal.Abiko|09%3A24|odpt.Station%3ATokyoMetro.Chiyoda.YoyogiUehara|odpt.Station%3AJR-East.JobanLocal.Ayase",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "JobanLocal",
+    "id": "Chiyoda",
+    "index": 0,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|TokyoMetro|odpt.Railway%3ATokyoMetro.Chiyoda|Chiyoda|A1005K|odpt.RailDirection%3ATokyoMetro.YoyogiUehara|odpt.Station%3ATokyoMetro.Chiyoda.KitaAyase|10%3A10|odpt.Station%3ATokyoMetro.Chiyoda.YoyogiUehara|odpt.Station%3ATokyoMetro.Chiyoda.YoyogiUehara",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "JobanLocal",
+    "id": "Chiyoda",
+    "index": 264,
+    "result": {
+      "runningChainId": "planned-trip:2026-10-17|TokyoMetro|odpt.Railway%3ATokyoMetro.Chiyoda|Chiyoda|B1001K|odpt.RailDirection%3ATokyoMetro.KitaAyase|odpt.Station%3ATokyoMetro.Chiyoda.YoyogiUehara|10%3A59|odpt.Station%3AJR-East.JobanLocal.Abiko|odpt.Station%3ATokyoMetro.Chiyoda.Ayase",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  },
+  {
+    "scenario": "JobanLocal",
+    "id": "Chiyoda",
+    "index": 527,
+    "result": {
+      "runningChainId": "canonical-sql-trip:2026-10-17:490",
+      "evidence": "NO_CONFIRMED_BOUNDARY"
+    }
+  }
+]

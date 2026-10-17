@@ -22,6 +22,31 @@ jobs:
   release-guards:
     uses: ./.github/workflows/release-guards.yml
 
+  browser-replay:
+    name: Fixed HAR browser replay
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+      - name: Replay four railway capabilities in Chromium
+        run: |
+          mkdir -p .work/browser-replay
+          node tools/browser-replay-server.cjs > .work/browser-replay/server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl --fail --silent 'http://127.0.0.1:8789/__replay-data?case=Agatsuma' > /dev/null && break
+            sleep 1
+          done
+          node tools/run-browser-replay.cjs
+      - name: Keep browser metrics and failures for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-replay-metrics
+          path: .work/browser-replay
+
   validate:
     name: Validate
     runs-on: ubuntu-latest
@@ -43,6 +68,11 @@ jobs:
         run: |
           node tools/runtime-architecture-guard.test.js
           node tools/runtime-change-contract.test.js
+
+      - name: Fixed HAR decision replay and computation budget
+        run: |
+          node tools/runtime-har-replay.test.js
+          node tools/running-chain-har-replay.test.js
 
       - name: Unified request and captured SQL contract
         run: node tools/runtime-request-contract.test.js
@@ -245,7 +275,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: [validate, release-guards]
+    needs: [validate, release-guards, browser-replay]
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     concurrency:

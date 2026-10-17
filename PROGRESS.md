@@ -1,5 +1,17 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-17 20:43 JST — 数据链路阶段 04：固定回放与性能门禁（REVIEW）
+
+- Workstream runtime-replay-performance；执行者Codex；依赖#38（GitHub CI success）。本阶段不合并main、不部署；生产页面设计、名称、车型图片、canonical数据及SQL规则未改。
+- 原有TrainOperationEvidence内索引车型族规则，原RunningChainResolver按端点/20分钟时窗索引候选再执行同一确认/歧义判断；删除全量扫描/全对比较。Fusion只对本次依赖范围做实时车型接续。官方网页监听器只绑定一次；独立情报刷新不再清空Train原始快照；RunInfoAPI不吞请求失败；覆盖与逐班日期未验证计数保留。
+- 固定429列车全输出SHA一致；本机Node645/599ms→81/55ms；18个捕获直通根结果与旧实现逐项一致，4525候选检查；源码不保存第二套图解析器。
+- 浏览器固定回放已见埼京20标记(位置715.1ms/SVG65.6ms)、中央本线31(1881.5/82)、吾妻0(146.9/9.4，只有6条计划，不补造)、常磐各停8(882.7/25.5)。未放宽原规则或预算。
+- CI增加独立Chromium四场景作业：真实计时、SVG500ms/位置2000ms阈值、扇出上限、身份唯一、元数据事件无重绘、SQL覆盖；与Validate/Release Guards共同阻止部署。回放远程请求仅从脱敏HAR夹具读取，缺失记录明确报错；CI保存JSON与PNG。
+- 本地49个Node检查、65项node:test、4个Python守卫通过；最后新增图算法与错误传播的专项回归再通过。GitHub完整浏览器门禁待本阶段PR，最终结论回填；无需安装新生产库或付费服务。
+- 文件：请求/融合/车型证据/直通图/运行情报既有所有者、回放测试与夹具、CI、审计报告、文档索引。Commit SHA见本阶段PR。
+- 交付范围为已识别链路风险及长期门禁；四类代表样本不等于全网人工验收。合并/生产发布仍须按#36→#37→#38→本阶段顺序审查。
+
+
 ## 2026-10-17 JST — 数据链路阶段 03：变化契约贯通与长期守卫（REVIEW）
 
 - 执行者 Codex；Workstream runtime-change-contract；依赖 PR #37（GitHub CI success）。
