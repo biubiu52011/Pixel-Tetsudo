@@ -898,3 +898,5 @@ Validation: all61 full-suite entries PASS, including65 node:test cases,4Python g
 ## 2026-10-17 JST — ITO-ICON-TRANSPARENCY / agent
 
 Status REVIEW pending deploy. User iPhone screenshot showed opaque magenta around Izukyu8000. Existing82x98 RGB asset lacked tRNS; replaced with unmodified original Train Front View bp/izq8000b.png, whose magenta key is transparent. Use qualified new filename to bypass stale image cache; preserve old asset in recovery. No AI redraw or pixel-edit conversion; catalogue remains planned representative. Newly used E2572000/E261 assets already have valid transparency. train-vehicle/page cache4.3.1260. Source and usage notes:docs/ito-icon-source-20261017.md. Backup:recovery/ito-icon-alpha-20261017/.
+
+PNG content-lock follow-up: explicitly re-reviewed original visual, source bytes and tRNS; update only renamed8000 entry, keep guard unchanged.
