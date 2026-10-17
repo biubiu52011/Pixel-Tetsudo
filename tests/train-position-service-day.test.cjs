@@ -535,6 +535,11 @@ test('date-specific SQL train-run supplements, never hides, the recurring plan',
   const changed = await readSqlRuns([{ id: 1, train_number: 'A1001' }], stopsFor(1, 2), recurring);
   assert.equal(changed.exact_date_overrides, 0);
   assert.equal(changed.runs.length, 3, 'same number but different itinerary cannot be silently collapsed');
+  const seconds = stopsFor(1, 1).map(s=>({...s,arrival_time:s.arrival_time?s.arrival_time+':00':undefined,departure_time:s.departure_time?s.departure_time+':00':undefined}));
+  const cancelled = await readSqlRuns([{ id:1,train_number:'A1001' }],seconds,recurring,[{train_run_id:1,exception_type:'cancelled'}]);
+  assert.equal(cancelled.runs.length,2,'SQL seconds formatting cannot retain a recurring duplicate');
+  assert.equal(cancelled.cancelled_runs,1,'cancelled overlay retires its exact recurring trip');
+  assert.equal(cancelled.runs.find(r=>r.train_number==='A1001').operation_status,'cancelled');
 });
 
 test('unknown calendar is never silently reinterpreted as no train or a verified weekday service', () => {

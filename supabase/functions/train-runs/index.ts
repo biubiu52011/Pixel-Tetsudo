@@ -480,8 +480,8 @@ Deno.serve(async (req: Request) => {
       if (!run.train_number || stops.length < 2) return "";
       const facts = stops.map((s: any) => [
         String(s.station_urn || s.station_key || ""),
-        String(s.arrival_time || ""),
-        String(s.departure_time || "")
+        String(s.arrival_time || "").slice(0, 5),
+        String(s.departure_time || "").slice(0, 5)
       ]);
       if (facts.some((s: string[]) => !s[0])) return "";
       return JSON.stringify([lineId, serviceDate, String(run.train_number), facts]);

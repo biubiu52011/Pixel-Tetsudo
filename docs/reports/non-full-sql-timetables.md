@@ -75,7 +75,7 @@ SQL只读审计：92,322条source resolution均缺少date_verified有效期认�
 - https://timetables.jreast.co.jp/2610/train/015/019131.html
 - https://timetables.jreast.co.jp/2610/train/020/022251.html
 
-官方实际运行表同时明确2026-10-17/18两班停运；复用既有service_exceptions保存4条逐车逐日例外。计划保留在SQL/API，位置适配器不将cancelled计划变成移动标记。例外不按裸列车号跨日/跨线路扩散。现役train-runs v242同时为周期计划和日期计划读取这一例外来源，原RLS与接口权限保持原样。实现中短暂加入的重复状态列已撤回，实际迁移20261017044313/20261017050314如实保留；最终schema继续使用既有service_exceptions所有者。
+官方实际运行表同时明确2026-10-17/18两班停运；复用既有service_exceptions保存4条逐车逐日例外。计划保留在SQL/API，位置适配器不将cancelled计划变成移动标记。例外不按裸列车号跨日/跨线路扩散。现役train-runs v243同时为周期计划和日期计划读取这一例外来源，原RLS与接口权限保持原样。实现中短暂加入的重复状态列已撤回，实际迁移20261017044313/20261017050314如实保留；最终schema继续使用既有service_exceptions所有者。
 停运来源：https://traininfo.jreast.co.jp/train_info/express.aspx?group=wakashio_sazamani 。
 
 共用刷新缺口：DataFusion原来只在运营日变化时重新加载SQL，同日新增计划和停运可能停留整天。改为使用既有十分钟缓存TTL，并替换该线路旧SQL副本；确认空/全部取消可以清空旧注册数据，SQL错误则不能伪装空结果或启动旧JS位置回退。保持FULL实时优先与唯一位置计算器。
