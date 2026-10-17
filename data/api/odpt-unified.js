@@ -818,7 +818,7 @@
         // Server independently checks the database's SQL plan eligibility.
         // FULL never synthesizes positions from a timetable.
         var serviceDate=_serviceDateJst(), key=lineId+"|"+serviceDate, hit=_trainRunCache[key];
-        if(hit && Date.now()-hit.at<30000) return Promise.resolve(hit.rows);
+        if(hit && Date.now()-hit.at<600000) return Promise.resolve(hit.rows);
         if(_trainRunInflight[key]) return _trainRunInflight[key];
         var url=TRAIN_RUN_CACHE_ENDPOINT+"?line_id="+encodeURIComponent(lineId)+"&service_date="+encodeURIComponent(serviceDate)+"&fallback_only=1";
         var controller = new AbortController();
