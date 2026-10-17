@@ -477,7 +477,11 @@ function _isTrainArtworkFailureActive(trainUid, p) {
     });
   }
 
+  var _trainRenderSamples = [];
+  function getTrainRenderPerformanceSamples() { return _trainRenderSamples.slice(); }
   function renderTrainMap(el, line, lineId) {
+    var startedAt = performance.now();
+    var renderKind = 'full';
     try {
       // ODPT dynamic data outside dct:valid must not remain visible as realtime.
       var positions = _sortTrainPositionsBySource(_filterExpiredRealtimePositions(getRealtimePositions(lineId)));
@@ -502,6 +506,7 @@ function _isTrainArtworkFailureActive(trainUid, p) {
         && existingSvg.getAttribute('data-lang') === _lang;
       
       if (isSameLine) {
+        renderKind = 'incremental';
         // === Incremental update: only update train layer using cached geometry ===
         updateTrainLayer(existingSvg, positions, stationCoords, lineId, line);
         updateRunningInfo(el, positions);
@@ -899,6 +904,10 @@ function _isTrainArtworkFailureActive(trainUid, p) {
       
     } catch(e) {
       el.innerHTML = '<div class="tp-no-data">Error: ' + escapeHtml(e.message) + '</div>';
+    } finally {
+      _trainRenderSamples.push({ lineId: lineId, kind: renderKind, ms: Math.round((performance.now() - startedAt) * 10) / 10,
+        trains: typeof positions !== 'undefined' ? positions.length : 0, at: Date.now() });
+      if (_trainRenderSamples.length > 40) _trainRenderSamples.shift();
     }
   }
   

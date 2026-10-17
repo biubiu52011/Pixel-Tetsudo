@@ -1,5 +1,16 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-17 JST — 数据链路阶段 03：变化契约贯通与长期守卫（REVIEW）
+
+- 执行者 Codex；Workstream runtime-change-contract；依赖 PR #37（GitHub CI success）。
+- DataFusion 逐线路区分 position/display/metadata，DataState 透传既有订阅；页面把源时间/有效期从位移哈希移除，单独续期检查；保持车次身份、种别、车型/计划、目的地及状态变化的既有绘制逻辑。订阅者异常相互隔离。源记录重排不作为位移。
+- 删除旧逐索引脏检测，复用唯一分类器；分钟协作批次只处理有已加载/注册时刻表的线路，取消无计划全网空算。TrainsPage增加有界绘制耗时读接口，复用Fusion指标。
+- ENGINEERING新增数据契约、网络及定时器所有权清单。CI禁止未审查新增网络/周期任务；门禁测试保护生产发布不在中途取消，PR验证仍可取消旧轮次。未放宽既有断言，抽取式测试改为加载真实分类器。
+- 本地65项node:test、变化契约/所有权守卫、位置推进/终到/重复号/图库/生命周期通过。浏览器本地埼京图实际有19标记；SVG增量绘制观测17.7–66.1ms。真实网络观测非固定输入前后对比。
+- 性能缺口：浏览器loadTrainPositions出现4502.5–7001.5ms，其中车型解析2984–4840.7ms；不得声明性能完成，继续阶段04。缺少受控浏览器HAR前后性能基准。
+- 文件：Fusion、DataState、trains-page/render、契约测试及网络/定时器清单、ENGINEERING、CI。Commit SHA见阶段PR；未合并main/未部署。
+
+
 ## 2026-10-17 JST — 数据链路阶段 02：统一请求契约（REVIEW）
 
 - Workstream: runtime-request-contract；执行者 Codex；依赖阶段01 PR #36（CI success），独立叠加分支，不合并 main。

@@ -12,11 +12,11 @@ permissions:
   pages: write
   id-token: write
 
-# Only the newest Pages deployment matters. Consecutive pushes must not race
-# each other for the single github-pages environment.
+# Cancel superseded PR validation only. A production publication must finish
+# before the next main workflow enters the single Pages environment.
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   release-guards:
@@ -38,6 +38,11 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: '20'
+
+      - name: Runtime ownership and semantic change contracts
+        run: |
+          node tools/runtime-architecture-guard.test.js
+          node tools/runtime-change-contract.test.js
 
       - name: Unified request and captured SQL contract
         run: node tools/runtime-request-contract.test.js
