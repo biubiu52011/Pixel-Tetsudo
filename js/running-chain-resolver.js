@@ -98,14 +98,33 @@
       if(s&&!seen[key]){seen[key]=true;segments.push(s);}
     });
     var adj={}; segments.forEach(function(s){adj[s.lineId+"|"+s.id]=[];});
+    // Only endpoint/time candidates can form an edge. Keep the original
+    // canonical pair order and the same _confirmedEdge/ambiguity arbitration.
+    var starts=Object.create(null), pairs=[], pairSeen=Object.create(null);
+    segments.forEach(function(segment,index){
+      if(segment.firstStation)(starts[segment.firstStation]||(starts[segment.firstStation]=[])).push(index);
+    });
+    segments.forEach(function(segment,index){
+      (starts[segment.lastStation]||[]).forEach(function(otherIndex){
+        if(index===otherIndex)return;
+        var next=segments[otherIndex];
+        if(segment.lastTime===null||next.firstTime===null)return;
+        var gap=next.firstTime-segment.lastTime;
+        if(gap<0||gap>20)return;
+        var lo=Math.min(index,otherIndex),hi=Math.max(index,otherIndex),key=lo+'|'+hi;
+        if(pairSeen[key])return;
+        pairSeen[key]=true;pairs.push({i:lo,j:hi});
+      });
+    });
+    pairs.sort(function(a,b){return a.i-b.i||a.j-b.j;});
     var edgeCandidates=[];
-    for(var i=0;i<segments.length;i++)for(var j=i+1;j<segments.length;j++){
-      var a=segments[i],b=segments[j];
-      if((_directThrough[a.lineId]||[]).indexOf(b.lineId)<0)continue;
+    pairs.forEach(function(pair){
+      var a=segments[pair.i],b=segments[pair.j];
+      if((_directThrough[a.lineId]||[]).indexOf(b.lineId)<0)return;
       var joins=(_boundaryMap[a.lineId]&&_boundaryMap[a.lineId][b.lineId])||[];
-      var ev=_confirmedEdge(a,b,joins); if(!ev||ev.unresolved)continue;
+      var ev=_confirmedEdge(a,b,joins); if(!ev||ev.unresolved)return;
       edgeCandidates.push({a:a,b:b,ev:ev});
-    }
+    });
     // Different train numbers are accepted only when the operational boundary
     // pairing is unique for BOTH segments. Through-service relation + handover
     // station + time continuity alone are not enough if another candidate fits.

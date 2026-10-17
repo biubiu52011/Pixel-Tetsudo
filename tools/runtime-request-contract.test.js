@@ -62,9 +62,22 @@ async function main() {
   await oldRequest;
   assert.equal(window.ODPTClient.getTrainRunStatus('Boundary').serviceDate,'2026-10-18','late old service day cannot replace current status');
   assert.equal(window.ODPTClient.getTrainRunStatus('Boundary').source,newBody.source);
+  const detail={window:{ODPTClient:{LINE_TO_OPERATOR:{Test:'Fixture'},getTrainInformation(){return Promise.reject(new Error('offline'));}}},
+    localStorage:{getItem(){return null;},setItem(){}},console};
+  vm.runInNewContext(fs.readFileSync('js/runinfo-api.js','utf8'),detail);
+  await assert.rejects(detail.window.RunInfoAPI.query('Test',{id:'Test',operator:'Fixture',status:'normal'}),/offline/,
+    'detail consumer must preserve failure rather than cache local normal as a fresh official response');
   console.log('captured SQL contracts: '+fixtures.length+' lines; partial coverage and cross-line rejection PASS');
   console.log('runtime-request-contract: 20 consumers → 1 request; refresh windows, errors, retry, source version and independent timers PASS');
 }
 const watchdog = setTimeout(() => { console.error('request contract did not settle'); process.exit(1); }, 10000);
 main().catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>clearTimeout(watchdog));
 
+
+// Resource initialization alone must preserve positions during information refresh.
+const begin=source.indexOf('    function loadRealtimeData('),end=source.indexOf('        var ops =',begin);
+const snapshot={JR:['existing-position']};
+const setup={window:{ODPT_TRAIN_POSITIONS:snapshot},validateAuthoritativeRealtimeConfig(){}};
+vm.runInNewContext(source.slice(begin,end)+'}',setup);
+setup.loadRealtimeData(true);
+assert.equal(setup.window.ODPT_TRAIN_POSITIONS,snapshot,'TrainInformation refresh must never clear the Train snapshot');

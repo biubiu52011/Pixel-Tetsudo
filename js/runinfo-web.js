@@ -353,23 +353,23 @@
   }
 
   // ========== 轮询（后台暂停/前台恢复，与 DataFusion 相同模式） ==========
+  var _visibilityBound = false;
   function startPolling() {
-    if (_timer) return;
+    if (!_visibilityBound) {
+      _visibilityBound = true;
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          if (_timer) { clearInterval(_timer); _timer = null; }
+        } else {
+          refreshAllIfStale();
+          startPolling();
+        }
+      });
+    }
+    if (_timer || document.hidden) return;
     _timer = setInterval(function() {
       try { refreshAllIfStale(); } catch(e) {}
     }, REFRESH_INTERVAL_MS);
-    try {
-      document.addEventListener("visibilitychange", function() {
-        try {
-          if (document.hidden) {
-            if (_timer) { clearInterval(_timer); _timer = null; }
-          } else {
-            refreshAllIfStale();
-            startPolling();
-          }
-        } catch(e) {}
-      });
-    } catch(e) {}
   }
 
   function refreshAllIfStale() {

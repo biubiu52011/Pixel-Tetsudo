@@ -886,6 +886,10 @@
                 serviceDate: serviceDate, source: body.source || "",
                 complete: body.complete === true, partial: body.partial === true,
                 calendarStatus: body.calendar_status || "",
+                sourceCoverage: body.source_coverage || "",
+                selectedCalendar: body.selected_calendar || "",
+                dateVerifiedRuns: Number(body.date_verified_runs) || 0,
+                dateUnverifiedRuns: Number(body.date_unverified_runs) || 0,
                 omittedIncompleteRuns: Number(body.omitted_incomplete_runs) || 0,
                 runs: Array.isArray(body.runs) ? body.runs.length : 0,
                 updatedAt: Date.now()
@@ -1789,7 +1793,7 @@
         if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
         // Position snapshots are retained per operator. On-demand refresh must
         // not erase another already-active operator before its own poll runs.
-        if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};
+        if (!window.ODPT_TRAIN_POSITIONS || (!delayOnly && !positionOperators)) window.ODPT_TRAIN_POSITIONS = {};
         // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);

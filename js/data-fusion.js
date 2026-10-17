@@ -1439,6 +1439,7 @@
             if (window.TrainPositionEstimator.matchRealtimeVehicleEvidence &&
                 window.TrainVehicle && typeof window.TrainVehicle.resolve === 'function') {
               Object.keys(posMap).forEach(function(_liveLineId) {
+                if (requestedLineIds && requestedLineIds.length && requestedLineIds.indexOf(_liveLineId) < 0) return;
                 (posMap[_liveLineId] || []).forEach(function(_live) {
                   if (!_live || _live.positionSource !== 'realtime-api') return;
                   var _scheduleModel = window.TrainPositionEstimator.matchRealtimeVehicleEvidence(
