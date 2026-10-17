@@ -901,6 +901,8 @@ var CANONICAL_VEHICLES = {
   "izukyu-3000-plan": {"displayName":"伊豆急行3000系","iconName":"伊豆急行3000系","asset":null,"aliases":[]},
   "izukyu-2100-plan": {"displayName":"伊豆急行2100系","iconName":"伊豆急行2100系","asset":null,"aliases":["伊豆急行2100系（リゾート21）"]},
   "jr-east-e261-saphir": {"displayName":"E261系","iconName":"E261系","asset":"../images/列车/JR東日本/JR東日本_E261系_サフィール踊り子.png","aliases":["E261系（サフィール踊り子）"]},
+  "jr-east-e231-3000-hachiko": {"displayName":"E231系3000番台","iconName":"E231系3000番台","asset":"../images/列车/JR東日本/JR東日本_E231系_3000番台.png","aliases":["JR東日本E231系3000番台"]},
+  "jr-east-hbe220-hachiko-plan": {"displayName":"HB-E220系（八高線）","iconName":"HB-E220系（八高線）","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_HB-E220系_八高線.png","aliases":["JR東日本HB-E220系（八高線）"]},
   "jr-east-e131-nagano-planned": {"displayName":"E131系（長野地区）","iconName":"E131系（長野地区）","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_E131系_長野地区.png","aliases":["JR東日本E131系（長野地区）"]},
   "jr-east-e233-1000-keiyo": {"displayName":"E233系1000番台（京葉線）","iconName":"E233系1000番台（京葉線）","asset":null,"aliases":["E233系1000番台（京葉線）"]},
   "jr-east-e231-0-musashino": {"displayName":"E231系0番台（武蔵野線）","iconName":"E231系0番台（武蔵野線）","asset":"../images/列车/JR東日本/JR東日本_E231系_0番台.png","aliases":["E231系0番台（武蔵野線）"]},
@@ -2533,7 +2535,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1260 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1262 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
