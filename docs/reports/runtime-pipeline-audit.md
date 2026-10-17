@@ -93,3 +93,5 @@ Chromium固定HAR真实计时：埼京SVG18/位置54.9ms，中央本线15.6/177.
 仓库配置另外核验：main PR/4项检查/strict/管理员保护/0审批；Pages build_type=workflow；旧手动工作流禁用；部署环境只允许main；Actions PR创建审批保持false。实际读回结果与CI链接记录于PROGRESS。设置与代码分别验收；代码未合并时旧main工作流不会自动获得新门禁。
 
 契约检查的威胁边界：内容哈希声明、基线检查器和回归测试使变更可审查，无法自动判断解释真假，仓库内CI本身也不是不可修改的外部策略。仍需人工核对最终PR，不能把“绿色”解释为架构语义的绝对证明。
+
+配置实读确认：main 的4项 strict 检查绑定 GitHub Actions app15368，0审批、PR必需、管理员保护、禁止强推/删除、讨论解决；Pages 已从legacy切换workflow，旧pages.yml已disabled_manually，环境仅main，Actions创建PR/审批仍false。最终集成[PR #40](https://github.com/biubiu52011/Pixel-Tetsudo/pull/40)待审查，未合并/部署。初次staged验收发现测试在hashchange之前同步读取返回状态，已修正等待真实列表恢复，未改生产路由或放宽断言。
