@@ -897,6 +897,10 @@ var CANONICAL_VEHICLES = {
   "remaining-fleet-extra-14": {"displayName":"小田急30000形","iconName":"小田急30000形","asset":null,"plannedAsset":"../images/列车/小田急電鉄/小田急電鉄_30000形_EXEα.png","aliases":["小田急30000形 EXEα"]},
   "remaining-fleet-extra-15": {"displayName":"E721系","iconName":"E721系","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_E721系_仙台地区.png","aliases":[]},
   "remaining-fleet-extra-16": {"displayName":"E653系（いなほ）","iconName":"E653系（いなほ）","asset":"../images/列车/JR東日本/JR東日本_E653系（いなほ）.png","aliases":["JR東日本E653系（いなほ）"]},
+  "izukyu-8000-plan": {"displayName":"伊豆急行8000系","iconName":"伊豆急行8000系","asset":null,"plannedAsset":"../images/列车/伊豆急行/伊豆急行_8000系.png","aliases":[]},
+  "izukyu-3000-plan": {"displayName":"伊豆急行3000系","iconName":"伊豆急行3000系","asset":null,"aliases":[]},
+  "izukyu-2100-plan": {"displayName":"伊豆急行2100系","iconName":"伊豆急行2100系","asset":null,"aliases":["伊豆急行2100系（リゾート21）"]},
+  "jr-east-e261-saphir": {"displayName":"E261系","iconName":"E261系","asset":"../images/列车/JR東日本/JR東日本_E261系_サフィール踊り子.png","aliases":["E261系（サフィール踊り子）"]},
   "jr-east-e131-nagano-planned": {"displayName":"E131系（長野地区）","iconName":"E131系（長野地区）","asset":null,"plannedAsset":"../images/列车/JR東日本/JR東日本_E131系_長野地区.png","aliases":["JR東日本E131系（長野地区）"]},
   "jr-east-e233-1000-keiyo": {"displayName":"E233系1000番台（京葉線）","iconName":"E233系1000番台（京葉線）","asset":null,"aliases":["E233系1000番台（京葉線）"]},
   "jr-east-e231-0-musashino": {"displayName":"E231系0番台（武蔵野線）","iconName":"E231系0番台（武蔵野線）","asset":"../images/列车/JR東日本/JR東日本_E231系_0番台.png","aliases":["E231系0番台（武蔵野線）"]},
@@ -2157,7 +2161,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
   var _issuedVehiclePlans = new WeakSet();
   var _planOwnerLabels = {
     'JR-East':'JR東日本', 'JR-West':'JR西日本', 'JR-Kyushu':'JR九州',
-    'JR-Central':'JR東海', 'JR-Hokkaido':'JR北海道',
+    'JR-Central':'JR東海', 'JR-Hokkaido':'JR北海道', 'Izukyu':'伊豆急行',
     'TokyoMetro':'東京メトロ', 'Toei':'都営', 'Tokyu':'東急', 'TOKYU':'東急',
     'Tobu':'東武', 'Odakyu':'小田急', 'Seibu':'西武', 'Keio':'京王',
     'Keikyu':'京急', 'Keisei':'京成', 'Sotetsu':'相鉄',
@@ -2529,7 +2533,7 @@ function _canonicalVehicleIconPath(name, serviceDate) {
     clearFormationEvidenceOtherDates: clearFormationEvidenceOtherDates,
   };
 
-  console.debug('[TrainVehicle] v4.3.1258 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
+  console.debug('[TrainVehicle] v4.3.1259 initialized（canonical EXACT/NARROWED/UNKNOWN vehicle identity contract）');
 })();
 
 })();
