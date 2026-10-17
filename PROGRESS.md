@@ -1,5 +1,16 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-17 JST — 数据链路阶段 02：统一请求契约（REVIEW）
+
+- Workstream: runtime-request-contract；执行者 Codex；依赖阶段01 PR #36（CI success），独立叠加分支，不合并 main。
+- 扩展唯一 ODPTClient：同 URL 在途共享；Train/TrainInformation 同刷新窗口共享结果；保留原限流与时刻表缓存；错误继续 reject，不伪装为空数据。指标仅汇总 started/joined/cacheHits/failed/staleRows，无密钥/URL输出。
+- 比较同一源身份的 dc:date，较老行不能覆盖较新位置；SQL 响应及行都绑定请求 line_id/service_date；跨04:00的旧请求不覆盖新运行日状态，旧日内存缓存淘汰。保留 partial 标签及遗漏数量，不扩大源覆盖声明。
+- Train 与 TrainInformation 各自调度，不因当前线路激活而停止情报刷新；后台同时停止、前台恢复；复用既有轮询生命周期。
+- 测试：20消费者→1请求、已完成窗口复用、错误传播/重试、源时间倒序、捕获7条线路SQL适配/partial、错线路拒绝、跨日乱序；65既有node:test及位置连续性/生命周期通过。45个其余CI Node入口通过；全地铁计划套件需单独等待较长执行，最终记录见PR。browser runtime: NOT VERIFIED。
+- 文件：odpt-unified.js、runtime-request-contract.test.js、sql-har-contract.json、CI与本进度。Commit SHA见阶段PR。
+- 遗留：此阶段未声称动画/浏览器性能完成，下一阶段变化契约和旧路径守卫。
+
+
 ## 2026-10-17 JST — 数据链路阶段 01：五份 HAR 基线与发布门禁（REVIEW）
 
 - Workstream: runtime-pipeline-audit；执行者 Codex；隔离工作目录基于 origin/main 78accf09，保留主工作区全部未提交内容。
