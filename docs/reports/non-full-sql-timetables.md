@@ -130,3 +130,6 @@ SQL只读审计：92,322条source resolution均缺少date_verified有效期认�
 170项公开API检查通过：全部23111班的站序、到发时刻和完整目的地URN与当前已解析官方计划一致，缺班0、目的地差异0；其中10项确认12月5日不重复使用已到期日期计划。公开北海道页面显示3031B前往新函馆北斗、3044B前往东京，并显示H5/E5计划候选。既有上越和西九州页面接入验证仍有效。仅补充数据，无需更新前端资源版本或部署新Edge函数。
 
 完成范围仅为已核对的16个周末/节假日，至2026-11-29。12月后、原平日表有效性和西九州2038G等剩余车型判定不在完成声明内。固定备份中的remaining.sql现为已执行原件，勿再视为未完成任务；幂等性保留。执行回执shinkansen-import-receipt.json和最新shinkansen-api-verification.json记录完成状态，来源归档同步更新。
+
+
+Release verification — SHINKANSEN-PUBLISHED-WEEKENDS: verifiedcommit95a0fa40d8b0c87d060f44520ff5cdcbc2f5ef64. CI/CD39022366264,ReleaseGuards39022366308,Pages39022365544 allSUCCESS. PublictrainsHTML HTTP200/build95a0fa40. SQL170APIcases complete/0missing/0destinationdiffs;localreceipt/sourcearchive synchronized. This supersedes earlier publication-pending status. Follow-up changes only record verification in existing documentation.
