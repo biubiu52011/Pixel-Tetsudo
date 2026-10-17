@@ -13,3 +13,12 @@
 验证：新回归覆盖791条参考数据、区域普通/快速直通/E353/源Green M/临时号隔离/实际车型优先。生产SQL经过位置估算回放两种日历、六个时段，普通列车模型已改为长野地区计划，位置和数量不变。完整检查及发布结果保存于 recovery/chuo-main-20261017/。browser runtime: NOT VERIFIED（浏览器连接超时）。
 
 来源：[官方平日下行](https://timetables.jreast.co.jp/2610/timetable-v/223d1p.html)、[平日上行](https://timetables.jreast.co.jp/2610/timetable-v/223u1p.html)、[土休日下行](https://timetables.jreast.co.jp/2610/timetable-v/223d2p.html)、[土休日上行](https://timetables.jreast.co.jp/2610/timetable-v/223u2p.html)、[区域新车公告](https://www.jreast.co.jp/press/2026/nagano/20260507_na01.pdf)、[E353车型说明](https://www.jreast.co.jp/train/express/azusa_kaiji.html)。
+
+
+## 2026-10-17 中央本线无旧提示输入的计划车型修正
+
+已复现：421M 等官方定期车号在 ODPT 实时输入或 SQL 车型提示为空时，被区域计划规则的 candidateLabelsAny 拦截，最终显示待判定。移除该多余前提，仍严格限定 168 个官方定期车号、线路和列车类型。保留实际车辆证据优先级及临时车号隔离。SQL 迁移 20261017020949 已应用并回读。
+
+回归覆盖 168 车号 × 2 运营日 × 2 输入路径，共 672 例，验证最终标记选中计划车型 PNG；额外验证未收录车号和伪造计划对象不能取得图标。浏览器运行时尚未验证，完整回归及发布检查另存 recovery/chuo-plan-admission-20261017。
+
+完整回归：60 个检查入口全部通过（含 65 个 node:test 用例、4 个 Python 守卫及车型映射守卫）。

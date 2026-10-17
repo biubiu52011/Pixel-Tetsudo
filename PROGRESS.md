@@ -877,3 +877,12 @@ Status: REVIEW until public deployment; browser runtime NOT VERIFIED. Reuse the 
 ## 2026-10-17 JST — CHUO-MAIN-PLAN / agent
 
 Status REVIEW pending deployment; browser runtime NOT VERIFIED. Audit 539 explicit regular timetable records across four official JR East 2610 sheets against production SQL by station/clock: all matched, including verified renumbered/merged services. Do not invent trips from 42 boundary-only/insufficient-clock rows; no timetable/stop/topology mutations. Added 3 canonical Grade C family plans, scoped regional plan to168 published train numbers, and Nagano E131 planned representative catalogue entry. Ordinary211/E131, rapid throughE233 and explicit E353 remain distinct; actual model priority retained. New791-reference regression PASS; all60 verification entries PASS. Twelve production position replays retain counts and PNGs; screenshot23:52 has3 trains over the full line, with2 outside the visible top segment. SQL migrations 20261016151338 / 20261016151640. Files: js/train-vehicle.js, two evidence snapshots, trains/realtime page resource tokens, two migrations, tools/chuo-main-planned-vehicles.test.js, docs/chuo-main-plan-audit-20261017.md. Details/backups: recovery/chuo-main-20261017/. Conditional/seasonal timetable notes remain outside the539-record completeness claim.
+
+
+## 2026-10-17 中央本线无旧提示输入的计划车型修正
+
+已复现：421M 等官方定期车号在 ODPT 实时输入或 SQL 车型提示为空时，被区域计划规则的 candidateLabelsAny 拦截，最终显示待判定。移除该多余前提，仍严格限定 168 个官方定期车号、线路和列车类型。保留实际车辆证据优先级及临时车号隔离。SQL 迁移 20261017020949 已应用并回读。
+
+回归覆盖 168 车号 × 2 运营日 × 2 输入路径，共 672 例，验证最终标记选中计划车型 PNG；额外验证未收录车号和伪造计划对象不能取得图标。浏览器运行时尚未验证，完整回归及发布检查另存 recovery/chuo-plan-admission-20261017。
+
+完整回归：60 个检查入口全部通过（含 65 个 node:test 用例、4 个 Python 守卫及车型映射守卫）。

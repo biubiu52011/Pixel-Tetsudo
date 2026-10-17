@@ -37,3 +37,28 @@ for(const source of c.window.ChuoMain_MANUAL_TIMETABLES){
 }
 assert.equal(checked,791);
 console.log('Chuo Main: 791 references have native PNG; regular Nagano, rapid working, E353, sourced Green M, temporary-number isolation and observed priority PASS');
+
+// Production admission: ODPT realtime omits legacy SQL candidate text.
+// The published number whitelist itself is sufficient planned-fleet evidence.
+const evidence=JSON.parse(fs.readFileSync('data/timetables/vehicle-operation-evidence.json','utf8'));
+const regional=evidence.familyRules.find(r=>r.networkKey==='ChuoMain'&&r.codePattern==='PLAN:CHUO-REGIONAL');
+assert.equal(regional.planScope.candidateLabelsAny,undefined);
+assert.equal(regional.planScope.operationPatterns.length,168);
+for(const date of ['2026-10-16','2026-10-17'])for(const number of regional.planScope.operationPatterns){
+ const live=api.resolveRealtime({lineId:'ChuoMain',operator:'JR-East',railway:'odpt.Railway:JR-East.ChuoMain',trainNumber:number,trainType:'odpt.TrainType:JR-East.Local',serviceDate:date}).vehicleResult;
+ const sql=resolve(number,'Local','',date);
+ for(const result of [live,sql]){
+  assert(result.vehiclePlan,number+' '+date+' missing-label input needs its published plan');
+  assert.deepEqual(Array.from(result.vehiclePlan.models),['211系（長野地区）','E131系（長野地区）']);
+  const position={vehicleResolution:result,vehicleResolvedUpstream:result.identityStatus==='EXACT',vehicleIconPath:result.iconPath||'',vehiclePlan:result.vehiclePlan};
+  const marker=api.selectMarkerArtwork(position,false);
+  assert.equal(marker.kind,'vehicle',number+' reaches the final drawable marker');
+  assert.equal(marker.planned,true,'planned PNG never becomes observed identity');
+  assert(fs.existsSync(marker.iconSrc.slice(3)));
+ }
+}
+const unknownLive=api.resolveRealtime({lineId:'ChuoMain',operator:'JR-East',railway:'odpt.Railway:JR-East.ChuoMain',trainNumber:'8293M',trainType:'odpt.TrainType:JR-East.Local',serviceDate:'2026-10-17'}).vehicleResult;
+assert(!unknownLive.vehiclePlan,'unknown temporary M without source evidence stays outside regular plan');
+const knownPlan=resolve('421M','Local','').vehiclePlan;
+assert.equal(api.selectMarkerArtwork({vehiclePlan:JSON.parse(JSON.stringify(knownPlan))},false).kind,'unresolved','copied arbitrary plans are still not admitted');
+console.log('Chuo Main missing-label realtime + SQL admission: 168 numbers x 2 service days x 2 inputs reach planned native PNG markers; unknown/copy protections PASS');

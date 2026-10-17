@@ -20427,7 +20427,7 @@ window.VEHICLE_FAMILY_RULES = [
     ],
     "grade": "C",
     "sourceUrl": "https://www.jreast.co.jp/press/2026/nagano/20260507_na01.pdf",
-    "notes": "Published regional Nagano fleet transition plan. Replaces legacy unqualified 211/E233 mixed candidates only when a regional source model is present. E233 green-car through services remain separate. Not an observed daily carset; E131 model announcement is a fleet plan, not proof of an individual assignment.",
+    "notes": "Published regional Nagano fleet transition plan. Replaces legacy unqualified 211/E233 mixed candidates only when a regional source model is present. E233 green-car through services remain separate. Not an observed daily carset; E131 model announcement is a fleet plan, not proof of an individual assignment. Admission is based on the published regular train-number whitelist; legacy SQL candidate text is not required for ODPT realtime or blank-label SQL input. Existing actual vehicle priority is unchanged.",
     "planScope": {
       "lineIds": [
         "ChuoMain"
@@ -20607,11 +20607,6 @@ window.VEHICLE_FAMILY_RULES = [
         "555M",
         "556M",
         "558M"
-      ],
-      "candidateLabelsAny": [
-        "211系",
-        "211系（長野地区）",
-        "E131系（長野地区）"
       ]
     }
   },
