@@ -121,3 +121,12 @@ SQL只读审计：92,322条source resolution均缺少date_verified有效期认�
 - https://www.jrkyushu-timetable.jp/cgi-bin/sp/sp-tt_dep.cgi/0829300/?d=20261017 （官方日期查询示例）
 
 固定主工作区备份：.work/backups/shinkansen-plans-remaining.sql（仅剩余范围）、shinkansen-plans-full.sql、shinkansen-published-plans.json、shinkansen-api-verification.json、shinkansen-published-sources.zip（原HTML、解析/验证程序、SQL及SHA256清单）。不参与生产加载。批准后先核对当前SQL状态和文件哈希，再按来源ID幂等执行，重新核对170项；不恢复旧JS位置链路。
+
+
+## 2026-10-17 批准后完成验收（取代上节待批准状态）
+
+用户在具体剩余导入批准请求后明确回复“处理”，随后要求继续完成。六个已批准批次全部执行；SQL原始哈希保持6fb0637ce5acfee0cc19302f57b2142d16d7b95a3b49c1d1df2dd074bdc9e8d8。新增7922班、64701条停站，130条九州往新大阪线路归属修正完成。最终十线23111条日期计划、183573条停站；664个既有平日模板保留。逐线/日/车号重复、缺失来源公布日期证据和待修正目的地归属均为0。
+
+170项公开API检查通过：全部23111班的站序、到发时刻和完整目的地URN与当前已解析官方计划一致，缺班0、目的地差异0；其中10项确认12月5日不重复使用已到期日期计划。公开北海道页面显示3031B前往新函馆北斗、3044B前往东京，并显示H5/E5计划候选。既有上越和西九州页面接入验证仍有效。仅补充数据，无需更新前端资源版本或部署新Edge函数。
+
+完成范围仅为已核对的16个周末/节假日，至2026-11-29。12月后、原平日表有效性和西九州2038G等剩余车型判定不在完成声明内。固定备份中的remaining.sql现为已执行原件，勿再视为未完成任务；幂等性保留。执行回执shinkansen-import-receipt.json和最新shinkansen-api-verification.json记录完成状态，来源归档同步更新。
