@@ -336,7 +336,7 @@
 
   // ========== Data management ==========
 
-  function setLines(lines) { _lines = lines || {}; notify(); }
+  function setLines(lines, changes) { _lines = lines || {}; notify(changes); }
   function setPositions(positions) { _positions = positions || {}; notify(); }
 
   function getLine(lineId) { return _lines[lineId] || null; }
@@ -354,9 +354,9 @@
     if (idx >= 0) _listeners.splice(idx, 1);
   }
 
-  function notify() {
+  function notify(changes) {
     for (var i = 0; i < _listeners.length; i++) {
-      try { _listeners[i](_lines, null, _positions); } catch(e) {}
+      try { _listeners[i](_lines, null, _positions, changes); } catch(e) {}
     }
   }
 
@@ -409,8 +409,8 @@
       if (window.DataFusion) {
         var fused = window.DataFusion.getFusedData();
         if (fused && fused.lines) setLines(fused.lines);
-        window.DataFusion.subscribe(function(fd) {
-          if (fd && fd.lines) setLines(fd.lines);
+        window.DataFusion.subscribe(function(fd, changes) {
+          if (fd && fd.lines) setLines(fd.lines, changes);
 
         });
       }

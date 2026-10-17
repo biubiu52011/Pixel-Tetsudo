@@ -1,0 +1,26 @@
+const fs = require('fs');
+const assert = require('node:assert/strict');
+const ci = fs.readFileSync('.github/workflows/ci-cd.yml', 'utf8');
+assert.match(ci, /release-guards:\s*\n\s*uses: \.\/\.github\/workflows\/release-guards.yml/);
+assert.match(ci, /needs: \[validate, release-guards, browser-replay\]/);
+const build = ci.split('\n  build:')[1].split('\n  deploy:')[0];
+const deploy = ci.split('\n  deploy:')[1].split('\n  verify-production:')[0];
+assert.match(build, /needs: \[validate, release-guards, browser-replay\]/);
+assert.match(build, /path: _site/);
+assert.match(deploy, /needs: \[validate, release-guards, browser-replay, build\]/);
+assert(!/checkout|upload-pages-artifact|release-bundle.cjs build/.test(deploy), 'deploy must consume the gated artifact without rebuilding');
+assert.match(ci, /name: Verify production release/);
+assert.match(ci, /release-history.cjs check-bundle _site/);
+assert.match(ci, /artifact_name: rollback-pages/);
+const sync = fs.readFileSync('.github/workflows/sync-vehicle-evidence.yml', 'utf8');
+assert.match(sync, /HEAD:refs\/heads\/\$candidate/);
+assert.match(sync, /gh workflow run ci-cd.yml --ref "\$candidate"/);
+assert(!/git push[^\n]*HEAD:main|pull-requests: write/.test(sync), 'scheduled evidence updates must remain reviewed candidates');
+assert.match(ci, /if: github.ref == 'refs\/heads\/main' &&/);
+assert.match(ci, /group: ci-\$\{\{ github.ref \}\}/);
+assert.match(ci, /group: pages\s*\n\s*cancel-in-progress: false/);
+const owners = fs.readdirSync('.github/workflows').filter(f => /\.ya?ml$/.test(f))
+  .filter(f => /uses: actions\/deploy-pages@/.test(fs.readFileSync('.github/workflows/' + f, 'utf8')));
+assert.deepEqual(owners, ['ci-cd.yml'], 'Pages must have exactly one gated deployment owner');
+assert.match(fs.readFileSync('.github/workflows/release-guards.yml', 'utf8'), /on:\s*\n\s*workflow_call:/);
+console.log('deployment-gate: validation + release guards required; one deploy owner; PR isolation PASS');

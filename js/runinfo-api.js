@@ -51,11 +51,11 @@
 
   // ODPT 官方接口：operator -> Promise<records[]>
   function fetchODPT(operator) {
-    if (!operator) return Promise.resolve([]);
-    if (!window.ODPTClient || typeof window.ODPTClient.getTrainInformation !== "function") return Promise.resolve([]);
+    if (!operator) return Promise.reject(new Error("ODPT operator unavailable"));
+    if (!window.ODPTClient || typeof window.ODPTClient.getTrainInformation !== "function") return Promise.reject(new Error("ODPT client unavailable"));
     try {
-      return window.ODPTClient.getTrainInformation(operator).catch(function() { return []; });
-    } catch (e) { return Promise.resolve([]); }
+      return window.ODPTClient.getTrainInformation(operator);
+    } catch (e) { return Promise.reject(e); }
   }
 
   // Canonical ODPT identity is operator namespace + railway code.

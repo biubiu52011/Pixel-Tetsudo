@@ -630,13 +630,52 @@
         });
     }
 
-    // ========== Fetch wrapper ==========
-    function fetchODPT(url) {
-        if (!url) return Promise.resolve(null);
-        return rateLimitedFetch(url).catch(function(e) {
-            console.warn("[ODPT] Failed:", e.message);
-            return null;
+    // One request owner for all consumers. Timetables retain their existing cache.
+    var _requestInflight = Object.create(null);
+    var _liveResponses = Object.create(null);
+    var _requestMetrics = { started: 0, joined: 0, cacheHits: 0, failed: 0, staleRows: 0 };
+    function _sourceTime(row) {
+        var value = row && (row['dc:date'] || row['dct:modified']);
+        return value ? Date.parse(value) || 0 : 0;
+    }
+    function _retainNewerRows(previous, incoming) {
+        if (!Array.isArray(previous) || !Array.isArray(incoming)) return incoming;
+        var old = Object.create(null);
+        previous.forEach(function(row) { var id = row && (row['owl:sameAs'] || row['@id']); if (id) old[id] = row; });
+        return incoming.map(function(row) {
+            var id = row && (row['owl:sameAs'] || row['@id']), prior = old[id];
+            if (prior && _sourceTime(prior) && _sourceTime(row) && _sourceTime(row) < _sourceTime(prior)) {
+                _requestMetrics.staleRows++;
+                return prior;
+            }
+            return row;
         });
+    }
+    function fetchODPT(url) {
+        if (!url) return Promise.reject(new Error('ODPT endpoint unavailable'));
+        if (_requestInflight[url]) { _requestMetrics.joined++; return _requestInflight[url]; }
+        var live = /odpt:Train(?:Information)?\?/.test(url);
+        var cfg = window.RuntimeConfig || {};
+        var interval = (/odpt:TrainInformation\?/.test(url) && cfg.ODPT_INFORMATION_INTERVAL) || cfg.ODPT_REALTIME_INTERVAL || 30000;
+        var windowId = Math.floor(Date.now() / interval), prior = _liveResponses[url];
+        if (live && prior && prior.windowId === windowId) {
+            _requestMetrics.cacheHits++;
+            return Promise.resolve(prior.data);
+        }
+        _requestMetrics.started++;
+        _requestInflight[url] = rateLimitedFetch(url).then(function(data) {
+            if (!Array.isArray(data) && !(data && Array.isArray(data.value))) throw new Error('Invalid ODPT collection');
+            if (live) {
+                var rows = _retainNewerRows(prior && extractData(prior.data), extractData(data));
+                data = Array.isArray(data) ? rows : Object.assign({}, data, { value: rows });
+                _liveResponses[url] = { windowId: windowId, data: data };
+            }
+            return data;
+        }).catch(function(error) {
+            _requestMetrics.failed++;
+            throw error; // Network failure must never become a confirmed empty timetable.
+        }).finally(function() { delete _requestInflight[url]; });
+        return _requestInflight[url];
     }
 
     function extractData(result) {
@@ -821,6 +860,9 @@
         // Server independently checks the database's SQL plan eligibility.
         // FULL never synthesizes positions from a timetable.
         var serviceDate=_serviceDateJst(), key=lineId+"|"+serviceDate, hit=_trainRunCache[key];
+        Object.keys(_trainRunCache).forEach(function(k) {
+            if (k.slice(k.lastIndexOf('|') + 1) !== serviceDate) delete _trainRunCache[k];
+        });
         if(hit && Date.now()-hit.at<600000) return Promise.resolve(hit.rows);
         if(_trainRunInflight[key]) return _trainRunInflight[key];
         var url=TRAIN_RUN_CACHE_ENDPOINT+"?line_id="+encodeURIComponent(lineId)+"&service_date="+encodeURIComponent(serviceDate)+"&fallback_only=1";
@@ -833,10 +875,21 @@
             if (!body || body.ok !== true) {
                 throw new Error("TrainRun source rejected: " + (body && body.error || "invalid-response"));
             }
+            if (_serviceDateJst() !== serviceDate) throw new Error('TrainRun service date expired in flight');
+            if (body.line_id !== lineId || body.service_date !== serviceDate || !Array.isArray(body.runs)) {
+                throw new Error('TrainRun response identity mismatch');
+            }
+            if (body.runs.some(function(run) {
+                return !run || run.line_id !== lineId || run.service_date !== serviceDate;
+            })) throw new Error('TrainRun row identity mismatch');
             _trainRunLastStatus[lineId] = {
                 serviceDate: serviceDate, source: body.source || "",
                 complete: body.complete === true, partial: body.partial === true,
                 calendarStatus: body.calendar_status || "",
+                sourceCoverage: body.source_coverage || "",
+                selectedCalendar: body.selected_calendar || "",
+                dateVerifiedRuns: Number(body.date_verified_runs) || 0,
+                dateUnverifiedRuns: Number(body.date_unverified_runs) || 0,
                 omittedIncompleteRuns: Number(body.omitted_incomplete_runs) || 0,
                 runs: Array.isArray(body.runs) ? body.runs.length : 0,
                 updatedAt: Date.now()
@@ -863,6 +916,7 @@
             _trainRunCache[key]={at:Date.now(),rows:rows};
             return rows;
         }).catch(function(err){
+            if (_serviceDateJst() !== serviceDate) return [];
             _trainRunLastStatus[lineId] = {
                 serviceDate: serviceDate, source: "SOURCE_ERROR", complete: false,
                 partial: false, calendarStatus: "unknown", runs: 0,
@@ -888,6 +942,7 @@
 
     // ========== Public API ==========
     window.ODPTClient = {
+        getRequestMetrics: function() { return Object.assign({}, _requestMetrics); },
         ENDPOINTS: ODPT_ENDPOINTS,
         LINE_TO_OPERATOR: LINE_TO_OPERATOR,
         LINE_RAILWAY_CODE: LINE_RAILWAY_CODE,
@@ -1738,7 +1793,7 @@
         if (!skipDelayRefresh || !window.ODPT_DELAY_DATA) window.ODPT_DELAY_DATA = {};
         // Position snapshots are retained per operator. On-demand refresh must
         // not erase another already-active operator before its own poll runs.
-        if (!window.ODPT_TRAIN_POSITIONS || !positionOperators) window.ODPT_TRAIN_POSITIONS = {};
+        if (!window.ODPT_TRAIN_POSITIONS || (!delayOnly && !positionOperators)) window.ODPT_TRAIN_POSITIONS = {};
         // 注意：不清空 ODPT_TIMETABLES，时刻表使用缓存
 
         var ops = Object.keys(ODPT_ENDPOINTS);
@@ -2039,20 +2094,25 @@
     REALTIME_INTERVAL = (window.RuntimeConfig && window.RuntimeConfig.ODPT_REALTIME_INTERVAL) || REALTIME_INTERVAL;
     var TT_CHECK_INTERVAL = 300000;
     var _rtPollTimer = null;
+    var _infoPollTimer = null;
     var _ttCheckTimer = null;
     var _lazyMode = false;
 
     function _realtimeRefresh() {
         var activeOps = Object.keys(_activeRealtimeOperators);
         var delayOnly = _lazyMode && activeOps.length === 0;
-        loadRealtimeData(delayOnly, activeOps.length ? activeOps : null, activeOps.length > 0).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
+        if (delayOnly) return;
+        loadRealtimeData(false, activeOps.length ? activeOps : null, true).catch(function(e) { console.warn("[ODPT] Realtime refresh error:", e.message); });
     }
     function startRealtimePolling() {
-        if (_rtPollTimer) return;
-        _rtPollTimer = setInterval(_realtimeRefresh, REALTIME_INTERVAL);
+        if (!_rtPollTimer) _rtPollTimer = setInterval(_realtimeRefresh, REALTIME_INTERVAL);
+        if (!_infoPollTimer) _infoPollTimer = setInterval(function() {
+            loadRealtimeData(true).catch(function(e) { console.warn('[ODPT] Information refresh error:', e.message); });
+        }, (window.RuntimeConfig && window.RuntimeConfig.ODPT_INFORMATION_INTERVAL) || REALTIME_INTERVAL);
     }
     function stopRealtimePolling() {
         if (_rtPollTimer) { clearInterval(_rtPollTimer); _rtPollTimer = null; }
+        if (_infoPollTimer) { clearInterval(_infoPollTimer); _infoPollTimer = null; }
     }
     function startTtCheckPolling() {
         if (_ttCheckTimer) return;
@@ -2076,6 +2136,7 @@
             } else {
                 // 回前台：立即拉一次（不等下一周期），再恢复定时器
                 _realtimeRefresh();
+                loadRealtimeData(true).catch(function() {});
                 startRealtimePolling();
                 // lazy 模式（delay-only）不建立时刻表过期检查轮询——保持首页零全量拉取
                 if (!_lazyMode) startTtCheckPolling();

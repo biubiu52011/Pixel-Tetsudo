@@ -19,6 +19,8 @@
 
 ## 现役车型与验证入口
 
+- [数据链路端到端审计与重构验收](reports/runtime-pipeline-audit.md) — 五份HAR、分阶段PR、来源/性能/发布门禁。
+
 - [列车计划车型与图标](train-vehicle-plans.md) — 唯一现役车型说明，替代分散日期报告。
 - [共享组件](COMPONENTS.md)
 - [CI 固定夹具](../tests/fixtures/guards/) — 基线与架构清单，原值保留。

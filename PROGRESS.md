@@ -1,5 +1,50 @@
 # Pixel Tetsudo 工程进度
 
+## 2026-10-17 20:43 JST — 数据链路阶段 04：固定回放与性能门禁（REVIEW）
+
+- Workstream runtime-replay-performance；执行者Codex；依赖#38（GitHub CI success）。本阶段不合并main、不部署；生产页面设计、名称、车型图片、canonical数据及SQL规则未改。
+- 原有TrainOperationEvidence内索引车型族规则，原RunningChainResolver按端点/20分钟时窗索引候选再执行同一确认/歧义判断；删除全量扫描/全对比较。Fusion只对本次依赖范围做实时车型接续。官方网页监听器只绑定一次；独立情报刷新不再清空Train原始快照；RunInfoAPI不吞请求失败；覆盖与逐班日期未验证计数保留。
+- 固定429列车全输出SHA一致；本机Node645/599ms→81/55ms；18个捕获直通根结果与旧实现逐项一致，4525候选检查；源码不保存第二套图解析器。
+- 浏览器固定回放已见埼京20标记(位置715.1ms/SVG65.6ms)、中央本线31(1881.5/82)、吾妻0(146.9/9.4，只有6条计划，不补造)、常磐各停8(882.7/25.5)。未放宽原规则或预算。
+- CI增加独立Chromium四场景作业：真实计时、SVG500ms/位置2000ms阈值、扇出上限、身份唯一、元数据事件无重绘、SQL覆盖；与Validate/Release Guards共同阻止部署。回放远程请求仅从脱敏HAR夹具读取，缺失记录明确报错；CI保存JSON与PNG。
+- 最终本地50个Node入口、65项node:test、4个Python守卫全部通过。阶段04提交b8cafaae的GitHub CI/CD run39029895965全部success：Validate、Release Guards、真实Chromium四场景；Deploy按PR规则skipped。无需新生产库或付费服务。
+- 文件：请求/融合/车型证据/直通图/运行情报既有所有者、回放测试与夹具、CI、审计报告、文档索引。Commit SHA见本阶段PR。
+- 四个PR：#36基线/发布、#37请求/快照、#38事件/所有权、#39性能/浏览器门禁；四个实现提交GitHub CI均success。CI Chromium：埼京SVG18/位置54.9ms、中央15.6/177.2ms、吾妻8.8/43.6ms、常磐19.7/69.7ms；覆盖/元数据无重绘/身份及扇出预算全通过，产物browser-replay-metrics保存4份JSON与PNG。
+- 交付范围为已识别链路风险及长期门禁；四类代表样本不等于全网人工验收。合并/生产发布仍须按#36→#37→#38→#39顺序审查；当前未合并、未部署。
+
+
+## 2026-10-17 JST — 数据链路阶段 03：变化契约贯通与长期守卫（REVIEW）
+
+- 执行者 Codex；Workstream runtime-change-contract；依赖 PR #37（GitHub CI success）。
+- DataFusion 逐线路区分 position/display/metadata，DataState 透传既有订阅；页面把源时间/有效期从位移哈希移除，单独续期检查；保持车次身份、种别、车型/计划、目的地及状态变化的既有绘制逻辑。订阅者异常相互隔离。源记录重排不作为位移。
+- 删除旧逐索引脏检测，复用唯一分类器；分钟协作批次只处理有已加载/注册时刻表的线路，取消无计划全网空算。TrainsPage增加有界绘制耗时读接口，复用Fusion指标。
+- ENGINEERING新增数据契约、网络及定时器所有权清单。CI禁止未审查新增网络/周期任务；门禁测试保护生产发布不在中途取消，PR验证仍可取消旧轮次。未放宽既有断言，抽取式测试改为加载真实分类器。
+- 本地65项node:test、变化契约/所有权守卫、位置推进/终到/重复号/图库/生命周期通过。浏览器本地埼京图实际有19标记；SVG增量绘制观测17.7–66.1ms。真实网络观测非固定输入前后对比。
+- 性能缺口：浏览器loadTrainPositions出现4502.5–7001.5ms，其中车型解析2984–4840.7ms；不得声明性能完成，继续阶段04。缺少受控浏览器HAR前后性能基准。
+- 文件：Fusion、DataState、trains-page/render、契约测试及网络/定时器清单、ENGINEERING、CI。Commit SHA见阶段PR；未合并main/未部署。
+
+
+## 2026-10-17 JST — 数据链路阶段 02：统一请求契约（REVIEW）
+
+- Workstream: runtime-request-contract；执行者 Codex；依赖阶段01 PR #36（CI success），独立叠加分支，不合并 main。
+- 扩展唯一 ODPTClient：同 URL 在途共享；Train/TrainInformation 同刷新窗口共享结果；保留原限流与时刻表缓存；错误继续 reject，不伪装为空数据。指标仅汇总 started/joined/cacheHits/failed/staleRows，无密钥/URL输出。
+- 比较同一源身份的 dc:date，较老行不能覆盖较新位置；SQL 响应及行都绑定请求 line_id/service_date；跨04:00的旧请求不覆盖新运行日状态，旧日内存缓存淘汰。保留 partial 标签及遗漏数量，不扩大源覆盖声明。
+- Train 与 TrainInformation 各自调度，不因当前线路激活而停止情报刷新；后台同时停止、前台恢复；复用既有轮询生命周期。
+- 测试：20消费者→1请求、已完成窗口复用、错误传播/重试、源时间倒序、捕获7条线路SQL适配/partial、错线路拒绝、跨日乱序；65既有node:test及位置连续性/生命周期通过。45个其余CI Node入口通过；全地铁计划套件需单独等待较长执行，最终记录见PR。browser runtime: NOT VERIFIED。
+- 文件：odpt-unified.js、runtime-request-contract.test.js、sql-har-contract.json、CI与本进度。Commit SHA见阶段PR。
+- 遗留：此阶段未声称动画/浏览器性能完成，下一阶段变化契约和旧路径守卫。
+
+
+## 2026-10-17 JST — 数据链路阶段 01：五份 HAR 基线与发布门禁（REVIEW）
+
+- Workstream: runtime-pipeline-audit；执行者 Codex；隔离工作目录基于 origin/main 78accf09，保留主工作区全部未提交内容。
+- 五份 HAR 已从 Downloads 读取；只提交脱敏汇总及 SHA256，不提交含密钥/请求头的 HAR。107/108/89/792/5 个请求；realtime 样本有 1 次同 URL 请求重叠，其余样本为 0。不能把所有轮询都归为重复请求。
+- CI/CD 成为唯一 Pages 发布者；Release Guards 变为可复用必经作业；PR 按 ref 隔离并发，发布串行且不在中途取消；手动重发仅允许 main 并重新验证。删除旧手动绕过入口。回滚通过 revert PR，经同一验证和发布链。
+- 本地 deployment-gate、6 个发布检查、4 个 Python 守卫全部通过（历史警告保留）；GitHub CI 待 PR。browser runtime: NOT VERIFIED。
+- 修改：.github/workflows、tools/deployment-gate.test.js、tools/audit-request-har.cjs、tests/fixtures/guards/request-har-baseline.json、docs/reports/runtime-pipeline-audit.md。Commit SHA：见本阶段 PR。
+- 遗留：网络基线不能证明脚本/渲染性能；下一阶段请求共享、失败语义、响应归属及版本；尚未宣称整体重构完成。
+
+
 ## 2026-10-16 JST — 小田急按列车号补充车型计划（DONE：本轮补充已同步并公开验证）
 
 - Workstream: odakyu-train-plans-20261016；执行者Codex。补充既有计划时刻表的车型依据，不重建时刻表，不查询当天实际编成。Supabase现有train_vehicle_rules追加2,126组列车号/日历计划，经唯一TrainOperationEvidence → TrainVehicle → PNG入口消费。
@@ -958,3 +1003,9 @@ Status REVIEW pending public release. Imported44user-updatedPNGs(11JR-Kyushu/33J
 
 
 Release verification — LINE-ICON-SYNC DONE:3a4e3ed03c60bc7e1d0e224bb67d836c8e26712c. CI/CD39022945061,ReleaseGuards39022945097,Pages39022944571 allSUCCESS. Public44PNG URLs HTTP200/SHA256equaluserinput;18canonicalimagepaths and7HTMLbuildtokens matchrelease. BrowserOsakaLoopcard uses近畿_O.png andcomplete/naturalWidth confirmsloaded;othernewKabe/Kosei/Kakogawaicons visuallyobserved. Lazyoffscreenimages checkedafterviewportentry;originalall-linesfilterrestored. Primarytargetedfiles/renamemanifest/releasereceipt synced. RemainingunrelatedTokyuShinYokohamamissingimageunchanged. Verification recorded without newruntime/SQL/recovery files.
+
+## 2026-10-17 JST — RELEASE-PIPELINE-INTEGRATION
+
+Status REVIEW. Integrates runtime phases #36–39 with immutable build/manifest, all-gate deploy dependencies, staged + production browser acceptance, verified-artifact rollback and exact-hash contract-change disclosure. Evidence sync now creates candidate branch, dispatches CI and outputs manual PR link; Actions PR creation remains disabled per user. main requires PR + all checks with0 mandatory approvals. No merge or production deploy in this task; actual GitHub CI/config readback pending below. First managed release needs its first successful production acceptance before historical verified rollback is available.
+
+Repository configuration applied and read back: main requires PR with0 approvals; strict Validate / release-guards / release-guards / Fixed HAR browser replay / Build verified release checks bound to GitHub Actions app15368; enforce_admins=true; force push/delete=false; conversation resolution=true. Pages build_type=workflow; old pages.yml workflow343057107 disabled_manually; github-pages environment retains sole main branch policy; Actions can_approve_pull_request_reviews=false. Integration PR https://github.com/biubiu52011/Pixel-Tetsudo/pull/40. main source has not been changed. First CI caught a synchronous assertion on the asynchronous hashchange back route; corrected the driver to await actual overview restoration without weakening assertions. Final rerun pending.

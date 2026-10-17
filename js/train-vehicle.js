@@ -307,6 +307,9 @@
   function registerCanonicalFamilyRuleProvider() {
     var rules=window.VEHICLE_FAMILY_RULES||[];
     if (!Array.isArray(rules)||!rules.length) return false;
+    // Index within the evidence owner. Dates/types/itinerary remain per call.
+    var rulesByNetwork = Object.create(null);
+    var indexedAliases = window.VEHICLE_NETWORK_ALIASES;
     return register({
       id:"canonical-vehicle-family-rules", grade:"B",
       resolveEvidence:function(trainNumber,ctx) {
@@ -316,8 +319,17 @@
         var cal=String(ctx.calendarType||"").toLowerCase();
         var scopedPlanAvailable=false;
         var plannedCtx=Object.assign({},ctx,{_plannedEvidenceMode:true});
-        var matches=rules.filter(function(r){
-          if (!_evidenceNetworkMatches(r.networkKey, ctx)) return false;
+        if (indexedAliases !== window.VEHICLE_NETWORK_ALIASES) {
+          indexedAliases = window.VEHICLE_NETWORK_ALIASES;
+          rulesByNetwork = Object.create(null);
+        }
+        var networkScope = JSON.stringify([ctx.lineId || '', ctx.railway || '']);
+        var candidateRules = rulesByNetwork[networkScope];
+        if (!candidateRules) {
+          candidateRules = rules.filter(function(r) { return _evidenceNetworkMatches(r.networkKey, ctx); });
+          rulesByNetwork[networkScope] = candidateRules;
+        }
+        var matches=candidateRules.filter(function(r){
           if (r.effectiveFrom && d<r.effectiveFrom) return false;
           if (r.effectiveTo && d>r.effectiveTo) return false;
           if (r.calendarType && (!cal || String(r.calendarType).toLowerCase()!==cal)) return false;

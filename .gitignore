@@ -52,6 +52,7 @@ work/
 
 # Node
 node_modules/
+_site/
 # Agent backups
 *.bak*
 

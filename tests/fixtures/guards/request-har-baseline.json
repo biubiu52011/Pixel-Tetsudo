@@ -1,0 +1,2393 @@
+[
+  {
+    "file": "biubiu52011.github Agatsuma .io.har",
+    "sha256": "5fe84f944b5dbe831cd368be14bff47df03e0bcef712514ed369bb4f363d3b11",
+    "requests": 107,
+    "overlappingIdenticalRequests": 0,
+    "groups": {
+      "biubiu52011.github.io/Pixel-Tetsudo/pages/trains.html": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 185.39900000905618,
+        "contentBytes": 8595,
+        "transferBytes": 136
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/style.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 198.8670000282582,
+        "contentBytes": 32743,
+        "transferBytes": 92
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/lang-bar.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 342.85499999532476,
+        "contentBytes": 5658,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/trains.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.8409999832511,
+        "contentBytes": 4984,
+        "transferBytes": 113
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/page-config-realtime.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 194.40599999506958,
+        "contentBytes": 275,
+        "transferBytes": 88
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/fonts/fusion-pixel-10px-proportional-ko.ttf": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 233.49800001597032,
+        "contentBytes": 3915608,
+        "transferBytes": 178
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/tourism-type.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 224.16399998473935,
+        "contentBytes": 1926,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/db-loader.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 172.5729999889154,
+        "contentBytes": 62724,
+        "transferBytes": 98
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/railway_data.compact.json": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 220.22900002775714,
+        "contentBytes": 802130,
+        "transferBytes": 113
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/station_i18n.compact.json": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 206.10699997632764,
+        "contentBytes": 409259,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-layer.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 188.6110000195913,
+        "contentBytes": 4875,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/api/odpt-links.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 189.59299998823553,
+        "contentBytes": 31973,
+        "transferBytes": 112
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/odpt-lazy.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.28400002024136,
+        "contentBytes": 434,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/api/odpt-unified.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.90099998819642,
+        "contentBytes": 107974,
+        "transferBytes": 186
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/local-railway-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 192.97599999117665,
+        "contentBytes": 757,
+        "transferBytes": 89
+      },
+      "api-challenge.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 24,
+        "errors": 0,
+        "totalMs": 822.1020000346471,
+        "contentBytes": 207090,
+        "transferBytes": 37679
+      },
+      "api.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 18,
+        "errors": 0,
+        "totalMs": 596.2110000255052,
+        "contentBytes": 33411,
+        "transferBytes": 21829
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/data-config-bundle.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 472.47099998639897,
+        "contentBytes": 96648,
+        "transferBytes": 124
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/running-chain-resolver.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 186.79199999314733,
+        "contentBytes": 11079,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-vehicle.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 194.44699998712167,
+        "contentBytes": 143259,
+        "transferBytes": 114
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/vehicle-operation-evidence-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 381.8860000174027,
+        "contentBytes": 4834446,
+        "transferBytes": 114
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/toyoko-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 191.64699999964796,
+        "contentBytes": 5447,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/meguro-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 183.56700000003912,
+        "contentBytes": 2711,
+        "transferBytes": 88
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/denentoshi-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 191.2049999809824,
+        "contentBytes": 2221,
+        "transferBytes": 161
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/denentoshi-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 179.0869999967981,
+        "contentBytes": 2117,
+        "transferBytes": 134
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/hanzomon-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 184.80800001998432,
+        "contentBytes": 2159,
+        "transferBytes": 99
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/saikyo-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 184.02000001515262,
+        "contentBytes": 2594,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/asakusa-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 175.75299998861738,
+        "contentBytes": 2102,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/asakusa-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.27700000978075,
+        "contentBytes": 2082,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/iketama-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.3949999769684,
+        "contentBytes": 3735,
+        "transferBytes": 112
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/oimachi-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 179.07600000035018,
+        "contentBytes": 2370,
+        "transferBytes": 112
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/sotetsu-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.8700000033714,
+        "contentBytes": 1984,
+        "transferBytes": 160
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/hibiya-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 175.96900000353344,
+        "contentBytes": 2132,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tobu-limited-express-vehicle-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 180.0470000016503,
+        "contentBytes": 15656,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/single-fleet-ordinary-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 180.07299999590032,
+        "contentBytes": 1541,
+        "transferBytes": 121
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/keiyo-operation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 191.96299999020994,
+        "contentBytes": 1409,
+        "transferBytes": 111
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tozai-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 183.56799997854978,
+        "contentBytes": 1732,
+        "transferBytes": 88
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tozai-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 174.39400000148453,
+        "contentBytes": 2365,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/seibu-shinjuku-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 176.71099997824058,
+        "contentBytes": 2709,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/odakyu-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.0420000141021,
+        "contentBytes": 4883,
+        "transferBytes": 91
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/odakyu-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.03399999300018,
+        "contentBytes": 2545,
+        "transferBytes": 184
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-position-estimator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.04400000022724,
+        "contentBytes": 55422,
+        "transferBytes": 113
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-evaluator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.17400000058115,
+        "contentBytes": 22887,
+        "transferBytes": 100
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-web.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 183.51000000257045,
+        "contentBytes": 17824,
+        "transferBytes": 91
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-fusion.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 189.23399999039248,
+        "contentBytes": 128762,
+        "transferBytes": 91
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-api.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 175.95899998559617,
+        "contentBytes": 18494,
+        "transferBytes": 114
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/translations.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.61099998117425,
+        "contentBytes": 57094,
+        "transferBytes": 114
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/common.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.01100001088344,
+        "contentBytes": 5512,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/line-presentation-service.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.47500000405125,
+        "contentBytes": 12360,
+        "transferBytes": 163
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/line-card.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 183.77099998178892,
+        "contentBytes": 18548,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-state.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.85399999795482,
+        "contentBytes": 18476,
+        "transferBytes": 92
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/operator-filter-bar.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 184.57099999068305,
+        "contentBytes": 3406,
+        "transferBytes": 121
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/site-shell.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 174.8630000220146,
+        "contentBytes": 5789,
+        "transferBytes": 112
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/Language.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 172.43500001495704,
+        "contentBytes": 312,
+        "transferBytes": 87
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/lang-init.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 176.83000001125038,
+        "contentBytes": 12468,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-config.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 172.86400002194569,
+        "contentBytes": 713,
+        "transferBytes": 89
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-utils.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 179.76400000043213,
+        "contentBytes": 1838,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 172.725000011269,
+        "contentBytes": 19410,
+        "transferBytes": 185
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/through-chip.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 178.62600000808015,
+        "contentBytes": 14562,
+        "transferBytes": 113
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-geometry.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 176.15300000761636,
+        "contentBytes": 50821,
+        "transferBytes": 99
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-track-layout.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 184.44099999032915,
+        "contentBytes": 19029,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-render.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 196.59400000819005,
+        "contentBytes": 109231,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-page.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.68800001149066,
+        "contentBytes": 26436,
+        "transferBytes": 112
+      },
+      "pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.0220000189729035,
+        "contentBytes": 11388,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B1%B1%E6%89%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1669999910518527,
+        "contentBytes": 7660,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 171.03599998517893,
+        "contentBytes": 67206,
+        "transferBytes": 112
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/pixel-tetsudo.ico": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 173.13899999135174,
+        "contentBytes": 6429,
+        "transferBytes": 89
+      }
+    },
+    "sql": [
+      {
+        "line": "Agatsuma",
+        "serviceDate": "2026-10-17",
+        "complete": true,
+        "partial": false,
+        "runs": 6,
+        "omitted": 0,
+        "dateVerified": 0,
+        "dateUnverified": 6
+      }
+    ],
+    "limitation": "HAR measures network only; JavaScript execution and render timings require browser traces."
+  },
+  {
+    "file": "biubiu52011.github ChuoMain .io.har",
+    "sha256": "164009f53aa7d991d9c711c8d041263d664b37e83374d84e6cab7f3b65fce87f",
+    "requests": 108,
+    "overlappingIdenticalRequests": 0,
+    "groups": {
+      "biubiu52011.github.io/Pixel-Tetsudo/pages/trains.html": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 10.067000024719164,
+        "contentBytes": 8595,
+        "transferBytes": 145
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/style.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1230000052601099,
+        "contentBytes": 32743,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/lang-bar.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.063000014051795,
+        "contentBytes": 5658,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/trains.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.05399997462518513,
+        "contentBytes": 4984,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/page-config-realtime.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0850000069476664,
+        "contentBytes": 275,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/tourism-type.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.20599999697878957,
+        "contentBytes": 1926,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/db-loader.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.13200001558288932,
+        "contentBytes": 62724,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-layer.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.13299999409355223,
+        "contentBytes": 4875,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/api/odpt-links.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.12099999003112316,
+        "contentBytes": 31973,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/odpt-lazy.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0740000104997307,
+        "contentBytes": 434,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/api/odpt-unified.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0709999876562506,
+        "contentBytes": 107974,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/local-railway-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1449999981559813,
+        "contentBytes": 757,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/data-config-bundle.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.09300000965595245,
+        "contentBytes": 96648,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/running-chain-resolver.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.11399999493733048,
+        "contentBytes": 11079,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-vehicle.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0790000194683671,
+        "contentBytes": 143259,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/railway_data.compact.json": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 17.637999990256503,
+        "contentBytes": 802130,
+        "transferBytes": 113
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/station_i18n.compact.json": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 17.744000011589378,
+        "contentBytes": 409259,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/vehicle-operation-evidence-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1449999981559813,
+        "contentBytes": 4834446,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/fonts/fusion-pixel-10px-proportional-ko.ttf": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.20400001085363328,
+        "contentBytes": 3915608,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/toyoko-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07700000423938036,
+        "contentBytes": 5447,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/meguro-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08800000068731606,
+        "contentBytes": 2711,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/denentoshi-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06699998630210757,
+        "contentBytes": 2221,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/denentoshi-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0900000159163028,
+        "contentBytes": 2117,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/hanzomon-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.04900002386420965,
+        "contentBytes": 2159,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/saikyo-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06699998630210757,
+        "contentBytes": 2594,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/asakusa-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.05900001269765198,
+        "contentBytes": 2102,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/asakusa-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06699998630210757,
+        "contentBytes": 2082,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/iketama-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.2159999858122319,
+        "contentBytes": 3735,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/oimachi-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.063000014051795,
+        "contentBytes": 2370,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/sotetsu-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.062000006437301636,
+        "contentBytes": 1984,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/hibiya-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.04400001489557326,
+        "contentBytes": 2132,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tobu-limited-express-vehicle-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06500000017695129,
+        "contentBytes": 15656,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/single-fleet-ordinary-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1039999770000577,
+        "contentBytes": 1541,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/keiyo-operation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08700002217665315,
+        "contentBytes": 1409,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tozai-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07100001676008105,
+        "contentBytes": 1732,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tozai-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.062000006437301636,
+        "contentBytes": 2365,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/seibu-shinjuku-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.05699999746866524,
+        "contentBytes": 2709,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/odakyu-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.058999983593821526,
+        "contentBytes": 4883,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/odakyu-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.060999998822808266,
+        "contentBytes": 2545,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-position-estimator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.05699999746866524,
+        "contentBytes": 55422,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-evaluator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.09300000965595245,
+        "contentBytes": 22887,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-web.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06399999256245792,
+        "contentBytes": 17824,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-fusion.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06399999256245792,
+        "contentBytes": 128762,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-api.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1990000018849969,
+        "contentBytes": 18494,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/translations.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.23700000019744039,
+        "contentBytes": 57094,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/common.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.18999999156221747,
+        "contentBytes": 5512,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/line-presentation-service.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.09799998952075839,
+        "contentBytes": 12360,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/line-card.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0769999751355499,
+        "contentBytes": 18548,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-state.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08100000559352338,
+        "contentBytes": 18476,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/operator-filter-bar.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.060999998822808266,
+        "contentBytes": 3406,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/site-shell.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08599998545832932,
+        "contentBytes": 5789,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/Language.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.1010000123642385,
+        "contentBytes": 312,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/lang-init.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.05599998985417187,
+        "contentBytes": 12468,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-config.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.063000014051795,
+        "contentBytes": 713,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-utils.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08299999171867967,
+        "contentBytes": 1838,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.13000000035390258,
+        "contentBytes": 19410,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/through-chip.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08599998545832932,
+        "contentBytes": 14562,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-geometry.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06600000779144466,
+        "contentBytes": 50821,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-track-layout.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.09899999713525176,
+        "contentBytes": 19029,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-render.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06900000153109431,
+        "contentBytes": 109231,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-page.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.10699999984353781,
+        "contentBytes": 26436,
+        "transferBytes": 0
+      },
+      "pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs": {
+        "requests": 4,
+        "errors": 0,
+        "totalMs": 5442.258000024594,
+        "contentBytes": 4172767,
+        "transferBytes": 365138
+      },
+      "api-challenge.odpt.org/api/v4/odpt:Train": {
+        "requests": 4,
+        "errors": 0,
+        "totalMs": 224.2720000213012,
+        "contentBytes": 1176396,
+        "transferBytes": 91112
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E9%AB%98%E5%B0%BE%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.2049999893642962,
+        "contentBytes": 47184,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%9F%BC%E4%BA%AC%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.21999998716637492,
+        "contentBytes": 8670,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%B8%AD%E5%A4%AE%E3%83%BB%E7%B7%8F%E6%AD%A6%E7%B7%9A%E5%90%84%E9%A7%85%E5%81%9C%E8%BB%8A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.09099999442696571,
+        "contentBytes": 8179,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%B8%AD%E5%A4%AE%E5%BF%AB%E9%80%9F%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0850000069476664,
+        "contentBytes": 8568,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E9%9D%92%E6%A2%85%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.20799998310394585,
+        "contentBytes": 8568,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%BA%94%E6%97%A5%E5%B8%82%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.15199999324977398,
+        "contentBytes": 8568,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%BA%AC%E8%91%89%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.10699999984353781,
+        "contentBytes": 5261,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%A8%AA%E6%B5%9C%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.08699999307282269,
+        "contentBytes": 5510,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E9%B6%B4%E8%A6%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.14600000577047467,
+        "contentBytes": 5037,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B8%B8%E7%A3%90%E7%B7%9A%E5%BF%AB%E9%80%9F.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.092999980552122,
+        "contentBytes": 5828,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%BA%AC%E6%B5%9C%E6%9D%B1%E5%8C%97%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07599999662488699,
+        "contentBytes": 7819,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B8%B8%E7%A3%90%E7%B7%A9%E8%A1%8C%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.0659999786876142,
+        "contentBytes": 5095,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%AD%A6%E8%94%B5%E9%87%8E%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07199999527074397,
+        "contentBytes": 8267,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%8D%97%E6%AD%A6%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.09799998952075839,
+        "contentBytes": 7297,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E7%B7%8F%E6%AD%A6%E7%B7%9A%E5%BF%AB%E9%80%9F%E6%A8%AA%E9%A0%88%E8%B3%80%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07599999662488699,
+        "contentBytes": 9480,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%B9%98%E5%8D%97%E6%96%B0%E5%AE%BF%E3%83%A9%E3%82%A4%E3%83%B3.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.05299999611452222,
+        "contentBytes": 8811,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%9D%B1%E6%B5%B7%E9%81%93%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07700000423938036,
+        "contentBytes": 5158,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E9%AB%98%E5%B4%8E%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06699998630210757,
+        "contentBytes": 7035,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%AE%87%E9%83%BD%E5%AE%AE%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07100001676008105,
+        "contentBytes": 4619,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B1%B1%E6%89%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.06900000153109431,
+        "contentBytes": 7660,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.07000000914558768,
+        "contentBytes": 67206,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E6%9D%B1%E6%97%A5%E6%9C%AC_E353%E7%B3%BB.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.33900002017617226,
+        "contentBytes": 1790,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E6%9D%B1%E6%97%A5%E6%9C%AC_211%E7%B3%BB_%E9%95%B7%E9%87%8E%E8%89%B2.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 0.20899999071843922,
+        "contentBytes": 1638,
+        "transferBytes": 0
+      },
+      "api.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 6,
+        "errors": 0,
+        "totalMs": 169.71799999009818,
+        "contentBytes": 11137,
+        "transferBytes": 7271
+      },
+      "api-challenge.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 8,
+        "errors": 0,
+        "totalMs": 259.4799999787938,
+        "contentBytes": 69030,
+        "transferBytes": 12567
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/pixel-tetsudo.ico": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.7069999885279685,
+        "contentBytes": 6429,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E6%9D%B1%E6%97%A5%E6%9C%AC_E233%E7%B3%BB_0%E7%95%AA%E5%8F%B0.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 191.00900000194088,
+        "contentBytes": 1639,
+        "transferBytes": 2002
+      }
+    },
+    "sql": [
+      {
+        "line": "ChuoMain",
+        "serviceDate": "2026-10-17",
+        "complete": false,
+        "partial": true,
+        "runs": 320,
+        "omitted": 43,
+        "dateVerified": 0,
+        "dateUnverified": 320
+      },
+      {
+        "line": "ChuoRapid",
+        "serviceDate": "2026-10-17",
+        "complete": true,
+        "partial": false,
+        "runs": 506,
+        "omitted": 0,
+        "dateVerified": 0,
+        "dateUnverified": 506
+      },
+      {
+        "line": "Shinonoi",
+        "serviceDate": "2026-10-17",
+        "complete": false,
+        "partial": true,
+        "runs": 142,
+        "omitted": 2,
+        "dateVerified": 0,
+        "dateUnverified": 142
+      },
+      {
+        "line": "ChuoTatsuno",
+        "serviceDate": "2026-10-17",
+        "complete": false,
+        "partial": true,
+        "runs": 126,
+        "omitted": 8,
+        "dateVerified": 0,
+        "dateUnverified": 126
+      }
+    ],
+    "limitation": "HAR measures network only; JavaScript execution and render timings require browser traces."
+  },
+  {
+    "file": "biubiu52011.github JobanLocal .io.har",
+    "sha256": "d4c9856ce1f7b48c38e75aad2c9438ec69704202de83ebb7529f2b205cb42957",
+    "requests": 89,
+    "overlappingIdenticalRequests": 0,
+    "groups": {
+      "biubiu52011.github.io/Pixel-Tetsudo/pages/trains.html": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 188.51599999470636,
+        "contentBytes": 8595,
+        "transferBytes": 145
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/style.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.98699999297969,
+        "contentBytes": 32743,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/lang-bar.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.657999990740791,
+        "contentBytes": 5658,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/css/trains.css": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.899999999906868,
+        "contentBytes": 4984,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/page-config-realtime.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.840000008698553,
+        "contentBytes": 275,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/tourism-type.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.921999985119328,
+        "contentBytes": 1926,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/db-loader.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.412999998545274,
+        "contentBytes": 62724,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/fonts/fusion-pixel-10px-proportional-ko.ttf": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 21.03299999726005,
+        "contentBytes": 3915608,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/railway_data.compact.json": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 193.37600001017563,
+        "contentBytes": 802130,
+        "transferBytes": 138
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/station_i18n.compact.json": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 199.13600001018494,
+        "contentBytes": 409259,
+        "transferBytes": 90
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-layer.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.1680000063497573,
+        "contentBytes": 4875,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/api/odpt-links.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.8350000027567148,
+        "contentBytes": 31973,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/odpt-lazy.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.0589999912772328,
+        "contentBytes": 434,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/api/odpt-unified.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.742999990005046,
+        "contentBytes": 107974,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/local-railway-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.8379999964963645,
+        "contentBytes": 757,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/core/data-config-bundle.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.5300000163260847,
+        "contentBytes": 96648,
+        "transferBytes": 0
+      },
+      "api-challenge.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 8,
+        "errors": 0,
+        "totalMs": 221.30300002754666,
+        "contentBytes": 69030,
+        "transferBytes": 12575
+      },
+      "api.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 6,
+        "errors": 0,
+        "totalMs": 202.78799999505281,
+        "contentBytes": 11137,
+        "transferBytes": 7278
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/running-chain-resolver.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.234999992651865,
+        "contentBytes": 11079,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-vehicle.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.588000010699034,
+        "contentBytes": 143259,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/vehicle-operation-evidence-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 52.546999999322,
+        "contentBytes": 4834446,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/toyoko-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.949000016087666,
+        "contentBytes": 5447,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/meguro-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.964999974006787,
+        "contentBytes": 2711,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/denentoshi-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.1969999943394214,
+        "contentBytes": 2221,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/denentoshi-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.7930000030901283,
+        "contentBytes": 2117,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/hanzomon-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.732999990461394,
+        "contentBytes": 2159,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/saikyo-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.295999991474673,
+        "contentBytes": 2594,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/asakusa-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.01799998851493,
+        "contentBytes": 2102,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/asakusa-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.1279999820981175,
+        "contentBytes": 2082,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/iketama-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.087999979266897,
+        "contentBytes": 3735,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/oimachi-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9179999944753945,
+        "contentBytes": 2370,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/sotetsu-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.963999995496124,
+        "contentBytes": 1984,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/hibiya-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.728000002913177,
+        "contentBytes": 2132,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tobu-limited-express-vehicle-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.039999992121011,
+        "contentBytes": 15656,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/single-fleet-ordinary-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.3050000017974526,
+        "contentBytes": 1541,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/keiyo-operation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.8910000217147171,
+        "contentBytes": 1409,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tozai-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.271000004839152,
+        "contentBytes": 1732,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/tozai-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9540000066626817,
+        "contentBytes": 2365,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/seibu-shinjuku-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.068000001600012,
+        "contentBytes": 2709,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/odakyu-operation-evidence-2026.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.4339999945368618,
+        "contentBytes": 4883,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/data/timetables/odakyu-formation-evidence.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.2570000146515667,
+        "contentBytes": 2545,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-position-estimator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.3219999857246876,
+        "contentBytes": 55422,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-evaluator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.1739999938290566,
+        "contentBytes": 22887,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-web.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.665000007255003,
+        "contentBytes": 17824,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-fusion.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.3939999993890524,
+        "contentBytes": 128762,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-api.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.146999991964549,
+        "contentBytes": 18494,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/translations.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.8609999970067292,
+        "contentBytes": 57094,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/common.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9829999946523458,
+        "contentBytes": 5512,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/line-presentation-service.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.7410000145900995,
+        "contentBytes": 12360,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/line-card.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.912999985506758,
+        "contentBytes": 18548,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-state.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9840000022668391,
+        "contentBytes": 18476,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/operator-filter-bar.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.771000010194257,
+        "contentBytes": 3406,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/site-shell.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.1000000017229468,
+        "contentBytes": 5789,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/Language.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.0340000046417117,
+        "contentBytes": 312,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/lang-init.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.6599999982863665,
+        "contentBytes": 12468,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-config.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.7649999936111271,
+        "contentBytes": 713,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-utils.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.5880000030156225,
+        "contentBytes": 1838,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-data.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.845000009983778,
+        "contentBytes": 19410,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/through-chip.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.466000005370006,
+        "contentBytes": 14562,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-geometry.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.589000010630116,
+        "contentBytes": 50821,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-track-layout.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.2530000132974237,
+        "contentBytes": 19029,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-render.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.5719999975990504,
+        "contentBytes": 109231,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/trains-page.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.019999985350296,
+        "contentBytes": 26436,
+        "transferBytes": 0
+      },
+      "pnupwfmgbtxqhpzsrhfn.supabase.co/functions/v1/train-runs": {
+        "requests": 2,
+        "errors": 0,
+        "totalMs": 10.81999996677041,
+        "contentBytes": 2890707,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E5%8D%83%E4%BB%A3%E7%94%B0%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.0790000164415687,
+        "contentBytes": 33724,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E5%8C%97%E7%B6%BE%E7%80%AC%E6%94%AF%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.5470000002533197,
+        "contentBytes": 42745,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B8%B8%E7%A3%90%E7%B7%9A%E5%BF%AB%E9%80%9F.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.6639999889303,
+        "contentBytes": 5828,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%AD%A6%E8%94%B5%E9%87%8E%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.8440000207629055,
+        "contentBytes": 8267,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E9%87%8E%E7%94%B0%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.243000003043562,
+        "contentBytes": 34277,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 4.828999983146787,
+        "contentBytes": 67206,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E6%9D%B1%E6%97%A5%E6%9C%AC_E233%E7%B3%BB_2000%E7%95%AA%E5%8F%B0.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.0960000110790133,
+        "contentBytes": 1558,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD_16000%E7%B3%BB.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.1800000104121864,
+        "contentBytes": 1678,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/pixel-tetsudo.ico": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9130000146105886,
+        "contentBytes": 6429,
+        "transferBytes": 0
+      },
+      "api-challenge.odpt.org/api/v4/odpt:Train": {
+        "requests": 3,
+        "errors": 0,
+        "totalMs": 164.64899998391047,
+        "contentBytes": 902625,
+        "transferBytes": 69675
+      }
+    },
+    "sql": [
+      {
+        "line": "JobanLocal",
+        "serviceDate": "2026-10-17",
+        "complete": true,
+        "partial": false,
+        "runs": 243,
+        "omitted": 0,
+        "dateVerified": 0,
+        "dateUnverified": 243
+      },
+      {
+        "line": "Chiyoda",
+        "serviceDate": "2026-10-17",
+        "complete": true,
+        "partial": false,
+        "runs": 528,
+        "omitted": 0,
+        "dateVerified": 0,
+        "dateUnverified": 528
+      }
+    ],
+    "limitation": "HAR measures network only; JavaScript execution and render timings require browser traces."
+  },
+  {
+    "file": "biubiu52011.github realtime .io.har",
+    "sha256": "7b412837da4daf3176ae44588088835f20a82236d2927de07c340f667a0ba21d",
+    "requests": 792,
+    "overlappingIdenticalRequests": 1,
+    "groups": {
+      "biubiu52011.github.io/Pixel-Tetsudo/js/train-position-estimator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 200.96200000261888,
+        "contentBytes": 55422,
+        "transferBytes": 17407
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-evaluator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.4709999959450215,
+        "contentBytes": 22887,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-web.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9699999829754233,
+        "contentBytes": 17824,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/data-fusion.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 3.4309999900870025,
+        "contentBytes": 128762,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/runinfo-api.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 1.9610000017564744,
+        "contentBytes": 18494,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/delay-translator.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 195.54900002549402,
+        "contentBytes": 35751,
+        "transferBytes": 11095
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/js/realtime-view.js": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 183.68799999007024,
+        "contentBytes": 34585,
+        "transferBytes": 10161
+      },
+      "api-challenge.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 559,
+        "errors": 0,
+        "totalMs": 20669.743000022576,
+        "contentBytes": 17378569,
+        "transferBytes": 2302417
+      },
+      "api.odpt.org/api/v4/odpt:TrainInformation": {
+        "requests": 142,
+        "errors": 0,
+        "totalMs": 5793.891999943466,
+        "contentBytes": 443009,
+        "transferBytes": 183842
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 186.06700000236742,
+        "contentBytes": 67206,
+        "transferBytes": 67529
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%9F%BC%E4%BA%AC%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 197.91800001985393,
+        "contentBytes": 8670,
+        "transferBytes": 8852
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%B8%AD%E5%A4%AE%E3%83%BB%E7%B7%8F%E6%AD%A6%E7%B7%9A%E5%90%84%E9%A7%85%E5%81%9C%E8%BB%8A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 187.52899998798966,
+        "contentBytes": 8179,
+        "transferBytes": 8345
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%B8%AD%E5%A4%AE%E5%BF%AB%E9%80%9F%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 188.14899999415502,
+        "contentBytes": 8568,
+        "transferBytes": 8822
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E9%9D%92%E6%A2%85%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 175.89799998677336,
+        "contentBytes": 8568,
+        "transferBytes": 8839
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%BA%94%E6%97%A5%E5%B8%82%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 187.68699999782257,
+        "contentBytes": 8568,
+        "transferBytes": 8697
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%BA%AC%E8%91%89%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 197.9249999858439,
+        "contentBytes": 5261,
+        "transferBytes": 5428
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%A8%AA%E6%B5%9C%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 210.54000000003725,
+        "contentBytes": 5510,
+        "transferBytes": 5763
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E9%B6%B4%E8%A6%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 194.6860000025481,
+        "contentBytes": 5037,
+        "transferBytes": 5203
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B8%B8%E7%A3%90%E7%B7%9A%E5%BF%AB%E9%80%9F.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 210.17800000845455,
+        "contentBytes": 5828,
+        "transferBytes": 6089
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E4%BA%AC%E6%B5%9C%E6%9D%B1%E5%8C%97%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 187.6439999905415,
+        "contentBytes": 7819,
+        "transferBytes": 8104
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B8%B8%E7%A3%90%E7%B7%A9%E8%A1%8C%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 220.6679999944754,
+        "contentBytes": 5095,
+        "transferBytes": 5261
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%AD%A6%E8%94%B5%E9%87%8E%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 194.79899998987094,
+        "contentBytes": 8267,
+        "transferBytes": 8529
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%8D%97%E6%AD%A6%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 228.19900000467896,
+        "contentBytes": 7297,
+        "transferBytes": 7559
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E7%B7%8F%E6%AD%A6%E7%B7%9A%E5%BF%AB%E9%80%9F%E6%A8%AA%E9%A0%88%E8%B3%80%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 213.87500001583248,
+        "contentBytes": 9480,
+        "transferBytes": 9640
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%B9%98%E5%8D%97%E6%96%B0%E5%AE%BF%E3%83%A9%E3%82%A4%E3%83%B3.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 193.86800000211224,
+        "contentBytes": 8811,
+        "transferBytes": 8970
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E6%9D%B1%E6%B5%B7%E9%81%93%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 194.7459999937564,
+        "contentBytes": 5158,
+        "transferBytes": 5391
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E9%AB%98%E5%B4%8E%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 232.4279999884311,
+        "contentBytes": 7035,
+        "transferBytes": 7290
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%AE%87%E9%83%BD%E5%AE%AE%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 239.96700000134297,
+        "contentBytes": 4619,
+        "transferBytes": 4779
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/%E5%B1%B1%E6%89%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 255.06399999721907,
+        "contentBytes": 7660,
+        "transferBytes": 7827
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/Shinkansen_jre.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 225.63800000352785,
+        "contentBytes": 19149,
+        "transferBytes": 19464
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E6%9D%B1%E6%B5%B7/Shinkansen_jrc.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 202.81099999556318,
+        "contentBytes": 24314,
+        "transferBytes": 24533
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E8%A5%BF%E6%97%A5%E6%9C%AC/Shinkansen_jrw.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 210.95799998147413,
+        "contentBytes": 12755,
+        "transferBytes": 12921
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E5%8C%97%E6%B5%B7%E9%81%93/Shinkansen_jrh.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 194.275000016205,
+        "contentBytes": 14275,
+        "transferBytes": 14457
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/JR%E4%B9%9D%E5%B7%9E/Shinkansen_jrk.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 197.35400000354275,
+        "contentBytes": 33211,
+        "transferBytes": 33491
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E5%8D%83%E4%BB%A3%E7%94%B0%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 205.3719999967143,
+        "contentBytes": 33724,
+        "transferBytes": 34004
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E5%89%AF%E9%83%BD%E5%BF%83%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 217.188000009628,
+        "contentBytes": 14618,
+        "transferBytes": 14880
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E9%8A%80%E5%BA%A7%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 198.2620000198949,
+        "contentBytes": 19940,
+        "transferBytes": 20117
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E6%97%A5%E6%AF%94%E8%B0%B7%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 210.83999998518266,
+        "contentBytes": 33843,
+        "transferBytes": 34028
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E4%B8%B8%E3%83%8E%E5%86%85%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 205.42500002193265,
+        "contentBytes": 37515,
+        "transferBytes": 37742
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E5%8D%97%E5%8C%97%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 204.598000011174,
+        "contentBytes": 30444,
+        "transferBytes": 30636
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E6%9D%B1%E8%A5%BF%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 217.37800000119023,
+        "contentBytes": 30140,
+        "transferBytes": 30373
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E6%9C%89%E6%A5%BD%E7%94%BA%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 193.12300000456162,
+        "contentBytes": 45344,
+        "transferBytes": 45571
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E3%83%A1%E3%83%88%E3%83%AD/%E5%8D%8A%E8%94%B5%E9%96%80%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 216.60099999280646,
+        "contentBytes": 44776,
+        "transferBytes": 44960
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E9%83%BD%E5%96%B6%E5%9C%B0%E4%B8%8B%E9%89%84/%E9%83%BD%E5%96%B6%E6%B5%85%E8%8D%89%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 187.11400000029244,
+        "contentBytes": 38567,
+        "transferBytes": 38752
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E9%83%BD%E5%96%B6%E5%9C%B0%E4%B8%8B%E9%89%84/%E9%83%BD%E5%96%B6%E5%A4%A7%E6%B1%9F%E6%88%B8%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 198.55999998981133,
+        "contentBytes": 36911,
+        "transferBytes": 37136
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E9%83%BD%E5%96%B6%E5%9C%B0%E4%B8%8B%E9%89%84/%E9%83%BD%E5%96%B6%E4%B8%89%E7%94%B0%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 209.86599999014288,
+        "contentBytes": 36354,
+        "transferBytes": 36555
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E9%83%BD%E5%96%B6%E5%9C%B0%E4%B8%8B%E9%89%84/%E9%83%BD%E5%96%B6%E6%96%B0%E5%AE%BF%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 226.25599999446422,
+        "contentBytes": 38832,
+        "transferBytes": 39015
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E9%83%BD%E5%96%B6%E5%9C%B0%E4%B8%8B%E9%89%84/%E9%83%BD%E9%9B%BB%E8%8D%92%E5%B7%9D%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 190.2330000011716,
+        "contentBytes": 11536,
+        "transferBytes": 11799
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E9%83%BD%E5%96%B6%E5%9C%B0%E4%B8%8B%E9%89%84/%E6%97%A5%E6%9A%AE%E9%87%8C%E3%83%BB%E8%88%8E%E4%BA%BA%E3%83%A9%E3%82%A4%E3%83%8A%E3%83%BC.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 186.22600001981482,
+        "contentBytes": 9471,
+        "transferBytes": 9637
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%A8%AA%E6%B5%9C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80/%E3%83%96%E3%83%AB%E3%83%BC%E3%83%A9%E3%82%A4%E3%83%B3.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 304.8000000126194,
+        "contentBytes": 8672,
+        "transferBytes": 8839
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%A8%AA%E6%B5%9C%E5%B8%82%E4%BA%A4%E9%80%9A%E5%B1%80/%E3%82%B0%E3%83%AA%E3%83%BC%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 226.0439999809023,
+        "contentBytes": 8539,
+        "transferBytes": 8815
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E4%BA%95%E3%81%AE%E9%A0%AD%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 372.334999992745,
+        "contentBytes": 47184,
+        "transferBytes": 47370
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E4%BA%AC%E7%8E%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 201.7399999895133,
+        "contentBytes": 47184,
+        "transferBytes": 47368
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E9%AB%98%E5%B0%BE%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 219.06199998920783,
+        "contentBytes": 47184,
+        "transferBytes": 47359
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E7%AB%B6%E9%A6%AC%E5%A0%B4%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 389.23100000829436,
+        "contentBytes": 47184,
+        "transferBytes": 47419
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E7%9B%B8%E6%A8%A1%E5%8E%9F%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 218.57699999236502,
+        "contentBytes": 47184,
+        "transferBytes": 47370
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E4%BA%AC%E7%8E%8B%E6%96%B0%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 219.13199999835342,
+        "contentBytes": 47184,
+        "transferBytes": 47369
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E4%BA%AC%E7%8E%8B%E9%9B%BB%E9%89%84/%E5%8B%95%E7%89%A9%E5%9C%92%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 212.75400000740774,
+        "contentBytes": 47184,
+        "transferBytes": 47451
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E5%B0%8F%E7%94%B0%E6%80%A5%E9%9B%BB%E9%89%84/%E6%B1%9F%E3%83%8E%E5%B3%B6%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 197.7210000040941,
+        "contentBytes": 47998,
+        "transferBytes": 48193
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E5%B0%8F%E7%94%B0%E6%80%A5%E9%9B%BB%E9%89%84/%E5%B0%8F%E7%94%B0%E5%8E%9F%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 195.66199998371303,
+        "contentBytes": 48218,
+        "transferBytes": 48445
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E5%B0%8F%E7%94%B0%E6%80%A5%E9%9B%BB%E9%89%84/%E5%A4%9A%E6%91%A9%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 214.05099998810329,
+        "contentBytes": 47751,
+        "transferBytes": 47936
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E8%B1%8A%E5%B3%B6%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 189.4929999834858,
+        "contentBytes": 55130,
+        "transferBytes": 55407
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E6%B1%A0%E8%A2%8B%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 184.8949999839533,
+        "contentBytes": 55130,
+        "transferBytes": 55434
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E5%9B%BD%E5%88%86%E5%AF%BA%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 196.14899999578483,
+        "contentBytes": 59172,
+        "transferBytes": 59368
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E7%8B%AD%E5%B1%B1%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 209.00000000256114,
+        "contentBytes": 55130,
+        "transferBytes": 55324
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E6%9C%89%E6%A5%BD%E7%94%BA%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 196.34700001915917,
+        "contentBytes": 55130,
+        "transferBytes": 55326
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E5%A4%9A%E6%91%A9%E5%B7%9D%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 186.0939999751281,
+        "contentBytes": 63710,
+        "transferBytes": 63904
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E6%96%B0%E5%AE%BF%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 186.1499999940861,
+        "contentBytes": 56593,
+        "transferBytes": 56899
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E7%A7%A9%E7%88%B6%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 201.38699997914955,
+        "contentBytes": 55130,
+        "transferBytes": 55353
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E5%A4%9A%E6%91%A9%E6%B9%96%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 191.5199999930337,
+        "contentBytes": 54430,
+        "transferBytes": 54667
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E5%9C%92%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 208.84100001421757,
+        "contentBytes": 59172,
+        "transferBytes": 59360
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E6%8B%9D%E5%B3%B6%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 200.91000001411885,
+        "contentBytes": 56593,
+        "transferBytes": 56899
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E9%89%84%E9%81%93/%E8%A5%BF%E6%AD%A6%E5%B1%B1%E5%8F%A3%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 190.31800000811927,
+        "contentBytes": 63710,
+        "transferBytes": 63998
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E9%87%8E%E7%94%B0%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 192.05900002270937,
+        "contentBytes": 34277,
+        "transferBytes": 34461
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E3%82%B9%E3%82%AB%E3%82%A4%E3%83%84%E3%83%AA%E3%83%BC%E3%83%A9%E3%82%A4%E3%83%B3.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 195.6720000016503,
+        "contentBytes": 32490,
+        "transferBytes": 32760
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E6%9D%B1%E4%B8%8A%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 182.94900000910275,
+        "contentBytes": 30035,
+        "transferBytes": 30238
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E6%97%A5%E5%85%89%E7%B7%9A%20%E5%AE%87%E9%83%BD%E5%AE%AE%E7%B7%9A%20%E9%AC%BC%E6%80%92%E5%B7%9D%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 199.83600001432933,
+        "contentBytes": 32114,
+        "transferBytes": 32356
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E5%A4%A7%E5%B8%AB%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 200.0980000011623,
+        "contentBytes": 32490,
+        "transferBytes": 32677
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E8%B6%8A%E7%94%9F%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.12599999504164,
+        "contentBytes": 30035,
+        "transferBytes": 30238
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E5%B0%8F%E6%B3%89%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 195.01499997568317,
+        "contentBytes": 32192,
+        "transferBytes": 32398
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E4%BC%8A%E5%8B%A2%E5%B4%8E%E7%B7%9A%20%E4%BD%90%E9%87%8E%E7%B7%9A%20%E6%A1%90%E7%94%9F%E7%B7%9A%20%E5%B0%8F%E6%B3%89%E7%B7%9A%20%E5%B0%8F%E6%B3%89%E7%B7%9A%E6%94%AF%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.74200001521967,
+        "contentBytes": 32192,
+        "transferBytes": 32485
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E4%BA%80%E6%88%B8%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 195.21900001564063,
+        "contentBytes": 32490,
+        "transferBytes": 32675
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%AD%A6%E9%89%84%E9%81%93/%E5%AE%87%E9%83%BD%E5%AE%AE%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.98299998766743,
+        "contentBytes": 32114,
+        "transferBytes": 32415
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E6%9D%B1%E6%80%A5%E5%A4%9A%E6%91%A9%E5%B7%9D%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 184.25900000147521,
+        "contentBytes": 12407,
+        "transferBytes": 12618
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E7%94%B0%E5%9C%92%E9%83%BD%E5%B8%82%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 177.73100000340492,
+        "contentBytes": 8139,
+        "transferBytes": 8299
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E6%9D%B1%E6%A8%AA%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 179.05700000119396,
+        "contentBytes": 8193,
+        "transferBytes": 8360
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E5%A4%A7%E4%BA%95%E7%94%BA%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 179.85099999350496,
+        "contentBytes": 16249,
+        "transferBytes": 16420
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E6%96%B0%E6%A8%AA%E6%B5%9C%E7%B7%9A.png": {
+        "requests": 4,
+        "errors": 4,
+        "totalMs": 235.30900001060218,
+        "contentBytes": 37516,
+        "transferBytes": 37516
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E7%9B%AE%E9%BB%92%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.6689999832306,
+        "contentBytes": 15262,
+        "transferBytes": 15517
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E9%89%84%E9%81%93/%E6%9D%B1%E6%80%A5%E9%9B%BB%E9%89%84/%E6%B1%A0%E4%B8%8A%E7%B7%9A.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 181.01000000024214,
+        "contentBytes": 7490,
+        "transferBytes": 7651
+      }
+    },
+    "sql": [],
+    "limitation": "HAR measures network only; JavaScript execution and render timings require browser traces."
+  },
+  {
+    "file": "biubiu52011.github SaikyoKawagoe .io.har",
+    "sha256": "8ada590316f57f4b4cbc7d1f156c61b70bc92fdc4a8436a9ad54527e06ace1fa",
+    "requests": 5,
+    "overlappingIdenticalRequests": 0,
+    "groups": {
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/JR%E6%9D%B1%E6%97%A5%E6%9C%AC/JR%E6%9D%B1%E6%97%A5%E6%9C%AC_E233%E7%B3%BB_7000%E7%95%AA%E5%8F%B0.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.330999996047467,
+        "contentBytes": 1649,
+        "transferBytes": 0
+      },
+      "biubiu52011.github.io/Pixel-Tetsudo/images/%E5%88%97%E8%BD%A6/%E6%9D%B1%E4%BA%AC%E8%87%A8%E6%B5%B7%E9%AB%98%E9%80%9F%E9%89%84%E9%81%93/%E6%9D%B1%E4%BA%AC%E8%87%A8%E6%B5%B7%E9%AB%98%E9%80%9F%E9%89%84%E9%81%93_70-000%E5%BD%A2.png": {
+        "requests": 1,
+        "errors": 0,
+        "totalMs": 2.392999973380938,
+        "contentBytes": 1638,
+        "transferBytes": 0
+      },
+      "api-challenge.odpt.org/api/v4/odpt:Train": {
+        "requests": 3,
+        "errors": 0,
+        "totalMs": 156.27999999560416,
+        "contentBytes": 897208,
+        "transferBytes": 69674
+      }
+    },
+    "sql": [],
+    "limitation": "HAR measures network only; JavaScript execution and render timings require browser traces."
+  }
+]
