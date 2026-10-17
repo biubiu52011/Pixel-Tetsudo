@@ -248,6 +248,7 @@
   var _lineControlVersion = null;
   var _positionTimer = null;
   var _positionServiceDate = Object.create(null);
+  var _positionLoadedAt = Object.create(null);
   var _initialized = false;
   var _refreshTimer = null;
   var _cacheTimer = null;
@@ -293,7 +294,7 @@
     if (_cacheTimer) return;
     // SQL-only lines have no Train API poll to advance their minute clock.
     // Reuse the existing timer; recompute from wall time, never replay a path.
-    // This local tick does not poll SQL or ODPT more frequently.
+    // Local ticks reuse SQL until its existing ten-minute cache expires.
     if (!_positionTimer) _positionTimer = setInterval(function() {
       if (document.hidden || (window.location.pathname || "").indexOf("trains.html") < 0) return;
       var lid = (window.location.hash || "").replace(/^#/, "");
@@ -305,7 +306,8 @@
         // Mark a date only after SQL succeeds; transient errors retry next minute.
         var needsSqlPlan = !!(window.ODPTClient && window.ODPTClient.usesSqlTimetable &&
           window.ODPTClient.usesSqlTimetable(id));
-        if (date && _positionServiceDate[id] !== date && needsSqlPlan) {
+        if (date && needsSqlPlan && (_positionServiceDate[id] !== date ||
+            Date.now() - (_positionLoadedAt[id] || 0) >= 600000)) {
           ensureTimetable(id).catch(function() {});
         }
       });
@@ -2130,9 +2132,9 @@
     // A partner's SQL timetable may already have been loaded into the shared
     // ODPT-shaped pool by ODPTClient. Re-estimate through evidence without
     // registering those same rows as a second manual timetable source.
-    if (_hasOdptTimetable(lineId)) {
-      var date = window.TrainPositionEstimator && window.TrainPositionEstimator.getCurrentServiceDate
-        ? window.TrainPositionEstimator.getCurrentServiceDate() : "";
+    var date = window.TrainPositionEstimator && window.TrainPositionEstimator.getCurrentServiceDate
+      ? window.TrainPositionEstimator.getCurrentServiceDate() : "";
+    if (_hasOdptTimetable(lineId) || (date && _positionServiceDate[lineId] === date)) {
       var client = window.ODPTClient;
       var identity = client && client.getLineRailwayIdentity && client.getLineRailwayIdentity(lineId);
       var op = client && client.LINE_TO_OPERATOR && client.LINE_TO_OPERATOR[lineId];
@@ -2142,7 +2144,14 @@
         return tt._positionSource === "supabase-train-run" && tt._serviceDate === date &&
           actual && actual.key === identity.key;
       });
-      if (currentSql || (date && _positionServiceDate[lineId] === date)) {
+      if (currentSql && !_positionLoadedAt[lineId]) {
+        var sharedStatus = client.getTrainRunStatus && client.getTrainRunStatus(lineId);
+        if (sharedStatus && (sharedStatus.complete || sharedStatus.partial) && sharedStatus.serviceDate === date) {
+          _positionLoadedAt[lineId] = sharedStatus.updatedAt || 0;
+        }
+      }
+      if ((currentSql || (date && _positionServiceDate[lineId] === date)) &&
+          Date.now() - (_positionLoadedAt[lineId] || 0) < 600000) {
         _positionServiceDate[lineId] = date;
         try {
           var readyTargets = _expandDirtyLines([lineId], allLines);
@@ -2159,8 +2168,19 @@
       return Promise.resolve(false);
     }
     return window.ODPTClient.getCachedTrainRuns(lineId).then(function(rows) {
-      if (!rows || !rows.length) return false;
-      _positionServiceDate[lineId] = rows[0]._serviceDate || "";
+      var status = window.ODPTClient.getTrainRunStatus && window.ODPTClient.getTrainRunStatus(lineId);
+      if (!rows || (!rows.length && !(status && (status.complete || status.partial)))) return false;
+      _positionServiceDate[lineId] = rows.length ? rows[0]._serviceDate || "" : status.serviceDate || "";
+      _positionLoadedAt[lineId] = Date.now();
+      // Replace this railway snapshot, including a confirmed empty/cancelled
+      // result. A stale SQL copy in the shared ODPT pool cannot resurrect it.
+      Object.keys(window.ODPT_TIMETABLES || {}).forEach(function(owner) {
+        var pool = window.ODPT_TIMETABLES[owner];
+        if (!Array.isArray(pool)) return;
+        window.ODPT_TIMETABLES[owner] = pool.filter(function(tt) {
+          return !(tt && tt._positionSource === "supabase-train-run" && tt._sqlLineId === lineId);
+        });
+      });
       if (window.TrainPositionEstimator && typeof window.TrainPositionEstimator.registerManualTimetable === "function") {
         window.TrainPositionEstimator.registerManualTimetable(lineId, rows);
       }

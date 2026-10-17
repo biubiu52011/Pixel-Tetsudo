@@ -10,7 +10,7 @@
 (function() {
   "use strict";
 
-  var ESTIMATOR_VERSION = 12;
+  var ESTIMATOR_VERSION = 13;
   var _manualTimetableRegistry = {};
   var _timetableIndexCache = { source: null, stamp: "", arrays: {}, manualVersion: 0, builtManualVersion: -1, index: {} };
   var _manualRegistryVersion = 0;
@@ -39,7 +39,9 @@
   }
 
   function registerManualTimetable(lineId, rows) {
-    if (!lineId || !Array.isArray(rows) || rows.length === 0) return;
+    // A confirmed empty snapshot retires the previous plan. Invalid/error
+    // responses are rejected by the caller and must not be passed as [].
+    if (!lineId || !Array.isArray(rows)) return;
     if (_manualTimetableRegistry[lineId] !== rows) {
       _manualTimetableRegistry[lineId] = rows;
       _manualRegistryVersion++;

@@ -924,3 +924,10 @@ Read-only SQL audit:92,322source resolutions have no date_verified validity meta
 
 
 Release verification — POSITION-CLOCK-NO-REPLAY: runtime commit7dbb7d1ba8c49f9c728eb6c51266f90610cc75a9. CI/CD39001828432,ReleaseGuards39001828445,Pages39001827983 success. Published3runtime files HTTP200 and byte-identical;HTMLbuild tokens point to7dbb7d1b. Public browser Hachiko5current services loaded;1278E/230D from earlier local sample no longer present after their schedule ended. Local7train same-tab directional progression verified. Follow-up terminal regression uses10:35 with30min operator alert so the original bug specifically resurrects the10:00–10:10 trip;updated test PASS. Source timetable date verification remains PARTIAL as recorded above.
+
+
+## 2026-10-17 JST — SQL-PLAN-COMPLETENESS-UCHIBO / agent
+
+Status REVIEW pending front-end release; broader SQL coverage audit PARTIAL. Compared4official2026-10Uchibo matrices plus2train-detail calendars. Existing weekday189numbers present;5456matrix clocks checked,5417same-field matches/39endpoint arrival-vs-departure field omissions, no conflicting stored clocks. Weekend lacked9043M/9046M;insert56date-specific plans/560stops for28published dates each through2026-11-29, preserve370recurring templates. Existingservice_exceptions owns4explicit cancellations for2026-10-17/18;retain plans,exclude cancelled movement. Repeated status columns were withdrawn;actualmigrationhistory20261017044313/20261017050314 retained, no new exception owner. train-runsv242deployed with originalverify_jwt=false;publicAPI183plans/2cancelled today,189weekday,no seasonalruns afterexpiry. Sources/remaining10Shinkansenmissingweekendcalendars in existing non-FULL report. No stock/PNG mapping assertions added.
+
+Shared runtime fix in existing owners: refreshSQLwithinservice day at ten-minute TTL,evictoldsame-lineSQLpoolcopies,allow confirmed empty to retire oldregisteredplan;errors remain retryable withoutlegacypositionfallback. Extend existing continuity/service-day/browser guards and add sourced seasonal fixture;no new runner/recovery. Fullvalidation/release pending. Versions4.3.1264. Browser runtime pending front-end release.

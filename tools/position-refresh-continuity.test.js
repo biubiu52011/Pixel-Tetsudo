@@ -60,3 +60,74 @@ const positionTick=intervals.find(x=>x.ms===15000);assert(positionTick);
 positionTick.f();assert.equal(ticks,1);
 polling.document.hidden=true;positionTick.f();assert.equal(ticks,1);
 console.log('local position timer and background suspension PASS');
+
+// Published JR East October2026 seasonal plans: exact operating dates and
+// clocks survive the real SQL adapter; a cancellation never erases the plan.
+const published=JSON.parse(read('tests/fixtures/uchibo-published-seasonal.json'));
+const realAdapter={window:{},LINE_TO_OPERATOR:{Uchibo:'JR-East'},LINE_RAILWAY_CODE:{Uchibo:'Uchibo'}};
+vm.runInNewContext(odpt.slice(odpt.indexOf('    function _dbStopClock('),adapterEnd),realAdapter);
+let seasonalChecks=0;
+for(const plan of published){
+ assert.equal(plan.dates.length,28);assert.equal(plan.stops.length,10);
+ assert(!plan.dates.includes('2026-10-19'));assert(!plan.dates.includes('2026-11-30'));
+ for(const date of plan.dates){
+  const run={service_date:date,line_id:'Uchibo',operator:'JR-East',network_key:'odpt.Railway:JR-East.Uchibo',train_number:plan.trainNumber,calendar_type:'saturday_holiday',rail_direction:'odpt.RailDirection:'+plan.railDirection,train_type:'odpt.TrainType:JR-East.LimitedExpress',destination_station:'odpt.Station:JR-East.Uchibo.'+plan.destination,
+    operation_status:plan.cancelledDates.includes(date)?'cancelled':'scheduled',
+    stops:plan.stops.map(s=>({station_urn:'odpt.Station:JR-East.Uchibo.'+s.station,arrival_time:s.arrival,departure_time:s.departure}))};
+  const snapshot=JSON.stringify(run),tt=realAdapter._trainRunToTimetable(run);
+  assert.equal(JSON.stringify(run),snapshot,'cancellation keeps published source clocks');
+  if(run.operation_status==='cancelled'){assert.equal(tt,null);seasonalChecks++;continue;}
+  const active=plan.trainNumber==='9043M'?'09:30':'16:30',finished=plan.trainNumber==='9043M'?'10:07':'17:24';
+  clock=Date.parse(date+'T'+active+':00+09:00');
+  const estimator=clean.window.TrainPositionEstimator;
+  const activeRows=estimator.estimateLinePositions('Uchibo',db.Uchibo,[tt],{},'JR-East',db);
+  assert.equal(activeRows[0]?.trainNumber,plan.trainNumber,'sourced seasonal train appears in its own service interval');
+  clock=Date.parse(date+'T'+finished+':00+09:00');
+  assert.equal(estimator.estimateLinePositions('Uchibo',db.Uchibo,[tt],{},'JR-East',db).length,0);
+  seasonalChecks++;
+ }
+}
+// Execute the server's actual scope resolver, never a train-number-only filter.
+const edge=read('supabase/functions/train-runs/index.ts');
+const cs=edge.indexOf('function isCancelled('),ce=edge.indexOf('/**',cs);
+const scopeCode=edge.slice(cs,ce).replace(/: any\[\]|: any|: string/g,'')+'this.cancel=isCancelled;';
+function cancelled(exceptions,run){const scope={exceptions,lineId:'Uchibo'};vm.runInNewContext(scopeCode,scope);return scope.cancel(run,'Uchibo',exceptions);}
+const run={id:10,operator:'JR-East'};
+assert(cancelled([{train_run_id:10,line_id:'Uchibo',operator:'JR-East'}],run));
+assert(!cancelled([{train_run_id:11,line_id:'Uchibo',operator:'JR-East'}],run),'another run cannot cancel the whole line');
+assert(!cancelled([{line_id:'Sotobo',operator:'JR-East'}],run),'another line cannot cancel the operator');
+assert(cancelled([{line_id:'Uchibo',operator:'JR-East'}],run));
+assert(cancelled([{operator:'JR-East'}],run));
+assert(!cancelled([{}],run),'unscoped record cannot suppress the network');
+console.log('published seasonal dates/clocks/terminal checks '+seasonalChecks+'; scoped cancellation PASS');
+
+(async()=>{
+ clock=Date.parse('2026-10-15T12:01:00+09:00');
+ w.ODPT_TIMETABLES={};
+ const client=w.ODPTClient;let reads=0;
+ client.getTrainRunStatus=()=>({serviceDate:'2026-10-15',complete:true,partial:false,updatedAt:clock});
+ client.getCachedTrainRuns=async()=>{reads++;return reads===1?[tt('SotetsuJRDirect','odpt.Railway:JR-East.SotetsuDirect','fresh','12:00','13:00')]:[];};
+ await w.DataFusion.ensureTimetable('SotetsuJRDirect');
+ assert.equal(reads,1,'initial SQL load');
+ const stale=tt('SotetsuJRDirect','odpt.Railway:JR-East.SotetsuDirect','stale','12:00','13:00');
+ const other=tt('Ito','odpt.Railway:JR-East.Ito','other');
+ w.ODPT_TIMETABLES={'JR-East':[stale,other]};
+ clock+=300000;
+ await w.DataFusion.ensureTimetable('SotetsuJRDirect');
+ assert.equal(reads,1,'same-day SQL snapshot reuses its bounded cache');
+ clock+=300001;
+ await w.DataFusion.ensureTimetable('SotetsuJRDirect');
+ assert.equal(reads,2,'same-day plan refreshes at TTL without waiting for next day');
+ assert.equal(w.TrainPositionEstimator.getRegisteredManualTimetable('SotetsuJRDirect').length,0,'confirmed empty/all-cancelled result replaces the old plan');
+ assert.equal(w.ODPT_TIMETABLES['JR-East'].length,1,'old railway copy evicted, other source retained');
+ assert.equal(w.ODPT_TIMETABLES['JR-East'][0],other);
+ w.DataFusion.loadTrainPositions();
+ assert.equal(w.DataFusion.getRealtimePositions('SotetsuJRDirect').length,0,'stale shared pool cannot resurrect cancelled position');
+ w.TrainPositionEstimator.registerManualTimetable('SotetsuJRDirect',[tt('SotetsuJRDirect','odpt.Railway:JR-East.SotetsuDirect','keep','12:00','13:00')]);
+ client.getCachedTrainRuns=async()=>[];
+ client.getTrainRunStatus=()=>({serviceDate:'2026-10-15',complete:false,partial:false,source:'SOURCE_ERROR'});
+ clock+=600001;
+ assert.equal(await w.DataFusion.ensureTimetable('SotetsuJRDirect'),false);
+ assert.equal(w.TrainPositionEstimator.getRegisteredManualTimetable('SotetsuJRDirect').length,1,'SQL error cannot masquerade as confirmed empty or activate legacy files');
+ console.log('same-day SQL TTL, confirmed-empty replacement, stale-pool eviction and error isolation PASS');
+})().catch(e=>{console.error(e);process.exitCode=1;});

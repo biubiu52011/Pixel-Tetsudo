@@ -703,6 +703,9 @@
         ].map(function(v) { return encodeURIComponent(String(v)); }).join("|");
     }
     function _trainRunToTimetable(run) {
+        // Keep cancelled plans and their published stops in SQL/API, but never
+        // turn a confirmed date-specific cancellation into a moving train.
+        if (run && run.operation_status === "cancelled") return null;
         var scheduledId = _plannedTrainRunIdentity(run);
         if (!scheduledId) return null;
         // Only verified same-itinerary/continuation groups share a cross-line

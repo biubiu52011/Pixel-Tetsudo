@@ -189,7 +189,7 @@ test('direct through railway loads its timetable evidence and shares one estimat
   assert.match(page, /if \(needsSqlTrainPlan\(id\)/);
   assert.match(page, /api\.usesSqlTimetable\(lineId\)/);
   assert.match(page, /_timetablePartners\.map\(function\(id\)/);
-  assert.match(fusion, /if \(_hasOdptTimetable\(lineId\)\) \{/);
+  assert.ok(fusion.includes("if (_hasOdptTimetable(lineId) || (date && _positionServiceDate[lineId] === date)) {"));
   assert.match(estimator, /scheduledItineraryKey: run\.scheduledItineraryKey/);
   assert.match(fusion, /var fingerprint = _ep\.scheduledItineraryKey/);
   assert.match(fusion, /_scheduledEstimateItineraries\[k\]\[fingerprint\]/);

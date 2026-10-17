@@ -69,12 +69,21 @@ function stationKey(urn: string) {
   return p[p.length - 1] || urn;
 }
 
+function isCancelled(run: any, lineId: string, exceptions: any[]) {
+  return exceptions.some((e: any) => {
+    if (e.train_run_id != null) return e.train_run_id === run.id;
+    // Run-scoped changes never widen into a line/operator closure.
+    if (e.line_id) return e.line_id === lineId;
+    return !!e.operator && e.operator === run.operator;
+  });
+}
+
 /**
  * Read recurring SQL timetable templates when a line has no upstream API and
  * there is no date-specific run. Calendar variants are alternatives.
  * Page both queries because Supabase Data API defaults to at most 1000 rows.
  */
-async function readManualTemplateRuns(db: any, lineId: string, serviceDate: string, timetableOperator: string | null): Promise<Response> {
+async function readManualTemplateRuns(db: any, lineId: string, serviceDate: string, timetableOperator: string | null, exceptions: any[]): Promise<Response> {
   async function pages(makeQuery: (first: number, last: number) => any) {
     const out: any[] = [];
     const size = 700;
@@ -294,6 +303,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
       // Only SQL-certified identical itineraries share identity across line sources.
       // Keep separate line records/stops; never dedupe by departure time alone.
       id: "canonical-train-timetable:" + mapped.timetable_id,
+      operation_status: isCancelled({ id: "canonical-train-timetable:" + mapped.timetable_id, operator }, lineId, exceptions) ? "cancelled" : "scheduled",
       canonical_timetable_id: mapped.timetable_id,
       canonical_group_evidence: mapped.group_evidence,
       line_id: lineId,
@@ -373,6 +383,7 @@ async function readManualTemplateRuns(db: any, lineId: string, serviceDate: stri
   const dateVerifiedRuns = validRuns.filter(r => r.timetable_date_verified).length;
   return json({ ok: true, complete, partial,
     // These counts do not change the existing structural coverage behavior.
+    cancelled_runs: validRuns.filter(r => r.operation_status === "cancelled").length,
     date_verified_runs: dateVerifiedRuns,
     date_unverified_runs: validRuns.length - dateVerifiedRuns,
     cache: complete ? "HIT" : partial ? "PARTIAL" : "MISS",
@@ -421,10 +432,14 @@ Deno.serve(async (req: Request) => {
     throw new Error("SQL_RESULT_TOO_LARGE");
   }
   try {
+    const exceptions = await pages((first, last) => db.from("service_exceptions")
+      .select("id,train_run_id,line_id,operator,exception_type")
+      .eq("service_date", serviceDate).eq("exception_type", "cancelled")
+      .order("id").range(first, last));
     const runs = await pages((first, last) => db.from("train_runs")
-      .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station")
+      .select("id,service_date,calendar_type,operator,network_key,line_id,train_number,operation_code,rail_direction,train_type,destination_station,evidence_sources(source_key,source_url)")
       .eq("line_id", lineId).eq("service_date", serviceDate).order("id").range(first, last));
-    if (!runs.length) return await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null);
+    if (!runs.length) return await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null, exceptions);
     const byRun = new Map<number, any[]>();
     for (let offset = 0; offset < runs.length; offset += 100) {
       const ids = runs.slice(offset, offset + 100).map(r => r.id);
@@ -437,8 +452,13 @@ Deno.serve(async (req: Request) => {
         byRun.set(stop.train_run_id, list);
       }
     }
+    // service_exceptions is the existing sole owner of date/run changes.
+    // Preserve cancelled plans in the response; the position adapter excludes
+    // them without erasing their published clocks.
     const result = runs.map(run => ({
       ...run, plan_source: "sql-date-specific-run",
+      operation_status: isCancelled(run, lineId, exceptions) ? "cancelled" : "scheduled",
+      timetable_provenance: run.evidence_sources?.source_url || null,
       service_id: String(run.calendar_type || ""),
       trip_id: "dated-run:" + String(run.id),
       timetable_validity: "date_specific_source_unverified",
@@ -452,7 +472,7 @@ Deno.serve(async (req: Request) => {
     // Date-specific records are an overlay, not permission to hide the rest
     // of the published recurring timetable. Both feed the SAME ODPT-shaped
     // estimator, with exact itinerary deduplication across the sources.
-    const fallback = await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null);
+    const fallback = await readManualTemplateRuns(db, lineId, serviceDate, source?.timetable_operator || null, exceptions);
     const planned = await fallback.json();
     if (!planned.ok || !Array.isArray(planned.runs)) throw new Error("INVALID_RECURRING_PLAN");
     function itineraryKey(run: any) {
@@ -491,6 +511,7 @@ Deno.serve(async (req: Request) => {
       complete, partial, calendar_status: planned.calendar_status || "selected",
       source: "DATABASE_PLAN_MERGED", line_id: lineId, service_date: serviceDate,
       dated_runs: validRuns.length, recurring_runs: planned.runs.length,
+      cancelled_runs: merged.filter((run: any) => run.operation_status === "cancelled").length,
       exact_date_overrides: dateOverrides,
       date_verified_runs: Number(planned.date_verified_runs || 0),
       date_unverified_runs: merged.length - Number(planned.date_verified_runs || 0),

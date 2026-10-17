@@ -1,0 +1,192 @@
+[
+  {
+    "lineId": "Uchibo",
+    "trainNumber": "9043M",
+    "sourceUrl": "https://timetables.jreast.co.jp/2610/train/015/019131.html",
+    "sourceKey": "jr-east-published-9043M-2026-10",
+    "dates": [
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-10-03",
+      "2026-10-04",
+      "2026-10-10",
+      "2026-10-11",
+      "2026-10-12",
+      "2026-10-17",
+      "2026-10-18",
+      "2026-10-24",
+      "2026-10-25",
+      "2026-10-31",
+      "2026-11-01",
+      "2026-11-03",
+      "2026-11-07",
+      "2026-11-08",
+      "2026-11-14",
+      "2026-11-15",
+      "2026-11-21",
+      "2026-11-22",
+      "2026-11-23",
+      "2026-11-28",
+      "2026-11-29"
+    ],
+    "railDirection": "Outbound",
+    "destination": "Tateyama",
+    "stops": [
+      {
+        "station": "Chiba",
+        "arrival": null,
+        "departure": "08:38"
+      },
+      {
+        "station": "Soga",
+        "arrival": "08:43",
+        "departure": "08:45"
+      },
+      {
+        "station": "Goi",
+        "arrival": "08:53",
+        "departure": "08:54"
+      },
+      {
+        "station": "Kisarazu",
+        "arrival": "09:09",
+        "departure": "09:10"
+      },
+      {
+        "station": "Kimitsu",
+        "arrival": "09:16",
+        "departure": "09:17"
+      },
+      {
+        "station": "Hamakanaya",
+        "arrival": "09:40",
+        "departure": "09:41"
+      },
+      {
+        "station": "Hota",
+        "arrival": "09:44",
+        "departure": "09:45"
+      },
+      {
+        "station": "Iwai",
+        "arrival": "09:51",
+        "departure": "09:54"
+      },
+      {
+        "station": "Tomiura",
+        "arrival": "10:00",
+        "departure": "10:00"
+      },
+      {
+        "station": "Tateyama",
+        "arrival": "10:06",
+        "departure": null
+      }
+    ],
+    "cancelledDates": [
+      "2026-10-17",
+      "2026-10-18"
+    ],
+    "cancellationSourceUrl": "https://traininfo.jreast.co.jp/train_info/express.aspx?group=wakashio_sazamani"
+  },
+  {
+    "lineId": "Uchibo",
+    "trainNumber": "9046M",
+    "sourceUrl": "https://timetables.jreast.co.jp/2610/train/020/022251.html",
+    "sourceKey": "jr-east-published-9046M-2026-10",
+    "dates": [
+      "2026-09-19",
+      "2026-09-20",
+      "2026-09-21",
+      "2026-09-22",
+      "2026-09-23",
+      "2026-09-26",
+      "2026-09-27",
+      "2026-10-03",
+      "2026-10-04",
+      "2026-10-10",
+      "2026-10-11",
+      "2026-10-12",
+      "2026-10-17",
+      "2026-10-18",
+      "2026-10-24",
+      "2026-10-25",
+      "2026-10-31",
+      "2026-11-01",
+      "2026-11-03",
+      "2026-11-07",
+      "2026-11-08",
+      "2026-11-14",
+      "2026-11-15",
+      "2026-11-21",
+      "2026-11-22",
+      "2026-11-23",
+      "2026-11-28",
+      "2026-11-29"
+    ],
+    "railDirection": "Inbound",
+    "destination": "Shinjuku",
+    "stops": [
+      {
+        "station": "Tateyama",
+        "arrival": null,
+        "departure": "16:02"
+      },
+      {
+        "station": "Tomiura",
+        "arrival": "16:07",
+        "departure": "16:08"
+      },
+      {
+        "station": "Iwai",
+        "arrival": "16:13",
+        "departure": "16:14"
+      },
+      {
+        "station": "Hota",
+        "arrival": "16:20",
+        "departure": "16:21"
+      },
+      {
+        "station": "Hamakanaya",
+        "arrival": "16:24",
+        "departure": "16:25"
+      },
+      {
+        "station": "Kimitsu",
+        "arrival": "16:47",
+        "departure": "16:47"
+      },
+      {
+        "station": "Kisarazu",
+        "arrival": "16:53",
+        "departure": "16:54"
+      },
+      {
+        "station": "Goi",
+        "arrival": "17:09",
+        "departure": "17:09"
+      },
+      {
+        "station": "Soga",
+        "arrival": "17:17",
+        "departure": "17:19"
+      },
+      {
+        "station": "Chiba",
+        "arrival": "17:23",
+        "departure": null
+      }
+    ],
+    "cancelledDates": [
+      "2026-10-17",
+      "2026-10-18"
+    ],
+    "cancellationSourceUrl": "https://traininfo.jreast.co.jp/train_info/express.aspx?group=wakashio_sazamani"
+  }
+]

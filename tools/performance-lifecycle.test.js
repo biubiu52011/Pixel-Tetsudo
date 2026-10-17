@@ -133,7 +133,7 @@ const ensureTimetableSrc = fusion.split('  function ensureTimetable(lineId) {')[
   .split('  function ensureManualTimetable(lineId) {')[0];
 assert.ok(/if \(fullCoverage\) \{/.test(ensureTimetableSrc) &&
   /return _hasOdptTimetable\(lineId\) \? ensureManualTimetable\(lineId\) : Promise\.resolve\(false\)/.test(ensureTimetableSrc) &&
-  /if \(!rows \|\| !rows\.length\) return false/.test(ensureTimetableSrc) &&
+  ensureTimetableSrc.includes("if (!rows || (!rows.length && !(status && (status.complete || status.partial)))) return false;") &&
   /\.catch\(function\(\) \{ return false; \}\)/.test(ensureTimetableSrc) &&
   !/return ensureManualTimetable\(lineId\)/.test(ensureTimetableSrc),
   'API vehicle evidence remains available; SQL MISS or error cannot start a second position source');

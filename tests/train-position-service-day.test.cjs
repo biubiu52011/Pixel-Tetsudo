@@ -252,7 +252,7 @@ test('station alias identities from supplied SQL timetables match existing canon
 });
 
 // Exercise the production SQL read block with a paginated database stub.
-async function readSqlRuns(runs, stops, recurringRows = []) {
+async function readSqlRuns(runs, stops, recurringRows = [], exceptions = []) {
   const edge = fs.readFileSync(path.join(__dirname, '../supabase/functions/train-runs/index.ts'), 'utf8');
   const begin = edge.lastIndexOf('  async function pages(');
   const body = edge.slice(begin, edge.lastIndexOf('\n});'))
@@ -263,7 +263,7 @@ async function readSqlRuns(runs, stops, recurringRows = []) {
     .replace(/\(run: any\)/g, '(run)')
     .replace(/\(s: string\[\]\)/g, '(s)');
   const db = { from(table) {
-    let rows = table === 'train_runs' ? runs : stops;
+    let rows = table === 'train_runs' ? runs : table === 'service_exceptions' ? exceptions : stops;
     const query = {
       select() { return query; }, eq() { return query; }, order() { return query; },
       in(key, ids) { rows = rows.filter(row => ids.includes(row[key])); return query; },
@@ -271,7 +271,9 @@ async function readSqlRuns(runs, stops, recurringRows = []) {
     };
     return query;
   } };
-  return vm.runInNewContext('(async function() {' + body + '})()', {
+  const helperStart = edge.indexOf('function isCancelled(');
+  const helper = edge.slice(helperStart, edge.indexOf('/**', helperStart)).replace(/: any\[\]|: any|: string/g, '');
+  return vm.runInNewContext(helper + '(async function() {' + body + '})()', {
     db, lineId: 'Test', serviceDate: '2026-10-13', source: { timetable_operator: 'Test' }, console,
     json(value) { return value; }, readManualTemplateRuns() {
       return Promise.resolve({ json: async () => ({
@@ -292,6 +294,10 @@ test('SQL reads page past 1000 runs and stops without claiming truncated coverag
   assert.equal(result.complete, true);
   assert.equal(result.runs.length, 1005);
   assert.equal(result.runs.reduce((n, run) => n + run.stops.length, 0), 8040);
+  const cancelled = await readSqlRuns(runs, stops, [], runs.map(r => ({ id:r.id, train_run_id:r.id, exception_type:'cancelled' })));
+  assert.equal(cancelled.cancelled_runs,1005,'service exception pages also pass the1000row limit');
+  assert.equal(cancelled.runs.length,1005,'cancellation retains every planned itinerary');
+  assert(cancelled.runs.every(r=>r.operation_status==='cancelled'));
 });
 
 test('one incomplete SQL run preserves verified runs and explicitly reports partial coverage', async () => {
@@ -385,7 +391,7 @@ test('a failed service-date SQL load remains retryable until usable rows arrive'
   let response = [];
   const dates = {};
   const context = {
-    _positionServiceDate: dates, allLines: {},
+    _positionServiceDate: dates, _positionLoadedAt: {}, allLines: {},
     _hasOdptTimetable() { return false; },
     _expandDirtyLines() { return []; }, doEstimation() {}, fuseDirty() {}, console,
     window: {
