@@ -1,5 +1,7 @@
 # 数据链路审计（2026-10-17 JST）
 
+当前状态：四阶段实现与验证完成，PR #36→#37→#38→#39 待依赖顺序审查；未合并main，未生产部署。
+
 基线：origin/main 78accf09。完整五份 HAR 位于用户 Downloads；脱敏汇总及原件 SHA256 位于 tests/fixtures/guards/request-har-baseline.json。复算：node tools/audit-request-har.cjs <五份HAR路径>。不输出查询参数、密钥、请求头或 Cookie。
 
 | 样本 | 请求总数 | 同 URL 重叠请求 | SQL 响应 |
@@ -68,3 +70,12 @@ PR按顺序叠加：#36基线/发布门禁，#37请求/版本，#38变化契约�
 main的7dbb7d1b已处理计划时钟/禁止重放；bb9ae03d将SQL TTL调整为600秒；7883c4ea补充季节计划和同日刷新。这些现役功能保留，未回退成第二套时刻表或动画引擎。现有TrainOperationEvidence、TrainVehicle、TrainPositionEstimator、RunningChainResolver各自职责继续使用；没有复制canonical拓扑或修改生产数据库。
 
 生产发布与最终合并留给逐阶段PR审查。基线/预算变更必须有新来源与回归证据，不能为了变绿重写golden或放宽阈值。这里的4场景证明固定样本契约，不代表223条线路/所有未来运营情形均已人工验收。
+
+
+## 最终自动验收
+
+2026-10-17 20:46 JST，阶段04实现b8cafaae通过 [CI/CD 39029895965](https://github.com/biubiu52011/Pixel-Tetsudo/actions/runs/39029895965)：Validate、Release Guards、Fixed HAR browser replay全部success；Deploy按PR条件skipped。
+
+Chromium固定HAR真实计时：埼京SVG18/位置54.9ms，中央本线15.6/177.2ms，吾妻8.8/43.6ms，常磐各停19.7/69.7ms。4类场景的身份唯一、元数据无重绘、覆盖保全和请求扇出预算均通过；browser-replay-metrics产物保留4份JSON及PNG。
+
+本地最终50个CI Node入口、65项node:test、4个Python守卫通过，历史警告未删除。审查入口：[阶段01](https://github.com/biubiu52011/Pixel-Tetsudo/pull/36)、[阶段02](https://github.com/biubiu52011/Pixel-Tetsudo/pull/37)、[阶段03](https://github.com/biubiu52011/Pixel-Tetsudo/pull/38)、[阶段04](https://github.com/biubiu52011/Pixel-Tetsudo/pull/39)。
