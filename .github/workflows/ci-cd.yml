@@ -39,6 +39,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Unified request and captured SQL contract
+        run: node tools/runtime-request-contract.test.js
+
       - name: Railway browser cross-page contract
         run: node --test tests/railway-browser-contract.test.cjs
 

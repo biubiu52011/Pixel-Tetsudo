@@ -19,7 +19,7 @@ complete 只代表服务端本次查询完整性，不能解释为实际全线�
 - js/data-fusion.js：融合、显式来源优先级、线路依赖扩展、计划时钟推进及 dirty 分发。
 - js/train-position-estimator.js：时刻表位置，禁止宣称官方实时；运行日与线路隔离。
 - js/running-chain-resolver.js / train-vehicle.js：已有证据身份与车型唯一入口。
-- js/trains-page.js / trains-render.js / train-motion.js：页面订阅、绘制、动画；需要用浏览器 trace 核验实际渲染成本，不能用网络完成代替。
+- js/trains-page.js / trains-render.js：页面订阅、绘制、动画；需要用浏览器 trace 核验实际渲染成本，不能用网络完成代替。
 
 ## 已确认的风险
 
