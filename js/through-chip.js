@@ -163,6 +163,23 @@
     });
   }
 
+  // v4.3.1256: 横向一字排开（上/下端头标签用），锚点对齐 + 边界钳制；各 chip 顶部对齐同一 y。
+  function _layoutRow(items, mobile, maxWidth, x, y, align, bounds) {
+    var sizes = items.map(function(it) { return _chipSize(it, mobile, maxWidth); });
+    if (!items.length) return [];
+    var rowGap = 6;
+    var totalW = sizes.reduce(function(s, sz) { return s + sz.w + rowGap; }, -rowGap);
+    var left = align === "end" ? x - totalW : align === "middle" ? x - totalW / 2 : x;
+    left = Math.max(bounds.minX, Math.min(left, bounds.maxX - totalW));
+    var cx = left;
+    return items.map(function(it, i) {
+      var sz = sizes[i];
+      var placed = {item:it, x:cx, y:y, size:sz};
+      cx += sz.w + rowGap;
+      return placed;
+    });
+  }
+
   // 归一化 + 去重 + 排序（up < middle < down 按名称）。
   function _normalize(items) {
     var seen = {}, out = [];
@@ -302,6 +319,7 @@
     size: _chipSize,
     height: _chipHeight,
     layoutGroup: _layoutGroup,
+    layoutRow: _layoutRow,
     normalize: _normalize,
     dirForStation: _dirForStation,
     render: _render,
