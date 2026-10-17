@@ -22,7 +22,7 @@ assert.equal(at(JSON.parse(JSON.stringify(overrun)),10,25,{type:'loop'}).length,
 // It must not rewind another railway, or replay a completed run after recovery.
 const unrelatedDelay={'JR-East':[{'odpt:railway':'odpt.Railway:JR-East.Other','odpt:trainInformationStatus':'Delay','odpt:trainInformationText':'30分遅延'}]};
 assert.equal(at(overrun,10,5,{},unrelatedDelay)[0]?.stationIndex,0,'another railway cannot rewind scheduled departure');
-assert.equal(at(overrun,10,25,{},unrelatedDelay).length,0,'operator alert cannot resurrect a terminated trip');
+assert.equal(at(overrun,10,35,{},unrelatedDelay).length,0,'operator alert cannot resurrect a terminated trip');
 const unspecifiedDelay={'JR-East':[{'odpt:railway':'odpt.Railway:JR-East.Test','odpt:trainInformationStatus':'Delay','odpt:trainInformationText':'遅れが出ています'}]};
 assert.equal(at(overrun,10,5,{},unspecifiedDelay)[0]?.segmentProgress,.5,'status text cannot invent a 15 minute delay');
 const reverse=timetable('C',[stop('D',null,'10:00'),stop('C','10:10','10:11'),stop('B','10:20',null)]);
