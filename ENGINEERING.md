@@ -275,3 +275,29 @@ Controller 不应重新实现 Header、Nav、Footer、FilterBar、通用 Card、
 - 禁止为了统一而扩大 CSP/API 权限。
 - 禁止忽略/关闭 CI 错误后宣称完成。
 - 禁止智能体完成工作后不更新 `PROGRESS.md`。
+
+
+## 13. 数据生命周期与新增路径准入
+
+数据源 → ODPTClient 请求/缓存/原始快照 → 标准化与来源校验 → DataFusion / TrainPositionEstimator → DataState → 页面与 SVG。官方网页的 RunInfoWeb 是独立来源，由 RunInfoEvaluator 解释，不取得最终运行状态所有权。UI 只声明当前线路需求，不直接向 ODPT 发请求；最终状态由既有融合所有者产生。
+
+- 同运营商/接口/参数的请求共用在途 Promise；实时资源按各自刷新窗口复用，不把失败缓存成空记录。
+- SQL 逐响应及逐行校验线路与04:00运行日；partial/coverage、日期未核实和来源等级不可丢弃或升级为全线事实。
+- 旧源时间不能覆盖较新同身份记录。完成时间不是源版本；删除/确认空响应仍有意义。
+- Fusion 的 positions 事件携带逐线路 position/display/metadata 三类变化。元数据续期仍提交快照、刷新过期检查，不得仅因 sourceUpdatedAt/sourceValidUntil 改变而重启 SVG 动画。新增消费者复用此契约。
+- 新网络调用或重复定时任务须先搜索已有 owner，在本节登记用途/范围/周期/停止条件并交付请求数量、错误重试、跨日/乱序、身份与变化回归。runtime-architecture-guard 对生产 js/data 的网络调用及 setInterval 清单做精确校验；不允许仅重写清单绕过审查。静态清单不是完整语义证明，递归 setTimeout 和新调度封装也必须审查。
+- 完成迁移时删除旧路；PR 不得删除测试或放宽断言来隐藏退化。可复用 Release Guards 与 Validate 同时成功才允许唯一 CI/CD 发布；生产发布不中途取消。回滚通过 revert PR 后走同一门禁。
+
+### 13.1 既有定时任务登记
+
+| 所有者 | 目的和范围 | 周期 | 停止条件 |
+|---|---|---|---|
+| odpt-unified startRealtimePolling | 当前激活运营商 Train | ODPT_REALTIME_INTERVAL，默认30秒 | hidden/stopRealtimePolling |
+| odpt-unified startRealtimePolling | TrainInformation，与 Train 独立 | ODPT_INFORMATION_INTERVAL，默认30秒 | hidden/stopRealtimePolling |
+| odpt-unified startTtCheckPolling | 非lazy页面缓存过期检查 | 5分钟 | hidden/stopTtCheckPolling |
+| data-fusion startFusionPolling | 当前列车页计划时钟推进 | 15秒 | hidden/stopFusionPolling |
+| data-fusion startFusionPolling | 保存已有融合缓存 | _refreshIntervalMs | hidden/stopFusionPolling |
+| runinfo-web | 已有官方网页状态来源刷新 | 5分钟 | hidden时清除；visible时恢复 |
+| tourism-core | 旧加载器就绪探测 | 50毫秒 | 数据就绪或200次检查；现役DataLoader路径不启动 |
+
+分钟批处理只运行有已注册/已加载时刻表的线路，不能为无计划线路展开全网空算。DataFusion.getPerformanceSamples、TrainsPage.getPerformanceSamples、ODPTClient.getRequestMetrics 均为有界只读诊断入口。HAR 只能提供网络基线；实际计算和 SVG 耗时必须用浏览器采样，真实网络采样不冒充固定输入的前后对比。

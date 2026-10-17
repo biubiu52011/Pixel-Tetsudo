@@ -423,7 +423,31 @@
   }
 
   // ========== Data Loading ==========
-  function emitUpdate(fusedData) {
+  // Change contract: metadata refresh is observable but is not train movement.
+  function classifyPositionChanges(before, after) {
+    var result = { position: false, display: false, metadata: false };
+    var previous = Object.create(null);
+    (before || []).forEach(function(p) { previous[_positionIdentity(p)] = p; });
+    if ((before || []).length !== (after || []).length) result.position = true;
+    (after || []).forEach(function(a) {
+      var b = previous[_positionIdentity(a)];
+      if (!b) { result.position = result.display = result.metadata = true; return; }
+      ['stationIndex','segmentToIndex','segmentProgress','positionSource','estimated','railDirection'].forEach(function(k) {
+        if (a[k] !== b[k]) result.position = true;
+      });
+      ['delayMin','destinationStation','vehicleIconPath','vehicleType','vehicleIdentityStatus',
+        'vehicleFormationId','trainNumber','trainType','typeName','serviceDate'].forEach(function(k) {
+        if (a[k] !== b[k]) result.display = true;
+      });
+      ['vehiclePlan','vehicleFormationCandidates','operationEvidence'].forEach(function(k) {
+        if (JSON.stringify(a[k] || null) !== JSON.stringify(b[k] || null)) result.display = true;
+      });
+      if (a.sourceUpdatedAt !== b.sourceUpdatedAt || a.sourceValidUntil !== b.sourceValidUntil) result.metadata = true;
+    });
+    return result;
+  }
+
+  function emitUpdate(fusedData, changes) {
     _lastFusionEmitAt = Date.now();
     if (fusedData) { _lastFusedData = fusedData; }
     // v4.3.842: 先提交 DATA_FUSION 再通知订阅者——原顺序为「先 cb 后赋值」，
@@ -431,7 +455,10 @@
     // 上一次的旧值（首屏空融合后为 truthy 空对象），Priority 1 判空失败回退
     // DataLayer 基线 → 延误状态在 15s REFRESH_INTERVAL 二次融合前永不显示。
     try { window.DATA_FUSION = fusedData; } catch(e) {}
-    try { subscribers.forEach(function(cb) { cb(fusedData); }); } catch(e) { console.debug("[DataFusion] Subscriber error:", e.message); }
+    subscribers.forEach(function(cb) {
+      try { cb(fusedData, changes || { kind: 'snapshot' }); }
+      catch(e) { console.debug('[DataFusion] Subscriber error:', e.message); }
+    });
   }
 
   function subscribe(callback) {
@@ -765,7 +792,7 @@
         lines: fusedLines,
         odptOperatorsLoaded: Object.keys(odptData.delayInfo).length
       });
-      emitUpdate(fusedData);
+      emitUpdate(fusedData, arguments[1]);
       _lastGoodFusionSnapshot = null;
       _perfRecord("fuseDirty", _perfStart, { seeds: (seedIds || []).length, dirty: dirtyIds.length });
       return fusedData;
@@ -1795,7 +1822,10 @@
         var _targetSet = {};
         (_estimationTargets || []).forEach(function(id) { _targetSet[id] = true; });
         var _minuteRemainder = Object.keys(allLines || {}).filter(function(id) {
-          return !_targetSet[id] && mayUseTimetablePosition(id);
+          var registered = window.TrainPositionEstimator && window.TrainPositionEstimator.getRegisteredManualTimetable &&
+            window.TrainPositionEstimator.getRegisteredManualTimetable(id);
+          var hasSchedule = (registered && registered.length) || hasOdptTimetableForLine(id, allLines[id] && allLines[id].operator);
+          return !_targetSet[id] && hasSchedule && mayUseTimetablePosition(id);
         });
         var _minuteBatchToken = _minuteKey;
         var _minuteBatchGeneration = ++_minuteEstimationGeneration;
@@ -1874,24 +1904,17 @@
       try {
         var _positionDirty = {};
         var _positionKeys = {};
+        var _positionChanges = {};
         Object.keys(_previousPosMap || {}).forEach(function(id) { _positionKeys[id] = true; });
         Object.keys(posMap || {}).forEach(function(id) { _positionKeys[id] = true; });
         Object.keys(_positionKeys).forEach(function(id) {
-          var before = _previousPosMap[id] || [];
-          var after = posMap[id] || [];
-          if (before.length !== after.length) { _positionDirty[id] = true; return; }
-          for (var pi = 0; pi < after.length; pi++) {
-            var a = after[pi] || {}, b = before[pi] || {};
-            if (_positionIdentity(a) !== _positionIdentity(b) || a.stationIndex !== b.stationIndex ||
-                a.segmentToIndex !== b.segmentToIndex || a.segmentProgress !== b.segmentProgress ||
-                a.positionSource !== b.positionSource || a.estimated !== b.estimated ||
-                a.sourceUpdatedAt !== b.sourceUpdatedAt || a.sourceValidUntil !== b.sourceValidUntil ||
-                a.delayMin !== b.delayMin || a.destinationStation !== b.destinationStation ||
-                a.vehicleIconPath !== b.vehicleIconPath ||
-                JSON.stringify(a.vehiclePlan || null) !== JSON.stringify(b.vehiclePlan || null)) { _positionDirty[id] = true; break; }
+          var changes = classifyPositionChanges(_previousPosMap[id] || [], posMap[id] || []);
+          if (changes.position || changes.display || changes.metadata) {
+            _positionDirty[id] = true;
+            _positionChanges[id] = changes;
           }
         });
-        fuseDirty(Object.keys(_positionDirty));
+        fuseDirty(Object.keys(_positionDirty), { kind: 'positions', lines: _positionChanges });
         // Report aggregate resolver costs without logging individual train identities.
         _perfSamples.push({ name: "vehicleEvidence", ms: Math.round(_vehicleEvidenceMs * 10) / 10, at: Date.now(), meta: { calls: _vehicleEvidenceCalls } });
         _perfSamples.push({ name: "vehicleResolve", ms: Math.round(_vehicleResolveMs * 10) / 10, at: Date.now(), meta: { calls: _vehicleResolveCalls } });
@@ -2259,6 +2282,7 @@
     getRealtimePositions: function(lineId) { return odptData.realtimePositions[lineId] || []; },
     loadTrainPositions: loadTrainPositions,
     getCachedData: function() { return _lastFusedData; },
+    classifyPositionChanges: classifyPositionChanges,
     getPerformanceSamples: function() { return _perfSamples.slice(); },
     saveToCache: saveToCache, refresh: function() { return fuseAll(); },
     // v4.3.528: 手动时刻表按需加载（ODPT 无时刻表的 JR 地方线，打开线路时才注入该线文件）

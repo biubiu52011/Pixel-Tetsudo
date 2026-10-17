@@ -360,7 +360,7 @@
       });
       // Subscribe to DataState changes to handle late data loading
       if (window.DataState) {
-        window.DataState.subscribe(function(lines, delayData, positions) {
+        window.DataState.subscribe(function(lines, delayData, positions, changes) {
           if (!lines || Object.keys(lines).length === 0 || !listEl) return;
           // A pending deep link may become resolvable when data arrives.
           _applyRoute();
@@ -380,8 +380,6 @@
                   + (_tp.stationIndex || 0) + ">"
                   + (_tp.segmentToIndex == null ? "" : _tp.segmentToIndex) + ":"
                   + (_tp.segmentProgress == null ? "" : Math.round(_tp.segmentProgress * 100)) + ":"
-                  + (_tp.sourceUpdatedAt || "") + ":"
-                  + (_tp.sourceValidUntil || "") + ":"
                   + (_tp.positionSource || "") + ":"
                   + (_tp.destinationStation || "") + ":"
                   + (_tp.typeName || "") + ":" + (_tp.delayMin || 0) + ":"
@@ -403,6 +401,11 @@
           // through/branch relation context and fused line metadata). A position-only
           // hash left the detail SVG stale after a transient state removed an element:
           // when the state recovered without train movement, no render was triggered.
+          // Renew expiry even when metadata is the only change; do not restart SVG motion.
+          if (currentLine && lines[currentLine] && changes && changes.lines &&
+              changes.lines[currentLine] && changes.lines[currentLine].metadata) {
+            _scheduleRealtimeExpiryRefresh(currentLine, lines[currentLine]);
+          }
           var detailStateHash = '';
           if (currentLine && lines[currentLine]) {
             try {
@@ -511,6 +514,7 @@
 
   window.TrainsPage = {
     init: init,
+    getPerformanceSamples: function() { return getTrainRenderPerformanceSamples(); },
     refreshUI: function() { renderList(listEl); },
     showLineView: showLineView,
     hideLineView: hideLineView

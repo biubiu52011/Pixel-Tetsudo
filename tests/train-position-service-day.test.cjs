@@ -372,7 +372,7 @@ test('movement inside one station segment and refreshed validity notify fusion c
   const end = fusion.indexOf('        // Report aggregate resolver costs', start);
   function changes(before, after) {
     let dirty;
-    vm.runInNewContext(fusion.slice(start, end), {
+    vm.runInNewContext(fusion.slice(fusion.indexOf('  function classifyPositionChanges('), fusion.indexOf('  function emitUpdate(')) + fusion.slice(start, end), {
       _previousPosMap: { Test: [before] }, posMap: { Test: [after] },
       _positionIdentity(p) { return p.trainId; }, fuseDirty(ids) { dirty = ids; }
     });

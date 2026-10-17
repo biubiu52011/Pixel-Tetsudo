@@ -1,0 +1,34 @@
+{
+  "js/data-fusion.js": {
+    "network": 0,
+    "polling": 2
+  },
+  "js/data-layer.js": {
+    "network": 3,
+    "polling": 0
+  },
+  "js/delay-translator.js": {
+    "network": 1,
+    "polling": 0
+  },
+  "js/maplibre/maplibre-gl.js": {
+    "network": 1,
+    "polling": 0
+  },
+  "js/runinfo-web.js": {
+    "network": 2,
+    "polling": 1
+  },
+  "js/tourism-core.js": {
+    "network": 0,
+    "polling": 1
+  },
+  "data/api/odpt-unified.js": {
+    "network": 3,
+    "polling": 3
+  },
+  "data/core/db-loader.js": {
+    "network": 3,
+    "polling": 0
+  }
+}
